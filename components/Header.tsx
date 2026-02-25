@@ -11,6 +11,7 @@ const pageNames: { [key: string]: string } = {
   '/ai-bot': 'AI봇',
   '/watchlist': '관심종목',
   '/memo': '메모',
+  '/lab': '전략연구실',
   '/news': '뉴스',
   '/premium': '프리미엄',
   '/profile': '프로필',
