@@ -14,6 +14,7 @@ const pageNames: { [key: string]: string } = {
   '/lab': '전략연구실',
   '/news': '뉴스',
   '/analyst': '애널리스트',
+  '/guru': '투자 구루',
   '/premium': '프리미엄',
   '/profile': '프로필',
 };
