@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 const navItems = [
   { icon: '🏠', label: '피드', href: '/' },
@@ -21,6 +22,7 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { user, signOut } = useAuth();
 
   return (
     <div className="hidden md:flex flex-col w-[240px] xl:w-[240px] lg:w-[70px] h-screen bg-white border-r border-[#e8e8e8] sticky top-0">
@@ -58,12 +60,17 @@ export default function Sidebar() {
       {/* User Profile */}
       <div className="p-4 border-t border-[#e8e8e8]">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-            <span className="text-[#191f28] font-medium">사</span>
+          <div className="w-10 h-10 bg-[#3182f6] rounded-full flex items-center justify-center">
+            <span className="text-white font-medium">{user?.email?.[0]?.toUpperCase() || '?'}</span>
           </div>
-          <div className="xl:block lg:hidden">
-            <p className="font-medium text-[#191f28]">사용자</p>
-            <p className="text-sm text-[#8b95a1]">@username</p>
+          <div className="xl:block lg:hidden flex-1 min-w-0">
+            <p className="font-medium text-[#191f28] truncate text-sm">{user?.email || '사용자'}</p>
+            <button
+              onClick={signOut}
+              className="text-xs text-[#8b95a1] hover:text-red-500 transition"
+            >
+              로그아웃
+            </button>
           </div>
         </div>
       </div>
