@@ -5,9 +5,11 @@ export default function FeedCompose() {
     <div className="px-4 py-3 border-b border-[#f0f0f0]">
       <div className="flex gap-3">
         {/* Avatar */}
-        <div className="w-10 h-10 rounded-full bg-[#3182f6] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-          Y
-        </div>
+        <img 
+          src="https://i.pravatar.cc/150?img=68" 
+          alt="내 프로필"
+          className="w-10 h-10 rounded-full flex-shrink-0"
+        />
         {/* Input area */}
         <div className="flex-1 min-w-0">
           <textarea
