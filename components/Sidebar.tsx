@@ -9,7 +9,7 @@ const navItems = [
   { icon: '📋', label: '공시', href: '/disclosure' },
   { icon: '👤', label: '인플루언서', href: '/influencer' },
   { icon: '🔔', label: '알림', href: '/alerts' },
-  { icon: '🤖', label: 'AI봇', href: '/bot' },
+  { icon: '🤖', label: 'AI봇', href: '/ai-bot' },
   { icon: '⭐️', label: '관심종목', href: '/watchlist' },
   { icon: '📝', label: '메모', href: '/memo' },
   { icon: '📰', label: '뉴스', href: '/news' },

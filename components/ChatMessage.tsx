@@ -1,0 +1,59 @@
+'use client';
+
+interface ChatMessageProps {
+  message: string;
+  isUser: boolean;
+  timestamp?: string;
+}
+
+export default function ChatMessage({ message, isUser, timestamp }: ChatMessageProps) {
+  // Function to parse **bold** text to JSX
+  const parseMessage = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/);
+    return parts.map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        const boldText = part.slice(2, -2);
+        // If bold text contains stock names, make them clickable style
+        const stockPattern = /(에코프로|아이빔테크놀로지|삼성전자)/;
+        if (stockPattern.test(boldText)) {
+          return (
+            <strong key={index} className="font-bold text-[#00d4aa] cursor-pointer hover:underline">
+              {boldText}
+            </strong>
+          );
+        }
+        return <strong key={index} className="font-bold">{boldText}</strong>;
+      }
+      return part;
+    });
+  };
+
+  return (
+    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
+      <div className={`flex ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start max-w-[80%]`}>
+        {/* Avatar */}
+        {!isUser && (
+          <div className="w-8 h-8 bg-[#00d4aa] rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+            <span className="text-white text-sm font-bold">🤖</span>
+          </div>
+        )}
+
+        {/* Message bubble */}
+        <div
+          className={`px-4 py-3 ${
+            isUser 
+              ? 'bg-[#00d4aa] text-white rounded-2xl rounded-tr-sm' 
+              : 'bg-[#f0f2f5] text-gray-900 rounded-2xl rounded-tl-sm'
+          } max-w-full word-break`}
+        >
+          <div className="whitespace-pre-wrap">{parseMessage(message)}</div>
+          {timestamp && (
+            <div className={`text-xs mt-1 ${isUser ? 'text-green-100' : 'text-gray-500'}`}>
+              {timestamp}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
