@@ -17,10 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="bg-[#0a0a0a] text-white">
-        <div className="flex justify-center min-h-screen">
+      <body className="bg-white text-[#111827]">
+        <div className="flex min-h-screen w-full">
           <Sidebar />
-          <main className="flex-1 min-w-[600px] max-w-[700px] border-l border-r border-[#2a2a2a] mb-16 md:mb-0">
+          <main className="flex-1 min-w-0 border-l border-r border-[#e5e7eb] mb-16 md:mb-0">
             <Header />
             {children}
           </main>

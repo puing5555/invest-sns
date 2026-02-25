@@ -24,8 +24,8 @@ export default function Header() {
   const currentPageName = pageNames[pathname] || '페이지';
 
   return (
-    <div className="sticky top-0 z-10 bg-[#0a0a0a] border-b border-[#2a2a2a] px-6 py-4">
-      <h1 className="text-xl font-bold">{currentPageName}</h1>
+    <div className="sticky top-0 z-10 bg-white border-b border-[#e5e7eb] px-6 py-4">
+      <h1 className="text-xl font-bold text-[#111827]">{currentPageName}</h1>
     </div>
   );
 }

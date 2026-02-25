@@ -22,10 +22,10 @@ export default function RightSidebar() {
             <input
               type="text"
               placeholder="검색"
-              className="w-full bg-[#1a1a2e] border border-[#2a2a2a] rounded-full px-6 py-3 text-white placeholder-[#888] focus:outline-none focus:border-[#00d4aa]"
+              className="w-full bg-[#f7f9fa] border border-[#e5e7eb] rounded-full px-6 py-3 text-[#111827] placeholder-[#6b7280] focus:outline-none focus:border-[#00d4aa]"
             />
             <svg
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#888]"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#6b7280]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -41,36 +41,36 @@ export default function RightSidebar() {
         </div>
 
         {/* Trends Box */}
-        <div className="bg-[#1a1a2e] border border-[#2a2a2a] rounded-xl p-4">
-          <h3 className="font-bold text-xl mb-4">무슨 일이 일어나고 있나요?</h3>
+        <div className="bg-[#f7f9fa] border border-[#e5e7eb] rounded-xl p-4">
+          <h3 className="font-bold text-xl mb-4 text-[#111827]">무슨 일이 일어나고 있나요?</h3>
           <div className="space-y-3">
             {trends.map((trend, index) => (
               <div
                 key={index}
-                className="hover:bg-[#2a2a2a] p-3 rounded-lg cursor-pointer transition-colors"
+                className="hover:bg-[#e5e7eb] p-3 rounded-lg cursor-pointer transition-colors"
               >
                 <p className="font-bold text-[#00d4aa]">{trend.tag}</p>
-                <p className="text-sm text-[#888]">{trend.posts}</p>
+                <p className="text-sm text-[#6b7280]">{trend.posts}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Recommended Accounts */}
-        <div className="bg-[#1a1a2e] border border-[#2a2a2a] rounded-xl p-4">
-          <h3 className="font-bold text-xl mb-4">팔로우할 계정</h3>
+        <div className="bg-[#f7f9fa] border border-[#e5e7eb] rounded-xl p-4">
+          <h3 className="font-bold text-xl mb-4 text-[#111827]">팔로우할 계정</h3>
           <div className="space-y-4">
             {recommendedUsers.map((user, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
-                    <span className="text-white font-medium">
+                  <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                    <span className="text-[#111827] font-medium">
                       {user.name[0]}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium">{user.name}</p>
-                    <p className="text-sm text-[#888]">{user.username}</p>
+                    <p className="font-medium text-[#111827]">{user.name}</p>
+                    <p className="text-sm text-[#6b7280]">{user.username}</p>
                   </div>
                 </div>
                 <button className="bg-white text-black px-4 py-1.5 rounded-full font-medium hover:bg-gray-200 transition-colors">
