@@ -8,7 +8,7 @@ const navItems = [
   { icon: '🏠', label: '피드', href: '/feed' },
   { icon: '📋', label: '공시', href: '/disclosure' },
   { icon: '👤', label: '인플루언서', href: '/influencer' },
-  { icon: '🔔', label: '알림', href: '/alerts' },
+  { icon: '🔔', label: '알림', href: '/notifications' },
   { icon: '🤖', label: 'AI봇', href: '/ai-bot' },
   { icon: '⭐️', label: '관심종목', href: '/watchlist' },
   { icon: '📝', label: '메모', href: '/memo' },

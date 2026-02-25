@@ -7,7 +7,7 @@ const bottomNavItems = [
   { icon: '📡', label: '시그널', href: '/' },
   { icon: '🏠', label: '피드', href: '/feed' },
   { icon: '📋', label: '공시', href: '/disclosure' },
-  { icon: '🔔', label: '알림', href: '/alerts' },
+  { icon: '🔔', label: '알림', href: '/notifications' },
   { icon: '👤', label: '프로필', href: '/profile' },
 ];
 

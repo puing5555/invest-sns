@@ -7,7 +7,7 @@ const pageNames: { [key: string]: string } = {
   '/feed': '피드',
   '/disclosure': '공시',
   '/influencer': '인플루언서',
-  '/alerts': '알림',
+  '/notifications': '알림',
   '/ai-bot': 'AI봇',
   '/watchlist': '관심종목',
   '/memo': '메모',
