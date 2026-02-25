@@ -13,6 +13,7 @@ const pageNames: { [key: string]: string } = {
   '/memo': '메모',
   '/lab': '전략연구실',
   '/news': '뉴스',
+  '/analyst': '애널리스트',
   '/premium': '프리미엄',
   '/profile': '프로필',
 };

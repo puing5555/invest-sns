@@ -14,6 +14,7 @@ const navItems = [
   { icon: '📝', label: '메모', href: '/memo' },
   { icon: '🧪', label: '전략연구실', href: '/lab' },
   { icon: '📰', label: '뉴스', href: '/news' },
+  { icon: '🎯', label: '애널리스트', href: '/analyst' },
   { icon: '👑', label: '프리미엄', href: '/premium' },
   { icon: '👤', label: '프로필', href: '/profile' },
 ];
