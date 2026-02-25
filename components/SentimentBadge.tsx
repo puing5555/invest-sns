@@ -13,20 +13,20 @@ export default function SentimentBadge({ sentiment, size = 'sm' }: SentimentBadg
       case 'negative':
         return 'bg-red-100 text-red-700 border-red-200';
       default:
-        return 'bg-gray-100 text-gray-700 border-gray-200';
+        return 'bg-[#f2f4f6] text-gray-700 border-gray-200';
     }
   };
 
   const getSentimentText = () => {
     switch (sentiment) {
       case 'positive':
-        return '🟢 긍정';
+        return '?�� 긍정';
       case 'neutral':
-        return '🟡 중립';
+        return '?�� 중립';
       case 'negative':
-        return '🔴 부정';
+        return '?�� 부??;
       default:
-        return '⚪ 미분류';
+        return '??미분�?;
     }
   };
 

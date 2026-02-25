@@ -11,33 +11,33 @@ export default function QuantBot({ onBack }: QuantBotProps) {
       <div className="border-b border-gray-200 px-6 py-4">
         <button
           onClick={onBack}
-          className="text-gray-600 hover:text-gray-900 mb-2 flex items-center space-x-1"
+          className="text-gray-600 hover:text-[#191f28] mb-2 flex items-center space-x-1"
         >
-          <span>←</span>
-          <span>전략연구실</span>
+          <span>??/span>
+          <span>?�략?�구??/span>
         </button>
-        <h1 className="text-2xl font-bold text-gray-900">AI 퀀트봇 생성</h1>
+        <h1 className="text-2xl font-bold text-[#191f28]">AI ?�?�봇 ?�성</h1>
       </div>
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Description */}
         <div className="text-center mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">나만의 AI 퀀트봇을 만드세요</h2>
-          <p className="text-gray-600">조건을 설정하면 AI가 24시간 자동으로 매매합니다</p>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">?�만??AI ?�?�봇??만드?�요</h2>
+          <p className="text-gray-600">조건???�정?�면 AI가 24?�간 ?�동?�로 매매?�니??/p>
         </div>
 
         {/* Bot Cards */}
         <div className="space-y-6 mb-8">
           {quantBots.map((bot) => (
-            <div key={bot.id} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <div key={bot.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
               {/* Bot Header */}
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                    <span className="text-2xl">🤖</span>
+                    <span className="text-2xl">?��</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900">{bot.name}</h3>
+                    <h3 className="text-lg font-bold text-[#191f28]">{bot.name}</h3>
                     <p className="text-sm text-gray-600">{bot.description}</p>
                   </div>
                 </div>
@@ -45,9 +45,9 @@ export default function QuantBot({ onBack }: QuantBotProps) {
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                     bot.status === 'active' 
                       ? 'bg-green-100 text-green-700' 
-                      : 'bg-gray-100 text-gray-600'
+                      : 'bg-[#f2f4f6] text-gray-600'
                   }`}>
-                    {bot.status === 'active' ? '🟢 운영중' : '⭕ 중단'}
+                    {bot.status === 'active' ? '?�� ?�영�? : '�?중단'}
                   </span>
                 </div>
               </div>
@@ -71,11 +71,11 @@ export default function QuantBot({ onBack }: QuantBotProps) {
               <div className="grid grid-cols-2 gap-6">
                 {/* Today's Signals */}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">오늘의 시그널</h4>
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">?�늘???�그??/h4>
                   <div className="space-y-1">
                     {bot.todaySignals.map((signal, index) => (
-                      <div key={index} className="text-sm text-gray-900 font-medium">
-                        📈 {signal}
+                      <div key={index} className="text-sm text-[#191f28] font-medium">
+                        ?�� {signal}
                       </div>
                     ))}
                   </div>
@@ -83,7 +83,7 @@ export default function QuantBot({ onBack }: QuantBotProps) {
 
                 {/* Performance */}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-2">6개월 수익률</h4>
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">6개월 ?�익�?/h4>
                   <div className="text-2xl font-bold text-green-600">
                     +{bot.sixMonthReturn}%
                   </div>
@@ -92,18 +92,18 @@ export default function QuantBot({ onBack }: QuantBotProps) {
 
               {/* Action Buttons */}
               <div className="flex space-x-2 mt-4 pt-4 border-t border-gray-100">
-                <button className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
-                  상세보기
+                <button className="px-4 py-2 bg-blue-600 text-white text-sm rounded-2xl hover:bg-blue-700">
+                  ?�세보기
                 </button>
-                <button className="px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg hover:bg-gray-200">
-                  설정변경
+                <button className="px-4 py-2 bg-[#f2f4f6] text-gray-700 text-sm rounded-2xl hover:bg-gray-200">
+                  ?�정변�?
                 </button>
-                <button className={`px-4 py-2 text-sm rounded-lg ${
+                <button className={`px-4 py-2 text-sm rounded-2xl ${
                   bot.status === 'active'
                     ? 'bg-red-100 text-red-600 hover:bg-red-200'
                     : 'bg-green-100 text-green-600 hover:bg-green-200'
                 }`}>
-                  {bot.status === 'active' ? '중단' : '시작'}
+                  {bot.status === 'active' ? '중단' : '?�작'}
                 </button>
               </div>
             </div>
@@ -112,8 +112,8 @@ export default function QuantBot({ onBack }: QuantBotProps) {
 
         {/* Create New Bot Button */}
         <div className="text-center">
-          <button className="px-8 py-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-medium">
-            + 새 퀀트봇 만들기
+          <button className="px-8 py-4 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 font-medium">
+            + ???�?�봇 만들�?
           </button>
         </div>
       </div>

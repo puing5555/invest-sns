@@ -7,29 +7,38 @@ interface PollOption {
   color: string;
 }
 
-interface VotePollProps {
+interface Poll {
   options: PollOption[];
   totalVotes: number;
 }
 
-export default function VotePoll({ options, totalVotes }: VotePollProps) {
+export default function VotePoll({ poll, className = '' }: { poll: Poll; className?: string }) {
   return (
-    <div className="mt-2 space-y-2">
-      {options.map((opt, i) => (
-        <div key={i} className="relative h-8 rounded-md overflow-hidden bg-gray-100">
-          <div
-            className="absolute inset-y-0 left-0 rounded-md opacity-20"
-            style={{ width: `${opt.percent}%`, backgroundColor: opt.color }}
-          />
-          <div className="relative flex items-center justify-between h-full px-3 text-sm">
-            <span className="text-gray-800">
-              {opt.emoji} {opt.label}
-            </span>
-            <span className="font-semibold text-gray-700">{opt.percent}%</span>
+    <div className={`border border-[#f0f0f0] rounded-2xl p-3 ${className}`}>
+      <div className="space-y-2">
+        {poll.options.map((option, i) => (
+          <div key={i} className="relative">
+            <div
+              className="flex items-center justify-between p-2 rounded-xl transition-colors cursor-pointer hover:bg-[#f2f4f6]"
+              style={{ backgroundColor: `${option.color}10` }}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sm">{option.emoji}</span>
+                <span className="text-sm font-medium text-[#191f28]">{option.label}</span>
+              </div>
+              <span className="text-sm font-bold text-[#191f28]">{option.percent}%</span>
+            </div>
+            <div
+              className="absolute left-0 top-0 bottom-0 rounded-xl opacity-20"
+              style={{
+                width: `${option.percent}%`,
+                backgroundColor: option.color,
+              }}
+            />
           </div>
-        </div>
-      ))}
-      <p className="text-xs text-gray-500">{totalVotes}명 참여</p>
+        ))}
+      </div>
+      <p className="text-xs text-[#8b95a1] mt-2">{poll.totalVotes.toLocaleString()}명 참여</p>
     </div>
   );
 }

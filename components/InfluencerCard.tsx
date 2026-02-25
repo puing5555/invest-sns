@@ -12,15 +12,15 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
 
   const getPlatformBadgeColor = (platformName: string) => {
     switch (platformName) {
-      case '유튜브': return 'bg-red-500 text-white';
-      case '텔레그램': return 'bg-blue-500 text-white';
-      case '블로그': return 'bg-green-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      case '?�튜�?: return 'bg-red-500 text-white';
+      case '?�레그램': return 'bg-blue-500 text-white';
+      case '블로�?: return 'bg-green-500 text-white';
+      default: return 'bg-[#f2f4f6]0 text-white';
     }
   };
 
   return (
-    <div className="bg-white rounded-xl border border-[#eff3f4] shadow-sm p-6 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-2xl border border-[#f0f0f0] shadow-[0_2px_8px_rgba(0,0,0,0.04)] p-6 hover:shadow-md transition-shadow">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
             {getInitial(influencer.name)}
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900">{influencer.name}</h3>
+            <h3 className="font-semibold text-[#191f28]">{influencer.name}</h3>
             <div className="flex gap-1 mt-1">
               {influencer.platforms.map((platform, idx) => (
                 <span
@@ -42,7 +42,7 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
           </div>
         </div>
         <div className="text-right">
-          <div className="text-sm text-gray-600">팔로워</div>
+          <div className="text-sm text-gray-600">?�로??/div>
           <div className="font-semibold">{influencer.followers}</div>
         </div>
       </div>
@@ -55,7 +55,7 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
           total={influencer.totalCalls}
         />
         <div className="text-center">
-          <div className="text-sm text-gray-600">평균 수익률</div>
+          <div className="text-sm text-gray-600">?�균 ?�익�?/div>
           <div className={`text-2xl font-bold ${influencer.avgReturn > 0 ? 'text-green-600' : 'text-red-600'}`}>
             +{influencer.avgReturn}%
           </div>
@@ -64,7 +64,7 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
 
       {/* Recent Calls */}
       <div className="mb-6">
-        <h4 className="text-sm font-medium text-gray-700 mb-2">최근 콜</h4>
+        <h4 className="text-sm font-medium text-gray-700 mb-2">최근 �?/h4>
         <div className="space-y-1">
           {influencer.recentCalls.map((call, idx) => (
             <CallHistoryItem key={idx} call={call} />
@@ -74,14 +74,14 @@ export default function InfluencerCard({ influencer, onDetailClick }: Influencer
 
       {/* Action Buttons */}
       <div className="flex gap-2">
-        <button className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-          팔로우
+        <button className="flex-1 px-4 py-2 border border-gray-300 rounded-2xl text-gray-700 hover:bg-[#f2f4f6] transition-colors">
+          ?�로??
         </button>
         <button
           onClick={onDetailClick}
-          className="flex-1 px-4 py-2 bg-[#00d4aa] text-white rounded-lg hover:bg-[#00c299] transition-colors"
+          className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-2xl hover:bg-[#00c299] transition-colors"
         >
-          상세보기
+          ?�세보기
         </button>
       </div>
     </div>

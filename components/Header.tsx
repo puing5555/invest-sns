@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation';
 
 const pageNames: { [key: string]: string } = {
-  '/': '시그널',
-  '/feed': '피드',
+  '/': '피드',
+  '/signal': '시그널',
   '/disclosure': '공시',
   '/influencer': '인플루언서',
   '/notifications': '알림',
@@ -24,8 +24,8 @@ export default function Header() {
   const currentPageName = pageNames[pathname] || '페이지';
 
   return (
-    <div className="sticky top-0 z-10 bg-white border-b border-[#e5e7eb] px-6 py-4">
-      <h1 className="text-xl font-bold text-[#111827]">{currentPageName}</h1>
+    <div className="sticky top-0 z-10 bg-white border-b border-[#e8e8e8] px-6 py-4">
+      <h1 className="text-xl font-bold text-[#191f28]">{currentPageName}</h1>
     </div>
   );
 }

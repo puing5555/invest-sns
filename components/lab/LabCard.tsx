@@ -19,7 +19,7 @@ export default function LabCard({
 }: LabCardProps) {
   return (
     <div
-      className="bg-white border border-[#e5e7eb] p-6 rounded-xl cursor-pointer transition-all hover:border hover:border-[#00d4aa] hover:shadow-lg hover:shadow-[#00d4aa]/20"
+      className="bg-white border border-[#e8e8e8] p-6 rounded-2xl cursor-pointer transition-all hover:border hover:border-[#3182f6] hover:shadow-lg hover:shadow-[#3182f6]/20"
       onClick={onClick}
     >
       {/* Icon */}
@@ -29,7 +29,7 @@ export default function LabCard({
 
       {/* Content */}
       <div className="space-y-3">
-        <h3 className="text-lg font-bold text-[#111827]">{title}</h3>
+        <h3 className="text-lg font-bold text-[#191f28]">{title}</h3>
         <p className="text-sm text-[#6b7280] leading-relaxed">{description}</p>
         
         {/* Badge */}

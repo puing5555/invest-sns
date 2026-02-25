@@ -5,23 +5,23 @@ interface NewsFilterProps {
 
 export default function NewsFilter({ activeFilter, onFilterChange }: NewsFilterProps) {
   const filters = [
-    { id: 'all', label: '전체' },
-    { id: 'my-stocks', label: '내 관심종목' },
-    { id: 'market', label: '시장전체' },
-    { id: 'sector', label: '섹터별' },
+    { id: 'all', label: '?�체' },
+    { id: 'my-stocks', label: '??관?�종�? },
+    { id: 'market', label: '?�장?�체' },
+    { id: 'sector', label: '?�터�? },
     { id: 'global', label: '글로벌' },
   ];
 
   return (
-    <div className="flex gap-1 mb-6 p-1 bg-gray-100 rounded-lg w-fit">
+    <div className="flex gap-1 mb-6 p-1 bg-[#f2f4f6] rounded-2xl w-fit">
       {filters.map((filter) => (
         <button
           key={filter.id}
           onClick={() => onFilterChange(filter.id)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-2xl text-sm font-medium transition-colors ${
             activeFilter === filter.id
-              ? 'bg-[#00d4aa] text-white shadow-sm'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              ? 'bg-[#3182f6] text-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+              : 'bg-[#f2f4f6] text-gray-600 hover:bg-gray-200'
           }`}
         >
           {filter.label}

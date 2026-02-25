@@ -13,20 +13,20 @@ export default function MemoDetail({ memo, isOpen, onClose, onEdit, onDelete }: 
 
   const getAttachmentIcon = (type: string) => {
     switch (type) {
-      case '공시': return '📋';
-      case '애널리포트': return '🎯';
-      case '인플루언서콜': return '👤';
-      default: return '📄';
+      case '공시': return '?��';
+      case '?�널리포??: return '?��';
+      case '?�플루언?�콜': return '?��';
+      default: return '?��';
     }
   };
 
   const handleShare = () => {
     // Non-functional for now
-    alert('공유 기능은 개발 중입니다.');
+    alert('공유 기능?� 개발 중입?�다.');
   };
 
   const handleDelete = () => {
-    if (confirm('이 메모를 삭제하시겠습니까?')) {
+    if (confirm('??메모�???��?�시겠습?�까?')) {
       onDelete(memo.id);
       onClose();
     }
@@ -47,12 +47,12 @@ export default function MemoDetail({ memo, isOpen, onClose, onEdit, onDelete }: 
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-lg font-bold text-gray-900">메모 상세</h2>
+            <h2 className="text-lg font-bold text-[#191f28]">메모 ?�세</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-xl"
+              className="text-[#8b95a1] hover:text-gray-600 text-xl"
             >
-              ✕
+              ??
             </button>
           </div>
 
@@ -62,28 +62,28 @@ export default function MemoDetail({ memo, isOpen, onClose, onEdit, onDelete }: 
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 {memo.stock && (
-                  <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-[#f2f4f6] text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
                     {memo.stock}
                   </span>
                 )}
                 {memo.isAI && (
                   <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">
-                    자동 생성
+                    ?�동 ?�성
                   </span>
                 )}
               </div>
-              <span className="text-gray-500 text-sm">{memo.date}</span>
+              <span className="text-[#8b95a1] text-sm">{memo.date}</span>
             </div>
 
             {/* Tag */}
             <div className="mb-4">
-              <span className="bg-gray-50 text-gray-700 px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2 inline-flex">
+              <span className="bg-[#f2f4f6] text-gray-700 px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2 inline-flex">
                 {memo.tagIcon} {memo.tag}
               </span>
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-bold text-gray-900 mb-4">{memo.title}</h3>
+            <h3 className="text-xl font-bold text-[#191f28] mb-4">{memo.title}</h3>
 
             {/* Content */}
             <div className="text-gray-700 mb-6 whitespace-pre-wrap">
@@ -93,19 +93,19 @@ export default function MemoDetail({ memo, isOpen, onClose, onEdit, onDelete }: 
             {/* Attachments */}
             {memo.attachments.length > 0 && (
               <div className="mb-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">첨부 자료</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-3">첨�? ?�료</h4>
                 <div className="space-y-2">
                   {memo.attachments.map((attachment, index) => (
                     <div
                       key={index}
-                      className="bg-gray-50 border border-gray-200 rounded-lg p-3 flex items-center gap-3"
+                      className="bg-[#f2f4f6] border border-gray-200 rounded-2xl p-3 flex items-center gap-3"
                     >
                       <span className="text-lg">
                         {getAttachmentIcon(attachment.type)}
                       </span>
                       <div>
-                        <p className="font-medium text-gray-900 text-sm">{attachment.label}</p>
-                        <p className="text-gray-500 text-xs">{attachment.type}</p>
+                        <p className="font-medium text-[#191f28] text-sm">{attachment.label}</p>
+                        <p className="text-[#8b95a1] text-xs">{attachment.type}</p>
                       </div>
                     </div>
                   ))}
@@ -119,19 +119,19 @@ export default function MemoDetail({ memo, isOpen, onClose, onEdit, onDelete }: 
             <div className="flex gap-2">
               <button
                 onClick={() => onEdit(memo)}
-                className="flex-1 bg-[#00d4aa] text-white py-2 px-4 rounded-lg font-medium hover:bg-[#00c299] transition-colors"
+                className="flex-1 bg-[#3182f6] text-white py-2 px-4 rounded-2xl font-medium hover:bg-[#00c299] transition-colors"
               >
-                수정
+                ?�정
               </button>
               <button
                 onClick={handleDelete}
-                className="flex-1 bg-red-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-red-600 transition-colors"
+                className="flex-1 bg-red-500 text-white py-2 px-4 rounded-2xl font-medium hover:bg-red-600 transition-colors"
               >
-                삭제
+                ??��
               </button>
               <button
                 onClick={handleShare}
-                className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+                className="flex-1 bg-[#f2f4f6] text-gray-700 py-2 px-4 rounded-2xl font-medium hover:bg-gray-200 transition-colors"
               >
                 공유
               </button>

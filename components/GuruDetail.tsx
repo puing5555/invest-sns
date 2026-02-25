@@ -50,27 +50,27 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
           {/* Header */}
           <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-gray-900">구루 상세</h2>
+              <h2 className="text-2xl font-bold text-[#191f28]">구루 ?�세</h2>
               <button 
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-[#f2f4f6] hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
-                ✕
+                ??
               </button>
             </div>
             
             {/* Large Profile Section */}
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00d4aa] to-[#00a087] flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#3182f6] to-[#00a087] flex items-center justify-center">
                 <span className="text-black font-bold text-2xl">{guru.initials}</span>
               </div>
               <div>
-                <h3 className="font-bold text-xl text-gray-900">{guru.name}</h3>
+                <h3 className="font-bold text-xl text-[#191f28]">{guru.name}</h3>
                 <p className="text-gray-600 font-medium">{guru.fund}</p>
-                <p className="text-gray-500 text-sm">{guru.aum} • {guru.lastUpdate}</p>
+                <p className="text-[#8b95a1] text-sm">{guru.aum} ??{guru.lastUpdate}</p>
                 {guru.isRealtime && (
                   <span className="inline-block bg-blue-500/20 text-blue-600 px-2 py-1 rounded text-xs font-medium mt-1">
-                    실시간
+                    ?�시�?
                   </span>
                 )}
               </div>
@@ -82,7 +82,7 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
               <>
                 {/* Portfolio Changes */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">변동 내역</h3>
+                  <h3 className="text-xl font-bold text-[#191f28] mb-4">변???�역</h3>
                   <PortfolioChange 
                     newBuys={guru.detail!.newBuys}
                     increased={guru.detail!.increased}
@@ -93,14 +93,14 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
 
                 {/* Sector Allocation */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">섹터 구성</h3>
+                  <h3 className="text-xl font-bold text-[#191f28] mb-4">?�터 구성</h3>
                   <SectorPieChart sectors={guru.detail!.sectors} />
                 </div>
 
                 {/* AI Insight */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">AI 해석</h3>
-                  <div className="bg-[#f0fdf4] border border-green-200 rounded-lg p-4">
+                  <h3 className="text-xl font-bold text-[#191f28] mb-4">AI ?�석</h3>
+                  <div className="bg-[#f0fdf4] border border-green-200 rounded-2xl p-4">
                     <div className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                         <span className="text-green-600 text-sm font-bold">AI</span>
@@ -112,12 +112,12 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
 
                 {/* Community Vote */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">커뮤니티 투표</h3>
-                  <div className="bg-gray-50 rounded-lg p-4">
+                  <h3 className="text-xl font-bold text-[#191f28] mb-4">커�??�티 ?�표</h3>
+                  <div className="bg-[#f2f4f6] rounded-2xl p-4">
                     <div className="mb-3">
                       <div className="flex justify-between text-sm text-gray-600 mb-1">
-                        <span>따라하기 {guru.detail!.vote.follow}%</span>
-                        <span>반대 {guru.detail!.vote.against}%</span>
+                        <span>?�라?�기 {guru.detail!.vote.follow}%</span>
+                        <span>반�? {guru.detail!.vote.against}%</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-3">
                         <div 
@@ -128,14 +128,14 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-600">
-                        💬 {guru.detail!.vote.comments}개 댓글
+                        ?�� {guru.detail!.vote.comments}�??��?
                       </span>
                       <div className="flex gap-2">
                         <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors">
-                          따라하기
+                          ?�라?�기
                         </button>
                         <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-3 py-1 rounded text-sm font-medium transition-colors">
-                          반대
+                          반�?
                         </button>
                       </div>
                     </div>
@@ -146,28 +146,28 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
               <>
                 {/* Basic Info for Gurus without Detail Data */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">변동 요약</h3>
+                  <h3 className="text-xl font-bold text-[#191f28] mb-4">변???�약</h3>
                   <div className="grid grid-cols-2 gap-4">
                     {guru.changes.newBuys > 0 && (
-                      <div className="bg-green-50 rounded-lg p-3 text-center">
+                      <div className="bg-green-50 rounded-2xl p-3 text-center">
                         <div className="text-2xl font-bold text-green-600">{guru.changes.newBuys}</div>
-                        <div className="text-sm text-green-700">신규매수</div>
+                        <div className="text-sm text-green-700">?�규매수</div>
                       </div>
                     )}
                     {guru.changes.increased > 0 && (
-                      <div className="bg-blue-50 rounded-lg p-3 text-center">
+                      <div className="bg-blue-50 rounded-2xl p-3 text-center">
                         <div className="text-2xl font-bold text-blue-600">{guru.changes.increased}</div>
-                        <div className="text-sm text-blue-700">확대</div>
+                        <div className="text-sm text-blue-700">?��?</div>
                       </div>
                     )}
                     {guru.changes.decreased > 0 && (
-                      <div className="bg-orange-50 rounded-lg p-3 text-center">
+                      <div className="bg-orange-50 rounded-2xl p-3 text-center">
                         <div className="text-2xl font-bold text-orange-600">{guru.changes.decreased}</div>
                         <div className="text-sm text-orange-700">축소</div>
                       </div>
                     )}
                     {guru.changes.sold > 0 && (
-                      <div className="bg-red-50 rounded-lg p-3 text-center">
+                      <div className="bg-red-50 rounded-2xl p-3 text-center">
                         <div className="text-2xl font-bold text-red-600">{guru.changes.sold}</div>
                         <div className="text-sm text-red-700">매도</div>
                       </div>
@@ -177,28 +177,28 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
 
                 {/* Top Holdings */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">주요 보유종목</h3>
+                  <h3 className="text-xl font-bold text-[#191f28] mb-4">주요 보유종목</h3>
                   <div className="space-y-3">
                     {guru.topHoldings.map((holding, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div key={index} className="flex items-center justify-between p-3 bg-[#f2f4f6] rounded-2xl">
                         <div>
-                          <span className="font-bold text-gray-900">{holding.name}</span>
-                          <span className="text-gray-500 ml-1">({holding.ticker})</span>
+                          <span className="font-bold text-[#191f28]">{holding.name}</span>
+                          <span className="text-[#8b95a1] ml-1">({holding.ticker})</span>
                         </div>
-                        <div className="font-semibold text-gray-900">{holding.percentage}%</div>
+                        <div className="font-semibold text-[#191f28]">{holding.percentage}%</div>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Notice for Limited Data */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4">
                   <div className="flex items-start gap-3">
                     <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <span className="text-blue-600 text-sm">ℹ️</span>
+                      <span className="text-blue-600 text-sm">?�️</span>
                     </div>
                     <p className="text-blue-800 text-sm">
-                      이 구루의 상세 포트폴리오 분석은 곧 제공될 예정입니다.
+                      ??구루???�세 ?�트?�리??분석?� �??�공???�정?�니??
                     </p>
                   </div>
                 </div>

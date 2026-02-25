@@ -14,10 +14,10 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
       if (part.startsWith('**') && part.endsWith('**')) {
         const boldText = part.slice(2, -2);
         // If bold text contains stock names, make them clickable style
-        const stockPattern = /(에코프로|아이빔테크놀로지|삼성전자)/;
+        const stockPattern = /(?�코?�로|?�이빔테?��?로�?|?�성?�자)/;
         if (stockPattern.test(boldText)) {
           return (
-            <strong key={index} className="font-bold text-[#00d4aa] cursor-pointer hover:underline">
+            <strong key={index} className="font-bold text-[#3182f6] cursor-pointer hover:underline">
               {boldText}
             </strong>
           );
@@ -33,8 +33,8 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
       <div className={`flex ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start max-w-[80%]`}>
         {/* Avatar */}
         {!isUser && (
-          <div className="w-8 h-8 bg-[#00d4aa] rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-            <span className="text-white text-sm font-bold">🤖</span>
+          <div className="w-8 h-8 bg-[#3182f6] rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+            <span className="text-white text-sm font-bold">?��</span>
           </div>
         )}
 
@@ -42,13 +42,13 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
         <div
           className={`px-4 py-3 ${
             isUser 
-              ? 'bg-[#00d4aa] text-white rounded-2xl rounded-tr-sm' 
-              : 'bg-[#f0f2f5] text-gray-900 rounded-2xl rounded-tl-sm'
+              ? 'bg-[#3182f6] text-white rounded-2xl rounded-tr-sm' 
+              : 'bg-[#f2f4f6] text-[#191f28] rounded-2xl rounded-tl-sm'
           } max-w-full word-break`}
         >
           <div className="whitespace-pre-wrap">{parseMessage(message)}</div>
           {timestamp && (
-            <div className={`text-xs mt-1 ${isUser ? 'text-green-100' : 'text-gray-500'}`}>
+            <div className={`text-xs mt-1 ${isUser ? 'text-green-100' : 'text-[#8b95a1]'}`}>
               {timestamp}
             </div>
           )}

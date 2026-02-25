@@ -12,45 +12,45 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
   if (!isOpen || !analyst) return null;
 
   const trustBadgeConfig = {
-    verified: { text: '🔵 검증됨', color: 'text-blue-600' },
-    accumulating: { text: '🟡 축적중', color: 'text-yellow-600' }
+    verified: { text: '?�� 검증됨', color: 'text-blue-600' },
+    accumulating: { text: '?�� 축적�?, color: 'text-yellow-600' }
   };
 
   const badge = trustBadgeConfig[analyst.trustBadge];
 
   // Mock data for stock-by-stock accuracy
   const stockAccuracy = [
-    { stock: 'SK하이닉스', accuracy: 75 },
-    { stock: '삼성전자', accuracy: 58 },
-    { stock: 'LG에너지솔루션', accuracy: 64 }
+    { stock: 'SK?�이?�스', accuracy: 75 },
+    { stock: '?�성?�자', accuracy: 58 },
+    { stock: 'LG?�너지?�루??, accuracy: 64 }
   ];
 
   // Mock monthly accuracy data (6 months)
   const monthlyAccuracy = [
-    { month: '9월', accuracy: 65 },
-    { month: '10월', accuracy: 72 },
-    { month: '11월', accuracy: 58 },
-    { month: '12월', accuracy: 69 },
-    { month: '1월', accuracy: 61 },
-    { month: '2월', accuracy: 67 }
+    { month: '9??, accuracy: 65 },
+    { month: '10??, accuracy: 72 },
+    { month: '11??, accuracy: 58 },
+    { month: '12??, accuracy: 69 },
+    { month: '1??, accuracy: 61 },
+    { month: '2??, accuracy: 67 }
   ];
 
   // Mock report history
   const reportHistory = [
-    { stock: 'SK하이닉스', target: 210000, current: 195000, return: 12.3 },
-    { stock: '삼성전자', target: 85000, current: 78000, return: -3.2 },
-    { stock: 'LG에너지솔루션', target: 420000, current: 445000, return: 18.7 },
-    { stock: 'SK스퀘어', target: 65000, current: 61000, return: -5.1 },
+    { stock: 'SK?�이?�스', target: 210000, current: 195000, return: 12.3 },
+    { stock: '?�성?�자', target: 85000, current: 78000, return: -3.2 },
+    { stock: 'LG?�너지?�루??, target: 420000, current: 445000, return: 18.7 },
+    { stock: 'SK?�퀘어', target: 65000, current: 61000, return: -5.1 },
     { stock: 'NAVER', target: 180000, current: 165000, return: -2.8 }
   ];
 
   // Get semiconductor analysts for comparison (for analyst with id '2')
   const semiAnalysts = analyst.id === '2' ? [
-    { name: '김OO', firm: '한국투자', accuracy: 62 },
-    { name: '박XX', firm: '미래에셋', accuracy: 67 },
-    { name: '이YY', firm: 'KB증권', accuracy: 59 },
-    { name: '최ZZ', firm: '삼성증권', accuracy: 71 },
-    { name: '정AA', firm: 'NH투자', accuracy: 55 }
+    { name: '김OO', firm: '?�국?�자', accuracy: 62 },
+    { name: '박XX', firm: '미래?�셋', accuracy: 67 },
+    { name: '?�YY', firm: 'KB증권', accuracy: 59 },
+    { name: '최ZZ', firm: '?�성증권', accuracy: 71 },
+    { name: '?�AA', firm: 'NH?�자', accuracy: 55 }
   ].sort((a, b) => b.accuracy - a.accuracy) : [];
 
   return (
@@ -65,12 +65,12 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
       <div className="w-[400px] bg-white h-full shadow-xl overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-          <h2 className="font-bold text-lg">애널리스트 상세</h2>
+          <h2 className="font-bold text-lg">?�널리스???�세</h2>
           <button 
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-xl"
+            className="text-[#8b95a1] hover:text-gray-700 text-xl"
           >
-            ✕
+            ??
           </button>
         </div>
 
@@ -82,9 +82,9 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
                 {analyst.name.charAt(0)}
               </span>
             </div>
-            <h3 className="font-bold text-xl text-gray-900 mb-1">{analyst.name}</h3>
-            <p className="text-gray-600 mb-1">{analyst.firm} • {analyst.sector}</p>
-            <p className="text-sm text-gray-500">활동기간: 2022.03 - 현재</p>
+            <h3 className="font-bold text-xl text-[#191f28] mb-1">{analyst.name}</h3>
+            <p className="text-gray-600 mb-1">{analyst.firm} ??{analyst.sector}</p>
+            <p className="text-sm text-[#8b95a1]">?�동기간: 2022.03 - ?�재</p>
           </div>
 
           {/* Large AccuracyCircle + Stars */}
@@ -101,17 +101,17 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
                 {badge.text}
               </p>
               <p className="text-lg font-bold text-green-600 mt-2">
-                평균 +{analyst.avgReturn}%
+                ?�균 +{analyst.avgReturn}%
               </p>
             </div>
           </div>
 
           {/* Stock-by-stock accuracy */}
           <div>
-            <h4 className="font-semibold mb-3">종목별 적중률</h4>
+            <h4 className="font-semibold mb-3">종목�??�중�?/h4>
             <div className="space-y-2">
               {stockAccuracy.map((item, index) => (
-                <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                <div key={index} className="flex items-center justify-between p-2 bg-[#f2f4f6] rounded">
                   <span className="font-medium text-sm">{item.stock}</span>
                   <span className={`font-bold text-sm ${
                     item.accuracy >= 60 ? 'text-green-600' : 
@@ -126,7 +126,7 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
 
           {/* Monthly accuracy chart */}
           <div>
-            <h4 className="font-semibold mb-3">월별 적중률 추이</h4>
+            <h4 className="font-semibold mb-3">?�별 ?�중�?추이</h4>
             <div className="space-y-2">
               {monthlyAccuracy.map((item, index) => (
                 <div key={index} className="flex items-center space-x-3">
@@ -150,10 +150,10 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
 
           {/* Report history */}
           <div>
-            <h4 className="font-semibold mb-3">리포트 히스토리</h4>
+            <h4 className="font-semibold mb-3">리포???�스?�리</h4>
             <div className="space-y-2">
               {reportHistory.map((item, index) => (
-                <div key={index} className="bg-gray-50 p-3 rounded-lg">
+                <div key={index} className="bg-[#f2f4f6] p-3 rounded-2xl">
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-medium text-sm">{item.stock}</span>
                     <span className={`font-bold text-sm ${
@@ -163,8 +163,8 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
                     </span>
                   </div>
                   <div className="text-xs text-gray-600">
-                    목표: {item.target.toLocaleString()}원 • 
-                    현재: {item.current.toLocaleString()}원
+                    목표: {item.target.toLocaleString()}????
+                    ?�재: {item.current.toLocaleString()}??
                   </div>
                 </div>
               ))}
@@ -174,10 +174,10 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
           {/* Comparison section (only for semiconductor analyst) */}
           {analyst.id === '2' && (
             <div>
-              <h4 className="font-semibold mb-3">반도체 커버 애널 TOP5</h4>
+              <h4 className="font-semibold mb-3">반도�?커버 ?�널 TOP5</h4>
               <div className="space-y-2">
                 {semiAnalysts.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                  <div key={index} className="flex items-center justify-between p-2 bg-[#f2f4f6] rounded">
                     <div>
                       <span className="font-medium text-sm">{item.name}</span>
                       <span className="text-xs text-gray-600 ml-2">({item.firm})</span>
@@ -196,11 +196,11 @@ export default function AnalystDetail({ analyst, isOpen, onClose }: AnalystDetai
 
           {/* Action buttons */}
           <div className="flex space-x-3 pt-4">
-            <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-              팔로우
+            <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-2xl font-medium hover:bg-blue-700 transition-colors">
+              ?�로??
             </button>
-            <button className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-              알림설정
+            <button className="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-2xl font-medium hover:bg-[#f2f4f6] transition-colors">
+              ?�림?�정
             </button>
           </div>
         </div>

@@ -14,43 +14,43 @@ export default function LongTermIdea({ onBack }: LongTermIdeaProps) {
       <div className="border-b border-gray-200 px-6 py-4">
         <button
           onClick={onBack}
-          className="text-gray-600 hover:text-gray-900 mb-2 flex items-center space-x-1"
+          className="text-gray-600 hover:text-[#191f28] mb-2 flex items-center space-x-1"
         >
-          <span>←</span>
-          <span>전략연구실</span>
+          <span>??/span>
+          <span>?�략?�구??/span>
         </button>
-        <h1 className="text-2xl font-bold text-gray-900">장기투자 아이디어</h1>
+        <h1 className="text-2xl font-bold text-[#191f28]">?�기?�자 ?�이?�어</h1>
       </div>
 
       <div className="max-w-4xl mx-auto p-6">
         {/* Description */}
         <div className="text-center mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">장기 투자 인사이트</h2>
-          <p className="text-gray-600">AI 리포트와 전문가들의 장기 투자 아이디어</p>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">?�기 ?�자 ?�사?�트</h2>
+          <p className="text-gray-600">AI 리포?��? ?�문가?�의 ?�기 ?�자 ?�이?�어</p>
         </div>
 
         {/* AI Reports */}
         <div className="mb-8">
           <div className="flex items-center space-x-2 mb-4">
-            <h3 className="text-lg font-bold text-gray-900">🤖 AI 리포트</h3>
-            <span className="px-2 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">매주 업데이트</span>
+            <h3 className="text-lg font-bold text-[#191f28]">?�� AI 리포??/h3>
+            <span className="px-2 py-1 bg-purple-100 text-purple-600 text-xs rounded-full">매주 ?�데?�트</span>
           </div>
           
           <div className="space-y-4">
             {aiReports.map((report) => (
-              <div key={report.id} className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl p-6">
+              <div key={report.id} className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-2xl p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">{report.title}</h4>
+                    <h4 className="text-lg font-bold text-[#191f28] mb-2">{report.title}</h4>
                     <p className="text-gray-700 mb-3">{report.description}</p>
                     
                     <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
                       <span className="flex items-center space-x-1">
-                        <span>⏰</span>
-                        <span>{report.readTime}분 읽기</span>
+                        <span>??/span>
+                        <span>{report.readTime}�??�기</span>
                       </span>
                       <span className="flex items-center space-x-1">
-                        <span>👀</span>
+                        <span>??</span>
                         <span>{report.views?.toLocaleString()} 조회</span>
                       </span>
                     </div>
@@ -58,7 +58,7 @@ export default function LongTermIdea({ onBack }: LongTermIdeaProps) {
                     {/* Related Stocks */}
                     {report.relatedStocks && (
                       <div className="mb-4">
-                        <p className="text-sm text-gray-600 mb-2">관련 종목:</p>
+                        <p className="text-sm text-gray-600 mb-2">관??종목:</p>
                         <div className="flex flex-wrap gap-2">
                           {report.relatedStocks.map((stock, index) => (
                             <span
@@ -74,20 +74,20 @@ export default function LongTermIdea({ onBack }: LongTermIdeaProps) {
                   </div>
                   <div className="ml-4">
                     <span className="px-3 py-1 bg-purple-600 text-white text-sm rounded-full">
-                      AI 리포트
+                      AI 리포??
                     </span>
                   </div>
                 </div>
                 
                 <div className="flex space-x-2">
-                  <button className="px-4 py-2 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700">
-                    전체 리포트 읽기
+                  <button className="px-4 py-2 bg-purple-600 text-white text-sm rounded-2xl hover:bg-purple-700">
+                    ?�체 리포???�기
                   </button>
-                  <button className="px-4 py-2 bg-purple-100 text-purple-600 text-sm rounded-lg hover:bg-purple-200">
-                    요약본 보기
+                  <button className="px-4 py-2 bg-purple-100 text-purple-600 text-sm rounded-2xl hover:bg-purple-200">
+                    ?�약�?보기
                   </button>
-                  <button className="px-4 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg hover:bg-gray-200">
-                    북마크
+                  <button className="px-4 py-2 bg-[#f2f4f6] text-gray-600 text-sm rounded-2xl hover:bg-gray-200">
+                    북마??
                   </button>
                 </div>
               </div>
@@ -98,49 +98,49 @@ export default function LongTermIdea({ onBack }: LongTermIdeaProps) {
         {/* Community Posts */}
         <div>
           <div className="flex items-center space-x-2 mb-4">
-            <h3 className="text-lg font-bold text-gray-900">👥 커뮤니티 인기글</h3>
-            <span className="px-2 py-1 bg-indigo-100 text-indigo-600 text-xs rounded-full">에디터 큐레이션</span>
+            <h3 className="text-lg font-bold text-[#191f28]">?�� 커�??�티 ?�기글</h3>
+            <span className="px-2 py-1 bg-indigo-100 text-indigo-600 text-xs rounded-full">?�디???�레?�션</span>
           </div>
           
           <div className="space-y-4">
             {communityPosts.map((post) => (
-              <div key={post.id} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-sm">
+              <div key={post.id} className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
-                      <h4 className="text-lg font-bold text-gray-900">{post.title}</h4>
+                      <h4 className="text-lg font-bold text-[#191f28]">{post.title}</h4>
                       {post.isEditorPick && (
                         <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full flex items-center space-x-1">
-                          <span>⭐</span>
-                          <span>에디터추천</span>
+                          <span>�?/span>
+                          <span>?�디?�추�?/span>
                         </span>
                       )}
                     </div>
                     <p className="text-gray-700 mb-3">{post.description}</p>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
+                    <div className="flex items-center space-x-4 text-sm text-[#8b95a1]">
                       <span>by {post.author}</span>
                     </div>
                   </div>
                 </div>
                 
                 <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                  <div className="flex space-x-4 text-sm text-gray-500">
+                  <div className="flex space-x-4 text-sm text-[#8b95a1]">
                     <span className="flex items-center space-x-1">
-                      <span>👍</span>
+                      <span>?��</span>
                       <span>{post.likes}</span>
                     </span>
                     <span className="flex items-center space-x-1">
-                      <span>💬</span>
+                      <span>?��</span>
                       <span>{post.comments}</span>
                     </span>
                   </div>
                   
                   <div className="flex space-x-2">
-                    <button className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-lg hover:bg-gray-200">
-                      전체 글 보기
+                    <button className="px-3 py-1 bg-[#f2f4f6] text-gray-600 text-sm rounded-2xl hover:bg-gray-200">
+                      ?�체 글 보기
                     </button>
-                    <button className="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-lg hover:bg-indigo-200">
-                      관심종목 추가
+                    <button className="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-2xl hover:bg-indigo-200">
+                      관?�종�?추�?
                     </button>
                   </div>
                 </div>
@@ -151,8 +151,8 @@ export default function LongTermIdea({ onBack }: LongTermIdeaProps) {
 
         {/* More Ideas Button */}
         <div className="text-center mt-8">
-          <button className="px-8 py-4 bg-indigo-100 text-indigo-600 rounded-lg hover:bg-indigo-200 font-medium">
-            더 많은 아이디어 보기
+          <button className="px-8 py-4 bg-indigo-100 text-indigo-600 rounded-2xl hover:bg-indigo-200 font-medium">
+            ??많�? ?�이?�어 보기
           </button>
         </div>
       </div>

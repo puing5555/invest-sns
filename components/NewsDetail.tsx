@@ -13,15 +13,15 @@ export default function NewsDetail({ news, isOpen, onClose }: NewsDetailProps) {
   const get3LineSummary = (newsId: number) => {
     if (newsId === 1) {
       return [
-        "삼성전자가 파운드리 2나노 공정에서 40% 수율을 달성하며 업계 최초 기록",
-        "관련 장비주인 한미반도체, 주성엔지니어링 등의 주가 상승 기대",
-        "반도체 제조 경쟁력 강화로 TSMC 대비 우위 확보 가능성"
+        "?�성?�자가 ?�운?�리 2?�노 공정?�서 40% ?�율???�성?�며 ?�계 최초 기록",
+        "관???�비주인 ?��?반도�? 주성?��??�어�??�의 주�? ?�승 기�?",
+        "반도�??�조 경쟁??강화�?TSMC ?��??�위 ?�보 가?�성"
       ];
     }
     return [
-      "주요 시장 동향과 영향 요인 분석 중",
-      "관련 종목들의 주가 움직임 모니터링 필요",
-      "추가 정보 업데이트 예정"
+      "주요 ?�장 ?�향�??�향 ?�인 분석 �?,
+      "관??종목?�의 주�? ?�직임 모니?�링 ?�요",
+      "추�? ?�보 ?�데?�트 ?�정"
     ];
   };
 
@@ -54,34 +54,34 @@ export default function NewsDetail({ news, isOpen, onClose }: NewsDetailProps) {
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl"
+            className="absolute top-4 right-4 text-[#8b95a1] hover:text-gray-600 text-xl"
           >
-            ✕
+            ??
           </button>
 
           {/* News title */}
-          <h1 className="text-xl font-bold text-gray-900 mb-4 pr-8">
+          <h1 className="text-xl font-bold text-[#191f28] mb-4 pr-8">
             {news.title}
           </h1>
 
           {/* Source, time, and sentiment */}
           <div className="flex items-center justify-between mb-6">
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-[#8b95a1]">
               <span>{news.source}</span>
-              <span className="mx-2">•</span>
+              <span className="mx-2">??/span>
               <span>{news.time}</span>
             </div>
             <SentimentBadge sentiment={news.sentiment} size="md" />
           </div>
 
-          {/* AI 3줄 요약 */}
+          {/* AI 3�??�약 */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">AI 3줄 요약</h2>
-            <div className="bg-[#f5f6f8] rounded-lg p-4">
+            <h2 className="text-lg font-semibold text-[#191f28] mb-3">AI 3�??�약</h2>
+            <div className="bg-[#f5f6f8] rounded-2xl p-4">
               <ul className="space-y-2">
                 {get3LineSummary(news.id).map((point, index) => (
                   <li key={index} className="text-sm text-gray-700 flex items-start">
-                    <span className="mr-2 text-[#00d4aa] font-bold">•</span>
+                    <span className="mr-2 text-[#3182f6] font-bold">??/span>
                     {point}
                   </li>
                 ))}
@@ -89,32 +89,32 @@ export default function NewsDetail({ news, isOpen, onClose }: NewsDetailProps) {
             </div>
           </section>
 
-          {/* AI 상세 영향 분석 */}
+          {/* AI ?�세 ?�향 분석 */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">AI 상세 영향 분석</h2>
+            <h2 className="text-lg font-semibold text-[#191f28] mb-3">AI ?�세 ?�향 분석</h2>
             <div className="text-sm text-gray-700 leading-relaxed">
               <p className="mb-2">{news.aiAnalysis}</p>
               <p>
-                이번 뉴스는 관련 업계와 투자자들에게 중요한 의미를 가지며, 
-                단기적으로는 관련 종목들의 주가 변동성이 증가할 것으로 예상됩니다. 
-                장기적 관점에서 지속적인 모니터링이 필요합니다.
+                ?�번 ?�스??관???�계?� ?�자?�들?�게 중요???��?�?가지�? 
+                ?�기?�으로는 관??종목?�의 주�? 변?�성??증�???것으�??�상?�니?? 
+                ?�기??관?�에??지?�적??모니?�링???�요?�니??
               </p>
             </div>
           </section>
 
-          {/* 관련 종목 가격 변동 */}
+          {/* 관??종목 가�?변??*/}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">관련 종목 가격 변동</h2>
+            <h2 className="text-lg font-semibold text-[#191f28] mb-3">관??종목 가�?변??/h2>
             <div className="space-y-3">
               {getStockPriceChanges().map((stock, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={index} className="flex items-center justify-between p-3 bg-[#f2f4f6] rounded-2xl">
                   <div>
-                    <div className="font-medium text-gray-900">{stock.name}</div>
-                    <div className="text-sm text-gray-500">{stock.price.toLocaleString()}원</div>
+                    <div className="font-medium text-[#191f28]">{stock.name}</div>
+                    <div className="text-sm text-[#8b95a1]">{stock.price.toLocaleString()}??/div>
                   </div>
                   <div className="text-right">
                     <div className={`font-medium ${stock.change >= 0 ? 'text-red-600' : 'text-blue-600'}`}>
-                      {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(0)}원
+                      {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(0)}??
                     </div>
                     <div className={`text-sm ${stock.changePercent >= 0 ? 'text-red-600' : 'text-blue-600'}`}>
                       {stock.changePercent >= 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%
@@ -125,53 +125,53 @@ export default function NewsDetail({ news, isOpen, onClose }: NewsDetailProps) {
             </div>
           </section>
 
-          {/* 관련 공시 */}
+          {/* 관??공시 */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">관련 공시</h2>
-            <div className="text-sm text-gray-500 bg-gray-50 rounded-lg p-4">
+            <h2 className="text-lg font-semibold text-[#191f28] mb-3">관??공시</h2>
+            <div className="text-sm text-[#8b95a1] bg-[#f2f4f6] rounded-2xl p-4">
               {news.id === 1 ? (
                 <div>
-                  <p className="font-medium text-gray-700 mb-2">최근 관련 공시</p>
-                  <p>• 삼성전자 - 반도체 사업부 투자계획 공시 (2024.12.15)</p>
-                  <p>• 한미반도체 - 장비 공급계약 체결 공시 (2024.12.20)</p>
+                  <p className="font-medium text-gray-700 mb-2">최근 관??공시</p>
+                  <p>???�성?�자 - 반도�??�업부 ?�자계획 공시 (2024.12.15)</p>
+                  <p>???��?반도�?- ?�비 공급계약 체결 공시 (2024.12.20)</p>
                 </div>
               ) : (
-                <p>관련 공시 없음</p>
+                <p>관??공시 ?�음</p>
               )}
             </div>
           </section>
 
-          {/* 커뮤니티 반응 */}
+          {/* 커�??�티 반응 */}
           <section className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">커뮤니티 반응</h2>
+            <h2 className="text-lg font-semibold text-[#191f28] mb-3">커�??�티 반응</h2>
             <div className="space-y-4">
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-[#f2f4f6] rounded-2xl p-4">
                 <div className="flex items-center mb-2">
-                  <div className="w-8 h-8 bg-[#00d4aa] rounded-full flex items-center justify-center text-white text-sm font-medium">
-                    투
+                  <div className="w-8 h-8 bg-[#3182f6] rounded-full flex items-center justify-center text-white text-sm font-medium">
+                    ??
                   </div>
                   <div className="ml-3">
-                    <div className="font-medium text-gray-900">투자고수</div>
-                    <div className="text-xs text-gray-500">5분 전</div>
+                    <div className="font-medium text-[#191f28]">?�자고수</div>
+                    <div className="text-xs text-[#8b95a1]">5�???/div>
                   </div>
                 </div>
                 <p className="text-sm text-gray-700">
-                  이번 뉴스는 정말 중요한 시사점이 있네요. 관련 종목들 관심 있게 지켜봐야겠습니다.
+                  ?�번 ?�스???�말 중요???�사?�이 ?�네?? 관??종목??관???�게 지켜봐?�겠?�니??
                 </p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-[#f2f4f6] rounded-2xl p-4">
                 <div className="flex items-center mb-2">
                   <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
-                    주
+                    �?
                   </div>
                   <div className="ml-3">
-                    <div className="font-medium text-gray-900">주식러버</div>
-                    <div className="text-xs text-gray-500">12분 전</div>
+                    <div className="font-medium text-[#191f28]">주식?�버</div>
+                    <div className="text-xs text-[#8b95a1]">12�???/div>
                   </div>
                 </div>
                 <p className="text-sm text-gray-700">
-                  AI 분석이 꽤 정확한 것 같아요. 장기적으로 봐야 할 뉴스네요.
+                  AI 분석??�??�확??�?같아?? ?�기?�으�?봐야 ???�스?�요.
                 </p>
               </div>
             </div>

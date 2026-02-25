@@ -11,8 +11,8 @@ export default function LabGrid({ onCardClick }: LabGridProps) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#111827] mb-2">전략연구실</h1>
-          <p className="text-[#6b7280]">AI와 커뮤니티가 함께 만드는 투자 아이디어</p>
+          <h1 className="text-3xl font-bold text-[#191f28] mb-2">?�략?�구??/h1>
+          <p className="text-[#6b7280]">AI?� 커�??�티가 ?�께 만드???�자 ?�이?�어</p>
         </div>
 
         {/* Grid */}

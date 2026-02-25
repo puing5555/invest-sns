@@ -13,108 +13,108 @@ export default function BacktestBuilder({ onBack }: BacktestBuilderProps) {
       <div className="border-b border-gray-200 px-6 py-4">
         <button
           onClick={onBack}
-          className="text-gray-600 hover:text-gray-900 mb-2 flex items-center space-x-1"
+          className="text-gray-600 hover:text-[#191f28] mb-2 flex items-center space-x-1"
         >
-          <span>←</span>
-          <span>전략연구실</span>
+          <span>??/span>
+          <span>?�략?�구??/span>
         </button>
-        <h1 className="text-2xl font-bold text-gray-900">공시 전략 백테스트</h1>
+        <h1 className="text-2xl font-bold text-[#191f28]">공시 ?�략 백테?�트</h1>
       </div>
 
       <div className="max-w-6xl mx-auto p-6">
         {/* Title */}
         <div className="text-center mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">나만의 전략을 만들고 검증하세요</h2>
-          <p className="text-gray-600">조건을 설정하고 백테스트로 수익률을 확인해보세요</p>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">?�만???�략??만들�?검증하?�요</h2>
+          <p className="text-gray-600">조건???�정?�고 백테?�트�??�익률을 ?�인?�보?�요</p>
         </div>
 
         {/* Strategy Builder */}
-        <div className="bg-gray-50 rounded-xl p-6 mb-8">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">전략 설정</h3>
+        <div className="bg-[#f2f4f6] rounded-2xl p-6 mb-8">
+          <h3 className="text-lg font-bold text-[#191f28] mb-4">?�략 ?�정</h3>
           
           <div className="space-y-4">
             {/* IF Conditions */}
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-medium text-gray-700">IF</span>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg bg-white">
-                <option>A등급 공시</option>
+              <select className="px-3 py-2 border border-gray-300 rounded-2xl bg-white">
+                <option>A?�급 공시</option>
               </select>
-              <span className="text-gray-500">+</span>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg bg-white">
-                <option>시총 1000억 이하</option>
+              <span className="text-[#8b95a1]">+</span>
+              <select className="px-3 py-2 border border-gray-300 rounded-2xl bg-white">
+                <option>?�총 1000???�하</option>
               </select>
-              <span className="text-gray-500">+</span>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg bg-white">
-                <option>거래량 전일대비 200%+</option>
+              <span className="text-[#8b95a1]">+</span>
+              <select className="px-3 py-2 border border-gray-300 rounded-2xl bg-white">
+                <option>거래???�일?��?200%+</option>
               </select>
             </div>
 
             {/* THEN Actions */}
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-medium text-gray-700">THEN</span>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg bg-white">
-                <option>다음날 시가 매수</option>
+              <select className="px-3 py-2 border border-gray-300 rounded-2xl bg-white">
+                <option>?�음???��? 매수</option>
               </select>
-              <span className="text-gray-500">→</span>
-              <select className="px-3 py-2 border border-gray-300 rounded-lg bg-white">
-                <option>3일 후 매도</option>
+              <span className="text-[#8b95a1]">??/span>
+              <select className="px-3 py-2 border border-gray-300 rounded-2xl bg-white">
+                <option>3????매도</option>
               </select>
             </div>
 
             {/* Add Condition Button */}
-            <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100">
-              + 조건 추가
+            <button className="px-4 py-2 border border-gray-300 rounded-2xl text-gray-600 hover:bg-[#f2f4f6]">
+              + 조건 추�?
             </button>
 
             {/* Run Backtest Button */}
-            <button className="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium">
-              백테스트 실행
+            <button className="w-full px-6 py-3 bg-green-600 text-white rounded-2xl hover:bg-green-700 font-medium">
+              백테?�트 ?�행
             </button>
           </div>
         </div>
 
         {/* Results */}
-        <div className="bg-white border border-gray-200 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-6">백테스트 결과</h3>
+        <div className="bg-white border border-gray-200 rounded-2xl p-6">
+          <h3 className="text-lg font-bold text-[#191f28] mb-6">백테?�트 결과</h3>
           
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center">
-              <p className="text-2xl font-bold text-gray-900">{result.totalTrades}건</p>
-              <p className="text-xs text-gray-500">총 거래</p>
+              <p className="text-2xl font-bold text-[#191f28]">{result.totalTrades}�?/p>
+              <p className="text-xs text-[#8b95a1]">�?거래</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-green-600">{result.winRate}%</p>
-              <p className="text-xs text-gray-500">승률</p>
+              <p className="text-xs text-[#8b95a1]">?�률</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-blue-600">+{result.avgReturn}%</p>
-              <p className="text-xs text-gray-500">평균수익</p>
+              <p className="text-xs text-[#8b95a1]">?�균?�익</p>
             </div>
             <div className="text-center">
               <p className="text-2xl font-bold text-purple-600">+{result.cumulativeReturn}%</p>
-              <p className="text-xs text-gray-500">누적수익</p>
+              <p className="text-xs text-[#8b95a1]">?�적?�익</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
             <div className="text-center">
               <p className="text-lg font-bold text-green-600">+{result.maxReturn}%</p>
-              <p className="text-xs text-gray-500">최대수익</p>
+              <p className="text-xs text-[#8b95a1]">최�??�익</p>
             </div>
             <div className="text-center">
               <p className="text-lg font-bold text-red-600">{result.maxLoss}%</p>
-              <p className="text-xs text-gray-500">최대손실</p>
+              <p className="text-xs text-[#8b95a1]">최�??�실</p>
             </div>
             <div className="text-center">
-              <p className="text-lg font-bold text-gray-900">{result.sharpe}</p>
-              <p className="text-xs text-gray-500">샤프 지수</p>
+              <p className="text-lg font-bold text-[#191f28]">{result.sharpe}</p>
+              <p className="text-xs text-[#8b95a1]">?�프 지??/p>
             </div>
           </div>
 
           {/* Equity Curve Chart */}
-          <div className="bg-gray-50 rounded-lg p-4 mb-6">
-            <h4 className="text-sm font-medium text-gray-700 mb-4">수익률 곡선</h4>
+          <div className="bg-[#f2f4f6] rounded-2xl p-4 mb-6">
+            <h4 className="text-sm font-medium text-gray-700 mb-4">?�익�?곡선</h4>
             <div className="h-32 w-full">
               <svg viewBox="0 0 400 100" className="w-full h-full">
                 <defs>
@@ -147,12 +147,12 @@ export default function BacktestBuilder({ onBack }: BacktestBuilderProps) {
 
           {/* Preset Strategies */}
           <div>
-            <h4 className="text-sm font-medium text-gray-700 mb-3">인기 전략 템플릿</h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-3">?�기 ?�략 ?�플�?/h4>
             <div className="flex flex-wrap gap-2">
               {presetStrategies.map((strategy, index) => (
                 <button
                   key={index}
-                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-100"
+                  className="px-3 py-2 border border-gray-300 rounded-2xl text-sm hover:bg-[#f2f4f6]"
                 >
                   {strategy.name} ({strategy.winRate}%)
                 </button>

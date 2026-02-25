@@ -31,15 +31,15 @@ export default function FeedPost({ post }: { post: PostData }) {
 
   return (
     <article
-      className={`px-4 py-3 border-b border-[#eff3f4] transition-colors hover:bg-[#f7f9fa] cursor-pointer ${
-        isSystem ? 'border-l-2 border-l-[#ff4444] bg-[#fff8f8]' : ''
+      className={`px-4 py-3 border-b border-[#f0f0f0] transition-colors hover:bg-[#f4f4f4] cursor-pointer ${
+        isSystem ? 'border-l-2 border-l-[#f44336] bg-[#fff8f8]' : ''
       }`}
     >
       <div className="flex gap-3">
         {/* Avatar */}
         {isSystem ? (
           <div className="w-10 h-10 flex items-center justify-center flex-shrink-0 text-xl">
-            🔴
+            🚨
           </div>
         ) : (
           <div className="w-10 h-10 rounded-full bg-[#2a2a4e] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
@@ -50,58 +50,58 @@ export default function FeedPost({ post }: { post: PostData }) {
         {/* Content */}
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className="flex items-center gap-1 text-[15px]">
-            <span className="font-bold text-gray-900 truncate">{post.name}</span>
-            <span className="text-gray-500 truncate">@{post.handle}</span>
-            <span className="text-gray-500">·</span>
-            <span className="text-gray-500 whitespace-nowrap">{post.time}</span>
-            <button className="ml-auto text-gray-400 hover:text-gray-600 flex-shrink-0">
-              ···
-            </button>
+          <div className="flex items-center gap-1 mb-1">
+            <span className="font-bold text-[15px] text-[#191f28] hover:underline cursor-pointer">
+              {post.name}
+            </span>
+            {!isSystem && (
+              <span className="text-sm text-[#8b95a1]">@{post.handle}</span>
+            )}
+            <span className="text-sm text-[#8b95a1]"> · {post.time}</span>
           </div>
 
-          {/* Body */}
-          <p className="text-[15px] text-gray-900 mt-0.5 whitespace-pre-wrap leading-relaxed">
+          {/* Text */}
+          <div className="text-[15px] text-[#191f28] leading-[1.4] whitespace-pre-line mb-2">
             {post.text}
-          </p>
+          </div>
 
-          {/* Poll (system posts) */}
-          {post.poll && (
-            <VotePoll options={post.poll.options} totalVotes={post.poll.totalVotes} />
-          )}
+          {/* Poll if exists */}
+          {post.poll && <VotePoll poll={post.poll} className="mb-3" />}
 
-          {/* Action bar */}
-          <div className="flex items-center justify-between mt-3 max-w-[420px]">
-            <ActionBtn icon="💬" count={post.comments} hoverColor="hover:text-blue-500" />
-            <ActionBtn icon="🔄" count={post.reposts} hoverColor="hover:text-green-500" />
-            <ActionBtn icon="❤️" count={post.likes} hoverColor="hover:text-red-500" />
-            <ActionBtn icon="📊" count={post.views} hoverColor="hover:text-blue-400" />
-            <div className="flex items-center gap-1">
-              <button className="text-gray-400 hover:text-blue-500 text-xs transition-colors">🔗</button>
-              <button className="text-gray-400 hover:text-blue-500 text-xs transition-colors">🔖</button>
-            </div>
+          {/* Actions */}
+          <div className="flex items-center gap-6 pt-1">
+            <button className="flex items-center gap-1 text-[#8b95a1] hover:text-[#3182f6] transition-colors group">
+              <div className="p-1.5 rounded-full group-hover:bg-[#3182f6]/10">
+                💬
+              </div>
+              <span className="text-sm">{formatNum(post.comments)}</span>
+            </button>
+            <button className="flex items-center gap-1 text-[#8b95a1] hover:text-[#00c853] transition-colors group">
+              <div className="p-1.5 rounded-full group-hover:bg-[#00c853]/10">
+                🔄
+              </div>
+              <span className="text-sm">{formatNum(post.reposts)}</span>
+            </button>
+            <button className="flex items-center gap-1 text-[#8b95a1] hover:text-[#f44336] transition-colors group">
+              <div className="p-1.5 rounded-full group-hover:bg-[#f44336]/10">
+                ❤️
+              </div>
+              <span className="text-sm">{formatNum(post.likes)}</span>
+            </button>
+            <button className="flex items-center gap-1 text-[#8b95a1] hover:text-[#3182f6] transition-colors group">
+              <div className="p-1.5 rounded-full group-hover:bg-[#3182f6]/10">
+                📊
+              </div>
+              <span className="text-sm">{formatNum(post.views)}</span>
+            </button>
+            <button className="flex items-center gap-1 text-[#8b95a1] hover:text-[#3182f6] transition-colors group ml-auto">
+              <div className="p-1.5 rounded-full group-hover:bg-[#3182f6]/10">
+                📤
+              </div>
+            </button>
           </div>
         </div>
       </div>
     </article>
-  );
-}
-
-function ActionBtn({
-  icon,
-  count,
-  hoverColor,
-}: {
-  icon: string;
-  count: number;
-  hoverColor: string;
-}) {
-  return (
-    <button
-      className={`flex items-center gap-1 text-gray-400 ${hoverColor} text-xs transition-colors group`}
-    >
-      <span className="group-hover:scale-110 transition-transform">{icon}</span>
-      <span>{formatNum(count)}</span>
-    </button>
   );
 }

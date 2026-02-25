@@ -16,19 +16,18 @@ export default function PatternAnalysis({ pattern }: PatternAnalysisProps) {
   };
 
   return (
-    <div className="bg-gray-50 rounded-lg p-4">
+    <div className="bg-[#f2f4f6] rounded-2xl p-4">
       {/* Title with count badge */}
       <div className="flex items-center gap-2 mb-3">
-        <span className="font-medium text-gray-900">{pattern.category}</span>
+        <span className="font-medium text-[#191f28]">{pattern.category}</span>
         <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">
-          {pattern.count}건
-        </span>
+          {pattern.count}�?        </span>
       </div>
 
       {/* Pattern stats */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">1주후 반등률</span>
+          <span className="text-sm text-gray-600">1주후 반등�?/span>
           <div className="flex items-center gap-2 flex-1 ml-4">
             <div className="flex-1 bg-gray-200 rounded-full h-2 relative">
               <div 
@@ -39,14 +38,14 @@ export default function PatternAnalysis({ pattern }: PatternAnalysisProps) {
                 }}
               />
             </div>
-            <span className="text-sm font-medium text-gray-900 w-10 text-right">
+            <span className="text-sm font-medium text-[#191f28] w-10 text-right">
               {pattern.weekRebound}%
             </span>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">2주후 반등률</span>
+          <span className="text-sm text-gray-600">2주후 반등�?/span>
           <div className="flex items-center gap-2 flex-1 ml-4">
             <div className="flex-1 bg-gray-200 rounded-full h-2 relative">
               <div 
@@ -57,14 +56,14 @@ export default function PatternAnalysis({ pattern }: PatternAnalysisProps) {
                 }}
               />
             </div>
-            <span className="text-sm font-medium text-gray-900 w-10 text-right">
+            <span className="text-sm font-medium text-[#191f28] w-10 text-right">
               {pattern.biWeekRebound}%
             </span>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">1개월후 반등률</span>
+          <span className="text-sm text-gray-600">1개월??반등�?/span>
           <div className="flex items-center gap-2 flex-1 ml-4">
             <div className="flex-1 bg-gray-200 rounded-full h-2 relative">
               <div 
@@ -75,7 +74,7 @@ export default function PatternAnalysis({ pattern }: PatternAnalysisProps) {
                 }}
               />
             </div>
-            <span className="text-sm font-medium text-gray-900 w-10 text-right">
+            <span className="text-sm font-medium text-[#191f28] w-10 text-right">
               {pattern.monthRebound}%
             </span>
           </div>
