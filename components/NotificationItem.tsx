@@ -11,13 +11,13 @@ interface NotificationItemProps {
 const getIconColor = (type: string) => {
   switch (type) {
     case '공시': return 'text-blue-500';
-    case '?�플루언??: return 'text-purple-500';
-    case '?�원매매': return 'text-orange-500';
-    case '?�널리스??: return 'text-green-500';
-    case '가�?: return 'text-red-500';
-    case '?�급': return 'text-cyan-500';
-    case 'AI?�그??: return 'text-yellow-500';
-    default: return 'text-[#8b95a1]';
+    case '인플루언서': return 'text-purple-500';
+    case '임원매매': return 'text-orange-500';
+    case '애널리스트': return 'text-green-500';
+    case '가격': return 'text-red-500';
+    case '수급': return 'text-cyan-500';
+    case 'AI시그널': return 'text-yellow-500';
+    default: return 'text-gray-500';
   }
 };
 
@@ -30,14 +30,14 @@ export default function NotificationItem({ notification, onMarkAsRead }: Notific
 
   return (
     <Link href={notification.link} onClick={handleClick}>
-      <div className={`p-4 border-b border-[#f0f0f0] hover:bg-[#f2f4f6] transition-colors ${
+      <div className={`p-4 border-b border-[#f0f0f0] hover:bg-gray-50 transition-colors ${
         notification.read ? 'bg-white' : 'bg-[#f0faf5]'
       }`}>
         <div className="flex items-start space-x-3">
           {/* Unread indicator */}
           {!notification.read && (
             <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0">
-              <span className="sr-only">??/span>
+              <span className="sr-only">●</span>
             </div>
           )}
           
@@ -51,11 +51,11 @@ export default function NotificationItem({ notification, onMarkAsRead }: Notific
             <div className="flex justify-between items-start">
               <div className="flex-1">
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-[#191f28]">
+                  <span className="text-sm font-medium text-gray-900">
                     {notification.title}
                   </span>
                   {!notification.read && (
-                    <span className="text-green-600 font-bold">??/span>
+                    <span className="text-green-600 font-bold">●</span>
                   )}
                 </div>
                 <p className="text-sm text-gray-800 mt-1">
@@ -67,7 +67,7 @@ export default function NotificationItem({ notification, onMarkAsRead }: Notific
                   </p>
                 )}
               </div>
-              <span className="text-xs text-[#8b95a1] flex-shrink-0 ml-2">
+              <span className="text-xs text-gray-500 flex-shrink-0 ml-2">
                 {notification.time}
               </span>
             </div>

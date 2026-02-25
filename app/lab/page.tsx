@@ -1,18 +1,50 @@
 'use client';
 
-export default function LabPage() {
-  return (
-    <div className="bg-[#f4f4f4] min-h-screen">
-      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0] px-4 py-3">
-        <div>
-          <h1 className="font-bold text-[15px] text-[#191f28]">🧪 전략연구실</h1>
-          <p className="text-xs text-[#8b95a1]">백테스팅과 모의투자로 전략을 검증해보세요</p>
-        </div>
-      </div>
+import { useState } from 'react';
+import LabGrid from '@/components/lab/LabGrid';
+import DailyIdea from '@/components/lab/DailyIdea';
+import BacktestBuilder from '@/components/lab/BacktestBuilder';
+import QuantBot from '@/components/lab/QuantBot';
+import InfluencerSim from '@/components/lab/InfluencerSim';
+import SwingLab from '@/components/lab/SwingLab';
+import LongTermIdea from '@/components/lab/LongTermIdea';
 
-      <div className="flex items-center justify-center h-60 text-[#8b95a1] text-sm">
-        준비중 (컴포넌트 재구성 작업중)
-      </div>
+type ActiveView = null | 'daily' | 'backtest' | 'quant' | 'influencer' | 'swing' | 'longterm';
+
+export default function LabPage() {
+  const [activeView, setActiveView] = useState<ActiveView>(null);
+
+  const handleCardClick = (cardId: string) => {
+    setActiveView(cardId as ActiveView);
+  };
+
+  const handleBack = () => {
+    setActiveView(null);
+  };
+
+  // Render the appropriate view
+  const renderActiveView = () => {
+    switch (activeView) {
+      case 'daily':
+        return <DailyIdea onBack={handleBack} />;
+      case 'backtest':
+        return <BacktestBuilder onBack={handleBack} />;
+      case 'quant':
+        return <QuantBot onBack={handleBack} />;
+      case 'influencer':
+        return <InfluencerSim onBack={handleBack} />;
+      case 'swing':
+        return <SwingLab onBack={handleBack} />;
+      case 'longterm':
+        return <LongTermIdea onBack={handleBack} />;
+      default:
+        return <LabGrid onCardClick={handleCardClick} />;
+    }
+  };
+
+  return (
+    <div>
+      {renderActiveView()}
     </div>
   );
 }

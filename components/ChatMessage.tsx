@@ -14,7 +14,7 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
       if (part.startsWith('**') && part.endsWith('**')) {
         const boldText = part.slice(2, -2);
         // If bold text contains stock names, make them clickable style
-        const stockPattern = /(?�코?�로|?�이빔테?��?로�?|?�성?�자)/;
+        const stockPattern = /(에코프로|아이빔테크놀로지|삼성전자)/;
         if (stockPattern.test(boldText)) {
           return (
             <strong key={index} className="font-bold text-[#3182f6] cursor-pointer hover:underline">
@@ -34,7 +34,7 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
         {/* Avatar */}
         {!isUser && (
           <div className="w-8 h-8 bg-[#3182f6] rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-            <span className="text-white text-sm font-bold">?��</span>
+            <span className="text-white text-sm font-bold">🤖</span>
           </div>
         )}
 
@@ -43,12 +43,12 @@ export default function ChatMessage({ message, isUser, timestamp }: ChatMessageP
           className={`px-4 py-3 ${
             isUser 
               ? 'bg-[#3182f6] text-white rounded-2xl rounded-tr-sm' 
-              : 'bg-[#f2f4f6] text-[#191f28] rounded-2xl rounded-tl-sm'
+              : 'bg-[#f0f2f5] text-gray-900 rounded-2xl rounded-tl-sm'
           } max-w-full word-break`}
         >
           <div className="whitespace-pre-wrap">{parseMessage(message)}</div>
           {timestamp && (
-            <div className={`text-xs mt-1 ${isUser ? 'text-green-100' : 'text-[#8b95a1]'}`}>
+            <div className={`text-xs mt-1 ${isUser ? 'text-green-100' : 'text-gray-500'}`}>
               {timestamp}
             </div>
           )}

@@ -5,12 +5,12 @@ import SignalScoreItem, { SignalScoreData } from './SignalScoreItem';
 const scores: SignalScoreData[] = [
   {
     rank: 1, stock: '에코프로', score: 87,
-    tags: [{ label: '인플루언서명콜', score: 45 }, { label: '기관순매수', score: 20 }, { label: '거래량급증', score: 12 }, { label: '뉴스긍정', score: 10 }],
+    tags: [{ label: '인플루언서3명콜', score: 45 }, { label: '기관순매수', score: 20 }, { label: '거래량급증', score: 12 }, { label: '뉴스긍정', score: 10 }],
     price: '248,000', change: '+3.2%', sparkData: [235, 238, 240, 237, 242, 245, 248],
   },
   {
     rank: 2, stock: 'SK하이닉스', score: 78,
-    tags: [{ label: '애널목표가상향', score: 30 }, { label: '외국인순매수', score: 25 }, { label: '실적업프라이즈', score: 23 }],
+    tags: [{ label: '애널목표가상향', score: 30 }, { label: '외국인순매수', score: 25 }, { label: '실적서프라이즈', score: 23 }],
     price: '182,000', change: '+1.8%', sparkData: [175, 173, 176, 178, 177, 180, 182],
   },
   {
@@ -32,9 +32,9 @@ const scores: SignalScoreData[] = [
 
 export default function SignalScoreList() {
   return (
-    <div className="space-y-2">
-      {scores.map((s) => (
-        <SignalScoreItem key={s.rank} data={s} />
+    <div className="bg-white border border-[#f0f0f0] rounded-xl overflow-hidden">
+      {scores.map((d) => (
+        <SignalScoreItem key={d.rank} d={d} />
       ))}
     </div>
   );

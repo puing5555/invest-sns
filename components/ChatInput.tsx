@@ -20,15 +20,15 @@ export default function ChatInput({ onSend }: ChatInputProps) {
   return (
     <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4">
       {/* Action icons */}
-      <div className="flex space-x-4 mb-3 text-[#8b95a1]">
-        <button className="p-2 hover:bg-[#f2f4f6] rounded-2xl transition-colors">
-          <span className="text-lg">?��</span>
+      <div className="flex space-x-4 mb-3 text-gray-400">
+        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <span className="text-lg">📎</span>
         </button>
-        <button className="p-2 hover:bg-[#f2f4f6] rounded-2xl transition-colors">
-          <span className="text-lg">?��</span>
+        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <span className="text-lg">📊</span>
         </button>
-        <button className="p-2 hover:bg-[#f2f4f6] rounded-2xl transition-colors">
-          <span className="text-lg">?��</span>
+        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+          <span className="text-lg">🎤</span>
         </button>
       </div>
 
@@ -38,7 +38,7 @@ export default function ChatInput({ onSend }: ChatInputProps) {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="종목�? 질문, 뭐든 물어보세??.."
+          placeholder="종목명, 질문, 뭐든 물어보세요..."
           className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:border-[#3182f6] focus:ring-1 focus:ring-[#3182f6]"
         />
         <button

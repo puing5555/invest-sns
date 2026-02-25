@@ -19,7 +19,7 @@ export default function LabCard({
 }: LabCardProps) {
   return (
     <div
-      className="bg-white border border-[#e8e8e8] p-6 rounded-2xl cursor-pointer transition-all hover:border hover:border-[#3182f6] hover:shadow-lg hover:shadow-[#3182f6]/20"
+      className="bg-white border border-[#e5e7eb] p-6 rounded-xl cursor-pointer transition-all hover:border hover:border-[#3182f6] hover:shadow-lg hover:shadow-[#3182f6]/20"
       onClick={onClick}
     >
       {/* Icon */}

@@ -13,7 +13,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
     stock: string;
     title: string;
     content: string;
-    tag: '매수근거' | '매도근거' | '관�? | 'AI?��?';
+    tag: '매수근거' | '매도근거' | '관찰' | 'AI일지';
   }>({
     stock: '',
     title: '',
@@ -22,20 +22,20 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
   });
 
   const stockOptions = [
-    { value: '', label: '종목 ?�택 (?�택?�항)' },
-    { value: '?�코?�로', label: '?�코?�로' },
-    { value: '?�성?�자', label: '?�성?�자' },
-    { value: 'SK?�이?�스', label: 'SK?�이?�스' },
-    { value: '?�이빔테?��?로�?', label: '?�이빔테?��?로�?' },
-    { value: 'HD?�국조선?�양', label: 'HD?�국조선?�양' },
-    { value: '카카??, label: '카카?? },
+    { value: '', label: '종목 선택 (선택사항)' },
+    { value: '에코프로', label: '에코프로' },
+    { value: '삼성전자', label: '삼성전자' },
+    { value: 'SK하이닉스', label: 'SK하이닉스' },
+    { value: '아이빔테크놀로지', label: '아이빔테크놀로지' },
+    { value: 'HD한국조선해양', label: 'HD한국조선해양' },
+    { value: '카카오', label: '카카오' },
   ];
 
   const tagOptions = [
-    { id: '매수근거', label: '매수근거', icon: '?��' },
-    { id: '매도근거', label: '매도근거', icon: '?��' },
-    { id: '관�?, label: '관�?, icon: '?��' },
-    { id: 'AI?��?', label: '?�이?�어', icon: '?��' }, // Changed from AI?��? to ?�이?�어 as specified
+    { id: '매수근거', label: '매수근거', icon: '📗' },
+    { id: '매도근거', label: '매도근거', icon: '📕' },
+    { id: '관찰', label: '관찰', icon: '📒' },
+    { id: 'AI일지', label: '아이디어', icon: '💡' }, // Changed from AI일지 to 아이디어 as specified
   ];
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const tagIcon = tagOptions.find(t => t.id === formData.tag)?.icon || '?��';
+    const tagIcon = tagOptions.find(t => t.id === formData.tag)?.icon || '📗';
     const currentDate = new Date().toLocaleDateString('ko-KR').replace(/\. /g, '.').replace(/\.$/, '');
     
     onSave({
@@ -77,17 +77,17 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-[#191f28]">
-              {memo ? '메모 ?�정' : '??메모 ?�성'}
+            <h2 className="text-xl font-bold text-gray-900">
+              {memo ? '메모 수정' : '새 메모 작성'}
             </h2>
             <button
               onClick={onClose}
-              className="text-[#8b95a1] hover:text-gray-600 text-xl"
+              className="text-gray-400 hover:text-gray-600 text-xl"
             >
-              ??
+              ✕
             </button>
           </div>
 
@@ -100,7 +100,7 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
               <select
                 value={formData.stock}
                 onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                className="w-full border border-gray-300 rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
               >
                 {stockOptions.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -113,47 +113,47 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
             {/* Title */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                ?�목 *
+                제목 *
               </label>
               <input
                 type="text"
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="w-full border border-gray-300 rounded-2xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
-                placeholder="메모 ?�목???�력?�세??
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
+                placeholder="메모 제목을 입력하세요"
               />
             </div>
 
             {/* Content */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                ?�용 *
+                내용 *
               </label>
               <textarea
                 required
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                className="w-full border border-gray-300 rounded-2xl px-3 py-2 min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
-                placeholder="메모 ?�용???�력?�세??
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 min-h-[120px] resize-none focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
+                placeholder="메모 내용을 입력하세요"
               />
             </div>
 
             {/* Tag Selector */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                ?�그
+                태그
               </label>
               <div className="flex gap-2">
                 {tagOptions.map((tag) => (
                   <button
                     key={tag.id}
                     type="button"
-                    onClick={() => setFormData({ ...formData, tag: tag.id as '매수근거' | '매도근거' | '관�? | 'AI?��?' })}
-                    className={`px-4 py-2 rounded-2xl font-medium flex items-center gap-2 ${
+                    onClick={() => setFormData({ ...formData, tag: tag.id as '매수근거' | '매도근거' | '관찰' | 'AI일지' })}
+                    className={`px-4 py-2 rounded-lg font-medium flex items-center gap-2 ${
                       formData.tag === tag.id
                         ? 'bg-[#3182f6] text-white'
-                        : 'bg-[#f2f4f6] text-gray-700 hover:bg-gray-200'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     {tag.icon} {tag.label}
@@ -165,26 +165,26 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
             {/* Attachment Buttons */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                첨�? ?�료
+                첨부 자료
               </label>
               <div className="flex gap-2 flex-wrap">
                 <button
                   type="button"
-                  className="bg-blue-50 text-blue-600 px-4 py-2 rounded-2xl font-medium hover:bg-blue-100 transition-colors flex items-center gap-2"
+                  className="bg-blue-50 text-blue-600 px-4 py-2 rounded-lg font-medium hover:bg-blue-100 transition-colors flex items-center gap-2"
                 >
-                  ?�� 공시 ?�결
+                  📋 공시 연결
                 </button>
                 <button
                   type="button"
-                  className="bg-green-50 text-green-600 px-4 py-2 rounded-2xl font-medium hover:bg-green-100 transition-colors flex items-center gap-2"
+                  className="bg-green-50 text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-green-100 transition-colors flex items-center gap-2"
                 >
-                  ?�� 리포???�결
+                  🎯 리포트 연결
                 </button>
                 <button
                   type="button"
-                  className="bg-purple-50 text-purple-600 px-4 py-2 rounded-2xl font-medium hover:bg-purple-100 transition-colors flex items-center gap-2"
+                  className="bg-purple-50 text-purple-600 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 transition-colors flex items-center gap-2"
                 >
-                  ?�� ?�플�??�결
+                  👤 인플콜 연결
                 </button>
               </div>
             </div>
@@ -194,15 +194,15 @@ export default function MemoEditor({ isOpen, memo, onSave, onClose }: MemoEditor
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-2 text-gray-600 bg-[#f2f4f6] rounded-2xl hover:bg-gray-200 transition-colors"
+                className="px-6 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 취소
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 bg-[#3182f6] text-white rounded-2xl hover:bg-[#00c299] transition-colors"
+                className="px-6 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c299] transition-colors"
               >
-                ?�??
+                저장
               </button>
             </div>
           </form>

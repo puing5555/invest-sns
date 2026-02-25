@@ -76,7 +76,7 @@ export default function SectorPieChart({ sectors }: SectorPieChartProps) {
               />
               <span className="text-gray-700">{sector.name}</span>
             </div>
-            <span className="font-medium text-[#191f28]">{sector.pct}%</span>
+            <span className="font-medium text-gray-900">{sector.pct}%</span>
           </div>
         ))}
       </div>

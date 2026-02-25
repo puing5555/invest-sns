@@ -64,15 +64,15 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-lg mx-4">
+      <div className="bg-white rounded-xl p-6 w-full max-w-lg mx-4">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-bold">{stock.name} 메모 ?�집</h2>
+          <h2 className="text-lg font-bold">{stock.name} 메모 편집</h2>
           <button 
             onClick={onClose}
-            className="text-[#8b95a1] hover:text-gray-600 text-xl"
+            className="text-gray-400 hover:text-gray-600 text-xl"
           >
-            ??
+            ✕
           </button>
         </div>
 
@@ -86,37 +86,37 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
             <textarea
               value={memo}
               onChange={(e) => setMemo(e.target.value)}
-              placeholder="?�자 메모�??�력?�세??.."
+              placeholder="투자 메모를 입력하세요..."
               rows={3}
-              className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6] resize-none"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6] resize-none"
             />
           </div>
 
           {/* Buy Price Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              매수가 (??
+              매수가 (원)
             </label>
             <input
               type="text"
               value={buyPrice}
               onChange={handleBuyPriceChange}
               placeholder="0"
-              className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
 
           {/* Quantity Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              매수 ?�량 (�?
+              매수 수량 (주)
             </label>
             <input
               type="text"
               value={quantity}
               onChange={handleQuantityChange}
               placeholder="0"
-              className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
         </div>
@@ -125,15 +125,15 @@ export default function MemoEditModal({ isOpen, onClose, onSave, stock }: MemoEd
         <div className="flex gap-3 mt-6">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 border border-gray-200 rounded-2xl text-gray-600 hover:bg-[#f2f4f6] transition-colors"
+            className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
           >
             취소
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-2xl hover:bg-[#00c499] transition-colors"
+            className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors"
           >
-            ?�??
+            저장
           </button>
         </div>
       </div>

@@ -128,15 +128,15 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-xl p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-bold">{stock.name} 매매 ?�정</h2>
+          <h2 className="text-lg font-bold">{stock.name} 매매 설정</h2>
           <button 
             onClick={onClose}
-            className="text-[#8b95a1] hover:text-gray-600 text-xl"
+            className="text-gray-400 hover:text-gray-600 text-xl"
           >
-            ??
+            ✕
           </button>
         </div>
 
@@ -145,35 +145,35 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
           {/* Buy Price */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              매수가 (??
+              매수가 (원)
             </label>
             <input
               type="text"
               value={buyPrice}
               onChange={handleNumberChange(setBuyPrice)}
               placeholder={formatNumber(stock.currentPrice.toString())}
-              className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
 
           {/* Quantity */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              매수 ?�량 (�?
+              매수 수량 (주)
             </label>
             <input
               type="text"
               value={quantity}
               onChange={handleNumberChange(setQuantity)}
               placeholder="100"
-              className="w-full px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
             />
           </div>
 
           {/* Stop Loss */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              ?�절가 (??
+              손절가 (원)
             </label>
             <div className="flex gap-2">
               <input
@@ -181,13 +181,13 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
                 value={stopLoss}
                 onChange={handleNumberChange(setStopLoss)}
                 placeholder="0"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
               />
               <button
                 onClick={() => applySuggestion('stopLoss')}
-                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-2xl hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
+                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
               >
-                AI ?�안: -7% ({formatNumber(getAISuggestion('stopLoss', basePrice).toString())}??
+                AI 제안: -7% ({formatNumber(getAISuggestion('stopLoss', basePrice).toString())}원)
               </button>
             </div>
           </div>
@@ -195,7 +195,7 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
           {/* Take Profit 1 */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              1�??�절가 (??
+              1차 익절가 (원)
             </label>
             <div className="flex gap-2">
               <input
@@ -203,13 +203,13 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
                 value={takeProfit1}
                 onChange={handleNumberChange(setTakeProfit1)}
                 placeholder="0"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
               />
               <button
                 onClick={() => applySuggestion('tp1')}
-                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-2xl hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
+                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
               >
-                AI ?�안: +15% ({formatNumber(getAISuggestion('tp1', basePrice).toString())}??
+                AI 제안: +15% ({formatNumber(getAISuggestion('tp1', basePrice).toString())}원)
               </button>
             </div>
           </div>
@@ -217,7 +217,7 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
           {/* Take Profit 2 */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              2�??�절가 (??
+              2차 익절가 (원)
             </label>
             <div className="flex gap-2">
               <input
@@ -225,13 +225,13 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
                 value={takeProfit2}
                 onChange={handleNumberChange(setTakeProfit2)}
                 placeholder="0"
-                className="flex-1 px-4 py-2 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+                className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
               />
               <button
                 onClick={() => applySuggestion('tp2')}
-                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-2xl hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
+                className="px-3 py-2 text-xs border border-[#3182f6] text-[#3182f6] rounded-lg hover:bg-[#3182f6] hover:text-white transition-colors whitespace-nowrap"
               >
-                AI ?�안: +25% ({formatNumber(getAISuggestion('tp2', basePrice).toString())}??
+                AI 제안: +25% ({formatNumber(getAISuggestion('tp2', basePrice).toString())}원)
               </button>
             </div>
           </div>
@@ -239,9 +239,9 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
           {/* AI Auto Setup */}
           <button
             onClick={handleAIAutoSetup}
-            className="w-full px-4 py-2 bg-[#3182f6] text-white rounded-2xl hover:bg-[#00c499] transition-colors font-medium"
+            className="w-full px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors font-medium"
           >
-            ?�� AI ?�동 ?�정
+            🤖 AI 자동 설정
           </button>
         </div>
 
@@ -249,15 +249,15 @@ export default function TradeSetupModal({ isOpen, onClose, onSave, stock }: Trad
         <div className="flex gap-3 mt-6">
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 border border-gray-200 rounded-2xl text-gray-600 hover:bg-[#f2f4f6] transition-colors"
+            className="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors"
           >
             취소
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-2xl hover:bg-[#00c499] transition-colors"
+            className="flex-1 px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#00c499] transition-colors"
           >
-            ?�??
+            저장
           </button>
         </div>
       </div>

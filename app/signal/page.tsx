@@ -95,7 +95,7 @@ export default function SignalHomePage() {
             {influencerCalls.map((c, i) => (
               <div key={i} className="bg-white border border-[#f0f0f0] rounded-2xl p-4 min-w-[220px] flex-shrink-0 hover:bg-[#f2f4f6] transition-colors cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-8 h-8 rounded-full bg-[#1a1a2e] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-[#f4f4f4] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                     {c.initial}
                   </div>
                   <span className="font-bold text-sm text-[#191f28]">{c.name}</span>

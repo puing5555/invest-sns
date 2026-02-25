@@ -14,7 +14,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
     if (guru.changes.newBuys > 0) {
       badges.push(
         <span key="new" className="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs font-medium">
-          ?Ÿ¢ ? ê·œ {guru.changes.newBuys}ê±?
+          ğŸŸ¢ ì‹ ê·œ {guru.changes.newBuys}ê±´
         </span>
       );
     }
@@ -22,7 +22,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
     if (guru.changes.increased > 0) {
       badges.push(
         <span key="inc" className="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs font-medium">
-          ?”¼ ?•ë? {guru.changes.increased}ê±?
+          ğŸ”¼ í™•ëŒ€ {guru.changes.increased}ê±´
         </span>
       );
     }
@@ -30,7 +30,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
     if (guru.changes.decreased > 0) {
       badges.push(
         <span key="dec" className="bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs font-medium">
-          ?”½ ì¶•ì†Œ {guru.changes.decreased}ê±?
+          ğŸ”½ ì¶•ì†Œ {guru.changes.decreased}ê±´
         </span>
       );
     }
@@ -38,7 +38,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
     if (guru.changes.sold > 0) {
       badges.push(
         <span key="sold" className="bg-red-500/20 text-red-400 px-2 py-1 rounded text-xs font-medium">
-          ?”´ ë§¤ë„ {guru.changes.sold}ê±?
+          ğŸ”´ ë§¤ë„ {guru.changes.sold}ê±´
         </span>
       );
     }
@@ -48,7 +48,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
 
   return (
     <div 
-      className="bg-white border border-[#e8e8e8] rounded-2xl p-6 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-[#3182f6]/20 hover:border hover:border-[#3182f6]/50 group"
+      className="bg-white border border-[#e5e7eb] rounded-lg p-6 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-[#3182f6]/20 hover:border hover:border-[#3182f6]/50 group"
       onClick={onClick}
     >
       {/* Header - Avatar and Basic Info */}
@@ -68,7 +68,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
         <span className="text-[#6b7280] text-sm">{guru.lastUpdate}</span>
         {guru.isRealtime && (
           <span className="bg-blue-500/20 text-blue-600 px-2 py-1 rounded text-xs font-medium">
-            ?¤ì‹œê°?
+            ì‹¤ì‹œê°„
           </span>
         )}
       </div>
@@ -88,7 +88,7 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
       {/* Warning */}
       {guru.hasWarning && guru.warningText && (
         <div className="bg-yellow-500/20 text-yellow-600 px-3 py-2 rounded text-sm mb-4 flex items-center gap-2">
-          <span>? ï¸</span>
+          <span>âš ï¸</span>
           <span>{guru.warningText}</span>
         </div>
       )}
@@ -118,8 +118,8 @@ export default function GuruCard({ guru, onClick }: GuruCardProps) {
       </div>
 
       {/* Action Button */}
-      <button className="w-full bg-[#f4f4f4] hover:bg-[#e5e7eb] text-[#3182f6] py-2 px-4 rounded font-medium text-sm transition-colors group-hover:bg-[#e5e7eb] border border-[#e8e8e8]">
-        ?ì„¸ë³´ê¸°
+      <button className="w-full bg-[#f7f9fa] hover:bg-[#e5e7eb] text-[#3182f6] py-2 px-4 rounded font-medium text-sm transition-colors group-hover:bg-[#e5e7eb] border border-[#e5e7eb]">
+        ìƒì„¸ë³´ê¸°
       </button>
     </div>
   );

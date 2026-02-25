@@ -12,19 +12,21 @@ export default function AnalystTabs({ activeTab, onTabChange }: AnalystTabsProps
           className={`flex-1 py-3 px-4 text-center font-medium border-b-2 transition-colors ${
             activeTab === 'reports'
               ? 'border-[#3182f6] text-[#3182f6]'
-              : 'border-transparent text-[#8b95a1] hover:text-gray-700'
+              : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
-          ?�� 리포??        </button>
+          📄 리포트
+        </button>
         <button
           onClick={() => onTabChange('analysts')}
           className={`flex-1 py-3 px-4 text-center font-medium border-b-2 transition-colors ${
             activeTab === 'analysts'
               ? 'border-[#3182f6] text-[#3182f6]'
-              : 'border-transparent text-[#8b95a1] hover:text-gray-700'
+              : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
-          ?�� ?�널리스??        </button>
+          🎯 애널리스트
+        </button>
       </div>
     </div>
   );

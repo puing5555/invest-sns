@@ -6,12 +6,12 @@ interface NotificationFilterProps {
 }
 
 const filterOptions = [
-  '?�체',
+  '전체',
   '공시',
-  '?�플루언??,
-  '?�널리스??,
-  '?�원매매',
-  '가�?
+  '인플루언서',
+  '애널리스트',
+  '임원매매',
+  '가격'
 ];
 
 export default function NotificationFilter({ activeFilter, onChange }: NotificationFilterProps) {
@@ -25,7 +25,7 @@ export default function NotificationFilter({ activeFilter, onChange }: Notificat
             className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors ${
               activeFilter === filter
                 ? 'bg-[#3182f6] text-white'
-                : 'bg-[#f2f4f6] text-gray-600 hover:bg-gray-200'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
             {filter}

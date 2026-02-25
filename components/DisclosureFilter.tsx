@@ -21,19 +21,19 @@ export default function DisclosureFilter({
   sort,
   onSortChange
 }: DisclosureFilterProps) {
-  const gradeOptions = ['?�체', 'A?�급', 'B?�급', 'C?�급'];
-  const typeOptions = ['?�체', '공급계약', '?�사�?, '지분�???, '배당', '?�명', '?�적', '기�?'];
+  const gradeOptions = ['전체', 'A등급', 'B등급', 'C등급'];
+  const typeOptions = ['전체', '공급계약', '자사주', '지분변동', '배당', '해명', '실적', '기타'];
   const sortOptions = [
-    { value: 'latest', label: '최신?? },
-    { value: 'marketCap', label: '?�총?? },
-    { value: 'favorability', label: '?�재비율?? }
+    { value: 'latest', label: '최신순' },
+    { value: 'marketCap', label: '시총순' },
+    { value: 'favorability', label: '호재비율순' }
   ];
 
   const getButtonClasses = (isSelected: boolean) => {
     return `px-3 py-1 text-sm rounded-md transition-colors ${
       isSelected
         ? 'bg-[#3182f6] text-white'
-        : 'bg-[#f2f4f6] text-gray-600 hover:bg-gray-200'
+        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
     }`;
   };
 
@@ -43,16 +43,16 @@ export default function DisclosureFilter({
       <div className="mb-4">
         <input
           type="text"
-          placeholder="종목�?검??.."
+          placeholder="종목명 검색..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
         />
       </div>
 
       {/* Grade Filter */}
       <div className="mb-3">
-        <div className="text-sm font-medium text-gray-700 mb-2">?�급</div>
+        <div className="text-sm font-medium text-gray-700 mb-2">등급</div>
         <div className="flex gap-2 flex-wrap">
           {gradeOptions.map((option) => (
             <button
@@ -68,7 +68,7 @@ export default function DisclosureFilter({
 
       {/* Type Filter */}
       <div className="mb-3">
-        <div className="text-sm font-medium text-gray-700 mb-2">?�형</div>
+        <div className="text-sm font-medium text-gray-700 mb-2">유형</div>
         <div className="flex gap-2 flex-wrap">
           {typeOptions.map((option) => (
             <button
@@ -84,7 +84,7 @@ export default function DisclosureFilter({
 
       {/* Sort Filter */}
       <div>
-        <div className="text-sm font-medium text-gray-700 mb-2">?�렬</div>
+        <div className="text-sm font-medium text-gray-700 mb-2">정렬</div>
         <div className="flex gap-2 flex-wrap">
           {sortOptions.map((option) => (
             <button

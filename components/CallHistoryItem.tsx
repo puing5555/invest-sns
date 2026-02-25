@@ -6,14 +6,14 @@ interface CallHistoryItemProps {
 
 export default function CallHistoryItem({ call }: CallHistoryItemProps) {
   const isPositive = call.returnRate > 0;
-  const statusIcon = isPositive || call.status === '?�중' ? '?��' : '?��';
+  const statusIcon = isPositive || call.status === '적중' ? '🟢' : '🔴';
   
   const getStatusBadgeColor = (status: string) => {
     switch (status) {
-      case '진행�?: return 'bg-blue-500 text-white';
-      case '?�중': return 'bg-green-500 text-white';
-      case '?�절': return 'bg-red-500 text-white';
-      default: return 'bg-[#f2f4f6]0 text-white';
+      case '진행중': return 'bg-blue-500 text-white';
+      case '적중': return 'bg-green-500 text-white';
+      case '손절': return 'bg-red-500 text-white';
+      default: return 'bg-gray-500 text-white';
     }
   };
 
@@ -22,12 +22,12 @@ export default function CallHistoryItem({ call }: CallHistoryItemProps) {
   };
 
   return (
-    <div className="flex items-center justify-between py-2 px-3 hover:bg-[#f2f4f6] transition-colors">
+    <div className="flex items-center justify-between py-2 px-3 hover:bg-gray-50 transition-colors">
       <div className="flex items-center gap-2 flex-1">
         <span className="text-lg">{statusIcon}</span>
         <div className="flex-1">
-          <span className="font-medium text-[#191f28]">{call.stock}</span>
-          <span className="text-sm text-[#8b95a1] ml-2">{call.date}</span>
+          <span className="font-medium text-gray-900">{call.stock}</span>
+          <span className="text-sm text-gray-500 ml-2">{call.date}</span>
         </div>
         <span 
           className={`px-2 py-1 rounded-full text-xs font-medium ${getDirectionBadgeColor(call.direction)}`}

@@ -9,8 +9,8 @@ interface AnalystCardProps {
 
 export default function AnalystCard({ analyst, onClick }: AnalystCardProps) {
   const trustBadgeConfig = {
-    verified: { text: '?�� 검증됨', color: 'text-blue-600' },
-    accumulating: { text: '?�� 축적�?, color: 'text-yellow-600' }
+    verified: { text: '🔵 검증됨', color: 'text-blue-600' },
+    accumulating: { text: '🟡 축적중', color: 'text-yellow-600' }
   };
 
   const badge = trustBadgeConfig[analyst.trustBadge];
@@ -23,7 +23,7 @@ export default function AnalystCard({ analyst, onClick }: AnalystCardProps) {
 
   return (
     <div 
-      className="bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] p-4 cursor-pointer hover:shadow-md transition-shadow border border-gray-100"
+      className="bg-white rounded-xl shadow-sm p-4 cursor-pointer hover:shadow-md transition-shadow border border-gray-100"
       onClick={onClick}
     >
       {/* Header with avatar, name, firm */}
@@ -35,7 +35,7 @@ export default function AnalystCard({ analyst, onClick }: AnalystCardProps) {
             </span>
           </div>
           <div>
-            <h3 className="font-bold text-[#191f28]">{analyst.name}</h3>
+            <h3 className="font-bold text-gray-900">{analyst.name}</h3>
             <p className="text-sm text-gray-600">{analyst.firm}</p>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function AnalystCard({ analyst, onClick }: AnalystCardProps) {
 
       {/* Sector badge */}
       <div className="mb-3">
-        <span className="inline-block bg-[#f2f4f6] text-gray-700 text-xs font-medium px-2 py-1 rounded-full">
+        <span className="inline-block bg-gray-100 text-gray-700 text-xs font-medium px-2 py-1 rounded-full">
           {analyst.sector}
         </span>
       </div>
@@ -63,17 +63,17 @@ export default function AnalystCard({ analyst, onClick }: AnalystCardProps) {
           </span>
         </div>
         <div className="text-right">
-          <p className="text-sm text-gray-600">?�균 ?�익�?/p>
+          <p className="text-sm text-gray-600">평균 수익률</p>
           <p className="font-bold text-green-600">+{analyst.avgReturn}%</p>
         </div>
       </div>
 
       {/* Recent reports */}
       <div>
-        <h4 className="text-sm font-medium text-gray-700 mb-2">최근 리포??/h4>
+        <h4 className="text-sm font-medium text-gray-700 mb-2">최근 리포트</h4>
         <div className="space-y-2">
           {recentReports.map((report, index) => (
-            <div key={index} className="bg-[#f2f4f6] p-2 rounded text-xs">
+            <div key={index} className="bg-gray-50 p-2 rounded text-xs">
               <div className="flex items-center justify-between">
                 <span className="font-medium">{report?.stockName}</span>
                 <span className={`font-medium ${
@@ -81,17 +81,17 @@ export default function AnalystCard({ analyst, onClick }: AnalystCardProps) {
                   report?.changeType === 'down' ? 'text-red-600' : 
                   report?.changeType === 'new' ? 'text-blue-600' : 'text-gray-600'
                 }`}>
-                  {report?.changeType === 'up' && '?�향'}
-                  {report?.changeType === 'down' && '?�향'}
-                  {report?.changeType === 'new' && '?�규'}
-                  {report?.changeType === 'maintain' && '?��?'}
+                  {report?.changeType === 'up' && '상향'}
+                  {report?.changeType === 'down' && '하향'}
+                  {report?.changeType === 'new' && '신규'}
+                  {report?.changeType === 'maintain' && '유지'}
                 </span>
               </div>
               <p className="text-gray-600 truncate mt-1">{report?.title}</p>
             </div>
           ))}
           {recentReports.length === 0 && (
-            <p className="text-xs text-[#8b95a1] py-2">최근 리포???�음</p>
+            <p className="text-xs text-gray-500 py-2">최근 리포트 없음</p>
           )}
         </div>
       </div>

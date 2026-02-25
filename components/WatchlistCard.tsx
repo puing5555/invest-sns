@@ -49,13 +49,13 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
     const isNearStopLoss = stock.currentPrice <= tradeData.stopLoss * 1.02;
     const isNearTakeProfit = tradeData.tp1 && stock.currentPrice >= tradeData.tp1 * 0.98;
     
-    if (isNearStopLoss) return '?�️';
-    if (isNearTakeProfit) return '?��';
+    if (isNearStopLoss) return '⚠️';
+    if (isNearTakeProfit) return '🎉';
     return null;
   };
 
   const getPriceChangeColor = () => {
-    return stock.changePercent >= 0 ? 'text-[#00c853]' : 'text-[#f44336]';
+    return stock.changePercent >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]';
   };
 
   const formatNumber = (num: number) => {
@@ -65,7 +65,7 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
   const warningIcon = getWarningIcon();
 
   return (
-    <div className={`bg-white rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border ${getCardBorderClass()} ${getLeftBorderColor()} border-l-4 p-4 hover:shadow-md transition-shadow`}>
+    <div className={`bg-white rounded-xl shadow-sm border ${getCardBorderClass()} ${getLeftBorderColor()} border-l-4 p-4 hover:shadow-md transition-shadow`}>
       <div className="flex justify-between">
         {/* Left Section */}
         <div className="flex-1">
@@ -76,7 +76,7 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
               {warningIcon && <span className="text-lg">{warningIcon}</span>}
             </div>
             <div className="text-right">
-              <div className="font-bold text-lg">{formatNumber(stock.currentPrice)}??/div>
+              <div className="font-bold text-lg">{formatNumber(stock.currentPrice)}원</div>
               <div className={`text-sm ${getPriceChangeColor()}`}>
                 {stock.changePercent >= 0 ? '+' : ''}{stock.changePercent}%
               </div>
@@ -87,15 +87,15 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
           <div className="mb-3">
             {stock.buyPrice ? (
               <div className="text-sm text-gray-600">
-                ??매수가: {formatNumber(stock.buyPrice)}??| 
-                <span className={stock.profitRate && stock.profitRate >= 0 ? 'text-[#00c853]' : 'text-[#f44336]'}>
+                내 매수가: {formatNumber(stock.buyPrice)}원 | 
+                <span className={stock.profitRate && stock.profitRate >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}>
                   {' '}{stock.profitRate && stock.profitRate >= 0 ? '+' : ''}{stock.profitRate}%
                 </span>
               </div>
             ) : (
-              <button className="px-3 py-1 text-xs bg-[#f2f4f6] rounded-2xl text-gray-600 hover:bg-gray-200"
+              <button className="px-3 py-1 text-xs bg-gray-100 rounded-lg text-gray-600 hover:bg-gray-200"
                       onClick={() => onMemoClick(stock)}>
-                매수가 ?�력
+                매수가 입력
               </button>
             )}
           </div>
@@ -109,13 +109,13 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
 
           {/* Recent Alert */}
           <div className="text-sm text-gray-600 mb-2">
-            ?�� {stock.alert.message} <span className="text-xs text-[#8b95a1]">{stock.alert.timeAgo}</span>
+            📢 {stock.alert.message} <span className="text-xs text-gray-400">{stock.alert.timeAgo}</span>
           </div>
 
           {/* Memo Preview */}
           {stock.memo && (
-            <div className="bg-[#f5f5f5] rounded-2xl p-2 text-sm italic text-gray-600 flex items-center gap-2 mb-2">
-              <span>?�️</span>
+            <div className="bg-[#f5f5f5] rounded-lg p-2 text-sm italic text-gray-600 flex items-center gap-2 mb-2">
+              <span>✏️</span>
               <span>{stock.memo}</span>
             </div>
           )}
@@ -133,24 +133,24 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysis
         {/* Right Action Icons */}
         <div className="flex flex-col gap-2 ml-4">
           <button 
-            className="p-2 hover:bg-[#f2f4f6] rounded-2xl text-[#8b95a1] hover:text-gray-700"
+            className="p-2 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700"
             onClick={() => onMemoClick(stock)}
             title="메모"
           >
-            ?��
+            📝
           </button>
           <button 
-            className="p-2 hover:bg-[#f2f4f6] rounded-2xl text-[#8b95a1] hover:text-gray-700"
-            title="?�림"
+            className="p-2 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700"
+            title="알림"
           >
-            ?��
+            🔔
           </button>
           <button 
-            className="p-2 hover:bg-[#f2f4f6] rounded-2xl text-[#8b95a1] hover:text-red-500"
+            className="p-2 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-red-500"
             onClick={() => onRemove(stock.id)}
-            title="?�거"
+            title="제거"
           >
-            ??
+            ✕
           </button>
         </div>
       </div>

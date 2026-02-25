@@ -38,11 +38,11 @@ export default function TradeAnalysisPanel({ isOpen, onClose, stockName }: Trade
         <div className={`p-4 border-b ${data.mode === 'loss' ? 'bg-red-50' : 'bg-green-50'}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-xl">{data.mode === 'loss' ? '?�️' : '?��'}</span>
+              <span className="text-xl">{data.mode === 'loss' ? '⚠️' : '🟢'}</span>
               <div>
                 <h3 className="font-bold text-lg">{data.stockName}</h3>
                 <div className="text-sm text-gray-600">
-                  ?�재가: {formatNumber(data.currentPrice)}??
+                  현재가: {formatNumber(data.currentPrice)}원
                   {data.mode === 'loss' && (
                     <span className="text-red-600 ml-2">
                       ({lossPercent}%)
@@ -53,9 +53,9 @@ export default function TradeAnalysisPanel({ isOpen, onClose, stockName }: Trade
             </div>
             <button
               onClick={onClose}
-              className="text-[#8b95a1] hover:text-gray-600 text-xl"
+              className="text-gray-400 hover:text-gray-600 text-xl"
             >
-              ??
+              ✕
             </button>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function TradeAnalysisPanel({ isOpen, onClose, stockName }: Trade
 
           {/* Vote Section */}
           <div className="mt-6">
-            <h4 className="font-medium text-[#191f28] mb-3">?�른 ?��? ?�견</h4>
+            <h4 className="font-medium text-gray-900 mb-3">다른 유저 의견</h4>
             <VotePoll 
               options={data.vote.options}
               totalVotes={data.vote.totalVotes}
@@ -90,13 +90,13 @@ function LossAnalysisContent({ data, formatNumber }: {
     <>
       {/* Current Position */}
       <div className="mb-6">
-        <h4 className="font-medium text-[#191f28] mb-2">?�재 ?��???/h4>
-        <div className="bg-[#f2f4f6] rounded-2xl p-3">
+        <h4 className="font-medium text-gray-900 mb-2">현재 포지션</h4>
+        <div className="bg-gray-50 rounded-lg p-3">
           <div className="text-sm space-y-1">
-            <div>매수가: {formatNumber(data.buyPrice)}??/div>
+            <div>매수가: {formatNumber(data.buyPrice)}원</div>
             {data.lossAmount && (
               <div className="text-red-600">
-                ?�실?? {formatNumber(Math.abs(data.lossAmount))}??
+                손실액: {formatNumber(Math.abs(data.lossAmount))}원
               </div>
             )}
           </div>
@@ -105,7 +105,7 @@ function LossAnalysisContent({ data, formatNumber }: {
 
       {/* Historical Analysis */}
       <div className="mb-6">
-        <h4 className="font-medium text-[#191f28] mb-3">과거 ?�사 ?�황 분석</h4>
+        <h4 className="font-medium text-gray-900 mb-3">과거 유사 상황 분석</h4>
         <div className="space-y-3">
           {data.patterns.map((pattern, index) => (
             <PatternAnalysis key={index} pattern={pattern} />
@@ -116,7 +116,7 @@ function LossAnalysisContent({ data, formatNumber }: {
       {/* Special Conditions */}
       {data.specialConditions && (
         <div className="mb-6">
-          <h4 className="font-medium text-[#191f28] mb-3">지�??�황 ?�이??/h4>
+          <h4 className="font-medium text-gray-900 mb-3">지금 상황 특이점</h4>
           <div className="space-y-2">
             {data.specialConditions.map((condition, index) => (
               <div key={index} className="text-sm">
@@ -129,13 +129,13 @@ function LossAnalysisContent({ data, formatNumber }: {
 
       {/* AI Summary */}
       <div className="mb-6">
-        <h4 className="font-medium text-[#191f28] mb-3">AI 종합</h4>
-        <div className="bg-blue-50 rounded-2xl p-3">
+        <h4 className="font-medium text-gray-900 mb-3">AI 종합</h4>
+        <div className="bg-blue-50 rounded-lg p-3">
           <p className="text-sm text-gray-700">
-            ?�재 {data.stockName}??매수 ???�기 조정 구간???�습?�다. 
-            과거 ?�사 ?�턴 분석 결과, 1개월 ??반등 ?�률???�으??
-            추�? ?�락 리스?�도 존재?�니?? 
-            ?��???관리�? 중요???�점?�니??
+            현재 {data.stockName}는 매수 후 단기 조정 구간에 있습니다. 
+            과거 유사 패턴 분석 결과, 1개월 내 반등 확률이 높으나 
+            추가 하락 리스크도 존재합니다. 
+            포지션 관리가 중요한 시점입니다.
           </p>
         </div>
       </div>
@@ -153,23 +153,23 @@ function ProfitAnalysisContent({ data, formatNumber }: {
     <>
       {/* Current Position */}
       <div className="mb-6">
-        <h4 className="font-medium text-[#191f28] mb-2">?�재 ?�익�?/h4>
-        <div className="bg-green-50 rounded-2xl p-3">
+        <h4 className="font-medium text-gray-900 mb-2">현재 수익률</h4>
+        <div className="bg-green-50 rounded-lg p-3">
           <div className="text-lg font-bold text-green-600">
             +{profitPercent}%
           </div>
           <div className="text-sm text-gray-600">
-            매수가: {formatNumber(data.buyPrice)}??
+            매수가: {formatNumber(data.buyPrice)}원
           </div>
         </div>
       </div>
 
       {/* Distance to Next Target */}
       <div className="mb-6">
-        <h4 className="font-medium text-[#191f28] mb-2">1�??�절까�?</h4>
-        <div className="bg-[#f2f4f6] rounded-2xl p-3">
+        <h4 className="font-medium text-gray-900 mb-2">1차 익절까지</h4>
+        <div className="bg-gray-50 rounded-lg p-3">
           <div className="text-sm text-gray-700">
-            1�??�절까�? ?��? 구간: <strong>??2%</strong>
+            1차 익절까지 남은 구간: <strong>약 2%</strong>
           </div>
         </div>
       </div>
@@ -177,19 +177,19 @@ function ProfitAnalysisContent({ data, formatNumber }: {
       {/* Pattern Analysis */}
       {data.moreUpProb && data.dropProb && (
         <div className="mb-6">
-          <h4 className="font-medium text-[#191f28] mb-3">?�턴 분석</h4>
-          <div className="bg-[#f2f4f6] rounded-2xl p-3">
+          <h4 className="font-medium text-gray-900 mb-3">패턴 분석</h4>
+          <div className="bg-gray-50 rounded-lg p-3">
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span>추�? ?�승 ?�률:</span>
+                <span>추가 상승 확률:</span>
                 <span className="text-green-600 font-medium">
-                  {data.moreUpProb}% (?�균 +{data.avgMoreUp}%)
+                  {data.moreUpProb}% (평균 +{data.avgMoreUp}%)
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>조정 ?�률:</span>
+                <span>조정 확률:</span>
                 <span className="text-red-600 font-medium">
-                  {data.dropProb}% (?�균 {data.avgDrop}%)
+                  {data.dropProb}% (평균 {data.avgDrop}%)
                 </span>
               </div>
             </div>
@@ -200,10 +200,10 @@ function ProfitAnalysisContent({ data, formatNumber }: {
       {/* Scenarios */}
       {data.scenarios && (
         <div className="mb-6">
-          <h4 className="font-medium text-[#191f28] mb-3">?�상 ?�나리오</h4>
+          <h4 className="font-medium text-gray-900 mb-3">예상 시나리오</h4>
           <div className="space-y-2">
             {data.scenarios.map((scenario, index) => (
-              <div key={index} className="bg-[#f2f4f6] rounded-2xl p-2">
+              <div key={index} className="bg-gray-50 rounded-lg p-2">
                 <div className="text-sm text-gray-700">
                   {scenario}
                 </div>
@@ -215,13 +215,13 @@ function ProfitAnalysisContent({ data, formatNumber }: {
 
       {/* AI Summary */}
       <div className="mb-6">
-        <h4 className="font-medium text-[#191f28] mb-3">AI 종합</h4>
-        <div className="bg-blue-50 rounded-2xl p-3">
+        <h4 className="font-medium text-gray-900 mb-3">AI 종합</h4>
+        <div className="bg-blue-50 rounded-lg p-3">
           <p className="text-sm text-gray-700">
-            {data.stockName}???�재 ?�익 구간???�으�? 
-            1�??�절 ?�?�밍??근접?�습?�다. 
-            추�? ?�승보다??조정 ?�률???�아 
-            부�??�절??고려?�볼 ?�점?�니??
+            {data.stockName}는 현재 수익 구간에 있으며, 
+            1차 익절 타이밍이 근접했습니다. 
+            추가 상승보다는 조정 확률이 높아 
+            부분 익절을 고려해볼 시점입니다.
           </p>
         </div>
       </div>

@@ -94,7 +94,7 @@ export default function FeedPost({ post }: { post: PostData }) {
           </div>
 
           {/* Poll if exists */}
-          {post.poll && <VotePoll poll={post.poll} className="mb-3" />}
+          {post.poll && <VotePoll options={post.poll.options} totalVotes={post.poll.totalVotes} />}
 
           {/* Actions */}
           <div className="flex items-center gap-6 pt-1 mb-2">

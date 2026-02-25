@@ -10,18 +10,18 @@ export default function MemoCard({ memo, onClick }: MemoCardProps) {
     switch (tag) {
       case '매수근거': return 'border-l-green-500';
       case '매도근거': return 'border-l-red-500';
-      case '관�?: return 'border-l-yellow-500';
-      case 'AI?��?': return 'border-l-blue-500';
+      case '관찰': return 'border-l-yellow-500';
+      case 'AI일지': return 'border-l-blue-500';
       default: return 'border-l-gray-300';
     }
   };
 
   const getAttachmentIcon = (type: string) => {
     switch (type) {
-      case '공시': return '?��';
-      case '?�널리포??: return '?��';
-      case '?�플루언?�콜': return '?��';
-      default: return '?��';
+      case '공시': return '📋';
+      case '애널리포트': return '🎯';
+      case '인플루언서콜': return '👤';
+      default: return '📄';
     }
   };
 
@@ -35,25 +35,25 @@ export default function MemoCard({ memo, onClick }: MemoCardProps) {
       onClick={() => onClick(memo)}
       className={`border-l-4 ${getColorBar(memo.tag)} ${
         memo.isAI ? 'bg-[#f0f4ff]' : 'bg-white'
-      } rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-[#f0f0f0] p-4 cursor-pointer hover:shadow-md transition-shadow`}
+      } rounded-xl shadow-sm border border-[#f0f0f0] p-4 cursor-pointer hover:shadow-md transition-shadow`}
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">
           {memo.stock && (
-            <span className="bg-[#f2f4f6] text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+            <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
               {memo.stock}
             </span>
           )}
           {memo.isAI && (
             <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">
-              ?�동 ?�성
+              자동 생성
             </span>
           )}
         </div>
-        <span className="text-[#8b95a1] text-sm">{memo.date}</span>
+        <span className="text-gray-400 text-sm">{memo.date}</span>
       </div>
 
-      <h3 className="font-bold text-[#191f28] mb-2 line-clamp-1">{memo.title}</h3>
+      <h3 className="font-bold text-gray-900 mb-2 line-clamp-1">{memo.title}</h3>
       
       <p className="text-gray-600 text-sm mb-3 line-clamp-2">
         {truncateContent(memo.content)}
@@ -61,7 +61,7 @@ export default function MemoCard({ memo, onClick }: MemoCardProps) {
 
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <span className="bg-[#f2f4f6] text-gray-700 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+          <span className="bg-gray-50 text-gray-700 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
             {memo.tagIcon} {memo.tag}
           </span>
           
