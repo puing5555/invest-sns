@@ -1,0 +1,38 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const bottomNavItems = [
+  { icon: '🏠', label: '피드', href: '/feed' },
+  { icon: '📡', label: '시그널', href: '/' },
+  { icon: '📋', label: '공시', href: '/disclosure' },
+  { icon: '🔔', label: '알림', href: '/alerts' },
+  { icon: '👤', label: '프로필', href: '/profile' },
+];
+
+export default function BottomNav() {
+  const pathname = usePathname();
+
+  return (
+    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#1a1a2e] border-t border-[#2a2a2a] z-50">
+      <nav className="flex">
+        {bottomNavItems.map((item) => {
+          const isActive = pathname === item.href;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex-1 flex flex-col items-center py-3 px-2 ${
+                isActive ? 'text-[#00d4aa]' : 'text-[#888]'
+              }`}
+            >
+              <span className="text-xl mb-1">{item.icon}</span>
+              <span className="text-xs font-medium">{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
+  );
+}
