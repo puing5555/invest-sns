@@ -1,120 +1,132 @@
 'use client';
 
-import { useState } from 'react';
-import FeedCompose from '../components/FeedCompose';
-import FeedPost, { PostData } from '../components/FeedPost';
+import Link from 'next/link';
+import SignalSummaryCards from '../components/SignalSummaryCards';
+import SignalScoreList from '../components/SignalScoreList';
+import InsiderTradeCard from '../components/InsiderTradeCard';
+import AnalystTargetItem, { AnalystTargetData } from '../components/AnalystTargetItem';
 
-const POSTS: PostData[] = [
-  {
-    id: 1,
-    name: '박두환',
-    handle: 'doohwan_park',
-    initial: '박',
-    time: '13시간',
-    text: '비트코인이 $45,000을 돌파했습니다! 다음 저항선은 $48,000 수준으로 보입니다. 단기 조정 가능성도 있으니 리스크 관리 잊지 마세요.',
-    comments: 142,
-    reposts: 89,
-    likes: 1247,
-    views: 15600,
-  },
-  {
-    id: 2,
-    name: '이효석',
-    handle: 'hyoseok_lee',
-    initial: '이',
-    time: '2시간',
-    text: 'NVIDIA 실적 발표 앞두고 있는데, 반도체 섹터 전반적으로 긴장감이 돌고 있네요. AI 관련주들 움직임 주의깊게 봐야겠습니다 📊',
-    comments: 67,
-    reposts: 134,
-    likes: 892,
-    views: 8945,
-  },
-  {
-    id: 3,
-    name: '코린이 아빠',
-    handle: 'korini_papa',
-    initial: '코',
-    time: '5시간',
-    text: '오늘 공시 정리:\n아이빔테크놀로지 공급계약 체결. 매출대비 14.77%.\n과거 유사 패턴 D+3 평균 +8.2%.\n주목할만합니다.',
-    comments: 23,
-    reposts: 45,
-    likes: 567,
-    views: 4200,
-  },
-  {
-    id: 4,
-    name: '🔴 [A등급 공시 속보]',
-    handle: '시스템',
-    initial: '!',
-    time: '10분전',
-    text: '와이엠씨 — 자사주 500,000주 소각 결정 (시총대비 3.75%)\n\n🤖 AI 판단: 소형주 대규모 소각, 과거 유사 D+5 +6.3%\n\n이 공시 어떻게 보시나요?',
-    comments: 34,
-    reposts: 67,
-    likes: 234,
-    views: 6700,
-    isSystem: true,
-    poll: {
-      options: [
-        { label: '호재', emoji: '🟢', percent: 78, color: '#22c55e' },
-        { label: '악재', emoji: '🔴', percent: 3, color: '#ef4444' },
-        { label: '모르겠다', emoji: '🟡', percent: 19, color: '#eab308' },
-      ],
-      totalVotes: 142,
-    },
-  },
-  {
-    id: 5,
-    name: '주식쟁이김과장',
-    handle: 'kim_kwajang',
-    initial: '김',
-    time: '1시간',
-    text: 'HD한국조선해양 해명공시 나왔는데, \'미확정\'이라고 했어요. 사실무근이 아니라 미확정 = 진행중 시그널. 3/24 재공시 예정일 체크하세요.',
-    comments: 56,
-    reposts: 78,
-    likes: 445,
-    views: 5600,
-  },
+const analystTargets: AnalystTargetData[] = [
+  { stock: 'SK하이닉스', firm: '한국투자', analyst: '김OO', prev: '180,000', next: '210,000', direction: 'up', accuracy: 62 },
+  { stock: '삼성전자', firm: '미래에셋', analyst: '박OO', prev: '78,000', next: '85,000', direction: 'up', accuracy: 58 },
+  { stock: 'HD한국조선', firm: 'NH투자', analyst: '이OO', prev: '170,000', next: '195,000', direction: 'up', accuracy: 71 },
 ];
 
-const TABS = ['추천', '팔로잉', '구독중'] as const;
+const influencerCalls = [
+  { name: '코린이아빠', initial: '코', stock: '에코프로', hitRate: 68, comment: '25만 밑에서 분할매수 추천' },
+  { name: '주식하는의사', initial: '주', stock: 'SK하이닉스', hitRate: 72, comment: 'HBM 수혜 본격화, 목표 20만' },
+  { name: '텔레그램큰손', initial: '텔', stock: '아이빔테크', hitRate: 58, comment: '공급계약 공시 나왔다, 단기 급등 예상' },
+];
 
-export default function FeedPage() {
-  const [activeTab, setActiveTab] = useState<string>('추천');
+const disclosures = [
+  { company: '아이빔테크놀로지', marketCap: '983억', title: '공급계약 체결 (계약금액 161억원)', ai: '매출대비 14.77%, 유사 47건 D+3 +8.2%', time: '09:32' },
+  { company: '씨케이솔루션', marketCap: '1,520억', title: '자사주 300,000주 소각 결정', ai: '시총대비 2.8%, 소형주 소각 D+5 +5.1%', time: '10:15' },
+];
+
+function SectionTitle({ title, subtitle, href }: { title: string; subtitle?: string; href?: string }) {
+  return (
+    <div className="flex items-center justify-between mb-3">
+      <div>
+        <h2 className="font-bold text-[15px] text-gray-900">{title}</h2>
+        {subtitle && <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>}
+      </div>
+      {href && (
+        <Link href={href} className="text-xs text-[#00d4aa] hover:underline">전체보기 &gt;</Link>
+      )}
+    </div>
+  );
+}
+
+export default function SignalHomePage() {
+  const today = new Date();
+  const days = ['일', '월', '화', '수', '목', '금', '토'];
+  const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')} ${days[today.getDay()]}`;
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Tabs */}
-      <div className="flex border-b border-[#eff3f4] sticky top-0 bg-white/80 backdrop-blur-md z-10">
-        {TABS.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className="flex-1 py-3.5 text-[15px] font-medium text-gray-500 hover:bg-gray-50 transition-colors relative"
-          >
-            <span className={activeTab === tab ? 'font-bold text-gray-900' : ''}>
-              {tab}
-            </span>
-            {activeTab === tab && (
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-14 h-1 rounded-full bg-[#00d4aa]" />
-            )}
-          </button>
-        ))}
+      {/* Sticky header */}
+      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-[#eff3f4] px-4 py-3 flex items-center justify-between">
+        <div>
+          <h1 className="font-bold text-[15px] text-gray-900">📡 오늘의 시그널</h1>
+          <p className="text-xs text-gray-400">{dateStr}</p>
+        </div>
+        <button className="text-gray-400 hover:text-gray-600 text-lg transition-colors">🔄</button>
       </div>
 
-      {activeTab === '추천' ? (
-        <>
-          <FeedCompose />
-          <div>
-            {POSTS.map((post) => (
-              <FeedPost key={post.id} post={post} />
+      <div className="p-4 space-y-6">
+        {/* 섹션1: 요약 카드 */}
+        <section>
+          <SignalSummaryCards />
+        </section>
+
+        {/* 섹션2: 시그널 스코어 TOP */}
+        <section>
+          <SectionTitle
+            title="🔥 오늘의 시그널 스코어 TOP"
+            subtitle="여러 시그널이 겹치는 종목일수록 점수가 높아요"
+          />
+          <SignalScoreList />
+        </section>
+
+        {/* 섹션3: A등급 공시 */}
+        <section>
+          <SectionTitle title="📋 오늘의 A등급 공시" href="/disclosure" />
+          <div className="space-y-2">
+            {disclosures.map((d, i) => (
+              <div key={i} className="bg-white border border-[#eff3f4] rounded-xl p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-bold bg-[#ff4444] text-white px-2 py-0.5 rounded-full">A등급</span>
+                  <span className="font-bold text-sm text-gray-900">{d.company}</span>
+                  <span className="text-xs text-gray-400">{d.marketCap}</span>
+                  <span className="text-xs text-gray-400 ml-auto">{d.time}</span>
+                </div>
+                <p className="text-sm text-gray-700 mb-1">{d.title}</p>
+                <p className="text-xs text-[#00d4aa]">🤖 {d.ai}</p>
+                <Link href="/disclosure" className="text-xs text-[#00d4aa] hover:underline mt-2 inline-block">상세보기 →</Link>
+              </div>
             ))}
           </div>
-        </>
-      ) : (
-        <div className="flex items-center justify-center h-60 text-gray-400 text-sm">
-          준비중
-        </div>
-      )}
+        </section>
+
+        {/* 섹션4: 인플루언서 핫콜 */}
+        <section>
+          <SectionTitle title="👤 인플루언서 오늘의 콜" href="/influencer" />
+          <div className="flex gap-3 overflow-x-auto pb-2">
+            {influencerCalls.map((c, i) => (
+              <div key={i} className="bg-white border border-[#eff3f4] rounded-xl p-4 min-w-[220px] flex-shrink-0 hover:bg-gray-50 transition-colors cursor-pointer">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 rounded-full bg-[#1a1a2e] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                    {c.initial}
+                  </div>
+                  <span className="font-bold text-sm text-gray-900">{c.name}</span>
+                  <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded-full font-medium ml-auto">적중 {c.hitRate}%</span>
+                </div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="font-bold text-sm text-gray-900">{c.stock}</span>
+                  <span className="text-[10px] font-bold bg-[#dcfce7] text-[#16a34a] px-2 py-0.5 rounded-full">매수</span>
+                </div>
+                <p className="text-xs text-gray-500">&ldquo;{c.comment}&rdquo;</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 섹션5: 임원 매매 */}
+        <section>
+          <SectionTitle title="👔 임원 매매 감지" />
+          <InsiderTradeCard />
+        </section>
+
+        {/* 섹션6: 애널리스트 목표가 */}
+        <section>
+          <SectionTitle title="🎯 목표가 변동" />
+          <div className="bg-white border border-[#eff3f4] rounded-xl px-3">
+            {analystTargets.map((d, i) => (
+              <AnalystTargetItem key={i} d={d} />
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

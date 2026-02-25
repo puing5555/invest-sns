@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation';
 
 const pageNames: { [key: string]: string } = {
-  '/': '피드',
-  '/signal': '시그널',
+  '/': '시그널',
+  '/feed': '피드',
   '/disclosure': '공시',
   '/influencer': '인플루언서',
   '/alerts': '알림',

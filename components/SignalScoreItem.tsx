@@ -1,0 +1,54 @@
+'use client';
+
+import SignalTag from './SignalTag';
+import MiniSparkline from './MiniSparkline';
+
+export interface SignalScoreData {
+  rank: number;
+  stock: string;
+  score: number;
+  tags: { label: string; score: number }[];
+  price: string;
+  change: string;
+  sparkData: number[];
+}
+
+export default function SignalScoreItem({ d }: { d: SignalScoreData }) {
+  const isPositive = d.change.startsWith('+');
+  const barWidth = Math.min(d.score, 100);
+  const barColor = d.score >= 80 ? '#22c55e' : d.score >= 60 ? '#00d4aa' : '#eab308';
+
+  return (
+    <div className="flex items-center gap-3 py-3 border-b border-[#eff3f4] last:border-b-0 hover:bg-gray-50 px-2 transition-colors cursor-pointer">
+      {/* Rank */}
+      <span className={`text-lg font-bold w-6 text-center flex-shrink-0 ${d.rank <= 3 ? 'text-[#00d4aa]' : 'text-gray-400'}`}>
+        {d.rank}
+      </span>
+
+      {/* Score bar + info */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="font-bold text-sm text-gray-900">{d.stock}</span>
+          <span className="text-xs font-bold text-[#00d4aa]">{d.score}점</span>
+          <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="h-full rounded-full" style={{ width: `${barWidth}%`, backgroundColor: barColor }} />
+          </div>
+        </div>
+        <div className="flex gap-1 flex-wrap">
+          {d.tags.map((t, i) => (
+            <SignalTag key={i} label={t.label} score={t.score} />
+          ))}
+        </div>
+      </div>
+
+      {/* Price + sparkline */}
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <MiniSparkline data={d.sparkData} color={isPositive ? '#22c55e' : '#ef4444'} />
+        <div className="text-right">
+          <p className="text-xs font-bold text-gray-900">{d.price}</p>
+          <p className={`text-[10px] font-semibold ${isPositive ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>{d.change}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
