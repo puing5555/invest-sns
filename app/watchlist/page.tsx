@@ -2,24 +2,32 @@
 
 import { useState } from 'react';
 import { WatchlistStock, watchlistStocks } from '@/data/watchlistData';
+import { tradeReviewData } from '@/data/tradeData';
 import WatchlistCard from '@/components/WatchlistCard';
 import AddStockModal from '@/components/AddStockModal';
 import MemoEditModal from '@/components/MemoEditModal';
+import TradeSetupModal from '@/components/TradeSetupModal';
+import TradeAnalysisPanel from '@/components/TradeAnalysisPanel';
+import TradeReviewCard from '@/components/TradeReviewCard';
 
-type FilterType = 'all' | 'profit' | 'loss' | 'signals';
+type FilterType = 'all' | 'profit' | 'loss' | 'signals' | 'review';
 
 export default function WatchlistPage() {
   const [stocks, setStocks] = useState<WatchlistStock[]>(watchlistStocks);
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isMemoModalOpen, setIsMemoModalOpen] = useState(false);
+  const [isTradeSetupModalOpen, setIsTradeSetupModalOpen] = useState(false);
+  const [isAnalysisPanelOpen, setIsAnalysisPanelOpen] = useState(false);
   const [selectedStock, setSelectedStock] = useState<WatchlistStock | null>(null);
+  const [selectedStockName, setSelectedStockName] = useState<string | null>(null);
 
   const filterTabs = [
     { key: 'all' as FilterType, label: '전체', count: stocks.length },
     { key: 'profit' as FilterType, label: '수익중', count: stocks.filter(s => s.profitRate && s.profitRate > 0).length },
     { key: 'loss' as FilterType, label: '손실중', count: stocks.filter(s => s.profitRate && s.profitRate < 0).length },
-    { key: 'signals' as FilterType, label: '시그널있음', count: stocks.filter(s => s.badges.length > 0).length }
+    { key: 'signals' as FilterType, label: '시그널있음', count: stocks.filter(s => s.badges.length > 0).length },
+    { key: 'review' as FilterType, label: '📋 매매 복기', count: tradeReviewData.length }
   ];
 
   const getFilteredStocks = () => {
@@ -30,6 +38,8 @@ export default function WatchlistPage() {
         return stocks.filter(s => s.profitRate && s.profitRate < 0);
       case 'signals':
         return stocks.filter(s => s.badges.length > 0);
+      case 'review':
+        return []; // Review tab doesn't show stocks, shows TradeReviewCards instead
       default:
         return stocks;
     }
@@ -89,6 +99,52 @@ export default function WatchlistPage() {
     setStocks(prev => prev.filter(stock => stock.id !== stockId));
   };
 
+  const handleAnalysisClick = (stockName: string) => {
+    setSelectedStockName(stockName);
+    setIsAnalysisPanelOpen(true);
+  };
+
+  const handleSetupClick = (stockName: string) => {
+    const stock = stocks.find(s => s.name === stockName);
+    if (stock) {
+      setSelectedStock(stock);
+      setIsTradeSetupModalOpen(true);
+    }
+  };
+
+  const handleTradeSetupSave = (updates: { 
+    memo?: string; 
+    buyPrice?: number; 
+    quantity?: number;
+    stopLoss?: number;
+    takeProfit1?: number;
+    takeProfit2?: number;
+  }) => {
+    if (!selectedStock) return;
+
+    setStocks(prev => prev.map(stock => {
+      if (stock.id === selectedStock.id) {
+        const updatedStock = { ...stock };
+        
+        if (updates.buyPrice !== undefined) {
+          updatedStock.buyPrice = updates.buyPrice;
+          // Recalculate profit rate if we have a buy price
+          if (updates.buyPrice > 0) {
+            updatedStock.profitRate = ((stock.currentPrice - updates.buyPrice) / updates.buyPrice) * 100;
+          }
+        }
+        
+        // Note: stopLoss, takeProfit1, takeProfit2 are stored in tradeData, not in stock object
+        // In a real app, you'd save these to a backend or separate state
+        
+        return updatedStock;
+      }
+      return stock;
+    }));
+
+    setSelectedStock(null);
+  };
+
   const filteredStocks = getFilteredStocks();
 
   return (
@@ -122,23 +178,41 @@ export default function WatchlistPage() {
           ))}
         </div>
 
-        {/* Stock Cards */}
+        {/* Content */}
         <div className="space-y-4">
-          {filteredStocks.length > 0 ? (
-            filteredStocks.map(stock => (
-              <WatchlistCard
-                key={stock.id}
-                stock={stock}
-                onMemoClick={handleMemoClick}
-                onRemove={handleRemoveStock}
-              />
-            ))
+          {activeFilter === 'review' ? (
+            // Trade Review Cards
+            tradeReviewData.length > 0 ? (
+              tradeReviewData.map(trade => (
+                <TradeReviewCard key={trade.id} trade={trade} />
+              ))
+            ) : (
+              <div className="text-center py-12 text-gray-500">
+                <div className="text-lg mb-2">📊</div>
+                <div>매매 기록이 없습니다</div>
+                <div className="text-sm">매매를 완료하면 여기에 나타납니다</div>
+              </div>
+            )
           ) : (
-            <div className="text-center py-12 text-gray-500">
-              <div className="text-lg mb-2">📋</div>
-              <div>관심종목이 없습니다</div>
-              <div className="text-sm">종목을 추가해보세요</div>
-            </div>
+            // Stock Cards
+            filteredStocks.length > 0 ? (
+              filteredStocks.map(stock => (
+                <WatchlistCard
+                  key={stock.id}
+                  stock={stock}
+                  onMemoClick={handleMemoClick}
+                  onRemove={handleRemoveStock}
+                  onAnalysisClick={handleAnalysisClick}
+                  onSetupClick={handleSetupClick}
+                />
+              ))
+            ) : (
+              <div className="text-center py-12 text-gray-500">
+                <div className="text-lg mb-2">📋</div>
+                <div>관심종목이 없습니다</div>
+                <div className="text-sm">종목을 추가해보세요</div>
+              </div>
+            )
           )}
         </div>
 
@@ -154,6 +228,19 @@ export default function WatchlistPage() {
           onClose={() => setIsMemoModalOpen(false)}
           onSave={handleMemoSave}
           stock={selectedStock}
+        />
+
+        <TradeSetupModal
+          isOpen={isTradeSetupModalOpen}
+          onClose={() => setIsTradeSetupModalOpen(false)}
+          onSave={handleTradeSetupSave}
+          stock={selectedStock}
+        />
+
+        <TradeAnalysisPanel
+          isOpen={isAnalysisPanelOpen}
+          onClose={() => setIsAnalysisPanelOpen(false)}
+          stockName={selectedStockName}
         />
       </div>
     </div>

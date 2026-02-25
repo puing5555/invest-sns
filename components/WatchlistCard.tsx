@@ -1,18 +1,57 @@
 import { WatchlistStock } from '@/data/watchlistData';
+import { tradeHelperData } from '@/data/tradeData';
 import SignalBadge from './SignalBadge';
+import TradeHelper from './TradeHelper';
 
 interface WatchlistCardProps {
   stock: WatchlistStock;
   onMemoClick: (stock: WatchlistStock) => void;
   onRemove: (stockId: string) => void;
+  onAnalysisClick: (stockName: string) => void;
+  onSetupClick: (stockName: string) => void;
 }
 
-export default function WatchlistCard({ stock, onMemoClick, onRemove }: WatchlistCardProps) {
+export default function WatchlistCard({ stock, onMemoClick, onRemove, onAnalysisClick, onSetupClick }: WatchlistCardProps) {
+  const tradeData = tradeHelperData[stock.name];
+  
+  const getCardBorderClass = () => {
+    let borderClass = '';
+    
+    // Check for stop-loss/take-profit proximity
+    if (stock.buyPrice && tradeData) {
+      const isNearStopLoss = stock.currentPrice <= tradeData.stopLoss * 1.02; // Within 2%
+      const isNearTakeProfit = tradeData.tp1 && stock.currentPrice >= tradeData.tp1 * 0.98; // Within 2%
+      
+      if (isNearStopLoss) {
+        borderClass = 'border-red-400';
+      } else if (isNearTakeProfit) {
+        borderClass = 'border-green-400';
+      } else {
+        borderClass = 'border-[#eff3f4]';
+      }
+    } else {
+      borderClass = 'border-[#eff3f4]';
+    }
+    
+    return borderClass;
+  };
+
   const getLeftBorderColor = () => {
     if (stock.buyPrice === null) return 'border-l-gray-300';
     if (stock.profitRate && stock.profitRate > 0) return 'border-l-[#22c55e]';
     if (stock.profitRate && stock.profitRate < 0) return 'border-l-[#ef4444]';
     return 'border-l-gray-300';
+  };
+  
+  const getWarningIcon = () => {
+    if (!stock.buyPrice || !tradeData) return null;
+    
+    const isNearStopLoss = stock.currentPrice <= tradeData.stopLoss * 1.02;
+    const isNearTakeProfit = tradeData.tp1 && stock.currentPrice >= tradeData.tp1 * 0.98;
+    
+    if (isNearStopLoss) return '⚠️';
+    if (isNearTakeProfit) return '🎉';
+    return null;
   };
 
   const getPriceChangeColor = () => {
@@ -23,14 +62,19 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove }: Watchlis
     return num.toLocaleString('ko-KR');
   };
 
+  const warningIcon = getWarningIcon();
+
   return (
-    <div className={`bg-white rounded-xl shadow-sm border border-[#eff3f4] ${getLeftBorderColor()} border-l-4 p-4 hover:shadow-md transition-shadow`}>
+    <div className={`bg-white rounded-xl shadow-sm border ${getCardBorderClass()} ${getLeftBorderColor()} border-l-4 p-4 hover:shadow-md transition-shadow`}>
       <div className="flex justify-between">
         {/* Left Section */}
         <div className="flex-1">
           {/* Stock Name and Price */}
           <div className="flex items-center justify-between mb-2">
-            <h3 className="font-bold text-lg">{stock.name}</h3>
+            <div className="flex items-center gap-2">
+              <h3 className="font-bold text-lg">{stock.name}</h3>
+              {warningIcon && <span className="text-lg">{warningIcon}</span>}
+            </div>
             <div className="text-right">
               <div className="font-bold text-lg">{formatNumber(stock.currentPrice)}원</div>
               <div className={`text-sm ${getPriceChangeColor()}`}>
@@ -70,11 +114,20 @@ export default function WatchlistCard({ stock, onMemoClick, onRemove }: Watchlis
 
           {/* Memo Preview */}
           {stock.memo && (
-            <div className="bg-[#f5f5f5] rounded-lg p-2 text-sm italic text-gray-600 flex items-center gap-2">
+            <div className="bg-[#f5f5f5] rounded-lg p-2 text-sm italic text-gray-600 flex items-center gap-2 mb-2">
               <span>✏️</span>
               <span>{stock.memo}</span>
             </div>
           )}
+
+          {/* Trade Helper Section */}
+          <TradeHelper
+            stockName={stock.name}
+            currentPrice={stock.currentPrice}
+            buyPrice={stock.buyPrice}
+            onAnalysisClick={onAnalysisClick}
+            onSetupClick={onSetupClick}
+          />
         </div>
 
         {/* Right Action Icons */}
