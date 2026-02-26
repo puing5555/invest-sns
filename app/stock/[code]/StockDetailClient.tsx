@@ -116,13 +116,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         );
 
       case 'influencer':
-        return (
-          <div className="text-center py-12">
-            <div className="text-4xl mb-4">👤</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">인플루언서 콜</h3>
-            <p className="text-[#8b95a1]">이 종목에 대한 인플루언서 분석을 준비중입니다</p>
-          </div>
-        );
+        return <InfluencerTab code={code} />;
 
       case 'analyst':
         return (
@@ -314,6 +308,259 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
       {/* Content */}
       <div className="px-4 py-6">
         {renderTabContent()}
+      </div>
+    </div>
+  );
+}
+
+// 인플루언서 탭 컴포넌트
+function InfluencerTab({ code }: { code: string }) {
+  const [periodFilter, setPeriodFilter] = useState('전체');
+  const [influencerFilter, setInfluencerFilter] = useState('전체');
+
+  const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
+  const influencerOptions = [
+    { name: '전체', count: null },
+    { name: '슈카월드', count: 8 },
+    { name: '김작가', count: 5 },
+    { name: '삼프로', count: 3 }
+  ];
+
+  // 더미 시그널 데이터
+  const signalData = [
+    {
+      date: '2026-02-25',
+      influencer: '슈카월드',
+      signal: 'BUY',
+      quote: '실적 개선 전망으로 매수 타이밍',
+      return: '+12.5%',
+      videoUrl: 'https://youtube.com/watch?v=dummy1',
+      price: 67200
+    },
+    {
+      date: '2026-02-20',
+      influencer: '김작가',
+      signal: 'POSITIVE',
+      quote: '반도체 업황 회복 기대감',
+      return: '+8.3%',
+      videoUrl: 'https://youtube.com/watch?v=dummy2',
+      price: 65800
+    },
+    {
+      date: '2026-02-15',
+      influencer: '삼프로',
+      signal: 'NEUTRAL',
+      quote: '단기 조정 가능성 있어 지켜봐야',
+      return: '+3.1%',
+      videoUrl: 'https://youtube.com/watch?v=dummy3',
+      price: 64100
+    },
+    {
+      date: '2026-02-10',
+      influencer: '슈카월드',
+      signal: 'CONCERN',
+      quote: '미국 증시 불안감으로 신중 필요',
+      return: '-2.8%',
+      videoUrl: 'https://youtube.com/watch?v=dummy4',
+      price: 66500
+    },
+    {
+      date: '2026-02-05',
+      influencer: '김작가',
+      signal: 'SELL',
+      quote: '고점 대비 조정 필요한 시점',
+      return: '-5.2%',
+      videoUrl: 'https://youtube.com/watch?v=dummy5',
+      price: 72000
+    }
+  ];
+
+  const getSignalColor = (signal: string) => {
+    switch (signal) {
+      case 'BUY': return 'text-blue-600 bg-blue-100';
+      case 'POSITIVE': return 'text-green-600 bg-green-100';
+      case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
+      case 'CONCERN': return 'text-orange-600 bg-orange-100';
+      case 'SELL': return 'text-red-600 bg-red-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const getSignalEmoji = (signal: string) => {
+    switch (signal) {
+      case 'BUY': return '🔵';
+      case 'POSITIVE': return '🟢';
+      case 'NEUTRAL': return '🟡';
+      case 'CONCERN': return '🟠';
+      case 'SELL': return '🔴';
+      default: return '⚪';
+    }
+  };
+
+  const getSignalText = (signal: string) => {
+    switch (signal) {
+      case 'BUY': return '매수';
+      case 'POSITIVE': return '긍정';
+      case 'NEUTRAL': return '중립';
+      case 'CONCERN': return '경계';
+      case 'SELL': return '매도';
+      default: return signal;
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* 필터 섹션 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <div className="space-y-4">
+          {/* 기간 필터 */}
+          <div>
+            <h4 className="font-medium text-[#191f28] mb-3">기간</h4>
+            <div className="flex gap-2 flex-wrap">
+              {periodOptions.map((period) => (
+                <button
+                  key={period}
+                  onClick={() => setPeriodFilter(period)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    periodFilter === period
+                      ? 'bg-[#3182f6] text-white'
+                      : 'bg-[#f8f9fa] text-[#8b95a1] hover:bg-[#e9ecef]'
+                  }`}
+                >
+                  {period}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 인플루언서 필터 */}
+          <div>
+            <h4 className="font-medium text-[#191f28] mb-3">인플루언서</h4>
+            <div className="flex gap-2 flex-wrap">
+              {influencerOptions.map((option) => (
+                <button
+                  key={option.name}
+                  onClick={() => setInfluencerFilter(option.name)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    influencerFilter === option.name
+                      ? 'bg-[#3182f6] text-white'
+                      : 'bg-[#f8f9fa] text-[#8b95a1] hover:bg-[#e9ecef]'
+                  }`}
+                >
+                  {option.name}
+                  {option.count && `(${option.count})`}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 차트 영역 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 신호</h4>
+        <div className="relative h-64 bg-[#f8f9fa] rounded-lg overflow-hidden">
+          {/* 간단한 주가 차트 (SVG) */}
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* 배경 격자 */}
+            <defs>
+              <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            {/* 주가 라인 */}
+            <path
+              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60"
+              fill="none"
+              stroke="#3182f6"
+              strokeWidth="2"
+            />
+            
+            {/* 신호 점들 */}
+            <circle cx="60" cy="100" r="6" fill="#dc3545" stroke="white" strokeWidth="2" />
+            <circle cx="140" cy="110" r="6" fill="#17a2b8" stroke="white" strokeWidth="2" />
+            <circle cx="220" cy="70" r="6" fill="#28a745" stroke="white" strokeWidth="2" />
+            <circle cx="300" cy="65" r="6" fill="#ffc107" stroke="white" strokeWidth="2" />
+            <circle cx="380" cy="60" r="6" fill="#007bff" stroke="white" strokeWidth="2" />
+          </svg>
+          
+          {/* 범례 */}
+          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-3 text-xs">
+            <div className="flex items-center gap-2 mb-1">
+              <span>🔵 매수</span>
+              <span>🟢 긍정</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>🟡 중립</span>
+              <span>🟠 경계</span>
+              <span>🔴 매도</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 신호 테이블 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+        <div className="p-6 border-b border-[#e8e8e8]">
+          <h4 className="font-medium text-[#191f28]">인플루언서 신호 이력</h4>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-[#f8f9fa]">
+              <tr>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">인플루언서</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f0f0f0]">
+              {signalData.map((signal, index) => (
+                <tr key={index} className="hover:bg-[#f8f9fa]">
+                  <td className="px-4 py-4 text-sm text-[#191f28]">
+                    {new Date(signal.date).toLocaleDateString('ko-KR', { 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
+                    {signal.influencer}
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{getSignalEmoji(signal.signal)}</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(signal.signal)}`}>
+                        {getSignalText(signal.signal)}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                    <div className="truncate">{signal.quote}</div>
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium">
+                    <span className={signal.return.startsWith('+') ? 'text-red-600' : 'text-blue-600'}>
+                      {signal.return}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4">
+                    <a
+                      href={signal.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                    >
+                      영상보기 →
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
