@@ -240,33 +240,23 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
             </button>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-[#191f28]">
-                {stockData.name}
-                <span className="text-lg text-[#8b95a1] font-normal ml-2">
-                  {code}
-                </span>
-              </h1>
-              <div className="flex items-center gap-4 mt-2">
-                <span className="text-3xl font-bold text-[#191f28]">
-                  {stockData.price.toLocaleString()}원
-                </span>
-                <span className={`text-lg font-medium ${
-                  stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
-                }`}>
-                  {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
-                  ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
-                </span>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <button className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#2171e5] transition-colors">
-                관심종목 추가
-              </button>
-              <button className="px-4 py-2 border border-[#e8e8e8] text-[#191f28] rounded-lg hover:bg-[#f8f9fa] transition-colors">
-                매매 설정
-              </button>
+          <div>
+            <h1 className="text-2xl font-bold text-[#191f28]">
+              {stockData.name}
+              <span className="text-lg text-[#8b95a1] font-normal ml-2">
+                {code}
+              </span>
+            </h1>
+            <div className="flex items-center gap-4 mt-2">
+              <span className="text-3xl font-bold text-[#191f28]">
+                {stockData.price.toLocaleString()}원
+              </span>
+              <span className={`text-lg font-medium ${
+                stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
+              }`}>
+                {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
+                ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
+              </span>
             </div>
           </div>
         </div>
