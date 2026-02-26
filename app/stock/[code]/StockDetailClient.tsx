@@ -228,7 +228,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     <div className="min-h-screen bg-[#f4f4f4]">
       {/* Stock Header */}
       <div className="bg-white border-b border-[#e8e8e8] px-4 py-6">
-        <div className="max-w-4xl mx-auto">
+        <div>
           {/* 뒤로가기 버튼 */}
           <div className="mb-4">
             <button
@@ -264,7 +264,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
 
       {/* Tabs */}
       <div className="bg-white border-b border-[#e8e8e8]">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="px-4">
           <div className="flex overflow-x-auto scrollbar-hide">
             {tabs.map((tab) => (
               <button
@@ -276,7 +276,6 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
                     : 'text-[#8b95a1] hover:text-[#191f28]'
                 }`}
               >
-                <span>{tab.icon}</span>
                 {tab.label}
                 {activeTab === tab.id && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3182f6]" />
@@ -288,7 +287,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="px-4 py-6">
         {renderTabContent()}
       </div>
     </div>
