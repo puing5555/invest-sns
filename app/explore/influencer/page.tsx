@@ -16,99 +16,136 @@ export default function InfluencerPage() {
 
   const categoryOptions = ['전체', '한국주식', '미국주식', '코인'];
 
-  // 최신 발언 더미 데이터
+  // 최신 발언 더미 데이터 (발언자 = 실제 발언한 사람 이름)
   const latestComments = [
     {
       id: 1,
-      youtuber: '슈카월드',
+      speaker: '슈카',
+      speakerId: 'syuka',
       stock: '삼성전자',
+      stockCode: '005930',
       signal: 'BUY',
-      quote: '실적 개선 전망으로 지금이 매수 타이밍이라고 봅니다',
-      return: '+12.5%',
+      quote: '실적 개선 전망으로 지금이 매수 타이밍이라고 봅니다. Q4 실적 발표 이후 반등할 것으로 예상합니다.',
       date: '2026-02-25',
+      time: '14:25',
+      videoUrl: 'https://youtube.com/watch?v=sample1',
       category: '한국주식'
     },
     {
       id: 2,
-      youtuber: '김작가',
+      speaker: '김작가',
+      speakerId: 'kimjakkga',
       stock: '테슬라',
+      stockCode: 'TSLA',
       signal: 'POSITIVE',
-      quote: '자율주행 기술 진전으로 긍정적 전망',
-      return: '+8.3%',
+      quote: '자율주행 기술 발전과 중국 시장 회복으로 긍정적 전망을 유지합니다.',
       date: '2026-02-24',
+      time: '16:42',
+      videoUrl: 'https://youtube.com/watch?v=sample2',
       category: '미국주식'
     },
     {
       id: 3,
-      youtuber: '삼프로',
+      speaker: '홍춘욱',
+      speakerId: 'hongchunuk',
       stock: '비트코인',
+      stockCode: 'BTC',
       signal: 'NEUTRAL',
-      quote: '단기적으론 횡보, 중장기적으론 상승 전망',
-      return: '+3.1%',
+      quote: '단기적으로는 횡보 구간이지만, 중장기적으로는 상승 기조를 유지할 것으로 봅니다.',
       date: '2026-02-23',
+      time: '10:15',
+      videoUrl: 'https://youtube.com/watch?v=sample3',
       category: '코인'
     },
     {
       id: 4,
-      youtuber: '코인왕',
+      speaker: '박세익',
+      speakerId: 'parkseik',
       stock: 'SK하이닉스',
+      stockCode: '000660',
       signal: 'CONCERN',
-      quote: '메모리 반도체 수요 둔화 우려',
-      return: '-2.8%',
+      quote: '메모리 반도체 수요 둔화 우려가 있어 신중한 접근이 필요해 보입니다.',
       date: '2026-02-22',
+      time: '09:33',
+      videoUrl: 'https://youtube.com/watch?v=sample4',
       category: '한국주식'
     },
     {
       id: 5,
-      youtuber: '슈카월드',
+      speaker: '이효석',
+      speakerId: 'leehyoseok',
       stock: '엔비디아',
+      stockCode: 'NVDA',
       signal: 'SELL',
-      quote: '고점 대비 차익실현 구간 진입',
-      return: '-5.2%',
+      quote: '고점 대비 과열 구간에 진입했다고 판단됩니다. 차익실현을 권장합니다.',
       date: '2026-02-21',
+      time: '15:47',
+      videoUrl: 'https://youtube.com/watch?v=sample5',
       category: '미국주식'
     },
     {
       id: 6,
-      youtuber: '투자왕김작가',
+      speaker: '신사임당',
+      speakerId: 'sinsaimdang',
       stock: '이더리움',
+      stockCode: 'ETH',
       signal: 'POSITIVE',
-      quote: 'ETF 승인으로 상승 모멘텀 지속',
-      return: '+15.7%',
+      quote: 'ETF 승인 기대감과 스테이킹 수익률로 상승 모멘텀이 지속될 것 같습니다.',
       date: '2026-02-20',
+      time: '11:22',
+      videoUrl: 'https://youtube.com/watch?v=sample6',
       category: '코인'
     },
     {
       id: 7,
-      youtuber: '삼프로',
+      speaker: '슈카',
+      speakerId: 'syuka',
       stock: 'NAVER',
+      stockCode: '035420',
       signal: 'BUY',
-      quote: 'AI 사업 확장으로 성장 동력 확보',
-      return: '+6.4%',
+      quote: 'AI 사업부문 확장과 클라우드 서비스 성장으로 새로운 성장 동력을 확보했습니다.',
       date: '2026-02-19',
+      time: '13:18',
+      videoUrl: 'https://youtube.com/watch?v=sample7',
       category: '한국주식'
     },
     {
       id: 8,
-      youtuber: '코인왕',
+      speaker: '김작가',
+      speakerId: 'kimjakkga',
       stock: '애플',
+      stockCode: 'AAPL',
       signal: 'NEUTRAL',
-      quote: 'Vision Pro 판매 부진하지만 장기적으론 긍정적',
-      return: '+1.2%',
+      quote: 'Vision Pro 판매는 부진하지만 서비스 부문 성장으로 장기적으로는 긍정적입니다.',
       date: '2026-02-18',
+      time: '12:55',
+      videoUrl: 'https://youtube.com/watch?v=sample8',
       category: '미국주식'
+    },
+    {
+      id: 9,
+      speaker: '홍춘욱',
+      speakerId: 'hongchunuk',
+      stock: '현대차',
+      stockCode: '005380',
+      signal: 'POSITIVE',
+      quote: '전기차 라인업 확대와 배터리 기술 혁신으로 경쟁력이 강화되고 있습니다.',
+      date: '2026-02-17',
+      time: '14:40',
+      videoUrl: 'https://youtube.com/watch?v=sample9',
+      category: '한국주식'
     }
   ];
 
-  // 유튜버 더미 데이터
+  // 유튜버 더미 데이터 (적중률, 수익률 삭제)
   const youtubers = [
     {
       id: 1,
-      name: '슈카월드',
+      name: '슈카',
       slug: 'syuka',
       avatar: '🎭',
       subscribers: '128만',
-      accuracy: '72%',
+      totalSignals: 245,
       category: '한국주식',
       tags: ['삼성전자', 'SK하이닉스', 'NAVER']
     },
@@ -118,120 +155,155 @@ export default function InfluencerPage() {
       slug: 'kimjakkga',
       avatar: '📚',
       subscribers: '85만',
-      accuracy: '68%',
+      totalSignals: 189,
       category: '미국주식',
       tags: ['테슬라', '애플', '마이크로소프트']
     },
     {
       id: 3,
-      name: '삼프로',
-      slug: 'sampro',
-      avatar: '⚡',
+      name: '홍춘욱',
+      slug: 'hongchunuk',
+      avatar: '📊',
       subscribers: '156만',
-      accuracy: '75%',
+      totalSignals: 312,
       category: '한국주식',
       tags: ['현대차', 'LG화학', '카카오']
     },
     {
       id: 4,
-      name: '코인왕',
-      slug: 'coinwang',
-      avatar: '👑',
+      name: '박세익',
+      slug: 'parkseik',
+      avatar: '⚡',
       subscribers: '92만',
-      accuracy: '64%',
-      category: '코인',
-      tags: ['비트코인', '이더리움', '리플']
+      totalSignals: 167,
+      category: '미국주식',
+      tags: ['애플', '구글', '아마존']
     },
     {
       id: 5,
-      name: '투자왕김작가',
-      slug: 'tujawang',
+      name: '이효석',
+      slug: 'leehyoseok',
       avatar: '💎',
       subscribers: '203만',
-      accuracy: '81%',
+      totalSignals: 398,
       category: '미국주식',
-      tags: ['엔비디아', '구글', '아마존']
+      tags: ['엔비디아', '마이크로소프트', '테슬라']
     },
     {
       id: 6,
-      name: '주식천재',
-      slug: 'stockgenius',
-      avatar: '🧠',
+      name: '신사임당',
+      slug: 'sinsaimdang',
+      avatar: '👑',
       subscribers: '67만',
-      accuracy: '69%',
+      totalSignals: 145,
+      category: '코인',
+      tags: ['비트코인', '이더리움', '솔라나']
+    },
+    {
+      id: 7,
+      name: '투자왕김작가',
+      slug: 'tujawang',
+      avatar: '🧠',
+      subscribers: '174만',
+      totalSignals: 267,
       category: '한국주식',
       tags: ['셀트리온', '삼성바이오', 'LG에너지']
     }
   ];
 
-  // 인기 종목 더미 데이터
+  // 인기 종목 더미 데이터 (대표 유튜버들과 함께 표시)
   const popularStocks = [
     {
       id: 1,
       name: '삼성전자',
+      code: '005930',
       mentionCount: 15,
-      recentSignal: '매수 신호 다수',
+      topYoutubers: ['슈카', '김작가', '투자왕김작가'],
+      otherCount: 12,
       category: '한국주식'
     },
     {
       id: 2,
-      name: '테슬라',
-      mentionCount: 12,
-      recentSignal: '긍정적 전망',
-      category: '미국주식'
-    },
-    {
-      id: 3,
       name: '비트코인',
+      code: 'BTC',
       mentionCount: 18,
-      recentSignal: '횡보 전망',
+      topYoutubers: ['신사임당', '슈카', '홍춘욱'],
+      otherCount: 15,
       category: '코인'
     },
     {
+      id: 3,
+      name: '테슬라',
+      code: 'TSLA',
+      mentionCount: 12,
+      topYoutubers: ['슈카', '신사임당', '박세익'],
+      otherCount: 9,
+      category: '미국주식'
+    },
+    {
       id: 4,
-      name: 'SK하이닉스',
-      mentionCount: 9,
-      recentSignal: '신중론 확산',
-      category: '한국주식'
+      name: '엔비디아',
+      code: 'NVDA',
+      mentionCount: 14,
+      topYoutubers: ['이효석', '김작가', '박세익'],
+      otherCount: 11,
+      category: '미국주식'
     },
     {
       id: 5,
-      name: '엔비디아',
-      mentionCount: 14,
-      recentSignal: '차익실현 권고',
-      category: '미국주식'
+      name: 'SK하이닉스',
+      code: '000660',
+      mentionCount: 9,
+      topYoutubers: ['슈카', '박세익', '홍춘욱'],
+      otherCount: 6,
+      category: '한국주식'
     },
     {
       id: 6,
       name: '이더리움',
+      code: 'ETH',
       mentionCount: 11,
-      recentSignal: '상승 모멘텀',
+      topYoutubers: ['신사임당', '이효석', '김작가'],
+      otherCount: 8,
       category: '코인'
     },
     {
       id: 7,
       name: 'NAVER',
+      code: '035420',
       mentionCount: 8,
-      recentSignal: '매수 기회',
+      topYoutubers: ['슈카', '홍춘욱', '투자왕김작가'],
+      otherCount: 5,
       category: '한국주식'
     },
     {
       id: 8,
       name: '애플',
+      code: 'AAPL',
       mentionCount: 10,
-      recentSignal: '중립적 시각',
+      topYoutubers: ['김작가', '박세익', '이효석'],
+      otherCount: 7,
       category: '미국주식'
+    },
+    {
+      id: 9,
+      name: '현대차',
+      code: '005380',
+      mentionCount: 7,
+      topYoutubers: ['홍춘욱', '슈카', '투자왕김작가'],
+      otherCount: 4,
+      category: '한국주식'
     }
   ];
 
   const getSignalColor = (signal: string) => {
     switch (signal) {
-      case 'BUY': return 'bg-blue-100 text-blue-600';
-      case 'POSITIVE': return 'bg-green-100 text-green-600';
-      case 'NEUTRAL': return 'bg-yellow-100 text-yellow-600';
-      case 'CONCERN': return 'bg-orange-100 text-orange-600';
-      case 'SELL': return 'bg-red-100 text-red-600';
-      default: return 'bg-gray-100 text-gray-600';
+      case 'BUY': return 'bg-blue-100 text-[#3182f6] border-blue-200';
+      case 'POSITIVE': return 'bg-green-100 text-[#22c55e] border-green-200';
+      case 'NEUTRAL': return 'bg-yellow-100 text-[#eab308] border-yellow-200';
+      case 'CONCERN': return 'bg-orange-100 text-[#f97316] border-orange-200';
+      case 'SELL': return 'bg-red-100 text-[#ef4444] border-red-200';
+      default: return 'bg-gray-100 text-gray-600 border-gray-200';
     }
   };
 
@@ -283,27 +355,35 @@ export default function InfluencerPage() {
                     📺
                   </div>
                   <div>
-                    <div className="font-medium text-[#191f28]">{comment.youtuber}</div>
-                    <div className="text-sm text-[#8b95a1]">{comment.date}</div>
+                    <Link 
+                      href={`/profile/influencer/${comment.speakerId}`}
+                      className="font-medium text-[#191f28] hover:text-[#3182f6] transition-colors cursor-pointer"
+                    >
+                      {comment.speaker}
+                    </Link>
+                    <div className="text-sm text-[#8b95a1]">{comment.date} {comment.time}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(comment.signal)}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getSignalColor(comment.signal)}`}>
                     {getSignalText(comment.signal)}
-                  </span>
-                  <span className={`text-sm font-medium ${
-                    comment.return.startsWith('+') ? 'text-red-600' : 'text-blue-600'
-                  }`}>
-                    {comment.return}
                   </span>
                 </div>
               </div>
               
-              <div className="mb-3">
-                <div className="inline-block bg-[#f2f4f6] text-[#8b95a1] px-2 py-1 rounded text-sm font-medium mb-2">
+              <div className="mb-4">
+                <div className="inline-block bg-[#f2f4f6] text-[#8b95a1] px-3 py-1 rounded-full text-sm font-medium mb-3">
                   {comment.stock}
                 </div>
-                <p className="text-[#191f28] leading-relaxed">{comment.quote}</p>
+                <p className="text-[#191f28] leading-relaxed mb-4">{comment.quote}</p>
+                <a 
+                  href={comment.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#3182f6] hover:text-[#2563eb] text-sm font-medium transition-colors"
+                >
+                  ▶ 영상보기
+                </a>
               </div>
             </div>
           ))}
@@ -349,8 +429,8 @@ export default function InfluencerPage() {
                 
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-[#8b95a1]">적중률</span>
-                    <span className="font-medium text-[#191f28]">{youtuber.accuracy}</span>
+                    <span className="text-[#8b95a1]">총 신호 수</span>
+                    <span className="font-medium text-[#191f28]">{youtuber.totalSignals}개</span>
                   </div>
                 </div>
 
@@ -419,15 +499,22 @@ export default function InfluencerPage() {
           </div>
           <div className="divide-y divide-[#f0f0f0]">
             {filteredStocks.map((stock) => (
-              <div key={stock.id} className="px-6 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors">
+              <Link 
+                key={stock.id} 
+                href={`/stock/${stock.code}?tab=influencer`}
+                className="block px-6 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg">
                       📈
                     </div>
                     <div>
-                      <div className="font-medium text-[#191f28] text-lg">{stock.name}</div>
-                      <div className="text-sm text-[#8b95a1]">{stock.recentSignal}</div>
+                      <div className="font-medium text-[#191f28] text-lg mb-1">{stock.name}</div>
+                      <div className="text-sm text-[#8b95a1]">
+                        {stock.topYoutubers.slice(0, 2).join(', ')}, {stock.topYoutubers[2]}
+                        {stock.otherCount > 0 && ` 외 ${stock.otherCount}명`}
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
@@ -435,7 +522,7 @@ export default function InfluencerPage() {
                     <div className="text-sm text-[#8b95a1]">언급</div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
