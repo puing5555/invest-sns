@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { gurus, getGurusWithNewBuys, getGurusWithChanges, Guru } from '../../data/guruData';
-import GuruCard from '../../components/GuruCard';
-import GuruDetail from '../../components/GuruDetail';
+import { gurus, getGurusWithNewBuys, getGurusWithChanges, Guru } from '@/data/guruData';
+import GuruCard from '@/components/GuruCard';
+import GuruDetail from '@/components/GuruDetail';
 
 type FilterType = 'all' | 'changes' | 'newBuys';
 

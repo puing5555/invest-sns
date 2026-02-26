@@ -1,0 +1,3075 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>투자SNS 프로토타입</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0b0e;
+  --bg-secondary: #12131a;
+  --bg-card: #1a1b24;
+  --bg-hover: #22232e;
+  --border: #2a2b36;
+  --text-primary: #f0f0f5;
+  --text-secondary: #8b8d9a;
+  --text-muted: #5a5c6a;
+  --accent-blue: #4a90ff;
+  --accent-green: #22c55e;
+  --accent-red: #ef4444;
+  --accent-orange: #f59e0b;
+  --accent-yellow: #eab308;
+  --signal-buy: #4a90ff;
+  --signal-positive: #22c55e;
+  --signal-neutral: #eab308;
+  --signal-caution: #f59e0b;
+  --signal-sell: #ef4444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Pretendard', -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Layout */
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 0 20px 24px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent-blue);
+  letter-spacing: -0.5px;
+}
+
+.sidebar-logo span {
+  color: var(--text-primary);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background: rgba(74, 144, 255, 0.08);
+  color: var(--accent-blue);
+  border-left-color: var(--accent-blue);
+}
+
+.nav-item .icon {
+  width: 20px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.nav-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 16px;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-primary);
+}
+
+/* Screen Container */
+.screen {
+  display: none;
+  padding: 0;
+  animation: fadeIn 0.2s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════ */
+/* SCREEN: 내 종목 대시보드 - 타임라인     */
+/* ═══════════════════════════════════════ */
+
+.dashboard-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-header p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* 관심종목 칩 */
+.watchlist-chips {
+  display: flex;
+  gap: 8px;
+  padding: 16px 32px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+}
+
+.chip:hover, .chip.active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: white;
+}
+
+.chip .price-change {
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+.chip .up { color: var(--accent-green); }
+.chip .down { color: var(--accent-red); }
+
+/* 타임라인 */
+.timeline {
+  padding: 16px 32px;
+}
+
+.timeline-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+  margin-bottom: 2px;
+}
+
+.timeline-item:hover {
+  background: var(--bg-card);
+}
+
+.timeline-item.grade-a { border-left-color: var(--accent-red); }
+.timeline-item.grade-b { border-left-color: var(--accent-orange); }
+.timeline-item.signal-buy { border-left-color: var(--signal-buy); }
+.timeline-item.signal-positive { border-left-color: var(--signal-positive); }
+.timeline-item.signal-caution { border-left-color: var(--signal-caution); }
+.timeline-item.signal-sell { border-left-color: var(--signal-sell); }
+.timeline-item.report { border-left-color: #a78bfa; }
+.timeline-item.insider { border-left-color: #f472b6; }
+.timeline-item.earnings { border-left-color: #38bdf8; }
+
+.tl-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.tl-icon.disclosure { background: rgba(239, 68, 68, 0.12); }
+.tl-icon.influencer { background: rgba(74, 144, 255, 0.12); }
+.tl-icon.report-icon { background: rgba(167, 139, 250, 0.12); }
+.tl-icon.insider-icon { background: rgba(244, 114, 182, 0.12); }
+.tl-icon.earnings-icon { background: rgba(56, 189, 248, 0.12); }
+
+.tl-content { flex: 1; min-width: 0; }
+
+.tl-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.tl-stock {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.tl-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tl-badge.a-grade { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+.tl-badge.b-grade { background: rgba(245,158,11,0.15); color: var(--accent-orange); }
+.tl-badge.buy { background: rgba(74,144,255,0.15); color: var(--signal-buy); }
+.tl-badge.positive { background: rgba(34,197,94,0.15); color: var(--signal-positive); }
+.tl-badge.neutral { background: rgba(234,179,8,0.15); color: var(--signal-neutral); }
+.tl-badge.caution { background: rgba(245,158,11,0.15); color: var(--signal-caution); }
+.tl-badge.sell { background: rgba(239,68,68,0.15); color: var(--signal-sell); }
+
+.tl-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tl-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════ */
+/* SCREEN: 종목 상세 대시보드              */
+/* ═══════════════════════════════════════ */
+
+.stock-detail-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stock-info h1 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.stock-info .stock-code {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.stock-price {
+  text-align: right;
+}
+
+.stock-price .price {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.stock-price .change {
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.stock-price .change.up { color: var(--accent-green); }
+.stock-price .change.down { color: var(--accent-red); }
+
+/* 탭 네비게이션 */
+.detail-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  overflow-x: auto;
+}
+
+.detail-tab {
+  padding: 14px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.detail-tab:hover {
+  color: var(--text-secondary);
+}
+
+.detail-tab.active {
+  color: var(--accent-blue);
+  border-bottom-color: var(--accent-blue);
+}
+
+/* 차트 영역 */
+.chart-section {
+  padding: 24px 32px;
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chart-period {
+  display: flex;
+  gap: 4px;
+}
+
+.period-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.period-btn:hover { color: var(--text-secondary); }
+.period-btn.active { background: var(--bg-card); color: var(--text-primary); }
+
+.influencer-filter {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.inf-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.inf-chip:hover, .inf-chip.active {
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+/* 차트 (시뮬레이션) */
+.chart-container {
+  position: relative;
+  height: 320px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.chart-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* 차트 위 신호 점 */
+.signal-dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s;
+  z-index: 2;
+  border: 2px solid var(--bg-card);
+}
+
+.signal-dot:hover {
+  transform: scale(1.5);
+  z-index: 10;
+}
+
+.signal-dot.buy { background: var(--signal-buy); }
+.signal-dot.positive { background: var(--signal-positive); }
+.signal-dot.neutral { background: var(--signal-neutral); }
+.signal-dot.caution { background: var(--signal-caution); }
+.signal-dot.sell { background: var(--signal-sell); }
+
+/* 신호 범례 */
+.signal-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* 신호 팝업 */
+.signal-popup {
+  display: none;
+  position: absolute;
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  z-index: 100;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+.signal-popup.visible { display: block; }
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.popup-influencer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.popup-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.popup-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.popup-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.popup-action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-hover);
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-quote {
+  background: var(--bg-hover);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.popup-summary {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.popup-btn {
+  flex: 1;
+  padding: 9px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.popup-btn:hover { opacity: 0.85; }
+
+.popup-btn.chart-btn {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.popup-btn.video-btn {
+  background: var(--accent-blue);
+  color: white;
+}
+
+/* 섹션 카드 */
+.section-cards {
+  padding: 0 32px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.section-card:hover {
+  border-color: var(--accent-blue);
+  background: var(--bg-hover);
+}
+
+.section-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.section-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.section-card-title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.section-card-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.section-card-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* ═══════════════════════════════════════ */
+/* SCREEN: 탐색                           */
+/* ═══════════════════════════════════════ */
+
+.explore-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.explore-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.explore-search {
+  margin-top: 14px;
+  position: relative;
+}
+
+.explore-search input {
+  width: 100%;
+  padding: 11px 16px 11px 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.explore-search input::placeholder { color: var(--text-muted); }
+.explore-search input:focus { border-color: var(--accent-blue); }
+
+.explore-search .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 24px 32px;
+}
+
+.explore-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.explore-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+.explore-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.explore-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.explore-card p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════ */
+/* SCREEN: 인플루언서                      */
+/* ═══════════════════════════════════════ */
+
+.inf-page-header {
+  padding: 28px 32px 0;
+}
+
+.inf-page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.inf-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  margin-top: 16px;
+}
+
+.inf-tab {
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+
+.inf-tab:hover { color: var(--text-secondary); }
+.inf-tab.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+
+/* 최신 발언 모음 */
+.recent-signals {
+  padding: 20px 32px;
+}
+
+.signal-card {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.signal-card:hover {
+  border-color: var(--accent-blue);
+}
+
+.signal-card-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.signal-card-content { flex: 1; }
+
+.signal-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.signal-card-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.signal-card-stock {
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.signal-card-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.signal-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.signal-card-return {
+  font-weight: 600;
+}
+
+.signal-card-return.up { color: var(--accent-green); }
+.signal-card-return.down { color: var(--accent-red); }
+
+/* 유튜버 모음 */
+.youtuber-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 20px 32px;
+}
+
+.youtuber-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.youtuber-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+.youtuber-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.youtuber-name {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.youtuber-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.youtuber-stats {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════ */
+/* SCREEN: 인플루언서 프로필               */
+/* ═══════════════════════════════════════ */
+
+.profile-header {
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.profile-info h1 {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.profile-info .profile-meta {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.profile-info .profile-activity {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.profile-stocks {
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-stocks-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.profile-stock-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.stock-tag {
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 발언 요약 */
+.recent-statements {
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-statements-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.statement-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 13px;
+}
+
+.statement-date {
+  color: var(--text-muted);
+  font-size: 12px;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.statement-stock {
+  font-weight: 600;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.statement-quote {
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 발언 이력 테이블 */
+.history-section {
+  padding: 20px 32px;
+}
+
+.history-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.history-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.history-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.history-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.history-table td {
+  padding: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.history-table tr:hover {
+  background: var(--bg-card);
+  cursor: pointer;
+}
+
+.history-table .stock-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.yt-link {
+  color: var(--accent-blue);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.yt-link:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════ */
+/* SCREEN: 피드                           */
+/* ═══════════════════════════════════════ */
+
+.feed-header {
+  padding: 24px 32px 0;
+}
+
+.feed-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+}
+
+.feed-tab {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.feed-tab.active { color: var(--text-primary); border-bottom-color: var(--accent-blue); }
+
+.feed-content {
+  display: flex;
+  gap: 24px;
+  padding: 20px 32px;
+}
+
+.feed-main { flex: 1; }
+.feed-sidebar { width: 280px; flex-shrink: 0; }
+
+.feed-post {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.feed-post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.feed-post-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.feed-post-author {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.feed-post-time {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.feed-post-text {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+}
+
+.feed-post-actions {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.feed-post-actions span {
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.feed-post-actions span:hover { color: var(--text-primary); }
+
+/* 피드 사이드바 */
+.feed-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.feed-widget-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.feed-widget-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 13px;
+}
+
+.feed-widget-item .stock-name { font-weight: 500; }
+
+/* ═══════════════════════════════════════ */
+/* 모달                                    */
+/* ═══════════════════════════════════════ */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-hover);
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-section {
+  margin-bottom: 16px;
+}
+
+.modal-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.modal-quote-box {
+  background: var(--bg-hover);
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.modal-timestamp {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.modal-summary-box {
+  background: var(--bg-hover);
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.modal-btn:hover { opacity: 0.85; }
+
+.modal-btn.secondary {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.modal-btn.primary {
+  background: var(--accent-blue);
+  color: white;
+}
+
+/* 신고 모달 */
+.report-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.report-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-hover);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: border-color 0.15s;
+  border: 1px solid transparent;
+}
+
+.report-option:hover, .report-option.selected {
+  border-color: var(--accent-blue);
+}
+
+.report-option .radio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+}
+
+.report-option.selected .radio {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  box-shadow: inset 0 0 0 3px var(--bg-hover);
+}
+
+.report-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+}
+
+.report-textarea:focus { border-color: var(--accent-blue); }
+
+.report-submit {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--accent-red);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  font-family: inherit;
+}
+
+/* 메모 모달 */
+.memo-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+}
+
+.memo-textarea::placeholder { color: var(--text-muted); }
+.memo-textarea:focus { border-color: var(--accent-blue); }
+
+/* Back button */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.15s;
+}
+
+.back-btn:hover { color: var(--text-primary); }
+
+/* Notification dot */
+.nav-item .notif {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  margin-left: auto;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">투자<span>SNS</span></div>
+    
+    <div class="nav-item" onclick="showScreen('feed')">
+      <span class="icon">🏠</span> 피드
+    </div>
+    <div class="nav-item active" onclick="showScreen('dashboard')">
+      <span class="icon">⭐</span> 내 종목
+      <span class="notif"></span>
+    </div>
+    <div class="nav-item" onclick="showScreen('explore')">
+      <span class="icon">🔍</span> 탐색
+    </div>
+    <div class="nav-item" onclick="showScreen('calendar')">
+      <span class="icon">📅</span> 캘린더
+    </div>
+    
+    <div class="nav-divider"></div>
+    
+    <div class="nav-item" onclick="showScreen('alerts')">
+      <span class="icon">🔔</span> 알림
+      <span class="notif"></span>
+    </div>
+    <div class="nav-item" onclick="showScreen('memo')">
+      <span class="icon">📝</span> 메모
+    </div>
+    <div class="nav-item" onclick="showScreen('profile')">
+      <span class="icon">👤</span> 프로필
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- ═══ SCREEN: 내 종목 타임라인 ═══ -->
+    <div class="screen active" id="screen-dashboard">
+      <div class="dashboard-header">
+        <h1>⭐ 내 종목</h1>
+        <p>관심종목에 대한 실시간 업데이트</p>
+      </div>
+      
+      <div class="watchlist-chips">
+        <div class="chip active">전체</div>
+        <div class="chip">삼성전자 <span class="price-change up">+0.8%</span></div>
+        <div class="chip">현대차 <span class="price-change up">+2.1%</span></div>
+        <div class="chip">SK하이닉스 <span class="price-change down">-1.3%</span></div>
+        <div class="chip">테슬라 <span class="price-change up">+3.4%</span></div>
+        <div class="chip">엔비디아 <span class="price-change up">+1.7%</span></div>
+        <div class="chip" onclick="showScreen('stock-detail')">삼성SDI <span class="price-change down">-0.5%</span></div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-title">🔴 실시간 업데이트</div>
+        
+        <div class="timeline-item grade-a" onclick="goStockTab('disclosure')">
+          <div class="tl-icon disclosure">📢</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">삼성전자</span>
+              <span class="tl-badge a-grade">A등급</span>
+            </div>
+            <div class="tl-desc">자사주 5조원 규모 취득 결정 — AI 분석: 주가 +3~5% 영향 예상</div>
+          </div>
+          <div class="tl-time">3분 전</div>
+        </div>
+
+        <div class="timeline-item signal-buy" onclick="goStockTab('influencer')">
+          <div class="tl-icon influencer">👤</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">현대차</span>
+              <span class="tl-badge buy">🔵 매수</span>
+              <span style="font-size:12px;color:var(--text-muted)">슈카월드</span>
+            </div>
+            <div class="tl-desc">"현대차 지금 저평가, EV 라인업 본격화되면 재평가" — 새 영상</div>
+          </div>
+          <div class="tl-time">15분 전</div>
+        </div>
+
+        <div class="timeline-item report" onclick="goStockTab('report')">
+          <div class="tl-icon report-icon">📄</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">SK하이닉스</span>
+              <span class="tl-badge" style="background:rgba(167,139,250,0.15);color:#a78bfa">리포트</span>
+              <span style="font-size:12px;color:var(--text-muted)">미래에셋</span>
+            </div>
+            <div class="tl-desc">목표가 22만원 → 25만원 상향, 투자의견 매수 유지</div>
+          </div>
+          <div class="tl-time">42분 전</div>
+        </div>
+
+        <div class="timeline-item earnings" onclick="goStockTab('earnings')">
+          <div class="tl-icon earnings-icon">📊</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">테슬라</span>
+              <span class="tl-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">서프라이즈 +18%</span>
+            </div>
+            <div class="tl-desc">4Q 매출 $25.7B (컨센 $21.8B) — EPS $2.14 (컨센 $1.85)</div>
+          </div>
+          <div class="tl-time">1시간 전</div>
+        </div>
+
+        <div class="timeline-item signal-caution" onclick="goStockTab('influencer')">
+          <div class="tl-icon influencer">👤</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">엔비디아</span>
+              <span class="tl-badge caution">🟠 경계</span>
+              <span style="font-size:12px;color:var(--text-muted)">김투자</span>
+            </div>
+            <div class="tl-desc">"밸류에이션 부담, 단기 조정 가능성" — 새 영상</div>
+          </div>
+          <div class="tl-time">2시간 전</div>
+        </div>
+
+        <div class="timeline-item insider" onclick="goStockTab('insider')">
+          <div class="tl-icon insider-icon">👔</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">삼성전자</span>
+              <span class="tl-badge" style="background:rgba(244,114,182,0.15);color:#f472b6">임원매수</span>
+            </div>
+            <div class="tl-desc">부회장 000, 보통주 50,000주 장내매수 (약 35억원)</div>
+          </div>
+          <div class="tl-time">3시간 전</div>
+        </div>
+
+        <div class="timeline-item signal-positive" onclick="goStockTab('influencer')">
+          <div class="tl-icon influencer">👤</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">삼성SDI</span>
+              <span class="tl-badge positive">🟢 긍정</span>
+              <span style="font-size:12px;color:var(--text-muted)">박주식</span>
+            </div>
+            <div class="tl-desc">"2차전지 사이클 바닥 근접, 삼성SDI 주목할 시점"</div>
+          </div>
+          <div class="tl-time">4시간 전</div>
+        </div>
+
+        <div class="timeline-item grade-b" onclick="goStockTab('disclosure')">
+          <div class="tl-icon disclosure">📢</div>
+          <div class="tl-content">
+            <div class="tl-top">
+              <span class="tl-stock">현대차</span>
+              <span class="tl-badge b-grade">B등급</span>
+            </div>
+            <div class="tl-desc">미국 조지아 공장 전기차 생산 시작 공시</div>
+          </div>
+          <div class="tl-time">5시간 전</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 종목 상세 대시보드 ═══ -->
+    <div class="screen" id="screen-stock-detail">
+      <div style="padding:16px 32px 0">
+        <div class="back-btn" onclick="showScreen('dashboard')">← 내 종목으로</div>
+      </div>
+      
+      <div class="stock-detail-header">
+        <div class="stock-info">
+          <h1>삼성전자</h1>
+          <div class="stock-code">005930.KS · KOSPI</div>
+        </div>
+        <div class="stock-price">
+          <div class="price">₩71,200</div>
+          <div class="change up">+800 (+1.14%)</div>
+        </div>
+      </div>
+
+      <div class="detail-tabs">
+        <div class="detail-tab" onclick="showDetailTab('realtime')">실시간</div>
+        <div class="detail-tab active" onclick="showDetailTab('influencer')">인플루언서</div>
+        <div class="detail-tab" onclick="showDetailTab('analyst')">애널리스트</div>
+        <div class="detail-tab" onclick="showDetailTab('disclosure')">공시</div>
+        <div class="detail-tab" onclick="showDetailTab('earnings')">실적</div>
+        <div class="detail-tab" onclick="showDetailTab('report')">리포트</div>
+        <div class="detail-tab" onclick="showDetailTab('insider')">임원매매</div>
+        <div class="detail-tab" onclick="showDetailTab('schedule')">일정</div>
+        <div class="detail-tab" onclick="showDetailTab('memo-tab')">메모</div>
+      </div>
+
+      <!-- 실시간 탭 -->
+      <div class="detail-tab-content" id="dtab-realtime" style="display:none">
+        <div class="timeline" style="padding-top:16px">
+          <div class="timeline-item grade-a">
+            <div class="tl-icon disclosure">📢</div>
+            <div class="tl-content">
+              <div class="tl-top"><span class="tl-badge a-grade">A등급 공시</span></div>
+              <div class="tl-desc">자사주 5조원 규모 취득 결정 — AI 분석: 주가 +3~5% 영향 예상</div>
+            </div>
+            <div class="tl-time">3분 전</div>
+          </div>
+          <div class="timeline-item signal-positive">
+            <div class="tl-icon influencer">👤</div>
+            <div class="tl-content">
+              <div class="tl-top"><span class="tl-badge positive">🟢 긍정</span><span style="font-size:12px;color:var(--text-muted)">이효석</span></div>
+              <div class="tl-desc">"메모리 업사이클 시작. 파운드리 수율도 개선 중"</div>
+            </div>
+            <div class="tl-time">5시간 전</div>
+          </div>
+          <div class="timeline-item report">
+            <div class="tl-icon report-icon">📄</div>
+            <div class="tl-content">
+              <div class="tl-top"><span class="tl-badge" style="background:rgba(167,139,250,0.15);color:#a78bfa">리포트</span><span style="font-size:12px;color:var(--text-muted)">미래에셋</span></div>
+              <div class="tl-desc">목표가 85,000원, 투자의견 매수 유지</div>
+            </div>
+            <div class="tl-time">1일 전</div>
+          </div>
+          <div class="timeline-item insider">
+            <div class="tl-icon insider-icon">👔</div>
+            <div class="tl-content">
+              <div class="tl-top"><span class="tl-badge" style="background:rgba(244,114,182,0.15);color:#f472b6">임원매수</span></div>
+              <div class="tl-desc">부회장 000, 보통주 50,000주 장내매수 (약 35억원)</div>
+            </div>
+            <div class="tl-time">3일 전</div>
+          </div>
+          <div class="timeline-item signal-buy">
+            <div class="tl-icon influencer">👤</div>
+            <div class="tl-content">
+              <div class="tl-top"><span class="tl-badge buy">🔵 매수</span><span style="font-size:12px;color:var(--text-muted)">슈카월드</span></div>
+              <div class="tl-desc">"삼성전자 지금 저평가, 파운드리 수율 개선되면 턴어라운드"</div>
+            </div>
+            <div class="tl-time">6일 전</div>
+          </div>
+          <div class="timeline-item earnings">
+            <div class="tl-icon earnings-icon">📊</div>
+            <div class="tl-content">
+              <div class="tl-top"><span class="tl-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">서프라이즈 +12%</span></div>
+              <div class="tl-desc">4Q 영업이익 6.5조 (컨센 5.8조)</div>
+            </div>
+            <div class="tl-time">2주 전</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 인플루언서 차트 탭 -->
+      <div class="detail-tab-content" id="dtab-influencer">
+      <div class="chart-section">
+        <div class="chart-controls">
+          <div class="chart-period">
+            <button class="period-btn">1개월</button>
+            <button class="period-btn">6개월</button>
+            <button class="period-btn active">1년</button>
+            <button class="period-btn">3년</button>
+            <button class="period-btn">전체</button>
+          </div>
+          <div class="influencer-filter">
+            <div class="inf-chip active" onclick="filterInfluencer('all')">전체</div>
+            <div class="inf-chip" onclick="filterInfluencer('syuka')">슈카월드 (8)</div>
+            <div class="inf-chip" onclick="filterInfluencer('kim')">김투자 (5)</div>
+            <div class="inf-chip" onclick="filterInfluencer('park')">박주식 (3)</div>
+            <div class="inf-chip" onclick="filterInfluencer('lee')">이효석 (12)</div>
+          </div>
+        </div>
+
+        <div class="chart-container" id="chartContainer">
+          <canvas class="chart-canvas" id="chartCanvas"></canvas>
+          <!-- 신호 점들 -->
+          <div class="signal-dot positive" style="left:12%;top:72%" title="슈카월드 🟢긍정" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot buy" style="left:22%;top:65%" title="김투자 🔵매수" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot neutral" style="left:35%;top:58%" title="이효석 🟡중립" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot positive" style="left:45%;top:52%" title="박주식 🟢긍정" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot caution" style="left:55%;top:45%" title="김투자 🟠경계" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot buy" style="left:65%;top:38%" title="슈카월드 🔵매수" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot sell" style="left:72%;top:42%" title="이효석 🔴매도" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot positive" style="left:82%;top:35%" title="슈카월드 🟢긍정" onclick="showSignalPopup(event)"></div>
+          <div class="signal-dot buy" style="left:90%;top:28%" title="박주식 🔵매수" onclick="showSignalPopup(event)"></div>
+
+          <!-- 팝업 -->
+          <div class="signal-popup" id="signalPopup">
+            <div class="popup-header">
+              <div class="popup-influencer">
+                <div class="popup-avatar">🎓</div>
+                <div>
+                  <div class="popup-name">슈카월드</div>
+                  <div class="popup-date">2025.01.15</div>
+                </div>
+              </div>
+              <div class="popup-actions">
+                <button class="popup-action-btn" title="메모 저장" onclick="showModal('memo-modal')">♡</button>
+                <button class="popup-action-btn" title="신고" onclick="showModal('report-modal')">⚠️</button>
+              </div>
+            </div>
+            <span class="tl-badge positive" style="margin-bottom:10px;display:inline-block">🟢 긍정</span>
+            <div class="popup-quote">"삼성전자 지금 저평가라고 봅니다. 파운드리 수율 개선되면 실적 턴어라운드 올 거예요."</div>
+            <div class="popup-summary">타임스탬프: [5:43] — 삼성전자의 파운드리 사업 수율 개선과 메모리 업사이클을 근거로 긍정적 전망 제시</div>
+            <div class="popup-buttons">
+              <button class="popup-btn chart-btn">📊 차트보기</button>
+              <button class="popup-btn video-btn">▶ 영상보기</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--signal-buy)"></div>매수</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--signal-positive)"></div>긍정</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--signal-neutral)"></div>중립</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--signal-caution)"></div>경계</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--signal-sell)"></div>매도</div>
+        </div>
+      </div>
+
+      <!-- 인플루언서 발언 테이블 (차트 아래) -->
+      <div style="padding:0 32px 24px">
+        <!-- 전체 테이블 -->
+        <div id="inf-table-all">
+          <div style="font-size:14px;font-weight:700;margin-bottom:12px">📋 인플루언서 발언 이력</div>
+          <table class="history-table">
+            <thead><tr><th>인플루언서</th><th>신호</th><th>분석</th><th>날짜</th><th>수익률</th><th>영상</th></tr></thead>
+            <tbody>
+              <tr onclick="showModal('analysis-modal')"><td class="stock-name">슈카월드</td><td><span class="tl-badge positive">🟢 긍정</span></td><td>파운드리 수율 개선, 메모리 업사이클 기대</td><td>26-02-20</td><td style="color:var(--accent-green);font-weight:600">+5.7%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td class="stock-name">이효석</td><td><span class="tl-badge buy">🔵 매수</span></td><td>HBM 수요 폭증, AI 반도체 수혜</td><td>26-02-18</td><td style="color:var(--accent-green);font-weight:600">+8.3%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td class="stock-name">김투자</td><td><span class="tl-badge caution">🟠 경계</span></td><td>단기 차트 과열, 조정 가능성</td><td>26-02-15</td><td style="color:var(--accent-red);font-weight:600">-1.2%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td class="stock-name">박주식</td><td><span class="tl-badge positive">🟢 긍정</span></td><td>장기 저평가 구간, 배당 매력</td><td>26-02-10</td><td style="color:var(--accent-green);font-weight:600">+3.4%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td class="stock-name">슈카월드</td><td><span class="tl-badge buy">🔵 매수</span></td><td>파운드리 턴어라운드 시작</td><td>26-01-15</td><td style="color:var(--accent-green);font-weight:600">+12.1%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 슈카월드 필터 테이블 -->
+        <div id="inf-table-syuka" style="display:none">
+          <div style="font-size:14px;font-weight:700;margin-bottom:4px">📋 슈카월드 × 삼성전자</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">발언 8건 · <a href="#" style="color:var(--accent-blue);text-decoration:none" onclick="showScreen('inf-profile');return false;">슈카월드 프로필 보기 →</a></div>
+          <table class="history-table">
+            <thead><tr><th>신호</th><th>분석</th><th>날짜</th><th>수익률</th><th>영상</th></tr></thead>
+            <tbody>
+              <tr onclick="showModal('analysis-modal')"><td><span class="tl-badge positive">🟢 긍정</span></td><td>파운드리 수율 개선, 메모리 업사이클 기대</td><td>26-02-20</td><td style="color:var(--accent-green);font-weight:600">+5.7%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge buy">🔵 매수</span></td><td>파운드리 턴어라운드, 지금 저평가 구간</td><td>26-01-15</td><td style="color:var(--accent-green);font-weight:600">+12.1%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge neutral">🟡 중립</span></td><td>실적 확인 필요, 단기 관망</td><td>25-12-03</td><td style="color:var(--accent-green);font-weight:600">+3.2%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge positive">🟢 긍정</span></td><td>메모리 바닥 통과, 하반기 기대</td><td>25-10-20</td><td style="color:var(--accent-green);font-weight:600">+18.5%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge caution">🟠 경계</span></td><td>파운드리 수율 이슈, 단기 부담</td><td>25-09-08</td><td style="color:var(--accent-red);font-weight:600">-2.4%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge buy">🔵 매수</span></td><td>반도체 사이클 바닥, 적극 매수 구간</td><td>25-07-15</td><td style="color:var(--accent-green);font-weight:600">+22.3%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge positive">🟢 긍정</span></td><td>HBM 양산 시작, 중장기 긍정적</td><td>25-05-22</td><td style="color:var(--accent-green);font-weight:600">+15.8%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+              <tr><td><span class="tl-badge neutral">🟡 중립</span></td><td>실적 바닥 확인 필요</td><td>25-03-10</td><td style="color:var(--accent-green);font-weight:600">+28.1%</td><td><a class="yt-link" href="#">▶ YT</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div><!-- end dtab-influencer -->
+
+      <!-- 탭별 콘텐츠가 각각 처리하므로 섹션 카드 불필요 -->
+    </div>
+
+    <!-- ═══ SCREEN: 탐색 ═══ -->
+    <div class="screen" id="screen-explore">
+      <div class="explore-header">
+        <h1>🔍 탐색</h1>
+        <div class="explore-search">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="종목명, 유튜버, 애널리스트 검색...">
+        </div>
+      </div>
+      
+      <div class="explore-grid">
+        <div class="explore-card" onclick="showScreen('influencer')">
+          <div class="explore-card-icon" style="background:rgba(74,144,255,0.12)">👤</div>
+          <h3>인플루언서</h3>
+          <p>유튜버 발언 추적, 차트 신호 마킹, 종목별 발언 검색</p>
+        </div>
+
+        <div class="explore-card" onclick="showScreen('analyst')">
+          <div class="explore-card-icon" style="background:rgba(167,139,250,0.12)">📄</div>
+          <h3>애널리스트</h3>
+          <p>증권사 리포트, 목표가 추적, 적중률 평점</p>
+        </div>
+
+        <div class="explore-card">
+          <div class="explore-card-icon" style="background:rgba(239,68,68,0.12)">📋</div>
+          <h3>공시 대시보드</h3>
+          <p>전체 시장 공시, A/B/C 등급별 필터</p>
+        </div>
+
+        <div class="explore-card">
+          <div class="explore-card-icon" style="background:rgba(56,189,248,0.12)">📊</div>
+          <h3>실적 센터</h3>
+          <p>어닝 서프라이즈 랭킹, 실적 패턴 분석</p>
+        </div>
+
+        <div class="explore-card">
+          <div class="explore-card-icon" style="background:rgba(244,114,182,0.12)">👔</div>
+          <h3>임원/대주주 매매</h3>
+          <p>전체 시장 임원·대주주 매매 추적</p>
+        </div>
+
+        <div class="explore-card">
+          <div class="explore-card-icon" style="background:rgba(34,197,94,0.12)">🐋</div>
+          <h3>투자 구루 포트폴리오</h3>
+          <p>13F 공시 기반 구루 포트폴리오 추적</p>
+        </div>
+
+        <div class="explore-card" style="grid-column: span 2;">
+          <div class="explore-card-icon" style="background:rgba(245,158,11,0.12)">🧪</div>
+          <h3>전략연구실</h3>
+          <p>백테스트, 전략 시뮬레이션 (Part 2)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 인플루언서 ═══ -->
+    <div class="screen" id="screen-influencer">
+      <div class="inf-page-header">
+        <div class="back-btn" onclick="showScreen('explore')">← 탐색으로</div>
+        <h1>👤 인플루언서</h1>
+      </div>
+
+      <div class="inf-tabs">
+        <div class="inf-tab active" onclick="showInfTab('recent')">최신 발언</div>
+        <div class="inf-tab" onclick="showInfTab('youtubers')">유튜버 모음</div>
+        <div class="inf-tab" onclick="showInfTab('by-stock')">종목별 검색</div>
+      </div>
+
+      <!-- 최신 발언 -->
+      <div id="inf-tab-recent" class="recent-signals">
+        <div class="signal-card" onclick="showModal('analysis-modal')">
+          <div class="signal-card-avatar">🎓</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">슈카월드</span>
+              <span class="tl-badge buy">🔵 매수</span>
+              <span class="signal-card-stock">현대차</span>
+            </div>
+            <div class="signal-card-text">"현대차 지금 저평가, EV 라인업 본격화되면 재평가될 것"</div>
+            <div class="signal-card-meta">
+              <span>15분 전</span>
+              <span class="signal-card-return up">발언 후 +12.4%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-avatar">📊</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">김투자</span>
+              <span class="tl-badge caution">🟠 경계</span>
+              <span class="signal-card-stock">엔비디아</span>
+            </div>
+            <div class="signal-card-text">"밸류에이션 부담 있다. 단기 조정 가능성"</div>
+            <div class="signal-card-meta">
+              <span>2시간 전</span>
+              <span class="signal-card-return down">발언 후 -3.2%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-avatar">🔬</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">이효석</span>
+              <span class="tl-badge positive">🟢 긍정</span>
+              <span class="signal-card-stock">삼성전자</span>
+            </div>
+            <div class="signal-card-text">"메모리 업사이클 시작. 파운드리 수율도 개선 중"</div>
+            <div class="signal-card-meta">
+              <span>5시간 전</span>
+              <span class="signal-card-return up">발언 후 +5.7%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-card">
+          <div class="signal-card-avatar">💰</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">박주식</span>
+              <span class="tl-badge sell">🔴 매도</span>
+              <span class="signal-card-stock">카카오</span>
+            </div>
+            <div class="signal-card-text">"규제 리스크 해소 안 됐다. 지금은 빠지는 게 맞다"</div>
+            <div class="signal-card-meta">
+              <span>8시간 전</span>
+              <span class="signal-card-return down">발언 후 -8.1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 유튜버 모음 -->
+      <div id="inf-tab-youtubers" class="recent-signals" style="display:none">
+        <div class="explore-search" style="margin-bottom:16px">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="유튜버 검색...">
+        </div>
+        <div class="youtuber-grid">
+          <div class="youtuber-card" onclick="showScreen('inf-profile')">
+            <div class="youtuber-avatar">🎓</div>
+            <div class="youtuber-name">슈카월드</div>
+            <div class="youtuber-desc">경제·투자 해설</div>
+            <div class="youtuber-stats">
+              <span>발언 234건</span>
+              <span>주 커버: 대형주</span>
+            </div>
+          </div>
+          <div class="youtuber-card" onclick="showScreen('inf-profile')">
+            <div class="youtuber-avatar">📊</div>
+            <div class="youtuber-name">김투자</div>
+            <div class="youtuber-desc">기술적 분석</div>
+            <div class="youtuber-stats">
+              <span>발언 187건</span>
+              <span>주 커버: 미국주</span>
+            </div>
+          </div>
+          <div class="youtuber-card" onclick="showScreen('inf-profile')">
+            <div class="youtuber-avatar">🔬</div>
+            <div class="youtuber-name">이효석</div>
+            <div class="youtuber-desc">반도체·AI 전문</div>
+            <div class="youtuber-stats">
+              <span>발언 706건</span>
+              <span>주 커버: 반도체</span>
+            </div>
+          </div>
+          <div class="youtuber-card">
+            <div class="youtuber-avatar">💰</div>
+            <div class="youtuber-name">박주식</div>
+            <div class="youtuber-desc">가치투자</div>
+            <div class="youtuber-stats">
+              <span>발언 145건</span>
+              <span>주 커버: 가치주</span>
+            </div>
+          </div>
+          <div class="youtuber-card">
+            <div class="youtuber-avatar">🚀</div>
+            <div class="youtuber-name">코린이아빠</div>
+            <div class="youtuber-desc">코인·투자 채널</div>
+            <div class="youtuber-stats">
+              <span>발언 172건</span>
+              <span>주 커버: 코인</span>
+            </div>
+          </div>
+          <div class="youtuber-card">
+            <div class="youtuber-avatar">📈</div>
+            <div class="youtuber-name">홍길동</div>
+            <div class="youtuber-desc">스윙 트레이딩</div>
+            <div class="youtuber-stats">
+              <span>발언 98건</span>
+              <span>주 커버: 중소형</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 종목별 검색 -->
+      <div id="inf-tab-by-stock" class="recent-signals" style="display:none">
+        <div class="explore-search" style="margin-bottom:20px">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="종목 검색...">
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:14px">🔥 인기 종목 (유튜버 커버 많은 순)</div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">₿</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">비트코인</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 48건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">20명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 12건</div>
+          </div>
+        </div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">🏭</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">삼성전자</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 35건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">15명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 8건</div>
+          </div>
+        </div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">🚗</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">테슬라</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 32건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">14명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 9건</div>
+          </div>
+        </div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">🤖</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">엔비디아</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 28건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">12명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 7건</div>
+          </div>
+        </div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">💾</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">SK하이닉스</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 22건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">10명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 5건</div>
+          </div>
+        </div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">Ξ</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">이더리움</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 18건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">9명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 6건</div>
+          </div>
+        </div>
+        <div class="signal-card" style="justify-content:space-between;align-items:center">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:20px">🚙</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">현대차</div>
+              <div style="font-size:12px;color:var(--text-muted)">최근 발언 15건</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:700;color:var(--accent-blue)">8명 커버</div>
+            <div style="font-size:11px;color:var(--text-muted)">최근 7일 발언 3건</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 인플루언서 프로필 ═══ -->
+    <div class="screen" id="screen-inf-profile">
+      <div style="padding:16px 32px 0">
+        <div class="back-btn" onclick="showScreen('influencer')">← 인플루언서 목록으로</div>
+      </div>
+      
+      <div class="profile-header">
+        <div class="profile-avatar">🎓</div>
+        <div class="profile-info">
+          <h1>슈카월드</h1>
+          <div class="profile-meta">YouTube · 슈카월드 · 🇰🇷 KR</div>
+          <div class="profile-activity">최근 활동: 15분 전 · 발언 234건</div>
+        </div>
+      </div>
+
+      <div class="profile-stocks">
+        <div class="profile-stocks-title">관심 종목</div>
+        <div class="profile-stock-tags">
+          <div class="stock-tag">#1 삼성전자</div>
+          <div class="stock-tag">#2 현대차</div>
+          <div class="stock-tag">#3 테슬라</div>
+          <div class="stock-tag">#4 SK하이닉스</div>
+          <div class="stock-tag">#5 카카오</div>
+        </div>
+      </div>
+
+      <div class="recent-statements">
+        <div class="recent-statements-title">🗣 주요 발언 요약</div>
+        <div class="statement-row">
+          <span class="statement-date">2026.2.26</span>
+          <span class="statement-stock">현대차</span>
+          <span class="tl-badge buy" style="flex-shrink:0">🔵 매수</span>
+          <span class="statement-quote">"현대차 지금 저평가, EV 라인업 본격화..."</span>
+        </div>
+        <div class="statement-row">
+          <span class="statement-date">2026.2.20</span>
+          <span class="statement-stock">삼성전자</span>
+          <span class="tl-badge positive" style="flex-shrink:0">🟢 긍정</span>
+          <span class="statement-quote">"파운드리 수율 개선, 하반기 기대..."</span>
+        </div>
+        <div class="statement-row">
+          <span class="statement-date">2026.2.15</span>
+          <span class="statement-stock">테슬라</span>
+          <span class="tl-badge neutral" style="flex-shrink:0">🟡 중립</span>
+          <span class="statement-quote">"FSD 기대감은 있지만 밸류 부담도..."</span>
+        </div>
+      </div>
+
+      <div class="history-section">
+        <div class="history-title">📋 발언 이력</div>
+        <div class="history-count">총 234건 · 최신순 정렬</div>
+        
+        <div class="history-filters">
+          <div class="chip active" style="padding:5px 12px;font-size:12px">전체 234</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">삼성전자 56</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">현대차 38</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">테슬라 32</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">SK하이닉스 28</div>
+        </div>
+
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>종목</th>
+              <th>신호</th>
+              <th>분석</th>
+              <th>날짜</th>
+              <th>수익률</th>
+              <th>영상</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="showModal('analysis-modal')">
+              <td class="stock-name">현대차</td>
+              <td><span class="tl-badge buy">🔵 매수</span></td>
+              <td>EV 라인업 본격화, 저평가 구간 매수 기회</td>
+              <td>2026-02-26</td>
+              <td style="color:var(--accent-green);font-weight:600">+12.4%</td>
+              <td><a class="yt-link" href="#">▶ YT</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">삼성전자</td>
+              <td><span class="tl-badge positive">🟢 긍정</span></td>
+              <td>파운드리 수율 개선, 메모리 업사이클 기대</td>
+              <td>2026-02-20</td>
+              <td style="color:var(--accent-green);font-weight:600">+5.7%</td>
+              <td><a class="yt-link" href="#">▶ YT</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">테슬라</td>
+              <td><span class="tl-badge neutral">🟡 중립</span></td>
+              <td>FSD 기대감은 있으나 밸류에이션 부담</td>
+              <td>2026-02-15</td>
+              <td style="color:var(--accent-red);font-weight:600">-2.1%</td>
+              <td><a class="yt-link" href="#">▶ YT</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">카카오</td>
+              <td><span class="tl-badge caution">🟠 경계</span></td>
+              <td>규제 리스크 불확실, 단기 관망 권유</td>
+              <td>2026-02-10</td>
+              <td style="color:var(--accent-red);font-weight:600">-4.3%</td>
+              <td><a class="yt-link" href="#">▶ YT</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">SK하이닉스</td>
+              <td><span class="tl-badge buy">🔵 매수</span></td>
+              <td>HBM 수요 폭증, 실적 서프라이즈 예상</td>
+              <td>2026-02-05</td>
+              <td style="color:var(--accent-green);font-weight:600">+18.2%</td>
+              <td><a class="yt-link" href="#">▶ YT</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 피드 ═══ -->
+    <div class="screen" id="screen-feed">
+      <div class="feed-tabs">
+        <div class="feed-tab active">추천</div>
+        <div class="feed-tab">팔로잉</div>
+        <div class="feed-tab">구독중</div>
+      </div>
+
+      <div class="feed-content">
+        <div class="feed-main">
+          <div class="feed-post">
+            <div class="feed-post-header">
+              <div class="feed-post-avatar" style="background:rgba(239,68,68,0.15)">📢</div>
+              <div>
+                <div class="feed-post-author">A등급 공시 속보</div>
+                <div class="feed-post-time">3분 전</div>
+              </div>
+            </div>
+            <div class="feed-post-text">
+              <strong>삼성전자</strong> — 자사주 5조원 규모 취득 결정<br><br>
+              🤖 AI 분석: 주가 +3~5% 영향 예상. 과거 유사 패턴 47건 중 D+3 평균 +8.2%
+            </div>
+            <div class="feed-post-actions">
+              <span>💬 187</span>
+              <span>🔄 234</span>
+              <span>❤️ 1.8K</span>
+              <span>📊 12.3만</span>
+            </div>
+          </div>
+
+          <div class="feed-post">
+            <div class="feed-post-header">
+              <div class="feed-post-avatar">🎓</div>
+              <div>
+                <div class="feed-post-author">슈카월드 <span class="tl-badge buy" style="font-size:10px">🔵 매수</span></div>
+                <div class="feed-post-time">현대차 · 15분 전</div>
+              </div>
+            </div>
+            <div class="feed-post-text">
+              "현대차 지금 저평가라고 봅니다. EV 라인업이 본격적으로 깔리면 재평가 받을 거예요."<br><br>
+              ⚠️ 투자 판단은 본인 책임입니다.
+            </div>
+            <div class="feed-post-actions">
+              <span>💬 342</span>
+              <span>🔄 567</span>
+              <span>❤️ 2.3K</span>
+              <span>📊 3.9만</span>
+            </div>
+          </div>
+
+          <div class="feed-post">
+            <div class="feed-post-header">
+              <div class="feed-post-avatar">🧑‍💻</div>
+              <div>
+                <div class="feed-post-author">주식초보 김대리</div>
+                <div class="feed-post-time">45분 전</div>
+              </div>
+            </div>
+            <div class="feed-post-text">
+              삼성전자 임원이 3일 연속 매수했다는 알림 받고 깜짝 놀랐네요 😮<br>
+              35억어치나 사면 뭔가 알고 있는 거 아닌가...<br><br>
+              근데 이 플랫폼 임원매매 알림 진짜 개좋다<br>
+              DART에서 직접 찾을 생각하면 끔찍 ㄷㄷ
+            </div>
+            <div class="feed-post-actions">
+              <span>💬 56</span>
+              <span>🔄 23</span>
+              <span>❤️ 892</span>
+              <span>📊 3.2만</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feed-sidebar">
+          <div class="feed-widget">
+            <div class="feed-widget-title">🔥 실시간 급등주</div>
+            <div class="feed-widget-item"><span>에코프로</span><span class="up" style="color:var(--accent-green);font-weight:600">+3.2%</span></div>
+            <div class="feed-widget-item"><span>SK하이닉스</span><span class="up" style="color:var(--accent-green);font-weight:600">+1.8%</span></div>
+            <div class="feed-widget-item"><span>삼성전자</span><span class="up" style="color:var(--accent-green);font-weight:600">+0.8%</span></div>
+            <div class="feed-widget-item"><span>HD한국조선해양</span><span class="up" style="color:var(--accent-green);font-weight:600">+2.1%</span></div>
+            <div class="feed-widget-item"><span>셀트리온</span><span style="color:var(--accent-red);font-weight:600">-0.5%</span></div>
+          </div>
+
+          <div class="feed-widget">
+            <div class="feed-widget-title">📡 시장 속보</div>
+            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">NVIDIA 실적 발표 임박, AI 관련주 주목<br><span style="font-size:11px;color:var(--text-muted)">12분 전</span></div>
+            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">한국은행 기준금리 동결 결정<br><span style="font-size:11px;color:var(--text-muted)">35분 전</span></div>
+            <div style="font-size:13px;color:var(--text-secondary)">비트코인 $45,000 돌파<br><span style="font-size:11px;color:var(--text-muted)">1시간 전</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 애널리스트 ═══ -->
+    <div class="screen" id="screen-analyst">
+      <div class="inf-page-header">
+        <div class="back-btn" onclick="showScreen('explore')">← 탐색으로</div>
+        <h1>📄 애널리스트</h1>
+      </div>
+      <div class="inf-tabs">
+        <div class="inf-tab active" onclick="showAnalystTab('recent-report')">최근 리포트</div>
+        <div class="inf-tab" onclick="showAnalystTab('analyst-list')">애널리스트 모음</div>
+        <div class="inf-tab" onclick="showAnalystTab('analyst-stock')">종목별 검색</div>
+      </div>
+
+      <!-- 최근 리포트 -->
+      <div id="analyst-tab-recent-report" class="recent-signals">
+        <div class="signal-card" onclick="showModal('report-detail-modal')">
+          <div class="signal-card-avatar" style="background:rgba(167,139,250,0.12)">📄</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">홍길동</span>
+              <span style="font-size:12px;color:var(--text-muted)">미래에셋</span>
+              <span class="tl-badge buy">매수</span>
+              <span class="signal-card-stock">삼성전자</span>
+            </div>
+            <div class="signal-card-text">목표가 85,000원 → AI 요약: 파운드리 수율 개선 + HBM 수요 확대 근거로 목표가 상향</div>
+            <div class="signal-card-meta">
+              <span>2시간 전</span>
+              <span style="color:var(--accent-blue);font-weight:600">목표가 +19.4%↑</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-card" onclick="showModal('report-detail-modal')">
+          <div class="signal-card-avatar" style="background:rgba(167,139,250,0.12)">📄</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">김애널</span>
+              <span style="font-size:12px;color:var(--text-muted)">한국투자</span>
+              <span class="tl-badge buy">매수</span>
+              <span class="signal-card-stock">SK하이닉스</span>
+            </div>
+            <div class="signal-card-text">목표가 250,000원 → AI 요약: HBM3E 양산 본격화, AI 서버 수요 지속 성장 전망</div>
+            <div class="signal-card-meta">
+              <span>5시간 전</span>
+              <span style="color:var(--accent-blue);font-weight:600">목표가 +22.1%↑</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-card" onclick="showModal('report-detail-modal')">
+          <div class="signal-card-avatar" style="background:rgba(167,139,250,0.12)">📄</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">박리서치</span>
+              <span style="font-size:12px;color:var(--text-muted)">삼성증권</span>
+              <span class="tl-badge neutral">중립</span>
+              <span class="signal-card-stock">카카오</span>
+            </div>
+            <div class="signal-card-text">목표가 45,000원 유지 → AI 요약: 규제 리스크 불확실성 지속, 광고 매출 회복은 긍정적</div>
+            <div class="signal-card-meta">
+              <span>8시간 전</span>
+              <span style="color:var(--accent-orange);font-weight:600">목표가 +5.2%↑</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="signal-card" onclick="showModal('report-detail-modal')">
+          <div class="signal-card-avatar" style="background:rgba(167,139,250,0.12)">📄</div>
+          <div class="signal-card-content">
+            <div class="signal-card-top">
+              <span class="signal-card-name">이분석</span>
+              <span style="font-size:12px;color:var(--text-muted)">NH투자</span>
+              <span class="tl-badge sell">매도</span>
+              <span class="signal-card-stock">에코프로</span>
+            </div>
+            <div class="signal-card-text">목표가 55,000원으로 하향 → AI 요약: 2차전지 수요 둔화, 재고 부담 확대</div>
+            <div class="signal-card-meta">
+              <span>1일 전</span>
+              <span style="color:var(--accent-red);font-weight:600">목표가 -15.3%↓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 애널리스트 모음 -->
+      <div id="analyst-tab-analyst-list" class="recent-signals" style="display:none">
+        <div class="explore-search" style="margin-bottom:16px">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="애널리스트 검색...">
+        </div>
+        <div class="youtuber-grid">
+          <div class="youtuber-card" onclick="showScreen('analyst-profile')">
+            <div class="youtuber-avatar" style="background:rgba(167,139,250,0.12)">📊</div>
+            <div class="youtuber-name">홍길동</div>
+            <div class="youtuber-desc">미래에셋 · 반도체</div>
+            <div style="color:var(--accent-green);font-weight:700;font-size:14px;margin:6px 0">적중률 82%</div>
+            <div class="youtuber-stats">
+              <span>리포트 47건</span>
+              <span>괴리율 +5.3%</span>
+            </div>
+          </div>
+          <div class="youtuber-card" onclick="showScreen('analyst-profile')">
+            <div class="youtuber-avatar" style="background:rgba(167,139,250,0.12)">📈</div>
+            <div class="youtuber-name">김애널</div>
+            <div class="youtuber-desc">한국투자 · IT/전기전자</div>
+            <div style="color:var(--accent-green);font-weight:700;font-size:14px;margin:6px 0">적중률 75%</div>
+            <div class="youtuber-stats">
+              <span>리포트 38건</span>
+              <span>괴리율 +8.1%</span>
+            </div>
+          </div>
+          <div class="youtuber-card" onclick="showScreen('analyst-profile')">
+            <div class="youtuber-avatar" style="background:rgba(167,139,250,0.12)">🔬</div>
+            <div class="youtuber-name">박리서치</div>
+            <div class="youtuber-desc">삼성증권 · 인터넷/게임</div>
+            <div style="color:var(--accent-orange);font-weight:700;font-size:14px;margin:6px 0">적중률 68%</div>
+            <div class="youtuber-stats">
+              <span>리포트 52건</span>
+              <span>괴리율 +12.4%</span>
+            </div>
+          </div>
+          <div class="youtuber-card">
+            <div class="youtuber-avatar" style="background:rgba(167,139,250,0.12)">💼</div>
+            <div class="youtuber-name">이분석</div>
+            <div class="youtuber-desc">NH투자 · 2차전지</div>
+            <div style="color:var(--accent-green);font-weight:700;font-size:14px;margin:6px 0">적중률 79%</div>
+            <div class="youtuber-stats">
+              <span>리포트 31건</span>
+              <span>괴리율 +6.7%</span>
+            </div>
+          </div>
+          <div class="youtuber-card">
+            <div class="youtuber-avatar" style="background:rgba(167,139,250,0.12)">🏦</div>
+            <div class="youtuber-name">최증권</div>
+            <div class="youtuber-desc">키움증권 · 자동차</div>
+            <div style="color:var(--accent-red);font-weight:700;font-size:14px;margin:6px 0">적중률 58%</div>
+            <div class="youtuber-stats">
+              <span>리포트 29건</span>
+              <span>괴리율 +18.2%</span>
+            </div>
+          </div>
+          <div class="youtuber-card">
+            <div class="youtuber-avatar" style="background:rgba(167,139,250,0.12)">📋</div>
+            <div class="youtuber-name">정목표</div>
+            <div class="youtuber-desc">대신증권 · 바이오</div>
+            <div style="color:var(--accent-green);font-weight:700;font-size:14px;margin:6px 0">적중률 73%</div>
+            <div class="youtuber-stats">
+              <span>리포트 44건</span>
+              <span>괴리율 +9.5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 종목별 검색 -->
+      <div id="analyst-tab-analyst-stock" class="recent-signals" style="display:none">
+        <div class="explore-search" style="margin-bottom:20px">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="종목 검색...">
+        </div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:12px">🔥 인기 종목 (리포트 많은 순)</div>
+        <div class="signal-card" style="padding:14px 16px">
+          <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;font-size:15px">삼성전자</span>
+            <span style="font-size:13px;color:var(--text-muted)">005930</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:600;color:var(--accent-blue)">32명 애널리스트</div>
+            <div style="font-size:12px;color:var(--text-muted)">평균 목표가 82,000원</div>
+          </div>
+        </div>
+        <div class="signal-card" style="padding:14px 16px">
+          <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;font-size:15px">SK하이닉스</span>
+            <span style="font-size:13px;color:var(--text-muted)">000660</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:600;color:var(--accent-blue)">28명 애널리스트</div>
+            <div style="font-size:12px;color:var(--text-muted)">평균 목표가 240,000원</div>
+          </div>
+        </div>
+        <div class="signal-card" style="padding:14px 16px">
+          <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;font-size:15px">현대차</span>
+            <span style="font-size:13px;color:var(--text-muted)">005380</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:600;color:var(--accent-blue)">25명 애널리스트</div>
+            <div style="font-size:12px;color:var(--text-muted)">평균 목표가 280,000원</div>
+          </div>
+        </div>
+        <div class="signal-card" style="padding:14px 16px">
+          <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;font-size:15px">LG에너지솔루션</span>
+            <span style="font-size:13px;color:var(--text-muted)">373220</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:600;color:var(--accent-blue)">22명 애널리스트</div>
+            <div style="font-size:12px;color:var(--text-muted)">평균 목표가 420,000원</div>
+          </div>
+        </div>
+        <div class="signal-card" style="padding:14px 16px">
+          <div style="flex:1;display:flex;align-items:center;gap:12px">
+            <span style="font-weight:700;font-size:15px">카카오</span>
+            <span style="font-size:13px;color:var(--text-muted)">035720</span>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:600;color:var(--accent-blue)">20명 애널리스트</div>
+            <div style="font-size:12px;color:var(--text-muted)">평균 목표가 48,000원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 애널리스트 프로필 ═══ -->
+    <div class="screen" id="screen-analyst-profile">
+      <div style="padding:16px 32px 0">
+        <div class="back-btn" onclick="showScreen('analyst')">← 애널리스트 목록으로</div>
+      </div>
+      
+      <div class="profile-header">
+        <div class="profile-avatar" style="background:rgba(167,139,250,0.12)">📊</div>
+        <div class="profile-info">
+          <h1>홍길동</h1>
+          <div class="profile-meta">미래에셋증권 · 반도체 섹터</div>
+          <div class="profile-activity">리포트 47건 · 적중률 82% · 평균 괴리율 +5.3%</div>
+        </div>
+      </div>
+
+      <div class="profile-stocks">
+        <div class="profile-stocks-title">주요 커버 종목</div>
+        <div class="profile-stock-tags">
+          <div class="stock-tag">#1 삼성전자</div>
+          <div class="stock-tag">#2 SK하이닉스</div>
+          <div class="stock-tag">#3 DB하이텍</div>
+          <div class="stock-tag">#4 리노공업</div>
+        </div>
+      </div>
+
+      <div style="padding:16px 32px;border-bottom:1px solid var(--border)">
+        <div style="display:flex;gap:24px">
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;flex:1;text-align:center">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">12개월 적중률</div>
+            <div style="font-size:24px;font-weight:800;color:var(--accent-green)">82%</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;flex:1;text-align:center">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">6개월 적중률</div>
+            <div style="font-size:24px;font-weight:800;color:var(--accent-green)">78%</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;flex:1;text-align:center">
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">평균 괴리율</div>
+            <div style="font-size:24px;font-weight:800;color:var(--accent-blue)">+5.3%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-section">
+        <div class="history-title">📋 리포트 이력</div>
+        <div class="history-count">총 47건 · 최신순 정렬</div>
+        
+        <div class="history-filters">
+          <div class="chip active" style="padding:5px 12px;font-size:12px">전체 47</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">삼성전자 18</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">SK하이닉스 15</div>
+          <div class="chip" style="padding:5px 12px;font-size:12px">DB하이텍 8</div>
+        </div>
+
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>종목</th>
+              <th>의견</th>
+              <th>목표가</th>
+              <th>AI 요약</th>
+              <th>날짜</th>
+              <th>괴리율</th>
+              <th>원문</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="showModal('report-detail-modal')">
+              <td class="stock-name">삼성전자</td>
+              <td><span class="tl-badge buy">매수</span></td>
+              <td style="font-weight:600">85,000원</td>
+              <td>파운드리 수율 개선 + HBM 수요 확대</td>
+              <td>26-02-26</td>
+              <td style="color:var(--accent-green);font-weight:600">+19.4%</td>
+              <td><a class="yt-link" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">SK하이닉스</td>
+              <td><span class="tl-badge buy">매수</span></td>
+              <td style="font-weight:600">250,000원</td>
+              <td>HBM3E 양산 본격화, AI 수요 지속</td>
+              <td>26-02-20</td>
+              <td style="color:var(--accent-green);font-weight:600">+22.1%</td>
+              <td><a class="yt-link" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">삼성전자</td>
+              <td><span class="tl-badge buy">매수</span></td>
+              <td style="font-weight:600">80,000원</td>
+              <td>메모리 업사이클 진입, 실적 턴어라운드</td>
+              <td>26-01-15</td>
+              <td style="color:var(--accent-green);font-weight:600">+12.4%</td>
+              <td><a class="yt-link" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">DB하이텍</td>
+              <td><span class="tl-badge neutral">중립</span></td>
+              <td style="font-weight:600">38,000원</td>
+              <td>아날로그 반도체 수요 회복 더딤</td>
+              <td>25-12-20</td>
+              <td style="color:var(--accent-red);font-weight:600">-8.2%</td>
+              <td><a class="yt-link" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td class="stock-name">SK하이닉스</td>
+              <td><span class="tl-badge buy">매수</span></td>
+              <td style="font-weight:600">220,000원</td>
+              <td>DRAM 가격 반등, HBM 독점 공급</td>
+              <td>25-11-10</td>
+              <td style="color:var(--accent-green);font-weight:600">+35.7%</td>
+              <td><a class="yt-link" href="#">PDF</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 캘린더 (placeholder) ═══ -->
+    <div class="screen" id="screen-calendar">
+      <div class="dashboard-header">
+        <h1>📅 캘린더</h1>
+        <p>내 관심종목 + 주요 일정</p>
+      </div>
+      <div style="padding:60px 32px;text-align:center;color:var(--text-muted)">
+        <div style="font-size:48px;margin-bottom:16px">📅</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px">캘린더</div>
+        <div style="font-size:13px">실적발표, 배당, FOMC 등 주요 일정</div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 알림 (placeholder) ═══ -->
+    <div class="screen" id="screen-alerts">
+      <div class="dashboard-header">
+        <h1>🔔 알림</h1>
+        <p>내 관심종목 실시간 알림</p>
+      </div>
+      <div style="padding:20px 32px">
+        <div class="timeline-item grade-a">
+          <div class="tl-icon disclosure">📢</div>
+          <div class="tl-content">
+            <div class="tl-top"><span class="tl-stock">삼성전자</span><span class="tl-badge a-grade">A등급</span></div>
+            <div class="tl-desc">자사주 5조원 규모 취득 결정</div>
+          </div>
+          <div class="tl-time">3분 전</div>
+        </div>
+        <div class="timeline-item signal-buy">
+          <div class="tl-icon influencer">👤</div>
+          <div class="tl-content">
+            <div class="tl-top"><span class="tl-stock">현대차</span><span class="tl-badge buy">🔵 매수</span><span style="font-size:12px;color:var(--text-muted)">슈카월드</span></div>
+            <div class="tl-desc">새 영상에서 현대차 매수 신호</div>
+          </div>
+          <div class="tl-time">15분 전</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 메모 (placeholder) ═══ -->
+    <div class="screen" id="screen-memo">
+      <div class="dashboard-header">
+        <h1>📝 메모</h1>
+        <p>스크랩한 발언 + 내 메모</p>
+      </div>
+      <div style="padding:20px 32px">
+        <div class="signal-card" style="flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="tl-stock">삼성전자</span>
+            <span class="tl-badge positive">🟢 긍정</span>
+            <span style="font-size:12px;color:var(--text-muted)">by 슈카월드</span>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary)">"파운드리 수율 개선, 하반기 기대"</div>
+          <div style="background:rgba(34,197,94,0.08);border-radius:6px;padding:10px;font-size:13px">
+            📝 내 메모: 하반기 실적 확인 후 추가 매수 검토
+          </div>
+          <div style="font-size:11px;color:var(--text-muted)">2026-02-20 · 스크랩: 2026.2.24</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN: 프로필 (placeholder) ═══ -->
+    <div class="screen" id="screen-profile">
+      <div class="dashboard-header">
+        <h1>👤 프로필</h1>
+      </div>
+      <div style="padding:60px 32px;text-align:center;color:var(--text-muted)">
+        <div style="font-size:48px;margin-bottom:16px">👤</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px">프로필 & 설정</div>
+        <div style="font-size:13px">관심종목 관리, 알림 설정</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- 영상 분석 모달 -->
+<div class="modal-overlay" id="analysis-modal" onclick="closeModal(event, 'analysis-modal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">▶ 영상 분석</div>
+      <div style="display:flex;gap:6px">
+        <button class="modal-close" onclick="showModal('memo-modal')">♡</button>
+        <button class="modal-close" onclick="showModal('report-modal')">⚠️</button>
+        <button class="modal-close" onclick="hideModal('analysis-modal')">✕</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <span style="font-size:16px;font-weight:700">현대차</span>
+      <span class="tl-badge buy">🔵 매수</span>
+    </div>
+
+    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">
+      "현대차, 지금이 기회일까? 전기차 전쟁의 승자는" · 2026-02-26
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">🗣 발언 내용</div>
+      <div class="modal-quote-box">
+        "현대차 지금 저평가라고 봅니다. EV 라인업이 본격적으로 깔리면 완전 다른 회사가 될 거예요. 저는 여기서 계속 모아가고 있습니다."
+        <div class="modal-timestamp">타임스탬프: [5:43]</div>
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">📋 영상 요약</div>
+      <div class="modal-summary-box">
+        슈카월드는 현대차의 전기차 라인업 확대와 미국 조지아 공장 가동을 근거로 현재 주가가 저평가 구간이라고 분석했습니다. 특히 아이오닉 시리즈의 글로벌 판매량 증가와 소프트웨어 정의 차량(SDV) 전략을 긍정적으로 평가하며, 본인도 현재 적극 매수 중이라고 밝혔습니다.
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn primary" style="flex:1">▶ 영상보기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 신고 모달 -->
+<div class="modal-overlay" id="report-modal" onclick="closeModal(event, 'report-modal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">⚠️ 수정요청</div>
+      <button class="modal-close" onclick="hideModal('report-modal')">✕</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <span style="font-weight:700">현대차</span>
+      <span class="tl-badge buy">🔵 매수</span>
+      <span style="font-size:12px;color:var(--text-muted)">2026-02-26</span>
+    </div>
+
+    <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin:14px 0 8px">신고 사유</div>
+    
+    <div class="report-options">
+      <div class="report-option selected" onclick="selectReportOption(this)">
+        <div class="radio"></div>
+        시그널 표시 오류 (매수/매도 등이 잘못됨)
+      </div>
+      <div class="report-option" onclick="selectReportOption(this)">
+        <div class="radio"></div>
+        발언 내용 오류 (요약이 잘못됨)
+      </div>
+      <div class="report-option" onclick="selectReportOption(this)">
+        <div class="radio"></div>
+        기타
+      </div>
+    </div>
+
+    <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">올바른 신호를 선택해주세요</div>
+    <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
+      <span class="tl-badge buy" style="cursor:pointer;padding:6px 12px">🔵 매수</span>
+      <span class="tl-badge positive" style="cursor:pointer;padding:6px 12px">🟢 긍정</span>
+      <span class="tl-badge neutral" style="cursor:pointer;padding:6px 12px">🟡 중립</span>
+      <span class="tl-badge caution" style="cursor:pointer;padding:6px 12px">🟠 경계</span>
+      <span class="tl-badge sell" style="cursor:pointer;padding:6px 12px">🔴 매도</span>
+    </div>
+
+    <textarea class="report-textarea" placeholder="어떤 부분이 잘못되었는지 알려주세요..."></textarea>
+    <button class="report-submit">⚠️ 신고 제출</button>
+  </div>
+</div>
+
+<!-- 리포트 AI 요약 모달 -->
+<div class="modal-overlay" id="report-detail-modal" onclick="closeModal(event, 'report-detail-modal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">📄 리포트 AI 요약</div>
+      <div style="display:flex;gap:6px">
+        <button class="modal-close" onclick="showModal('memo-modal')">♡</button>
+        <button class="modal-close" onclick="hideModal('report-detail-modal')">✕</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+      <span style="font-size:16px;font-weight:700">삼성전자</span>
+      <span class="tl-badge buy">매수</span>
+      <span style="font-size:13px;font-weight:600;color:var(--accent-blue)">목표가 85,000원</span>
+    </div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px">홍길동 · 미래에셋증권 · 2026-02-26</div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">핵심 한줄</div>
+      <div class="modal-quote-box" style="font-weight:600">
+        파운드리 수율 개선 + HBM 수요 확대로 실적 턴어라운드 본격화, 목표가 85,000원 상향
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">📌 투자포인트</div>
+      <div class="modal-summary-box">
+        1) 파운드리 3nm 수율 70% 돌파, 퀄컴 물량 확보 기대<br>
+        2) HBM3E 양산 시작, SK하이닉스 대비 가격 경쟁력 확보<br>
+        3) 메모리 업사이클 진입, DRAM 가격 분기 대비 +15% 상승
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">📊 실적 전망</div>
+      <div class="modal-summary-box">
+        2026E 영업이익 42조원 (+58% YoY), 매출 310조원 예상. 하반기 메모리 비중 확대로 수익성 개선 가속화 전망.
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">💰 밸류에이션</div>
+      <div class="modal-summary-box">
+        12M Fwd PER 11.2배, 역사적 평균 대비 저평가. 목표 PER 13배 적용 시 적정가 85,000원 산출.
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-section-title">⚠️ 리스크</div>
+      <div class="modal-summary-box">
+        미중 반도체 규제 확대 시 파운드리 수주 차질 가능성. 환율 변동에 따른 실적 변동성.
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn primary" style="flex:1">📎 원문 보기 (PDF)</button>
+    </div>
+  </div>
+</div>
+
+<!-- 메모 저장 모달 -->
+<div class="modal-overlay" id="memo-modal" onclick="closeModal(event, 'memo-modal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">📝 메모 작성</div>
+      <button class="modal-close" onclick="hideModal('memo-modal')">✕</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <span style="font-weight:700">현대차</span>
+      <span class="tl-badge buy">🔵 매수</span>
+      <span style="font-size:12px;color:var(--text-muted)">by 슈카월드 · 2026-02-26</span>
+    </div>
+
+    <textarea class="memo-textarea" placeholder="이 시그널에 대한 메모를 남겨보세요..."></textarea>
+
+    <div class="modal-actions">
+      <button class="modal-btn secondary" onclick="hideModal('memo-modal')">취소</button>
+      <button class="modal-btn primary" onclick="hideModal('memo-modal')">💾 저장</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// 애널리스트 탭
+function showAnalystTab(tab) {
+  document.querySelectorAll('#screen-analyst .inf-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.getElementById('analyst-tab-recent-report').style.display = tab === 'recent-report' ? 'block' : 'none';
+  document.getElementById('analyst-tab-analyst-list').style.display = tab === 'analyst-list' ? 'block' : 'none';
+  document.getElementById('analyst-tab-analyst-stock').style.display = tab === 'analyst-stock' ? 'block' : 'none';
+}
+
+// 타임라인에서 해당 탭으로 이동
+function goStockTab(tab) {
+  showScreen('stock-detail');
+  setTimeout(function() {
+    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.detail-tab-content').forEach(c => c.style.display = 'none');
+    
+    // 해당 탭 활성화
+    const tabs = document.querySelectorAll('.detail-tab');
+    const tabMap = {'realtime':0,'influencer':1,'analyst':2,'disclosure':3,'earnings':4,'report':5,'insider':6,'schedule':7,'memo-tab':8};
+    const idx = tabMap[tab];
+    if (idx !== undefined && tabs[idx]) {
+      tabs[idx].classList.add('active');
+    }
+    
+    const dtab = document.getElementById('dtab-' + tab);
+    if (dtab) {
+      dtab.style.display = 'block';
+    }
+    
+    if (tab === 'influencer') {
+      setTimeout(drawChart, 100);
+    }
+  }, 50);
+}
+
+// 종목 상세 탭 전환
+function showDetailTab(tab) {
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.querySelectorAll('.detail-tab-content').forEach(c => c.style.display = 'none');
+  
+  const dtab = document.getElementById('dtab-' + tab);
+  if (dtab) {
+    dtab.style.display = 'block';
+  }
+  
+  if (tab === 'influencer') {
+    setTimeout(drawChart, 100);
+  }
+}
+
+// 인플루언서 필터
+function filterInfluencer(who) {
+  document.querySelectorAll('.inf-chip').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.getElementById('inf-table-all').style.display = who === 'all' ? 'block' : 'none';
+  document.getElementById('inf-table-syuka').style.display = who === 'syuka' ? 'block' : 'none';
+}
+
+// 화면 전환
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + screenId).classList.add('active');
+  
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  
+  const navMap = {
+    'feed': 0, 'dashboard': 1, 'stock-detail': 1,
+    'explore': 2, 'influencer': 2, 'analyst': 2, 'inf-profile': 2, 'analyst-profile': 2,
+    'calendar': 3, 'alerts': 4, 'memo': 5, 'profile': 6
+  };
+  
+  const idx = navMap[screenId];
+  if (idx !== undefined) {
+    document.querySelectorAll('.nav-item')[idx].classList.add('active');
+  }
+  
+  // 차트 그리기
+  if (screenId === 'stock-detail') {
+    // 기본 실시간 탭으로
+    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.detail-tab')[0].classList.add('active');
+    document.querySelectorAll('.detail-tab-content').forEach(c => c.style.display = 'none');
+    document.getElementById('dtab-realtime').style.display = 'block';
+  }
+  
+  // 팝업 닫기
+  document.getElementById('signalPopup').classList.remove('visible');
+}
+
+// 인플루언서 탭
+function showInfTab(tab) {
+  document.querySelectorAll('.inf-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.getElementById('inf-tab-recent').style.display = tab === 'recent' ? 'block' : 'none';
+  document.getElementById('inf-tab-youtubers').style.display = tab === 'youtubers' ? 'block' : 'none';
+  document.getElementById('inf-tab-by-stock').style.display = tab === 'by-stock' ? 'block' : 'none';
+}
+
+// 신호 팝업
+function showSignalPopup(e) {
+  e.stopPropagation();
+  const popup = document.getElementById('signalPopup');
+  const rect = e.target.getBoundingClientRect();
+  const container = document.getElementById('chartContainer').getBoundingClientRect();
+  
+  let left = e.target.offsetLeft + 20;
+  let top = e.target.offsetTop - 80;
+  
+  if (left + 320 > container.width) left = e.target.offsetLeft - 330;
+  if (top < 0) top = 10;
+  
+  popup.style.left = left + 'px';
+  popup.style.top = top + 'px';
+  popup.classList.add('visible');
+}
+
+// 차트 외 클릭 시 팝업 닫기
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.signal-popup') && !e.target.closest('.signal-dot')) {
+    document.getElementById('signalPopup').classList.remove('visible');
+  }
+});
+
+// 모달
+function showModal(id) {
+  document.getElementById(id).classList.add('visible');
+}
+
+function hideModal(id) {
+  document.getElementById(id).classList.remove('visible');
+}
+
+function closeModal(e, id) {
+  if (e.target === e.currentTarget) hideModal(id);
+}
+
+// 신고 옵션
+function selectReportOption(el) {
+  document.querySelectorAll('.report-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// 차트 그리기
+function drawChart() {
+  const canvas = document.getElementById('chartCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.parentElement.offsetWidth;
+  const h = canvas.parentElement.offsetHeight;
+  canvas.width = w;
+  canvas.height = h;
+  
+  ctx.clearRect(0, 0, w, h);
+  
+  // 그리드
+  ctx.strokeStyle = 'rgba(42,43,54,0.5)';
+  ctx.lineWidth = 1;
+  for (let i = 1; i < 5; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, h * i / 5);
+    ctx.lineTo(w, h * i / 5);
+    ctx.stroke();
+  }
+  
+  // 가격 라벨
+  ctx.fillStyle = '#5a5c6a';
+  ctx.font = '11px Pretendard';
+  const prices = ['₩80,000', '₩75,000', '₩70,000', '₩65,000', '₩60,000'];
+  prices.forEach((p, i) => {
+    ctx.fillText(p, w - 65, h * (i + 0.5) / 5);
+  });
+  
+  // 주가 라인
+  const points = [
+    [0.05, 0.78], [0.1, 0.75], [0.15, 0.7], [0.2, 0.68],
+    [0.25, 0.63], [0.3, 0.6], [0.35, 0.57], [0.4, 0.55],
+    [0.45, 0.5], [0.5, 0.48], [0.55, 0.44], [0.6, 0.4],
+    [0.65, 0.37], [0.7, 0.4], [0.72, 0.42], [0.75, 0.38],
+    [0.8, 0.35], [0.85, 0.32], [0.9, 0.28], [0.95, 0.25]
+  ];
+  
+  // 그라데이션 영역
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, 'rgba(74,144,255,0.15)');
+  grad.addColorStop(1, 'rgba(74,144,255,0)');
+  
+  ctx.beginPath();
+  ctx.moveTo(points[0][0] * w, points[0][1] * h);
+  points.forEach(p => ctx.lineTo(p[0] * w, p[1] * h));
+  ctx.lineTo(points[points.length-1][0] * w, h);
+  ctx.lineTo(points[0][0] * w, h);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+  
+  // 라인
+  ctx.beginPath();
+  ctx.moveTo(points[0][0] * w, points[0][1] * h);
+  points.forEach(p => ctx.lineTo(p[0] * w, p[1] * h));
+  ctx.strokeStyle = '#4a90ff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+// 초기 화면
+drawChart();
+</script>
+
+</body>
+</html>
