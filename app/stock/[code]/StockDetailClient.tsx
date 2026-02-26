@@ -67,6 +67,9 @@ const getStockData = (code: string) => {
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('realtime');
+  const [isWatched, setIsWatched] = useState(false);
+  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
+  const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
   const searchParams = useSearchParams();
   const router = useRouter();
   const stockData = getStockData(code);
@@ -84,11 +87,10 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     switch (activeTab) {
       case 'realtime':
         return (
-          <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
-            <div className="divide-y divide-[#f0f0f0]">
-              {timeline.map((event) => (
+          <div className="space-y-4">
+            {timeline.map((event) => (
+              <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
                 <div
-                  key={event.id}
                   onClick={() => setActiveTab(event.tab)}
                   className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
                 >
@@ -110,8 +112,89 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
                     <div className="text-[#8b95a1] text-sm">→</div>
                   </div>
                 </div>
-              ))}
-            </div>
+                
+                {/* Comment Section */}
+                <div className="border-t border-[#f0f0f0] px-4 py-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowComments(prev => ({
+                          ...prev,
+                          [event.id]: !prev[event.id]
+                        }));
+                      }}
+                      className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
+                    >
+                      💬 댓글 {Math.floor(Math.random() * 10) + 1}개
+                    </button>
+                    <span className="text-xs text-[#8b95a1]">•</span>
+                    <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
+                      ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
+                    </button>
+                  </div>
+                  
+                  {/* Comment Input */}
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                      👤
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="댓글을 입력하세요..."
+                      value={commentInputs[event.id] || ''}
+                      onChange={(e) => {
+                        setCommentInputs(prev => ({
+                          ...prev,
+                          [event.id]: e.target.value
+                        }));
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
+                    />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (commentInputs[event.id]?.trim()) {
+                          // Here you would handle comment submission
+                          setCommentInputs(prev => ({
+                            ...prev,
+                            [event.id]: ''
+                          }));
+                        }
+                      }}
+                      className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
+                    >
+                      등록
+                    </button>
+                  </div>
+                  
+                  {/* Comments List */}
+                  {showComments[event.id] && (
+                    <div className="mt-3 space-y-2 pl-8">
+                      <div className="flex gap-2 text-sm">
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                          🐶
+                        </div>
+                        <div>
+                          <span className="font-medium text-[#191f28]">투자왕</span>
+                          <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-2 text-sm">
+                        <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                          🎯
+                        </div>
+                        <div>
+                          <span className="font-medium text-[#191f28]">주식초보</span>
+                          <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         );
 
@@ -259,24 +342,49 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
             </button>
           </div>
 
-          <div>
-            <h1 className="text-2xl font-bold text-[#191f28]">
-              {stockData.name}
-              <span className="text-lg text-[#8b95a1] font-normal ml-2">
-                {code}
-              </span>
-            </h1>
-            <div className="flex items-center gap-4 mt-2">
-              <span className="text-3xl font-bold text-[#191f28]">
-                {stockData.price.toLocaleString()}원
-              </span>
-              <span className={`text-lg font-medium ${
-                stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
-              }`}>
-                {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
-                ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
-              </span>
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-2xl font-bold text-[#191f28]">
+                {stockData.name}
+                <span className="text-lg text-[#8b95a1] font-normal ml-2">
+                  {code}
+                </span>
+              </h1>
+              <div className="flex items-center gap-4 mt-2">
+                <span className="text-3xl font-bold text-[#191f28]">
+                  {stockData.price.toLocaleString()}원
+                </span>
+                <span className={`text-lg font-medium ${
+                  stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
+                }`}>
+                  {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
+                  ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
+                </span>
+              </div>
+              
+              {/* Coverage Stats */}
+              <div className="flex items-center gap-4 mt-3 text-sm text-[#8b95a1]">
+                <span>인플루언서 12명</span>
+                <span>•</span>
+                <span>애널리스트 8명</span>
+                <span>•</span>
+                <span>투자자 5명</span>
+                <span>•</span>
+                <span>팔로워 3,247명</span>
+              </div>
             </div>
+            
+            {/* Watch Button */}
+            <button
+              onClick={() => setIsWatched(!isWatched)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                isWatched
+                  ? 'bg-green-100 text-green-700 border border-green-200'
+                  : 'bg-[#3182f6] text-white hover:bg-[#2171e5]'
+              }`}
+            >
+              {isWatched ? '✓ 관심종목 등록됨' : '+ 관심종목 추가'}
+            </button>
           </div>
         </div>
       </div>

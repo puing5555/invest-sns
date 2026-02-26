@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function InfluencerPage() {
   const [activeTab, setActiveTab] = useState('latest');
@@ -104,6 +105,7 @@ export default function InfluencerPage() {
     {
       id: 1,
       name: '슈카월드',
+      slug: 'syuka',
       avatar: '🎭',
       subscribers: '128만',
       accuracy: '72%',
@@ -113,6 +115,7 @@ export default function InfluencerPage() {
     {
       id: 2,
       name: '김작가',
+      slug: 'kimjakkga',
       avatar: '📚',
       subscribers: '85만',
       accuracy: '68%',
@@ -122,6 +125,7 @@ export default function InfluencerPage() {
     {
       id: 3,
       name: '삼프로',
+      slug: 'sampro',
       avatar: '⚡',
       subscribers: '156만',
       accuracy: '75%',
@@ -131,6 +135,7 @@ export default function InfluencerPage() {
     {
       id: 4,
       name: '코인왕',
+      slug: 'coinwang',
       avatar: '👑',
       subscribers: '92만',
       accuracy: '64%',
@@ -140,6 +145,7 @@ export default function InfluencerPage() {
     {
       id: 5,
       name: '투자왕김작가',
+      slug: 'tujawang',
       avatar: '💎',
       subscribers: '203만',
       accuracy: '81%',
@@ -149,6 +155,7 @@ export default function InfluencerPage() {
     {
       id: 6,
       name: '주식천재',
+      slug: 'stockgenius',
       avatar: '🧠',
       subscribers: '67만',
       accuracy: '69%',
@@ -330,33 +337,35 @@ export default function InfluencerPage() {
         {/* 유튜버 카드 그리드 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredYoutubers.map((youtuber) => (
-            <div key={youtuber.id} className="bg-white rounded-lg border border-[#e8e8e8] p-6 hover:shadow-md transition-shadow cursor-pointer">
-              <div className="text-center mb-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[#f8f9fa] flex items-center justify-center text-2xl mb-3">
-                  {youtuber.avatar}
+            <Link key={youtuber.id} href={`/profile/influencer/${youtuber.slug}`}>
+              <div className="bg-white rounded-lg border border-[#e8e8e8] p-6 hover:shadow-md transition-shadow cursor-pointer">
+                <div className="text-center mb-4">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[#f8f9fa] flex items-center justify-center text-2xl mb-3">
+                    {youtuber.avatar}
+                  </div>
+                  <h3 className="font-bold text-[#191f28] text-lg">{youtuber.name}</h3>
+                  <div className="text-sm text-[#8b95a1] mt-1">구독자 {youtuber.subscribers}</div>
                 </div>
-                <h3 className="font-bold text-[#191f28] text-lg">{youtuber.name}</h3>
-                <div className="text-sm text-[#8b95a1] mt-1">구독자 {youtuber.subscribers}</div>
-              </div>
-              
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-[#8b95a1]">적중률</span>
-                  <span className="font-medium text-[#191f28]">{youtuber.accuracy}</span>
+                
+                <div className="space-y-2 mb-4">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-[#8b95a1]">적중률</span>
+                    <span className="font-medium text-[#191f28]">{youtuber.accuracy}</span>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <div className="text-xs text-[#8b95a1] mb-2">주요 종목</div>
-                <div className="flex flex-wrap gap-1">
-                  {youtuber.tags.slice(0, 3).map((tag, index) => (
-                    <span key={index} className="text-xs bg-[#f2f4f6] text-[#8b95a1] px-2 py-1 rounded">
-                      {tag}
-                    </span>
-                  ))}
+                <div>
+                  <div className="text-xs text-[#8b95a1] mb-2">주요 종목</div>
+                  <div className="flex flex-wrap gap-1">
+                    {youtuber.tags.slice(0, 3).map((tag, index) => (
+                      <span key={index} className="text-xs bg-[#f2f4f6] text-[#8b95a1] px-2 py-1 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
