@@ -7,6 +7,7 @@ export default function InfluencerPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [categoryFilter, setCategoryFilter] = useState('전체');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedComment, setSelectedComment] = useState<any>(null);
 
   const tabs = [
     { id: 'latest', label: '최신 발언' },
@@ -26,6 +27,9 @@ export default function InfluencerPage() {
       stockCode: '005930',
       signal: 'BUY',
       quote: '실적 개선 전망으로 지금이 매수 타이밍이라고 봅니다. Q4 실적 발표 이후 반등할 것으로 예상합니다.',
+      timestamp: '[5:43]',
+      videoTitle: '"삼성전자, 지금이 기회일까? 반도체 슈퍼사이클의 시작"',
+      summary: '슈카는 삼성전자의 HBM3E 양산 본격화와 AI 반도체 수요 급증을 근거로 현재 주가가 저평가 구간이라고 분석했습니다. 특히 TSMC 대비 파운드리 경쟁력 회복과 메모리 사업부의 수익성 개선을 긍정적으로 평가하며, 본인도 현재 적극 매수 중이라고 밝혔습니다.',
       date: '2026-02-25',
       time: '14:25',
       videoUrl: 'https://youtube.com/watch?v=sample1',
@@ -39,6 +43,9 @@ export default function InfluencerPage() {
       stockCode: 'TSLA',
       signal: 'POSITIVE',
       quote: '자율주행 기술 발전과 중국 시장 회복으로 긍정적 전망을 유지합니다.',
+      timestamp: '[12:15]',
+      videoTitle: '"테슬라 FSD V13, 게임체인저가 될까?"',
+      summary: '김작가는 테슬라의 FSD V13 업데이트와 중국 시장 점유율 회복을 근거로 긍정적 전망을 제시했습니다. 로보택시 사업 본격화 시 밸류에이션 재평가가 이뤄질 것이라고 분석했습니다.',
       date: '2026-02-24',
       time: '16:42',
       videoUrl: 'https://youtube.com/watch?v=sample2',
@@ -52,6 +59,9 @@ export default function InfluencerPage() {
       stockCode: 'BTC',
       signal: 'NEUTRAL',
       quote: '단기적으로는 횡보 구간이지만, 중장기적으로는 상승 기조를 유지할 것으로 봅니다.',
+      timestamp: '[8:22]',
+      videoTitle: '"비트코인 10만달러, 올해 가능할까?"',
+      summary: '홍춘욱은 비트코인의 반감기 이후 수급 개선과 ETF 자금 유입을 분석하면서도, 단기 과열 구간에서는 조정 가능성이 있다고 중립 의견을 제시했습니다.',
       date: '2026-02-23',
       time: '10:15',
       videoUrl: 'https://youtube.com/watch?v=sample3',
@@ -65,6 +75,9 @@ export default function InfluencerPage() {
       stockCode: '000660',
       signal: 'CONCERN',
       quote: '메모리 반도체 수요 둔화 우려가 있어 신중한 접근이 필요해 보입니다.',
+      timestamp: '[3:17]',
+      videoTitle: '"SK하이닉스, 고점인가 저점인가?"',
+      summary: '박세익은 SK하이닉스의 HBM 수주는 긍정적이나, NAND 부문 적자 지속과 중국 메모리 업체 추격을 우려하며 경계 의견을 제시했습니다.',
       date: '2026-02-22',
       time: '09:33',
       videoUrl: 'https://youtube.com/watch?v=sample4',
@@ -78,6 +91,9 @@ export default function InfluencerPage() {
       stockCode: 'NVDA',
       signal: 'SELL',
       quote: '고점 대비 과열 구간에 진입했다고 판단됩니다. 차익실현을 권장합니다.',
+      timestamp: '[18:30]',
+      videoTitle: '"엔비디아 버블인가? AI 반도체 과열 분석"',
+      summary: '이효석은 엔비디아의 PER이 역사적 고점에 도달했으며, AI 투자 사이클의 피크가 가까워지고 있다고 분석하며 차익실현을 권장했습니다.',
       date: '2026-02-21',
       time: '15:47',
       videoUrl: 'https://youtube.com/watch?v=sample5',
@@ -91,6 +107,9 @@ export default function InfluencerPage() {
       stockCode: 'ETH',
       signal: 'POSITIVE',
       quote: 'ETF 승인 기대감과 스테이킹 수익률로 상승 모멘텀이 지속될 것 같습니다.',
+      timestamp: '[7:05]',
+      videoTitle: '"이더리움 ETF, 승인되면 어디까지?"',
+      summary: '신사임당은 이더리움 현물 ETF 승인 가능성과 스테이킹 수익률을 분석하며 긍정적 전망을 제시했습니다.',
       date: '2026-02-20',
       time: '11:22',
       videoUrl: 'https://youtube.com/watch?v=sample6',
@@ -104,6 +123,9 @@ export default function InfluencerPage() {
       stockCode: '035420',
       signal: 'BUY',
       quote: 'AI 사업부문 확장과 클라우드 서비스 성장으로 새로운 성장 동력을 확보했습니다.',
+      timestamp: '[14:52]',
+      videoTitle: '"네이버 AI, 구글과 경쟁 가능할까?"',
+      summary: '슈카는 네이버의 하이퍼클로바X와 클라우드 사업 확장을 분석하며, AI 시대 국내 플랫폼 중 가장 유리한 위치라고 평가했습니다.',
       date: '2026-02-19',
       time: '13:18',
       videoUrl: 'https://youtube.com/watch?v=sample7',
@@ -117,6 +139,9 @@ export default function InfluencerPage() {
       stockCode: 'AAPL',
       signal: 'NEUTRAL',
       quote: 'Vision Pro 판매는 부진하지만 서비스 부문 성장으로 장기적으로는 긍정적입니다.',
+      timestamp: '[9:38]',
+      videoTitle: '"애플, 혁신 없는 성장은 가능한가?"',
+      summary: '김작가는 애플의 하드웨어 혁신 둔화에도 서비스 매출 성장과 자사주 매입 프로그램이 주가를 지지할 것이라고 분석했습니다.',
       date: '2026-02-18',
       time: '12:55',
       videoUrl: 'https://youtube.com/watch?v=sample8',
@@ -130,6 +155,9 @@ export default function InfluencerPage() {
       stockCode: '005380',
       signal: 'POSITIVE',
       quote: '전기차 라인업 확대와 배터리 기술 혁신으로 경쟁력이 강화되고 있습니다.',
+      timestamp: '[11:20]',
+      videoTitle: '"현대차, 전기차 전쟁의 승자는?"',
+      summary: '홍춘욱은 현대차의 전기차 라인업 확대와 미국 조지아 공장 가동을 근거로 현재 주가가 저평가 구간이라고 분석했습니다. 특히 아이오닉 시리즈의 글로벌 판매량 증가와 SDV 전략을 긍정적으로 평가했습니다.',
       date: '2026-02-17',
       time: '14:40',
       videoUrl: 'https://youtube.com/watch?v=sample9',
@@ -348,7 +376,7 @@ export default function InfluencerPage() {
         {/* 발언 카드 목록 */}
         <div className="space-y-4">
           {filteredComments.map((comment) => (
-            <div key={comment.id} className="bg-white rounded-lg border border-[#e8e8e8] p-6 hover:shadow-md transition-shadow">
+            <div key={comment.id} onClick={() => setSelectedComment(comment)} className="bg-white rounded-lg border border-[#e8e8e8] p-6 hover:shadow-md transition-shadow cursor-pointer">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-[#f8f9fa] flex items-center justify-center text-xl">
@@ -572,6 +600,67 @@ export default function InfluencerPage() {
         {activeTab === 'influencers' && renderInfluencersTab()}
         {activeTab === 'stocks' && renderStocksTab()}
       </div>
+
+      {/* 영상 분석 팝업 */}
+      {selectedComment && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedComment(null)}>
+          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* 팝업 헤더 */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#e8e8e8]">
+              <h3 className="font-bold text-[#191f28] text-lg">▶ 영상 분석</h3>
+              <div className="flex items-center gap-2">
+                <button className="w-9 h-9 rounded-full bg-[#f8f9fa] flex items-center justify-center text-[#8b95a1] hover:bg-[#e9ecef] transition-colors" title="메모 저장">
+                  ♡
+                </button>
+                <button className="w-9 h-9 rounded-full bg-[#f8f9fa] flex items-center justify-center text-[#8b95a1] hover:bg-[#e9ecef] transition-colors" title="신고">
+                  ⚠️
+                </button>
+                <button onClick={() => setSelectedComment(null)} className="w-9 h-9 rounded-full bg-[#f8f9fa] flex items-center justify-center text-[#8b95a1] hover:bg-[#e9ecef] transition-colors">
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div className="px-6 py-5">
+              {/* 종목 + 신호 */}
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xl font-bold text-[#191f28]">{selectedComment.stock}</span>
+                <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getSignalColor(selectedComment.signal)}`}>
+                  {getSignalText(selectedComment.signal)}
+                </span>
+              </div>
+
+              {/* 영상 제목 + 날짜 */}
+              <p className="text-sm text-[#8b95a1] mb-5">{selectedComment.videoTitle} · {selectedComment.date}</p>
+
+              {/* 발언 내용 */}
+              <div className="mb-5">
+                <div className="text-xs font-medium text-[#8b95a1] mb-2">💬 발언 내용</div>
+                <div className="bg-[#f8f9fa] rounded-xl p-4 border border-[#e8e8e8]">
+                  <p className="text-[#191f28] leading-relaxed text-[15px]">"{selectedComment.quote}"</p>
+                  <p className="text-xs text-[#3182f6] mt-2">타임스탬프: {selectedComment.timestamp}</p>
+                </div>
+              </div>
+
+              {/* 영상 요약 */}
+              <div className="mb-6">
+                <div className="text-xs font-medium text-[#8b95a1] mb-2">📎 영상 요약</div>
+                <p className="text-[#4e5968] text-sm leading-relaxed">{selectedComment.summary}</p>
+              </div>
+
+              {/* 영상보기 버튼 */}
+              <a
+                href={selectedComment.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full py-3.5 bg-[#3182f6] text-white rounded-xl text-center font-medium hover:bg-[#2171e5] transition-colors"
+              >
+                ▶ 영상보기
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
