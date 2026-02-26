@@ -84,40 +84,8 @@ export default function ExplorePage() {
   return (
     <div className="min-h-screen bg-[#f4f4f4]">
       {/* Header */}
-      <div className="bg-white border-b border-[#e8e8e8] px-4 py-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl font-bold text-[#191f28] mb-4">🔍 탐색</h1>
-          
-          {/* Search Bar */}
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-[#8b95a1] text-xl">🔍</span>
-            </div>
-            <input
-              type="text"
-              placeholder="종목명, 기업명 또는 키워드 검색..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-[#e8e8e8] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent text-[#191f28] placeholder-[#8b95a1]"
-            />
-          </div>
-
-          {/* Quick Search Tags */}
-          <div className="mt-4">
-            <p className="text-sm text-[#8b95a1] mb-2">빠른 검색</p>
-            <div className="flex flex-wrap gap-2">
-              {quickSearches.map((tag, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSearchQuery(tag)}
-                  className="px-3 py-1.5 bg-[#f8f9fa] hover:bg-[#e9ecef] border border-[#e8e8e8] rounded-full text-sm text-[#191f28] transition-colors"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="bg-white border-b border-[#e8e8e8] px-4 py-4">
+        <h1 className="text-xl font-bold text-[#191f28]">🔍 탐색</h1>
       </div>
 
       {/* Cards Grid */}
