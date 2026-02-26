@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // 관심종목 칩 데이터
 const stockChips = [
@@ -137,6 +138,7 @@ const timelineEvents: TimelineEvent[] = [
 
 export default function MyStocksPage() {
   const [selectedChip, setSelectedChip] = useState('전체');
+  const router = useRouter();
 
   // 선택된 종목에 따른 이벤트 필터링
   const getFilteredEvents = () => {
@@ -151,9 +153,30 @@ export default function MyStocksPage() {
 
   const filteredEvents = getFilteredEvents();
 
+  // 종목 칩 클릭 핸들러
+  const handleChipClick = (chip: typeof stockChips[0]) => {
+    if (chip.name === '전체') {
+      setSelectedChip('전체');
+    } else if (chip.code) {
+      // 종목 상세 페이지로 이동
+      router.push(`/stock/${chip.code}`);
+    }
+  };
+
+  // 타임라인 이벤트 클릭 핸들러 - 타입별로 적절한 탭으로 이동
   const handleEventClick = (event: TimelineEvent) => {
-    // 해당 종목 페이지로 이동
-    window.location.href = `/stock/${event.stockCode}`;
+    // 이벤트 타입에 따라 적절한 탭으로 이동
+    const tabMapping = {
+      'disclosure': 'disclosure',
+      'influencer': 'influencer',
+      'report': 'reports',
+      'insider': 'insider',
+      'earnings': 'earnings',
+      'news': 'realtime'
+    };
+
+    const tab = tabMapping[event.type] || 'realtime';
+    router.push(`/stock/${event.stockCode}?tab=${tab}`);
   };
 
   return (
@@ -171,7 +194,7 @@ export default function MyStocksPage() {
           {stockChips.map((chip, index) => (
             <button
               key={index}
-              onClick={() => setSelectedChip(chip.name)}
+              onClick={() => handleChipClick(chip)}
               className={`flex-shrink-0 px-4 py-2.5 rounded-full text-sm font-medium transition-colors ${
                 selectedChip === chip.name
                   ? 'bg-[#3182f6] text-white'

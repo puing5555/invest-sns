@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import FeedPost, { PostData } from '@/components/FeedPost';
 
 interface StockDetailClientProps {
@@ -66,7 +67,17 @@ const realtimePosts: PostData[] = [
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('realtime');
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const stockData = getStockData(code);
+
+  // URL 쿼리 파라미터에서 탭 설정
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam && tabs.some(tab => tab.id === tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -218,6 +229,17 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
       {/* Stock Header */}
       <div className="bg-white border-b border-[#e8e8e8] px-4 py-6">
         <div className="max-w-4xl mx-auto">
+          {/* 뒤로가기 버튼 */}
+          <div className="mb-4">
+            <button
+              onClick={() => router.push('/my-stocks')}
+              className="flex items-center gap-2 text-[#8b95a1] hover:text-[#191f28] transition-colors"
+            >
+              <span className="text-lg">←</span>
+              <span className="text-sm">내 종목으로</span>
+            </button>
+          </div>
+
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-[#191f28]">
