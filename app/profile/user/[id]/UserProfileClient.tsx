@@ -129,7 +129,7 @@ export default function UserProfileClient({ user }: { user: UserData }) {
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-[#191f28]">{memo.title}</span>
                     {memo.stock && (
-                      <span className="px-2 py-1 bg-gray-100 text-[#191f28] text-xs rounded-full border border-gray-200">
+                      <span className="px-2 py-1 bg-[#f2f4f6] text-[#191f28] text-xs rounded-full border border-[#e8e8e8]">
                         {memo.stock}
                       </span>
                     )}
@@ -181,7 +181,7 @@ export default function UserProfileClient({ user }: { user: UserData }) {
               {user.interests.map(interest => (
                 <span
                   key={interest}
-                  className="px-2 py-1 bg-gray-100 text-[#191f28] text-xs rounded-full border border-gray-200"
+                  className="px-2 py-1 bg-[#f2f4f6] text-[#191f28] text-xs rounded-full border border-[#e8e8e8]"
                 >
                   {interest}
                 </span>
@@ -189,7 +189,7 @@ export default function UserProfileClient({ user }: { user: UserData }) {
             </div>
           </div>
           
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+          <button className="px-4 py-2 bg-[#3182f6] text-white rounded-lg text-sm font-medium hover:bg-[#2171e5] transition-colors">
             팔로우
           </button>
         </div>

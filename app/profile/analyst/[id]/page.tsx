@@ -228,7 +228,7 @@ export default function AnalystProfile({ params }: { params: { id: string } }) {
             </div>
           </div>
           
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+          <button className="px-4 py-2 bg-[#3182f6] text-white rounded-lg text-sm font-medium hover:bg-[#2171e5] transition-colors">
             팔로우
           </button>
         </div>
@@ -275,7 +275,7 @@ export default function AnalystProfile({ params }: { params: { id: string } }) {
           {analyst.coverStocks.map(stock => (
             <button
               key={stock.code}
-              className="px-3 py-2 bg-gray-100 text-[#191f28] rounded-full text-sm border border-gray-200 hover:bg-gray-200 transition-colors"
+              className="px-3 py-2 bg-[#f2f4f6] text-[#191f28] rounded-full text-sm border border-[#e8e8e8] hover:bg-[#e9ecef] transition-colors"
             >
               {stock.name}({stock.reports})
             </button>
