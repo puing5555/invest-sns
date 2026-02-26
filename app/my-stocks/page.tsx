@@ -1,233 +1,160 @@
 'use client';
 
 import { useState } from 'react';
-import { WatchlistStock, watchlistStocks } from '@/data/watchlistData';
-import { tradeReviewData } from '@/data/tradeData';
-import WatchlistCard from '@/components/WatchlistCard';
-import AddStockModal from '@/components/AddStockModal';
-import MemoEditModal from '@/components/MemoEditModal';
-import TradeSetupModal from '@/components/TradeSetupModal';
-import TradeAnalysisPanel from '@/components/TradeAnalysisPanel';
-import TradeReviewCard from '@/components/TradeReviewCard';
-import FeedPost, { PostData } from '@/components/FeedPost';
+import Link from 'next/link';
 
 // 관심종목 칩 데이터
 const stockChips = [
-  { name: '전체', isActive: true },
-  { name: '삼성전자', change: '+0.8%', isPositive: true },
-  { name: '현대차', change: '+2.1%', isPositive: true },
-  { name: 'SK하이닉스', change: '-1.2%', isPositive: false },
-  { name: 'LG에너지', change: '+0.5%', isPositive: true },
-  { name: 'NAVER', change: '-0.3%', isPositive: false },
+  { name: '전체', code: '', change: '', isPositive: true, isActive: true },
+  { name: '삼성전자', code: '005930', change: '+0.8%', isPositive: true, isActive: false },
+  { name: '현대차', code: '005380', change: '+2.1%', isPositive: true, isActive: false },
+  { name: '카카오', code: '035720', change: '-1.2%', isPositive: false, isActive: false },
+  { name: 'SK하이닉스', code: '000660', change: '+1.5%', isPositive: true, isActive: false },
+  { name: 'LG에너지', code: '373220', change: '+0.5%', isPositive: true, isActive: false },
+  { name: 'NAVER', code: '035420', change: '-0.3%', isPositive: false, isActive: false },
 ];
 
-// 타임라인 샘플 데이터 (기존 피드 데이터 재활용)
-const timelinePosts: PostData[] = [
+// 타임라인 이벤트 타입
+interface TimelineEvent {
+  id: number;
+  type: 'disclosure' | 'influencer' | 'report' | 'insider' | 'earnings' | 'news';
+  icon: string;
+  categoryName: string;
+  stockName: string;
+  stockCode: string;
+  title: string;
+  time: string;
+  source?: string;
+}
+
+// 타임라인 더미 데이터
+const timelineEvents: TimelineEvent[] = [
   {
     id: 1,
-    name: 'A등급 공시 속보',
-    handle: 'system',
-    avatar: 'system',
-    time: '3분전',
-    text: '삼성전자 — 3분기 실적 컨센서스 상회 발표\n\n🤖 AI 분석: 메모리 슈퍼사이클 본격화. HBM 매출 비중 확대\n시그널 스코어 82점 🔥',
-    isSystem: true,
-    comments_count: 245,
-    reposts: 334,
-    likes: 2100,
-    views: 156000,
-    poll: {
-      options: [
-        { label: '매수', emoji: '🟢', percent: 78, color: '#00c853' },
-        { label: '매도', emoji: '🔴', percent: 8, color: '#f44336' },
-        { label: '관망', emoji: '🟡', percent: 14, color: '#eab308' },
-      ],
-      totalVotes: 3247,
-    },
+    type: 'disclosure',
+    icon: '🔵',
+    categoryName: '공시',
+    stockName: '삼성전자',
+    stockCode: '005930',
+    title: 'A등급 공시 - 3분기 실적 컨센서스 상회',
+    time: '3분 전'
   },
   {
     id: 2,
-    name: '코린이아빠',
-    handle: 'korini_papa',
-    avatar: 'https://i.pravatar.cc/150?img=11',
-    verified: true,
-    accuracy: 68,
-    time: '15분전',
-    text: '현대차 220,000 돌파했네요! 🚗\n\n제가 205,000에 추천했던 구간이었는데\n+7.3% 수익률입니다.\n\n전기차 전환 이슈보다\n중국 진출 확대가 더 중요한 포인트였습니다.\n\n목표가: 240,000\n손절: 200,000\n\n⚠️ 단타보다는 스윙 추천',
-    comments_count: 156,
-    reposts: 234,
-    likes: 1580,
-    views: 67000,
+    type: 'influencer',
+    icon: '🟢',
+    categoryName: '인플루언서',
+    stockName: '삼성전자',
+    stockCode: '005930',
+    title: '슈카월드 긍정 신호',
+    time: '1시간 전',
+    source: '슈카월드'
   },
   {
     id: 3,
-    name: '반도체 전문가',
-    handle: 'semi_expert',
-    avatar: 'https://i.pravatar.cc/150?img=25',
-    verified: true,
-    accuracy: 74,
-    time: '1시간전',
-    text: 'SK하이닉스 실적 발표 임박 📊\n\nHBM3E 출하량이 예상보다 20% 증가\n마진율도 개선되고 있어서\n이번 분기 깜짝 실적 가능성 높습니다.\n\n현재가 기준으로도 충분히 매력적\n\n#SK하이닉스 #HBM #메모리',
-    comments_count: 89,
-    reposts: 145,
-    likes: 956,
-    views: 45000,
+    type: 'report',
+    icon: '📊',
+    categoryName: '리포트',
+    stockName: '현대차',
+    stockCode: '005380',
+    title: '한국투자증권 목표가 상향',
+    time: '2시간 전',
+    source: '한국투자증권'
   },
   {
     id: 4,
-    name: '💼 임원매매 알림',
-    handle: 'system', 
-    avatar: 'system',
-    time: '2시간전',
-    text: 'LG에너지솔루션 임원 매매 현황\n\n김○○ 상무: 5억원 규모 매수 (3일차)\n박○○ 전무: 8억원 규모 매수 (2일차)\n\n🔍 분석: 대규모 임원 매수 집중\n내부 정보 기반 포지션 확대로 해석',
-    isSystem: true,
-    comments_count: 67,
-    reposts: 123,
-    likes: 834,
-    views: 34000,
+    type: 'insider',
+    icon: '👔',
+    categoryName: '임원매매',
+    stockName: '삼성전자',
+    stockCode: '005930',
+    title: '이재용 사장 매수 5만주',
+    time: '3시간 전'
   },
   {
     id: 5,
-    name: '애널리스트 정○○',
-    handle: 'analyst_jung',
-    avatar: 'https://i.pravatar.cc/150?img=42',
-    verified: true,
-    time: '3시간전',
-    text: 'NAVER 목표가 상향 조정 📈\n\n기존: 180,000 → 신규: 200,000\n투자의견: Buy 유지\n\n클라우드 사업 본격 성장\n웹툰/게임 해외 진출 가속화\n\n현재 밸류에이션 매력적 수준',
-    comments_count: 78,
-    reposts: 156,
-    likes: 1234,
-    views: 56000,
+    type: 'earnings',
+    icon: '📈',
+    categoryName: '실적',
+    stockName: '현대차',
+    stockCode: '005380',
+    title: '3분기 영업이익 컨센서스 상회',
+    time: '5시간 전'
+  },
+  {
+    id: 6,
+    type: 'news',
+    icon: '📰',
+    categoryName: '뉴스',
+    stockName: '카카오',
+    stockCode: '035720',
+    title: 'AI 플랫폼 사업 확대 발표',
+    time: '6시간 전'
+  },
+  {
+    id: 7,
+    type: 'disclosure',
+    icon: '🔵',
+    categoryName: '공시',
+    stockName: 'LG에너지',
+    stockCode: '373220',
+    title: '北美 배터리 공장 증설 계획 공개',
+    time: '8시간 전'
+  },
+  {
+    id: 8,
+    type: 'report',
+    icon: '📊',
+    categoryName: '리포트',
+    stockName: 'NAVER',
+    stockCode: '035420',
+    title: '미래에셋 투자의견 상향',
+    time: '10시간 전',
+    source: '미래에셋증권'
+  },
+  {
+    id: 9,
+    type: 'influencer',
+    icon: '🟢',
+    categoryName: '인플루언서',
+    stockName: 'SK하이닉스',
+    stockCode: '000660',
+    title: '코린이아빠 매수 신호',
+    time: '12시간 전',
+    source: '코린이아빠'
+  },
+  {
+    id: 10,
+    type: 'earnings',
+    icon: '📈',
+    categoryName: '실적',
+    stockName: '카카오',
+    stockCode: '035720',
+    title: '모빌리티 부문 흑자 전환',
+    time: '1일 전'
   }
 ];
 
-type FilterType = 'all' | 'profit' | 'loss' | 'signals';
-
 export default function MyStocksPage() {
-  const [stocks, setStocks] = useState<WatchlistStock[]>(watchlistStocks);
-  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [selectedChip, setSelectedChip] = useState('전체');
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isMemoModalOpen, setIsMemoModalOpen] = useState(false);
-  const [isTradeSetupModalOpen, setIsTradeSetupModalOpen] = useState(false);
-  const [isAnalysisPanelOpen, setIsAnalysisPanelOpen] = useState(false);
-  const [selectedStock, setSelectedStock] = useState<WatchlistStock | null>(null);
-  const [selectedStockName, setSelectedStockName] = useState<string | null>(null);
 
-  const filterTabs = [
-    { key: 'all' as FilterType, label: '전체', count: stocks.length },
-    { key: 'profit' as FilterType, label: '수익중', count: stocks.filter(s => s.profitRate && s.profitRate > 0).length },
-    { key: 'loss' as FilterType, label: '손실중', count: stocks.filter(s => s.profitRate && s.profitRate < 0).length },
-    { key: 'signals' as FilterType, label: '시그널있음', count: stocks.filter(s => s.badges.length > 0).length },
-  ];
-
-  const getFilteredStocks = () => {
-    switch (activeFilter) {
-      case 'profit':
-        return stocks.filter(s => s.profitRate && s.profitRate > 0);
-      case 'loss':
-        return stocks.filter(s => s.profitRate && s.profitRate < 0);
-      case 'signals':
-        return stocks.filter(s => s.badges.length > 0);
-      default:
-        return stocks;
+  // 선택된 종목에 따른 이벤트 필터링
+  const getFilteredEvents = () => {
+    if (selectedChip === '전체') {
+      return timelineEvents;
     }
+    const selectedStock = stockChips.find(chip => chip.name === selectedChip);
+    if (!selectedStock) return timelineEvents;
+    
+    return timelineEvents.filter(event => event.stockName === selectedChip);
   };
 
-  const handleAddStock = (stockName: string) => {
-    const newStock: WatchlistStock = {
-      id: Date.now().toString(),
-      name: stockName,
-      code: '000000',
-      currentPrice: 50000,
-      changePercent: 0,
-      buyPrice: null,
-      profitRate: null,
-      badges: [],
-      alert: {
-        message: '새로운 관심종목이 추가되었습니다',
-        timeAgo: '방금'
-      },
-      memo: null
-    };
+  const filteredEvents = getFilteredEvents();
 
-    setStocks(prev => [...prev, newStock]);
+  const handleEventClick = (event: TimelineEvent) => {
+    // 해당 종목 페이지로 이동
+    window.location.href = `/stock/${event.stockCode}`;
   };
-
-  const handleMemoClick = (stock: WatchlistStock) => {
-    setSelectedStock(stock);
-    setIsMemoModalOpen(true);
-  };
-
-  const handleMemoSave = (updates: { memo: string; buyPrice?: number; quantity?: number }) => {
-    if (!selectedStock) return;
-
-    setStocks(prev => prev.map(stock => {
-      if (stock.id === selectedStock.id) {
-        const updatedStock = { ...stock };
-        updatedStock.memo = updates.memo || null;
-        
-        if (updates.buyPrice !== undefined) {
-          updatedStock.buyPrice = updates.buyPrice;
-          if (updates.buyPrice > 0) {
-            updatedStock.profitRate = ((stock.currentPrice - updates.buyPrice) / updates.buyPrice) * 100;
-          }
-        }
-        
-        return updatedStock;
-      }
-      return stock;
-    }));
-
-    setSelectedStock(null);
-  };
-
-  const handleRemoveStock = (stockId: string) => {
-    setStocks(prev => prev.filter(stock => stock.id !== stockId));
-  };
-
-  const handleAnalysisClick = (stockName: string) => {
-    setSelectedStockName(stockName);
-    setIsAnalysisPanelOpen(true);
-  };
-
-  const handleSetupClick = (stockName: string) => {
-    const stock = stocks.find(s => s.name === stockName);
-    if (stock) {
-      setSelectedStock(stock);
-      setIsTradeSetupModalOpen(true);
-    }
-  };
-
-  const handleTradeSetupSave = (updates: { 
-    memo?: string; 
-    buyPrice?: number; 
-    quantity?: number;
-    stopLoss?: number;
-    takeProfit1?: number;
-    takeProfit2?: number;
-  }) => {
-    if (!selectedStock) return;
-
-    setStocks(prev => prev.map(stock => {
-      if (stock.id === selectedStock.id) {
-        const updatedStock = { ...stock };
-        
-        if (updates.buyPrice !== undefined) {
-          updatedStock.buyPrice = updates.buyPrice;
-          if (updates.buyPrice > 0) {
-            updatedStock.profitRate = ((stock.currentPrice - updates.buyPrice) / updates.buyPrice) * 100;
-          }
-        }
-        
-        return updatedStock;
-      }
-      return stock;
-    }));
-
-    setSelectedStock(null);
-  };
-
-  const filteredStocks = getFilteredStocks();
 
   return (
     <div className="min-h-screen bg-[#f4f4f4]">
@@ -235,129 +162,111 @@ export default function MyStocksPage() {
       <div className="bg-white border-b border-[#e8e8e8] px-4 py-4">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-[#191f28]">⭐ 내 종목</h1>
-          <button
-            onClick={() => setIsAddModalOpen(true)}
-            className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#2171e5] transition-colors font-medium text-sm"
-          >
-            + 종목 추가
-          </button>
         </div>
       </div>
 
-      {/* 관심종목 칩 */}
-      <div className="bg-white border-b border-[#e8e8e8] px-4 py-3">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+      {/* 관심종목 칩 필터 */}
+      <div className="bg-white border-b border-[#e8e8e8] px-4 py-4">
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
           {stockChips.map((chip, index) => (
             <button
               key={index}
               onClick={() => setSelectedChip(chip.name)}
-              className={`flex-shrink-0 px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`flex-shrink-0 px-4 py-2.5 rounded-full text-sm font-medium transition-colors ${
                 selectedChip === chip.name
                   ? 'bg-[#3182f6] text-white'
                   : 'bg-[#f8f9fa] text-[#191f28] hover:bg-[#e9ecef]'
               }`}
             >
-              {chip.name}
-              {chip.change && (
-                <span className={`ml-1 ${chip.isPositive ? 'text-red-500' : 'text-blue-500'}`}>
-                  {chip.change}
-                </span>
-              )}
+              <div className="flex items-center gap-1">
+                <span>{chip.name}</span>
+                {chip.change && (
+                  <span className={`text-xs font-medium ${
+                    selectedChip === chip.name 
+                      ? 'text-white/90' 
+                      : chip.isPositive 
+                        ? 'text-[#f44336]' 
+                        : 'text-[#3182f6]'
+                  }`}>
+                    {chip.change}
+                  </span>
+                )}
+              </div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="bg-white border-b border-[#e8e8e8] px-4">
-        <div className="flex gap-1">
-          {filterTabs.map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveFilter(tab.key)}
-              className={`px-4 py-3 text-sm font-medium transition-colors relative ${
-                activeFilter === tab.key
-                  ? 'text-[#3182f6]'
-                  : 'text-[#8b95a1] hover:text-[#191f28]'
-              }`}
-            >
-              {tab.label} ({tab.count})
-              {activeFilter === tab.key && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3182f6]" />
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Content Area */}
-      <div className="flex gap-6 max-w-6xl mx-auto px-4 py-6">
-        {/* Left Column - 관심종목 카드 */}
-        <div className="flex-1 space-y-4">
-          {filteredStocks.length > 0 ? (
-            filteredStocks.map(stock => (
-              <WatchlistCard
-                key={stock.id}
-                stock={stock}
-                onMemoClick={handleMemoClick}
-                onRemove={handleRemoveStock}
-                onAnalysisClick={handleAnalysisClick}
-                onSetupClick={handleSetupClick}
-              />
-            ))
+      {/* 타임라인 리스트 */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+          {filteredEvents.length > 0 ? (
+            <div className="divide-y divide-[#f0f0f0]">
+              {filteredEvents.map((event) => (
+                <div
+                  key={event.id}
+                  onClick={() => handleEventClick(event)}
+                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    {/* 이벤트 아이콘 */}
+                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
+                      {event.icon}
+                    </div>
+                    
+                    {/* 이벤트 내용 */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
+                          {event.categoryName}
+                        </span>
+                        <span className="text-sm font-bold text-[#191f28]">
+                          {event.stockName}
+                        </span>
+                        {event.source && (
+                          <span className="text-xs text-[#8b95a1]">
+                            • {event.source}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
+                        {event.title}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-[#8b95a1]">
+                          {event.time}
+                        </span>
+                        <div className="text-[#8b95a1] text-sm">
+                          →
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
-            <div className="bg-white rounded-lg p-8 text-center">
-              <div className="text-lg mb-2">📋</div>
-              <div className="text-[#191f28] font-medium mb-1">관심종목이 없습니다</div>
-              <div className="text-sm text-[#8b95a1]">종목을 추가해보세요</div>
+            <div className="p-8 text-center">
+              <div className="text-4xl mb-4">📋</div>
+              <div className="text-lg font-medium text-[#191f28] mb-2">
+                해당 종목의 이벤트가 없습니다
+              </div>
+              <div className="text-sm text-[#8b95a1]">
+                다른 종목을 선택하거나 전체를 확인해보세요
+              </div>
             </div>
           )}
         </div>
 
-        {/* Right Column - 실시간 타임라인 */}
-        <div className="w-96">
-          <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
-            <div className="px-4 py-3 border-b border-[#e8e8e8]">
-              <h2 className="font-bold text-[#191f28]">실시간 타임라인</h2>
-              <p className="text-xs text-[#8b95a1] mt-1">내 종목 관련 소식</p>
-            </div>
-            <div className="divide-y divide-[#f0f0f0]">
-              {timelinePosts.map((post) => (
-                <div key={post.id} className="p-4">
-                  <FeedPost post={post} compact />
-                </div>
-              ))}
-            </div>
+        {/* 이벤트가 있는 경우 하단 설명 */}
+        {filteredEvents.length > 0 && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-[#8b95a1]">
+              이벤트를 클릭하면 해당 종목 페이지로 이동합니다
+            </p>
           </div>
-        </div>
+        )}
       </div>
-
-      {/* Modals */}
-      <AddStockModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAdd={handleAddStock}
-      />
-
-      <MemoEditModal
-        isOpen={isMemoModalOpen}
-        onClose={() => setIsMemoModalOpen(false)}
-        onSave={handleMemoSave}
-        stock={selectedStock}
-      />
-
-      <TradeSetupModal
-        isOpen={isTradeSetupModalOpen}
-        onClose={() => setIsTradeSetupModalOpen(false)}
-        onSave={handleTradeSetupSave}
-        stock={selectedStock}
-      />
-
-      <TradeAnalysisPanel
-        isOpen={isAnalysisPanelOpen}
-        onClose={() => setIsAnalysisPanelOpen(false)}
-        stockName={selectedStockName}
-      />
     </div>
   );
 }
