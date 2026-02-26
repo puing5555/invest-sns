@@ -654,7 +654,7 @@ export default function InfluencerPage() {
               <div className="flex gap-3">
                 <button
                   onClick={() => { setSelectedComment(null); router.push(`/stock/${selectedComment.stockCode}?tab=influencer`); }}
-                  className="flex-1 py-3.5 bg-[#f2f4f6] text-[#191f28] rounded-xl text-center font-medium hover:bg-[#e9ecef] transition-colors border border-[#e8e8e8]"
+                  className="flex-1 py-3.5 bg-[#e8f4fd] text-[#3182f6] rounded-xl text-center font-medium hover:bg-[#d0e8fc] transition-colors border border-blue-200"
                 >
                   📊 차트보기
                 </button>
