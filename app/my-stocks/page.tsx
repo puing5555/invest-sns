@@ -221,7 +221,7 @@ export default function MyStocksPage() {
       </div>
 
       {/* 타임라인 리스트 */}
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="px-4 py-4">
         <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
           {filteredEvents.length > 0 ? (
             <div className="divide-y divide-[#f0f0f0]">
