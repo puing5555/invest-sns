@@ -2,11 +2,42 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import FeedPost, { PostData } from '@/components/FeedPost';
-
 interface StockDetailClientProps {
   code: string;
 }
+
+// 종목별 타임라인 이벤트
+interface StockTimelineEvent {
+  id: number;
+  type: string;
+  icon: string;
+  categoryName: string;
+  title: string;
+  time: string;
+  tab: string;
+}
+
+const getStockTimeline = (code: string): StockTimelineEvent[] => {
+  const timelines: { [key: string]: StockTimelineEvent[] } = {
+    '005930': [
+      { id: 1, type: 'disclosure', icon: '🔵', categoryName: '공시', title: 'A등급 공시 - 3분기 실적 컨센서스 상회', time: '3분 전', tab: 'disclosure' },
+      { id: 2, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '슈카월드 긍정 신호', time: '1시간 전', tab: 'influencer' },
+      { id: 3, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'reports' },
+      { id: 4, type: 'insider', icon: '👔', categoryName: '임원매매', title: '이재용 사장 매수 5만주', time: '3시간 전', tab: 'insider' },
+      { id: 5, type: 'earnings', icon: '📈', categoryName: '실적', title: '3분기 영업이익 컨센서스 상회', time: '5시간 전', tab: 'earnings' },
+      { id: 6, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '코린이아빠 매수 신호', time: '8시간 전', tab: 'influencer' },
+      { id: 7, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '자사주 매입 결정', time: '1일 전', tab: 'disclosure' },
+    ],
+    '005380': [
+      { id: 1, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'reports' },
+      { id: 2, type: 'earnings', icon: '📈', categoryName: '실적', title: '3분기 영업이익 컨센서스 상회', time: '5시간 전', tab: 'earnings' },
+      { id: 3, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '전기차 신모델 출시 공시', time: '1일 전', tab: 'disclosure' },
+    ],
+  };
+  return timelines[code] || [
+    { id: 1, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '최근 공시 없음', time: '-', tab: 'disclosure' },
+  ];
+};
 
 // 탭 정의
 const tabs = [
@@ -34,42 +65,12 @@ const getStockData = (code: string) => {
   return stockMap[code] || { name: `종목 ${code}`, price: 50000, change: 0, changePercent: 0 };
 };
 
-// 더미 데이터들
-const realtimePosts: PostData[] = [
-  {
-    id: 1,
-    name: 'A등급 공시 속보',
-    handle: 'system',
-    avatar: 'system',
-    time: '5분전',
-    text: '3분기 실적 컨센서스 상회 발표\n\n🤖 AI 분석: 메모리 슈퍼사이클 본격화\n시그널 스코어 85점 🔥',
-    isSystem: true,
-    comments_count: 156,
-    reposts: 234,
-    likes: 1890,
-    views: 89000,
-  },
-  {
-    id: 2,
-    name: '코린이아빠',
-    handle: 'korini_papa',
-    avatar: 'https://i.pravatar.cc/150?img=11',
-    verified: true,
-    accuracy: 68,
-    time: '12분전',
-    text: '분할매수 1차 진입했습니다.\n목표가까지 아직 20% 여유 있어서\n2차 분할 준비하고 있어요.\n\n⚠️ 투자 판단은 본인 책임',
-    comments_count: 89,
-    reposts: 156,
-    likes: 1234,
-    views: 45000,
-  }
-];
-
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('realtime');
   const searchParams = useSearchParams();
   const router = useRouter();
   const stockData = getStockData(code);
+  const timeline = getStockTimeline(code);
 
   // URL 쿼리 파라미터에서 탭 설정
   useEffect(() => {
@@ -83,10 +84,34 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     switch (activeTab) {
       case 'realtime':
         return (
-          <div className="space-y-4">
-            {realtimePosts.map((post) => (
-              <FeedPost key={post.id} post={post} />
-            ))}
+          <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+            <div className="divide-y divide-[#f0f0f0]">
+              {timeline.map((event) => (
+                <div
+                  key={event.id}
+                  onClick={() => setActiveTab(event.tab)}
+                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
+                      {event.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
+                          {event.categoryName}
+                        </span>
+                      </div>
+                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
+                        {event.title}
+                      </h3>
+                      <span className="text-sm text-[#8b95a1]">{event.time}</span>
+                    </div>
+                    <div className="text-[#8b95a1] text-sm">→</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         );
 
