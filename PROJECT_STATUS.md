@@ -1,6 +1,74 @@
 # PROJECT STATUS - invest-sns
 
-## 최근 완료 (2026-02-26)
+## 최근 완료 (2026-02-27)
+
+### Next.js 프론트엔드를 Supabase 실제 데이터로 연결 ✅
+
+**완료된 작업:**
+
+1. **Supabase 연결 헬퍼 함수 구현 (lib/supabase.ts)**
+   - `getLatestInfluencerSignals()` - 최신 승인된 시그널들
+   - `getInfluencerChannels()` - 인플루언서 채널 목록 + 시그널 수
+   - `getStockSignalGroups()` - 종목별 시그널 그룹핑
+   - `getInfluencerProfile()` - 특정 채널 정보 + 시그널들
+   - `getStockSignals()` - 특정 종목의 시그널들
+   - 신호 한글↔영문 매핑 (`매수`→`BUY` 등)
+   - 신호별 색상 매핑 함수
+
+2. **실제 데이터 연결 우선순위별 구현**
+
+   **1순위: `/explore/influencer` (탐색 > 인플루언서) 완료** ✅
+   - "최신 발언" 탭: `influencer_signals` 최신순으로 표시
+   - "유튜버 모음" 탭: `influencer_channels` + 채널별 시그널 수
+   - "종목별 검색" 탭: 시그널에서 종목 그룹핑 표시
+   - 더미 데이터 완전 제거, 실제 DB 데이터 사용
+   - 한글 신호 (`매수`, `긍정`, `중립`, `경계`, `매도`) 정상 표시
+   - 로딩 상태 처리 추가
+
+   **2순위: `/profile/influencer/[id]` (유튜버 프로필) 완료** ✅
+   - channel_handle 기준으로 채널 정보 + 시그널 목록 가져오기
+   - 동적 라우트로 변경 (generateStaticParams 대신)
+   - 실제 채널명, 구독자수, 시그널 이력 표시
+   - 에러 핸들링: 존재하지 않는 채널 처리
+   - YouTube 영상 URL 자동 생성
+
+   **3순위: `/my-stocks` (내 종목 타임라인) 완료** ✅
+   - 인플루언서 시그널을 타임라인 이벤트로 변환
+   - 시간 전 표시 함수 구현 (x분 전, x시간 전, x일 전)
+   - 실제 데이터 기반으로 타임라인 생성
+   - 로딩 상태 처리 추가
+
+   **4순위: `/stock/[code]` (종목 상세) 인플루언서 탭 완료** ✅
+   - 해당 종목의 시그널 목록 표시
+   - 인플루언서별 필터링 기능
+   - 실제 시그널 데이터로 차트와 테이블 생성
+   - 한글 신호 처리 완료
+
+3. **데이터베이스 스키마 (v3) 활용**
+   ```sql
+   speakers: id, name, aliases, profile_image_url, bio
+   influencer_channels: id, channel_name, channel_handle, channel_url, platform, subscriber_count  
+   influencer_videos: id, channel_id, video_id, title, published_at, pipeline_version, signal_count, analyzed_at
+   influencer_signals: id, video_id, speaker_id, stock, ticker, market, mention_type, signal, confidence, timestamp, key_quote, reasoning, review_status, pipeline_version
+   ```
+
+4. **현재 DB 데이터 활용**
+   - 삼프로TV 채널 + 영상 10개 + 시그널 20개 (V7, approved)
+   - 코린이아빠 채널 + 영상 11개 + 시그널 11개 (V5, approved)
+   - speakers 12명 (삼프로TV 패널 10명 + 코린이아빠 1명)
+
+**기술적 세부사항:**
+- Supabase 클라이언트 확장 및 쿼리 최적화
+- JOIN 쿼리로 관련 테이블 데이터 함께 가져오기
+- 에러 핸들링 및 fallback 처리 완료
+- 빌드 호환성 확인 (정적 페이지 생성)
+
+**신호 매핑 시스템:**
+- DB 저장: 한글 (`매수`, `긍정`, `중립`, `경계`, `매도`)
+- UI 색상: 매수=파랑🔵, 긍정=초록🟢, 중립=노랑🟡, 경계=주황🟠, 매도=빨강🔴
+- 기존 영문 코드와 호환성 유지
+
+## 이전 완료 (2026-02-26)
 
 ### 프로필 시스템 5종 구현 완료 ✅
 
