@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { getLatestInfluencerSignals } from '@/lib/supabase';
 
 // 관심종목 칩 데이터
 const stockChips = [
@@ -28,117 +29,63 @@ interface TimelineEvent {
   source?: string;
 }
 
-// 타임라인 더미 데이터
-const timelineEvents: TimelineEvent[] = [
-  {
-    id: 1,
-    type: 'disclosure',
-    icon: '🔵',
-    categoryName: '공시',
-    stockName: '삼성전자',
-    stockCode: '005930',
-    title: 'A등급 공시 - 3분기 실적 컨센서스 상회',
-    time: '3분 전'
-  },
-  {
-    id: 2,
-    type: 'influencer',
-    icon: '🟢',
-    categoryName: '인플루언서',
-    stockName: '삼성전자',
-    stockCode: '005930',
-    title: '슈카월드 긍정 신호',
-    time: '1시간 전',
-    source: '슈카월드'
-  },
-  {
-    id: 3,
-    type: 'report',
-    icon: '📊',
-    categoryName: '리포트',
-    stockName: '현대차',
-    stockCode: '005380',
-    title: '한국투자증권 목표가 상향',
-    time: '2시간 전',
-    source: '한국투자증권'
-  },
-  {
-    id: 4,
-    type: 'insider',
-    icon: '👔',
-    categoryName: '임원매매',
-    stockName: '삼성전자',
-    stockCode: '005930',
-    title: '이재용 사장 매수 5만주',
-    time: '3시간 전'
-  },
-  {
-    id: 5,
-    type: 'earnings',
-    icon: '📈',
-    categoryName: '실적',
-    stockName: '현대차',
-    stockCode: '005380',
-    title: '3분기 영업이익 컨센서스 상회',
-    time: '5시간 전'
-  },
-  {
-    id: 6,
-    type: 'news',
-    icon: '📰',
-    categoryName: '뉴스',
-    stockName: '카카오',
-    stockCode: '035720',
-    title: 'AI 플랫폼 사업 확대 발표',
-    time: '6시간 전'
-  },
-  {
-    id: 7,
-    type: 'disclosure',
-    icon: '🔵',
-    categoryName: '공시',
-    stockName: 'LG에너지',
-    stockCode: '373220',
-    title: '北美 배터리 공장 증설 계획 공개',
-    time: '8시간 전'
-  },
-  {
-    id: 8,
-    type: 'report',
-    icon: '📊',
-    categoryName: '리포트',
-    stockName: 'NAVER',
-    stockCode: '035420',
-    title: '미래에셋 투자의견 상향',
-    time: '10시간 전',
-    source: '미래에셋증권'
-  },
-  {
-    id: 9,
-    type: 'influencer',
-    icon: '🟢',
-    categoryName: '인플루언서',
-    stockName: 'SK하이닉스',
-    stockCode: '000660',
-    title: '코린이아빠 매수 신호',
-    time: '12시간 전',
-    source: '코린이아빠'
-  },
-  {
-    id: 10,
-    type: 'earnings',
-    icon: '📈',
-    categoryName: '실적',
-    stockName: '카카오',
-    stockCode: '035720',
-    title: '모빌리티 부문 흑자 전환',
-    time: '1일 전'
-  }
-];
+  // (더미 데이터 제거됨)
 
 export default function MyStocksPage() {
   const [selectedChip, setSelectedChip] = useState('전체');
   const router = useRouter();
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // 데이터 로드
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const signals = await getLatestInfluencerSignals(20);
+        
+        // 인플루언서 시그널을 타임라인 이벤트로 변환
+        const events = signals.map((signal, index) => ({
+          id: signal.id || index,
+          type: 'influencer' as const,
+          icon: '🟢',
+          categoryName: '인플루언서',
+          stockName: signal.stock,
+          stockCode: signal.ticker,
+          title: `${signal.speakers?.name || 'Unknown'} ${signal.signal} 신호`,
+          time: getTimeAgo(signal.influencer_videos?.published_at),
+          source: signal.speakers?.name || 'Unknown'
+        }));
+
+        setTimelineEvents(events);
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setTimelineEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // 시간 전 표시 함수
+  const getTimeAgo = (dateString: string | undefined) => {
+    if (!dateString) return '알 수 없음';
+    
+    const date = new Date(dateString);
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    
+    const minutes = Math.floor(diff / (1000 * 60));
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+    if (days > 0) return `${days}일 전`;
+    if (hours > 0) return `${hours}시간 전`;
+    if (minutes > 0) return `${minutes}분 전`;
+    return '방금 전';
+  };
 
   // 선택된 종목에 따른 이벤트 필터링
   const getFilteredEvents = () => {
@@ -223,7 +170,11 @@ export default function MyStocksPage() {
       {/* 타임라인 리스트 */}
       <div className="px-4 py-4">
         <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
-          {filteredEvents.length > 0 ? (
+          {loading ? (
+            <div className="p-8 text-center">
+              <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
+            </div>
+          ) : filteredEvents.length > 0 ? (
             <div className="divide-y divide-[#f0f0f0]">
               {filteredEvents.map((event) => (
                 <div

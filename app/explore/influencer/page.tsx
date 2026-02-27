@@ -1,8 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { 
+  getLatestInfluencerSignals, 
+  getInfluencerChannels, 
+  getStockSignalGroups,
+  getSignalColor,
+  reverseSignalMapping 
+} from '@/lib/supabase';
 
 export default function InfluencerPage() {
   const [activeTab, setActiveTab] = useState('latest');
@@ -10,6 +17,39 @@ export default function InfluencerPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedComment, setSelectedComment] = useState<any>(null);
   const router = useRouter();
+
+  // Supabase 데이터 상태
+  const [latestSignals, setLatestSignals] = useState<any[]>([]);
+  const [influencerChannels, setInfluencerChannels] = useState<any[]>([]);
+  const [stockGroups, setStockGroups] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // 데이터 로드
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const [signals, channels, stocks] = await Promise.all([
+          getLatestInfluencerSignals(50),
+          getInfluencerChannels(),
+          getStockSignalGroups()
+        ]);
+        
+        setLatestSignals(signals || []);
+        setInfluencerChannels(channels || []);
+        setStockGroups(stocks || []);
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setError('데이터를 불러오는데 실패했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
 
   const tabs = [
     { id: 'latest', label: '최신 발언' },
@@ -19,342 +59,72 @@ export default function InfluencerPage() {
 
   const categoryOptions = ['전체', '한국주식', '미국주식', '코인'];
 
-  // 최신 발언 더미 데이터 (발언자 = 실제 발언한 사람 이름)
-  const latestComments = [
-    {
-      id: 1,
-      speaker: '슈카',
-      speakerId: 'syuka',
-      stock: '삼성전자',
-      stockCode: '005930',
-      signal: 'BUY',
-      quote: '실적 개선 전망으로 지금이 매수 타이밍이라고 봅니다. Q4 실적 발표 이후 반등할 것으로 예상합니다.',
-      timestamp: '[5:43]',
-      videoTitle: '"삼성전자, 지금이 기회일까? 반도체 슈퍼사이클의 시작"',
-      summary: '슈카는 삼성전자의 HBM3E 양산 본격화와 AI 반도체 수요 급증을 근거로 현재 주가가 저평가 구간이라고 분석했습니다. 특히 TSMC 대비 파운드리 경쟁력 회복과 메모리 사업부의 수익성 개선을 긍정적으로 평가하며, 본인도 현재 적극 매수 중이라고 밝혔습니다.',
-      date: '2026-02-25',
-      time: '14:25',
-      videoUrl: 'https://youtube.com/watch?v=sample1',
-      category: '한국주식'
-    },
-    {
-      id: 2,
-      speaker: '김작가',
-      speakerId: 'kimjakkga',
-      stock: '테슬라',
-      stockCode: 'TSLA',
-      signal: 'POSITIVE',
-      quote: '자율주행 기술 발전과 중국 시장 회복으로 긍정적 전망을 유지합니다.',
-      timestamp: '[12:15]',
-      videoTitle: '"테슬라 FSD V13, 게임체인저가 될까?"',
-      summary: '김작가는 테슬라의 FSD V13 업데이트와 중국 시장 점유율 회복을 근거로 긍정적 전망을 제시했습니다. 로보택시 사업 본격화 시 밸류에이션 재평가가 이뤄질 것이라고 분석했습니다.',
-      date: '2026-02-24',
-      time: '16:42',
-      videoUrl: 'https://youtube.com/watch?v=sample2',
-      category: '미국주식'
-    },
-    {
-      id: 3,
-      speaker: '홍춘욱',
-      speakerId: 'hongchunuk',
-      stock: '비트코인',
-      stockCode: 'BTC',
-      signal: 'NEUTRAL',
-      quote: '단기적으로는 횡보 구간이지만, 중장기적으로는 상승 기조를 유지할 것으로 봅니다.',
-      timestamp: '[8:22]',
-      videoTitle: '"비트코인 10만달러, 올해 가능할까?"',
-      summary: '홍춘욱은 비트코인의 반감기 이후 수급 개선과 ETF 자금 유입을 분석하면서도, 단기 과열 구간에서는 조정 가능성이 있다고 중립 의견을 제시했습니다.',
-      date: '2026-02-23',
-      time: '10:15',
-      videoUrl: 'https://youtube.com/watch?v=sample3',
-      category: '코인'
-    },
-    {
-      id: 4,
-      speaker: '박세익',
-      speakerId: 'parkseik',
-      stock: 'SK하이닉스',
-      stockCode: '000660',
-      signal: 'CONCERN',
-      quote: '메모리 반도체 수요 둔화 우려가 있어 신중한 접근이 필요해 보입니다.',
-      timestamp: '[3:17]',
-      videoTitle: '"SK하이닉스, 고점인가 저점인가?"',
-      summary: '박세익은 SK하이닉스의 HBM 수주는 긍정적이나, NAND 부문 적자 지속과 중국 메모리 업체 추격을 우려하며 경계 의견을 제시했습니다.',
-      date: '2026-02-22',
-      time: '09:33',
-      videoUrl: 'https://youtube.com/watch?v=sample4',
-      category: '한국주식'
-    },
-    {
-      id: 5,
-      speaker: '이효석',
-      speakerId: 'leehyoseok',
-      stock: '엔비디아',
-      stockCode: 'NVDA',
-      signal: 'SELL',
-      quote: '고점 대비 과열 구간에 진입했다고 판단됩니다. 차익실현을 권장합니다.',
-      timestamp: '[18:30]',
-      videoTitle: '"엔비디아 버블인가? AI 반도체 과열 분석"',
-      summary: '이효석은 엔비디아의 PER이 역사적 고점에 도달했으며, AI 투자 사이클의 피크가 가까워지고 있다고 분석하며 차익실현을 권장했습니다.',
-      date: '2026-02-21',
-      time: '15:47',
-      videoUrl: 'https://youtube.com/watch?v=sample5',
-      category: '미국주식'
-    },
-    {
-      id: 6,
-      speaker: '신사임당',
-      speakerId: 'sinsaimdang',
-      stock: '이더리움',
-      stockCode: 'ETH',
-      signal: 'POSITIVE',
-      quote: 'ETF 승인 기대감과 스테이킹 수익률로 상승 모멘텀이 지속될 것 같습니다.',
-      timestamp: '[7:05]',
-      videoTitle: '"이더리움 ETF, 승인되면 어디까지?"',
-      summary: '신사임당은 이더리움 현물 ETF 승인 가능성과 스테이킹 수익률을 분석하며 긍정적 전망을 제시했습니다.',
-      date: '2026-02-20',
-      time: '11:22',
-      videoUrl: 'https://youtube.com/watch?v=sample6',
-      category: '코인'
-    },
-    {
-      id: 7,
-      speaker: '슈카',
-      speakerId: 'syuka',
-      stock: 'NAVER',
-      stockCode: '035420',
-      signal: 'BUY',
-      quote: 'AI 사업부문 확장과 클라우드 서비스 성장으로 새로운 성장 동력을 확보했습니다.',
-      timestamp: '[14:52]',
-      videoTitle: '"네이버 AI, 구글과 경쟁 가능할까?"',
-      summary: '슈카는 네이버의 하이퍼클로바X와 클라우드 사업 확장을 분석하며, AI 시대 국내 플랫폼 중 가장 유리한 위치라고 평가했습니다.',
-      date: '2026-02-19',
-      time: '13:18',
-      videoUrl: 'https://youtube.com/watch?v=sample7',
-      category: '한국주식'
-    },
-    {
-      id: 8,
-      speaker: '김작가',
-      speakerId: 'kimjakkga',
-      stock: '애플',
-      stockCode: 'AAPL',
-      signal: 'NEUTRAL',
-      quote: 'Vision Pro 판매는 부진하지만 서비스 부문 성장으로 장기적으로는 긍정적입니다.',
-      timestamp: '[9:38]',
-      videoTitle: '"애플, 혁신 없는 성장은 가능한가?"',
-      summary: '김작가는 애플의 하드웨어 혁신 둔화에도 서비스 매출 성장과 자사주 매입 프로그램이 주가를 지지할 것이라고 분석했습니다.',
-      date: '2026-02-18',
-      time: '12:55',
-      videoUrl: 'https://youtube.com/watch?v=sample8',
-      category: '미국주식'
-    },
-    {
-      id: 9,
-      speaker: '홍춘욱',
-      speakerId: 'hongchunuk',
-      stock: '현대차',
-      stockCode: '005380',
-      signal: 'POSITIVE',
-      quote: '전기차 라인업 확대와 배터리 기술 혁신으로 경쟁력이 강화되고 있습니다.',
-      timestamp: '[11:20]',
-      videoTitle: '"현대차, 전기차 전쟁의 승자는?"',
-      summary: '홍춘욱은 현대차의 전기차 라인업 확대와 미국 조지아 공장 가동을 근거로 현재 주가가 저평가 구간이라고 분석했습니다. 특히 아이오닉 시리즈의 글로벌 판매량 증가와 SDV 전략을 긍정적으로 평가했습니다.',
-      date: '2026-02-17',
-      time: '14:40',
-      videoUrl: 'https://youtube.com/watch?v=sample9',
-      category: '한국주식'
-    }
-  ];
-
-  // 유튜버 더미 데이터 (적중률, 수익률 삭제)
-  const youtubers = [
-    {
-      id: 1,
-      name: '슈카',
-      slug: 'syuka',
-      avatar: '🎭',
-      subscribers: '128만',
-      totalSignals: 245,
-      category: '한국주식',
-      tags: ['삼성전자', 'SK하이닉스', 'NAVER']
-    },
-    {
-      id: 2,
-      name: '김작가',
-      slug: 'kimjakkga',
-      avatar: '📚',
-      subscribers: '85만',
-      totalSignals: 189,
-      category: '미국주식',
-      tags: ['테슬라', '애플', '마이크로소프트']
-    },
-    {
-      id: 3,
-      name: '홍춘욱',
-      slug: 'hongchunuk',
-      avatar: '📊',
-      subscribers: '156만',
-      totalSignals: 312,
-      category: '한국주식',
-      tags: ['현대차', 'LG화학', '카카오']
-    },
-    {
-      id: 4,
-      name: '박세익',
-      slug: 'parkseik',
-      avatar: '⚡',
-      subscribers: '92만',
-      totalSignals: 167,
-      category: '미국주식',
-      tags: ['애플', '구글', '아마존']
-    },
-    {
-      id: 5,
-      name: '이효석',
-      slug: 'leehyoseok',
-      avatar: '💎',
-      subscribers: '203만',
-      totalSignals: 398,
-      category: '미국주식',
-      tags: ['엔비디아', '마이크로소프트', '테슬라']
-    },
-    {
-      id: 6,
-      name: '신사임당',
-      slug: 'sinsaimdang',
-      avatar: '👑',
-      subscribers: '67만',
-      totalSignals: 145,
-      category: '코인',
-      tags: ['비트코인', '이더리움', '솔라나']
-    },
-    {
-      id: 7,
-      name: '투자왕김작가',
-      slug: 'tujawang',
-      avatar: '🧠',
-      subscribers: '174만',
-      totalSignals: 267,
-      category: '한국주식',
-      tags: ['셀트리온', '삼성바이오', 'LG에너지']
-    }
-  ];
-
-  // 인기 종목 더미 데이터 (대표 유튜버들과 함께 표시)
-  const popularStocks = [
-    {
-      id: 1,
-      name: '삼성전자',
-      code: '005930',
-      mentionCount: 15,
-      topYoutubers: ['슈카', '김작가', '투자왕김작가'],
-      otherCount: 12,
-      category: '한국주식'
-    },
-    {
-      id: 2,
-      name: '비트코인',
-      code: 'BTC',
-      mentionCount: 18,
-      topYoutubers: ['신사임당', '슈카', '홍춘욱'],
-      otherCount: 15,
-      category: '코인'
-    },
-    {
-      id: 3,
-      name: '테슬라',
-      code: 'TSLA',
-      mentionCount: 12,
-      topYoutubers: ['슈카', '신사임당', '박세익'],
-      otherCount: 9,
-      category: '미국주식'
-    },
-    {
-      id: 4,
-      name: '엔비디아',
-      code: 'NVDA',
-      mentionCount: 14,
-      topYoutubers: ['이효석', '김작가', '박세익'],
-      otherCount: 11,
-      category: '미국주식'
-    },
-    {
-      id: 5,
-      name: 'SK하이닉스',
-      code: '000660',
-      mentionCount: 9,
-      topYoutubers: ['슈카', '박세익', '홍춘욱'],
-      otherCount: 6,
-      category: '한국주식'
-    },
-    {
-      id: 6,
-      name: '이더리움',
-      code: 'ETH',
-      mentionCount: 11,
-      topYoutubers: ['신사임당', '이효석', '김작가'],
-      otherCount: 8,
-      category: '코인'
-    },
-    {
-      id: 7,
-      name: 'NAVER',
-      code: '035420',
-      mentionCount: 8,
-      topYoutubers: ['슈카', '홍춘욱', '투자왕김작가'],
-      otherCount: 5,
-      category: '한국주식'
-    },
-    {
-      id: 8,
-      name: '애플',
-      code: 'AAPL',
-      mentionCount: 10,
-      topYoutubers: ['김작가', '박세익', '이효석'],
-      otherCount: 7,
-      category: '미국주식'
-    },
-    {
-      id: 9,
-      name: '현대차',
-      code: '005380',
-      mentionCount: 7,
-      topYoutubers: ['홍춘욱', '슈카', '투자왕김작가'],
-      otherCount: 4,
-      category: '한국주식'
-    }
-  ];
-
-  const getSignalColor = (signal: string) => {
-    switch (signal) {
-      case 'BUY': return 'bg-blue-100 text-[#3182f6] border-blue-200';
-      case 'POSITIVE': return 'bg-green-100 text-[#22c55e] border-green-200';
-      case 'NEUTRAL': return 'bg-yellow-100 text-[#eab308] border-yellow-200';
-      case 'CONCERN': return 'bg-orange-100 text-[#f97316] border-orange-200';
-      case 'SELL': return 'bg-red-100 text-[#ef4444] border-red-200';
-      default: return 'bg-gray-100 text-gray-600 border-gray-200';
-    }
-  };
-
+  // 신호 텍스트 변환 함수
   const getSignalText = (signal: string) => {
-    switch (signal) {
-      case 'BUY': return '매수';
-      case 'POSITIVE': return '긍정';
-      case 'NEUTRAL': return '중립';
-      case 'CONCERN': return '경계';
-      case 'SELL': return '매도';
-      default: return signal;
-    }
+    // DB는 한글로 저장되어 있으므로 그대로 사용
+    return signal;
   };
 
+  // 카테고리별 필터링 함수 (현재는 전체만 지원)
   const filterData = (data: any[], category: string) => {
     if (category === '전체') return data;
-    return data.filter(item => item.category === category);
+    // TODO: 실제 카테고리 필터링 로직 추가 (한국주식/미국주식/코인)
+    return data;
+  };
+
+  // 실시간 데이터를 UI용 형태로 변환
+  const transformSignalToComment = (signal: any) => {
+    const publishedDate = signal.influencer_videos?.published_at 
+      ? new Date(signal.influencer_videos.published_at)
+      : new Date();
+    
+    const videoUrl = signal.influencer_videos?.video_id 
+      ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
+      : '#';
+
+    return {
+      id: signal.id,
+      speaker: signal.speakers?.name || 'Unknown',
+      speakerId: signal.influencer_videos?.influencer_channels?.channel_handle || 'unknown',
+      stock: signal.stock,
+      stockCode: signal.ticker,
+      signal: signal.signal,
+      quote: signal.key_quote || '키 인용문이 없습니다.',
+      timestamp: signal.timestamp ? `[${Math.floor(signal.timestamp / 60)}:${String(signal.timestamp % 60).padStart(2, '0')}]` : '[0:00]',
+      videoTitle: signal.influencer_videos?.title || 'Unknown Video',
+      summary: signal.reasoning || '분석 내용이 없습니다.',
+      date: publishedDate.toISOString().split('T')[0],
+      time: publishedDate.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }),
+      videoUrl,
+      category: '한국주식' // TODO: 실제 카테고리 분류 로직 추가
+    };
+  };
+
+  // 채널 데이터를 UI용 형태로 변환
+  const transformChannelToYoutuber = (channel: any) => {
+    return {
+      id: channel.id,
+      name: channel.channel_name,
+      slug: channel.channel_handle,
+      avatar: '📺',
+      subscribers: channel.subscriber_count ? `${Math.floor(channel.subscriber_count / 10000)}만` : 'N/A',
+      totalSignals: channel.totalSignals || 0,
+      category: '한국주식', // TODO: 실제 카테고리 분류 로직 추가
+      tags: [] // TODO: 주요 종목 태그 추가
+    };
   };
 
   const renderLatestTab = () => {
-    const filteredComments = filterData(latestComments, categoryFilter);
+    if (loading) {
+      return (
+        <div className="text-center py-8">
+          <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
+        </div>
+      );
+    }
+
+    const comments = latestSignals.map(transformSignalToComment);
+    const filteredComments = filterData(comments, categoryFilter);
 
     return (
       <div className="space-y-4">
@@ -396,7 +166,7 @@ export default function InfluencerPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getSignalColor(comment.signal)}`}>
-                    {getSignalText(comment.signal)}
+                    {comment.signal}
                   </span>
                 </div>
               </div>
@@ -423,6 +193,15 @@ export default function InfluencerPage() {
   };
 
   const renderInfluencersTab = () => {
+    if (loading) {
+      return (
+        <div className="text-center py-8">
+          <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
+        </div>
+      );
+    }
+
+    const youtubers = influencerChannels.map(transformChannelToYoutuber);
     const filteredYoutubers = filterData(youtubers, categoryFilter);
 
     return (
@@ -483,7 +262,25 @@ export default function InfluencerPage() {
   };
 
   const renderStocksTab = () => {
-    const filteredStocks = filterData(popularStocks, categoryFilter).filter(stock => 
+    if (loading) {
+      return (
+        <div className="text-center py-8">
+          <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
+        </div>
+      );
+    }
+
+    const stocks = stockGroups.map((group: any) => ({
+      id: group.ticker,
+      name: group.name,
+      code: group.ticker,
+      mentionCount: group.mentionCount,
+      topYoutubers: group.topSpeakers || [],
+      otherCount: group.otherCount || 0,
+      category: '한국주식' // TODO: 실제 카테고리 분류 로직 추가
+    }));
+
+    const filteredStocks = filterData(stocks, categoryFilter).filter(stock => 
       searchQuery === '' || stock.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
@@ -628,7 +425,7 @@ export default function InfluencerPage() {
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xl font-bold text-[#191f28]">{selectedComment.stock}</span>
                 <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getSignalColor(selectedComment.signal)}`}>
-                  {getSignalText(selectedComment.signal)}
+                  {selectedComment.signal}
                 </span>
               </div>
 

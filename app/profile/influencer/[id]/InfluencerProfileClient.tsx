@@ -1,97 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { getInfluencerProfile, getSignalColor } from '@/lib/supabase';
 
-interface StockTag {
-  name: string;
-  code: string;
-  mentions: number;
-}
-
-interface SignalRecord {
-  date: string;
-  stock: string;
-  stockCode: string;
-  signal: string;
-  content: string;
-  returnPct: string;
-  source: string;
-  videoUrl: string;
-  timestamp: string;
-  summary: string;
-  videoTitle: string;
-}
-
-interface InfluencerData {
-  id: string;
-  name: string;
-  avatar: string;
-  badge: string;
-  subscribers: string;
-  videos: number;
-  mentions: number;
-  avgReturn: string;
-  positiveRatio: string;
-  totalSignals: number;
-  coverStocks: number;
-  stocks: StockTag[];
-  signalHistory: SignalRecord[];
-}
-
-const mockInfluencers: Record<string, InfluencerData> = {
-  'syuka': {
-    id: 'syuka',
-    name: '슈카월드',
-    avatar: '슈',
-    badge: '유튜버',
-    subscribers: '253만',
-    videos: 482,
-    mentions: 1247,
-    avgReturn: '+12.3%',
-    positiveRatio: '68%',
-    totalSignals: 156,
-    coverStocks: 23,
-    stocks: [
-      { name: '삼성전자', code: '005930', mentions: 28 },
-      { name: 'NAVER', code: '035420', mentions: 15 },
-      { name: '카카오', code: '035720', mentions: 12 },
-      { name: '현대차', code: '005380', mentions: 9 },
-      { name: '테슬라', code: 'TSLA', mentions: 7 },
-    ],
-    signalHistory: [
-      { date: '02.24', stock: '삼성전자', stockCode: '005930', signal: 'BUY', content: '"5만원대면 무조건 담아야 합니다. HBM 수주 확대되면 실적 턴어라운드 확실합니다."', returnPct: '+8.3%', source: '본인채널', videoUrl: '#', timestamp: '[5:43]', videoTitle: '"삼성전자, 지금이 기회일까? 반도체 슈퍼사이클의 시작"', summary: '슈카는 삼성전자의 HBM3E 양산 본격화와 AI 반도체 수요 급증을 근거로 현재 주가가 저평가 구간이라고 분석했습니다.' },
-      { date: '02.21', stock: 'NAVER', stockCode: '035420', signal: 'POSITIVE', content: '"AI 사업 방향성은 좋아 보입니다. 관심 가져볼 만합니다."', returnPct: '+3.1%', source: '삼프로TV', videoUrl: '#', timestamp: '[12:15]', videoTitle: '"네이버 AI, 구글과 경쟁 가능할까?"', summary: '슈카는 네이버의 하이퍼클로바X와 클라우드 사업 확장을 분석하며 AI 시대 국내 플랫폼 중 가장 유리한 위치라고 평가했습니다.' },
-      { date: '02.18', stock: '카카오', stockCode: '035720', signal: 'NEUTRAL', content: '"지켜보자, 아직 판단 이르다"', returnPct: '-1.2%', source: '본인채널', videoUrl: '#', timestamp: '[8:30]', videoTitle: '"카카오, 바닥은 어디인가?"', summary: '슈카는 카카오의 구조조정 효과는 아직 미미하며, AI 전략이 구체화될 때까지 관망을 권했습니다.' },
-      { date: '02.10', stock: '테슬라', stockCode: 'TSLA', signal: 'CONCERN', content: '"지금 테슬라는 좀 조심해야 합니다"', returnPct: '-5.1%', source: '본인채널', videoUrl: '#', timestamp: '[15:20]', videoTitle: '"테슬라 버블 논란, 팩트체크"', summary: '슈카는 테슬라의 높은 밸류에이션과 경쟁 심화를 우려하며 경계 의견을 제시했습니다.' },
-      { date: '02.05', stock: '현대차', stockCode: '005380', signal: 'BUY', content: '"현대차 지금 저평가라고 봅니다. EV 라인업 본격화되면 재평가될 것"', returnPct: '+6.2%', source: '본인채널', videoUrl: '#', timestamp: '[3:17]', videoTitle: '"현대차, 전기차 전쟁의 승자는?"', summary: '슈카는 현대차의 전기차 라인업 확대와 미국 공장 가동을 근거로 저평가 판단했습니다.' },
-      { date: '01.28', stock: '삼성전자', stockCode: '005930', signal: 'POSITIVE', content: '"반도체 업사이클 시작되고 있습니다"', returnPct: '+4.5%', source: '본인채널', videoUrl: '#', timestamp: '[7:55]', videoTitle: '"반도체 업사이클, 진짜 시작인가?"', summary: '슈카는 메모리 반도체 가격 반등과 AI 서버 수요 증가를 분석하며 긍정적 전망을 제시했습니다.' },
-      { date: '01.20', stock: 'NAVER', stockCode: '035420', signal: 'BUY', content: '"네이버 지금 사면 1년 뒤 웃을 겁니다"', returnPct: '+11.2%', source: '삼프로TV', videoUrl: '#', timestamp: '[18:42]', videoTitle: '"네이버 vs 카카오, 어디에 투자할까?"', summary: '슈카는 네이버의 검색광고 독점력과 AI 투자 방향성을 높이 평가하며 매수를 권했습니다.' },
-    ]
-  }
-};
-
-function getSignalColor(signal: string) {
-  switch (signal) {
-    case 'BUY': return 'bg-blue-100 text-[#3182f6] border-blue-200';
-    case 'POSITIVE': return 'bg-green-100 text-[#22c55e] border-green-200';
-    case 'NEUTRAL': return 'bg-yellow-100 text-[#eab308] border-yellow-200';
-    case 'CONCERN': return 'bg-orange-100 text-[#f97316] border-orange-200';
-    case 'SELL': return 'bg-red-100 text-[#ef4444] border-red-200';
-    default: return 'bg-gray-100 text-gray-600';
-  }
-}
-
+// 신호별 색상 매핑
 function getSignalLabel(signal: string) {
-  switch (signal) {
-    case 'BUY': return '매수';
-    case 'POSITIVE': return '긍정';
-    case 'NEUTRAL': return '중립';
-    case 'CONCERN': return '경계';
-    case 'SELL': return '매도';
-    default: return signal;
-  }
+  // DB는 한글로 저장되어 있으므로 그대로 사용
+  return signal;
 }
 
 function getSignalDotColor(signal: string) {
@@ -108,15 +25,92 @@ function getSignalDotColor(signal: string) {
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
   const [isFollowing, setIsFollowing] = useState(false);
-  const [selectedSignal, setSelectedSignal] = useState<SignalRecord | null>(null);
-  const influencer = mockInfluencers[id];
+  const [selectedSignal, setSelectedSignal] = useState<any | null>(null);
+  const [influencer, setInfluencer] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!influencer) {
+  // 데이터 로드
+  useEffect(() => {
+    const loadInfluencerData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getInfluencerProfile(id);
+        
+        if (!data) {
+          setError('인플루언서를 찾을 수 없습니다');
+          return;
+        }
+
+        // 데이터를 UI용 형태로 변환
+        const transformedData = {
+          id: data.id,
+          name: data.channel_name,
+          avatar: data.channel_name.charAt(0),
+          badge: '유튜버',
+          subscribers: data.subscriber_count ? `${Math.floor(data.subscriber_count / 10000)}만` : 'N/A',
+          videos: 0, // TODO: 영상 수 계산
+          mentions: data.signals?.length || 0,
+          avgReturn: 'N/A', // TODO: 평균 수익률 계산
+          positiveRatio: 'N/A', // TODO: 긍정 비율 계산
+          totalSignals: data.signals?.length || 0,
+          coverStocks: new Set(data.signals?.map((s: any) => s.stock)).size || 0,
+          stocks: [], // TODO: 주요 종목 계산
+          signalHistory: (data.signals || []).map((signal: any) => {
+            const publishedDate = signal.influencer_videos?.published_at 
+              ? new Date(signal.influencer_videos.published_at)
+              : new Date();
+            
+            const videoUrl = signal.influencer_videos?.video_id 
+              ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
+              : '#';
+
+            return {
+              date: publishedDate.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' }),
+              stock: signal.stock,
+              stockCode: signal.ticker,
+              signal: signal.signal,
+              content: signal.key_quote || '키 인용문이 없습니다.',
+              returnPct: 'N/A', // TODO: 수익률 계산
+              source: data.channel_name,
+              videoUrl,
+              timestamp: signal.timestamp ? `[${Math.floor(signal.timestamp / 60)}:${String(signal.timestamp % 60).padStart(2, '0')}]` : '[0:00]',
+              videoTitle: signal.influencer_videos?.title || 'Unknown Video',
+              summary: signal.reasoning || '분석 내용이 없습니다.'
+            };
+          })
+        };
+
+        setInfluencer(transformedData);
+      } catch (err) {
+        console.error('Error loading influencer data:', err);
+        setError('데이터를 불러오는 중 오류가 발생했습니다');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadInfluencerData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-4xl mb-4">⏳</div>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">데이터를 불러오는 중...</h2>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !influencer) {
     return (
       <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center">
         <div className="text-center">
           <div className="text-4xl mb-4">🔍</div>
-          <h2 className="text-xl font-bold text-[#191f28] mb-2">인플루언서를 찾을 수 없습니다</h2>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">{error || '인플루언서를 찾을 수 없습니다'}</h2>
           <Link href="/explore/influencer" className="text-[#3182f6]">← 인플루언서 목록으로</Link>
         </div>
       </div>
@@ -236,7 +230,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                     </td>
                     <td className="py-3 px-2">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${getSignalColor(item.signal)}`}>
-                        {getSignalLabel(item.signal)}
+                        {item.signal}
                       </span>
                     </td>
                     <td className="py-3 px-2 text-[#191f28] max-w-[200px] truncate">{item.content}</td>
@@ -269,7 +263,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-xl font-bold text-[#191f28]">{selectedSignal.stock}</span>
                 <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getSignalColor(selectedSignal.signal)}`}>
-                  {getSignalLabel(selectedSignal.signal)}
+                  {selectedSignal.signal}
                 </span>
               </div>
               <p className="text-sm text-[#8b95a1] mb-5">{selectedSignal.videoTitle} · {selectedSignal.date}</p>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { getStockSignals, getSignalColor } from '@/lib/supabase';
 interface StockDetailClientProps {
   code: string;
 }
@@ -425,70 +426,85 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
 function InfluencerTab({ code }: { code: string }) {
   const [periodFilter, setPeriodFilter] = useState('전체');
   const [influencerFilter, setInfluencerFilter] = useState('전체');
+  const [signalData, setSignalData] = useState<any[]>([]);
+  const [influencerOptions, setInfluencerOptions] = useState([
+    { name: '전체', count: null }
+  ]);
+  const [loading, setLoading] = useState(true);
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
-  const influencerOptions = [
-    { name: '전체', count: null },
-    { name: '슈카월드', count: 8 },
-    { name: '김작가', count: 5 },
-    { name: '삼프로', count: 3 }
-  ];
 
-  // 더미 시그널 데이터
-  const signalData = [
-    {
-      date: '2026-02-25',
-      influencer: '슈카월드',
-      signal: 'BUY',
-      quote: '실적 개선 전망으로 매수 타이밍',
-      return: '+12.5%',
-      videoUrl: 'https://youtube.com/watch?v=dummy1',
-      price: 67200
-    },
-    {
-      date: '2026-02-20',
-      influencer: '김작가',
-      signal: 'POSITIVE',
-      quote: '반도체 업황 회복 기대감',
-      return: '+8.3%',
-      videoUrl: 'https://youtube.com/watch?v=dummy2',
-      price: 65800
-    },
-    {
-      date: '2026-02-15',
-      influencer: '삼프로',
-      signal: 'NEUTRAL',
-      quote: '단기 조정 가능성 있어 지켜봐야',
-      return: '+3.1%',
-      videoUrl: 'https://youtube.com/watch?v=dummy3',
-      price: 64100
-    },
-    {
-      date: '2026-02-10',
-      influencer: '슈카월드',
-      signal: 'CONCERN',
-      quote: '미국 증시 불안감으로 신중 필요',
-      return: '-2.8%',
-      videoUrl: 'https://youtube.com/watch?v=dummy4',
-      price: 66500
-    },
-    {
-      date: '2026-02-05',
-      influencer: '김작가',
-      signal: 'SELL',
-      quote: '고점 대비 조정 필요한 시점',
-      return: '-5.2%',
-      videoUrl: 'https://youtube.com/watch?v=dummy5',
-      price: 72000
+  // 데이터 로드
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        
+        const { getStockSignals } = await import('@/lib/supabase');
+        const signals = await getStockSignals(code);
+        
+        // 데이터를 UI용 형태로 변환
+        const transformedSignals = signals.map((signal: any) => {
+          const publishedDate = signal.influencer_videos?.published_at 
+            ? new Date(signal.influencer_videos.published_at)
+            : new Date();
+          
+          const videoUrl = signal.influencer_videos?.video_id 
+            ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
+            : '#';
+
+          return {
+            date: publishedDate.toISOString().split('T')[0],
+            influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
+            signal: signal.signal,
+            quote: signal.key_quote || '키 인용문이 없습니다.',
+            return: 'N/A', // TODO: 수익률 계산
+            videoUrl,
+            price: 0 // TODO: 발언 시점 주가
+          };
+        });
+        
+        setSignalData(transformedSignals);
+        
+        // 인플루언서별 카운트 생성
+        const influencerCounts = transformedSignals.reduce((acc: any, signal: any) => {
+          acc[signal.influencer] = (acc[signal.influencer] || 0) + 1;
+          return acc;
+        }, {});
+        
+        const influencerOpts = [
+          { name: '전체', count: null },
+          ...Object.entries(influencerCounts).map(([name, count]) => ({
+            name,
+            count: count as number
+          }))
+        ];
+        
+        setInfluencerOptions(influencerOpts);
+      } catch (error) {
+        console.error('Error loading stock signals:', error);
+        setSignalData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (code) {
+      loadData();
     }
-  ];
+  }, [code]);
 
-  const getSignalColor = (signal: string) => {
+  const getLocalSignalColor = (signal: string) => {
     switch (signal) {
+      case '매수':
       case 'BUY': return 'text-blue-600 bg-blue-100';
+      case '긍정':
       case 'POSITIVE': return 'text-green-600 bg-green-100';
+      case '중립':
       case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
+      case '경계':
       case 'CONCERN': return 'text-orange-600 bg-orange-100';
+      case '매도':
       case 'SELL': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
     }
@@ -496,25 +512,69 @@ function InfluencerTab({ code }: { code: string }) {
 
   const getSignalEmoji = (signal: string) => {
     switch (signal) {
+      case '매수':
       case 'BUY': return '🔵';
+      case '긍정':
       case 'POSITIVE': return '🟢';
+      case '중립':
       case 'NEUTRAL': return '🟡';
+      case '경계':
       case 'CONCERN': return '🟠';
+      case '매도':
       case 'SELL': return '🔴';
       default: return '⚪';
     }
   };
 
   const getSignalText = (signal: string) => {
-    switch (signal) {
-      case 'BUY': return '매수';
-      case 'POSITIVE': return '긍정';
-      case 'NEUTRAL': return '중립';
-      case 'CONCERN': return '경계';
-      case 'SELL': return '매도';
-      default: return signal;
-    }
+    // DB는 한글로 저장되어 있으므로 그대로 반환
+    return signal;
   };
+
+  // 필터링된 데이터 계산
+  const getFilteredSignals = () => {
+    let filtered = [...signalData];
+    
+    // 인플루언서 필터
+    if (influencerFilter !== '전체') {
+      filtered = filtered.filter(signal => signal.influencer === influencerFilter);
+    }
+    
+    // 기간 필터 (간단한 구현)
+    if (periodFilter !== '전체') {
+      const now = new Date();
+      let cutoffDate = new Date();
+      
+      switch (periodFilter) {
+        case '1개월':
+          cutoffDate.setMonth(now.getMonth() - 1);
+          break;
+        case '6개월':
+          cutoffDate.setMonth(now.getMonth() - 6);
+          break;
+        case '1년':
+          cutoffDate.setFullYear(now.getFullYear() - 1);
+          break;
+        case '3년':
+          cutoffDate.setFullYear(now.getFullYear() - 3);
+          break;
+      }
+      
+      filtered = filtered.filter(signal => new Date(signal.date) >= cutoffDate);
+    }
+    
+    return filtered;
+  };
+
+  const filteredSignals = getFilteredSignals();
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -627,7 +687,7 @@ function InfluencerTab({ code }: { code: string }) {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#f0f0f0]">
-              {signalData.map((signal, index) => (
+              {filteredSignals.map((signal, index) => (
                 <tr key={index} className="hover:bg-[#f8f9fa]">
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
@@ -641,7 +701,7 @@ function InfluencerTab({ code }: { code: string }) {
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-2">
                       <span className="text-lg">{getSignalEmoji(signal.signal)}</span>
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(signal.signal)}`}>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${getLocalSignalColor(signal.signal)}`}>
                         {getSignalText(signal.signal)}
                       </span>
                     </div>
