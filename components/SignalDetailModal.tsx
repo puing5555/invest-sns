@@ -64,9 +64,8 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     return signal.videoUrl;
   };
 
-  // 호스트 판단: 발언자명이 채널명에 포함되면 호스트 → 채널명 표시, 아니면 게스트 → 채널명 숨김
+  // 호스트: 발언자명이 채널명에 포함 → 채널명만. 게스트: 미포함 → "발언자 · 채널명"
   const isHost = signal.channelName && signal.influencer && signal.channelName.includes(signal.influencer);
-  const showChannel = isHost && signal.channelName !== signal.influencer;
 
   const handleLike = () => {
     if (liked) {
@@ -132,11 +131,17 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <p className="text-sm text-[#8b95a1] mt-1">{formatDate(signal.date)}</p>
             </div>
 
-            {/* 발언자 · 채널 */}
+            {/* 발언자 · 채널: 호스트면 채널명만, 게스트면 둘 다 */}
             <div className="text-sm text-[#8b95a1]">
-              발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span>
-              {showChannel && (
-                <span> · 채널: <span className="font-medium text-[#191f28]">{signal.channelName}</span></span>
+              {isHost ? (
+                <>채널: <span className="font-medium text-[#191f28]">{signal.channelName}</span></>
+              ) : (
+                <>
+                  발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span>
+                  {signal.channelName && (
+                    <span> · <span className="font-medium text-[#191f28]">{signal.channelName}</span></span>
+                  )}
+                </>
               )}
             </div>
 
