@@ -166,7 +166,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                 {filteredSignals.map((signal: any, i: number) => {
                   const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
                   const videoId = signal.influencer_videos?.video_id;
-                  const date = publishedAt ? new Date(publishedAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' }) : '';
+                  const date = publishedAt ? new Date(publishedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
                   const signalEmoji = (() => {
                     switch (signal.signal) {
                       case '매수': return '🟢';
