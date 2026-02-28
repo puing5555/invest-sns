@@ -22,19 +22,9 @@ interface SignalCardProps {
 }
 
 export default function SignalCard({
-  signal, stock, speaker, channelName, confidence,
+  signal, stock, speaker, channelName,
   keyQuote, videoTitle, date, videoUrl, onClick,
 }: SignalCardProps) {
-  const getConfidenceLabel = (c?: string) => {
-    if (!c) return null;
-    switch (c.toLowerCase()) {
-      case 'high': case 'very_high': return '높음';
-      case 'medium': return '보통';
-      case 'low': case 'very_low': return '낮음';
-      default: return c;
-    }
-  };
-
   const signalColor = V9_SIGNAL_COLORS[signal] || 'bg-gray-500 text-white';
 
   return (

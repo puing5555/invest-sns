@@ -21,7 +21,7 @@ const convertFeedPost = (feedPost: any, index: number) => ({
     hour12: false 
   }).replace(':', '시 ') + '분전',
   text: feedPost.content.text + (feedPost.content.signal 
-    ? `\n\n🎯 ${feedPost.content.signal.stock} ${feedPost.content.signal.direction}\n신뢰도: ${feedPost.content.signal.confidence === 'high' ? '높음' : feedPost.content.signal.confidence === 'medium' ? '보통' : '낮음'}`
+    ? `\n\n🎯 ${feedPost.content.signal.stock} ${feedPost.content.signal.direction}`
     : ''),
   comments_count: feedPost.engagement.comments,
   reposts: feedPost.engagement.shares,

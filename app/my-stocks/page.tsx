@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
 import FeedCard from '@/components/FeedCard';
 import SignalCard from '@/components/SignalCard';
+import SignalDetailModal from '@/components/SignalDetailModal';
 
 // 관심종목 칩 데이터
 const stockChips = [
@@ -123,6 +124,7 @@ const dummyNews = [
 
 export default function MyStocksPage() {
   const [selectedChip, setSelectedChip] = useState('전체');
+  const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const router = useRouter();
   const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -318,6 +320,17 @@ export default function MyStocksPage() {
   const handleFeedItemClick = (item: FeedItem) => {
     if (item.detailLink) {
       router.push(item.detailLink);
+    } else if (item.type === 'influencer') {
+      setSelectedSignal({
+        date: item.date,
+        influencer: item.source,
+        signal: item.signal || '중립',
+        quote: item.keyQuote || '',
+        videoUrl: item.videoUrl || '#',
+        analysis_reasoning: item.reasoning,
+        videoTitle: item.videoTitle,
+        channelName: item.channelName,
+      });
     }
   };
 
@@ -440,6 +453,8 @@ export default function MyStocksPage() {
           </div>
         )}
       </div>
+
+      <SignalDetailModal signal={selectedSignal} onClose={() => setSelectedSignal(null)} />
     </div>
   );
 }

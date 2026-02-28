@@ -39,21 +39,6 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     }
   };
 
-  const getConfidenceLabel = (c?: number | string) => {
-    if (!c) return null;
-    if (typeof c === 'string') {
-      switch (c.toLowerCase()) {
-        case 'high': return '높음';
-        case 'medium': return '보통';
-        case 'low': return '낮음';
-        default: return c;
-      }
-    }
-    if (c >= 80) return '높음';
-    if (c >= 50) return '보통';
-    return '낮음';
-  };
-
   const formatDate = (d: string) => {
     try {
       return new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -116,7 +101,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
                 {signal.signal}
               </span>
-              {/* confidence UI removed */}
+              {/* */}
             </div>
             <div className="flex items-center gap-1">
               <button
