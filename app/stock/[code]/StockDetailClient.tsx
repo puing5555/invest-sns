@@ -559,6 +559,7 @@ function InfluencerTab({ code }: { code: string }) {
         setLoading(true);
         
         const { getStockSignals } = await import('@/lib/supabase');
+        const videoSummaries = (await import('@/data/video_summaries.json')).default as Record<string, string>;
         const signals = await getStockSignals(code);
         
         // 데이터를 UI용 형태로 변환
@@ -580,7 +581,7 @@ function InfluencerTab({ code }: { code: string }) {
             videoUrl,
             price: 0,
             confidence: signal.confidence,
-            analysis_reasoning: signal.reasoning,
+            analysis_reasoning: videoSummaries[signal.video_id] || signal.influencer_videos?.video_summary || signal.reasoning,
             mention_type: signal.mention_type,
             timestamp: signal.timestamp,
             videoTitle: signal.influencer_videos?.title,
