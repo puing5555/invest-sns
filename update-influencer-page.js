@@ -1,4 +1,9 @@
-'use client';
+/**
+ * 인플루언서 페이지를 로컬 데이터 사용하도록 업데이트
+ */
+const fs = require('fs');
+
+const newInfluencerPage = `'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -26,11 +31,11 @@ export default function InfluencerPage() {
   // 로컬 데이터에서 최신 시그널 생성
   const latestSignals = influencers.flatMap(influencer => 
     influencer.recentCalls.slice(0, 3).map(call => ({
-      id: `${influencer.id}-${call.stock}`,
+      id: \`\${influencer.id}-\${call.stock}\`,
       stock: call.stock,
       signal_type: call.direction === '매수' ? 'BUY' : call.direction === '매도' ? 'SELL' : 'NEUTRAL',
       speaker: influencer.name,
-      content_snippet: `${call.stock} ${call.direction} 추천`,
+      content_snippet: \`\${call.stock} \${call.direction} 추천\`,
       video_published_at: call.date,
       accuracy_rate: influencer.accuracy,
       return_rate: call.returnRate,
@@ -64,8 +69,8 @@ export default function InfluencerPage() {
     const date = new Date(dateStr);
     const now = new Date();
     const diffHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    if (diffHours < 24) return `${diffHours}시간 전`;
-    return `${Math.floor(diffHours / 24)}일 전`;
+    if (diffHours < 24) return \`\${diffHours}시간 전\`;
+    return \`\${Math.floor(diffHours / 24)}일 전\`;
   };
 
   const filteredSignals = latestSignals.filter(signal => 
@@ -116,11 +121,11 @@ export default function InfluencerPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pb-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                className={\`pb-4 px-1 border-b-2 font-medium text-sm transition-colors \${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
+                }\`}
               >
                 {tab.label} <span className="text-xs bg-gray-100 px-2 py-1 rounded-full ml-1">{tab.count}</span>
               </button>
@@ -141,7 +146,7 @@ export default function InfluencerPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-3">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
+                      <div className={\`px-3 py-1 rounded-full text-xs font-medium \${getSignalColor(signal.signal_type)}\`}>
                         {signal.signal_type === 'BUY' ? '매수' : signal.signal_type === 'SELL' ? '매도' : '중립'}
                       </div>
                       <span className="font-bold text-lg text-gray-900">{signal.stock}</span>
@@ -164,7 +169,7 @@ export default function InfluencerPage() {
         {activeTab === 'influencers' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredInfluencers.map((influencer) => (
-              <Link key={influencer.id} href={`/profile/influencer/${influencer.id}`}>
+              <Link key={influencer.id} href={\`/profile/influencer/\${influencer.id}\`}>
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all cursor-pointer">
                   <div className="flex items-center space-x-4 mb-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
@@ -189,7 +194,7 @@ export default function InfluencerPage() {
                   
                   <div className="mt-4 pt-4 border-t border-gray-100">
                     <div className="text-sm text-gray-600">
-                      평균 수익률: <span className={`font-medium ${influencer.avgReturn > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      평균 수익률: <span className={\`font-medium \${influencer.avgReturn > 0 ? 'text-green-600' : 'text-red-600'}\`}>
                         {influencer.avgReturn > 0 ? '+' : ''}{influencer.avgReturn.toFixed(1)}%
                       </span>
                     </div>
@@ -211,7 +216,7 @@ export default function InfluencerPage() {
                   <div className="flex items-center space-x-3">
                     <h3 className="font-bold text-lg text-gray-900">{group.stock}</h3>
                     <span className="text-sm text-gray-500">{group.signal_count}개 시그널</span>
-                    <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(group.latest_signal)}`}>
+                    <div className={\`px-2 py-1 rounded text-xs font-medium \${getSignalColor(group.latest_signal)}\`}>
                       최신: {group.latest_signal === 'BUY' ? '매수' : group.latest_signal === 'SELL' ? '매도' : '중립'}
                     </div>
                   </div>
@@ -222,7 +227,7 @@ export default function InfluencerPage() {
                     <div key={signal.id} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
                       <div className="flex items-center space-x-3">
                         <span className="font-medium text-sm">{signal.speaker}</span>
-                        <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
+                        <div className={\`px-2 py-1 rounded text-xs font-medium \${getSignalColor(signal.signal_type)}\`}>
                           {signal.signal_type === 'BUY' ? '매수' : signal.signal_type === 'SELL' ? '매도' : '중립'}
                         </div>
                       </div>
@@ -239,4 +244,9 @@ export default function InfluencerPage() {
       </div>
     </div>
   );
-}
+}`;
+
+fs.writeFileSync('./app/explore/influencer/page.tsx', newInfluencerPage);
+
+console.log('✅ Updated influencer page to use local data');
+console.log('📊 Generated influencers with local signal data');
