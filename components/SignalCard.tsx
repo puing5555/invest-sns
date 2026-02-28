@@ -36,7 +36,6 @@ export default function SignalCard({
   };
 
   const signalColor = V9_SIGNAL_COLORS[signal] || 'bg-gray-500 text-white';
-  const confLabel = getConfidenceLabel(confidence);
 
   return (
     <div
@@ -54,11 +53,6 @@ export default function SignalCard({
             <span className="text-gray-400"> · {channelName}</span>
           )}
         </span>
-        {confLabel && (
-          <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
-            확신도 {confLabel}
-          </span>
-        )}
       </div>
       {keyQuote && (
         <p className="text-[15px] text-gray-700 italic mb-2 leading-relaxed line-clamp-2">

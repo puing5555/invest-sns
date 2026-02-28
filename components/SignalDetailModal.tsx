@@ -116,11 +116,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
                 {signal.signal}
               </span>
-              {getConfidenceLabel(signal.confidence) && (
-                <span className="text-xs text-[#8b95a1]">
-                  확신도 <span className="font-medium text-[#191f28]">{getConfidenceLabel(signal.confidence)}</span>
-                </span>
-              )}
+              {/* confidence UI removed */}
             </div>
             <div className="flex items-center gap-1">
               <button
