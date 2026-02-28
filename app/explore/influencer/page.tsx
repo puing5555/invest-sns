@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { influencers } from '@/data/influencerData';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
+import { speakerToSlug } from '@/lib/speakerSlugs';
 import SignalCard from '@/components/SignalCard';
 
 // V9 기준 한글 시그널 타입 색상
@@ -225,7 +226,7 @@ export default function InfluencerPage() {
                 .sort((a, b) => b.count - a.count);
 
               return speakers.map((speaker) => {
-                const speakerId = encodeURIComponent(speaker.name);
+                const speakerId = speakerToSlug(speaker.name);
                 return (
                   <Link key={speaker.name} href={`/profile/influencer/${speakerId}`}>
                     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all cursor-pointer">

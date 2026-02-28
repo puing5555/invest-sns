@@ -4,20 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getInfluencerProfileBySpeaker } from '@/lib/supabase';
+import { slugToSpeaker } from '@/lib/speakerSlugs';
 import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
 
-const V9_SIGNAL_COLORS: Record<string, string> = {
-  '매수': 'text-green-600 bg-green-50',
-  '긍정': 'text-blue-600 bg-blue-50',
-  '중립': 'text-yellow-600 bg-yellow-50',
-  '경계': 'text-orange-600 bg-orange-50',
-  '매도': 'text-red-600 bg-red-50',
-};
-
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
-  const speakerName = decodeURIComponent(id);
+  const speakerName = slugToSpeaker(id) || decodeURIComponent(id);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
@@ -52,12 +45,6 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
     );
   }
 
-  // 시그널 통계
-  const signalCounts: Record<string, number> = {};
-  profile.signals.forEach((s: any) => {
-    signalCounts[s.signal] = (signalCounts[s.signal] || 0) + 1;
-  });
-
   const handleCardClick = (signal: any) => {
     if (signal.ticker) {
       router.push(`/stock/${signal.ticker}?tab=influencer`);
@@ -88,46 +75,19 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
           </button>
         </div>
 
-        <div className="flex items-start gap-5">
-          <div className="w-16 h-16 rounded-full bg-[#e8f4fd] flex items-center justify-center text-2xl font-bold text-[#3182f6] flex-shrink-0">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-full bg-[#e8f4fd] flex items-center justify-center text-2xl font-bold text-[#3182f6] flex-shrink-0">
             {speakerName.charAt(0)}
           </div>
-          <div className="flex-1">
-            <h1 className="text-xl font-bold text-[#191f28] mb-1">{speakerName}</h1>
-            {profile.channels.length > 0 && (
-              <p className="text-sm text-[#8b95a1] mb-3">
-                {profile.channels.join(' · ')}
-              </p>
-            )}
-            <div className="flex gap-5 flex-wrap">
-              <div>
-                <span className="text-lg font-bold text-[#191f28]">{profile.totalSignals}건</span>
-                <span className="text-xs text-[#8b95a1] ml-1">총 시그널</span>
-              </div>
-              <div>
-                <span className="text-lg font-bold text-[#191f28]">{profile.stocks.length}개</span>
-                <span className="text-xs text-[#8b95a1] ml-1">커버 종목</span>
-              </div>
-            </div>
+          <div>
+            <h1 className="text-xl font-bold text-[#191f28]">{speakerName}</h1>
+            <p className="text-sm text-[#8b95a1] mt-1">총 {profile.totalSignals}건의 시그널</p>
           </div>
         </div>
       </div>
 
-      {/* 시그널 분포 */}
+      {/* 시그널 리스트 */}
       <div className="px-4 py-4">
-        <div className="bg-white rounded-xl border border-gray-100 p-4 mb-4">
-          <div className="text-xs font-medium text-[#8b95a1] mb-3">📊 시그널 분포</div>
-          <div className="flex flex-wrap gap-2">
-            {Object.entries(signalCounts).map(([sig, count]) => (
-              <span key={sig} className={`px-3 py-1.5 rounded-full text-xs font-medium ${V9_SIGNAL_COLORS[sig] || 'text-gray-600 bg-gray-50'}`}>
-                {sig} {count}건
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* 시그널 목록 */}
-        <div className="text-xs font-medium text-[#8b95a1] mb-3">📋 전체 시그널 ({profile.totalSignals}건)</div>
         <div className="space-y-3">
           {profile.signals.map((signal: any, i: number) => {
             const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
