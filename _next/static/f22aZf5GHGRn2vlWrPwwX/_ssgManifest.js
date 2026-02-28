@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fprofile\u002F[username]","\u002Fprofile\u002Fanalyst\u002F[id]","\u002Fprofile\u002Finfluencer\u002F[id]","\u002Fprofile\u002Finvestor\u002F[id]","\u002Fprofile\u002Fuser\u002F[id]","\u002Fstock\u002F[code]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
