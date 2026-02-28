@@ -13,6 +13,13 @@ const V9_SIGNAL_COLORS: Record<string, string> = {
   '매도': 'bg-red-800 text-white'
 };
 
+const STOCK_CODE_MAP: Record<string, string> = {
+  '삼성전자': '005930', 'SK하이닉스': '000660', '현대차': '005380',
+  '네이버': '035420', 'NAVER': '035420', 'LG화학': '051910',
+  '에코프로': '086520', '한국가스공사': '009540', '퓨처켐': '399720',
+  '현대건설': '000720', '신세계': '004170', 'POSCO홀딩스': '005490',
+};
+
 export default function InfluencerPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,6 +44,7 @@ export default function InfluencerPage() {
           reasoning: s.reasoning,
           videoUrl: s.influencer_videos?.video_id ? `https://youtube.com/watch?v=${s.influencer_videos.video_id}` : '#',
           videoTitle: s.influencer_videos?.title,
+          ticker: s.ticker || null,
         }));
         setDbSignals(transformed);
       } catch (e) {
@@ -77,6 +85,7 @@ export default function InfluencerPage() {
     } else {
       groups.push({
         stock: signal.stock,
+        ticker: signal.ticker || STOCK_CODE_MAP[signal.stock] || null,
         signal_count: 1,
         latest_signal: signal.signal_type,
         latest_date: signal.video_published_at,
@@ -283,41 +292,46 @@ export default function InfluencerPage() {
             <div className="text-sm text-gray-600 mb-4">
               총 {filteredStockGroups.length}개 종목
             </div>
-            {filteredStockGroups.map((group) => (
-              <div key={group.stock} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <h3 className="font-bold text-lg text-gray-900">{group.stock}</h3>
-                    <span className="text-sm text-gray-500">{group.signal_count}개 시그널</span>
-                    <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(group.latest_signal)}`}>
-                      최신: {group.latest_signal}
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  {group.signals.map((signal: any) => (
-                    <div key={signal.id} className="py-3 px-4 bg-gray-50 rounded-lg">
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center space-x-3">
-                          <span className="font-medium text-sm">{signal.speaker}</span>
-                          <div className={`px-2 py-0.5 rounded text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
-                            {signal.signal_type}
-                          </div>
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          {formatDate(signal.video_published_at)}
-                        </div>
-                      </div>
-                      {signal.key_quote && (
-                        <p className="text-sm text-gray-600 italic mt-1">
-                          &ldquo;{signal.key_quote}&rdquo;
-                        </p>
+            {filteredStockGroups.map((group) => {
+              const speakers = [...new Set(group.signals.map((s: any) => s.speaker))];
+              const speakerText = speakers.length <= 2
+                ? speakers.join(', ')
+                : `${speakers.slice(0, 2).join(', ')} 외 ${speakers.length - 2}명`;
+              const stockUrl = group.ticker ? `/stock/${group.ticker}?tab=influencer` : null;
+
+              return (
+                <div key={group.stock} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-3">
+                      {stockUrl ? (
+                        <Link href={stockUrl} className="font-bold text-lg text-[#3182f6] hover:underline">
+                          {group.stock}
+                        </Link>
+                      ) : (
+                        <h3 className="font-bold text-lg text-gray-900">{group.stock}</h3>
                       )}
+                      <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(group.latest_signal)}`}>
+                        최신: {group.latest_signal}
+                      </div>
                     </div>
-                  ))}
+                    <span className="text-sm text-gray-500">{group.signal_count}개 시그널</span>
+                  </div>
+                  <div className="text-sm text-gray-600 mb-3">
+                    👤 {speakerText}
+                  </div>
+                  {/* 최신 1개 key_quote만 표시 */}
+                  {(() => {
+                    const latestQuote = group.signals.find((s: any) => s.key_quote);
+                    return latestQuote ? (
+                      <p className="text-sm text-gray-500 italic line-clamp-2">
+                        &ldquo;{latestQuote.key_quote}&rdquo;
+                        <span className="not-italic text-gray-400 ml-1">— {latestQuote.speaker}</span>
+                      </p>
+                    ) : null;
+                  })()}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
