@@ -193,10 +193,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
               onMouseLeave={() => setHoveredSignal(null)}
               onClick={() => onSignalClick?.(marker)}
             >
-              <circle cx={marker.x} cy={marker.y} r="8" fill={getSignalColor(marker.signal)} stroke="white" strokeWidth="2.5" opacity="0.9"/>
-              <text x={marker.x} y={marker.y - 12} textAnchor="middle" fontSize="9" fill={getSignalColor(marker.signal)} fontWeight="bold">
-                {marker.signal}
-              </text>
+              <circle cx={marker.x} cy={marker.y} r="4" fill={getSignalColor(marker.signal)} stroke="white" strokeWidth="1.5" opacity="0.9"/>
             </g>
           ))}
         </svg>
@@ -224,15 +221,10 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
           </div>
         )}
 
-        {/* Legend */}
-        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-2 text-xs">
-          <div className="flex items-center gap-2 mb-1">
-            <span>🔵 매수</span><span>🟢 긍정</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>🟡 중립</span><span>🟠 경계</span><span>🔴 매도</span>
-          </div>
-        </div>
+      </div>
+      {/* Legend - bottom center */}
+      <div className="flex justify-center gap-4 mt-2 text-xs text-[#8b95a1]">
+        <span>🔵 매수</span><span>🟢 긍정</span><span>🟡 중립</span><span>🟠 경계</span><span>🔴 매도</span>
       </div>
     </div>
   );

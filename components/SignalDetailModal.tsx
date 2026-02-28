@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 interface SignalDetail {
   date: string;
   influencer: string;
@@ -20,140 +22,177 @@ interface SignalDetailModalProps {
 }
 
 export default function SignalDetailModal({ signal, onClose }: SignalDetailModalProps) {
+  const [showMemoInput, setShowMemoInput] = useState(false);
+  const [memoText, setMemoText] = useState('');
+  const [liked, setLiked] = useState(false);
+
   if (!signal) return null;
 
-  const getSignalBadge = (sig: string) => {
+  const getSignalStyle = (sig: string) => {
     switch (sig) {
-      case '매수': return { emoji: '🔵', color: 'text-blue-600 bg-blue-50 border-blue-200' };
-      case '긍정': return { emoji: '🟢', color: 'text-green-600 bg-green-50 border-green-200' };
-      case '중립': return { emoji: '🟡', color: 'text-yellow-600 bg-yellow-50 border-yellow-200' };
-      case '경계': return { emoji: '🟠', color: 'text-orange-600 bg-orange-50 border-orange-200' };
-      case '매도': return { emoji: '🔴', color: 'text-red-600 bg-red-50 border-red-200' };
-      default: return { emoji: '⚪', color: 'text-gray-600 bg-gray-50 border-gray-200' };
+      case '매수': return 'text-blue-600 bg-blue-50';
+      case '긍정': return 'text-green-600 bg-green-50';
+      case '중립': return 'text-yellow-600 bg-yellow-50';
+      case '경계': return 'text-orange-600 bg-orange-50';
+      case '매도': return 'text-red-600 bg-red-50';
+      default: return 'text-gray-600 bg-gray-50';
     }
   };
 
-  const badge = getSignalBadge(signal.signal);
+  const getConfidenceLabel = (c?: number) => {
+    if (!c) return null;
+    if (c >= 80) return '높음';
+    if (c >= 50) return '보통';
+    return '낮음';
+  };
 
-  const getMentionTypeLabel = (type?: string) => {
-    switch (type) {
-      case 'main_topic': return '메인 주제';
-      case 'detailed_analysis': return '상세 분석';
-      case 'brief_mention': return '간단 언급';
-      case 'comparison': return '비교 언급';
-      default: return type || '-';
+  const formatDate = (d: string) => {
+    try {
+      return new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch { return d; }
+  };
+
+  // 채널명 = 발언자면 발언자 생략
+  const showSpeaker = signal.channelName && signal.influencer && signal.channelName !== signal.influencer;
+
+  const handleLike = () => {
+    if (liked) {
+      setLiked(false);
+      setShowMemoInput(false);
+      return;
     }
+    setLiked(true);
+    setShowMemoInput(true);
+  };
+
+  const handleSaveMemo = () => {
+    // TODO: 메모장에 저장 연동
+    console.log('Memo saved:', memoText);
+    setShowMemoInput(false);
   };
 
   return (
     <>
       {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-black/50 z-50 transition-opacity"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
+      
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
         <div
           className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
-          <div className="sticky top-0 bg-white border-b border-[#f0f0f0] p-4 flex items-center justify-between rounded-t-2xl">
-            <h3 className="text-lg font-bold text-[#191f28]">시그널 상세</h3>
+          {/* Top bar: 신고 (left) / X (right) */}
+          <div className="sticky top-0 bg-white z-10 px-4 pt-4 pb-2 flex items-center justify-between rounded-t-2xl">
+            <button className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm flex items-center gap-1">
+              🚨 <span className="text-xs">신고</span>
+            </button>
+            <button
+              onClick={handleLike}
+              className={`transition-colors text-sm flex items-center gap-1 ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
+            >
+              {liked ? '❤️' : '🤍'} <span className="text-xs">좋아요</span>
+            </button>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f8f9fa] transition-colors text-[#8b95a1]"
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f8f9fa] transition-colors text-[#8b95a1] text-lg"
             >
               ✕
             </button>
           </div>
 
-          <div className="p-5 space-y-5">
-            {/* Signal badge + influencer */}
-            <div className="flex items-center gap-3">
-              <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${badge.color}`}>
-                <span className="text-lg">{badge.emoji}</span>
-                <span className="font-bold text-sm">{signal.signal}</span>
-              </div>
-              {signal.confidence != null && (
-                <span className="text-xs text-[#8b95a1] bg-[#f8f9fa] px-2 py-1 rounded-full">
-                  확신도 {signal.confidence}%
-                </span>
-              )}
-            </div>
+          <div className="px-5 pb-5 space-y-4">
+            {/* 영상 제목 (크게) */}
+            <h2 className="text-lg font-bold text-[#191f28] leading-snug">
+              {signal.videoTitle || signal.quote?.slice(0, 40) + '...'}
+            </h2>
 
-            {/* Info grid */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-[#8b95a1] w-16 flex-shrink-0">발언자</span>
-                <span className="text-sm font-medium text-[#191f28]">{signal.influencer}</span>
-              </div>
-              {signal.channelName && (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-[#8b95a1] w-16 flex-shrink-0">채널</span>
-                  <span className="text-sm text-[#191f28]">{signal.channelName}</span>
-                </div>
-              )}
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-[#8b95a1] w-16 flex-shrink-0">날짜</span>
-                <span className="text-sm text-[#191f28]">
-                  {new Date(signal.date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
-                </span>
-              </div>
+            {/* 날짜 + 타임스탬프 */}
+            <div className="text-sm text-[#8b95a1]">
+              {formatDate(signal.date)}
               {signal.timestamp && (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-[#8b95a1] w-16 flex-shrink-0">시점</span>
-                  <span className="text-sm text-[#191f28]">{signal.timestamp}</span>
-                </div>
-              )}
-              {signal.mention_type && (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-[#8b95a1] w-16 flex-shrink-0">언급유형</span>
-                  <span className="text-sm text-[#191f28]">{getMentionTypeLabel(signal.mention_type)}</span>
-                </div>
+                <span className="ml-1 text-[#3182f6] font-medium">[{signal.timestamp}]</span>
               )}
             </div>
 
-            {/* Key quote */}
-            <div>
-              <h4 className="text-sm font-medium text-[#8b95a1] mb-2">핵심발언</h4>
-              <div className="bg-[#f8f9fa] rounded-lg p-4 border-l-4 border-[#3182f6]">
-                <p className="text-sm text-[#191f28] leading-relaxed whitespace-pre-wrap">
-                  &ldquo;{signal.quote}&rdquo;
-                </p>
-              </div>
+            {/* 시그널 배지 + 확신도 + 채널 + 발언자 한 줄 */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
+                {signal.signal}
+              </span>
+              {getConfidenceLabel(signal.confidence) && (
+                <span className="text-xs text-[#8b95a1]">
+                  확신도 <span className="font-medium text-[#191f28]">{getConfidenceLabel(signal.confidence)}</span>
+                </span>
+              )}
+              <span className="text-xs text-[#8b95a1]">•</span>
+              <span className="text-xs text-[#8b95a1]">
+                채널: <span className="font-medium text-[#191f28]">{signal.channelName || signal.influencer}</span>
+              </span>
+              {showSpeaker && (
+                <>
+                  <span className="text-xs text-[#8b95a1]">•</span>
+                  <span className="text-xs text-[#8b95a1]">
+                    발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span>
+                  </span>
+                </>
+              )}
             </div>
 
-            {/* Analysis reasoning */}
+            {/* 핵심발언 인용 블록 */}
+            <div className="bg-[#f8f9fa] rounded-xl p-4 border-l-4 border-[#3182f6]">
+              <div className="text-xs font-medium text-[#8b95a1] mb-2">핵심발언</div>
+              <p className="text-[15px] text-[#191f28] leading-relaxed italic">
+                &ldquo;{signal.quote}&rdquo;
+              </p>
+            </div>
+
+            {/* 영상 내용 요약 */}
             {signal.analysis_reasoning && (
               <div>
-                <h4 className="text-sm font-medium text-[#8b95a1] mb-2">분석 근거</h4>
-                <div className="bg-[#fffbeb] rounded-lg p-4 border-l-4 border-[#f59e0b]">
-                  <p className="text-sm text-[#191f28] leading-relaxed whitespace-pre-wrap">
-                    {signal.analysis_reasoning}
-                  </p>
+                <div className="text-xs font-medium text-[#8b95a1] mb-2">영상 내용 요약</div>
+                <p className="text-sm text-[#333d4b] leading-relaxed whitespace-pre-wrap">
+                  {signal.analysis_reasoning}
+                </p>
+              </div>
+            )}
+
+            {/* 메모 입력 (좋아요 클릭 시) */}
+            {showMemoInput && (
+              <div className="bg-[#fffbeb] rounded-xl p-4 border border-[#fde68a]">
+                <div className="text-xs font-medium text-[#92400e] mb-2">💛 메모 남기기</div>
+                <textarea
+                  value={memoText}
+                  onChange={(e) => setMemoText(e.target.value)}
+                  placeholder="이 시그널에 대한 메모를 남겨보세요..."
+                  className="w-full text-sm border border-[#fde68a] rounded-lg p-2 resize-none h-20 focus:outline-none focus:ring-1 focus:ring-[#f59e0b]"
+                />
+                <div className="flex justify-end gap-2 mt-2">
+                  <button
+                    onClick={() => setShowMemoInput(false)}
+                    className="text-xs text-[#8b95a1] px-3 py-1.5 rounded-lg hover:bg-[#f8f9fa]"
+                  >
+                    취소
+                  </button>
+                  <button
+                    onClick={handleSaveMemo}
+                    className="text-xs text-white bg-[#f59e0b] px-3 py-1.5 rounded-lg hover:bg-[#d97706] font-medium"
+                  >
+                    저장
+                  </button>
                 </div>
               </div>
             )}
 
-            {/* Video title */}
-            {signal.videoTitle && (
-              <div>
-                <h4 className="text-sm font-medium text-[#8b95a1] mb-2">영상</h4>
-                <p className="text-sm text-[#191f28]">{signal.videoTitle}</p>
-              </div>
-            )}
-
-            {/* Watch button */}
+            {/* 영상보기 버튼 */}
             {signal.videoUrl && signal.videoUrl !== '#' && (
               <a
                 href={signal.videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-center bg-[#ff0000] hover:bg-[#cc0000] text-white font-medium py-3 rounded-lg transition-colors"
+                className="block w-full text-center bg-[#ff0000] hover:bg-[#cc0000] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px]"
               >
-                ▶ 영상보기 →
+                ▶️ 영상보기 →
               </a>
             )}
           </div>
