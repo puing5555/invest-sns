@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
+import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -262,23 +263,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return <AnalystTab code={code} />;
 
       case 'disclosure':
-        return (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-              <h4 className="font-bold text-[#191f28] mb-4">최근 공시</h4>
-              <div className="space-y-3">
-                <div className="p-3 border-l-4 border-blue-500 bg-blue-50">
-                  <div className="font-medium text-blue-800">3분기 실적 발표</div>
-                  <div className="text-sm text-blue-600">2시간 전</div>
-                </div>
-                <div className="p-3 border-l-4 border-green-500 bg-green-50">
-                  <div className="font-medium text-green-800">자사주 매입 결정</div>
-                  <div className="text-sm text-green-600">1일 전</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        return <StockDisclosureTab code={code} />;
 
       case 'earnings':
         return (
