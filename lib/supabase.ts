@@ -232,7 +232,8 @@ export async function getInfluencerProfile(channelHandle: string) {
 // 발언자 이름으로 프로필 + 시그널 가져오기
 export async function getInfluencerProfileBySpeaker(speakerName: string) {
   try {
-    const { data: signals, error } = await supabase
+    // 1) speaker_id가 이름인 경우 직접 조회
+    let { data: signals, error } = await supabase
       .from('influencer_signals')
       .select(`
         *,
@@ -251,6 +252,42 @@ export async function getInfluencerProfileBySpeaker(speakerName: string) {
       `)
       .eq('speaker_id', speakerName)
       .order('created_at', { ascending: false });
+
+    // 2) 결과 없으면 speakers 테이블에서 이름으로 UUID 찾아서 재조회
+    if ((!signals || signals.length === 0) && !error) {
+      const { data: speakerRows } = await supabase
+        .from('speakers')
+        .select('id')
+        .eq('name', speakerName);
+
+      if (speakerRows && speakerRows.length > 0) {
+        const speakerIds = speakerRows.map((s: any) => s.id);
+        const { data: signals2, error: error2 } = await supabase
+          .from('influencer_signals')
+          .select(`
+            *,
+            influencer_videos (
+              title,
+              published_at,
+              video_id,
+              influencer_channels (
+                channel_name,
+                channel_handle
+              )
+            ),
+            speakers (
+              name
+            )
+          `)
+          .in('speaker_id', speakerIds)
+          .order('created_at', { ascending: false });
+
+        if (!error2) {
+          signals = signals2;
+          error = error2;
+        }
+      }
+    }
 
     if (error) {
       console.error('Error fetching speaker signals:', error);
