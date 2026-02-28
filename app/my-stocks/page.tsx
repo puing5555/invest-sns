@@ -26,10 +26,15 @@ interface TimelineEvent {
   stockCode: string;
   title: string;
   time: string;
+  date: string;
   source?: string;
+  channelName?: string;
+  signal?: string;
+  keyQuote?: string;
+  reasoning?: string;
+  influencerId?: string;
+  originalData?: any;
 }
-
-  // (더미 데이터 제거됨)
 
 export default function MyStocksPage() {
   const [selectedChip, setSelectedChip] = useState('전체');
@@ -42,21 +47,40 @@ export default function MyStocksPage() {
     const loadData = async () => {
       try {
         setLoading(true);
-        const signals = await getLatestInfluencerSignals(20);
+        console.log('Loading influencer signals...');
+        const signals = await getLatestInfluencerSignals(50); // 더 많은 데이터 로드
+        console.log('Loaded signals:', signals.length);
         
         // 인플루언서 시그널을 타임라인 이벤트로 변환
-        const events = signals.map((signal, index) => ({
-          id: signal.id || index,
-          type: 'influencer' as const,
-          icon: '🟢',
-          categoryName: '인플루언서',
-          stockName: signal.stock,
-          stockCode: signal.ticker,
-          title: `${signal.speakers?.name || 'Unknown'} ${signal.signal} 신호`,
-          time: getTimeAgo(signal.influencer_videos?.published_at),
-          source: signal.speakers?.name || 'Unknown'
-        }));
+        const events = signals.map((signal, index) => {
+          const channelName = signal.influencer_videos?.influencer_channels?.channel_name || 
+                            signal.influencer_videos?.influencer_channels?.channel_handle || 
+                            '알 수 없는 채널';
+          const speakerName = signal.speakers?.name || channelName;
+          const publishedAt = signal.influencer_videos?.published_at || signal.timestamp;
+          const videoTitle = signal.influencer_videos?.title || '';
 
+          return {
+            id: signal.id || index,
+            type: 'influencer' as const,
+            icon: getSignalIcon(signal.signal),
+            categoryName: '인플루언서',
+            stockName: signal.stock || '알 수 없는 종목',
+            stockCode: signal.ticker || '',
+            title: `${speakerName} ${signal.signal} 신호`,
+            time: getTimeAgo(publishedAt),
+            date: formatDate(publishedAt),
+            source: speakerName,
+            channelName: channelName,
+            signal: signal.signal,
+            keyQuote: signal.key_quote || '핵심 발언 없음',
+            reasoning: signal.reasoning || '분석 내용 없음',
+            influencerId: getInfluencerSlug(channelName),
+            originalData: signal
+          };
+        });
+
+        console.log('Converted events:', events.length);
         setTimelineEvents(events);
       } catch (error) {
         console.error('Error loading data:', error);
@@ -69,22 +93,65 @@ export default function MyStocksPage() {
     loadData();
   }, []);
 
+  // 신호별 아이콘 반환
+  const getSignalIcon = (signal: string) => {
+    switch (signal) {
+      case '매수': return '🔵';
+      case '긍정': return '🟢';
+      case '중립': return '🟡';
+      case '경계': return '🟠';
+      case '매도': return '🔴';
+      default: return '⚪';
+    }
+  };
+
+  // 인플루언서 슬러그 생성
+  const getInfluencerSlug = (channelName: string) => {
+    if (channelName.includes('슈카') || channelName.includes('syuka')) return 'syuka';
+    if (channelName.includes('삼프로') || channelName.includes('3pro')) return '3protv';
+    if (channelName.includes('코린이') || channelName.includes('korini')) return 'korini_papa';
+    if (channelName.includes('달란트')) return 'talent';
+    if (channelName.includes('부읽남')) return 'booknam';
+    if (channelName.includes('이효석')) return 'hyoseok';
+    return 'unknown';
+  };
+
   // 시간 전 표시 함수
   const getTimeAgo = (dateString: string | undefined) => {
-    if (!dateString) return '알 수 없음';
+    if (!dateString) return '시간 미상';
     
-    const date = new Date(dateString);
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
+    try {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diff = now.getTime() - date.getTime();
+      
+      const minutes = Math.floor(diff / (1000 * 60));
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      
+      if (days > 0) return `${days}일 전`;
+      if (hours > 0) return `${hours}시간 전`;
+      if (minutes > 0) return `${minutes}분 전`;
+      return '방금 전';
+    } catch (error) {
+      return '시간 미상';
+    }
+  };
+
+  // 날짜 포맷팅
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return '날짜 미상';
     
-    const minutes = Math.floor(diff / (1000 * 60));
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
-    if (days > 0) return `${days}일 전`;
-    if (hours > 0) return `${hours}시간 전`;
-    if (minutes > 0) return `${minutes}분 전`;
-    return '방금 전';
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch (error) {
+      return '날짜 미상';
+    }
   };
 
   // 선택된 종목에 따른 이벤트 필터링
@@ -92,38 +159,51 @@ export default function MyStocksPage() {
     if (selectedChip === '전체') {
       return timelineEvents;
     }
+    
     const selectedStock = stockChips.find(chip => chip.name === selectedChip);
     if (!selectedStock) return timelineEvents;
     
-    return timelineEvents.filter(event => event.stockName === selectedChip);
+    // 종목명 또는 종목코드로 필터링
+    return timelineEvents.filter(event => 
+      event.stockName === selectedChip || 
+      event.stockName.includes(selectedChip) ||
+      event.stockCode === selectedStock.code
+    );
   };
 
   const filteredEvents = getFilteredEvents();
 
   // 종목 칩 클릭 핸들러
-  const handleChipClick = (chip: typeof stockChips[0]) => {
-    if (chip.name === '전체') {
-      setSelectedChip('전체');
-    } else if (chip.code) {
-      // 종목 상세 페이지로 이동
-      router.push(`/stock/${chip.code}`);
+  const handleChipClick = (chipName: string) => {
+    setSelectedChip(chipName);
+  };
+
+  // 시그널 카드 클릭 핸들러 - 종목 상세 페이지 인플루언서 탭으로 이동
+  const handleEventClick = (event: TimelineEvent) => {
+    if (event.stockCode) {
+      router.push(`/stock/${event.stockCode}?tab=influencer`);
     }
   };
 
-  // 타임라인 이벤트 클릭 핸들러 - 타입별로 적절한 탭으로 이동
-  const handleEventClick = (event: TimelineEvent) => {
-    // 이벤트 타입에 따라 적절한 탭으로 이동
-    const tabMapping = {
-      'disclosure': 'disclosure',
-      'influencer': 'influencer',
-      'report': 'reports',
-      'insider': 'insider',
-      'earnings': 'earnings',
-      'news': 'realtime'
-    };
+  // 인플루언서 이름 클릭 핸들러 - 프로필 페이지로 이동
+  const handleInfluencerClick = (event: TimelineEvent, e: React.MouseEvent) => {
+    e.stopPropagation(); // 카드 클릭 이벤트 중단
+    
+    if (event.influencerId && event.influencerId !== 'unknown') {
+      router.push(`/profile/${event.influencerId}`);
+    }
+  };
 
-    const tab = tabMapping[event.type] || 'realtime';
-    router.push(`/stock/${event.stockCode}?tab=${tab}`);
+  // 신호별 색상 반환
+  const getSignalColor = (signal: string) => {
+    switch (signal) {
+      case '매수': return 'text-blue-600 bg-blue-50';
+      case '긍정': return 'text-green-600 bg-green-50';
+      case '중립': return 'text-yellow-600 bg-yellow-50';
+      case '경계': return 'text-orange-600 bg-orange-50';
+      case '매도': return 'text-red-600 bg-red-50';
+      default: return 'text-gray-600 bg-gray-50';
+    }
   };
 
   return (
@@ -132,6 +212,9 @@ export default function MyStocksPage() {
       <div className="bg-white border-b border-[#e8e8e8] px-4 py-4">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-[#191f28]">⭐ 내 종목</h1>
+          <div className="text-sm text-[#8b95a1]">
+            {loading ? '로딩 중...' : `${filteredEvents.length}개 이벤트`}
+          </div>
         </div>
       </div>
 
@@ -141,7 +224,7 @@ export default function MyStocksPage() {
           {stockChips.map((chip, index) => (
             <button
               key={index}
-              onClick={() => handleChipClick(chip)}
+              onClick={() => handleChipClick(chip.name)}
               className={`flex-shrink-0 px-4 py-2.5 rounded-full text-sm font-medium transition-colors ${
                 selectedChip === chip.name
                   ? 'bg-[#3182f6] text-white'
@@ -182,7 +265,7 @@ export default function MyStocksPage() {
                   onClick={() => handleEventClick(event)}
                   className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-start gap-3">
                     {/* 이벤트 아이콘 */}
                     <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
                       {event.icon}
@@ -190,26 +273,60 @@ export default function MyStocksPage() {
                     
                     {/* 이벤트 내용 */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-2 mb-2">
                         <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
                           {event.categoryName}
                         </span>
                         <span className="text-sm font-bold text-[#191f28]">
                           {event.stockName}
                         </span>
-                        {event.source && (
-                          <span className="text-xs text-[#8b95a1]">
-                            • {event.source}
+                        {event.signal && (
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded ${getSignalColor(event.signal)}`}>
+                            {event.signal}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
+
+                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-2">
                         {event.title}
                       </h3>
+
+                      {/* 상세 정보 표시 */}
+                      {event.keyQuote && event.keyQuote !== '핵심 발언 없음' && (
+                        <div className="mb-2">
+                          <div className="text-xs text-[#8b95a1] mb-1">핵심 발언:</div>
+                          <div className="text-sm text-[#191f28] bg-[#f8f9fa] px-2 py-1 rounded text-ellipsis line-clamp-2">
+                            "{event.keyQuote}"
+                          </div>
+                        </div>
+                      )}
+
+                      {event.reasoning && event.reasoning !== '분석 내용 없음' && (
+                        <div className="mb-2">
+                          <div className="text-xs text-[#8b95a1] mb-1">분석:</div>
+                          <div className="text-sm text-[#191f28] line-clamp-2">
+                            {event.reasoning}
+                          </div>
+                        </div>
+                      )}
+
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-[#8b95a1]">
-                          {event.time}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-[#8b95a1]">
+                            {event.date} • {event.time}
+                          </span>
+                          {event.source && (
+                            <>
+                              <span className="text-xs text-[#8b95a1]">•</span>
+                              <button
+                                onClick={(e) => handleInfluencerClick(event, e)}
+                                className="text-sm text-[#3182f6] hover:underline"
+                              >
+                                {event.source}
+                              </button>
+                            </>
+                          )}
+                        </div>
                         <div className="text-[#8b95a1] text-sm">
                           →
                         </div>
@@ -223,10 +340,10 @@ export default function MyStocksPage() {
             <div className="p-8 text-center">
               <div className="text-4xl mb-4">📋</div>
               <div className="text-lg font-medium text-[#191f28] mb-2">
-                해당 종목의 이벤트가 없습니다
+                {selectedChip === '전체' ? '이벤트가 없습니다' : `${selectedChip}의 이벤트가 없습니다`}
               </div>
               <div className="text-sm text-[#8b95a1]">
-                다른 종목을 선택하거나 전체를 확인해보세요
+                {selectedChip !== '전체' && '다른 종목을 선택하거나 전체를 확인해보세요'}
               </div>
             </div>
           )}
@@ -236,7 +353,7 @@ export default function MyStocksPage() {
         {filteredEvents.length > 0 && (
           <div className="mt-4 text-center">
             <p className="text-sm text-[#8b95a1]">
-              이벤트를 클릭하면 해당 종목 페이지로 이동합니다
+              시그널을 클릭하면 종목 상세 페이지로, 인플루언서 이름을 클릭하면 프로필로 이동합니다
             </p>
           </div>
         )}
