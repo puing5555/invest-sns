@@ -254,7 +254,7 @@ export async function getInfluencerProfileBySpeaker(speakerName: string) {
       .order('created_at', { ascending: false });
 
     // 2) 결과 없으면 speakers 테이블에서 이름으로 UUID 찾아서 재조회
-    if ((!signals || signals.length === 0) && !error) {
+    if (!signals || signals.length === 0) {
       const { data: speakerRows } = await supabase
         .from('speakers')
         .select('id')
