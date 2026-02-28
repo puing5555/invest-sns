@@ -770,7 +770,6 @@ function InfluencerTab({ code }: { code: string }) {
             <thead className="bg-[#f8f9fa]">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">인플루언서</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
@@ -785,9 +784,6 @@ function InfluencerTab({ code }: { code: string }) {
                       month: 'short', 
                       day: 'numeric' 
                     })}
-                  </td>
-                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
-                    {signal.influencer}
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-2">

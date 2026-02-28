@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getInfluencerProfileBySpeaker } from '@/lib/supabase';
 import { slugToSpeaker } from '@/lib/speakerSlugs';
-import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
 
 export default function InfluencerProfileClient({ id }: { id: string }) {
@@ -152,30 +151,72 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
         </div>
       )}
 
-      {/* 시그널 리스트 */}
+      {/* 시그널 테이블 */}
       <div className="px-4 py-4">
-        <div className="space-y-3">
-          {filteredSignals.map((signal: any, i: number) => {
-            const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
-            const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
-            const videoId = signal.influencer_videos?.video_id;
-            const date = publishedAt ? new Date(publishedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+        <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-[#f8f9fa]">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">종목</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#f0f0f0]">
+                {filteredSignals.map((signal: any, i: number) => {
+                  const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
+                  const videoId = signal.influencer_videos?.video_id;
+                  const date = publishedAt ? new Date(publishedAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' }) : '';
+                  const signalEmoji = (() => {
+                    switch (signal.signal) {
+                      case '매수': return '🟢';
+                      case '긍정': return '🔵';
+                      case '중립': return '🟡';
+                      case '경계': return '🟠';
+                      case '매도': return '🔴';
+                      default: return '⚪';
+                    }
+                  })();
 
-            return (
-              <SignalCard
-                key={signal.id || i}
-                signal={signal.signal || '중립'}
-                stock={signal.stock || '알 수 없는 종목'}
-                speaker={speakerName}
-                channelName={channelName}
-                keyQuote={signal.key_quote}
-                videoTitle={signal.influencer_videos?.title}
-                date={date}
-                videoUrl={videoId ? `https://youtube.com/watch?v=${videoId}` : undefined}
-                onClick={() => handleCardClick(signal)}
-              />
-            );
-          })}
+                  return (
+                    <tr
+                      key={signal.id || i}
+                      className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                      onClick={() => handleCardClick(signal)}
+                    >
+                      <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{date}</td>
+                      <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">{signal.stock || '-'}</td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{signalEmoji}</span>
+                          <span className="text-xs font-medium">{signal.signal}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                        <div className="truncate" title={signal.key_quote}>{signal.key_quote || '-'}</div>
+                      </td>
+                      <td className="px-4 py-4">
+                        {videoId ? (
+                          <a
+                            href={`https://youtube.com/watch?v=${videoId}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            영상보기 →
+                          </a>
+                        ) : '-'}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
