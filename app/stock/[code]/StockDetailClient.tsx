@@ -379,7 +379,7 @@ function AnalystTab({ code }: { code: string }) {
 
   const getRatingColor = (rating: string) => {
     switch (rating) {
-      case '매수': return 'text-blue-600 bg-blue-100';
+      case '매수': return 'text-green-600 bg-green-100';
       case '중립': return 'text-yellow-600 bg-yellow-100';
       case '매도': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
@@ -548,6 +548,7 @@ function InfluencerTab({ code }: { code: string }) {
   ]);
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
+  const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '경계', '매도']);
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
 
@@ -620,9 +621,9 @@ function InfluencerTab({ code }: { code: string }) {
   const getLocalSignalColor = (signal: string) => {
     switch (signal) {
       case '매수':
-      case 'BUY': return 'text-blue-600 bg-blue-100';
+      case 'BUY': return 'text-green-600 bg-green-100';
       case '긍정':
-      case 'POSITIVE': return 'text-green-600 bg-green-100';
+      case 'POSITIVE': return 'text-blue-600 bg-blue-100';
       case '중립':
       case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
       case '경계':
@@ -636,9 +637,9 @@ function InfluencerTab({ code }: { code: string }) {
   const getSignalEmoji = (signal: string) => {
     switch (signal) {
       case '매수':
-      case 'BUY': return '🔵';
+      case 'BUY': return '🟢';
       case '긍정':
-      case 'POSITIVE': return '🟢';
+      case 'POSITIVE': return '🔵';
       case '중립':
       case 'NEUTRAL': return '🟡';
       case '경계':
@@ -689,7 +690,18 @@ function InfluencerTab({ code }: { code: string }) {
     return filtered;
   };
 
-  const filteredSignals = getFilteredSignals();
+  const handleSignalTypeToggle = (type: string) => {
+    setActiveSignalTypes(prev => {
+      if (prev.includes(type)) {
+        // Don't allow deselecting all
+        if (prev.length === 1) return prev;
+        return prev.filter(t => t !== type);
+      }
+      return [...prev, type];
+    });
+  };
+
+  const filteredSignals = getFilteredSignals().filter(s => activeSignalTypes.includes(s.signal));
 
   if (loading) {
     return (
@@ -750,9 +762,11 @@ function InfluencerTab({ code }: { code: string }) {
       {/* 차트 영역 - 실제 Yahoo Finance 데이터 */}
       <StockSignalChart
         code={code}
-        signals={filteredSignals}
+        signals={getFilteredSignals()}
         periodFilter={periodFilter}
         onSignalClick={(sig) => setSelectedSignal(sig)}
+        activeSignalTypes={activeSignalTypes}
+        onSignalTypeToggle={handleSignalTypeToggle}
       />
 
       {/* 신호 테이블 */}

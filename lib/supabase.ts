@@ -27,10 +27,10 @@ export const getSignalColor = (signal: string) => {
   switch (signal) {
     case '매수':
     case 'BUY': 
-      return 'bg-blue-100 text-[#3182f6] border-blue-200';
+      return 'bg-green-100 text-[#22c55e] border-green-200';
     case '긍정':
     case 'POSITIVE': 
-      return 'bg-green-100 text-[#22c55e] border-green-200';
+      return 'bg-blue-100 text-[#3182f6] border-blue-200';
     case '중립':
     case 'NEUTRAL': 
       return 'bg-yellow-100 text-[#eab308] border-yellow-200';

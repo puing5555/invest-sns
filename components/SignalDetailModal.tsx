@@ -30,8 +30,8 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
 
   const getSignalStyle = (sig: string) => {
     switch (sig) {
-      case '매수': return 'text-blue-600 bg-blue-50';
-      case '긍정': return 'text-green-600 bg-green-50';
+      case '매수': return 'text-green-600 bg-green-50';
+      case '긍정': return 'text-blue-600 bg-blue-50';
       case '중립': return 'text-yellow-600 bg-yellow-50';
       case '경계': return 'text-orange-600 bg-orange-50';
       case '매도': return 'text-red-600 bg-red-50';

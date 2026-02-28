@@ -23,8 +23,8 @@ export default function FeedCard({
 }: FeedCardProps) {
   const getSignalStyle = (sig: string) => {
     switch (sig) {
-      case '매수': case 'BUY': return 'text-blue-600 bg-blue-50';
-      case '긍정': case 'POSITIVE': return 'text-green-600 bg-green-50';
+      case '매수': case 'BUY': return 'text-green-600 bg-green-50';
+      case '긍정': case 'POSITIVE': return 'text-blue-600 bg-blue-50';
       case '중립': case 'NEUTRAL': return 'text-yellow-600 bg-yellow-50';
       case '경계': case 'CONCERN': return 'text-orange-600 bg-orange-50';
       case '매도': case 'SELL': return 'text-red-600 bg-red-50';

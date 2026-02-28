@@ -7,8 +7,8 @@ import { influencers } from '@/data/influencerData';
 
 // V9 기준 한글 시그널 타입 색상
 const V9_SIGNAL_COLORS = {
-  '매수': 'bg-red-600 text-white',
-  '긍정': 'bg-green-600 text-white', 
+  '매수': 'bg-green-600 text-white',
+  '긍정': 'bg-blue-600 text-white', 
   '중립': 'bg-gray-500 text-white',
   '경계': 'bg-yellow-600 text-white',
   '매도': 'bg-red-800 text-white'
