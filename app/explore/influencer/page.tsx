@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { influencers } from '@/data/influencerData';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
+import SignalCard from '@/components/SignalCard';
 
 // V9 기준 한글 시그널 타입 색상
 const V9_SIGNAL_COLORS: Record<string, string> = {
@@ -177,49 +178,18 @@ export default function InfluencerPage() {
               총 {filteredSignals.length}개 시그널 {loading && '(로딩 중...)'}
             </div>
             {filteredSignals.map((signal) => (
-              <div key={signal.id} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
-                        {signal.signal_type}
-                      </div>
-                      <span className="font-bold text-lg text-gray-900">{signal.stock}</span>
-                      <span className="text-sm text-gray-500">
-                        {signal.speaker}
-                        {signal.channelName && signal.channelName !== signal.speaker && (
-                          <span className="text-gray-400"> · {signal.channelName}</span>
-                        )}
-                      </span>
-                      {signal.confidence && (
-                        <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
-                          확신도 {signal.confidence === 'high' ? '높음' : signal.confidence === 'medium' ? '보통' : signal.confidence}
-                        </span>
-                      )}
-                    </div>
-                    {signal.key_quote && (
-                      <p className="text-[15px] text-gray-700 italic mb-2 leading-relaxed">
-                        &ldquo;{signal.key_quote}&rdquo;
-                      </p>
-                    )}
-                    {signal.videoTitle && (
-                      <p className="text-sm text-gray-500 mb-2">
-                        📹 {signal.videoTitle}
-                      </p>
-                    )}
-                    <div className="flex items-center space-x-4 text-xs text-gray-400">
-                      <span>{formatDate(signal.video_published_at)}</span>
-                      {signal.videoUrl && signal.videoUrl !== '#' && (
-                        <a href={signal.videoUrl} target="_blank" rel="noopener noreferrer"
-                           className="text-blue-500 hover:text-blue-700"
-                           onClick={(e) => e.stopPropagation()}>
-                          영상보기 →
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SignalCard
+                key={signal.id}
+                signal={signal.signal_type}
+                stock={signal.stock}
+                speaker={signal.speaker}
+                channelName={signal.channelName}
+                confidence={signal.confidence}
+                keyQuote={signal.key_quote}
+                videoTitle={signal.videoTitle}
+                date={formatDate(signal.video_published_at)}
+                videoUrl={signal.videoUrl}
+              />
             ))}
           </div>
         )}

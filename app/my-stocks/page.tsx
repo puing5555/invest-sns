@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
 import FeedCard from '@/components/FeedCard';
+import SignalCard from '@/components/SignalCard';
 
 // 관심종목 칩 데이터
 const stockChips = [
@@ -33,6 +34,10 @@ interface FeedItem {
   signal?: string;
   keyQuote?: string;
   reasoning?: string;
+  confidence?: string;
+  channelName?: string;
+  videoTitle?: string;
+  videoUrl?: string;
   profileLink?: string;
   detailLink?: string;
 }
@@ -143,6 +148,7 @@ export default function MyStocksPage() {
           const speakerName = signal.speakers?.name || channelName;
           const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
           
+          const videoId = signal.influencer_videos?.video_id;
           allItems.push({
             id: `influencer_${signal.id || index}`,
             type: 'influencer',
@@ -159,8 +165,12 @@ export default function MyStocksPage() {
             signal: signal.signal,
             keyQuote: signal.key_quote,
             reasoning: signal.reasoning,
+            confidence: signal.confidence,
+            channelName: channelName,
+            videoTitle: signal.influencer_videos?.title,
+            videoUrl: videoId ? `https://youtube.com/watch?v=${videoId}` : undefined,
             profileLink: `/profile/${getInfluencerSlug(channelName)}`,
-            detailLink: `/stock/${signal.ticker}?tab=influencer`
+            detailLink: signal.ticker ? `/stock/${signal.ticker}?tab=influencer` : undefined,
           });
         });
         
@@ -380,15 +390,32 @@ export default function MyStocksPage() {
           ) : feedItems.length > 0 ? (
             <div className="space-y-4">
               {feedItems.map((item) => (
-                <FeedCard
-                  key={item.id}
-                  icon={item.icon}
-                  categoryName={item.categoryName}
-                  title={item.title}
-                  date={item.date}
-                  signal={item.signal}
-                  onClick={() => handleFeedItemClick(item)}
-                />
+                item.type === 'influencer' ? (
+                  <SignalCard
+                    key={item.id}
+                    signal={item.signal || '중립'}
+                    stock={item.stockName}
+                    speaker={item.source}
+                    channelName={item.channelName}
+                    confidence={item.confidence}
+                    keyQuote={item.keyQuote}
+                    videoTitle={item.videoTitle}
+                    date={item.date}
+                    videoUrl={item.videoUrl}
+                    onClick={() => handleFeedItemClick(item)}
+                  />
+                ) : (
+                  <FeedCard
+                    key={item.id}
+                    icon={item.icon}
+                    categoryName={item.categoryName}
+                    title={item.title}
+                    date={item.date}
+                    signal={item.signal}
+                    keyQuote={item.subtitle}
+                    onClick={() => handleFeedItemClick(item)}
+                  />
+                )
               ))}
             </div>
           ) : (

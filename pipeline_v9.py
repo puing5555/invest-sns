@@ -2,8 +2,11 @@
 Pipeline V9.1 - Influencer Signal Analysis
 Reads subtitle files, analyzes with Claude, validates, inserts to Supabase.
 """
-import json, os, ssl, uuid, time, re
+import json, os, sys, ssl, uuid, time, re
 import urllib.request
+
+# Force unbuffered output
+sys.stdout.reconfigure(line_buffering=True)
 
 SUBS_DIR = r"C:\Users\Mario\work\subs"
 SUPABASE_URL = "https://arypzhotxflimroprmdk.supabase.co"
