@@ -5,6 +5,9 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
+import FeedCard from '@/components/FeedCard';
+import StockSignalChart from '@/components/StockSignalChart';
+import SignalDetailModal from '@/components/SignalDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -56,24 +59,32 @@ const tabs = [
   { id: 'memo', label: '메모', icon: '📝' },
 ];
 
-// 더미 종목 데이터
+import stockPricesData from '@/data/stockPrices.json';
+
+// 종목 데이터 - 실제 Yahoo Finance 데이터 사용
 const getStockData = (code: string) => {
-  const stockMap: { [key: string]: any } = {
-    '005930': { name: '삼성전자', price: 68500, change: 1200, changePercent: 1.78 },
-    '000660': { name: 'SK하이닉스', price: 178000, change: -2100, changePercent: -1.16 },
-    '035420': { name: 'NAVER', price: 185500, change: 3200, changePercent: 1.76 },
-    '051910': { name: 'LG화학', price: 412000, change: -5500, changePercent: -1.32 },
-    '005380': { name: '현대차', price: 221000, change: 4500, changePercent: 2.08 },
+  const nameMap: { [key: string]: string } = {
+    '005930': '삼성전자', '000660': 'SK하이닉스', '035420': 'NAVER',
+    '051910': 'LG화학', '005380': '현대차', '086520': '에코프로',
+    '009540': '한국가스공사', '399720': '퓨처켐',
   };
 
-  return stockMap[code] || { name: `종목 ${code}`, price: 50000, change: 0, changePercent: 0 };
+  const realData = (stockPricesData as any)[code];
+  if (realData) {
+    return {
+      name: nameMap[code] || `종목 ${code}`,
+      price: realData.currentPrice,
+      change: realData.change,
+      changePercent: realData.changePercent,
+    };
+  }
+
+  return { name: nameMap[code] || `종목 ${code}`, price: 0, change: 0, changePercent: 0 };
 };
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('feed');
   const [isWatched, setIsWatched] = useState(false);
-  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
-  const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
   const searchParams = useSearchParams();
   const router = useRouter();
   const stockData = getStockData(code);
@@ -135,117 +146,17 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     switch (activeTab) {
       case 'feed':
         return (
-          <div className="space-y-6">
-            {/* 타임라인 이벤트 (차트 제거) */}
-            <div className="space-y-4">
+          <div className="space-y-4">
             {timeline.map((event) => (
-              <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
-                <div
-                  onClick={() => setActiveTab(event.tab)}
-                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
-                      {event.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
-                          {event.categoryName}
-                        </span>
-                      </div>
-                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
-                        {event.title}
-                      </h3>
-                      <span className="text-sm text-[#8b95a1]">{event.time}</span>
-                    </div>
-                    <div className="text-[#8b95a1] text-sm">→</div>
-                  </div>
-                </div>
-                
-                {/* Comment Section */}
-                <div className="border-t border-[#f0f0f0] px-4 py-3">
-                  <div className="flex items-center gap-2 mb-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setShowComments(prev => ({
-                          ...prev,
-                          [event.id]: !prev[event.id]
-                        }));
-                      }}
-                      className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
-                    >
-                      💬 댓글 {Math.floor(Math.random() * 10) + 1}개
-                    </button>
-                    <span className="text-xs text-[#8b95a1]">•</span>
-                    <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
-                      ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
-                    </button>
-                  </div>
-                  
-                  {/* Comment Input */}
-                  <div className="flex gap-2">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                      👤
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="댓글을 입력하세요..."
-                      value={commentInputs[event.id] || ''}
-                      onChange={(e) => {
-                        setCommentInputs(prev => ({
-                          ...prev,
-                          [event.id]: e.target.value
-                        }));
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                      className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
-                    />
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (commentInputs[event.id]?.trim()) {
-                          // Here you would handle comment submission
-                          setCommentInputs(prev => ({
-                            ...prev,
-                            [event.id]: ''
-                          }));
-                        }
-                      }}
-                      className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
-                    >
-                      등록
-                    </button>
-                  </div>
-                  
-                  {/* Comments List */}
-                  {showComments[event.id] && (
-                    <div className="mt-3 space-y-2 pl-8">
-                      <div className="flex gap-2 text-sm">
-                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                          🐶
-                        </div>
-                        <div>
-                          <span className="font-medium text-[#191f28]">투자왕</span>
-                          <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-2 text-sm">
-                        <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                          🎯
-                        </div>
-                        <div>
-                          <span className="font-medium text-[#191f28]">주식초보</span>
-                          <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              <FeedCard
+                key={event.id}
+                icon={event.icon}
+                categoryName={event.categoryName}
+                title={event.title}
+                date={event.time}
+                onClick={() => setActiveTab(event.tab)}
+              />
             ))}
-            </div>
           </div>
         );
 
@@ -636,6 +547,7 @@ function InfluencerTab({ code }: { code: string }) {
     { name: '전체', count: null }
   ]);
   const [loading, setLoading] = useState(true);
+  const [selectedSignal, setSelectedSignal] = useState<any>(null);
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
 
@@ -663,9 +575,15 @@ function InfluencerTab({ code }: { code: string }) {
             influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
             signal: signal.signal,
             quote: signal.key_quote || '키 인용문이 없습니다.',
-            return: 'N/A', // TODO: 수익률 계산
+            return: 'N/A',
             videoUrl,
-            price: 0 // TODO: 발언 시점 주가
+            price: 0,
+            confidence: signal.confidence,
+            analysis_reasoning: signal.analysis_reasoning,
+            mention_type: signal.mention_type,
+            timestamp: signal.timestamp,
+            videoTitle: signal.influencer_videos?.title,
+            channelName: signal.influencer_videos?.influencer_channels?.channel_name,
           };
         });
         
@@ -829,50 +747,13 @@ function InfluencerTab({ code }: { code: string }) {
         </div>
       </div>
 
-      {/* 차트 영역 */}
-      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-        <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 신호</h4>
-        <div className="relative h-64 bg-[#f8f9fa] rounded-lg overflow-hidden">
-          {/* 간단한 주가 차트 (SVG) */}
-          <svg className="w-full h-full" viewBox="0 0 400 200">
-            {/* 배경 격자 */}
-            <defs>
-              <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="1"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-            
-            {/* 주가 라인 */}
-            <path
-              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60"
-              fill="none"
-              stroke="#3182f6"
-              strokeWidth="2"
-            />
-            
-            {/* 신호 점들 */}
-            <circle cx="60" cy="100" r="6" fill="#dc3545" stroke="white" strokeWidth="2" />
-            <circle cx="140" cy="110" r="6" fill="#17a2b8" stroke="white" strokeWidth="2" />
-            <circle cx="220" cy="70" r="6" fill="#28a745" stroke="white" strokeWidth="2" />
-            <circle cx="300" cy="65" r="6" fill="#ffc107" stroke="white" strokeWidth="2" />
-            <circle cx="380" cy="60" r="6" fill="#007bff" stroke="white" strokeWidth="2" />
-          </svg>
-          
-          {/* 범례 */}
-          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-3 text-xs">
-            <div className="flex items-center gap-2 mb-1">
-              <span>🔵 매수</span>
-              <span>🟢 긍정</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>🟡 중립</span>
-              <span>🟠 경계</span>
-              <span>🔴 매도</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* 차트 영역 - 실제 Yahoo Finance 데이터 */}
+      <StockSignalChart
+        code={code}
+        signals={filteredSignals}
+        periodFilter={periodFilter}
+        onSignalClick={(sig) => setSelectedSignal(sig)}
+      />
 
       {/* 신호 테이블 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
@@ -893,7 +774,11 @@ function InfluencerTab({ code }: { code: string }) {
             </thead>
             <tbody className="divide-y divide-[#f0f0f0]">
               {filteredSignals.map((signal, index) => (
-                <tr key={index} className="hover:bg-[#f8f9fa]">
+                <tr
+                  key={index}
+                  className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                  onClick={() => setSelectedSignal(signal)}
+                >
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
                       month: 'short', 
@@ -912,7 +797,7 @@ function InfluencerTab({ code }: { code: string }) {
                     </div>
                   </td>
                   <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                    <div className="truncate">{signal.quote}</div>
+                    <div className="truncate" title={signal.quote}>{signal.quote}</div>
                   </td>
                   <td className="px-4 py-4 text-sm font-medium">
                     <span className={signal.return.startsWith('+') ? 'text-red-600' : 'text-blue-600'}>
@@ -925,6 +810,7 @@ function InfluencerTab({ code }: { code: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       영상보기 →
                     </a>
@@ -935,6 +821,12 @@ function InfluencerTab({ code }: { code: string }) {
           </table>
         </div>
       </div>
+
+      {/* 시그널 상세 모달 */}
+      <SignalDetailModal
+        signal={selectedSignal}
+        onClose={() => setSelectedSignal(null)}
+      />
     </div>
   );
 }
