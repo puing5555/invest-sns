@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getStockSignals } from '@/lib/supabase';
-import StockChartV2 from '@/components/StockChartV2';
+import { getStockSignals, getSignalColor } from '@/lib/supabase';
+import StockChart from '@/components/StockChart';
 import { influencers } from '@/data/influencerData';
 
 interface StockDetailClientProps {
   code: string;
 }
 
-// 종목별 타임라인 이벤트 (실시간 탭용)
+// 종목별 타임라인 이벤트
 interface StockTimelineEvent {
   id: number;
   type: string;
@@ -18,93 +18,42 @@ interface StockTimelineEvent {
   categoryName: string;
   title: string;
   time: string;
-  content?: string;
+  tab: string;
 }
 
-const getRealtimeTimeline = (code: string): StockTimelineEvent[] => {
+const getStockTimeline = (code: string): StockTimelineEvent[] => {
   const timelines: { [key: string]: StockTimelineEvent[] } = {
     '005930': [
-      { 
-        id: 1, 
-        type: 'news', 
-        icon: '📰', 
-        categoryName: '뉴스', 
-        title: '삼성전자, 3분기 실적 컨센서스 상회', 
-        time: '3분 전',
-        content: '삼성전자가 발표한 3분기 실적이 시장 예상치를 웃돌았습니다. DS 부문의 회복이 주효했다는 분석입니다.'
-      },
-      { 
-        id: 2, 
-        type: 'disclosure', 
-        icon: '📋', 
-        categoryName: '공시', 
-        title: 'A등급 공시 - 자사주 매입 결정', 
-        time: '1시간 전',
-        content: '보통주 500만주 한도 내에서 주주가치 제고를 위한 자사주 매입을 결정했다고 공시했습니다.'
-      },
-      { 
-        id: 3, 
-        type: 'signal', 
-        icon: '🔵', 
-        categoryName: '시그널', 
-        title: '슈카월드 매수 시그널', 
-        time: '2시간 전',
-        content: '"현재 주가는 충분히 매력적인 구간. 장기 관점에서 매수 추천" - 슈카월드'
-      },
-      { 
-        id: 4, 
-        type: 'insider', 
-        icon: '👔', 
-        categoryName: '임원매매', 
-        title: '임원 매수 거래 발생', 
-        time: '3시간 전',
-        content: '상무급 임원이 5만주 규모의 매수 거래를 실행했습니다.'
-      },
-      { 
-        id: 5, 
-        type: 'disclosure', 
-        icon: '📋', 
-        categoryName: '공시', 
-        title: '3분기 실적 공시', 
-        time: '5시간 전',
-        content: '매출액 74조원, 영업이익 9.18조원으로 전분기 대비 증가했습니다.'
-      }
+      { id: 1, type: 'disclosure', icon: '🔵', categoryName: '공시', title: 'A등급 공시 - 3분기 실적 컨센서스 상회', time: '3분 전', tab: 'disclosure' },
+      { id: 2, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '슈카월드 긍정 신호', time: '1시간 전', tab: 'influencer' },
+      { id: 3, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'reports' },
+      { id: 4, type: 'insider', icon: '👔', categoryName: '임원매매', title: '이재용 사장 매수 5만주', time: '3시간 전', tab: 'insider' },
+      { id: 5, type: 'earnings', icon: '📈', categoryName: '실적', title: '3분기 영업이익 컨센서스 상회', time: '5시간 전', tab: 'earnings' },
+      { id: 6, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '코린이아빠 매수 신호', time: '8시간 전', tab: 'influencer' },
+      { id: 7, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '자사주 매입 결정', time: '1일 전', tab: 'disclosure' },
     ],
-    '000660': [
-      { 
-        id: 1, 
-        type: 'news', 
-        icon: '📰', 
-        categoryName: '뉴스', 
-        title: 'SK하이닉스, HBM3E 양산 본격화', 
-        time: '1시간 전',
-        content: 'SK하이닉스가 차세대 고대역폭메모리 HBM3E의 양산을 본격화한다고 발표했습니다.'
-      },
-      { 
-        id: 2, 
-        type: 'signal', 
-        icon: '🟢', 
-        categoryName: '시그널', 
-        title: '이효석 긍정 시그널', 
-        time: '2시간 전',
-        content: '"반도체 업사이클 시작. SK하이닉스는 HBM 수혜주로 주목" - 이효석'
-      }
-    ]
+    '005380': [
+      { id: 1, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'reports' },
+      { id: 2, type: 'earnings', icon: '📈', categoryName: '실적', title: '3분기 영업이익 컨센서스 상회', time: '5시간 전', tab: 'earnings' },
+      { id: 3, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '전기차 신모델 출시 공시', time: '1일 전', tab: 'disclosure' },
+    ],
   };
   return timelines[code] || [
-    { id: 1, type: 'news', icon: '📰', categoryName: '뉴스', title: '최근 뉴스 없음', time: '-' },
+    { id: 1, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '최근 공시 없음', time: '-', tab: 'disclosure' },
   ];
 };
 
-// 탭 정의 (수정된 구조)
+// 탭 정의
 const tabs = [
-  { id: 'realtime', label: '실시간', icon: '⚡', description: '뉴스·공시·시그널 피드' },
-  { id: 'influencer', label: '인플루언서', icon: '👤', description: '차트 + 인플루언서 시그널' },
-  { id: 'analyst', label: '애널리스트', icon: '🎯', description: '차트 + 애널리스트 리포트' },
-  { id: 'disclosure', label: '공시', icon: '📋', description: '공시 상세' },
-  { id: 'earnings', label: '실적', icon: '📊', description: '실적 분석' },
-  { id: 'insider', label: '임원매매', icon: '💼', description: '임원 거래' },
-  { id: 'memo', label: '메모', icon: '📝', description: '개인 메모' },
+  { id: 'feed', label: '피드', icon: '📱' },
+  { id: 'influencer', label: '인플루언서', icon: '📈' },
+  { id: 'analyst', label: '애널리스트', icon: '📊' },
+  { id: 'disclosure', label: '공시', icon: '📋' },
+  { id: 'earnings', label: '실적', icon: '📈' },
+  { id: 'reports', label: '리포트', icon: '📄' },
+  { id: 'insider', label: '임원매매', icon: '💼' },
+  { id: 'calendar', label: '일정', icon: '📅' },
+  { id: 'memo', label: '메모', icon: '📝' },
 ];
 
 // 더미 종목 데이터
@@ -120,20 +69,15 @@ const getStockData = (code: string) => {
   return stockMap[code] || { name: `종목 ${code}`, price: 50000, change: 0, changePercent: 0 };
 };
 
-export default function StockDetailClientV2({ code }: StockDetailClientProps) {
-  const [activeTab, setActiveTab] = useState('realtime');
+export default function StockDetailClient({ code }: StockDetailClientProps) {
+  const [activeTab, setActiveTab] = useState('feed');
   const [isWatched, setIsWatched] = useState(false);
   const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
   const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
-  const [stockSignals, setStockSignals] = useState<any[]>([]);
-  const [influencerSignals, setInfluencerSignals] = useState<any[]>([]);
-  const [analystSignals, setAnalystSignals] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const searchParams = useSearchParams();
   const router = useRouter();
   const stockData = getStockData(code);
-  const realtimeTimeline = getRealtimeTimeline(code);
+  const timeline = getStockTimeline(code);
 
   // URL 쿼리 파라미터에서 탭 설정
   useEffect(() => {
@@ -143,232 +87,180 @@ export default function StockDetailClientV2({ code }: StockDetailClientProps) {
     }
   }, [searchParams]);
 
-  // 시그널 데이터 로드
-  useEffect(() => {
-    const loadSignals = async () => {
-      try {
-        setLoading(true);
-        
-        // Supabase에서 시그널 데이터 가져오기
-        const signals = await getStockSignals(code);
-        
-        // 인플루언서 시그널과 애널리스트 시그널 분리
-        const influencerSigs = signals.filter((s: any) => 
-          s.speaker_type === 'influencer' || !s.speaker_type
-        );
-        const analystSigs = signals.filter((s: any) => 
-          s.speaker_type === 'analyst'
-        );
-
-        setStockSignals(signals);
-        setInfluencerSignals(influencerSigs);
-        setAnalystSignals(analystSigs);
-
-        console.log(`시그널 로드 완료: 전체 ${signals.length}, 인플루언서 ${influencerSigs.length}, 애널리스트 ${analystSigs.length}`);
-      } catch (error) {
-        console.error('시그널 로드 실패:', error);
-        
-        // 에러 시 더미 시그널 사용
-        const dummySignals = getDummySignals(code, stockData.name);
-        setStockSignals(dummySignals);
-        setInfluencerSignals(dummySignals.filter(s => s.speaker_type !== 'analyst'));
-        setAnalystSignals(dummySignals.filter(s => s.speaker_type === 'analyst'));
-      }
-      
-      setLoading(false);
+  // 해당 종목의 시그널 가져오기
+  const getStockSignalsLocal = (code: string, name: string) => {
+    const stockMapping: { [key: string]: string[] } = {
+      '005930': ['삼성전자', '삼성'],
+      '000660': ['SK하이닉스', '하이닉스'],
+      '035420': ['네이버', 'NAVER'],
+      '051910': ['LG화학'],
+      '005380': ['현대차', '현대자동차'],
+      '005490': ['POSCO홀딩스', '포스코'],
+      'BTC': ['비트코인', 'Bitcoin'],
+      'ETH': ['이더리움', 'Ethereum']
     };
 
-    loadSignals();
-  }, [code, stockData.name]);
-
-  // 더미 시그널 데이터 생성
-  const getDummySignals = (code: string, name: string) => {
-    const signals = [
-      {
-        id: 1,
-        stock: name,
-        signal: '매수',
-        speaker: '슈카',
-        date: '2026-02-25',
-        key_quote: `${name} 지금 가격에서 매수 추천`,
-        speaker_type: 'influencer',
-        video_published_at: '2026-02-25T10:00:00Z'
-      },
-      {
-        id: 2,
-        stock: name,
-        signal: '긍정',
-        speaker: '이효석',
-        date: '2026-02-24',
-        key_quote: `${name} 펀더멘털 개선 기대`,
-        speaker_type: 'influencer',
-        video_published_at: '2026-02-24T15:30:00Z'
-      },
-      {
-        id: 3,
-        stock: name,
-        signal: '매수',
-        speaker: 'KB증권 김○○',
-        date: '2026-02-23',
-        key_quote: '목표주가 상향 - 매수 추천',
-        speaker_type: 'analyst',
-        report_published_at: '2026-02-23T09:00:00Z'
-      }
-    ];
+    const possibleNames = stockMapping[code] || [name];
+    const signals: any[] = [];
+    
+    influencers.forEach(influencer => {
+      influencer.recentCalls.forEach(call => {
+        const isMatch = possibleNames.some(stockName => 
+          call.stock.includes(stockName) || stockName.includes(call.stock)
+        );
+        
+        if (isMatch) {
+          signals.push({
+            id: `${influencer.id}-${call.stock}`,
+            stock: call.stock,
+            signal_type: call.direction,
+            speaker: influencer.name,
+            content_snippet: `${call.stock} ${call.direction} 추천`,
+            date: call.date,
+            video_published_at: call.date,
+            accuracy_rate: influencer.accuracy,
+            return_rate: call.returnRate,
+            status: call.status
+          });
+        }
+      });
+    });
+    
     return signals;
   };
 
+  const stockSignals = getStockSignalsLocal(code, stockData.name);
+
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'realtime':
+      case 'feed':
         return (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">⚡</div>
-                <div>
-                  <h3 className="font-bold text-[#191f28]">실시간 피드</h3>
-                  <p className="text-sm text-[#8b95a1]">최신 뉴스, 공시, 시그널을 실시간으로 확인하세요</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 실시간 타임라인 (차트 없음) */}
-            <div className="space-y-3">
-              {realtimeTimeline.map((event) => (
-                <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
-                  <div className="px-4 py-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
-                        {event.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
-                            {event.categoryName}
-                          </span>
-                          <span className="text-sm text-[#8b95a1]">{event.time}</span>
-                        </div>
-                        <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-2">
-                          {event.title}
-                        </h3>
-                        {event.content && (
-                          <p className="text-sm text-[#8b95a1] leading-relaxed">
-                            {event.content}
-                          </p>
-                        )}
-                      </div>
+          <div className="space-y-6">
+            {/* 주가 차트 */}
+            <StockChart 
+              stockCode={code}
+              stockName={stockData.name}
+              signals={stockSignals}
+            />
+            
+            {/* 타임라인 이벤트 */}
+            <div className="space-y-4">
+            {timeline.map((event) => (
+              <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+                <div
+                  onClick={() => setActiveTab(event.tab)}
+                  className="px-4 py-4 hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
+                      {event.icon}
                     </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
+                          {event.categoryName}
+                        </span>
+                      </div>
+                      <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
+                        {event.title}
+                      </h3>
+                      <span className="text-sm text-[#8b95a1]">{event.time}</span>
+                    </div>
+                    <div className="text-[#8b95a1] text-sm">→</div>
+                  </div>
+                </div>
+                
+                {/* Comment Section */}
+                <div className="border-t border-[#f0f0f0] px-4 py-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowComments(prev => ({
+                          ...prev,
+                          [event.id]: !prev[event.id]
+                        }));
+                      }}
+                      className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
+                    >
+                      💬 댓글 {Math.floor(Math.random() * 10) + 1}개
+                    </button>
+                    <span className="text-xs text-[#8b95a1]">•</span>
+                    <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
+                      ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
+                    </button>
                   </div>
                   
-                  {/* Comment Section */}
-                  <div className="border-t border-[#f0f0f0] px-4 py-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowComments(prev => ({
-                            ...prev,
-                            [event.id]: !prev[event.id]
-                          }));
-                        }}
-                        className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
-                      >
-                        💬 댓글 {Math.floor(Math.random() * 10) + 1}개
-                      </button>
-                      <span className="text-xs text-[#8b95a1]">•</span>
-                      <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
-                        ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
-                      </button>
+                  {/* Comment Input */}
+                  <div className="flex gap-2">
+                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                      👤
                     </div>
-                    
-                    {/* Comment Input */}
-                    <div className="flex gap-2">
-                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                        👤
-                      </div>
-                      <input
-                        type="text"
-                        placeholder="댓글을 입력하세요..."
-                        value={commentInputs[event.id] || ''}
-                        onChange={(e) => {
+                    <input
+                      type="text"
+                      placeholder="댓글을 입력하세요..."
+                      value={commentInputs[event.id] || ''}
+                      onChange={(e) => {
+                        setCommentInputs(prev => ({
+                          ...prev,
+                          [event.id]: e.target.value
+                        }));
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
+                    />
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (commentInputs[event.id]?.trim()) {
+                          // Here you would handle comment submission
                           setCommentInputs(prev => ({
                             ...prev,
-                            [event.id]: e.target.value
+                            [event.id]: ''
                           }));
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
-                      />
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (commentInputs[event.id]?.trim()) {
-                            setCommentInputs(prev => ({
-                              ...prev,
-                              [event.id]: ''
-                            }));
-                          }
-                        }}
-                        className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
-                      >
-                        등록
-                      </button>
-                    </div>
-                    
-                    {/* Comments List */}
-                    {showComments[event.id] && (
-                      <div className="mt-3 space-y-2 pl-8">
-                        <div className="flex gap-2 text-sm">
-                          <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                            🐶
-                          </div>
-                          <div>
-                            <span className="font-medium text-[#191f28]">투자왕</span>
-                            <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
-                          </div>
+                        }
+                      }}
+                      className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
+                    >
+                      등록
+                    </button>
+                  </div>
+                  
+                  {/* Comments List */}
+                  {showComments[event.id] && (
+                    <div className="mt-3 space-y-2 pl-8">
+                      <div className="flex gap-2 text-sm">
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                          🐶
                         </div>
-                        <div className="flex gap-2 text-sm">
-                          <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
-                            🎯
-                          </div>
-                          <div>
-                            <span className="font-medium text-[#191f28]">주식초보</span>
-                            <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
-                          </div>
+                        <div>
+                          <span className="font-medium text-[#191f28]">투자왕</span>
+                          <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
                         </div>
                       </div>
-                    )}
-                  </div>
+                      <div className="flex gap-2 text-sm">
+                        <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                          🎯
+                        </div>
+                        <div>
+                          <span className="font-medium text-[#191f28]">주식초보</span>
+                          <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              ))}
+              </div>
+            ))}
             </div>
           </div>
         );
 
       case 'influencer':
-        return (
-          <div className="space-y-6">
-            <InfluencerTab 
-              code={code} 
-              stockName={stockData.name}
-              signals={influencerSignals}
-              loading={loading}
-            />
-          </div>
-        );
+        return <InfluencerTab code={code} />;
 
       case 'analyst':
-        return (
-          <div className="space-y-6">
-            <AnalystTab 
-              code={code} 
-              stockName={stockData.name}
-              signals={analystSignals}
-              loading={loading}
-            />
-          </div>
-        );
+        return <AnalystTab code={code} />;
 
       case 'disclosure':
         return (
@@ -398,6 +290,15 @@ export default function StockDetailClientV2({ code }: StockDetailClientProps) {
           </div>
         );
 
+      case 'reports':
+        return (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">📄</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">리서치 리포트</h3>
+            <p className="text-[#8b95a1]">증권사 리포트를 준비중입니다</p>
+          </div>
+        );
+
       case 'insider':
         return (
           <div className="space-y-4">
@@ -420,6 +321,15 @@ export default function StockDetailClientV2({ code }: StockDetailClientProps) {
                 </div>
               </div>
             </div>
+          </div>
+        );
+
+      case 'calendar':
+        return (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">📅</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">종목 일정</h3>
+            <p className="text-[#8b95a1]">실적발표, 주주총회 등 일정을 준비중입니다</p>
           </div>
         );
 
@@ -484,9 +394,11 @@ export default function StockDetailClientV2({ code }: StockDetailClientProps) {
               
               {/* Coverage Stats */}
               <div className="flex items-center gap-4 mt-3 text-sm text-[#8b95a1]">
-                <span>인플루언서 {influencerSignals.length}개 시그널</span>
+                <span>인플루언서 12명</span>
                 <span>•</span>
-                <span>애널리스트 {analystSignals.length}개 리포트</span>
+                <span>애널리스트 8명</span>
+                <span>•</span>
+                <span>투자자 5명</span>
                 <span>•</span>
                 <span>팔로워 3,247명</span>
               </div>
@@ -515,14 +427,13 @@ export default function StockDetailClientV2({ code }: StockDetailClientProps) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex-shrink-0 flex flex-col items-center gap-1 px-4 py-3 text-sm font-medium transition-colors relative ${
+                className={`flex-shrink-0 flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors relative ${
                   activeTab === tab.id
                     ? 'text-[#3182f6]'
                     : 'text-[#8b95a1] hover:text-[#191f28]'
                 }`}
               >
-                <span className="text-base">{tab.icon}</span>
-                <span>{tab.label}</span>
+                {tab.label}
                 {activeTab === tab.id && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3182f6]" />
                 )}
@@ -540,35 +451,319 @@ export default function StockDetailClientV2({ code }: StockDetailClientProps) {
   );
 }
 
-// 인플루언서 탭 컴포넌트 (차트 포함)
-function InfluencerTab({ code, stockName, signals, loading }: {
-  code: string;
-  stockName: string;
-  signals: any[];
-  loading: boolean;
-}) {
+// 인플루언서 탭 컴포넌트 (개선된 차트 + 모든 시그널 점 표시)
+function InfluencerTab({ code }: { code: string }) {
+  const [periodFilter, setPeriodFilter] = useState('전체');
+  const [influencerFilter, setInfluencerFilter] = useState('전체');
+  const [signalData, setSignalData] = useState<any[]>([]);
+  const [influencerOptions, setInfluencerOptions] = useState([
+    { name: '전체', count: null }
+  ]);
+  const [loading, setLoading] = useState(true);
+
+  const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
+
+  // 데이터 로드
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        
+        const { getStockSignals } = await import('@/lib/supabase');
+        const signals = await getStockSignals(code);
+        
+        // 데이터를 UI용 형태로 변환
+        const transformedSignals = signals.map((signal: any) => {
+          const publishedDate = signal.influencer_videos?.published_at 
+            ? new Date(signal.influencer_videos.published_at)
+            : new Date();
+          
+          const videoUrl = signal.influencer_videos?.video_id 
+            ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
+            : '#';
+
+          return {
+            date: publishedDate.toISOString().split('T')[0],
+            influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
+            signal: signal.signal,
+            quote: signal.key_quote || '키 인용문이 없습니다.',
+            return: 'N/A', // TODO: 수익률 계산
+            videoUrl,
+            price: 0, // TODO: 발언 시점 주가
+            timestamp: signal.timestamp
+          };
+        });
+        
+        setSignalData(transformedSignals);
+        
+        // 인플루언서별 카운트 생성
+        const influencerCounts = transformedSignals.reduce((acc: any, signal: any) => {
+          acc[signal.influencer] = (acc[signal.influencer] || 0) + 1;
+          return acc;
+        }, {});
+        
+        const influencerOpts = [
+          { name: '전체', count: null },
+          ...Object.entries(influencerCounts).map(([name, count]) => ({
+            name,
+            count: count as number
+          }))
+        ];
+        
+        setInfluencerOptions(influencerOpts);
+      } catch (error) {
+        console.error('Error loading stock signals:', error);
+        setSignalData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (code) {
+      loadData();
+    }
+  }, [code]);
+
+  const getLocalSignalColor = (signal: string) => {
+    switch (signal) {
+      case '매수':
+      case 'BUY': return 'text-blue-600 bg-blue-100';
+      case '긍정':
+      case 'POSITIVE': return 'text-green-600 bg-green-100';
+      case '중립':
+      case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
+      case '경계':
+      case 'CONCERN': return 'text-orange-600 bg-orange-100';
+      case '매도':
+      case 'SELL': return 'text-red-600 bg-red-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const getSignalEmoji = (signal: string) => {
+    switch (signal) {
+      case '매수':
+      case 'BUY': return '🔵';
+      case '긍정':
+      case 'POSITIVE': return '🟢';
+      case '중립':
+      case 'NEUTRAL': return '🟡';
+      case '경계':
+      case 'CONCERN': return '🟠';
+      case '매도':
+      case 'SELL': return '🔴';
+      default: return '⚪';
+    }
+  };
+
+  const getSignalPointColor = (signal: string) => {
+    switch (signal) {
+      case '매수':
+      case 'BUY': return '#3B82F6'; // blue-500
+      case '긍정':
+      case 'POSITIVE': return '#10B981'; // green-500
+      case '중립':
+      case 'NEUTRAL': return '#F59E0B'; // yellow-500
+      case '경계':
+      case 'CONCERN': return '#F97316'; // orange-500
+      case '매도':
+      case 'SELL': return '#EF4444'; // red-500
+      default: return '#6B7280'; // gray-500
+    }
+  };
+
+  const getSignalText = (signal: string) => {
+    return signal;
+  };
+
+  // 필터링된 데이터 계산
+  const getFilteredSignals = () => {
+    let filtered = [...signalData];
+    
+    // 인플루언서 필터
+    if (influencerFilter !== '전체') {
+      filtered = filtered.filter(signal => signal.influencer === influencerFilter);
+    }
+    
+    // 기간 필터
+    if (periodFilter !== '전체') {
+      const now = new Date();
+      let cutoffDate = new Date();
+      
+      switch (periodFilter) {
+        case '1개월':
+          cutoffDate.setMonth(now.getMonth() - 1);
+          break;
+        case '6개월':
+          cutoffDate.setMonth(now.getMonth() - 6);
+          break;
+        case '1년':
+          cutoffDate.setFullYear(now.getFullYear() - 1);
+          break;
+        case '3년':
+          cutoffDate.setFullYear(now.getFullYear() - 3);
+          break;
+      }
+      
+      filtered = filtered.filter(signal => new Date(signal.date) >= cutoffDate);
+    }
+    
+    return filtered;
+  };
+
+  const filteredSignals = getFilteredSignals();
+
+  // 차트용 데이터 생성 (개선된 차트)
+  const generateChartData = () => {
+    const chartWidth = 400;
+    const chartHeight = 200;
+    const padding = 20;
+    
+    // 더미 주가 데이터 (실제 데이터로 교체 필요)
+    const priceData = Array.from({ length: 30 }, (_, i) => ({
+      x: (i / 29) * (chartWidth - 2 * padding) + padding,
+      y: Math.sin(i * 0.2) * 30 + chartHeight / 2 + Math.random() * 20 - 10
+    }));
+    
+    // 시그널 점들 (실제 데이터 기반)
+    const signalPoints = filteredSignals.map((signal, index) => {
+      const x = (index / Math.max(filteredSignals.length - 1, 1)) * (chartWidth - 2 * padding) + padding;
+      const y = Math.random() * (chartHeight - 2 * padding) + padding;
+      return {
+        x,
+        y,
+        signal: signal.signal,
+        influencer: signal.influencer,
+        date: signal.date
+      };
+    });
+    
+    return { priceData, signalPoints };
+  };
+
+  const { priceData, signalPoints } = generateChartData();
+
   if (loading) {
     return (
       <div className="text-center py-8">
-        <div className="text-lg text-[#8b95a1]">인플루언서 데이터 로딩 중...</div>
+        <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      {/* 차트 + 인플루언서 시그널 */}
-      <StockChartV2
-        stockCode={code}
-        stockName={stockName}
-        signals={signals}
-        mode="influencer"
-      />
+      {/* 필터 섹션 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-medium text-[#191f28] mb-3">기간</h4>
+            <div className="flex gap-2 flex-wrap">
+              {periodOptions.map((period) => (
+                <button
+                  key={period}
+                  onClick={() => setPeriodFilter(period)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    periodFilter === period
+                      ? 'bg-[#3182f6] text-white'
+                      : 'bg-[#f8f9fa] text-[#8b95a1] hover:bg-[#e9ecef]'
+                  }`}
+                >
+                  {period}
+                </button>
+              ))}
+            </div>
+          </div>
 
-      {/* 인플루언서 시그널 테이블 */}
+          <div>
+            <h4 className="font-medium text-[#191f28] mb-3">인플루언서</h4>
+            <div className="flex gap-2 flex-wrap">
+              {influencerOptions.map((option) => (
+                <button
+                  key={option.name}
+                  onClick={() => setInfluencerFilter(option.name)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    influencerFilter === option.name
+                      ? 'bg-[#3182f6] text-white'
+                      : 'bg-[#f8f9fa] text-[#8b95a1] hover:bg-[#e9ecef]'
+                  }`}
+                >
+                  {option.name}
+                  {option.count && `(${option.count})`}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 개선된 차트 영역 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 인플루언서 신호 ({filteredSignals.length}개)</h4>
+        <div className="relative h-80 bg-[#f8f9fa] rounded-lg overflow-hidden">
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* 배경 격자 */}
+            <defs>
+              <pattern id="influencerGrid" width="40" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#influencerGrid)" />
+            
+            {/* 주가 라인 (더 부드러운 곡선) */}
+            <path
+              d={`M ${priceData.map(p => `${p.x} ${p.y}`).join(' L ')}`}
+              fill="none"
+              stroke="#3182f6"
+              strokeWidth="2"
+              opacity="0.8"
+            />
+            
+            {/* 모든 시그널 점들 표시 */}
+            {signalPoints.map((point, index) => (
+              <g key={index}>
+                <circle 
+                  cx={point.x} 
+                  cy={point.y} 
+                  r="8" 
+                  fill={getSignalPointColor(point.signal)} 
+                  stroke="white" 
+                  strokeWidth="2"
+                  className="cursor-pointer"
+                />
+                {/* 호버 시 정보 표시 */}
+                <title>
+                  {point.influencer} - {getSignalText(point.signal)} ({point.date})
+                </title>
+              </g>
+            ))}
+            
+            {/* Y축 라벨 */}
+            <text x="10" y="20" className="text-xs fill-gray-600">높음</text>
+            <text x="10" y="190" className="text-xs fill-gray-600">낮음</text>
+          </svg>
+          
+          {/* 범례 (개선됨) */}
+          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-4 text-xs">
+            <div className="font-medium mb-2">시그널 타입</div>
+            <div className="grid grid-cols-2 gap-1">
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-blue-500 rounded-full"></span>매수</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-full"></span>긍정</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span>중립</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-orange-500 rounded-full"></span>경계</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-red-500 rounded-full"></span>매도</span>
+            </div>
+            <div className="mt-2 text-gray-600">
+              총 {filteredSignals.length}개 시그널
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 신호 테이블 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
         <div className="p-6 border-b border-[#e8e8e8]">
-          <h4 className="font-medium text-[#191f28]">인플루언서 시그널 이력</h4>
+          <h4 className="font-medium text-[#191f28]">인플루언서 신호 이력</h4>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
@@ -576,42 +771,45 @@ function InfluencerTab({ code, stockName, signals, loading }: {
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">인플루언서</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">시그널</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#f0f0f0]">
-              {signals.map((signal, index) => (
+              {filteredSignals.map((signal, index) => (
                 <tr key={index} className="hover:bg-[#f8f9fa]">
                   <td className="px-4 py-4 text-sm text-[#191f28]">
-                    {new Date(signal.date || signal.video_published_at).toLocaleDateString('ko-KR', { 
+                    {new Date(signal.date).toLocaleDateString('ko-KR', { 
                       month: 'short', 
                       day: 'numeric' 
                     })}
                   </td>
                   <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
-                    {signal.speaker}
+                    {signal.influencer}
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-2">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        signal.signal === '매수' ? 'bg-blue-100 text-blue-600' :
-                        signal.signal === '긍정' ? 'bg-green-100 text-green-600' :
-                        signal.signal === '중립' ? 'bg-gray-100 text-gray-600' :
-                        signal.signal === '경계' ? 'bg-orange-100 text-orange-600' :
-                        'bg-red-100 text-red-600'
-                      }`}>
-                        {signal.signal}
+                      <span className="text-lg">{getSignalEmoji(signal.signal)}</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${getLocalSignalColor(signal.signal)}`}>
+                        {getSignalText(signal.signal)}
                       </span>
                     </div>
                   </td>
                   <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                    <div className="truncate">{signal.key_quote}</div>
+                    <div className="truncate" title={signal.quote}>{signal.quote}</div>
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium">
+                    <span className="text-gray-500">
+                      {signal.return}
+                    </span>
                   </td>
                   <td className="px-4 py-4">
                     <a
-                      href="#"
+                      href={signal.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
                     >
                       영상보기 →
@@ -627,82 +825,330 @@ function InfluencerTab({ code, stockName, signals, loading }: {
   );
 }
 
-// 애널리스트 탭 컴포넌트 (차트 포함)
-function AnalystTab({ code, stockName, signals, loading }: {
-  code: string;
-  stockName: string;
-  signals: any[];
-  loading: boolean;
-}) {
-  if (loading) {
-    return (
-      <div className="text-center py-8">
-        <div className="text-lg text-[#8b95a1]">애널리스트 데이터 로딩 중...</div>
-      </div>
-    );
-  }
+// 애널리스트 탭 컴포넌트 (차트 형태)
+function AnalystTab({ code }: { code: string }) {
+  const [periodFilter, setPeriodFilter] = useState('전체');
+  const [analystFilter, setAnalystFilter] = useState('전체');
+  
+  const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
+  
+  // 더미 애널리스트 데이터 (실제 환경에서는 DB에서 가져와야 함)
+  const analystSignals = [
+    {
+      date: '2024-02-20',
+      analyst: '김선우',
+      firm: '한국투자증권',
+      signal: '매수',
+      targetPrice: '75,000원',
+      quote: '메모리 업사이클 시작으로 실적 개선 기대',
+      accuracy: '72%',
+      previousPrice: '68,500원',
+      upside: '+9.5%'
+    },
+    {
+      date: '2024-02-18',
+      analyst: '이미래',
+      firm: '미래에셋증권',
+      signal: '매수',
+      targetPrice: '72,000원',
+      quote: '3분기 실적 컨센서스 상회 전망',
+      accuracy: '68%',
+      previousPrice: '68,500원',
+      upside: '+5.1%'
+    },
+    {
+      date: '2024-02-15',
+      analyst: '박기술',
+      firm: 'NH투자증권',
+      signal: '중립',
+      targetPrice: '65,000원',
+      quote: '단기 조정 후 상승 전망',
+      accuracy: '65%',
+      previousPrice: '68,500원',
+      upside: '-5.1%'
+    },
+    {
+      date: '2024-02-10',
+      analyst: '정에너지',
+      firm: '삼성증권',
+      signal: '매수',
+      targetPrice: '78,000원',
+      quote: 'AI 반도체 수요 증가로 수혜',
+      accuracy: '74%',
+      previousPrice: '68,500원',
+      upside: '+13.9%'
+    },
+    {
+      date: '2024-02-05',
+      analyst: '최금융',
+      firm: 'KB증권',
+      signal: '긍정',
+      targetPrice: '70,000원',
+      quote: 'HBM 점유율 확대 지속',
+      accuracy: '69%',
+      previousPrice: '68,500원',
+      upside: '+2.2%'
+    }
+  ];
+
+  const analystOptions = [
+    { name: '전체', count: null },
+    { name: '한국투자증권', count: 1 },
+    { name: '미래에셋증권', count: 1 },
+    { name: 'NH투자증권', count: 1 },
+    { name: '삼성증권', count: 1 },
+    { name: 'KB증권', count: 1 }
+  ];
+
+  const getSignalColor = (signal: string) => {
+    switch (signal) {
+      case '매수': return 'text-blue-600 bg-blue-100';
+      case '긍정': return 'text-green-600 bg-green-100';
+      case '중립': return 'text-yellow-600 bg-yellow-100';
+      case '경계': return 'text-orange-600 bg-orange-100';
+      case '매도': return 'text-red-600 bg-red-100';
+      default: return 'text-gray-600 bg-gray-100';
+    }
+  };
+
+  const getSignalEmoji = (signal: string) => {
+    switch (signal) {
+      case '매수': return '🔵';
+      case '긍정': return '🟢';
+      case '중립': return '🟡';
+      case '경계': return '🟠';
+      case '매도': return '🔴';
+      default: return '⚪';
+    }
+  };
+
+  const getTargetPriceColor = (firm: string) => {
+    const colors: { [key: string]: string } = {
+      '한국투자증권': '#3B82F6',
+      '미래에셋증권': '#10B981',
+      'NH투자증권': '#F59E0B',
+      '삼성증권': '#EF4444',
+      'KB증권': '#8B5CF6'
+    };
+    return colors[firm] || '#6B7280';
+  };
+
+  // 필터링된 데이터
+  const filteredSignals = analystSignals.filter(signal => {
+    if (analystFilter !== '전체' && !signal.firm.includes(analystFilter.replace('증권', ''))) {
+      return false;
+    }
+    
+    if (periodFilter !== '전체') {
+      const now = new Date();
+      let cutoffDate = new Date();
+      
+      switch (periodFilter) {
+        case '1개월':
+          cutoffDate.setMonth(now.getMonth() - 1);
+          break;
+        case '6개월':
+          cutoffDate.setMonth(now.getMonth() - 6);
+          break;
+        case '1년':
+          cutoffDate.setFullYear(now.getFullYear() - 1);
+          break;
+        case '3년':
+          cutoffDate.setFullYear(now.getFullYear() - 3);
+          break;
+      }
+      
+      if (new Date(signal.date) < cutoffDate) {
+        return false;
+      }
+    }
+    
+    return true;
+  });
+
+  // 평균 목표가 계산
+  const avgTargetPrice = filteredSignals.reduce((sum, signal) => {
+    return sum + parseInt(signal.targetPrice.replace(/[,원]/g, ''));
+  }, 0) / filteredSignals.length;
 
   return (
     <div className="space-y-6">
-      {/* 차트 + 애널리스트 시그널 */}
-      <StockChartV2
-        stockCode={code}
-        stockName={stockName}
-        signals={signals}
-        mode="analyst"
-      />
+      {/* 필터 섹션 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-medium text-[#191f28] mb-3">기간</h4>
+            <div className="flex gap-2 flex-wrap">
+              {periodOptions.map((period) => (
+                <button
+                  key={period}
+                  onClick={() => setPeriodFilter(period)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    periodFilter === period
+                      ? 'bg-[#3182f6] text-white'
+                      : 'bg-[#f8f9fa] text-[#8b95a1] hover:bg-[#e9ecef]'
+                  }`}
+                >
+                  {period}
+                </button>
+              ))}
+            </div>
+          </div>
 
-      {/* 애널리스트 리포트 테이블 */}
+          <div>
+            <h4 className="font-medium text-[#191f28] mb-3">증권사</h4>
+            <div className="flex gap-2 flex-wrap">
+              {analystOptions.map((option) => (
+                <button
+                  key={option.name}
+                  onClick={() => setAnalystFilter(option.name)}
+                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    analystFilter === option.name
+                      ? 'bg-[#3182f6] text-white'
+                      : 'bg-[#f8f9fa] text-[#8b95a1] hover:bg-[#e9ecef]'
+                  }`}
+                >
+                  {option.name}
+                  {option.count && `(${option.count})`}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 목표가 차트 영역 (개선됨) */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+        <h4 className="font-medium text-[#191f28] mb-4">목표가 추이 & 애널리스트 의견 ({filteredSignals.length}개)</h4>
+        <div className="relative h-80 bg-[#f8f9fa] rounded-lg overflow-hidden">
+          <svg className="w-full h-full" viewBox="0 0 400 200">
+            {/* 배경 격자 */}
+            <defs>
+              <pattern id="analystGrid" width="40" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#analystGrid)" />
+            
+            {/* 현재 주가 라인 */}
+            <line x1="0" y1="120" x2="400" y2="120" stroke="#666" strokeWidth="2" strokeDasharray="5,5" />
+            <text x="10" y="115" className="text-xs fill-gray-600">현재가 68,500원</text>
+            
+            {/* 평균 목표가 라인 */}
+            <line x1="0" y1="80" x2="400" y2="80" stroke="#10B981" strokeWidth="2" strokeDasharray="3,3" />
+            <text x="10" y="75" className="text-xs fill-green-600">평균 목표가 {avgTargetPrice.toLocaleString()}원</text>
+            
+            {/* 목표가 트렌드 라인 */}
+            <path
+              d="M 50 100 L 120 85 L 200 75 L 280 80 L 350 70"
+              fill="none"
+              stroke="#10B981"
+              strokeWidth="3"
+            />
+            
+            {/* 애널리스트 목표가 점들 */}
+            {filteredSignals.map((signal, index) => {
+              const x = 50 + (index * 75); 
+              const targetPriceNum = parseInt(signal.targetPrice.replace(/[,원]/g, ''));
+              const y = 200 - (targetPriceNum / 80000) * 160; 
+              
+              return (
+                <g key={index}>
+                  <circle 
+                    cx={x} 
+                    cy={y} 
+                    r="10" 
+                    fill={getTargetPriceColor(signal.firm)} 
+                    stroke="white" 
+                    strokeWidth="2"
+                    className="cursor-pointer"
+                  />
+                  <title>
+                    {signal.firm} {signal.analyst} - {signal.targetPrice} ({signal.signal})
+                  </title>
+                </g>
+              );
+            })}
+          </svg>
+          
+          {/* 범례 (개선됨) */}
+          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-4 text-xs">
+            <div className="font-medium mb-2">증권사별 목표가</div>
+            <div className="space-y-1">
+              {filteredSignals.map((signal, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <span 
+                    className="w-3 h-3 rounded-full" 
+                    style={{ backgroundColor: getTargetPriceColor(signal.firm) }}
+                  ></span>
+                  <span>{signal.firm.replace('증권', '')} {signal.targetPrice}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 pt-2 border-t border-gray-200">
+              <div className="font-medium text-green-600">
+                평균: {avgTargetPrice.toLocaleString()}원
+              </div>
+              <div className="text-gray-600">
+                상승여력: {((avgTargetPrice - 68500) / 68500 * 100).toFixed(1)}%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 애널리스트 의견 테이블 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
         <div className="p-6 border-b border-[#e8e8e8]">
-          <h4 className="font-medium text-[#191f28]">애널리스트 리포트</h4>
+          <h4 className="font-medium text-[#191f28]">애널리스트 의견 이력</h4>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-[#f8f9fa]">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">의견</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">상승여력</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심논거</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">적중률</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#f0f0f0]">
-              {signals.map((signal, index) => (
+              {filteredSignals.map((signal, index) => (
                 <tr key={index} className="hover:bg-[#f8f9fa]">
                   <td className="px-4 py-4 text-sm text-[#191f28]">
-                    {new Date(signal.date || signal.report_published_at).toLocaleDateString('ko-KR', { 
+                    {new Date(signal.date).toLocaleDateString('ko-KR', { 
                       month: 'short', 
                       day: 'numeric' 
                     })}
                   </td>
                   <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
-                    {signal.speaker?.split(' ')[0] || 'KB증권'}
-                  </td>
-                  <td className="px-4 py-4 text-sm text-[#191f28]">
-                    {signal.speaker?.split(' ').slice(1).join(' ') || '김○○'}
+                    <div>{signal.analyst}</div>
+                    <div className="text-xs text-[#8b95a1]">{signal.firm}</div>
                   </td>
                   <td className="px-4 py-4">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      signal.signal === '매수' ? 'bg-blue-100 text-blue-600' :
-                      signal.signal === '긍정' ? 'bg-green-100 text-green-600' :
-                      'bg-gray-100 text-gray-600'
-                    }`}>
-                      {signal.signal}
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{getSignalEmoji(signal.signal)}</span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(signal.signal)}`}>
+                        {signal.signal}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-sm font-bold text-[#191f28]">
+                    {signal.targetPrice}
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium">
+                    <span className={signal.upside.startsWith('+') ? 'text-red-600' : 'text-blue-600'}>
+                      {signal.upside}
                     </span>
                   </td>
-                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
-                    {Math.floor(Math.random() * 20 + 70)}만원
+                  <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                    <div className="truncate" title={signal.quote}>{signal.quote}</div>
                   </td>
-                  <td className="px-4 py-4">
-                    <a
-                      href="#"
-                      className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
-                    >
-                      리포트보기 →
-                    </a>
+                  <td className="px-4 py-4 text-sm font-medium text-green-600">
+                    {signal.accuracy}
                   </td>
                 </tr>
               ))}

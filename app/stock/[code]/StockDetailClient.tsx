@@ -44,11 +44,11 @@ const getStockTimeline = (code: string): StockTimelineEvent[] => {
 
 // 탭 정의
 const tabs = [
-  { id: 'realtime', label: '실시간', icon: '⚡' },
-  { id: 'influencer', label: '인플루언서', icon: '👤' },
-  { id: 'analyst', label: '애널리스트', icon: '🎯' },
+  { id: 'feed', label: '피드', icon: '📱' },
+  { id: 'influencer', label: '인플루언서', icon: '📈' },
+  { id: 'analyst', label: '애널리스트', icon: '📊' },
   { id: 'disclosure', label: '공시', icon: '📋' },
-  { id: 'earnings', label: '실적', icon: '📊' },
+  { id: 'earnings', label: '실적', icon: '📈' },
   { id: 'reports', label: '리포트', icon: '📄' },
   { id: 'insider', label: '임원매매', icon: '💼' },
   { id: 'calendar', label: '일정', icon: '📅' },
@@ -69,7 +69,7 @@ const getStockData = (code: string) => {
 };
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
-  const [activeTab, setActiveTab] = useState('realtime');
+  const [activeTab, setActiveTab] = useState('feed');
   const [isWatched, setIsWatched] = useState(false);
   const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
   const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
@@ -132,7 +132,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'realtime':
+      case 'feed':
         return (
           <div className="space-y-6">
             {/* 주가 차트 */}
@@ -259,35 +259,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return <InfluencerTab code={code} />;
 
       case 'analyst':
-        return (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-              <h4 className="font-bold text-[#191f28] mb-4">애널리스트 의견</h4>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-[#f8f9fa] rounded-lg">
-                  <div>
-                    <div className="font-medium">한국투자증권 김○○</div>
-                    <div className="text-sm text-[#8b95a1]">목표가 75,000원</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold text-blue-600">매수</div>
-                    <div className="text-xs text-[#8b95a1]">적중률 72%</div>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-[#f8f9fa] rounded-lg">
-                  <div>
-                    <div className="font-medium">미래에셋증권 이○○</div>
-                    <div className="text-sm text-[#8b95a1]">목표가 72,000원</div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-bold text-green-600">매수</div>
-                    <div className="text-xs text-[#8b95a1]">적중률 68%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+        return <AnalystTab code={code} />;
 
       case 'disclosure':
         return (

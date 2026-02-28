@@ -1,358 +1,270 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useMemo } from 'react';
+
+interface Signal {
+  id: string;
+  signal_type: string;
+  date: string;
+  speaker: string;
+  timestamp?: string;
+}
 
 interface StockChartProps {
   stockCode: string;
   stockName: string;
-  signals?: any[];
+  signals: Signal[];
 }
 
-interface ChartPeriod {
-  id: string;
-  label: string;
-  days: number;
-}
-
-const CHART_PERIODS: ChartPeriod[] = [
-  { id: '1M', label: '1개월', days: 30 },
-  { id: '6M', label: '6개월', days: 180 },
-  { id: '1Y', label: '1년', days: 365 },
-  { id: '3Y', label: '3년', days: 1095 },
-  { id: 'ALL', label: '전체', days: -1 }
-];
-
-// V9 시그널 색상
-const SIGNAL_COLORS = {
-  '매수': '#dc2626',     // 빨강
-  '긍정': '#16a34a',     // 초록
-  '중립': '#6b7280',     // 회색
-  '경계': '#ca8a04',     // 노랑
-  '매도': '#991b1b'      // 진한 빨강
-};
-
-export default function StockChart({ stockCode, stockName, signals = [] }: StockChartProps) {
-  const chartRef = useRef<HTMLCanvasElement>(null);
-  const [selectedPeriod, setSelectedPeriod] = useState('6M');
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // 실제 주가 데이터 가져오기
-  const fetchStockData = async (symbol: string, period: string) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      let data: any[] = [];
+export default function StockChart({ stockCode, stockName, signals }: StockChartProps) {
+  // 차트 데이터 최적화 (useMemo로 성능 개선)
+  const chartData = useMemo(() => {
+    const chartWidth = 400;
+    const chartHeight = 200;
+    const padding = 30;
+    
+    // 더미 주가 데이터 생성 (실제 환경에서는 API 데이터 사용)
+    const priceData = Array.from({ length: 50 }, (_, i) => {
+      const progress = i / 49;
+      const baseY = chartHeight / 2;
+      const noise = (Math.sin(i * 0.3) + Math.sin(i * 0.7) * 0.5) * 20;
+      const trend = progress * 30 - 15; // 약간의 상승 트렌드
       
-      // 종목 코드에 따라 API 선택
-      if (symbol.match(/^[0-9]{6}$/)) {
-        // 한국 주식 (6자리 숫자)
-        data = await fetchKoreanStock(symbol, period);
-      } else if (['BTC', 'ETH', 'XRP', 'ADA', 'DOT', 'SOL'].includes(symbol.toUpperCase())) {
-        // 암호화폐
-        data = await fetchCrypto(symbol, period);
-      } else {
-        // 미국 주식
-        data = await fetchUSStock(symbol, period);
-      }
-
-      setChartData(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '데이터를 가져올 수 없습니다');
-      // 에러 시 더미 데이터 사용
-      setChartData(generateDummyData(30));
-    }
-
-    setLoading(false);
-  };
-
-  // 한국 주식 데이터 (Yahoo Finance via AllOrigins)
-  const fetchKoreanStock = async (symbol: string, period: string): Promise<any[]> => {
-    const koreanSymbol = symbol + '.KS'; // 코스피 종목
-    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${koreanSymbol}?interval=1d&range=${period.toLowerCase()}`)}`;
+      return {
+        x: progress * (chartWidth - 2 * padding) + padding,
+        y: Math.max(padding, Math.min(chartHeight - padding, baseY + noise + trend))
+      };
+    });
     
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('한국 주식 데이터 조회 실패');
+    // 시그널 점들 (실제 데이터 기반, 시간순 정렬)
+    const sortedSignals = [...signals].sort((a, b) => 
+      new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
     
-    const data = await response.json();
-    const result = data.chart?.result?.[0];
+    const signalPoints = sortedSignals.map((signal, index) => {
+      const progress = sortedSignals.length > 1 ? index / (sortedSignals.length - 1) : 0.5;
+      const x = progress * (chartWidth - 2 * padding) + padding;
+      
+      // 주가 라인과 연동하여 Y 위치 계산
+      const priceIndex = Math.floor(progress * (priceData.length - 1));
+      const baseY = priceData[priceIndex]?.y || chartHeight / 2;
+      
+      // 시그널 타입에 따라 Y 위치 조정
+      const yOffset = getSignalYOffset(signal.signal_type);
+      const y = Math.max(padding + 10, Math.min(chartHeight - padding - 10, baseY + yOffset));
+      
+      return {
+        x,
+        y,
+        signal: signal.signal_type,
+        speaker: signal.speaker,
+        date: signal.date,
+        id: signal.id
+      };
+    });
     
-    if (!result) throw new Error('주식 데이터가 없습니다');
-    
-    const timestamps = result.timestamp || [];
-    const prices = result.indicators?.quote?.[0]?.close || [];
-    
-    return timestamps.map((timestamp: number, index: number) => ({
-      date: new Date(timestamp * 1000),
-      price: prices[index] || 0
-    })).filter((item: any) => item.price > 0);
-  };
-
-  // 암호화폐 데이터 (CoinGecko)
-  const fetchCrypto = async (symbol: string, period: string): Promise<any[]> => {
-    const coinId = getCoinGeckoId(symbol);
-    const days = CHART_PERIODS.find(p => p.id === period)?.days || 180;
-    
-    const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=krw&days=${days}`;
-    
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('암호화폐 데이터 조회 실패');
-    
-    const data = await response.json();
-    const prices = data.prices || [];
-    
-    return prices.map(([timestamp, price]: [number, number]) => ({
-      date: new Date(timestamp),
-      price: price
-    }));
-  };
-
-  // 미국 주식 데이터 (Yahoo Finance)
-  const fetchUSStock = async (symbol: string, period: string): Promise<any[]> => {
-    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=${period.toLowerCase()}`)}`;
-    
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('미국 주식 데이터 조회 실패');
-    
-    const data = await response.json();
-    const result = data.chart?.result?.[0];
-    
-    if (!result) throw new Error('주식 데이터가 없습니다');
-    
-    const timestamps = result.timestamp || [];
-    const prices = result.indicators?.quote?.[0]?.close || [];
-    
-    return timestamps.map((timestamp: number, index: number) => ({
-      date: new Date(timestamp * 1000),
-      price: prices[index] || 0
-    })).filter((item: any) => item.price > 0);
-  };
-
-  // CoinGecko ID 매핑
-  const getCoinGeckoId = (symbol: string): string => {
-    const mapping: { [key: string]: string } = {
-      'BTC': 'bitcoin',
-      'ETH': 'ethereum',
-      'XRP': 'ripple',
-      'ADA': 'cardano',
-      'DOT': 'polkadot',
-      'SOL': 'solana'
-    };
-    return mapping[symbol.toUpperCase()] || symbol.toLowerCase();
-  };
-
-  // 더미 데이터 생성 (에러 시 사용)
-  const generateDummyData = (days: number) => {
-    const data = [];
-    const now = new Date();
-    let price = 50000 + Math.random() * 50000;
-
-    for (let i = days; i >= 0; i--) {
-      const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
-      price = price * (0.95 + Math.random() * 0.1); // ±5% 변동
-      data.push({ date, price });
-    }
-
-    return data;
-  };
-
-  // 차트 그리기
-  const drawChart = () => {
-    const canvas = chartRef.current;
-    if (!canvas || chartData.length === 0) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // 캔버스 크기 설정
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * devicePixelRatio;
-    canvas.height = rect.height * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-
-    const width = rect.width;
-    const height = rect.height;
-    const padding = { top: 20, right: 40, bottom: 40, left: 80 };
-    const chartWidth = width - padding.left - padding.right;
-    const chartHeight = height - padding.top - padding.bottom;
-
-    // 클리어
-    ctx.clearRect(0, 0, width, height);
-
-    // 배경
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, width, height);
-
-    // 가격 범위 계산
-    const prices = chartData.map(d => d.price);
-    const minPrice = Math.min(...prices);
-    const maxPrice = Math.max(...prices);
-    const priceRange = maxPrice - minPrice;
-
-    // 그리드 그리기
-    ctx.strokeStyle = '#f0f0f0';
-    ctx.lineWidth = 1;
-
-    // 수평 그리드 (가격)
-    for (let i = 0; i <= 5; i++) {
-      const y = padding.top + (chartHeight / 5) * i;
-      ctx.beginPath();
-      ctx.moveTo(padding.left, y);
-      ctx.lineTo(padding.left + chartWidth, y);
-      ctx.stroke();
-
-      // 가격 레이블
-      const price = maxPrice - (priceRange / 5) * i;
-      ctx.fillStyle = '#666';
-      ctx.font = '12px sans-serif';
-      ctx.textAlign = 'right';
-      ctx.fillText(price.toLocaleString(), padding.left - 10, y + 4);
-    }
-
-    // 수직 그리드 (날짜)
-    for (let i = 0; i <= 6; i++) {
-      const x = padding.left + (chartWidth / 6) * i;
-      ctx.beginPath();
-      ctx.moveTo(x, padding.top);
-      ctx.lineTo(x, padding.top + chartHeight);
-      ctx.stroke();
-    }
-
-    // 차트 라인 그리기 (파란색)
-    ctx.strokeStyle = '#3b82f6';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-
-    chartData.forEach((point, index) => {
-      const x = padding.left + (chartWidth / (chartData.length - 1)) * index;
-      const y = padding.top + chartHeight - ((point.price - minPrice) / priceRange) * chartHeight;
-
+    // 주가 라인을 부드러운 곡선으로 만들기 위한 패스 생성
+    const pathD = priceData.reduce((path, point, index) => {
       if (index === 0) {
-        ctx.moveTo(x, y);
+        return `M ${point.x} ${point.y}`;
       } else {
-        ctx.lineTo(x, y);
+        const prevPoint = priceData[index - 1];
+        const cpx1 = prevPoint.x + (point.x - prevPoint.x) * 0.5;
+        const cpx2 = prevPoint.x + (point.x - prevPoint.x) * 0.5;
+        return `${path} C ${cpx1} ${prevPoint.y}, ${cpx2} ${point.y}, ${point.x} ${point.y}`;
       }
-    });
+    }, '');
+    
+    return { priceData, signalPoints, pathD };
+  }, [signals]);
 
-    ctx.stroke();
-
-    // 시그널 점 그리기
-    signals.forEach(signal => {
-      const signalDate = new Date(signal.date || signal.video_published_at);
-      const dataPoint = chartData.find(d => 
-        Math.abs(d.date.getTime() - signalDate.getTime()) < 24 * 60 * 60 * 1000
-      );
-
-      if (dataPoint) {
-        const x = padding.left + (chartWidth / (chartData.length - 1)) * chartData.indexOf(dataPoint);
-        const y = padding.top + chartHeight - ((dataPoint.price - minPrice) / priceRange) * chartHeight;
-
-        ctx.fillStyle = SIGNAL_COLORS[signal.signal_type || signal.direction] || '#6b7280';
-        ctx.beginPath();
-        ctx.arc(x, y, 6, 0, 2 * Math.PI);
-        ctx.fill();
-
-        // 흰색 테두리
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      }
-    });
+  // 시그널 타입별 Y 오프셋
+  const getSignalYOffset = (signalType: string) => {
+    switch (signalType) {
+      case '매수':
+      case 'BUY': return -25;
+      case '긍정':
+      case 'POSITIVE': return -15;
+      case '중립':
+      case 'NEUTRAL': return 0;
+      case '경계':
+      case 'CONCERN': return 15;
+      case '매도':
+      case 'SELL': return 25;
+      default: return 0;
+    }
   };
 
-  // 데이터 로드
-  useEffect(() => {
-    fetchStockData(stockCode, selectedPeriod);
-  }, [stockCode, selectedPeriod]);
+  // 시그널 색상
+  const getSignalColor = (signalType: string) => {
+    switch (signalType) {
+      case '매수':
+      case 'BUY': return '#3B82F6';
+      case '긍정':
+      case 'POSITIVE': return '#10B981';
+      case '중립':
+      case 'NEUTRAL': return '#F59E0B';
+      case '경계':
+      case 'CONCERN': return '#F97316';
+      case '매도':
+      case 'SELL': return '#EF4444';
+      default: return '#6B7280';
+    }
+  };
 
-  // 차트 그리기
-  useEffect(() => {
-    drawChart();
-  }, [chartData, signals]);
-
-  // 윈도우 리사이즈 처리
-  useEffect(() => {
-    const handleResize = () => drawChart();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [chartData, signals]);
+  // 시그널 텍스트
+  const getSignalText = (signalType: string) => {
+    switch (signalType) {
+      case '매수':
+      case 'BUY': return '매수';
+      case '긍정':
+      case 'POSITIVE': return '긍정';
+      case '중립':
+      case 'NEUTRAL': return '중립';
+      case '경계':
+      case 'CONCERN': return '경계';
+      case '매도':
+      case 'SELL': return '매도';
+      default: return signalType;
+    }
+  };
 
   return (
-    <div className="bg-white rounded-xl p-6 border border-gray-100">
-      {/* 헤더 */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-lg font-bold text-gray-900">{stockName} 주가 차트 & 시그널</h3>
-          <p className="text-sm text-gray-500">실시간 주가와 인플루언서 시그널</p>
-        </div>
-
-        {/* 시그널 범례 */}
-        <div className="flex items-center space-x-4 text-sm">
-          {Object.entries(SIGNAL_COLORS).map(([type, color]) => (
-            <div key={type} className="flex items-center space-x-1">
-              <div 
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: color }}
-              ></div>
-              <span className="text-gray-600">{type}</span>
-            </div>
-          ))}
+    <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h4 className="font-medium text-[#191f28]">
+          {stockName} 주가 차트 & 시그널
+        </h4>
+        <div className="text-sm text-[#8b95a1]">
+          총 {signals.length}개 시그널
         </div>
       </div>
-
-      {/* 기간 선택 */}
-      <div className="flex items-center space-x-2 mb-4">
-        {CHART_PERIODS.map(period => (
-          <button
-            key={period.id}
-            onClick={() => setSelectedPeriod(period.id)}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-              selectedPeriod === period.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            {period.label}
-          </button>
-        ))}
-      </div>
-
-      {/* 차트 */}
-      <div className="relative">
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 rounded-lg">
-            <div className="text-gray-500">차트 로딩 중...</div>
-          </div>
-        )}
+      
+      <div className="relative h-80 bg-[#f8f9fa] rounded-lg overflow-hidden">
+        <svg className="w-full h-full" viewBox="0 0 400 200">
+          {/* 배경 격자 */}
+          <defs>
+            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="0.5"/>
+            </pattern>
+            <linearGradient id="priceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#3182f6" stopOpacity="0.2"/>
+              <stop offset="100%" stopColor="#3182f6" stopOpacity="0.05"/>
+            </linearGradient>
+          </defs>
+          
+          <rect width="100%" height="100%" fill="url(#grid)" />
+          
+          {/* 주가 영역 (그라데이션) */}
+          <path
+            d={`${chartData.pathD} L ${chartData.priceData[chartData.priceData.length - 1]?.x || 0} 200 L 30 200 Z`}
+            fill="url(#priceGradient)"
+          />
+          
+          {/* 주가 라인 (부드러운 곡선) */}
+          <path
+            d={chartData.pathD}
+            fill="none"
+            stroke="#3182f6"
+            strokeWidth="3"
+            opacity="0.9"
+          />
+          
+          {/* 모든 시그널 점들 표시 (성능 최적화) */}
+          <g className="signal-points">
+            {chartData.signalPoints.map((point) => (
+              <g key={point.id} className="signal-point">
+                <circle 
+                  cx={point.x} 
+                  cy={point.y} 
+                  r="8" 
+                  fill={getSignalColor(point.signal)} 
+                  stroke="white" 
+                  strokeWidth="3"
+                  className="cursor-pointer hover:r-10 transition-all duration-200"
+                  style={{
+                    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                  }}
+                />
+                {/* 호버 시 표시할 라벨 */}
+                <text
+                  x={point.x}
+                  y={point.y - 15}
+                  textAnchor="middle"
+                  className="text-xs font-medium opacity-0 hover:opacity-100 transition-opacity duration-200"
+                  fill={getSignalColor(point.signal)}
+                >
+                  {getSignalText(point.signal)}
+                </text>
+                
+                {/* 툴팁 정보 */}
+                <title>
+                  {point.speaker} - {getSignalText(point.signal)}
+                  {'\n'}날짜: {new Date(point.date).toLocaleDateString('ko-KR')}
+                </title>
+              </g>
+            ))}
+          </g>
+          
+          {/* Y축 라벨 */}
+          <text x="10" y="25" className="text-xs fill-gray-500">고점</text>
+          <text x="10" y="185" className="text-xs fill-gray-500">저점</text>
+          
+          {/* X축 라벨 (시간) */}
+          <text x="40" y="195" className="text-xs fill-gray-500">과거</text>
+          <text x="350" y="195" className="text-xs fill-gray-500">현재</text>
+        </svg>
         
-        {error && (
-          <div className="absolute top-2 left-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-lg text-sm">
-            ⚠️ {error} (더미 데이터 표시)
+        {/* 개선된 범례 */}
+        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-gray-200">
+          <div className="font-medium text-sm mb-3 text-[#191f28]">시그널 타입</div>
+          <div className="grid grid-cols-1 gap-2 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+              <span>매수 ({chartData.signalPoints.filter(p => ['매수', 'BUY'].includes(p.signal)).length})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+              <span>긍정 ({chartData.signalPoints.filter(p => ['긍정', 'POSITIVE'].includes(p.signal)).length})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+              <span>중립 ({chartData.signalPoints.filter(p => ['중립', 'NEUTRAL'].includes(p.signal)).length})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
+              <span>경계 ({chartData.signalPoints.filter(p => ['경계', 'CONCERN'].includes(p.signal)).length})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+              <span>매도 ({chartData.signalPoints.filter(p => ['매도', 'SELL'].includes(p.signal)).length})</span>
+            </div>
           </div>
-        )}
-
-        <canvas 
-          ref={chartRef}
-          className="w-full h-80 border border-gray-200 rounded-lg"
-          style={{ width: '100%', height: '320px' }}
-        />
+          <div className="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-600">
+            총 {chartData.signalPoints.length}개 시그널
+          </div>
+        </div>
       </div>
-
-      {/* 통계 */}
-      <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-100">
-        <div className="text-center">
-          <div className="text-sm text-gray-500">시그널 수</div>
-          <div className="font-bold text-gray-900">{signals.length}개</div>
+      
+      {/* 시그널 요약 */}
+      <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+        <div className="p-3 bg-blue-50 rounded-lg">
+          <div className="text-lg font-bold text-blue-600">
+            {chartData.signalPoints.filter(p => ['매수', 'BUY'].includes(p.signal)).length}
+          </div>
+          <div className="text-sm text-blue-800">매수 신호</div>
         </div>
-        <div className="text-center">
-          <div className="text-sm text-gray-500">기간</div>
-          <div className="font-bold text-gray-900">{CHART_PERIODS.find(p => p.id === selectedPeriod)?.label}</div>
+        <div className="p-3 bg-green-50 rounded-lg">
+          <div className="text-lg font-bold text-green-600">
+            {chartData.signalPoints.filter(p => ['긍정', 'POSITIVE'].includes(p.signal)).length}
+          </div>
+          <div className="text-sm text-green-800">긍정 신호</div>
         </div>
-        <div className="text-center">
-          <div className="text-sm text-gray-500">데이터 포인트</div>
-          <div className="font-bold text-gray-900">{chartData.length}개</div>
+        <div className="p-3 bg-red-50 rounded-lg">
+          <div className="text-lg font-bold text-red-600">
+            {chartData.signalPoints.filter(p => ['매도', 'SELL'].includes(p.signal)).length}
+          </div>
+          <div className="text-sm text-red-800">매도 신호</div>
         </div>
       </div>
     </div>
