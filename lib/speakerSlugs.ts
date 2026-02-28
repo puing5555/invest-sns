@@ -3,6 +3,7 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '이효석': 'lee-hyoseok',
   '조진표': 'cho-jinpyo',
   '코린이아빠': 'korini-appa',
+  '코린이 아빠': 'korini-appa',
   '박지훈': 'park-jihoon',
   '배재원': 'bae-jaewon',
   '김동훈': 'kim-donghoon',
