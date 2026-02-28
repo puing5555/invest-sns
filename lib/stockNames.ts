@@ -22,16 +22,29 @@ export function formatStockDisplay(stock?: string, ticker?: string): string {
   const isKorean = /[가-힣]/.test(stock);
 
   if (isKorean) {
-    // 이미 한글 → "삼성전자(005930)" or "삼성전자"
-    return ticker && ticker !== stock ? `${stock}(${ticker})` : stock;
+    // 이미 한글 → "삼성전자 (005930)" or "삼성전자"
+    return ticker && ticker !== stock ? `${stock} (${ticker})` : stock;
   }
 
   // 영문 티커만 있는 경우 → 매핑에서 한글명 찾기
   const korName = STOCK_NAME_MAP[stock];
   if (korName) {
-    return `${korName}(${stock})`;
+    return `${korName} (${stock})`;
   }
 
   // 매핑 없으면 그대로
   return stock;
+}
+
+/**
+ * 관심 종목용: 한글명만 표시 (티커 제거). 한글명 없으면 원본 그대로.
+ */
+export function formatStockShort(stock?: string, ticker?: string): string {
+  if (!stock) return ticker || '-';
+
+  const isKorean = /[가-힣]/.test(stock);
+  if (isKorean) return stock;
+
+  const korName = STOCK_NAME_MAP[stock];
+  return korName || stock;
 }

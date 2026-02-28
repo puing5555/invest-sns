@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { getInfluencerProfileBySpeaker } from '@/lib/supabase';
 import { slugToSpeaker } from '@/lib/speakerSlugs';
 import SignalDetailModal from '@/components/SignalDetailModal';
-import { formatStockDisplay } from '@/lib/stockNames';
+import { formatStockDisplay, formatStockShort } from '@/lib/stockNames';
 
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
@@ -47,16 +47,19 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   }
 
   // 종목별 카운트 계산 (발언 많은 순)
-  const stockCounts: { name: string; count: number }[] = [];
+  const stockCounts: { name: string; count: number; shortName: string }[] = [];
   if (profile?.signals) {
     const countMap: Record<string, number> = {};
+    const shortNameMap: Record<string, string> = {};
     for (const s of profile.signals) {
       const name = formatStockDisplay(s.stock, s.ticker) || '기타';
+      const shortName = formatStockShort(s.stock, s.ticker) || '기타';
       countMap[name] = (countMap[name] || 0) + 1;
+      shortNameMap[name] = shortName;
     }
     Object.entries(countMap)
       .sort((a, b) => b[1] - a[1])
-      .forEach(([name, count]) => stockCounts.push({ name, count }));
+      .forEach(([name, count]) => stockCounts.push({ name, count, shortName: shortNameMap[name] || name }));
   }
 
   // 필터링된 시그널
@@ -108,7 +111,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
               {stockCounts.map((s, i) => (
                 <span key={s.name}>
                   {i > 0 && <span className="text-[#d1d6db] mx-1">·</span>}
-                  <span className="font-medium">{s.name}</span>
+                  <span className="font-medium">{s.shortName}</span>
                   <span className="text-[#8b95a1]">({s.count})</span>
                 </span>
               ))}
