@@ -27,6 +27,10 @@ export default function SignalCard({
 }: SignalCardProps) {
   const signalColor = V9_SIGNAL_COLORS[signal] || 'bg-gray-500 text-white';
 
+  // 호스트 판단: 발언자명이 채널명에 포함되면 호스트 → 채널명 표시, 아니면 게스트 → 채널명 숨김
+  const isHost = channelName && speaker && channelName.includes(speaker);
+  const showChannel = isHost && channelName !== speaker;
+
   return (
     <div
       className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
@@ -39,7 +43,7 @@ export default function SignalCard({
         <span className="font-bold text-lg text-gray-900">{stock}</span>
         <span className="text-sm text-gray-500">
           {speaker}
-          {channelName && channelName !== speaker && (
+          {showChannel && (
             <span className="text-gray-400"> · {channelName}</span>
           )}
         </span>

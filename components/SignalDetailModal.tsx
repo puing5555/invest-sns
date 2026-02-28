@@ -64,8 +64,9 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     return signal.videoUrl;
   };
 
-  // 채널명 = 발언자면 발언자 생략
-  const showSpeaker = signal.channelName && signal.influencer && signal.channelName !== signal.influencer;
+  // 호스트 판단: 발언자명이 채널명에 포함되면 호스트 → 채널명 표시, 아니면 게스트 → 채널명 숨김
+  const isHost = signal.channelName && signal.influencer && signal.channelName.includes(signal.influencer);
+  const showChannel = isHost && signal.channelName !== signal.influencer;
 
   const handleLike = () => {
     if (liked) {
@@ -95,7 +96,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
           className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Top bar: 시그널+확신도 (left) / 좋아요·신고·X (right) */}
+          {/* Top bar: 시그널 (left) / 좋아요·신고·X (right) */}
           <div className="sticky top-0 bg-white z-10 px-4 pt-4 pb-2 flex items-center justify-between rounded-t-2xl">
             <div className="flex items-center gap-2">
               <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
@@ -131,11 +132,11 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <p className="text-sm text-[#8b95a1] mt-1">{formatDate(signal.date)}</p>
             </div>
 
-            {/* 채널 · 발언자 */}
+            {/* 발언자 · 채널 */}
             <div className="text-sm text-[#8b95a1]">
-              채널: <span className="font-medium text-[#191f28]">{signal.channelName || signal.influencer}</span>
-              {showSpeaker && (
-                <span> · 발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span></span>
+              발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span>
+              {showChannel && (
+                <span> · 채널: <span className="font-medium text-[#191f28]">{signal.channelName}</span></span>
               )}
             </div>
 

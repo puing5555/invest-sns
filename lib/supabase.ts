@@ -229,6 +229,47 @@ export async function getInfluencerProfile(channelHandle: string) {
   }
 }
 
+// 발언자 이름으로 프로필 + 시그널 가져오기
+export async function getInfluencerProfileBySpeaker(speakerName: string) {
+  try {
+    const { data: signals, error } = await supabase
+      .from('influencer_signals')
+      .select(`
+        *,
+        influencer_videos (
+          title,
+          published_at,
+          video_id,
+          influencer_channels (
+            channel_name,
+            channel_handle
+          )
+        ),
+        speakers (
+          name
+        )
+      `)
+      .eq('speaker_id', speakerName)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching speaker signals:', error);
+      return null;
+    }
+
+    return {
+      speakerName,
+      signals: signals || [],
+      totalSignals: signals?.length || 0,
+      stocks: [...new Set(signals?.map(s => s.stock).filter(Boolean))],
+      channels: [...new Set(signals?.map(s => s.influencer_videos?.influencer_channels?.channel_name).filter(Boolean))],
+    };
+  } catch (error) {
+    console.error('Error in getInfluencerProfileBySpeaker:', error);
+    return null;
+  }
+}
+
 // 특정 종목의 시그널을 가져오는 함수
 export async function getStockSignals(ticker: string) {
   try {
