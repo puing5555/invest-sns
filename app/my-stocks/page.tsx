@@ -244,7 +244,7 @@ export default function MyStocksPage() {
         date: item.date, influencer: item.source, signal: item.signal || '중립',
         quote: item.keyQuote || '', videoUrl: item.videoUrl || '#',
         analysis_reasoning: item.reasoning, videoTitle: item.videoTitle,
-        channelName: item.channelName,
+        channelName: item.channelName, ticker: item.stockCode,
       });
     }
   };

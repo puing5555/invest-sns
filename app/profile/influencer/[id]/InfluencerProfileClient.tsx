@@ -60,6 +60,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
         videoTitle: signal.influencer_videos?.title,
         channelName,
         timestamp: signal.timestamp,
+        ticker: signal.ticker,
       });
     }
   };

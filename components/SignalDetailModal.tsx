@@ -14,6 +14,24 @@ interface SignalDetail {
   timestamp?: string;
   videoTitle?: string;
   channelName?: string;
+  ticker?: string;
+}
+
+// AI 내부 메모 필터링
+const INTERNAL_PATTERNS = [
+  /confidence\s*[=:]\s*\w+/gi,
+  /mention_type\s*[=:]\s*\w+/gi,
+  /signal_type\s*[=:]\s*\w+/gi,
+  /\[내부\s*메모\]/gi,
+  /\[AI\s*(분석|메모|노트)\]/gi,
+];
+
+function filterInternalText(text: string): string {
+  let filtered = text;
+  INTERNAL_PATTERNS.forEach(p => { filtered = filtered.replace(p, '').trim(); });
+  // 빈 줄 정리
+  filtered = filtered.replace(/\n{3,}/g, '\n\n').trim();
+  return filtered;
 }
 
 interface SignalDetailModalProps {
@@ -154,14 +172,16 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
             </div>
 
             {/* 영상 내용 요약 */}
-            {signal.analysis_reasoning && (
-              <div>
-                <div className="text-xs font-medium text-[#8b95a1] mb-2">영상 내용 요약</div>
+            <div>
+              <div className="text-xs font-medium text-[#8b95a1] mb-2">영상 내용 요약</div>
+              {signal.analysis_reasoning ? (
                 <p className="text-sm text-[#333d4b] leading-relaxed whitespace-pre-wrap">
-                  {signal.analysis_reasoning}
+                  {filterInternalText(signal.analysis_reasoning)}
                 </p>
-              </div>
-            )}
+              ) : (
+                <p className="text-sm text-[#8b95a1] italic">영상 요약 준비 중</p>
+              )}
+            </div>
 
             {/* 메모 입력 (좋아요 클릭 시) */}
             {showMemoInput && (
@@ -190,17 +210,27 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               </div>
             )}
 
-            {/* 영상보기 버튼 - 타임스탬프 시점부터 재생 */}
-            {videoHref && (
-              <a
-                href={videoHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-center bg-[#ff0000] hover:bg-[#cc0000] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px]"
-              >
-                ▶️ 영상보기 →
-              </a>
-            )}
+            {/* 버튼: 차트보기 + 영상보기 */}
+            <div className="flex gap-3">
+              {signal.ticker && (
+                <a
+                  href={`/stock/${signal.ticker}?tab=influencer`}
+                  className="flex-1 text-center bg-[#3182f6] hover:bg-[#1b64da] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px]"
+                >
+                  📊 차트보기
+                </a>
+              )}
+              {videoHref && (
+                <a
+                  href={videoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center bg-[#ff0000] hover:bg-[#cc0000] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px]"
+                >
+                  ▶️ 영상보기
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
