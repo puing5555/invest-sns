@@ -14,6 +14,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
+  const [activeStock, setActiveStock] = useState<string>('전체');
 
   useEffect(() => {
     const load = async () => {
@@ -44,6 +45,24 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
       </div>
     );
   }
+
+  // 종목별 카운트 계산 (발언 많은 순)
+  const stockCounts: { name: string; count: number }[] = [];
+  if (profile?.signals) {
+    const countMap: Record<string, number> = {};
+    for (const s of profile.signals) {
+      const name = s.stock || '기타';
+      countMap[name] = (countMap[name] || 0) + 1;
+    }
+    Object.entries(countMap)
+      .sort((a, b) => b[1] - a[1])
+      .forEach(([name, count]) => stockCounts.push({ name, count }));
+  }
+
+  // 필터링된 시그널
+  const filteredSignals = activeStock === '전체'
+    ? (profile?.signals || [])
+    : (profile?.signals || []).filter((s: any) => (s.stock || '기타') === activeStock);
 
   const handleCardClick = (signal: any) => {
     if (signal.ticker) {
@@ -85,12 +104,58 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
             <p className="text-sm text-[#8b95a1] mt-1">총 {profile.totalSignals}건의 시그널</p>
           </div>
         </div>
+
+        {stockCounts.length > 0 && (
+          <div className="mt-4">
+            <p className="text-xs text-[#8b95a1] mb-1.5">관심 종목</p>
+            <p className="text-sm text-[#333d4b]">
+              {stockCounts.map((s, i) => (
+                <span key={s.name}>
+                  {i > 0 && <span className="text-[#d1d6db] mx-1">·</span>}
+                  <span className="font-medium">{s.name}</span>
+                  <span className="text-[#8b95a1]">({s.count})</span>
+                </span>
+              ))}
+            </p>
+          </div>
+        )}
       </div>
+
+      {/* 종목 필터 탭 */}
+      {stockCounts.length > 1 && (
+        <div className="px-4 pt-4 pb-0">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar">
+            <button
+              onClick={() => setActiveStock('전체')}
+              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                activeStock === '전체'
+                  ? 'bg-[#191f28] text-white'
+                  : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
+              }`}
+            >
+              전체 {profile.totalSignals}
+            </button>
+            {stockCounts.map((s) => (
+              <button
+                key={s.name}
+                onClick={() => setActiveStock(s.name)}
+                className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  activeStock === s.name
+                    ? 'bg-[#191f28] text-white'
+                    : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
+                }`}
+              >
+                {s.name} {s.count}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 시그널 리스트 */}
       <div className="px-4 py-4">
         <div className="space-y-3">
-          {profile.signals.map((signal: any, i: number) => {
+          {filteredSignals.map((signal: any, i: number) => {
             const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
             const publishedAt = signal.influencer_videos?.published_at || signal.created_at;
             const videoId = signal.influencer_videos?.video_id;
