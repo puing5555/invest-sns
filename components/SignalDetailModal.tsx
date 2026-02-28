@@ -49,7 +49,26 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   const formatDate = (d: string) => {
     try {
       return new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
-    } catch (e) { return d; }
+    } catch { return d; }
+  };
+
+  // timestamp "3:52" → seconds 232
+  const timestampToSeconds = (ts?: string): number | null => {
+    if (!ts) return null;
+    const parts = ts.split(':').map(Number);
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    return null;
+  };
+
+  const getVideoUrlWithTimestamp = () => {
+    if (!signal.videoUrl || signal.videoUrl === '#') return null;
+    const seconds = timestampToSeconds(signal.timestamp);
+    if (seconds && signal.videoUrl.includes('youtube.com') || signal.videoUrl.includes('youtu.be')) {
+      const sep = signal.videoUrl.includes('?') ? '&' : '?';
+      return `${signal.videoUrl}${sep}t=${seconds}`;
+    }
+    return signal.videoUrl;
   };
 
   // 채널명 = 발언자면 발언자 생략
@@ -66,10 +85,11 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   };
 
   const handleSaveMemo = () => {
-    // TODO: 메모장에 저장 연동
     console.log('Memo saved:', memoText);
     setShowMemoInput(false);
   };
+
+  const videoHref = getVideoUrlWithTimestamp();
 
   return (
     <>
@@ -82,41 +102,9 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
           className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Top bar: 신고 (left) / X (right) */}
+          {/* Top bar: 시그널+확신도 (left) / 좋아요·신고·X (right) */}
           <div className="sticky top-0 bg-white z-10 px-4 pt-4 pb-2 flex items-center justify-between rounded-t-2xl">
-            <button className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm flex items-center gap-1">
-              🚨 <span className="text-xs">신고</span>
-            </button>
-            <button
-              onClick={handleLike}
-              className={`transition-colors text-sm flex items-center gap-1 ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
-            >
-              {liked ? '❤️' : '🤍'} <span className="text-xs">좋아요</span>
-            </button>
-            <button
-              onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f8f9fa] transition-colors text-[#8b95a1] text-lg"
-            >
-              ✕
-            </button>
-          </div>
-
-          <div className="px-5 pb-5 space-y-4">
-            {/* 영상 제목 (크게) */}
-            <h2 className="text-lg font-bold text-[#191f28] leading-snug">
-              {signal.videoTitle || signal.quote?.slice(0, 40) + '...'}
-            </h2>
-
-            {/* 날짜 + 타임스탬프 */}
-            <div className="text-sm text-[#8b95a1]">
-              {formatDate(signal.date)}
-              {signal.timestamp && (
-                <span className="ml-1 text-[#3182f6] font-medium">[{signal.timestamp}]</span>
-              )}
-            </div>
-
-            {/* 시그널 배지 + 확신도 + 채널 + 발언자 한 줄 */}
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2">
               <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
                 {signal.signal}
               </span>
@@ -125,17 +113,40 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                   확신도 <span className="font-medium text-[#191f28]">{getConfidenceLabel(signal.confidence)}</span>
                 </span>
               )}
-              <span className="text-xs text-[#8b95a1]">•</span>
-              <span className="text-xs text-[#8b95a1]">
-                채널: <span className="font-medium text-[#191f28]">{signal.channelName || signal.influencer}</span>
-              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleLike}
+                className={`transition-colors text-sm px-2 py-1 rounded-lg ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
+              >
+                {liked ? '❤️' : '🤍'}
+              </button>
+              <button className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm px-2 py-1 rounded-lg">
+                🚨
+              </button>
+              <button
+                onClick={onClose}
+                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f8f9fa] transition-colors text-[#8b95a1] text-lg"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <div className="px-5 pb-5 space-y-4">
+            {/* 영상 제목 + 날짜 한 줄 */}
+            <div>
+              <h2 className="text-lg font-bold text-[#191f28] leading-snug">
+                {signal.videoTitle || signal.quote?.slice(0, 40) + '...'}
+              </h2>
+              <p className="text-sm text-[#8b95a1] mt-1">{formatDate(signal.date)}</p>
+            </div>
+
+            {/* 채널 · 발언자 */}
+            <div className="text-sm text-[#8b95a1]">
+              채널: <span className="font-medium text-[#191f28]">{signal.channelName || signal.influencer}</span>
               {showSpeaker && (
-                <>
-                  <span className="text-xs text-[#8b95a1]">•</span>
-                  <span className="text-xs text-[#8b95a1]">
-                    발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span>
-                  </span>
-                </>
+                <span> · 발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span></span>
               )}
             </div>
 
@@ -184,10 +195,10 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               </div>
             )}
 
-            {/* 영상보기 버튼 */}
-            {signal.videoUrl && signal.videoUrl !== '#' && (
+            {/* 영상보기 버튼 - 타임스탬프 시점부터 재생 */}
+            {videoHref && (
               <a
-                href={signal.videoUrl}
+                href={videoHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full text-center bg-[#ff0000] hover:bg-[#cc0000] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px]"
