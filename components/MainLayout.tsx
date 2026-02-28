@@ -32,13 +32,13 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Not logged in → redirect to login
-  if (!user) {
-    if (typeof window !== 'undefined') {
-      window.location.href = '/invest-sns/login';
-    }
-    return null;
-  }
+  // 데모 모드: 인증 없이 접근 가능
+  // if (!user) {
+  //   if (typeof window !== 'undefined') {
+  //     window.location.href = '/invest-sns/login';
+  //   }
+  //   return null;
+  // }
 
   return (
     <div className="flex min-h-screen w-full">

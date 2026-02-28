@@ -49,7 +49,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   const formatDate = (d: string) => {
     try {
       return new Date(d).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
-    } catch { return d; }
+    } catch (e) { return d; }
   };
 
   // 채널명 = 발언자면 발언자 생략
