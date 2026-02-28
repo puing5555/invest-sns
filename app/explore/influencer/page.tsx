@@ -217,38 +217,64 @@ export default function InfluencerPage() {
 
         {activeTab === 'influencers' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredInfluencers.map((influencer) => (
-              <Link key={influencer.id} href={`/profile/influencer/${influencer.id}`}>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all cursor-pointer">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
-                      {influencer.name.charAt(0)}
+            {(() => {
+              // DB 시그널에서 발언자별 카운트 + 최신 시그널 + 채널 추출
+              const speakerMap = new Map<string, { count: number; channels: Set<string>; latestSignal: string; latestDate: string }>();
+              allSignals.forEach(s => {
+                const existing = speakerMap.get(s.speaker);
+                if (existing) {
+                  existing.count++;
+                  if (s.channelName) existing.channels.add(s.channelName);
+                  if (s.video_published_at > existing.latestDate) {
+                    existing.latestSignal = s.signal_type;
+                    existing.latestDate = s.video_published_at;
+                  }
+                } else {
+                  const channels = new Set<string>();
+                  if (s.channelName) channels.add(s.channelName);
+                  speakerMap.set(s.speaker, {
+                    count: 1,
+                    channels,
+                    latestSignal: s.signal_type,
+                    latestDate: s.video_published_at || '',
+                  });
+                }
+              });
+              const speakers = Array.from(speakerMap.entries())
+                .map(([name, data]) => ({ name, ...data, channelList: Array.from(data.channels) }))
+                .filter(s => searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                .sort((a, b) => b.count - a.count);
+
+              return speakers.map((speaker) => {
+                const speakerId = encodeURIComponent(speaker.name);
+                return (
+                  <Link key={speaker.name} href={`/profile/influencer/${speakerId}`}>
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all cursor-pointer">
+                      <div className="flex items-center space-x-4 mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                          {speaker.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-gray-900">{speaker.name}</h3>
+                          <p className="text-sm text-gray-500">
+                            {speaker.channelList.join(' · ') || '채널 정보 없음'}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-[#3182f6]">{speaker.count}</div>
+                          <div className="text-xs text-gray-500">시그널 수</div>
+                        </div>
+                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${getSignalColor(speaker.latestSignal)}`}>
+                          최신: {speaker.latestSignal}
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-gray-900">{influencer.name}</h3>
-                      <p className="text-sm text-gray-500">{influencer.followers} 팔로워</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    <div>
-                      <div className="text-2xl font-bold text-blue-600">{influencer.accuracy}%</div>
-                      <div className="text-xs text-gray-500">정확도</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-gray-900">{influencer.totalCalls}</div>
-                      <div className="text-xs text-gray-500">총 시그널</div>
-                    </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <div className="text-sm text-gray-600">
-                      평균 수익률: <span className={`font-medium ${influencer.avgReturn > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        {influencer.avgReturn > 0 ? '+' : ''}{influencer.avgReturn.toFixed(1)}%
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                  </Link>
+                );
+              });
+            })()}
           </div>
         )}
 
