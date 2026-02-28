@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { getInfluencerProfileBySpeaker } from '@/lib/supabase';
 import { slugToSpeaker } from '@/lib/speakerSlugs';
 import SignalDetailModal from '@/components/SignalDetailModal';
+import { formatStockDisplay } from '@/lib/stockNames';
 
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
@@ -50,7 +51,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   if (profile?.signals) {
     const countMap: Record<string, number> = {};
     for (const s of profile.signals) {
-      const name = s.stock || '기타';
+      const name = formatStockDisplay(s.stock, s.ticker) || '기타';
       countMap[name] = (countMap[name] || 0) + 1;
     }
     Object.entries(countMap)
@@ -61,26 +62,22 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   // 필터링된 시그널
   const filteredSignals = activeStock === '전체'
     ? (profile?.signals || [])
-    : (profile?.signals || []).filter((s: any) => (s.stock || '기타') === activeStock);
+    : (profile?.signals || []).filter((s: any) => (formatStockDisplay(s.stock, s.ticker) || '기타') === activeStock);
 
   const handleCardClick = (signal: any) => {
-    if (signal.ticker) {
-      router.push(`/stock/${signal.ticker}?tab=influencer`);
-    } else {
-      const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
-      setSelectedSignal({
-        date: signal.influencer_videos?.published_at || signal.created_at,
-        influencer: speakerName,
-        signal: signal.signal,
-        quote: signal.key_quote || '',
-        videoUrl: signal.influencer_videos?.video_id ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}` : '#',
-        analysis_reasoning: signal.reasoning,
-        videoTitle: signal.influencer_videos?.title,
-        channelName,
-        timestamp: signal.timestamp,
-        ticker: signal.ticker,
-      });
-    }
+    const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
+    setSelectedSignal({
+      date: signal.influencer_videos?.published_at || signal.created_at,
+      influencer: speakerName,
+      signal: signal.signal,
+      quote: signal.key_quote || '',
+      videoUrl: signal.influencer_videos?.video_id ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}` : '#',
+      analysis_reasoning: signal.reasoning,
+      videoTitle: signal.influencer_videos?.title,
+      channelName,
+      timestamp: signal.timestamp,
+      ticker: signal.ticker,
+    });
   };
 
   return (
@@ -188,7 +185,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       onClick={() => handleCardClick(signal)}
                     >
                       <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{date}</td>
-                      <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">{signal.stock || '-'}</td>
+                      <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">{formatStockDisplay(signal.stock, signal.ticker)}</td>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
                           <span className="text-lg">{signalEmoji}</span>
