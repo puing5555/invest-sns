@@ -130,7 +130,7 @@ export default function MyStocksPage() {
         console.log('Loading integrated feed...');
         
         // 1. 인플루언서 시그널 가져오기
-        const influencerSignals = await getLatestInfluencerSignals(20);
+        const influencerSignals = await getLatestInfluencerSignals(50);
         
         // 2. 모든 데이터 소스를 통합 피드 아이템으로 변환
         const allItems: FeedItem[] = [];
