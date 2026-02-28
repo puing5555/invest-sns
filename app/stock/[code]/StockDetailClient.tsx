@@ -580,7 +580,7 @@ function InfluencerTab({ code }: { code: string }) {
             videoUrl,
             price: 0,
             confidence: signal.confidence,
-            analysis_reasoning: signal.analysis_reasoning,
+            analysis_reasoning: signal.reasoning,
             mention_type: signal.mention_type,
             timestamp: signal.timestamp,
             videoTitle: signal.influencer_videos?.title,

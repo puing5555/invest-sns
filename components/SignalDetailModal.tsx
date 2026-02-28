@@ -8,7 +8,7 @@ interface SignalDetail {
   signal: string;
   quote: string;
   videoUrl: string;
-  confidence?: number;
+  confidence?: number | string;
   analysis_reasoning?: string;
   mention_type?: string;
   timestamp?: string;
@@ -39,8 +39,16 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     }
   };
 
-  const getConfidenceLabel = (c?: number) => {
+  const getConfidenceLabel = (c?: number | string) => {
     if (!c) return null;
+    if (typeof c === 'string') {
+      switch (c.toLowerCase()) {
+        case 'high': return '높음';
+        case 'medium': return '보통';
+        case 'low': return '낮음';
+        default: return c;
+      }
+    }
     if (c >= 80) return '높음';
     if (c >= 50) return '보통';
     return '낮음';
