@@ -236,9 +236,6 @@ export default function InfluencerPage() {
                         </div>
                         <div>
                           <h3 className="font-bold text-gray-900">{speaker.name}</h3>
-                          <p className="text-sm text-gray-500">
-                            {speaker.channelList.join(' · ') || '채널 정보 없음'}
-                          </p>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
