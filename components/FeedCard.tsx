@@ -4,8 +4,9 @@ interface FeedCardProps {
   icon: string;
   categoryName: string;
   title: string;
-  date: string;       // 실제 날짜 문자열 (예: "2월 23일")
+  date: string;
   signal?: string;
+  keyQuote?: string;
   commentCount?: number;
   likeCount?: number;
   onClick?: () => void;
@@ -17,6 +18,7 @@ export default function FeedCard({
   title,
   date,
   signal,
+  keyQuote,
   commentCount,
   likeCount,
   onClick,
@@ -56,6 +58,11 @@ export default function FeedCard({
             <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-1">
               {title}
             </h3>
+            {keyQuote && (
+              <p className="text-sm text-[#4e5968] italic mb-1 line-clamp-1">
+                &ldquo;{keyQuote}&rdquo;
+              </p>
+            )}
             <span className="text-sm text-[#8b95a1]">{date}</span>
           </div>
           <div className="text-[#8b95a1] text-sm">→</div>

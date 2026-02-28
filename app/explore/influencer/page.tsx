@@ -1,14 +1,13 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { influencers } from '@/data/influencerData';
+import { getLatestInfluencerSignals } from '@/lib/supabase';
 
 // V9 기준 한글 시그널 타입 색상
-const V9_SIGNAL_COLORS = {
+const V9_SIGNAL_COLORS: Record<string, string> = {
   '매수': 'bg-green-600 text-white',
-  '긍정': 'bg-blue-600 text-white', 
+  '긍정': 'bg-blue-600 text-white',
   '중립': 'bg-gray-500 text-white',
   '경계': 'bg-yellow-600 text-white',
   '매도': 'bg-red-800 text-white'
@@ -16,28 +15,61 @@ const V9_SIGNAL_COLORS = {
 
 export default function InfluencerPage() {
   const [activeTab, setActiveTab] = useState('latest');
-  const [categoryFilter, setCategoryFilter] = useState('전체');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedComment, setSelectedComment] = useState<any>(null);
-  const router = useRouter();
+  const [dbSignals, setDbSignals] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // 로컬 데이터에서 최신 시그널 생성
-  const latestSignals = influencers.flatMap(influencer => 
+  // DB에서 시그널 로드
+  useEffect(() => {
+    const loadSignals = async () => {
+      try {
+        const signals = await getLatestInfluencerSignals(100); // 전부 가져오기
+        const transformed = signals.map((s: any) => ({
+          id: s.id,
+          stock: s.stock,
+          signal_type: s.signal,
+          speaker: s.speakers?.name || s.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
+          channelName: s.influencer_videos?.influencer_channels?.channel_name || '',
+          content_snippet: s.key_quote || `${s.stock} ${s.signal}`,
+          key_quote: s.key_quote,
+          video_published_at: s.influencer_videos?.published_at || s.created_at,
+          confidence: s.confidence,
+          reasoning: s.reasoning,
+          videoUrl: s.influencer_videos?.video_id ? `https://youtube.com/watch?v=${s.influencer_videos.video_id}` : '#',
+          videoTitle: s.influencer_videos?.title,
+        }));
+        setDbSignals(transformed);
+      } catch (e) {
+        console.error('Failed to load signals:', e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadSignals();
+  }, []);
+
+  // 로컬 데이터 fallback (DB 비어있을 때)
+  const localSignals = influencers.flatMap(influencer =>
     influencer.recentCalls.slice(0, 3).map(call => ({
       id: `${influencer.id}-${call.stock}`,
       stock: call.stock,
-      signal_type: call.direction, // V9 한글 타입 그대로 사용
+      signal_type: call.direction,
       speaker: influencer.name,
+      channelName: influencer.name,
       content_snippet: `${call.stock} ${call.direction} 추천`,
+      key_quote: null,
       video_published_at: call.date,
-      accuracy_rate: influencer.accuracy,
-      return_rate: call.returnRate,
-      status: call.status
+      confidence: null,
+      reasoning: null,
+      videoUrl: '#',
+      videoTitle: null,
     }))
-  ).slice(0, 20);
+  );
 
-  // 주식별 시그널 그룹화
-  const stockGroups = latestSignals.reduce((groups: any[], signal) => {
+  const allSignals = dbSignals.length > 0 ? dbSignals : localSignals;
+
+  // 종목별 그룹
+  const stockGroups = allSignals.reduce((groups: any[], signal) => {
     const existing = groups.find(g => g.stock === signal.stock);
     if (existing) {
       existing.signals.push(signal);
@@ -55,19 +87,22 @@ export default function InfluencerPage() {
   }, []).sort((a, b) => b.signal_count - a.signal_count);
 
   const getSignalColor = (signalType: string) => {
-    return V9_SIGNAL_COLORS[signalType as keyof typeof V9_SIGNAL_COLORS] || 'bg-gray-500 text-white';
+    return V9_SIGNAL_COLORS[signalType] || 'bg-gray-500 text-white';
   };
 
   const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
     const date = new Date(dateStr);
     const now = new Date();
     const diffHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
     if (diffHours < 24) return `${diffHours}시간 전`;
-    return `${Math.floor(diffHours / 24)}일 전`;
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffDays < 30) return `${diffDays}일 전`;
+    return date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
   };
 
-  const filteredSignals = latestSignals.filter(signal => 
-    searchQuery === '' || 
+  const filteredSignals = allSignals.filter(signal =>
+    searchQuery === '' ||
     signal.stock.toLowerCase().includes(searchQuery.toLowerCase()) ||
     signal.speaker.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -89,8 +124,6 @@ export default function InfluencerPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <h1 className="text-xl font-bold text-gray-900">📈 인플루언서 시그널</h1>
-            
-            {/* Search */}
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <input
@@ -103,11 +136,11 @@ export default function InfluencerPage() {
               </div>
             </div>
           </div>
-          
+
           {/* Tabs */}
           <div className="flex space-x-8 -mb-px">
             {[
-              { id: 'latest', label: '🔥 최신 시그널', count: latestSignals.length },
+              { id: 'latest', label: '🔥 최신 시그널', count: allSignals.length },
               { id: 'influencers', label: '👥 인플루언서', count: influencers.length },
               { id: 'stocks', label: '📊 종목별', count: stockGroups.length }
             ].map((tab) => (
@@ -132,25 +165,48 @@ export default function InfluencerPage() {
         {activeTab === 'latest' && (
           <div className="space-y-4">
             <div className="text-sm text-gray-600 mb-4">
-              총 {filteredSignals.length}개 시그널
+              총 {filteredSignals.length}개 시그널 {loading && '(로딩 중...)'}
             </div>
             {filteredSignals.map((signal) => (
-              <div key={signal.id} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div key={signal.id} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-3">
+                    <div className="flex items-center space-x-3 mb-2">
                       <div className={`px-3 py-1 rounded-full text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
                         {signal.signal_type}
                       </div>
                       <span className="font-bold text-lg text-gray-900">{signal.stock}</span>
-                      <span className="text-sm text-gray-500">by {signal.speaker}</span>
+                      <span className="text-sm text-gray-500">
+                        {signal.speaker}
+                        {signal.channelName && signal.channelName !== signal.speaker && (
+                          <span className="text-gray-400"> · {signal.channelName}</span>
+                        )}
+                      </span>
+                      {signal.confidence && (
+                        <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">
+                          확신도 {signal.confidence === 'high' ? '높음' : signal.confidence === 'medium' ? '보통' : signal.confidence}
+                        </span>
+                      )}
                     </div>
-                    <p className="text-gray-700 text-sm mb-3">{signal.content_snippet}</p>
-                    <div className="flex items-center space-x-4 text-xs text-gray-500">
-                      <span>정확도 {signal.accuracy_rate}%</span>
-                      <span>수익률 {signal.return_rate > 0 ? '+' : ''}{signal.return_rate.toFixed(1)}%</span>
-                      <span>상태: {signal.status}</span>
+                    {signal.key_quote && (
+                      <p className="text-[15px] text-gray-700 italic mb-2 leading-relaxed">
+                        &ldquo;{signal.key_quote}&rdquo;
+                      </p>
+                    )}
+                    {signal.videoTitle && (
+                      <p className="text-sm text-gray-500 mb-2">
+                        📹 {signal.videoTitle}
+                      </p>
+                    )}
+                    <div className="flex items-center space-x-4 text-xs text-gray-400">
                       <span>{formatDate(signal.video_published_at)}</span>
+                      {signal.videoUrl && signal.videoUrl !== '#' && (
+                        <a href={signal.videoUrl} target="_blank" rel="noopener noreferrer"
+                           className="text-blue-500 hover:text-blue-700"
+                           onClick={(e) => e.stopPropagation()}>
+                          영상보기 →
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -173,7 +229,6 @@ export default function InfluencerPage() {
                       <p className="text-sm text-gray-500">{influencer.followers} 팔로워</p>
                     </div>
                   </div>
-                  
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div>
                       <div className="text-2xl font-bold text-blue-600">{influencer.accuracy}%</div>
@@ -184,7 +239,6 @@ export default function InfluencerPage() {
                       <div className="text-xs text-gray-500">총 시그널</div>
                     </div>
                   </div>
-                  
                   <div className="mt-4 pt-4 border-t border-gray-100">
                     <div className="text-sm text-gray-600">
                       평균 수익률: <span className={`font-medium ${influencer.avgReturn > 0 ? 'text-green-600' : 'text-red-600'}`}>
@@ -214,19 +268,25 @@ export default function InfluencerPage() {
                     </div>
                   </div>
                 </div>
-                
                 <div className="space-y-2">
                   {group.signals.map((signal: any) => (
-                    <div key={signal.id} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded">
-                      <div className="flex items-center space-x-3">
-                        <span className="font-medium text-sm">{signal.speaker}</span>
-                        <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
-                          {signal.signal_type}
+                    <div key={signal.id} className="py-3 px-4 bg-gray-50 rounded-lg">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center space-x-3">
+                          <span className="font-medium text-sm">{signal.speaker}</span>
+                          <div className={`px-2 py-0.5 rounded text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
+                            {signal.signal_type}
+                          </div>
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {formatDate(signal.video_published_at)}
                         </div>
                       </div>
-                      <div className="text-sm text-gray-500">
-                        {signal.accuracy_rate}% 정확도 · {formatDate(signal.video_published_at)}
-                      </div>
+                      {signal.key_quote && (
+                        <p className="text-sm text-gray-600 italic mt-1">
+                          &ldquo;{signal.key_quote}&rdquo;
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
