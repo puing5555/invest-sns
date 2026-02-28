@@ -11,7 +11,7 @@
 
 # next.js
 /.next/
-/out/
+# /out/ # GitHub Pages 배포를 위해 out 폴더 포함
 
 # production
 /build
