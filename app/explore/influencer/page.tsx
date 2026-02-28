@@ -5,15 +5,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { influencers } from '@/data/influencerData';
 
-const SIGNAL_COLORS = {
-  'STRONG_BUY': 'bg-[#dc2626] text-white',
-  'BUY': 'bg-[#ea580c] text-white', 
-  'POSITIVE': 'bg-[#16a34a] text-white',
-  'HOLD': 'bg-[#6b7280] text-white',
-  'NEUTRAL': 'bg-[#6b7280] text-white',
-  'CONCERN': 'bg-[#ca8a04] text-white',
-  'SELL': 'bg-[#dc2626] text-white',
-  'STRONG_SELL': 'bg-[#991b1b] text-white'
+// V9 기준 한글 시그널 타입 색상
+const V9_SIGNAL_COLORS = {
+  '매수': 'bg-red-600 text-white',
+  '긍정': 'bg-green-600 text-white', 
+  '중립': 'bg-gray-500 text-white',
+  '경계': 'bg-yellow-600 text-white',
+  '매도': 'bg-red-800 text-white'
 };
 
 export default function InfluencerPage() {
@@ -28,7 +26,7 @@ export default function InfluencerPage() {
     influencer.recentCalls.slice(0, 3).map(call => ({
       id: `${influencer.id}-${call.stock}`,
       stock: call.stock,
-      signal_type: call.direction === '매수' ? 'BUY' : call.direction === '매도' ? 'SELL' : 'NEUTRAL',
+      signal_type: call.direction, // V9 한글 타입 그대로 사용
       speaker: influencer.name,
       content_snippet: `${call.stock} ${call.direction} 추천`,
       video_published_at: call.date,
@@ -57,7 +55,7 @@ export default function InfluencerPage() {
   }, []).sort((a, b) => b.signal_count - a.signal_count);
 
   const getSignalColor = (signalType: string) => {
-    return SIGNAL_COLORS[signalType as keyof typeof SIGNAL_COLORS] || 'bg-gray-500 text-white';
+    return V9_SIGNAL_COLORS[signalType as keyof typeof V9_SIGNAL_COLORS] || 'bg-gray-500 text-white';
   };
 
   const formatDate = (dateStr: string) => {
@@ -142,7 +140,7 @@ export default function InfluencerPage() {
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-3">
                       <div className={`px-3 py-1 rounded-full text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
-                        {signal.signal_type === 'BUY' ? '매수' : signal.signal_type === 'SELL' ? '매도' : '중립'}
+                        {signal.signal_type}
                       </div>
                       <span className="font-bold text-lg text-gray-900">{signal.stock}</span>
                       <span className="text-sm text-gray-500">by {signal.speaker}</span>
@@ -212,7 +210,7 @@ export default function InfluencerPage() {
                     <h3 className="font-bold text-lg text-gray-900">{group.stock}</h3>
                     <span className="text-sm text-gray-500">{group.signal_count}개 시그널</span>
                     <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(group.latest_signal)}`}>
-                      최신: {group.latest_signal === 'BUY' ? '매수' : group.latest_signal === 'SELL' ? '매도' : '중립'}
+                      최신: {group.latest_signal}
                     </div>
                   </div>
                 </div>
@@ -223,7 +221,7 @@ export default function InfluencerPage() {
                       <div className="flex items-center space-x-3">
                         <span className="font-medium text-sm">{signal.speaker}</span>
                         <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(signal.signal_type)}`}>
-                          {signal.signal_type === 'BUY' ? '매수' : signal.signal_type === 'SELL' ? '매도' : '중립'}
+                          {signal.signal_type}
                         </div>
                       </div>
                       <div className="text-sm text-gray-500">

@@ -1,212 +1,246 @@
-export interface Report {
+export interface AnalystReport {
   id: string;
-  stockName: string;
   title: string;
-  firm: string;
-  analystName: string;
-  date: string;
-  targetPriceOld?: number;
-  targetPriceNew: number;
-  changeType: 'up' | 'down' | 'maintain' | 'new';
-  recommendation: string;
-  aiSummary: string;
-  aiSummaryFull: string;
-  analystAccuracy: number;
-  starRating: number;
+  targetPrice: number;
+  currentPrice: number;
+  investmentOpinion: 'BUY' | 'SELL' | 'HOLD' | 'STRONG_BUY' | 'STRONG_SELL';
+  previousTargetPrice?: number;
+  upsidePotential: number;
+  publishedAt: string;
+  summary: string;
+  keyPoints: string[];
+}
+
+export interface AnalystPerformance {
+  stock: string;
+  entryPrice: number;
+  exitPrice?: number;
+  returnRate: number;
+  hitTarget: boolean;
+  daysToTarget?: number;
+  entryDate: string;
+  exitDate?: string;
+  status: '진행중' | '목표달성' | '손절' | '만료';
 }
 
 export interface Analyst {
   id: string;
   name: string;
-  firm: string;
-  sector: string;
-  accuracy: number;
-  successful: number;
-  total: number;
-  avgReturn: number;
-  starRating: number;
-  trustBadge: 'verified' | 'accumulating';
-  recentReports: string[];
-  avatar?: string;
+  company: string; // 증권사명
+  sector: string; // 전문 섹터
+  accuracyRate: number; // 적중률 %
+  totalReports: number;
+  successfulPredictions: number;
+  avgReturn: number; // 평균 수익률 %
+  experienceYears: number;
+  profileImage?: string;
+  recentReports: AnalystReport[];
+  recentPerformance: AnalystPerformance[];
 }
 
-export interface TargetPriceHistory {
-  date: string;
-  price: number;
-  analyst: string;
-  firm: string;
-}
-
-export const reports: Report[] = [
-  {
-    id: '1',
-    stockName: 'SK하이닉스',
-    title: 'HBM 수혜 본격화, 목표가 상향',
-    firm: '한국투자',
-    analystName: '김OO',
-    date: '2025.02.25',
-    targetPriceOld: 180000,
-    targetPriceNew: 210000,
-    changeType: 'up',
-    recommendation: '매수유지',
-    aiSummary: 'HBM3E 양산 본격화로 ASP 상승 기대. 2025 영업익 전년대비 +45% 전망. 목표가 PER 12배 적용.',
-    aiSummaryFull: 'HBM3E 양산 본격화로 ASP 상승 기대. 2025 영업익 전년대비 +45% 전망. 목표가 PER 12배 적용. SK하이닉스는 AI 메모리 시장의 핵심 기업으로 HBM 점유율 확대가 지속될 것으로 예상. 삼성전자 대비 기술 우위 유지하며 가격 프리미엄 지속 전망.',
-    analystAccuracy: 62,
-    starRating: 4
-  },
-  {
-    id: '2',
-    stockName: '삼성전자',
-    title: '파운드리 회복 + 메모리 업사이클',
-    firm: '미래에셋',
-    analystName: '박OO',
-    date: '2025.02.24',
-    targetPriceOld: 78000,
-    targetPriceNew: 85000,
-    changeType: 'up',
-    recommendation: '매수',
-    aiSummary: '2나노 수율 개선으로 파운드리 흑자전환 기대. DRAM 가격 반등 수혜.',
-    aiSummaryFull: '2나노 수율 개선으로 파운드리 흑자전환 기대. DRAM 가격 반등 수혜. 파운드리 부문의 수율 개선으로 2025년 흑자전환 가능할 것으로 예상. 메모리 부문도 재고 정상화 완료로 가격 상승 사이클 진입. AI 반도체 수요 증가도 긍정적 요인.',
-    analystAccuracy: 58,
-    starRating: 3
-  },
-  {
-    id: '3',
-    stockName: 'HD한국조선해양',
-    title: '수주 모멘텀 지속, 조선 슈퍼사이클',
-    firm: 'NH투자',
-    analystName: '이OO',
-    date: '2025.02.23',
-    targetPriceOld: 170000,
-    targetPriceNew: 195000,
-    changeType: 'up',
-    recommendation: '매수',
-    aiSummary: '카타르 LNG선 추가 수주 기대. 2025 수주잔고 역대 최고치 전망.',
-    aiSummaryFull: '카타르 LNG선 추가 수주 기대. 2025 수주잔고 역대 최고치 전망. 글로벌 LNG 수요 증가로 LNG선 신규 수주가 지속될 것으로 예상. 조선업계 슈퍼사이클이 본격화되면서 선가 상승도 동반. ESG 규제 강화로 친환경선박 수요도 증가 전망.',
-    analystAccuracy: 71,
-    starRating: 5
-  },
-  {
-    id: '4',
-    stockName: '에코프로',
-    title: '2차전지 바닥 확인, 반등 시작',
-    firm: '키움',
-    analystName: '최OO',
-    date: '2025.02.22',
-    targetPriceOld: 280000,
-    targetPriceNew: 310000,
-    changeType: 'up',
-    recommendation: '매수',
-    aiSummary: '북미 양극재 공장 가동률 상승. 재고 정상화 완료. 하반기 턴어라운드.',
-    aiSummaryFull: '북미 양극재 공장 가동률 상승. 재고 정상화 완료. 하반기 턴어라운드. 2차전지 업계의 재고 조정이 완료되면서 수요 회복 신호가 나타나고 있음. 북미 IRA 수혜로 현지 공장 가동률 상승. 중국 업체 대비 기술 경쟁력 우위 유지.',
-    analystAccuracy: 55,
-    starRating: 3
-  },
-  {
-    id: '5',
-    stockName: '카카오',
-    title: '실적 부진 지속, 목표가 하향',
-    firm: '삼성증권',
-    analystName: '정OO',
-    date: '2025.02.21',
-    targetPriceOld: 65000,
-    targetPriceNew: 52000,
-    changeType: 'down',
-    recommendation: '중립',
-    aiSummary: '광고 매출 회복 지연. AI 투자비용 증가로 수익성 악화.',
-    aiSummaryFull: '광고 매출 회복 지연. AI 투자비용 증가로 수익성 악화. 디지털 광고 시장 경쟁 심화로 매출 성장 둔화. AI 기술 투자 확대로 단기 수익성 압박. 하지만 장기적으로는 AI 기반 신사업 포트폴리오 확장 기대. 카카오페이 분할 상장도 긍정적 요인.',
-    analystAccuracy: 64,
-    starRating: 4
-  },
-  {
-    id: '6',
-    stockName: '한화에어로스페이스',
-    title: '방산 수출 확대, 중장기 성장',
-    firm: '대신',
-    analystName: '윤OO',
-    date: '2025.02.20',
-    targetPriceNew: 310000,
-    changeType: 'new',
-    recommendation: '매수',
-    aiSummary: '폴란드 추가 수주 가시화. K-방산 글로벌 점유율 확대.',
-    aiSummaryFull: '폴란드 추가 수주 가시화. K-방산 글로벌 점유율 확대. 우크라이나 전쟁으로 글로벌 방산 수요 급증. 한국 방산 기업의 가성비 우위로 수출 확대 지속. 차세대 전투기 사업 참여로 장기 성장동력 확보. ESG 이슈는 있으나 국가 안보 차원에서 투자 필요성 인정.',
-    analystAccuracy: 48,
-    starRating: 2
-  }
-];
-
+// 샘플 애널리스트 데이터
 export const analysts: Analyst[] = [
   {
-    id: '1',
-    name: '이OO',
-    firm: 'NH투자',
-    sector: '조선/해운',
-    accuracy: 71,
-    successful: 25,
-    total: 35,
-    avgReturn: 16.8,
-    starRating: 5,
-    trustBadge: 'verified',
-    recentReports: ['3', '1']
-  },
-  {
-    id: '2',
-    name: '김OO',
-    firm: '한국투자',
+    id: 'kim-sunwoo',
+    name: '김선우',
+    company: '한국투자증권',
     sector: '반도체',
-    accuracy: 62,
-    successful: 37,
-    total: 60,
-    avgReturn: 14.2,
-    starRating: 4,
-    trustBadge: 'verified',
-    recentReports: ['1', '2']
-  },
-  {
-    id: '3',
-    name: '정OO',
-    firm: '삼성증권',
-    sector: '인터넷/플랫폼',
-    accuracy: 64,
-    successful: 28,
-    total: 44,
-    avgReturn: 11.5,
-    starRating: 4,
-    trustBadge: 'verified',
-    recentReports: ['5']
-  },
-  {
-    id: '4',
-    name: '최OO',
-    firm: '키움',
-    sector: '2차전지',
-    accuracy: 55,
-    successful: 22,
-    total: 40,
+    accuracyRate: 72.5,
+    totalReports: 45,
+    successfulPredictions: 33,
     avgReturn: 8.3,
-    starRating: 3,
-    trustBadge: 'verified',
-    recentReports: ['4']
+    experienceYears: 7,
+    profileImage: '/avatars/analyst-kim.jpg',
+    recentReports: [
+      {
+        id: 'r1',
+        title: 'SK하이닉스: HBM3E 매출 확대로 목표가 상향',
+        targetPrice: 210000,
+        currentPrice: 180000,
+        investmentOpinion: 'BUY',
+        previousTargetPrice: 190000,
+        upsidePotential: 16.7,
+        publishedAt: '2026-02-27T14:30:00Z',
+        summary: 'HBM3E 매출 비중 30% 돌파로 수익성 크게 개선. 영업이익률 35%로 업계 최고 수준.',
+        keyPoints: ['HBM3E 매출 비중 30% 돌파', '영업이익률 35% 달성', 'AI 수요 지속 증가']
+      },
+      {
+        id: 'r2', 
+        title: '삼성전자: 메모리 업사이클 진입, 매수 유지',
+        targetPrice: 95000,
+        currentPrice: 86000,
+        investmentOpinion: 'BUY',
+        upsidePotential: 10.5,
+        publishedAt: '2026-02-26T09:15:00Z',
+        summary: '메모리 가격 상승 사이클 진입. D램 가격 10% 상승으로 수익성 개선 전망.',
+        keyPoints: ['메모리 가격 상승', 'D램 10% 가격 인상', '1Q 실적 턴어라운드']
+      }
+    ],
+    recentPerformance: [
+      {
+        stock: 'SK하이닉스',
+        entryPrice: 165000,
+        exitPrice: 185000,
+        returnRate: 12.1,
+        hitTarget: true,
+        daysToTarget: 23,
+        entryDate: '2026-01-15',
+        exitDate: '2026-02-07',
+        status: '목표달성'
+      },
+      {
+        stock: '삼성전자',
+        entryPrice: 82000,
+        returnRate: 4.9,
+        hitTarget: false,
+        entryDate: '2026-02-10',
+        status: '진행중'
+      }
+    ]
   },
   {
-    id: '5',
-    name: '윤OO',
-    firm: '대신',
-    sector: '방산/항공',
-    accuracy: 48,
-    successful: 8,
-    total: 17,
-    avgReturn: 6.1,
-    starRating: 2,
-    trustBadge: 'accumulating',
-    recentReports: ['6']
+    id: 'lee-mirae',
+    name: '이미래',
+    company: '삼성증권',
+    sector: '바이오/헬스케어',
+    accuracyRate: 68.2,
+    totalReports: 38,
+    successfulPredictions: 26,
+    avgReturn: 6.7,
+    experienceYears: 5,
+    profileImage: '/avatars/analyst-lee.jpg',
+    recentReports: [
+      {
+        id: 'r3',
+        title: '셀트리온: 코로나 치료제 매출 안정화',
+        targetPrice: 220000,
+        currentPrice: 195000,
+        investmentOpinion: 'BUY',
+        upsidePotential: 12.8,
+        publishedAt: '2026-02-26T16:45:00Z',
+        summary: '코로나 치료제 레클리쿠맙 매출이 안정적 흐름. 바이오시밀러 사업도 견조.',
+        keyPoints: ['레클리쿠맙 안정 매출', '바이오시밀러 성장', '신약 파이프라인 진전']
+      }
+    ],
+    recentPerformance: [
+      {
+        stock: '셀트리온',
+        entryPrice: 180000,
+        exitPrice: 210000,
+        returnRate: 16.7,
+        hitTarget: true,
+        daysToTarget: 42,
+        entryDate: '2025-12-20',
+        exitDate: '2026-01-31',
+        status: '목표달성'
+      }
+    ]
+  },
+  {
+    id: 'park-tech',
+    name: '박테크',
+    company: 'NH투자증권',
+    sector: '테크/IT서비스',
+    accuracyRate: 74.1,
+    totalReports: 52,
+    successfulPredictions: 39,
+    avgReturn: 9.1,
+    experienceYears: 9,
+    profileImage: '/avatars/analyst-park.jpg',
+    recentReports: [
+      {
+        id: 'r4',
+        title: '네이버: AI 플랫폼 확장으로 성장 가속화',
+        targetPrice: 280000,
+        currentPrice: 245000,
+        investmentOpinion: 'BUY',
+        upsidePotential: 14.3,
+        publishedAt: '2026-02-25T11:20:00Z',
+        summary: 'HyperCLOVA X 상용화로 AI 매출 급증. 클라우드 사업 확장도 긍정적.',
+        keyPoints: ['HyperCLOVA X 상용화', 'AI 매출 3배 증가', '클라우드 사업 확장']
+      }
+    ],
+    recentPerformance: []
+  },
+  {
+    id: 'choi-finance',
+    name: '최금융',
+    company: '대신증권',
+    sector: '금융',
+    accuracyRate: 69.8,
+    totalReports: 41,
+    successfulPredictions: 29,
+    avgReturn: 7.2,
+    experienceYears: 6,
+    profileImage: '/avatars/analyst-choi.jpg',
+    recentReports: [
+      {
+        id: 'r5',
+        title: '신한금융지주: 금리 안정화로 NIM 개선',
+        targetPrice: 58000,
+        currentPrice: 52000,
+        investmentOpinion: 'BUY',
+        upsidePotential: 11.5,
+        publishedAt: '2026-02-24T13:30:00Z',
+        summary: '기준금리 안정화로 순이자마진(NIM) 개선. 대출 성장도 양호한 흐름.',
+        keyPoints: ['NIM 개선 전망', '대출 성장 지속', '충당금 부담 완화']
+      }
+    ],
+    recentPerformance: []
+  },
+  {
+    id: 'jung-energy',
+    name: '정에너지',
+    company: 'KB증권',
+    sector: '에너지/화학',
+    accuracyRate: 71.3,
+    totalReports: 33,
+    successfulPredictions: 24,
+    avgReturn: 8.8,
+    experienceYears: 8,
+    profileImage: '/avatars/analyst-jung.jpg',
+    recentReports: [
+      {
+        id: 'r6',
+        title: 'SK이노베이션: 배터리 분할 후 밸류업',
+        targetPrice: 180000,
+        currentPrice: 155000,
+        investmentOpinion: 'BUY',
+        upsidePotential: 16.1,
+        publishedAt: '2026-02-23T10:45:00Z',
+        summary: '배터리 사업 분할 후 각 사업부 가치 재평가. 석유화학 업황 개선도 긍정적.',
+        keyPoints: ['배터리 분할 밸류업', '석유화학 마진 회복', 'ESG 투자 유치']
+      }
+    ],
+    recentPerformance: []
   }
 ];
 
-export const targetPriceHistory: TargetPriceHistory[] = [
-  { date: '2025.02.25', price: 210000, analyst: '김OO', firm: '한국투자' },
-  { date: '2025.01.15', price: 180000, analyst: '김OO', firm: '한국투자' },
-  { date: '2024.12.10', price: 165000, analyst: '박XX', firm: '미래에셋' },
-  { date: '2024.11.20', price: 155000, analyst: '이YY', firm: 'KB증권' },
-  { date: '2024.10.25', price: 150000, analyst: '김OO', firm: '한국투자' }
-];
+// 최신 리포트 (전체)
+export const latestReports = analysts.flatMap(analyst => 
+  analyst.recentReports.map(report => ({
+    ...report,
+    analystId: analyst.id,
+    analystName: analyst.name,
+    company: analyst.company,
+    accuracyRate: analyst.accuracyRate
+  }))
+).sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
+// 투자의견별 색상
+export const opinionColors = {
+  'STRONG_BUY': 'bg-red-600 text-white',
+  'BUY': 'bg-blue-600 text-white',
+  'HOLD': 'bg-gray-500 text-white',
+  'SELL': 'bg-orange-600 text-white',
+  'STRONG_SELL': 'bg-red-800 text-white'
+};
+
+// 투자의견 한글 변환
+export const opinionLabels = {
+  'STRONG_BUY': '적극매수',
+  'BUY': '매수',
+  'HOLD': '보유',
+  'SELL': '매도',
+  'STRONG_SELL': '적극매도'
+};

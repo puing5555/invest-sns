@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
+import StockChart from '@/components/StockChart';
+import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
 }
@@ -84,11 +86,64 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
     }
   }, [searchParams]);
 
+  // 해당 종목의 시그널 가져오기
+  const getStockSignals = (code: string, name: string) => {
+    const stockMapping: { [key: string]: string[] } = {
+      '005930': ['삼성전자', '삼성'],
+      '000660': ['SK하이닉스', '하이닉스'],
+      '035420': ['네이버', 'NAVER'],
+      '051910': ['LG화학'],
+      '005380': ['현대차', '현대자동차'],
+      '005490': ['POSCO홀딩스', '포스코'],
+      'BTC': ['비트코인', 'Bitcoin'],
+      'ETH': ['이더리움', 'Ethereum']
+    };
+
+    const possibleNames = stockMapping[code] || [name];
+    const signals: any[] = [];
+    
+    influencers.forEach(influencer => {
+      influencer.recentCalls.forEach(call => {
+        const isMatch = possibleNames.some(stockName => 
+          call.stock.includes(stockName) || stockName.includes(call.stock)
+        );
+        
+        if (isMatch) {
+          signals.push({
+            id: `${influencer.id}-${call.stock}`,
+            stock: call.stock,
+            signal_type: call.direction,
+            speaker: influencer.name,
+            content_snippet: `${call.stock} ${call.direction} 추천`,
+            date: call.date,
+            video_published_at: call.date,
+            accuracy_rate: influencer.accuracy,
+            return_rate: call.returnRate,
+            status: call.status
+          });
+        }
+      });
+    });
+    
+    return signals;
+  };
+
+  const stockSignals = getStockSignals(code, stockData.name);
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'realtime':
         return (
-          <div className="space-y-4">
+          <div className="space-y-6">
+            {/* 주가 차트 */}
+            <StockChart 
+              stockCode={code}
+              stockName={stockData.name}
+              signals={stockSignals}
+            />
+            
+            {/* 타임라인 이벤트 */}
+            <div className="space-y-4">
             {timeline.map((event) => (
               <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
                 <div
@@ -196,6 +251,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         );
 

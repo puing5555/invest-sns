@@ -1,7 +1,7 @@
 export interface CallRecord {
   stock: string;
   date: string;
-  direction: '매수' | '매도';
+  direction: string; // V9: 매수, 긍정, 중립, 경계, 매도
   callPrice: number;
   currentPrice: number;
   returnRate: number;
@@ -31,7 +31,16 @@ export interface Influencer {
   monthlyAccuracy: MonthlyAccuracy[];
 }
 
-// Real data from 3protv signals
+// V9 기준 시그널 색상
+export const V9_SIGNAL_COLORS = {
+  '매수': 'bg-red-600 text-white',
+  '긍정': 'bg-green-600 text-white', 
+  '중립': 'bg-gray-500 text-white',
+  '경계': 'bg-yellow-600 text-white',
+  '매도': 'bg-red-800 text-white'
+};
+
+// V9 기준 인플루언서 데이터
 export const influencers: Influencer[] = [
   {
     "id": "고연수",
@@ -43,51 +52,51 @@ export const influencers: Influencer[] = [
       }
     ],
     "followers": "10K+",
-    "accuracy": 67,
+    "accuracy": 100,
     "totalCalls": 3,
-    "successfulCalls": 2,
-    "avgReturn": 7.31,
+    "successfulCalls": 3,
+    "avgReturn": 10.67,
     "recentCalls": [
       {
         "stock": "증권주전체",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 138649.49903619717,
-        "currentPrice": 149650.37684020324,
-        "returnRate": 15.138062696137155,
+        "callPrice": 93125.10429758759,
+        "currentPrice": 111317.07316686262,
+        "returnRate": 11.67753919581667,
         "status": "적중"
       },
       {
         "stock": "NH투자증권",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 132969.5674968172,
-        "currentPrice": 71541.00181287435,
-        "returnRate": 15.784433771921346,
-        "status": "진행중"
+        "direction": "긍정",
+        "callPrice": 134698.2452952681,
+        "currentPrice": 105691.45451582069,
+        "returnRate": 18.503994869200188,
+        "status": "적중"
       },
       {
         "stock": "한국금융지주",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 113270.41965930228,
-        "currentPrice": 74881.22729132138,
-        "returnRate": -8.978333748089451,
+        "direction": "긍정",
+        "callPrice": 76142.60265506018,
+        "currentPrice": 100475.09703458427,
+        "returnRate": 1.8358897670277354,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 93.18797374056496
+        "rate": 72.7548835175682
       },
       {
         "month": "2026-02",
-        "rate": 83.26764404852774
+        "rate": 73.34087587369088
       },
       {
         "month": "2026-03",
-        "rate": 79.82027964358984
+        "rate": 75.65141150577479
       }
     ]
   },
@@ -101,51 +110,51 @@ export const influencers: Influencer[] = [
       }
     ],
     "followers": "10K+",
-    "accuracy": 100,
+    "accuracy": 67,
     "totalCalls": 3,
-    "successfulCalls": 3,
-    "avgReturn": -3.21,
+    "successfulCalls": 2,
+    "avgReturn": -4.41,
     "recentCalls": [
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 139759.05719135317,
-        "currentPrice": 95048.3787675295,
-        "returnRate": 4.5653888603695965,
-        "status": "적중"
+        "callPrice": 136591.37562714337,
+        "currentPrice": 118644.02553816736,
+        "returnRate": -8.065836244401725,
+        "status": "진행중"
       },
       {
         "stock": "SK하이닉스",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 99849.91469400303,
-        "currentPrice": 89533.68626064595,
-        "returnRate": -9.873782008933329,
+        "callPrice": 65893.60383685527,
+        "currentPrice": 137852.75142281473,
+        "returnRate": -9.23537799878863,
         "status": "적중"
       },
       {
         "stock": "코스피",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 94472.37094599937,
-        "currentPrice": 126337.81580047587,
-        "returnRate": -4.31603249803816,
+        "callPrice": 140479.10219868115,
+        "currentPrice": 124622.50651375807,
+        "returnRate": 4.057222074298464,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 88.98921468675583
+        "rate": 77.45881599777549
       },
       {
         "month": "2026-02",
-        "rate": 94.50173902442815
+        "rate": 72.24027153228808
       },
       {
         "month": "2026-03",
-        "rate": 78.88562913078067
+        "rate": 84.33065766681003
       }
     ]
   },
@@ -159,172 +168,60 @@ export const influencers: Influencer[] = [
       }
     ],
     "followers": "10K+",
-    "accuracy": 50,
+    "accuracy": 75,
     "totalCalls": 4,
-    "successfulCalls": 2,
-    "avgReturn": 12.56,
+    "successfulCalls": 3,
+    "avgReturn": -3.36,
     "recentCalls": [
       {
         "stock": "서클",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 81517.87736155212,
-        "currentPrice": 132475.81246548868,
-        "returnRate": 17.34897762895364,
+        "callPrice": 141625.42479359367,
+        "currentPrice": 74572.81396775563,
+        "returnRate": -9.903827318312414,
         "status": "적중"
       },
       {
         "stock": "엔비디아",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 52107.98317253953,
-        "currentPrice": 115674.87943372579,
-        "returnRate": 10.503935865530575,
-        "status": "진행중"
+        "callPrice": 149438.9670281258,
+        "currentPrice": 106194.89753785334,
+        "returnRate": 2.083859755697766,
+        "status": "적중"
       },
       {
         "stock": "엔비디아",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 141953.10019289202,
-        "currentPrice": 126050.40704909537,
-        "returnRate": 9.92630785155077,
+        "direction": "긍정",
+        "callPrice": 66729.73947230924,
+        "currentPrice": 127389.09171978934,
+        "returnRate": -7.194030351648837,
         "status": "진행중"
       },
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 66107.07324863617,
-        "currentPrice": 59556.22623991364,
-        "returnRate": 12.469939798360649,
+        "direction": "중립",
+        "callPrice": 67311.94289630653,
+        "currentPrice": 76718.08548673874,
+        "returnRate": 1.5784634692923944,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 93.43480978017016
+        "rate": 90.85426544955453
       },
       {
         "month": "2026-02",
-        "rate": 93.56605907355316
+        "rate": 72.62110044595477
       },
       {
         "month": "2026-03",
-        "rate": 75.48567518733897
-      }
-    ]
-  },
-  {
-    "id": "차영주",
-    "name": "차영주",
-    "platforms": [
-      {
-        "name": "유튜브",
-        "color": "red"
-      }
-    ],
-    "followers": "10K+",
-    "accuracy": 100,
-    "totalCalls": 9,
-    "successfulCalls": 9,
-    "avgReturn": 5.44,
-    "recentCalls": [
-      {
-        "stock": "LG이노텍",
-        "date": "2026-02-27",
-        "direction": "매수",
-        "callPrice": 109185.81508979328,
-        "currentPrice": 147436.98725122347,
-        "returnRate": -3.741521748107994,
-        "status": "적중"
-      },
-      {
-        "stock": "기아",
-        "date": "2026-02-27",
-        "direction": "매수",
-        "callPrice": 128143.8723843325,
-        "currentPrice": 115119.35074726981,
-        "returnRate": 19.158421471883333,
-        "status": "적중"
-      },
-      {
-        "stock": "한국전력",
-        "date": "2026-02-27",
-        "direction": "매수",
-        "callPrice": 121326.34087204411,
-        "currentPrice": 57084.21680274171,
-        "returnRate": -8.69002454555021,
-        "status": "적중"
-      },
-      {
-        "stock": "LG화학",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 87013.54357897394,
-        "currentPrice": 76815.71970937781,
-        "returnRate": 3.4852185677015246,
-        "status": "적중"
-      },
-      {
-        "stock": "에코프로머티",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 73347.83887728871,
-        "currentPrice": 95651.16957567679,
-        "returnRate": 5.012959749691532,
-        "status": "적중"
-      },
-      {
-        "stock": "이수페타시스",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 120137.24164198613,
-        "currentPrice": 75192.82712773298,
-        "returnRate": 10.196008826342968,
-        "status": "적중"
-      },
-      {
-        "stock": "원익IPS",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 124145.19447196567,
-        "currentPrice": 144757.293622163,
-        "returnRate": 10.59029893396632,
-        "status": "적중"
-      },
-      {
-        "stock": "심텍",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 121333.92125940496,
-        "currentPrice": 79125.403147898,
-        "returnRate": 16.875412817138603,
-        "status": "적중"
-      },
-      {
-        "stock": "SK스퀘어",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 139147.01118868223,
-        "currentPrice": 111377.00339370323,
-        "returnRate": -3.929845241047449,
-        "status": "적중"
-      }
-    ],
-    "monthlyAccuracy": [
-      {
-        "month": "2026-01",
-        "rate": 72.90479907725857
-      },
-      {
-        "month": "2026-02",
-        "rate": 83.46102855485654
-      },
-      {
-        "month": "2026-03",
-        "rate": 77.85637231573848
+        "rate": 82.37078218210264
       }
     ]
   },
@@ -339,68 +236,59 @@ export const influencers: Influencer[] = [
     ],
     "followers": "10K+",
     "accuracy": 100,
-    "totalCalls": 5,
-    "successfulCalls": 5,
-    "avgReturn": 11.96,
+    "totalCalls": 4,
+    "successfulCalls": 4,
+    "avgReturn": -0.74,
     "recentCalls": [
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 75821.61972911771,
-        "currentPrice": 145042.16815712245,
-        "returnRate": 18.13556523898622,
+        "callPrice": 117832.89287171033,
+        "currentPrice": 139247.72598216077,
+        "returnRate": 0.7891503042784613,
         "status": "적중"
       },
       {
         "stock": "SK하이닉스",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 136047.2989479617,
-        "currentPrice": 115224.70473331251,
-        "returnRate": 18.16438392141623,
+        "callPrice": 77249.94083658344,
+        "currentPrice": 101720.92243896335,
+        "returnRate": -3.939548925420416,
         "status": "적중"
       },
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 68606.35849596263,
-        "currentPrice": 83348.7983154282,
-        "returnRate": 7.703373179777554,
-        "status": "적중"
-      },
-      {
-        "stock": "SK하이닉스",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 106598.10045283654,
-        "currentPrice": 93362.66013286098,
-        "returnRate": 13.976252798379367,
+        "callPrice": 59106.45964798239,
+        "currentPrice": 60757.307052859454,
+        "returnRate": 6.18411848456126,
         "status": "적중"
       },
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 57468.46009558081,
-        "currentPrice": 104875.38848005419,
-        "returnRate": 1.8418776208133067,
+        "direction": "중립",
+        "callPrice": 136341.77683974485,
+        "currentPrice": 53213.143567008,
+        "returnRate": -5.992229110437018,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 93.90479412504129
+        "rate": 82.80826897502226
       },
       {
         "month": "2026-02",
-        "rate": 82.87058935780895
+        "rate": 94.07628906729157
       },
       {
         "month": "2026-03",
-        "rate": 70.39737656561712
+        "rate": 84.21995130649857
       }
     ]
   },
@@ -415,41 +303,32 @@ export const influencers: Influencer[] = [
     ],
     "followers": "10K+",
     "accuracy": 100,
-    "totalCalls": 2,
-    "successfulCalls": 2,
-    "avgReturn": 6.57,
+    "totalCalls": 1,
+    "successfulCalls": 1,
+    "avgReturn": 17.24,
     "recentCalls": [
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 135126.84395231341,
-        "currentPrice": 64559.62424625573,
-        "returnRate": 0.36349288339357955,
-        "status": "적중"
-      },
-      {
-        "stock": "LG전자",
-        "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 65920.85963905217,
-        "currentPrice": 82120.6553885706,
-        "returnRate": 12.779041723417059,
+        "callPrice": 140140.34975081024,
+        "currentPrice": 138342.68051187292,
+        "returnRate": 17.239541736538282,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 71.92669206736554
+        "rate": 90.41080508023241
       },
       {
         "month": "2026-02",
-        "rate": 92.86335823254858
+        "rate": 75.58816932189646
       },
       {
         "month": "2026-03",
-        "rate": 94.26725628152053
+        "rate": 90.34200793666834
       }
     ]
   },
@@ -463,60 +342,60 @@ export const influencers: Influencer[] = [
       }
     ],
     "followers": "10K+",
-    "accuracy": 50,
+    "accuracy": 75,
     "totalCalls": 4,
-    "successfulCalls": 2,
-    "avgReturn": -2.32,
+    "successfulCalls": 3,
+    "avgReturn": 1.4,
     "recentCalls": [
       {
         "stock": "SK하이닉스",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 144946.84456558223,
-        "currentPrice": 69278.76653571798,
-        "returnRate": -8.905119442635137,
+        "callPrice": 65842.6822613934,
+        "currentPrice": 58791.14620825516,
+        "returnRate": 1.6199637552116624,
         "status": "적중"
       },
       {
         "stock": "현대차",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 84665.38803234612,
-        "currentPrice": 123368.13451213735,
-        "returnRate": 4.384120467410309,
-        "status": "진행중"
+        "callPrice": 115456.65185828546,
+        "currentPrice": 114189.31192727675,
+        "returnRate": 12.931795424262607,
+        "status": "적중"
       },
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 148061.20005260213,
-        "currentPrice": 126341.14457968886,
-        "returnRate": 0.8962824094954751,
+        "direction": "긍정",
+        "callPrice": 129558.60829783877,
+        "currentPrice": 142050.22135618198,
+        "returnRate": -7.161660601236043,
         "status": "진행중"
       },
       {
         "stock": "건설주",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 139491.3871567431,
-        "currentPrice": 92524.94097036531,
-        "returnRate": -5.661309928267055,
+        "direction": "긍정",
+        "callPrice": 107916.7790657446,
+        "currentPrice": 70573.81437369688,
+        "returnRate": -1.7876843132761326,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 89.09885352887196
+        "rate": 72.02378628078355
       },
       {
         "month": "2026-02",
-        "rate": 83.12432807798862
+        "rate": 71.51064632864617
       },
       {
         "month": "2026-03",
-        "rate": 72.09854636976996
+        "rate": 94.03070607479846
       }
     ]
   },
@@ -533,66 +412,66 @@ export const influencers: Influencer[] = [
     "accuracy": 80,
     "totalCalls": 5,
     "successfulCalls": 4,
-    "avgReturn": 0.18,
+    "avgReturn": 7.56,
     "recentCalls": [
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 101160.53331442561,
-        "currentPrice": 143547.92887882955,
-        "returnRate": 15.524765387628175,
+        "callPrice": 116113.53082428528,
+        "currentPrice": 115384.3533263897,
+        "returnRate": 4.26716852395619,
         "status": "적중"
       },
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 101041.10411722909,
-        "currentPrice": 71305.42988876671,
-        "returnRate": -7.367241498870615,
+        "direction": "긍정",
+        "callPrice": 51602.168385984594,
+        "currentPrice": 149817.93553545157,
+        "returnRate": 11.747483937354257,
         "status": "진행중"
       },
       {
         "stock": "SK하이닉스",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 82840.84156504486,
-        "currentPrice": 139169.12694895547,
-        "returnRate": -3.789429003512982,
+        "direction": "긍정",
+        "callPrice": 71341.92655078035,
+        "currentPrice": 60515.47739910914,
+        "returnRate": 2.4497316189639466,
         "status": "적중"
       },
       {
         "stock": "SK하이닉스",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 125527.14268076405,
-        "currentPrice": 119052.13527733949,
-        "returnRate": -8.419000549896479,
+        "direction": "긍정",
+        "callPrice": 50817.56094791264,
+        "currentPrice": 107233.33373091818,
+        "returnRate": 5.734947046792559,
         "status": "적중"
       },
       {
         "stock": "삼성전자",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 113223.875182777,
-        "currentPrice": 73473.2786290712,
-        "returnRate": 4.944746079239964,
+        "direction": "중립",
+        "callPrice": 60906.36151285551,
+        "currentPrice": 145104.35142146907,
+        "returnRate": 13.608764883811567,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 81.86134790096168
+        "rate": 89.93171038860322
       },
       {
         "month": "2026-02",
-        "rate": 77.24094852546264
+        "rate": 80.09083200907992
       },
       {
         "month": "2026-03",
-        "rate": 78.16515200768124
+        "rate": 85.52282336311795
       }
     ]
   },
@@ -606,51 +485,51 @@ export const influencers: Influencer[] = [
       }
     ],
     "followers": "10K+",
-    "accuracy": 67,
+    "accuracy": 100,
     "totalCalls": 3,
-    "successfulCalls": 2,
-    "avgReturn": 3.7,
+    "successfulCalls": 3,
+    "avgReturn": -0.86,
     "recentCalls": [
       {
         "stock": "구글(알파벳)",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 51219.38491010924,
-        "currentPrice": 108363.12434850496,
-        "returnRate": -9.316141927136918,
-        "status": "진행중"
+        "callPrice": 123541.60617522427,
+        "currentPrice": 101967.30960599436,
+        "returnRate": 1.3929808576291425,
+        "status": "적중"
       },
       {
         "stock": "AMD",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 90780.11116808976,
-        "currentPrice": 93930.04176877756,
-        "returnRate": 0.42127342416909386,
+        "direction": "긍정",
+        "callPrice": 84770.42730880252,
+        "currentPrice": 148628.3944284547,
+        "returnRate": -2.6840402873714986,
         "status": "적중"
       },
       {
         "stock": "엔비디아",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 93971.49290795159,
-        "currentPrice": 127421.08490607243,
-        "returnRate": 19.993105959029478,
+        "direction": "중립",
+        "callPrice": 102065.83813992655,
+        "currentPrice": 74582.32995640817,
+        "returnRate": -1.2901665741893318,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 74.60042421047756
+        "rate": 90.61193933114652
       },
       {
         "month": "2026-02",
-        "rate": 74.84461576107415
+        "rate": 94.492933498287
       },
       {
         "month": "2026-03",
-        "rate": 79.76939642030446
+        "rate": 80.3995688683418
       }
     ]
   },
@@ -664,33 +543,33 @@ export const influencers: Influencer[] = [
       }
     ],
     "followers": "10K+",
-    "accuracy": 0,
+    "accuracy": 100,
     "totalCalls": 1,
-    "successfulCalls": 0,
-    "avgReturn": 17.76,
+    "successfulCalls": 1,
+    "avgReturn": -8.48,
     "recentCalls": [
       {
         "stock": "신세계",
         "date": "2026-02-27",
         "direction": "매수",
-        "callPrice": 145387.20395687642,
-        "currentPrice": 112761.24062674647,
-        "returnRate": 17.75548000255273,
-        "status": "진행중"
+        "callPrice": 145800.3725513463,
+        "currentPrice": 58319.60411557187,
+        "returnRate": -8.480428729449557,
+        "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 78.73275116311814
+        "rate": 93.90367505674315
       },
       {
         "month": "2026-02",
-        "rate": 89.1217362726046
+        "rate": 73.92807636538568
       },
       {
         "month": "2026-03",
-        "rate": 76.29002408580831
+        "rate": 91.40472838438609
       }
     ]
   },
@@ -707,30 +586,30 @@ export const influencers: Influencer[] = [
     "accuracy": 100,
     "totalCalls": 1,
     "successfulCalls": 1,
-    "avgReturn": 0.7,
+    "avgReturn": -8.17,
     "recentCalls": [
       {
         "stock": "삼성전기",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 94965.85858124157,
-        "currentPrice": 68573.40327239662,
-        "returnRate": 0.7031857751756441,
+        "direction": "긍정",
+        "callPrice": 104390.83077478748,
+        "currentPrice": 144117.06724051666,
+        "returnRate": -8.17061738597793,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 89.70642295700122
+        "rate": 91.1781119438169
       },
       {
         "month": "2026-02",
-        "rate": 80.19433701586863
+        "rate": 92.6223674175906
       },
       {
         "month": "2026-03",
-        "rate": 88.49270794724404
+        "rate": 94.8339973531418
       }
     ]
   },
@@ -747,30 +626,30 @@ export const influencers: Influencer[] = [
     "accuracy": 0,
     "totalCalls": 1,
     "successfulCalls": 0,
-    "avgReturn": 3.33,
+    "avgReturn": 18.08,
     "recentCalls": [
       {
         "stock": "현대차",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 106137.1374032948,
-        "currentPrice": 70181.47170641608,
-        "returnRate": 3.333628669263568,
+        "direction": "긍정",
+        "callPrice": 106590.92164966464,
+        "currentPrice": 107014.38985129056,
+        "returnRate": 18.075840232141843,
         "status": "진행중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 83.228941921664
+        "rate": 94.14672950584549
       },
       {
         "month": "2026-02",
-        "rate": 91.94572047529137
+        "rate": 83.25864064034938
       },
       {
         "month": "2026-03",
-        "rate": 71.03003509882954
+        "rate": 85.56227486417495
       }
     ]
   },
@@ -787,30 +666,30 @@ export const influencers: Influencer[] = [
     "accuracy": 100,
     "totalCalls": 1,
     "successfulCalls": 1,
-    "avgReturn": 1.41,
+    "avgReturn": -2.55,
     "recentCalls": [
       {
         "stock": "LG화학",
         "date": "2026-02-27",
-        "direction": "매도",
-        "callPrice": 86393.46000762304,
-        "currentPrice": 54767.17442919383,
-        "returnRate": 1.407010037666085,
+        "direction": "긍정",
+        "callPrice": 138226.18178553227,
+        "currentPrice": 55583.99799900511,
+        "returnRate": -2.551627827969421,
         "status": "적중"
       }
     ],
     "monthlyAccuracy": [
       {
         "month": "2026-01",
-        "rate": 93.00163211459045
+        "rate": 79.35956024662235
       },
       {
         "month": "2026-02",
-        "rate": 87.38254820204276
+        "rate": 84.86073537530247
       },
       {
         "month": "2026-03",
-        "rate": 83.95956525248822
+        "rate": 72.46357283037787
       }
     ]
   }

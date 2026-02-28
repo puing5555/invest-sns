@@ -1,0 +1,715 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { getStockSignals } from '@/lib/supabase';
+import StockChartV2 from '@/components/StockChartV2';
+import { influencers } from '@/data/influencerData';
+
+interface StockDetailClientProps {
+  code: string;
+}
+
+// 종목별 타임라인 이벤트 (실시간 탭용)
+interface StockTimelineEvent {
+  id: number;
+  type: string;
+  icon: string;
+  categoryName: string;
+  title: string;
+  time: string;
+  content?: string;
+}
+
+const getRealtimeTimeline = (code: string): StockTimelineEvent[] => {
+  const timelines: { [key: string]: StockTimelineEvent[] } = {
+    '005930': [
+      { 
+        id: 1, 
+        type: 'news', 
+        icon: '📰', 
+        categoryName: '뉴스', 
+        title: '삼성전자, 3분기 실적 컨센서스 상회', 
+        time: '3분 전',
+        content: '삼성전자가 발표한 3분기 실적이 시장 예상치를 웃돌았습니다. DS 부문의 회복이 주효했다는 분석입니다.'
+      },
+      { 
+        id: 2, 
+        type: 'disclosure', 
+        icon: '📋', 
+        categoryName: '공시', 
+        title: 'A등급 공시 - 자사주 매입 결정', 
+        time: '1시간 전',
+        content: '보통주 500만주 한도 내에서 주주가치 제고를 위한 자사주 매입을 결정했다고 공시했습니다.'
+      },
+      { 
+        id: 3, 
+        type: 'signal', 
+        icon: '🔵', 
+        categoryName: '시그널', 
+        title: '슈카월드 매수 시그널', 
+        time: '2시간 전',
+        content: '"현재 주가는 충분히 매력적인 구간. 장기 관점에서 매수 추천" - 슈카월드'
+      },
+      { 
+        id: 4, 
+        type: 'insider', 
+        icon: '👔', 
+        categoryName: '임원매매', 
+        title: '임원 매수 거래 발생', 
+        time: '3시간 전',
+        content: '상무급 임원이 5만주 규모의 매수 거래를 실행했습니다.'
+      },
+      { 
+        id: 5, 
+        type: 'disclosure', 
+        icon: '📋', 
+        categoryName: '공시', 
+        title: '3분기 실적 공시', 
+        time: '5시간 전',
+        content: '매출액 74조원, 영업이익 9.18조원으로 전분기 대비 증가했습니다.'
+      }
+    ],
+    '000660': [
+      { 
+        id: 1, 
+        type: 'news', 
+        icon: '📰', 
+        categoryName: '뉴스', 
+        title: 'SK하이닉스, HBM3E 양산 본격화', 
+        time: '1시간 전',
+        content: 'SK하이닉스가 차세대 고대역폭메모리 HBM3E의 양산을 본격화한다고 발표했습니다.'
+      },
+      { 
+        id: 2, 
+        type: 'signal', 
+        icon: '🟢', 
+        categoryName: '시그널', 
+        title: '이효석 긍정 시그널', 
+        time: '2시간 전',
+        content: '"반도체 업사이클 시작. SK하이닉스는 HBM 수혜주로 주목" - 이효석'
+      }
+    ]
+  };
+  return timelines[code] || [
+    { id: 1, type: 'news', icon: '📰', categoryName: '뉴스', title: '최근 뉴스 없음', time: '-' },
+  ];
+};
+
+// 탭 정의 (수정된 구조)
+const tabs = [
+  { id: 'realtime', label: '실시간', icon: '⚡', description: '뉴스·공시·시그널 피드' },
+  { id: 'influencer', label: '인플루언서', icon: '👤', description: '차트 + 인플루언서 시그널' },
+  { id: 'analyst', label: '애널리스트', icon: '🎯', description: '차트 + 애널리스트 리포트' },
+  { id: 'disclosure', label: '공시', icon: '📋', description: '공시 상세' },
+  { id: 'earnings', label: '실적', icon: '📊', description: '실적 분석' },
+  { id: 'insider', label: '임원매매', icon: '💼', description: '임원 거래' },
+  { id: 'memo', label: '메모', icon: '📝', description: '개인 메모' },
+];
+
+// 더미 종목 데이터
+const getStockData = (code: string) => {
+  const stockMap: { [key: string]: any } = {
+    '005930': { name: '삼성전자', price: 68500, change: 1200, changePercent: 1.78 },
+    '000660': { name: 'SK하이닉스', price: 178000, change: -2100, changePercent: -1.16 },
+    '035420': { name: 'NAVER', price: 185500, change: 3200, changePercent: 1.76 },
+    '051910': { name: 'LG화학', price: 412000, change: -5500, changePercent: -1.32 },
+    '005380': { name: '현대차', price: 221000, change: 4500, changePercent: 2.08 },
+  };
+
+  return stockMap[code] || { name: `종목 ${code}`, price: 50000, change: 0, changePercent: 0 };
+};
+
+export default function StockDetailClientV2({ code }: StockDetailClientProps) {
+  const [activeTab, setActiveTab] = useState('realtime');
+  const [isWatched, setIsWatched] = useState(false);
+  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
+  const [commentInputs, setCommentInputs] = useState<{ [key: number]: string }>({});
+  const [stockSignals, setStockSignals] = useState<any[]>([]);
+  const [influencerSignals, setInfluencerSignals] = useState<any[]>([]);
+  const [analystSignals, setAnalystSignals] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const stockData = getStockData(code);
+  const realtimeTimeline = getRealtimeTimeline(code);
+
+  // URL 쿼리 파라미터에서 탭 설정
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam && tabs.some(tab => tab.id === tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
+
+  // 시그널 데이터 로드
+  useEffect(() => {
+    const loadSignals = async () => {
+      try {
+        setLoading(true);
+        
+        // Supabase에서 시그널 데이터 가져오기
+        const signals = await getStockSignals(code);
+        
+        // 인플루언서 시그널과 애널리스트 시그널 분리
+        const influencerSigs = signals.filter((s: any) => 
+          s.speaker_type === 'influencer' || !s.speaker_type
+        );
+        const analystSigs = signals.filter((s: any) => 
+          s.speaker_type === 'analyst'
+        );
+
+        setStockSignals(signals);
+        setInfluencerSignals(influencerSigs);
+        setAnalystSignals(analystSigs);
+
+        console.log(`시그널 로드 완료: 전체 ${signals.length}, 인플루언서 ${influencerSigs.length}, 애널리스트 ${analystSigs.length}`);
+      } catch (error) {
+        console.error('시그널 로드 실패:', error);
+        
+        // 에러 시 더미 시그널 사용
+        const dummySignals = getDummySignals(code, stockData.name);
+        setStockSignals(dummySignals);
+        setInfluencerSignals(dummySignals.filter(s => s.speaker_type !== 'analyst'));
+        setAnalystSignals(dummySignals.filter(s => s.speaker_type === 'analyst'));
+      }
+      
+      setLoading(false);
+    };
+
+    loadSignals();
+  }, [code, stockData.name]);
+
+  // 더미 시그널 데이터 생성
+  const getDummySignals = (code: string, name: string) => {
+    const signals = [
+      {
+        id: 1,
+        stock: name,
+        signal: '매수',
+        speaker: '슈카',
+        date: '2026-02-25',
+        key_quote: `${name} 지금 가격에서 매수 추천`,
+        speaker_type: 'influencer',
+        video_published_at: '2026-02-25T10:00:00Z'
+      },
+      {
+        id: 2,
+        stock: name,
+        signal: '긍정',
+        speaker: '이효석',
+        date: '2026-02-24',
+        key_quote: `${name} 펀더멘털 개선 기대`,
+        speaker_type: 'influencer',
+        video_published_at: '2026-02-24T15:30:00Z'
+      },
+      {
+        id: 3,
+        stock: name,
+        signal: '매수',
+        speaker: 'KB증권 김○○',
+        date: '2026-02-23',
+        key_quote: '목표주가 상향 - 매수 추천',
+        speaker_type: 'analyst',
+        report_published_at: '2026-02-23T09:00:00Z'
+      }
+    ];
+    return signals;
+  };
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'realtime':
+        return (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">⚡</div>
+                <div>
+                  <h3 className="font-bold text-[#191f28]">실시간 피드</h3>
+                  <p className="text-sm text-[#8b95a1]">최신 뉴스, 공시, 시그널을 실시간으로 확인하세요</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 실시간 타임라인 (차트 없음) */}
+            <div className="space-y-3">
+              {realtimeTimeline.map((event) => (
+                <div key={event.id} className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+                  <div className="px-4 py-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#f8f9fa] flex items-center justify-center text-lg flex-shrink-0">
+                        {event.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-sm font-medium text-[#8b95a1] bg-[#f2f4f6] px-2 py-0.5 rounded">
+                            {event.categoryName}
+                          </span>
+                          <span className="text-sm text-[#8b95a1]">{event.time}</span>
+                        </div>
+                        <h3 className="text-[15px] font-medium text-[#191f28] leading-[1.4] mb-2">
+                          {event.title}
+                        </h3>
+                        {event.content && (
+                          <p className="text-sm text-[#8b95a1] leading-relaxed">
+                            {event.content}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Comment Section */}
+                  <div className="border-t border-[#f0f0f0] px-4 py-3">
+                    <div className="flex items-center gap-2 mb-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowComments(prev => ({
+                            ...prev,
+                            [event.id]: !prev[event.id]
+                          }));
+                        }}
+                        className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors"
+                      >
+                        💬 댓글 {Math.floor(Math.random() * 10) + 1}개
+                      </button>
+                      <span className="text-xs text-[#8b95a1]">•</span>
+                      <button className="text-xs text-[#8b95a1] hover:text-[#191f28] transition-colors">
+                        ❤️ 좋아요 {Math.floor(Math.random() * 50) + 5}개
+                      </button>
+                    </div>
+                    
+                    {/* Comment Input */}
+                    <div className="flex gap-2">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                        👤
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="댓글을 입력하세요..."
+                        value={commentInputs[event.id] || ''}
+                        onChange={(e) => {
+                          setCommentInputs(prev => ({
+                            ...prev,
+                            [event.id]: e.target.value
+                          }));
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex-1 text-sm border border-[#e8e8e8] rounded-full px-3 py-1 focus:outline-none focus:ring-1 focus:ring-[#3182f6] focus:border-transparent"
+                      />
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (commentInputs[event.id]?.trim()) {
+                            setCommentInputs(prev => ({
+                              ...prev,
+                              [event.id]: ''
+                            }));
+                          }
+                        }}
+                        className="text-xs px-3 py-1 bg-[#3182f6] text-white rounded-full hover:bg-[#2171e5] transition-colors"
+                      >
+                        등록
+                      </button>
+                    </div>
+                    
+                    {/* Comments List */}
+                    {showComments[event.id] && (
+                      <div className="mt-3 space-y-2 pl-8">
+                        <div className="flex gap-2 text-sm">
+                          <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                            🐶
+                          </div>
+                          <div>
+                            <span className="font-medium text-[#191f28]">투자왕</span>
+                            <span className="text-[#8b95a1] ml-2">좋은 정보네요!</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-2 text-sm">
+                          <div className="w-5 h-5 bg-yellow-100 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                            🎯
+                          </div>
+                          <div>
+                            <span className="font-medium text-[#191f28]">주식초보</span>
+                            <span className="text-[#8b95a1] ml-2">매수 타이밍 맞나요?</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'influencer':
+        return (
+          <div className="space-y-6">
+            <InfluencerTab 
+              code={code} 
+              stockName={stockData.name}
+              signals={influencerSignals}
+              loading={loading}
+            />
+          </div>
+        );
+
+      case 'analyst':
+        return (
+          <div className="space-y-6">
+            <AnalystTab 
+              code={code} 
+              stockName={stockData.name}
+              signals={analystSignals}
+              loading={loading}
+            />
+          </div>
+        );
+
+      case 'disclosure':
+        return (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+              <h4 className="font-bold text-[#191f28] mb-4">최근 공시</h4>
+              <div className="space-y-3">
+                <div className="p-3 border-l-4 border-blue-500 bg-blue-50">
+                  <div className="font-medium text-blue-800">3분기 실적 발표</div>
+                  <div className="text-sm text-blue-600">2시간 전</div>
+                </div>
+                <div className="p-3 border-l-4 border-green-500 bg-green-50">
+                  <div className="font-medium text-green-800">자사주 매입 결정</div>
+                  <div className="text-sm text-green-600">1일 전</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'earnings':
+        return (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">📊</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">실적 분석</h3>
+            <p className="text-[#8b95a1]">상세 실적 분석을 준비중입니다</p>
+          </div>
+        );
+
+      case 'insider':
+        return (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+              <h4 className="font-bold text-[#191f28] mb-4">임원 매매 현황</h4>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                  <div>
+                    <div className="font-medium text-red-800">김○○ 전무 매도</div>
+                    <div className="text-sm text-red-600">5억원 규모 • 3일 전</div>
+                  </div>
+                  <div className="text-red-600 font-bold">-1.2%</div>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                  <div>
+                    <div className="font-medium text-blue-800">박○○ 상무 매수</div>
+                    <div className="text-sm text-blue-600">3억원 규모 • 1주 전</div>
+                  </div>
+                  <div className="text-blue-600 font-bold">+0.8%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'memo':
+        return (
+          <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+            <h4 className="font-bold text-[#191f28] mb-4">내 메모</h4>
+            <div className="space-y-4">
+              <textarea
+                placeholder="이 종목에 대한 메모를 작성해보세요..."
+                className="w-full h-32 p-3 border border-[#e8e8e8] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
+              />
+              <div className="flex justify-end">
+                <button className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#2171e5] transition-colors">
+                  저장
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return <div>준비중</div>;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f4f4f4]">
+      {/* Stock Header */}
+      <div className="bg-white border-b border-[#e8e8e8] px-4 py-6">
+        <div>
+          {/* 뒤로가기 버튼 */}
+          <div className="mb-4">
+            <button
+              onClick={() => router.push('/my-stocks')}
+              className="flex items-center gap-2 text-[#8b95a1] hover:text-[#191f28] transition-colors"
+            >
+              <span className="text-lg">←</span>
+              <span className="text-sm">내 종목으로</span>
+            </button>
+          </div>
+
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-2xl font-bold text-[#191f28]">
+                {stockData.name}
+                <span className="text-lg text-[#8b95a1] font-normal ml-2">
+                  {code}
+                </span>
+              </h1>
+              <div className="flex items-center gap-4 mt-2">
+                <span className="text-3xl font-bold text-[#191f28]">
+                  {stockData.price.toLocaleString()}원
+                </span>
+                <span className={`text-lg font-medium ${
+                  stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
+                }`}>
+                  {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
+                  ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
+                </span>
+              </div>
+              
+              {/* Coverage Stats */}
+              <div className="flex items-center gap-4 mt-3 text-sm text-[#8b95a1]">
+                <span>인플루언서 {influencerSignals.length}개 시그널</span>
+                <span>•</span>
+                <span>애널리스트 {analystSignals.length}개 리포트</span>
+                <span>•</span>
+                <span>팔로워 3,247명</span>
+              </div>
+            </div>
+            
+            {/* Watch Button */}
+            <button
+              onClick={() => setIsWatched(!isWatched)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                isWatched
+                  ? 'bg-green-100 text-green-700 border border-green-200'
+                  : 'bg-[#3182f6] text-white hover:bg-[#2171e5]'
+              }`}
+            >
+              {isWatched ? '✓ 관심종목 등록됨' : '+ 관심종목 추가'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="bg-white border-b border-[#e8e8e8]">
+        <div className="px-4">
+          <div className="flex overflow-x-auto scrollbar-hide">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex-shrink-0 flex flex-col items-center gap-1 px-4 py-3 text-sm font-medium transition-colors relative ${
+                  activeTab === tab.id
+                    ? 'text-[#3182f6]'
+                    : 'text-[#8b95a1] hover:text-[#191f28]'
+                }`}
+              >
+                <span className="text-base">{tab.icon}</span>
+                <span>{tab.label}</span>
+                {activeTab === tab.id && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3182f6]" />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="px-4 py-6">
+        {renderTabContent()}
+      </div>
+    </div>
+  );
+}
+
+// 인플루언서 탭 컴포넌트 (차트 포함)
+function InfluencerTab({ code, stockName, signals, loading }: {
+  code: string;
+  stockName: string;
+  signals: any[];
+  loading: boolean;
+}) {
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="text-lg text-[#8b95a1]">인플루언서 데이터 로딩 중...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* 차트 + 인플루언서 시그널 */}
+      <StockChartV2
+        stockCode={code}
+        stockName={stockName}
+        signals={signals}
+        mode="influencer"
+      />
+
+      {/* 인플루언서 시그널 테이블 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+        <div className="p-6 border-b border-[#e8e8e8]">
+          <h4 className="font-medium text-[#191f28]">인플루언서 시그널 이력</h4>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-[#f8f9fa]">
+              <tr>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">인플루언서</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">시그널</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f0f0f0]">
+              {signals.map((signal, index) => (
+                <tr key={index} className="hover:bg-[#f8f9fa]">
+                  <td className="px-4 py-4 text-sm text-[#191f28]">
+                    {new Date(signal.date || signal.video_published_at).toLocaleDateString('ko-KR', { 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
+                    {signal.speaker}
+                  </td>
+                  <td className="px-4 py-4">
+                    <div className="flex items-center gap-2">
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        signal.signal === '매수' ? 'bg-blue-100 text-blue-600' :
+                        signal.signal === '긍정' ? 'bg-green-100 text-green-600' :
+                        signal.signal === '중립' ? 'bg-gray-100 text-gray-600' :
+                        signal.signal === '경계' ? 'bg-orange-100 text-orange-600' :
+                        'bg-red-100 text-red-600'
+                      }`}>
+                        {signal.signal}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                    <div className="truncate">{signal.key_quote}</div>
+                  </td>
+                  <td className="px-4 py-4">
+                    <a
+                      href="#"
+                      className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                    >
+                      영상보기 →
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 애널리스트 탭 컴포넌트 (차트 포함)
+function AnalystTab({ code, stockName, signals, loading }: {
+  code: string;
+  stockName: string;
+  signals: any[];
+  loading: boolean;
+}) {
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="text-lg text-[#8b95a1]">애널리스트 데이터 로딩 중...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* 차트 + 애널리스트 시그널 */}
+      <StockChartV2
+        stockCode={code}
+        stockName={stockName}
+        signals={signals}
+        mode="analyst"
+      />
+
+      {/* 애널리스트 리포트 테이블 */}
+      <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
+        <div className="p-6 border-b border-[#e8e8e8]">
+          <h4 className="font-medium text-[#191f28]">애널리스트 리포트</h4>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-[#f8f9fa]">
+              <tr>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">의견</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f0f0f0]">
+              {signals.map((signal, index) => (
+                <tr key={index} className="hover:bg-[#f8f9fa]">
+                  <td className="px-4 py-4 text-sm text-[#191f28]">
+                    {new Date(signal.date || signal.report_published_at).toLocaleDateString('ko-KR', { 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
+                    {signal.speaker?.split(' ')[0] || 'KB증권'}
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[#191f28]">
+                    {signal.speaker?.split(' ').slice(1).join(' ') || '김○○'}
+                  </td>
+                  <td className="px-4 py-4">
+                    <span className={`px-2 py-1 rounded text-xs font-medium ${
+                      signal.signal === '매수' ? 'bg-blue-100 text-blue-600' :
+                      signal.signal === '긍정' ? 'bg-green-100 text-green-600' :
+                      'bg-gray-100 text-gray-600'
+                    }`}>
+                      {signal.signal}
+                    </span>
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium text-[#191f28]">
+                    {Math.floor(Math.random() * 20 + 70)}만원
+                  </td>
+                  <td className="px-4 py-4">
+                    <a
+                      href="#"
+                      className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                    >
+                      리포트보기 →
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
