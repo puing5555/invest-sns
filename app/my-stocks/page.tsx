@@ -37,7 +37,7 @@ interface TimelineEvent {
 }
 
 export default function MyStocksPage() {
-  const [selectedChip, setSelectedChip] = useState('전체');
+  const [selectedChip, setSelectedChip] = useState('전체'); // '전체'만 활성 상태 관리
   const router = useRouter();
   const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -154,28 +154,14 @@ export default function MyStocksPage() {
     }
   };
 
-  // 선택된 종목에 따른 이벤트 필터링
-  const getFilteredEvents = () => {
-    if (selectedChip === '전체') {
-      return timelineEvents;
+  // 종목 칩 클릭 핸들러 - 종목 상세 페이지로 이동
+  const handleChipClick = (chip: typeof stockChips[0]) => {
+    if (chip.name === '전체') {
+      setSelectedChip('전체'); // 전체 탭만 로컬 상태 유지
+    } else if (chip.code) {
+      // 종목 상세 페이지로 이동 (9개 탭 구조)
+      router.push(`/stock/${chip.code}`);
     }
-    
-    const selectedStock = stockChips.find(chip => chip.name === selectedChip);
-    if (!selectedStock) return timelineEvents;
-    
-    // 종목명 또는 종목코드로 필터링
-    return timelineEvents.filter(event => 
-      event.stockName === selectedChip || 
-      event.stockName.includes(selectedChip) ||
-      event.stockCode === selectedStock.code
-    );
-  };
-
-  const filteredEvents = getFilteredEvents();
-
-  // 종목 칩 클릭 핸들러
-  const handleChipClick = (chipName: string) => {
-    setSelectedChip(chipName);
   };
 
   // 시그널 카드 클릭 핸들러 - 종목 상세 페이지 인플루언서 탭으로 이동
@@ -206,6 +192,9 @@ export default function MyStocksPage() {
     }
   };
 
+  // 전체 탭에서만 모든 이벤트 표시 (필터링 없음)
+  const displayedEvents = timelineEvents;
+
   return (
     <div className="min-h-screen bg-[#f4f4f4]">
       {/* Header */}
@@ -213,9 +202,12 @@ export default function MyStocksPage() {
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-[#191f28]">⭐ 내 종목</h1>
           <div className="text-sm text-[#8b95a1]">
-            {loading ? '로딩 중...' : `${filteredEvents.length}개 이벤트`}
+            {loading ? '로딩 중...' : `${displayedEvents.length}개 시그널`}
           </div>
         </div>
+        <p className="text-sm text-[#8b95a1] mt-2">
+          관심 종목의 최신 시그널을 확인하세요. 종목을 클릭하면 상세 페이지로 이동합니다.
+        </p>
       </div>
 
       {/* 관심종목 칩 필터 */}
@@ -224,7 +216,7 @@ export default function MyStocksPage() {
           {stockChips.map((chip, index) => (
             <button
               key={index}
-              onClick={() => handleChipClick(chip.name)}
+              onClick={() => handleChipClick(chip)}
               className={`flex-shrink-0 px-4 py-2.5 rounded-full text-sm font-medium transition-colors ${
                 selectedChip === chip.name
                   ? 'bg-[#3182f6] text-white'
@@ -244,6 +236,9 @@ export default function MyStocksPage() {
                     {chip.change}
                   </span>
                 )}
+                {chip.name !== '전체' && (
+                  <span className="text-xs text-gray-400 ml-1">→</span>
+                )}
               </div>
             </button>
           ))}
@@ -257,9 +252,9 @@ export default function MyStocksPage() {
             <div className="p-8 text-center">
               <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
             </div>
-          ) : filteredEvents.length > 0 ? (
+          ) : displayedEvents.length > 0 ? (
             <div className="divide-y divide-[#f0f0f0]">
-              {filteredEvents.map((event) => (
+              {displayedEvents.map((event) => (
                 <div
                   key={event.id}
                   onClick={() => handleEventClick(event)}
@@ -340,17 +335,17 @@ export default function MyStocksPage() {
             <div className="p-8 text-center">
               <div className="text-4xl mb-4">📋</div>
               <div className="text-lg font-medium text-[#191f28] mb-2">
-                {selectedChip === '전체' ? '이벤트가 없습니다' : `${selectedChip}의 이벤트가 없습니다`}
+                아직 시그널이 없습니다
               </div>
               <div className="text-sm text-[#8b95a1]">
-                {selectedChip !== '전체' && '다른 종목을 선택하거나 전체를 확인해보세요'}
+                관심 종목의 새로운 시그널이 업데이트될 때까지 기다려주세요
               </div>
             </div>
           )}
         </div>
 
-        {/* 이벤트가 있는 경우 하단 설명 */}
-        {filteredEvents.length > 0 && (
+        {/* 하단 설명 */}
+        {displayedEvents.length > 0 && (
           <div className="mt-4 text-center">
             <p className="text-sm text-[#8b95a1]">
               시그널을 클릭하면 종목 상세 페이지로, 인플루언서 이름을 클릭하면 프로필로 이동합니다
