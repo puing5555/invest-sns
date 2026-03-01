@@ -4,6 +4,17 @@ import { useEffect, useState } from 'react';
 import { getSignalReports, updateReportStatus, getAdminStats, supabase } from '@/lib/supabase';
 import { callAnthropicAPI } from '@/lib/anthropicClient';
 
+// AI 응답에서 JSON 안전 추출 (```json 백틱, markdown 제거)
+function parseAiJson(text: string): any {
+  let s = text.trim();
+  // markdown 코드블록 제거
+  s = s.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
+  // 혹시 앞뒤 설명 텍스트가 있으면 JSON 부분만 추출
+  const jsonMatch = s.match(/\{[\s\S]*\}/);
+  if (jsonMatch) s = jsonMatch[0];
+  return JSON.parse(s);
+}
+
 interface SignalReport {
   id: string;
   reason: string;
@@ -213,12 +224,12 @@ ${aiReview}
   "stock": "종목명",
   "ticker": "티커 또는 null",
   "signal": "매수|긍정|중립|경계|매도",
-  "quote": "정확한 인용문",
+  "key_quote": "정확한 인용문",
   "timestamp": "MM:SS",
-  "analysis_reasoning": "수정된 분석근거"
+  "reasoning": "수정된 분석근거"
 }
 
-JSON만 출력하고 다른 설명은 하지 마세요.
+반드시 순수 JSON만 반환. markdown 코드블록(\`\`\`)으로 감싸지 마세요.
 `;
 
         try {
@@ -260,10 +271,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
     }
 
     try {
-      // markdown 코드블록 제거 후 파싱
-      let jsonStr = report.ai_suggestion.trim();
-      jsonStr = jsonStr.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
-      const suggestion = JSON.parse(jsonStr);
+      const suggestion = parseAiJson(report.ai_suggestion);
       
       // influencer_signals 테이블 업데이트
       const { error } = await supabase
@@ -272,9 +280,9 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           stock: suggestion.stock,
           ticker: suggestion.ticker,
           signal: suggestion.signal,
-          key_quote: suggestion.quote || suggestion.key_quote,
+          key_quote: suggestion.key_quote,
           timestamp: suggestion.timestamp,
-          reasoning: suggestion.analysis_reasoning || suggestion.reasoning
+          reasoning: suggestion.reasoning
         })
         .eq('id', report.influencer_signals.id);
 
@@ -518,15 +526,13 @@ JSON만 출력하고 다른 설명은 하지 마세요.
                               <span className="truncate block max-w-full" title={report.ai_suggestion}>
                                 {(() => {
                                   try {
-                                    let s = report.ai_suggestion.trim();
-                                    s = s.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
-                                    const json = JSON.parse(s);
+                                    const json = parseAiJson(report.ai_suggestion);
                                     const changes: string[] = [];
                                     const orig = report.influencer_signals;
                                     if (orig && json.stock && json.stock !== orig.stock) changes.push(`종목: ${orig.stock}→${json.stock}`);
                                     if (orig && json.signal && json.signal !== orig.signal) changes.push(`신호: ${orig.signal}→${json.signal}`);
-                                    if (json.quote || json.key_quote) changes.push('인용문 수정');
-                                    if (json.analysis_reasoning || json.reasoning) changes.push('분석근거 수정');
+                                    if (json.key_quote) changes.push('인용문 수정');
+                                    if (json.reasoning) changes.push('분석근거 수정');
                                     return changes.length > 0 ? changes.slice(0, 2).join(', ') : '수정안 있음';
                                   } catch { return '수정안 있음'; }
                                 })()}
@@ -849,13 +855,13 @@ ${issueDescription}
   "stock": "종목명",
   "ticker": "티커 또는 null",
   "signal": "매수|긍정|중립|경계|매도",
-  "quote": "정확한 인용문 (15자 이상)",
+  "key_quote": "정확한 인용문 (15자 이상)",
   "timestamp": "MM:SS",
-  "analysis_reasoning": "구체적인 분석근거 (20자 이상)",
+  "reasoning": "구체적인 분석근거 (20자 이상)",
   "confidence": 85
 }
 
-JSON만 출력하고 다른 설명은 하지 마세요.
+반드시 순수 JSON만 반환. markdown 코드블록(\`\`\`)으로 감싸지 마세요.
 `;
 
       const improvementSuggestion = await callAnthropicAPI({
@@ -898,9 +904,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
       const improvement = aiImprovements[signalId];
       if (!improvement) return;
 
-      let jsonStr2 = improvement.improvement.trim();
-      jsonStr2 = jsonStr2.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
-      const suggestion = JSON.parse(jsonStr2);
+      const suggestion = parseAiJson(improvement.improvement);
       
       const { error } = await supabase
         .from('influencer_signals')
@@ -908,9 +912,9 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           stock: suggestion.stock,
           ticker: suggestion.ticker,
           signal: suggestion.signal,
-          key_quote: suggestion.quote || suggestion.key_quote,
+          key_quote: suggestion.key_quote,
           timestamp: suggestion.timestamp,
-          reasoning: suggestion.analysis_reasoning || suggestion.reasoning,
+          reasoning: suggestion.reasoning,
           confidence: suggestion.confidence
         })
         .eq('id', signalId);
@@ -1167,7 +1171,7 @@ ${aiReviewSummary || '   (AI 검토 결과 없음)'}
               <div className="space-y-6">
                 {Object.entries(aiImprovements).map(([signalId, improvement]: [string, any]) => {
                   try {
-                    const suggestion = JSON.parse(improvement.improvement);
+                    const suggestion = parseAiJson(improvement.improvement);
                     const original = improvement.originalSignal;
                     const issue = qualityIssues.find(i => i.id === signalId);
                     
@@ -1199,8 +1203,8 @@ ${aiReviewSummary || '   (AI 검토 결과 없음)'}
                             <div className="space-y-1 text-sm">
                               <div><span className="font-medium">종목:</span> {original.stock}</div>
                               <div><span className="font-medium">신호:</span> {original.signal}</div>
-                              <div><span className="font-medium">인용문:</span> {original.quote || 'N/A'}</div>
-                              <div><span className="font-medium">분석근거:</span> {original.analysis_reasoning || 'N/A'}</div>
+                              <div><span className="font-medium">인용문:</span> {original.key_quote || 'N/A'}</div>
+                              <div><span className="font-medium">분석근거:</span> {original.reasoning || 'N/A'}</div>
                               <div><span className="font-medium">신뢰도:</span> {original.confidence || 'N/A'}</div>
                             </div>
                           </div>
@@ -1210,8 +1214,8 @@ ${aiReviewSummary || '   (AI 검토 결과 없음)'}
                             <div className="space-y-1 text-sm">
                               <div><span className="font-medium">종목:</span> {suggestion.stock}</div>
                               <div><span className="font-medium">신호:</span> {suggestion.signal}</div>
-                              <div><span className="font-medium">인용문:</span> {suggestion.quote}</div>
-                              <div><span className="font-medium">분석근거:</span> {suggestion.analysis_reasoning}</div>
+                              <div><span className="font-medium">인용문:</span> {suggestion.key_quote}</div>
+                              <div><span className="font-medium">분석근거:</span> {suggestion.reasoning}</div>
                               <div><span className="font-medium">신뢰도:</span> {suggestion.confidence}</div>
                             </div>
                           </div>
@@ -1570,7 +1574,7 @@ ${aiReviewSummary || '   (AI 검토 결과 없음)'}
                     <div className="space-y-4">
                       {(() => {
                         try {
-                          const suggestion = JSON.parse(selectedReport.ai_suggestion);
+                          const suggestion = parseAiJson(selectedReport.ai_suggestion);
                           const original = selectedReport.influencer_signals;
                           
                           return (
@@ -1595,9 +1599,9 @@ ${aiReviewSummary || '   (AI 검토 결과 없음)'}
                                   <div><span className="font-medium">종목:</span> {suggestion.stock}</div>
                                   <div><span className="font-medium">티커:</span> {suggestion.ticker || 'N/A'}</div>
                                   <div><span className="font-medium">신호:</span> {suggestion.signal}</div>
-                                  <div><span className="font-medium">인용문:</span> "{suggestion.quote}"</div>
+                                  <div><span className="font-medium">인용문:</span> "{suggestion.key_quote}"</div>
                                   <div><span className="font-medium">타임스탬프:</span> {suggestion.timestamp}</div>
-                                  <div><span className="font-medium">분석근거:</span> {suggestion.analysis_reasoning || 'N/A'}</div>
+                                  <div><span className="font-medium">분석근거:</span> {suggestion.reasoning || 'N/A'}</div>
                                 </div>
                               </div>
                             </div>
