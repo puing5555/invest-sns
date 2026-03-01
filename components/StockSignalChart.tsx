@@ -80,15 +80,38 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
       yLabels.push({ price: Math.round(price), y: priceToY(price) });
     }
 
-    const xLabels = [];
+    // 기간별 X축 날짜 포맷
+    const formatXLabel = (d: Date): string => {
+      const period = periodFilter || '전체';
+      switch (period) {
+        case '1개월': return `${d.getMonth() + 1}/${d.getDate()}`;
+        case '6개월': return `${d.getMonth() + 1}월`;
+        case '1년': return `${d.getMonth() + 1}월`;
+        case '3년': {
+          const q = Math.floor(d.getMonth() / 3) + 1;
+          return `${d.getFullYear()} Q${q}`;
+        }
+        default: return `${d.getFullYear()}`;
+      }
+    };
+
+    const xLabels: { label: string; x: number }[] = [];
     const xStep = Math.max(1, Math.floor(prices.length / 5));
+    let prevLabel = '';
     for (let i = 0; i < prices.length; i += xStep) {
       const d = new Date(prices[i].date);
-      const label = `${d.getMonth() + 1}/${d.getDate()}`;
-      xLabels.push({ label, x: dateToX(i) });
+      const label = formatXLabel(d);
+      if (label !== prevLabel) {
+        xLabels.push({ label, x: dateToX(i) });
+        prevLabel = label;
+      }
     }
+    // 마지막 라벨 추가 (중복 아닐 때만)
     const lastD = new Date(prices[prices.length - 1].date);
-    xLabels.push({ label: `${lastD.getMonth() + 1}/${lastD.getDate()}`, x: dateToX(prices.length - 1) });
+    const lastLabel = formatXLabel(lastD);
+    if (lastLabel !== prevLabel) {
+      xLabels.push({ label: lastLabel, x: dateToX(prices.length - 1) });
+    }
 
     const signalMarkers = filteredSignals.map(sig => {
       const sigDate = sig.date;
