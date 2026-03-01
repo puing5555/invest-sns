@@ -38,10 +38,15 @@ with open(videos_file, 'r', encoding='utf-16') as f:
 
 print(f"Total videos: {len(video_ids)}")
 
-# Check already extracted
+# Check already extracted + failed
 existing = set(os.listdir(SUBS_DIR))
-remaining = [v for v in video_ids if f"{v}.json" not in existing]
-print(f"Already extracted: {len(video_ids) - len(remaining)}, Remaining: {len(remaining)}")
+FAIL_FILE = os.path.join(SUBS_DIR, "_failed.txt")
+failed_ids = set()
+if os.path.exists(FAIL_FILE):
+    with open(FAIL_FILE, 'r') as f:
+        failed_ids = set(line.strip() for line in f if line.strip())
+remaining = [v for v in video_ids if f"{v}.json" not in existing and v not in failed_ids]
+print(f"Already extracted: {len(video_ids) - len(remaining) - len(failed_ids)}, Failed(skip): {len(failed_ids)}, Remaining: {len(remaining)}")
 
 success = 0
 fail = 0
@@ -59,6 +64,8 @@ for i, vid in enumerate(remaining[:20]):  # Batch of 20
         err = str(e)[:100]
         print(f"FAIL: {err}")
         fail += 1
+        with open(FAIL_FILE, 'a') as ff:
+            ff.write(vid + '\n')
     
     delay = random.uniform(2, 4)
     time.sleep(delay)

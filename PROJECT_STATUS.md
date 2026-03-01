@@ -1,6 +1,17 @@
 # PROJECT STATUS - invest-sns
 
-## 🔥 최신 업데이트 (2026-03-01 15:41) ✅
+## 🔥 최신 업데이트 (2026-03-01 22:40) ✅
+
+### 애널리스트 탭 실데이터 교체 완료
+- `app/explore/analyst/page.tsx` 완전 재작성
+- mock 데이터(`@/data/analystData`) → 실데이터(`data/analyst_reports.json`, 567개 리포트, 20종목)
+- 3개 탭: 🔥최신 리포트(날짜순), 👩‍💼증권사별(그룹화), 📈종목별(그룹화)
+- 검색, opinion 배지 색상, PDF 링크, 토스 스타일 UI
+- ✅ 빌드 성공, gh-pages 배포 완료
+
+---
+
+## 이전 업데이트 (2026-03-01 15:41) ✅
 
 ### 3가지 핵심 개선사항 완료
 1. **종목 페이지 일괄 생성 (generateStaticParams)** ✅

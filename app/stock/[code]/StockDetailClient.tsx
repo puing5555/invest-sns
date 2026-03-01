@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
+import StockAnalystTab from '@/components/stock/StockAnalystTab';
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import SignalDetailModal from '@/components/SignalDetailModal';
@@ -196,7 +197,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return <InfluencerTab code={code} />;
 
       case 'analyst':
-        return <AnalystTab code={code} />;
+        return <StockAnalystTab code={code} />;
 
       case 'disclosure':
         return <StockDisclosureTab code={code} />;

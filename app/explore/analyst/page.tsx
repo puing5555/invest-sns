@@ -14,8 +14,9 @@ const TICKER_NAMES: Record<string, string> = {
 interface Report {
   ticker: string;
   firm: string;
+  analyst: string | null;
   title: string;
-  target_price: number;
+  target_price: number | null;
   opinion: string;
   published_at: string;
   pdf_url: string;
@@ -26,14 +27,21 @@ const data = reportsData as Record<string, Report[]>;
 const allReports: Report[] = Object.values(data).flat();
 
 function OpinionBadge({ opinion }: { opinion: string }) {
-  const color = opinion === 'BUY' ? 'bg-green-100 text-green-700'
-    : opinion === 'SELL' ? 'bg-red-100 text-red-700'
-    : opinion === 'HOLD' ? 'bg-yellow-100 text-yellow-700'
-    : 'bg-gray-100 text-gray-600';
-  return <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${color}`}>{opinion}</span>;
+  const styles = {
+    'BUY': 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20',
+    'HOLD': 'bg-[#eab308]/10 text-[#eab308] border border-[#eab308]/20', 
+    'SELL': 'bg-[#ef4444]/10 text-[#ef4444] border border-[#ef4444]/20'
+  };
+  
+  return (
+    <span className={`text-xs font-medium px-2 py-1 rounded-full ${styles[opinion as keyof typeof styles] || styles.HOLD}`}>
+      {opinion}
+    </span>
+  );
 }
 
-function formatPrice(n: number) {
+function formatPrice(n: number | null) {
+  if (n === null || n === undefined) return '-';
   return n.toLocaleString('ko-KR') + '원';
 }
 

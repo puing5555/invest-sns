@@ -23,9 +23,17 @@ function parseDate(text) {
 }
 
 function parseTargetPrice(text) {
+  // 목표가는 보통 만원 단위 이상 (10,000원~)이고 "목표가" 키워드가 포함되거나
+  // "원" 단위로 명시되어야 함. 단순 숫자는 조회수일 가능성이 높음
+  if (!text.includes('목표') && !text.includes('원')) return null;
+  
   const cleaned = text.replace(/,/g, '').replace(/원/g, '').trim();
   const num = parseInt(cleaned, 10);
-  return isNaN(num) ? null : num;
+  
+  // 목표가는 최소 1만원 이상이어야 함 (조회수와 구분)
+  if (isNaN(num) || num < 10000) return null;
+  
+  return num;
 }
 
 async function crawlTicker(ticker) {
@@ -57,7 +65,7 @@ async function crawlTicker(ticker) {
       const title = titleMatch ? titleMatch[1].replace(/<[^>]*>/g, '').trim() : '';
       if (!title) continue;
       
-      // Extract all td contents
+      // Extract all td contents with proper indexing
       const tds = [];
       const tdRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi;
       let m;
@@ -65,34 +73,59 @@ async function crawlTicker(ticker) {
         tds.push(m[1].replace(/<[^>]*>/g, '').trim());
       }
       
-      let firm = '', date = null, targetPrice = null, opinion = 'BUY';
+      // Parse based on known table structure:
+      // [0]: 종목명, [1]: 제목, [2]: 증권사, [3]: PDF링크, [4]: 날짜, [5]: 조회수
+      let firm = '', date = null, targetPrice = null, opinion = 'BUY', analyst = null;
       
-      for (const td of tds) {
-        if (!firm && (td.includes('증권') || td.includes('투자') || td.includes('캐피탈') || 
-            td.includes('리서치') || td.includes('파이낸셜') || td.includes('Securities') ||
-            td.includes('자산운용') || td.includes('금융'))) {
-          firm = td;
-        }
-        if (!date) {
-          const d = parseDate(td);
-          if (d) date = d;
-        }
-        const tp = parseTargetPrice(td);
-        if (tp && tp > 500) targetPrice = tp;
+      if (tds.length >= 5) {
+        // 증권사 (TD[2])
+        firm = tds[2] || 'Unknown';
+        
+        // 날짜 (TD[4])  
+        const d = parseDate(tds[4]);
+        if (d) date = d;
+        
+        // 목표가는 일단 null로 설정 (네이버 리스트에서는 제공되지 않음)
+        // PDF 내부를 파싱해야 실제 목표가를 얻을 수 있음
+        targetPrice = null;
+        
+        // 애널리스트명도 네이버 리스트에서는 제공되지 않음
+        analyst = null;
       }
       
-      // Opinion detection
+      // Opinion detection from title and row content
       const rowLower = row.toLowerCase();
-      if (rowLower.includes('buy') || row.includes('매수')) opinion = 'BUY';
-      if (rowLower.includes('hold') || row.includes('중립') || rowLower.includes('neutral') || rowLower.includes('marketperform')) opinion = 'HOLD';
-      if (rowLower.includes('sell') || row.includes('매도') || rowLower.includes('underperform')) opinion = 'SELL';
+      const titleLower = title.toLowerCase();
+      
+      if (rowLower.includes('buy') || row.includes('매수') || 
+          titleLower.includes('매수') || titleLower.includes('강력추천')) {
+        opinion = 'BUY';
+      } else if (rowLower.includes('hold') || row.includes('중립') || row.includes('보유') ||
+                 titleLower.includes('중립') || titleLower.includes('보유')) {
+        opinion = 'HOLD';  
+      } else if (rowLower.includes('sell') || row.includes('매도') ||
+                 titleLower.includes('매도')) {
+        opinion = 'SELL';
+      } else {
+        // 기본값은 BUY (대부분 긍정적 리포트)
+        opinion = 'BUY';
+      }
       
       // PDF URL
       const pdfMatch = row.match(/href="(https?:\/\/[^"]*\.pdf[^"]*)"/i);
       const pdfUrl = pdfMatch ? pdfMatch[1] : null;
       
-      if (title && date) {
-        reports.push({ ticker, firm: firm || 'Unknown', title, target_price: targetPrice, opinion, published_at: date, pdf_url: pdfUrl });
+      if (title && date && firm) {
+        reports.push({ 
+          ticker, 
+          firm, 
+          analyst, 
+          title, 
+          target_price: targetPrice, 
+          opinion, 
+          published_at: date, 
+          pdf_url: pdfUrl 
+        });
       }
     }
     
