@@ -42,7 +42,7 @@ function OpinionBadge({ opinion }: { opinion: string }) {
 
 function formatPrice(n: number | null) {
   if (n === null || n === undefined) return '-';
-  return n.toLocaleString('ko-KR') + '원';
+  return `${Math.floor(n / 10000)}만원`;
 }
 
 export default function AnalystPage() {
@@ -94,8 +94,9 @@ export default function AnalystPage() {
 
   const tabs = [
     { id: 'latest', label: '🔥 최신 리포트' },
-    { id: 'firm', label: '👩‍💼 증권사별' },
+    { id: 'analyst', label: '👤 애널리스트별' },
     { id: 'stock', label: '📈 종목별' },
+    { id: 'firm', label: '🏢 증권사별' },
   ];
 
   const [expandedFirm, setExpandedFirm] = useState<string | null>(null);
@@ -164,7 +165,19 @@ export default function AnalystPage() {
           </div>
         )}
 
-        {/* 👩‍💼 증권사별 */}
+        {/* 👤 애널리스트별 */}
+        {activeTab === 'analyst' && (
+          <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+            <div className="text-4xl mb-4">👤</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">데이터 준비 중</h3>
+            <p className="text-[#8b95a1] text-sm leading-relaxed">
+              애널리스트별 분류 기능을 준비하고 있습니다.<br/>
+              현재 애널리스트 정보 수집 중이며, 곧 업데이트될 예정입니다.
+            </p>
+          </div>
+        )}
+
+        {/* 🏢 증권사별 */}
         {activeTab === 'firm' && (
           <div className="space-y-2">
             {firmGroups.map(g => (
