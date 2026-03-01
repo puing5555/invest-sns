@@ -180,8 +180,7 @@ ${subtitleText}
       const { error: updateError } = await supabase
         .from('signal_reports')
         .update({ 
-          ai_review: aiReview,
-          updated_at: new Date().toISOString()
+          ai_review: aiReview
         })
         .eq('id', reportId);
 
@@ -233,8 +232,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           await supabase
             .from('signal_reports')
             .update({ 
-              ai_suggestion: aiSuggestion,
-              updated_at: new Date().toISOString()
+              ai_suggestion: aiSuggestion
             })
             .eq('id', reportId);
         } catch (suggestionError) {
