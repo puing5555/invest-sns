@@ -400,8 +400,8 @@ export async function getSignalReports() {
           stock,
           ticker,
           signal,
-          quote,
-          analysis_reasoning,
+          key_quote,
+          reasoning,
           influencer_videos (
             title,
             published_at,

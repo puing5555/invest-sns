@@ -16,8 +16,8 @@ interface SignalReport {
     stock: string;
     ticker: string | null;
     signal: string;
-    quote: string;
-    analysis_reasoning: string | null;
+    key_quote: string;
+    reasoning: string | null;
     influencer_videos: {
       title: string;
       published_at: string;
@@ -148,9 +148,9 @@ export default function AdminPage() {
           stock: suggestion.stock,
           ticker: suggestion.ticker,
           signal: suggestion.signal,
-          quote: suggestion.quote,
+          key_quote: suggestion.quote,
           timestamp: suggestion.timestamp,
-          analysis_reasoning: suggestion.analysis_reasoning,
+          reasoning: suggestion.analysis_reasoning,
           updated_at: new Date().toISOString()
         })
         .eq('id', report.influencer_signals.id);
@@ -496,9 +496,9 @@ export default function AdminPage() {
           stock: suggestion.stock,
           ticker: suggestion.ticker,
           signal: suggestion.signal,
-          quote: suggestion.quote,
+          key_quote: suggestion.quote,
           timestamp: suggestion.timestamp,
-          analysis_reasoning: suggestion.analysis_reasoning,
+          reasoning: suggestion.analysis_reasoning,
           confidence: suggestion.confidence,
           updated_at: new Date().toISOString()
         })
@@ -1064,15 +1064,15 @@ export default function AdminPage() {
                       <div>
                         <div className="text-sm text-gray-600 mb-1">핵심 발언:</div>
                         <div className="text-sm bg-white p-3 rounded border italic">
-                          "{selectedReport.influencer_signals.quote}"
+                          "{selectedReport.influencer_signals.key_quote}"
                         </div>
                       </div>
 
-                      {selectedReport.influencer_signals.analysis_reasoning && (
+                      {selectedReport.influencer_signals.reasoning && (
                         <div>
                           <div className="text-sm text-gray-600 mb-1">분석 내용:</div>
                           <div className="text-sm bg-white p-3 rounded border whitespace-pre-wrap">
-                            {selectedReport.influencer_signals.analysis_reasoning}
+                            {selectedReport.influencer_signals.reasoning}
                           </div>
                         </div>
                       )}
