@@ -168,7 +168,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
 
             {/* 영상 내용 요약 */}
             <div>
-              <div className="text-xs font-medium text-[#8b95a1] mb-2">영상 내용 요약</div>
+              <div className="text-xs font-medium text-[#8b95a1] mb-2">내용요약</div>
               {signal.analysis_reasoning ? (
                 <p className="text-sm text-[#333d4b] leading-relaxed whitespace-pre-wrap">
                   {filterInternalText(signal.analysis_reasoning)}

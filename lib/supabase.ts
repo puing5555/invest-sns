@@ -55,6 +55,8 @@ export async function getLatestInfluencerSignals(limit = 20) {
         influencer_videos (
           title,
           published_at,
+          video_id,
+          video_summary,
           channel_id,
           influencer_channels (
             channel_name,
