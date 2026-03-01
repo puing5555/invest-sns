@@ -62,7 +62,7 @@ class SubtitleExtractor:
                         transcript = transcript_list.find_manually_created_transcript([lang])
                         subtitle_data = transcript.fetch()
                         subtitle_text = self.formatter.format_transcript(subtitle_data)
-                        print(f"✓ 수동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자")
+                        print(f"[OK] 수동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자")
                         return subtitle_text
                     except:
                         pass
@@ -72,7 +72,7 @@ class SubtitleExtractor:
                         transcript = transcript_list.find_generated_transcript([lang])
                         subtitle_data = transcript.fetch()
                         subtitle_text = self.formatter.format_transcript(subtitle_data)
-                        print(f"✓ 자동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자")
+                        print(f"[OK] 자동 자막 추출 성공 ({lang}): {len(subtitle_text)} 글자")
                         return subtitle_text
                     except:
                         pass
@@ -80,11 +80,11 @@ class SubtitleExtractor:
                 except Exception as e:
                     continue
                     
-            print(f"❌ 한국어 자막 없음 (video_id: {video_id})")
+            print(f"[ERROR] 한국어 자막 없음 (video_id: {video_id})")
             return None
             
         except Exception as e:
-            print(f"❌ youtube_transcript_api 에러: {e}")
+            print(f"[ERROR] youtube_transcript_api 에러: {e}")
             return None
         finally:
             # 프록시 환경변수 정리
@@ -121,7 +121,7 @@ class SubtitleExtractor:
                             # VTT 파일 파싱
                             if subtitle_file.endswith('.vtt'):
                                 subtitle_text = self.parse_vtt_content(content)
-                                print(f"✓ yt-dlp 자막 추출 성공: {len(subtitle_text)} 글자")
+                                print(f"[OK] yt-dlp 자막 추출 성공: {len(subtitle_text)} 글자")
                                 
                                 # 임시 파일 정리
                                 os.remove(subtitle_file)
@@ -134,11 +134,11 @@ class SubtitleExtractor:
                             if os.path.exists(subtitle_file):
                                 os.remove(subtitle_file)
                 
-                print(f"❌ yt-dlp 자막 파일 없음")
+                print(f"[ERROR] yt-dlp 자막 파일 없음")
                 return None
                 
         except Exception as e:
-            print(f"❌ yt-dlp 에러: {e}")
+            print(f"[ERROR] yt-dlp 에러: {e}")
             return None
     
     def parse_vtt_content(self, content: str) -> str:
@@ -180,7 +180,7 @@ class SubtitleExtractor:
         """
         video_id = self.extract_video_id(url)
         if not video_id:
-            print(f"❌ 유효하지 않은 유튜브 URL: {url}")
+            print(f"[ERROR] 유효하지 않은 유튜브 URL: {url}")
             return None
         
         print(f"자막 추출 시작: {video_id}")
@@ -209,7 +209,7 @@ class SubtitleExtractor:
                 if attempt < retries - 1:
                     time.sleep(5)
         
-        print(f"❌ 자막 추출 완전 실패: {video_id}")
+        print(f"[ERROR] 자막 추출 완전 실패: {video_id}")
         return None
     
     def extract_with_rate_limit(self, videos: list) -> list:

@@ -39,7 +39,7 @@ class DatabaseInserter:
             
             if response.data:
                 channel_id = response.data[0]['id']
-                print(f"✓ 기존 채널 발견: {channel_id}")
+                print(f"[OK] 기존 채널 발견: {channel_id}")
                 return channel_id
             
             # 새 채널 생성
@@ -58,11 +58,11 @@ class DatabaseInserter:
                 .execute()
             
             channel_id = response.data[0]['id']
-            print(f"✓ 새 채널 생성: {channel_id} ({channel_info['name']})")
+            print(f"[OK] 새 채널 생성: {channel_id} ({channel_info['name']})")
             return channel_id
             
         except Exception as e:
-            print(f"❌ 채널 생성 에러: {e}")
+            print(f"[ERROR] 채널 생성 에러: {e}")
             raise
     
     def get_or_create_speaker(self, speaker_name: str) -> str:
@@ -98,11 +98,11 @@ class DatabaseInserter:
                 .execute()
             
             speaker_id = response.data[0]['id']
-            print(f"✓ 새 발언자 생성: {speaker_name} ({speaker_id})")
+            print(f"[OK] 새 발언자 생성: {speaker_name} ({speaker_id})")
             return speaker_id
             
         except Exception as e:
-            print(f"❌ 발언자 생성 에러: {e}")
+            print(f"[ERROR] 발언자 생성 에러: {e}")
             raise
     
     def insert_video(self, channel_id: str, video_data: Dict[str, Any]) -> str:
@@ -154,11 +154,11 @@ class DatabaseInserter:
                 .execute()
             
             video_id = response.data[0]['id']
-            print(f"✓ 새 영상 INSERT: {video_id}")
+            print(f"[OK] 새 영상 INSERT: {video_id}")
             return video_id
             
         except Exception as e:
-            print(f"❌ 영상 INSERT 에러: {e}")
+            print(f"[ERROR] 영상 INSERT 에러: {e}")
             raise
     
     def insert_signals(self, video_id: str, signals: List[Dict[str, Any]]) -> int:
@@ -217,10 +217,10 @@ class DatabaseInserter:
                 
                 if response.data:
                     inserted_count += 1
-                    print(f"✓ 시그널 INSERT: {signal['speaker']} - {signal['stock']} ({signal['signal']})")
+                    print(f"[OK] 시그널 INSERT: {signal['speaker']} - {signal['stock']} ({signal['signal']})")
                 
         except Exception as e:
-            print(f"❌ 시그널 INSERT 에러: {e}")
+            print(f"[ERROR] 시그널 INSERT 에러: {e}")
             raise
         
         return inserted_count
@@ -294,7 +294,7 @@ class DatabaseInserter:
             return stats
             
         except Exception as e:
-            print(f"❌ DB INSERT 에러: {e}")
+            print(f"[ERROR] DB INSERT 에러: {e}")
             raise
     
     def update_signal_prices_json(self):
@@ -326,12 +326,12 @@ class DatabaseInserter:
             with open('scripts/stocks_for_price_update.json', 'w', encoding='utf-8') as f:
                 json.dump(stocks_for_price_update, f, ensure_ascii=False, indent=2)
             
-            print("✓ 가격 업데이트용 종목 목록 저장: scripts/stocks_for_price_update.json")
+            print("[OK] 가격 업데이트용 종목 목록 저장: scripts/stocks_for_price_update.json")
             print("다음 명령어로 가격 업데이트를 실행하세요:")
             print("python scripts/gen_prices.py")
             
             return stocks_for_price_update
             
         except Exception as e:
-            print(f"❌ 가격 업데이트 준비 에러: {e}")
+            print(f"[ERROR] 가격 업데이트 준비 에러: {e}")
             return []

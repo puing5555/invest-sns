@@ -30,8 +30,8 @@ import yt_dlp
 # 모듈 import
 from title_filter import TitleFilter
 from subtitle_extractor import SubtitleExtractor
-from signal_analyzer import SignalAnalyzer
-from db_inserter import DatabaseInserter
+from signal_analyzer_rest import SignalAnalyzer
+from db_inserter_rest import DatabaseInserter
 from pipeline_config import PipelineConfig
 
 class YouTubeChannelCollector:
@@ -71,7 +71,7 @@ class YouTubeChannelCollector:
                 }
                 
         except Exception as e:
-            print(f"❌ 채널 정보 수집 실패: {e}")
+            print(f"[ERROR] 채널 정보 수집 실패: {e}")
             return None
     
     def get_video_list(self, channel_url: str, limit: Optional[int] = None) -> List[Dict[str, Any]]:
@@ -82,14 +82,19 @@ class YouTubeChannelCollector:
             if limit:
                 opts['playlistend'] = limit
             
+            # 채널 URL에 /videos 추가해서 실제 영상 목록만 가져오기
+            videos_url = channel_url
+            if not videos_url.endswith('/videos'):
+                videos_url = videos_url.rstrip('/') + '/videos'
+            
             with yt_dlp.YoutubeDL(opts) as ydl:
-                print(f"채널 영상 목록 수집 중: {channel_url}")
+                print(f"채널 영상 목록 수집 중: {videos_url}")
                 
                 # 플레이리스트 추출
-                playlist_info = ydl.extract_info(channel_url, download=False)
+                playlist_info = ydl.extract_info(videos_url, download=False)
                 
                 if 'entries' not in playlist_info:
-                    print("❌ 영상 목록을 찾을 수 없습니다")
+                    print("[ERROR] 영상 목록을 찾을 수 없습니다")
                     return []
                 
                 videos = []
@@ -114,11 +119,11 @@ class YouTubeChannelCollector:
                     
                     videos.append(video_data)
                 
-                print(f"✓ 영상 목록 수집 완료: {len(videos)}개")
+                print(f"[OK] 영상 목록 수집 완료: {len(videos)}개")
                 return videos
                 
         except Exception as e:
-            print(f"❌ 영상 목록 수집 실패: {e}")
+            print(f"[ERROR] 영상 목록 수집 실패: {e}")
             return []
 
 
@@ -196,7 +201,7 @@ class AutoPipeline:
             if not channel_info:
                 return {'error': '채널 정보 수집 실패'}
             
-            print(f"✓ 채널: {channel_info['channel_title']} ({channel_info['name']})")
+            print(f"[OK] 채널: {channel_info['channel_title']} ({channel_info['name']})")
             
             # 2. 영상 목록 수집
             print("\n[2/6] 영상 목록 수집...")
@@ -262,7 +267,7 @@ class AutoPipeline:
             return result
             
         except Exception as e:
-            print(f"❌ 파이프라인 실행 중 에러: {e}")
+            print(f"[ERROR] 파이프라인 실행 중 에러: {e}")
             return {'error': str(e)}
 
 
@@ -310,12 +315,12 @@ def main():
     
     # 인자 검증
     if not args.channel.startswith('https://www.youtube.com/'):
-        print("❌ 올바른 유튜브 채널 URL을 입력해주세요")
+        print("[ERROR] 올바른 유튜브 채널 URL을 입력해주세요")
         print("예시: https://www.youtube.com/@sesang101")
         return 1
     
     if args.limit and args.limit <= 0:
-        print("❌ limit은 1 이상의 정수여야 합니다")
+        print("[ERROR] limit은 1 이상의 정수여야 합니다")
         return 1
     
     # 파이프라인 실행
@@ -329,18 +334,18 @@ def main():
         
         # 결과 확인
         if 'error' in result:
-            print(f"❌ 실행 실패: {result['error']}")
+            print(f"[ERROR] 실행 실패: {result['error']}")
             return 1
         
         # 성공
-        print("✅ 파이프라인 완료!")
+        print("[SUCCESS] 파이프라인 완료!")
         return 0
         
     except KeyboardInterrupt:
-        print("\n❌ 사용자에 의해 중단됨")
+        print("\n[ERROR] 사용자에 의해 중단됨")
         return 1
     except Exception as e:
-        print(f"❌ 예상치 못한 에러: {e}")
+        print(f"[ERROR] 예상치 못한 에러: {e}")
         return 1
 
 

@@ -1,0 +1,430 @@
+{
+  "total_signals": 90,
+  "critical_issues": 82,
+  "quality_issues": 0,
+  "issues": {
+    "timestamp_zero": [
+      {
+        "id": "c6df1cd3-246d-40b7-850b-cb0a8d624a65",
+        "stock": "아이덴",
+        "timestamp": "0:00"
+      }
+    ],
+    "confidence_text": [
+      {
+        "id": "c9d04f21-5570-4d15-b01f-0d8d06412b7b",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "414a3173-afac-46b8-af46-48615d2293e6",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "85e74359-3b1f-4694-b9f5-09b8d303659d",
+        "stock": "원익IPS",
+        "confidence": "medium"
+      },
+      {
+        "id": "11e95a7f-a408-4a9a-9072-f1b238db28e5",
+        "stock": "주성엔지니어링",
+        "confidence": "medium"
+      },
+      {
+        "id": "2bb7d896-a03c-4413-ac3e-9717c59b9090",
+        "stock": "한미반도체",
+        "confidence": "medium"
+      },
+      {
+        "id": "4ed7b3c7-e152-4011-85f9-88d7eb331dd6",
+        "stock": "HPSP",
+        "confidence": "medium"
+      },
+      {
+        "id": "e1d58ec7-3ca7-4db9-9a77-d63cf1c06e89",
+        "stock": "SOXX",
+        "confidence": "medium"
+      },
+      {
+        "id": "20fe5054-8bda-4b78-8285-bd5270fb57f7",
+        "stock": "HD현대일렉트릭",
+        "confidence": "medium"
+      },
+      {
+        "id": "2244a98d-2de6-40a7-bd0a-8f0104126e5e",
+        "stock": "효성중공업",
+        "confidence": "medium"
+      },
+      {
+        "id": "bac042bc-8a78-4397-ab71-ba1755fc3d79",
+        "stock": "조선",
+        "confidence": "medium"
+      },
+      {
+        "id": "050ddf63-9f8a-487b-ae70-5d7f30ae1b6f",
+        "stock": "현대차",
+        "confidence": "medium"
+      },
+      {
+        "id": "f3ecfcd0-fc26-4606-989f-9c4fab5b2f3b",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "fc445820-5853-4152-bca2-db6eacb10003",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "fee2af81-2e4b-4d1b-a31b-6c194e482b74",
+        "stock": "반도체",
+        "confidence": "high"
+      },
+      {
+        "id": "f5a73453-15dc-4cb5-bd0e-1da5eea7fb23",
+        "stock": "현대차",
+        "confidence": "high"
+      },
+      {
+        "id": "8e42adce-5630-4b8a-9e38-1137df6b4173",
+        "stock": "아모레퍼시픽",
+        "confidence": "high"
+      },
+      {
+        "id": "146207b1-702e-44a5-8d7f-026bf6181cbb",
+        "stock": "하이브",
+        "confidence": "high"
+      },
+      {
+        "id": "86996087-c16e-4dfd-9f7a-9be7501ef024",
+        "stock": "삼성SDI",
+        "confidence": "medium"
+      },
+      {
+        "id": "cd3a96b4-8c52-4dce-884f-5e89a8e228d5",
+        "stock": "반도체 섹터",
+        "confidence": "high"
+      },
+      {
+        "id": "ff39bd30-09b5-40cc-b8d2-413ff2b32138",
+        "stock": "ASML",
+        "confidence": "high"
+      },
+      {
+        "id": "c6df1cd3-246d-40b7-850b-cb0a8d624a65",
+        "stock": "아이덴",
+        "confidence": "medium"
+      },
+      {
+        "id": "0b1207d3-8144-4e27-b5b6-adad57709e27",
+        "stock": "HM파마",
+        "confidence": "medium"
+      },
+      {
+        "id": "dd2bbc57-c6ed-4168-b84a-305e0b832e7f",
+        "stock": "2차전지 관련 기업",
+        "confidence": "high"
+      },
+      {
+        "id": "9aeda838-cd78-49c4-afe0-779fe6924305",
+        "stock": "바이오 AI 기업",
+        "confidence": "high"
+      },
+      {
+        "id": "90831b68-b73e-4f53-b215-ffca476fc46e",
+        "stock": "원익IPS",
+        "confidence": "medium"
+      },
+      {
+        "id": "21f03a71-d3a6-437a-aafb-1ef0f8b224f6",
+        "stock": "테스",
+        "confidence": "medium"
+      },
+      {
+        "id": "5ae58cc4-830b-4abe-8d2e-c0dc7d3fe76d",
+        "stock": "유진테크",
+        "confidence": "medium"
+      },
+      {
+        "id": "41daad11-7b68-4815-b380-eef73f8555c0",
+        "stock": "테슬라",
+        "confidence": "medium"
+      },
+      {
+        "id": "072420e3-2ae3-4942-84f8-2c38a6e835f4",
+        "stock": "엔비디아",
+        "confidence": "high"
+      },
+      {
+        "id": "63208f63-4c0a-4625-b6b7-48fd75451f29",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "9d79c0a4-7e2a-4852-b303-b24f05a980fd",
+        "stock": "현대차그룹주",
+        "confidence": "medium"
+      },
+      {
+        "id": "e33133c1-cd42-4a51-975e-f092c50f3f46",
+        "stock": "반도체",
+        "confidence": "high"
+      },
+      {
+        "id": "87f3fa04-503b-4cb5-9000-ee39bd0ce907",
+        "stock": "빅테크",
+        "confidence": "high"
+      },
+      {
+        "id": "dc359487-49ef-42ce-ba2c-297b1587e743",
+        "stock": "CGV",
+        "confidence": "medium"
+      },
+      {
+        "id": "71ff56f8-deb9-49c1-9c18-bc4fd717d666",
+        "stock": "삼성전자",
+        "confidence": "low"
+      },
+      {
+        "id": "c5d155e7-b7da-4127-90a5-02e4cd45c8f7",
+        "stock": "SK하이닉스",
+        "confidence": "low"
+      },
+      {
+        "id": "163d4529-4871-4f34-ac74-271407952cd6",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "764703cc-157e-46fe-b265-f2253a1d66ba",
+        "stock": "삼성전자",
+        "confidence": "medium"
+      },
+      {
+        "id": "f614c684-8fc0-4c7d-a121-8073bee99b09",
+        "stock": "현대건설",
+        "confidence": "high"
+      },
+      {
+        "id": "332a5809-ad05-4697-89f2-1a8e2f6cb359",
+        "stock": "SMR/원전",
+        "confidence": "high"
+      },
+      {
+        "id": "f6d397de-1c5d-47f3-bf75-02abc2f3e8f4",
+        "stock": "AI 인프라 섹터",
+        "confidence": "high"
+      },
+      {
+        "id": "720aef52-2d6a-45f1-b8bd-b888a96813ae",
+        "stock": "소프트웨어 섹터",
+        "confidence": "medium"
+      },
+      {
+        "id": "d155bb53-c292-48f0-818a-1f25f5b43fe9",
+        "stock": "삼성전자",
+        "confidence": "medium"
+      },
+      {
+        "id": "2d5d8a4b-a6e1-425a-98f5-8767a142193e",
+        "stock": "로봇 섹터",
+        "confidence": "low"
+      },
+      {
+        "id": "c5ddfab8-d29f-428c-aaab-568aff7db603",
+        "stock": "SK하이닉스",
+        "confidence": "medium"
+      },
+      {
+        "id": "3f5e9c95-9ec0-41c9-a700-683e9257d5f8",
+        "stock": "현대차",
+        "confidence": "medium"
+      },
+      {
+        "id": "3fe9c19f-d7da-42f6-a677-be82ea350afd",
+        "stock": "코스피",
+        "confidence": "high"
+      },
+      {
+        "id": "f13c9ca0-d899-4bb3-9c61-849503831329",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "bb6deb68-005b-489c-9302-1ac7cd050453",
+        "stock": "한국금융지주",
+        "confidence": "high"
+      },
+      {
+        "id": "0d83bde0-d91c-45da-af79-0a360db6c6ad",
+        "stock": "NH투자증권",
+        "confidence": "high"
+      },
+      {
+        "id": "58b2432f-071a-4208-a1d8-90f3f0222517",
+        "stock": "삼성증권",
+        "confidence": "high"
+      },
+      {
+        "id": "6ab0f37a-1bac-4010-988a-f14db3e2b1e8",
+        "stock": "키움증권",
+        "confidence": "high"
+      },
+      {
+        "id": "dfa9fdbc-5485-4a48-a007-14dab596ab31",
+        "stock": "엔비디아",
+        "confidence": "high"
+      },
+      {
+        "id": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "83d4e654-d9db-4e5a-9a69-ac85b0ce0699",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "75042710-e161-4b46-bb9e-ae97f1e0d98a",
+        "stock": "마이크론",
+        "confidence": "high"
+      },
+      {
+        "id": "a12ab318-7173-4365-8d4d-140ab5b54506",
+        "stock": "신세계",
+        "confidence": "high"
+      },
+      {
+        "id": "493f2bf6-d84d-43c6-898e-7ec2e68ed1a3",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "1c3a1827-db67-458f-955b-11bb7b554575",
+        "stock": "하이브",
+        "confidence": "high"
+      },
+      {
+        "id": "fd197edb-e670-46c0-ac68-1626c26e129e",
+        "stock": "솔브레인",
+        "confidence": "medium"
+      },
+      {
+        "id": "b2fc3fdd-422e-4611-ad17-2a8be169d68d",
+        "stock": "LG화학",
+        "confidence": "high"
+      },
+      {
+        "id": "999ac2a9-60b3-42e6-8b24-f3ef97a36eb1",
+        "stock": "HD현대일렉트릭",
+        "confidence": "high"
+      },
+      {
+        "id": "b5ab47f3-aa0c-4584-8a87-41a53aacb0be",
+        "stock": "NC소프트",
+        "confidence": "medium"
+      },
+      {
+        "id": "53975f78-e496-49e8-b92e-8e9c482dbf09",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "ab0044b3-5414-4421-a6a6-5dd9077c3fd0",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "a9338662-af28-46b7-ac82-84e475646007",
+        "stock": "엔비디아",
+        "confidence": "high"
+      },
+      {
+        "id": "9a0f20c2-af24-4c50-b195-5c89d92a6cf9",
+        "stock": "엔비디아",
+        "confidence": "high"
+      },
+      {
+        "id": "33078122-93ea-4001-83bd-58ee6dc8e4df",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "19d07177-090a-4774-8504-38d177a8117d",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+        "stock": "현대차",
+        "confidence": "high"
+      },
+      {
+        "id": "418512f8-30ff-438a-9f56-f5a151536b09",
+        "stock": "삼성전자",
+        "confidence": "high"
+      },
+      {
+        "id": "889cc0ca-b605-46af-8ec6-65360b496d5d",
+        "stock": "엔비디아",
+        "confidence": "high"
+      },
+      {
+        "id": "5521f481-8192-4ad8-817d-4941327c5e15",
+        "stock": "마이크론",
+        "confidence": "medium"
+      },
+      {
+        "id": "c84d8705-85ea-4cb7-b91a-d9fb54db86ac",
+        "stock": "구글(알파벳)",
+        "confidence": "medium"
+      },
+      {
+        "id": "be863b24-d232-45ff-a6ec-7d5d79e77cfe",
+        "stock": "비트코인",
+        "confidence": "medium"
+      },
+      {
+        "id": "90524688-c8f2-4640-9614-61f79ec3ce58",
+        "stock": "HCM파마",
+        "confidence": "medium"
+      },
+      {
+        "id": "ec80bdec-b73c-4d5f-905f-3fada26fd361",
+        "stock": "마이크론",
+        "confidence": "high"
+      },
+      {
+        "id": "22e38f2b-be73-44cb-864d-febe8c81353c",
+        "stock": "SK하이닉스",
+        "confidence": "high"
+      },
+      {
+        "id": "e7426ae0-0fdd-47f7-be0e-c7d4f4f2956a",
+        "stock": "SK하이닉스",
+        "confidence": "medium"
+      },
+      {
+        "id": "65cf7a56-55b1-4401-983e-6d6615710747",
+        "stock": "엔비디아",
+        "confidence": "medium"
+      }
+    ],
+    "quote_short": [],
+    "reasoning_short": [],
+    "invalid_signal": [],
+    "video_stock_violations": [
+      {
+        "video_title": "하이닉스 없거나 추가 매수 고민하는 분들 제가 시원하게 바로 말씀드립니다 [Z1뉴스]",
+        "stock": "SK하이닉스",
+        "count": 2,
+        "signal_id": "1cda9f77-c6cf-43b6-83be-6542e9930f58"
+      }
+    ],
+    "quote_quality": [],
+    "reasoning_quality": []
+  },
+  "improvement_recommendation": "MAJOR_IMPROVEMENT"
+}

@@ -25,25 +25,40 @@ export default function AnalystPage() {
     (sectorFilter === '전체' || analyst.sector === sectorFilter)
   );
 
-  // 섹터별 그룹화
-  const sectorGroups = analysts.reduce((groups: any[], analyst) => {
-    const existing = groups.find(g => g.sector === analyst.sector);
-    if (existing) {
-      existing.analysts.push(analyst);
-      existing.totalReports += analyst.totalReports;
-      existing.avgAccuracy = (existing.avgAccuracy + analyst.accuracyRate) / 2;
-    } else {
-      groups.push({
-        sector: analyst.sector,
-        analysts: [analyst],
-        totalReports: analyst.totalReports,
-        avgAccuracy: analyst.accuracyRate
-      });
+  // 종목별 그룹화: 리포트에서 종목명 추출 → 애널리스트+최신 목표가/의견 매핑
+  const stockGroups = (() => {
+    const map: Record<string, { stock: string; reports: Array<typeof latestReports[0] & { sector: string }> }> = {};
+    for (const analyst of analysts) {
+      for (const report of analyst.recentReports) {
+        // 리포트 제목에서 종목명 추출 (첫 ":" 앞)
+        const stockName = report.title.split(':')[0].trim();
+        if (!map[stockName]) {
+          map[stockName] = { stock: stockName, reports: [] };
+        }
+        map[stockName].reports.push({
+          ...report,
+          analystId: analyst.id,
+          analystName: analyst.name,
+          company: analyst.company,
+          accuracyRate: analyst.accuracyRate,
+          sector: analyst.sector
+        });
+      }
     }
-    return groups;
-  }, []).filter(group => 
-    sectorFilter === '전체' || group.sector === sectorFilter
-  );
+    return Object.values(map)
+      .map(g => ({
+        ...g,
+        reports: g.reports.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()),
+        avgTarget: Math.round(g.reports.reduce((s, r) => s + r.targetPrice, 0) / g.reports.length),
+        currentPrice: g.reports[0].currentPrice,
+        analystCount: new Set(g.reports.map(r => r.analystId)).size,
+      }))
+      .filter(g =>
+        searchQuery === '' ||
+        g.stock.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .sort((a, b) => b.analystCount - a.analystCount);
+  })();
 
   const sectors = ['전체', ...Array.from(new Set(analysts.map(a => a.sector)))];
 
@@ -94,7 +109,7 @@ export default function AnalystPage() {
             {[
               { id: 'latest', label: '🔥 최신 리포트', count: filteredReports.length },
               { id: 'analysts', label: '👩‍💼 애널리스트', count: filteredAnalysts.length },
-              { id: 'sectors', label: '🏭 섹터별', count: sectorGroups.length }
+              { id: 'stocks', label: '📈 종목별', count: stockGroups.length }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -231,33 +246,59 @@ export default function AnalystPage() {
           </div>
         )}
 
-        {activeTab === 'sectors' && (
+        {activeTab === 'stocks' && (
           <div className="space-y-6">
-            {sectorGroups.map((group) => (
-              <div key={group.sector} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            {stockGroups.map((group) => (
+              <div key={group.stock} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">{group.sector}</h3>
-                  <div className="flex items-center space-x-4 text-sm text-gray-500">
-                    <span>애널리스트 {group.analysts.length}명</span>
-                    <span>리포트 {group.totalReports}개</span>
-                    <span>평균 적중률 {group.avgAccuracy.toFixed(1)}%</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">{group.stock}</h3>
+                    <div className="flex items-center space-x-3 mt-1">
+                      <span className="text-sm text-gray-500">현재가 {group.currentPrice.toLocaleString()}원</span>
+                      <span className="text-sm text-gray-500">·</span>
+                      <span className="text-sm text-blue-600 font-medium">평균 목표가 {group.avgTarget.toLocaleString()}원</span>
+                      <span className="text-sm text-gray-500">·</span>
+                      <span className={`text-sm font-medium ${((group.avgTarget - group.currentPrice) / group.currentPrice * 100) > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        상승여력 {((group.avgTarget - group.currentPrice) / group.currentPrice * 100).toFixed(1)}%
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-blue-600">{group.analystCount}</div>
+                    <div className="text-xs text-gray-500">커버 애널리스트</div>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {group.analysts.map((analyst) => (
-                    <Link key={analyst.id} href={`/profile/analyst/${analyst.id}`}>
-                      <div className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-medium text-gray-900">{analyst.name}</span>
-                          <span className="text-xs text-gray-500">{analyst.company}</span>
-                        </div>
-                        <div className="flex justify-between text-sm text-gray-600">
-                          <span>적중률 {analyst.accuracyRate}%</span>
-                          <span>수익률 {analyst.avgReturn > 0 ? '+' : ''}{analyst.avgReturn.toFixed(1)}%</span>
+                <div className="space-y-3">
+                  {group.reports.map((report) => (
+                    <div key={report.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <Link href={`/profile/analyst/${report.analystId}`}>
+                          <div className="w-9 h-9 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold cursor-pointer hover:opacity-80">
+                            {report.analystName.charAt(0)}
+                          </div>
+                        </Link>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <span className="font-medium text-gray-900">{report.analystName}</span>
+                            <span className="text-xs text-gray-500">{report.company}</span>
+                            <span className="text-xs bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded">적중률 {report.accuracyRate}%</span>
+                          </div>
+                          <div className="text-xs text-gray-500 mt-0.5">{report.title}</div>
                         </div>
                       </div>
-                    </Link>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <div className={`px-2.5 py-1 rounded-full text-xs font-medium ${opinionColors[report.investmentOpinion]}`}>
+                          {opinionLabels[report.investmentOpinion]}
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium text-gray-900">{report.targetPrice.toLocaleString()}원</div>
+                          <div className={`text-xs ${report.upsidePotential > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                            {report.upsidePotential > 0 ? '+' : ''}{report.upsidePotential.toFixed(1)}%
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>

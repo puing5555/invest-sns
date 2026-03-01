@@ -200,7 +200,7 @@ URL: {video_data['url']}
             )
             
             response_text = response.content[0].text
-            print(f"✓ AI 분석 완료: {len(response_text)} 글자")
+            print(f"[OK] AI 분석 완료: {len(response_text)} 글자")
             
             # 응답 파싱
             analysis_result = self.parse_analysis_response(response_text)
@@ -213,7 +213,7 @@ URL: {video_data['url']}
                     validated_signals.append(validated_signal)
                 analysis_result['signals'] = validated_signals
                 
-                print(f"✓ 시그널 검증 완료: {len(validated_signals)}개")
+                print(f"[OK] 시그널 검증 완료: {len(validated_signals)}개")
             else:
                 analysis_result['signals'] = []
                 print(f"시그널 없음")
@@ -221,7 +221,7 @@ URL: {video_data['url']}
             return analysis_result
             
         except Exception as e:
-            print(f"❌ AI 분석 에러: {e}")
+            print(f"[ERROR] AI 분석 에러: {e}")
             return {
                 "video_summary": f"분석 에러: {str(e)}",
                 "signals": [],
@@ -279,6 +279,6 @@ URL: {video_data['url']}
         try:
             with open(filename, 'w', encoding='utf-8') as f:
                 json.dump(results, f, ensure_ascii=False, indent=2)
-            print(f"✓ 분석 결과 저장: {filename}")
+            print(f"[OK] 분석 결과 저장: {filename}")
         except Exception as e:
-            print(f"❌ 결과 저장 실패: {e}")
+            print(f"[ERROR] 결과 저장 실패: {e}")

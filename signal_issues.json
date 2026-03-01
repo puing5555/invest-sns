@@ -1,0 +1,19 @@
+{
+  "total_signals": 90,
+  "total_issues": 1,
+  "signal_types": {
+    "매수": 26,
+    "긍정": 49,
+    "중립": 11,
+    "경계": 4
+  },
+  "issues": [
+    {
+      "id": "c6df1cd3-246d-40b7-850b-cb0a8d624a65",
+      "stock": "아이덴",
+      "issues": [
+        "잘못된 타임스탬프: '0:00'"
+      ]
+    }
+  ]
+}

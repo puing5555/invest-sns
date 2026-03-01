@@ -58,16 +58,27 @@ class PipelineConfig:
     # 통과 키워드 (특정 종목 언급, 시장 전망 등)
     PASS_KEYWORDS = [
         # 시장/섹터 전망
-        "전망", "시황", "시장", "증시", "코스피", "나스닥", "섹터",
+        "전망", "시황", "시장", "증시", "코스피", "나스닥", "섹터", "bubble", "panic", "crash",
         
         # 매매 의견
-        "매수", "매도", "추천", "관망", "정리", "담기",
+        "매수", "매도", "추천", "관망", "정리", "담기", "buy", "sell", "investment", "investing",
         
         # 경제지표
-        "금리", "인플레이션", "GDP", "실적", "어닝",
+        "금리", "인플레이션", "GDP", "실적", "어닝", "trump", "fed", "economy", "economic",
         
         # 종목 관련
-        "종목", "기업", "회사", "주식", "투자"
+        "종목", "기업", "회사", "주식", "투자", "stock", "stocks", "equity", "portfolio",
+        
+        # 암호화폐
+        "bitcoin", "ethereum", "btc", "eth", "crypto", "blockchain", "coin", "비트코인", "이더리움", "코인", "암호화폐",
+        
+        # 주요 종목
+        "palantir", "pltr", "tesla", "tsla", "nvidia", "nvda", "apple", "aapl", "amazon", "amzn",
+        "microsoft", "msft", "google", "googl", "meta", "팔란티어", "테슬라", "엔비디아", "애플",
+        
+        # 투자 관련
+        "asset", "wealth", "portfolio", "diversification", "analysis", "valuation", "risk",
+        "return", "yield", "dividend", "earnings", "profit", "loss", "finance", "financial"
     ]
 
     @classmethod
