@@ -119,7 +119,7 @@ export default function AdminPage() {
             signal,
             key_quote,
             timestamp,
-            analysis_reasoning,
+            reasoning,
             influencer_videos (
               subtitle_text,
               title,
