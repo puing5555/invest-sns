@@ -589,6 +589,8 @@ function InfluencerTab({ code }: { code: string }) {
           };
         });
         
+        // published_at 우선 최신순 정렬
+        transformedSignals.sort((a: any, b: any) => (b.date || '').localeCompare(a.date || ''));
         setSignalData(transformedSignals);
         
         // 인플루언서별 카운트 생성

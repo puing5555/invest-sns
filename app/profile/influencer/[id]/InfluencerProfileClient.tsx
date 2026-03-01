@@ -62,10 +62,16 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
       .forEach(([name, count]) => stockCounts.push({ name, count, shortName: shortNameMap[name] || name }));
   }
 
-  // 필터링된 시그널
-  const filteredSignals = activeStock === '전체'
+  // 필터링된 시그널 (published_at 우선 최신순 정렬)
+  const sortByDate = (a: any, b: any) => {
+    const dateA = a.influencer_videos?.published_at || a.created_at || '';
+    const dateB = b.influencer_videos?.published_at || b.created_at || '';
+    return dateB.localeCompare(dateA);
+  };
+  const filteredSignals = (activeStock === '전체'
     ? (profile?.signals || [])
-    : (profile?.signals || []).filter((s: any) => (formatStockDisplay(s.stock, s.ticker) || '기타') === activeStock);
+    : (profile?.signals || []).filter((s: any) => (formatStockDisplay(s.stock, s.ticker) || '기타') === activeStock)
+  ).sort(sortByDate);
 
   const handleCardClick = (signal: any) => {
     const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';

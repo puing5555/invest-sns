@@ -116,7 +116,7 @@ export default function InfluencerPage() {
     searchQuery === '' ||
     signal.stock.toLowerCase().includes(searchQuery.toLowerCase()) ||
     signal.speaker.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ).sort((a, b) => (b.video_published_at || '').localeCompare(a.video_published_at || ''));
 
   const filteredInfluencers = influencers.filter(influencer =>
     searchQuery === '' ||
