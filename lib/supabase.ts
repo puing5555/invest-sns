@@ -450,3 +450,132 @@ export async function updateReportStatus(reportId: string, status: string) {
     throw error;
   }
 }
+
+// 좋아요 관련 함수들
+export async function insertSignalVote(signalId: string, memo?: string) {
+  try {
+    const { data, error } = await supabase
+      .from('signal_votes')
+      .insert({ 
+        signal_id: signalId, 
+        vote_type: 'like', 
+        memo 
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error inserting signal vote:', error);
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error in insertSignalVote:', error);
+    throw error;
+  }
+}
+
+export async function getSignalVoteCounts(signalIds: string[]): Promise<Record<string, number>> {
+  try {
+    if (!signalIds.length) return {};
+
+    const { data, error } = await supabase
+      .from('signal_votes')
+      .select('signal_id')
+      .in('signal_id', signalIds);
+
+    if (error) {
+      console.error('Error fetching signal vote counts:', error);
+      return {};
+    }
+
+    const counts: Record<string, number> = {};
+    data?.forEach(v => {
+      counts[v.signal_id] = (counts[v.signal_id] || 0) + 1;
+    });
+
+    return counts;
+  } catch (error) {
+    console.error('Error in getSignalVoteCounts:', error);
+    return {};
+  }
+}
+
+// 메모 관련 함수들
+export async function insertSignalMemo(signalId: string, memo: string, userId?: string) {
+  try {
+    const { data, error } = await supabase
+      .from('signal_memos')
+      .insert({ 
+        signal_id: signalId, 
+        memo, 
+        user_id: userId || null 
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error inserting signal memo:', error);
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error in insertSignalMemo:', error);
+    throw error;
+  }
+}
+
+// 대시보드 통계 함수
+export async function getAdminStats() {
+  try {
+    const [signals, votes, reports] = await Promise.all([
+      supabase.from('influencer_signals').select('id', { count: 'exact', head: true }),
+      supabase.from('signal_votes').select('id', { count: 'exact', head: true }).catch(() => ({ count: 0 })),
+      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).catch(() => ({ count: 0 })),
+    ]);
+
+    // 상태별 신고 수 조회
+    const [pendingReports, reviewedReports, resolvedReports] = await Promise.all([
+      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).eq('status', 'pending').catch(() => ({ count: 0 })),
+      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).eq('status', 'reviewed').catch(() => ({ count: 0 })),
+      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).eq('status', 'resolved').catch(() => ({ count: 0 })),
+    ]);
+
+    const totalSignals = signals.count || 0;
+    const totalVotes = votes.count || 0;
+    const totalReports = reports.count || 0;
+    
+    // 메모 수 조회
+    const memos = await supabase.from('signal_memos').select('id', { count: 'exact', head: true }).catch(() => ({ count: 0 }));
+    const totalMemos = memos.count || 0;
+
+    // 유저 참여율 계산 (좋아요+신고+메모 / 시그널 수)
+    const participationRate = totalSignals > 0 ? 
+      Math.round(((totalVotes + totalReports + totalMemos) / totalSignals) * 100) : 0;
+
+    return {
+      totalSignals,
+      totalVotes,
+      totalReports,
+      totalMemos,
+      pendingReports: pendingReports.count || 0,
+      reviewedReports: reviewedReports.count || 0,
+      resolvedReports: resolvedReports.count || 0,
+      participationRate
+    };
+  } catch (error) {
+    console.error('Error in getAdminStats:', error);
+    return {
+      totalSignals: 0,
+      totalVotes: 0,
+      totalReports: 0,
+      totalMemos: 0,
+      pendingReports: 0,
+      reviewedReports: 0,
+      resolvedReports: 0,
+      participationRate: 0
+    };
+  }
+}

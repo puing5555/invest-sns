@@ -19,12 +19,13 @@ interface SignalCardProps {
   videoTitle?: string;
   date: string;
   videoUrl?: string;
+  likeCount?: number;
   onClick?: () => void;
 }
 
 export default function SignalCard({
   signal, stock, speaker, channelName,
-  keyQuote, reasoning, videoTitle, date, videoUrl, onClick,
+  keyQuote, reasoning, videoTitle, date, videoUrl, likeCount, onClick,
 }: SignalCardProps) {
   const signalColor = V9_SIGNAL_COLORS[signal] || 'bg-gray-500 text-white';
 
@@ -55,9 +56,11 @@ export default function SignalCard({
           📹 {videoTitle}
         </p>
       )}
-      <div className="flex items-center space-x-4 text-xs text-gray-400">
+      <div className="flex items-center justify-between text-xs text-gray-400">
         <span>{date}</span>
-{/* 영상보기는 모달에서 제공 */}
+        {likeCount && likeCount > 0 && (
+          <span className="text-xs text-red-500">❤️ {likeCount}</span>
+        )}
       </div>
     </div>
   );

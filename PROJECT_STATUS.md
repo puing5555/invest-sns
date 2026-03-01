@@ -1,6 +1,36 @@
 # PROJECT STATUS - invest-sns
 
-## 현재 완료 (2026-02-28)
+## 현재 완료 (2026-03-01)
+
+### 신고 기능 1단계 구현 완료 ✅ (NEW)
+
+**완료된 작업 (12:07 업데이트):**
+- ✅ Supabase에 `signal_reports` 테이블 생성 (scripts/create_signal_reports.sql)
+- ✅ lib/supabase.ts에 신고 관련 함수 추가:
+  - `insertSignalReport()` - 신고 접수
+  - `getSignalReports()` - 신고 목록 조회 (join)
+  - `updateReportStatus()` - 신고 상태 변경
+- ✅ SignalDetailModal.tsx 수정:
+  - SignalDetail interface에 `id` 필드 추가
+  - 🚨 버튼에 신고 기능 연결
+  - 신고 사유 선택 모달 (시그널이 틀림/종목명 오류/발언 내용 왜곡/기타)
+  - 기타 선택 시 텍스트 입력란 표시
+  - 신고 접수 완료 알림
+- ✅ /admin/reports 페이지 생성 (app/admin/reports/page.tsx):
+  - 신고 목록 테이블 (날짜/시그널/사유/상태)
+  - 상태 변경 드롭다운 (pending → reviewed → resolved)
+  - 신고 상세 정보 모달
+  - 해당 시그널의 원문(quote) + 분석(analysis_reasoning) 표시
+- ✅ 인플루언서 페이지에서 SignalDetailModal에 signal.id 전달
+- ✅ 빌드 성공 및 GitHub Pages 배포 완료
+- ✅ Git 커밋: "신고 기능 1단계 구현" (`1c8329e`)
+
+**신고 시스템 구조:**
+- 사유: "시그널이 틀림" / "종목명 오류" / "발언 내용 왜곡" / "기타"
+- 상태: pending → reviewed → resolved
+- RLS 정책으로 누구나 신고 가능, 조회 가능, 관리자가 상태 변경
+
+## 이전 완료 (2026-02-28)
 
 ### V9 분석 통합 및 프론트엔드 업데이트 완료 ✅
 

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { insertSignalReport } from '@/lib/supabase';
+import { useState, useEffect } from 'react';
+import { insertSignalReport, insertSignalVote, insertSignalMemo } from '@/lib/supabase';
 
 interface SignalDetail {
   id?: string;
@@ -17,6 +17,7 @@ interface SignalDetail {
   videoTitle?: string;
   channelName?: string;
   ticker?: string;
+  likeCount?: number;
 }
 
 // AI 내부 메모 필터링
@@ -45,6 +46,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   const [showMemoInput, setShowMemoInput] = useState(false);
   const [memoText, setMemoText] = useState('');
   const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(signal?.likeCount || 0);
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportReason, setReportReason] = useState('');
   const [reportDetail, setReportDetail] = useState('');
@@ -91,19 +93,44 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   // influencer: 호스트=채널명, 게스트=화자명. channelName으로 구분
   const isHost = !signal.channelName || !signal.influencer || signal.channelName === signal.influencer || signal.channelName.includes(signal.influencer) || signal.influencer.includes(signal.channelName);
 
-  const handleLike = () => {
+  const handleLike = async () => {
+    if (!signal?.id) {
+      alert('시그널 ID가 없습니다.');
+      return;
+    }
+
     if (liked) {
       setLiked(false);
       setShowMemoInput(false);
       return;
     }
-    setLiked(true);
-    setShowMemoInput(true);
+
+    try {
+      await insertSignalVote(signal.id);
+      setLiked(true);
+      setLikeCount(prev => prev + 1);
+      setShowMemoInput(true);
+    } catch (error) {
+      console.error('좋아요 처리 중 오류:', error);
+      alert('좋아요 처리에 실패했습니다.');
+    }
   };
 
-  const handleSaveMemo = () => {
-    console.log('Memo saved:', memoText);
-    setShowMemoInput(false);
+  const handleSaveMemo = async () => {
+    if (!signal?.id || !memoText.trim()) {
+      alert('메모 내용을 입력해주세요.');
+      return;
+    }
+
+    try {
+      await insertSignalMemo(signal.id, memoText.trim());
+      alert('저장되었습니다');
+      setShowMemoInput(false);
+      setMemoText('');
+    } catch (error) {
+      console.error('메모 저장 중 오류:', error);
+      alert('메모 저장에 실패했습니다.');
+    }
   };
 
   const handleReport = () => {
@@ -164,7 +191,9 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
                 {signal.signal}
               </span>
-              {/* */}
+              {likeCount > 0 && (
+                <span className="text-xs text-[#8b95a1]">❤️ {likeCount}</span>
+              )}
             </div>
             <div className="flex items-center gap-1">
               <button
@@ -282,7 +311,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                   <h3 className="text-lg font-bold text-[#191f28] mb-4">시그널 신고</h3>
                   
                   <div className="space-y-3 mb-4">
-                    {['시그널이 틀림', '종목명 오류', '발언 내용 왜곡', '기타'].map((reason) => (
+                    {['시그널 틀림', '종목 오류', '발언 왜곡', '기타'].map((reason) => (
                       <label key={reason} className="flex items-center gap-3 cursor-pointer">
                         <input
                           type="radio"
