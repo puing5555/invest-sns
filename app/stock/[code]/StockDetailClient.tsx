@@ -549,6 +549,7 @@ function InfluencerTab({ code }: { code: string }) {
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '경계', '매도']);
+  const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
 
@@ -560,7 +561,13 @@ function InfluencerTab({ code }: { code: string }) {
         
         const { getStockSignals } = await import('@/lib/supabase');
         const videoSummaries = (await import('@/data/video_summaries.json')).default as Record<string, string>;
-        const signals = await getStockSignals(code);
+        const [signals] = await Promise.all([
+          getStockSignals(code),
+          fetch('/invest-sns/signal_prices.json')
+            .then(r => r.ok ? r.json() : {})
+            .then(d => setPriceData(d))
+            .catch(() => {}),
+        ]);
         
         // 데이터를 UI용 형태로 변환
         const transformedSignals = signals.map((signal: any) => {
@@ -581,6 +588,7 @@ function InfluencerTab({ code }: { code: string }) {
             : speakerName;
 
           return {
+            signalId: signal.id,
             date: publishedDate.toISOString().split('T')[0],
             influencer: influencerDisplay,
             signal: signal.signal,
@@ -824,10 +832,22 @@ function InfluencerTab({ code }: { code: string }) {
                   <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
                     <div className="truncate" title={signal.quote}>{signal.quote}</div>
                   </td>
-                  <td className="px-4 py-4 text-sm font-medium">
-                    <span className={signal.return.startsWith('+') ? 'text-red-600' : 'text-blue-600'}>
-                      {signal.return}
-                    </span>
+                  <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                    {(() => {
+                      if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
+                      const pd = priceData[signal.signalId];
+                      if (!pd || pd.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
+                      const ret = pd.return_pct;
+                      const isBullish = signal.signal === '매수' || signal.signal === '긍정';
+                      const isGood = isBullish ? ret >= 0 : ret <= 0;
+                      const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
+                      const arrow = ret >= 0 ? '▲' : '▼';
+                      return (
+                        <span className={color} title={`${pd.price_at_signal?.toLocaleString()}원 → ${pd.price_current?.toLocaleString()}원`}>
+                          {arrow} {ret >= 0 ? '+' : ''}{ret}%
+                        </span>
+                      );
+                    })()}
                   </td>
                   <td className="px-4 py-4">
                     <a

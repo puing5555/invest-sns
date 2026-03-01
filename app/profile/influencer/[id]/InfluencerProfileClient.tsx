@@ -22,7 +22,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
       setLoading(true);
       const [data] = await Promise.all([
         getInfluencerProfileBySpeaker(speakerName),
-        fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL ? '' : ''}/signal_prices.json`)
+        fetch('/invest-sns/signal_prices.json')
           .then(r => r.ok ? r.json() : {})
           .then(d => setPriceData(d))
           .catch(() => {}),
