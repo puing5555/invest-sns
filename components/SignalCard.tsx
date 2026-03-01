@@ -57,13 +57,7 @@ export default function SignalCard({
       )}
       <div className="flex items-center space-x-4 text-xs text-gray-400">
         <span>{date}</span>
-        {videoUrl && videoUrl !== '#' && (
-          <a href={videoUrl} target="_blank" rel="noopener noreferrer"
-             className="text-blue-500 hover:text-blue-700"
-             onClick={(e) => e.stopPropagation()}>
-            영상보기 →
-          </a>
-        )}
+{/* 영상보기는 모달에서 제공 */}
       </div>
     </div>
   );
