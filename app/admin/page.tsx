@@ -482,21 +482,30 @@ JSON만 출력하고 다른 설명은 하지 마세요.
                     </td>
                     <td className="px-4 py-4" style={{ maxWidth: '180px' }}>
                       <div className="text-sm">
-                        {report.ai_review ? (
-                          report.ai_review.includes('수정필요') || report.ai_review.includes('수정 필요') ? (
-                            <span className="text-amber-600">⚠️ 수정필요{(() => {
-                              const lines = report.ai_review.split('\n').filter((l: string) => l.trim());
-                              const reasonLine = lines.find((l: string) => l.includes('근거:') || l.includes('이유:') || l.includes('문제:'));
-                              if (reasonLine) {
-                                const short = reasonLine.replace(/^.*?[:：]\s*/, '').slice(0, 30);
-                                return `: ${short}${short.length >= 30 ? '...' : ''}`;
-                              }
-                              return '';
-                            })()}</span>
-                          ) : (
-                            <span className="text-green-600">✅ 문제없음</span>
-                          )
-                        ) : (
+                        {report.ai_review ? (() => {
+                          const review = report.ai_review;
+                          const needsFix = /수정\s*필요|수정필요/i.test(review);
+                          const noIssue = /문제\s*없음|문제없음/i.test(review);
+                          if (needsFix) {
+                            // 근거 줄 찾기
+                            const lines = review.split('\n').filter((l: string) => l.trim());
+                            const reasonLine = lines.find((l: string) => /근거|이유|문제점/.test(l) && l.includes(':'));
+                            let summary = '';
+                            if (reasonLine) {
+                              const short = reasonLine.replace(/^[\s*#-]*.*?[:：]\s*/, '').replace(/\*+/g, '').slice(0, 35);
+                              summary = short ? `: ${short}${short.length >= 35 ? '...' : ''}` : '';
+                            }
+                            return <span className="text-amber-600">⚠️ 수정필요{summary}</span>;
+                          } else if (noIssue) {
+                            return <span className="text-green-600">✅ 문제없음</span>;
+                          } else if (review === 'test') {
+                            return <span className="text-gray-400">테스트</span>;
+                          } else {
+                            // 기본: 첫 줄 요약
+                            const firstLine = review.split('\n').find((l: string) => l.trim() && !l.startsWith('#'))?.replace(/\*+/g, '').trim() || '검토완료';
+                            return <span className="text-blue-600">📋 {firstLine.slice(0, 30)}{firstLine.length > 30 ? '...' : ''}</span>;
+                          }
+                        })() : (
                           <span className="text-yellow-600">대기중</span>
                         )}
                       </div>
@@ -942,9 +951,21 @@ JSON만 출력하고 다른 설명은 하지 마세요.
         throw new Error('신고 패턴 데이터가 필요합니다.');
       }
 
+      // AI 검토 결과가 있는 신고 데이터 가져오기
+      const { data: reviewedReports } = await supabase
+        .from('signal_reports')
+        .select('reason, detail, ai_review, influencer_signals(stock, signal, key_quote)')
+        .not('ai_review', 'is', null)
+        .neq('ai_review', 'test')
+        .limit(10);
+
+      const aiReviewSummary = (reviewedReports || []).map((r: any, i: number) => 
+        `   ${i+1}. [${r.reason}] ${r.influencer_signals?.stock || '?'} (${r.influencer_signals?.signal || '?'}) → AI판정: ${r.ai_review?.includes('수정필요') || r.ai_review?.includes('수정 필요') ? '수정필요' : '문제없음'}`
+      ).join('\n');
+
       // AI에게 프롬프트 개선안 요청
       const promptImprovementPrompt = `
-신고 패턴 분석 결과를 바탕으로 파이프라인 프롬프트의 개선 규칙을 제안해 주세요.
+신고 패턴 분석 결과와 AI 검토 결과를 바탕으로 파이프라인 프롬프트의 개선 규칙을 제안해 주세요.
 
 **현재 프롬프트 버전:** V10
 
@@ -962,6 +983,9 @@ ${reportPatterns.stockStats.map((item: any) => `   - ${item.stock}: ${item.count
 ${reportPatterns.speakerStats.map((item: any) => `   - ${item.speaker}: ${item.count}건`).join('\n')}
 
 5. **총 신고 건수:** ${reportPatterns.totalReports}건
+
+6. **AI 검토 결과 요약:**
+${aiReviewSummary || '   (AI 검토 결과 없음)'}
 
 **분석 기준:**
 - 자주 신고되는 사유를 줄이기 위한 추출 규칙 강화
