@@ -1,6 +1,39 @@
 # PROJECT STATUS - invest-sns
 
-## 현재 완료 (2026-03-01)
+## 🔥 최신 업데이트 (2026-03-01 15:41) ✅
+
+### 3가지 핵심 개선사항 완료
+1. **종목 페이지 일괄 생성 (generateStaticParams)** ✅
+   - 기존 하드코딩된 5개 종목 → Supabase에서 동적으로 28개 종목 생성
+   - `app/stock/[code]/page.tsx`에서 `influencer_signals` 테이블로부터 고유 ticker 목록 자동 수집
+   - 한국 종목코드(6자리)만 필터링, 기존 하드코딩 종목도 포함하여 중복제거
+   - 빌드 성공: 28개 종목 페이지 정적 생성 확인
+
+2. **StockDetailClient 종목명 매핑 보강** ✅
+   - nameMap을 8개 → 22개 종목으로 확장
+   - Supabase `influencer_signals` 테이블에서 `stock` 컬럼(종목명) 동적 활용
+   - `getStockData()` 함수에 dynamicName 파라미터 추가
+   - React state로 `dynamicStockName` 관리, Supabase 데이터 우선 사용, nameMap은 fallback
+
+3. **Supabase Edge Function으로 Anthropic API 프록시** ✅
+   - `supabase/functions/anthropic-proxy/index.ts` 생성 완료
+   - CORS 헤더, 환경변수 `ANTHROPIC_API_KEY` 사용, POST 요청 프록시
+   - `lib/anthropicClient.ts` 완전 수정: corsproxy.io 제거, API 키 프롬프트 제거
+   - Supabase Edge Function URL과 anon key로 직접 호출하도록 변경
+
+**✅ Supabase Edge Function 배포 완료!**
+- ✅ Supabase CLI 로그인 성공 (access token 사용)
+- ✅ Edge Function 배포: `anthropic-proxy` 함수 배포 완료
+- ✅ 환경변수 설정: `ANTHROPIC_API_KEY` 환경변수 설정 완료
+- ✅ Dashboard URL: https://supabase.com/dashboard/project/arypzhotxflimroprmdk/functions
+
+**최종 빌드 상태:** ✅ `npm run build` 성공 (28개 종목 페이지 정적 생성)
+**Git 상태:** ✅ 커밋 완료 (886c315), master 브랜치 push 완료
+**Edge Function URL:** `https://arypzhotxflimroprmdk.supabase.co/functions/v1/anthropic-proxy`
+
+🎉 **모든 작업 100% 완료! 프론트엔드에서 이제 API 키 입력 없이 바로 Anthropic API 사용 가능합니다.**
+
+## 이전 완료 내역 (2026-03-01)
 
 ### 유저 참여 시스템 1단계 구현 완료 ✅ (NEW)
 
