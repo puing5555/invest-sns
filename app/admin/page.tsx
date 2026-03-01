@@ -514,7 +514,10 @@ ${aiReview}
                           } else if (review === 'test') {
                             return <span className="text-gray-400">테스트</span>;
                           } else {
-                            // 기본: 첫 줄 요약
+                            // "수정필요"가 없고 ai_suggestion도 없으면 → 문제없음으로 추정
+                            if (!report.ai_suggestion) {
+                              return <span className="text-green-600">✅ 문제없음</span>;
+                            }
                             const firstLine = review.split('\n').find((l: string) => l.trim() && !l.startsWith('#'))?.replace(/\*+/g, '').trim() || '검토완료';
                             return <span className="text-blue-600">📋 {firstLine.slice(0, 30)}{firstLine.length > 30 ? '...' : ''}</span>;
                           }
