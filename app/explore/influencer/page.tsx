@@ -105,25 +105,8 @@ export default function InfluencerPage() {
     loadSignals();
   }, []);
 
-  // 로컬 데이터 fallback (DB 비어있을 때)
-  const localSignals = influencers.flatMap(influencer =>
-    influencer.recentCalls.slice(0, 3).map(call => ({
-      id: `${influencer.id}-${call.stock}`,
-      stock: call.stock,
-      signal_type: call.direction,
-      speaker: influencer.name,
-      channelName: influencer.name,
-      content_snippet: `${call.stock} ${call.direction} 추천`,
-      key_quote: null,
-      video_published_at: call.date,
-      confidence: null,
-      reasoning: null,
-      videoUrl: '#',
-      videoTitle: null,
-    }))
-  );
-
-  const allSignals = dbSignals.length > 0 ? dbSignals : localSignals;
+  // DB 데이터만 사용 (mock 데이터 제거)
+  const allSignals = dbSignals;
 
   // 종목별 그룹
   const stockGroups = allSignals.reduce((groups: any[], signal) => {
