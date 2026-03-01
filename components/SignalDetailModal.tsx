@@ -82,8 +82,8 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     return signal.videoUrl;
   };
 
-  // 호스트: 발언자명이 채널명에 포함 → 채널명만. 게스트: 미포함 → "발언자 · 채널명"
-  const isHost = signal.channelName && signal.influencer && signal.channelName.includes(signal.influencer);
+  // influencer 필드에 이미 올바른 표시명이 들어있음 (호스트: 채널명, 게스트: "발언자 · 채널")
+  const isHost = !signal.influencer?.includes(' · ');
 
   const handleLike = () => {
     if (liked) {
@@ -149,17 +149,12 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <p className="text-sm text-[#8b95a1] mt-1">{formatDate(signal.date)}</p>
             </div>
 
-            {/* 발언자 · 채널: 호스트면 채널명만, 게스트면 둘 다 */}
+            {/* 발언자 표시: influencer 필드에 이미 올바른 형태 */}
             <div className="text-sm text-[#8b95a1]">
               {isHost ? (
-                <>채널: <span className="font-medium text-[#191f28]">{signal.channelName}</span></>
+                <>채널: <span className="font-medium text-[#191f28]">{signal.influencer}</span></>
               ) : (
-                <>
-                  발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span>
-                  {signal.channelName && (
-                    <span> · <span className="font-medium text-[#191f28]">{signal.channelName}</span></span>
-                  )}
-                </>
+                <>발언자: <span className="font-medium text-[#191f28]">{signal.influencer}</span></>
               )}
             </div>
 

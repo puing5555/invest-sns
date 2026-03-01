@@ -485,9 +485,11 @@ function InfluencerTab({ code }: { code: string }) {
           const speakerName = signal.speakers?.name || '';
           const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
           // 게스트면 "스피커 · 채널", 호스트(스피커==채널 or 스피커 없음)면 채널명만
-          const influencerDisplay = speakerName && speakerName !== channelName
-            ? `${speakerName} · ${channelName}`
-            : channelName || speakerName || 'Unknown';
+          // 호스트: 채널명에 발언자명 포함 → 채널명만. 게스트: "발언자 · 채널"
+          const isHost = !speakerName || !channelName || speakerName === channelName || channelName.includes(speakerName) || speakerName.includes(channelName);
+          const influencerDisplay = isHost
+            ? (channelName || speakerName || 'Unknown')
+            : `${speakerName} · ${channelName}`;
 
           return {
             date: publishedDate.toISOString().split('T')[0],
