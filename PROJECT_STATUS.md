@@ -2,6 +2,53 @@
 
 ## 현재 완료 (2026-03-01)
 
+### 유저 참여 시스템 1단계 구현 완료 ✅ (NEW)
+
+**완료된 작업 (12:20 업데이트):**
+- ✅ Supabase 테이블 SQL 스크립트 작성 (scripts/create_participation_tables.sql)
+  - signal_reports 테이블에 ai_review, ai_suggestion 컬럼 추가
+  - signal_votes 테이블 생성 (좋아요 기능)
+  - signal_memos 테이블 생성 (메모 기능)
+- ✅ lib/supabase.ts에 새로운 함수 추가:
+  - `insertSignalVote()` - 좋아요 기록
+  - `getSignalVoteCounts()` - signal_id 목록에 대한 좋아요 카운트
+  - `insertSignalMemo()` - 메모 저장
+  - `getAdminStats()` - 대시보드용 통계 데이터
+- ✅ SignalDetailModal.tsx 기능 강화:
+  - interface SignalDetail에 likeCount 필드 추가
+  - 좋아요 클릭 시 insertSignalVote() 호출 및 카운트 실시간 업데이트
+  - 메모 저장 시 insertSignalMemo() 호출 및 "저장되었습니다" 알림
+  - 신고 사유 텍스트 단순화 ("시그널 틀림" / "종목 오류" / "발언 왜곡" / "기타")
+  - 좋아요 카운트 "❤️ 3" 형태로 시그널명 옆에 표시
+- ✅ 좋아요 카운트 전체 페이지 적용:
+  - SignalCard.tsx: likeCount props 추가, 카드 하단에 좋아요 수 표시
+  - app/explore/influencer/page.tsx: getSignalVoteCounts() 호출하여 카운트 가져와서 SignalCard와 모달에 전달
+  - app/stock/[code]/StockDetailClient.tsx: 인플루언서 탭 테이블에 좋아요 컬럼 추가, 모달에 카운트 전달
+  - app/profile/influencer/[id]/InfluencerProfileClient.tsx: 인플루언서 프로필 테이블에 좋아요 컬럼 추가, 모달에 카운트 전달
+- ✅ /admin 페이지 완전 재구현 (app/admin/page.tsx):
+  - 기존 /admin/reports 삭제하고 /admin으로 통합
+  - 탭 구조로 변경: [📊 대시보드] [🚨 신고 관리] [🤖 AI 제안] [⚙️ 프롬프트 관리]
+  - 대시보드 탭: 토스 스타일 카드로 통계 표시 (총 시그널/좋아요/신고/참여율, 상태별 신고 수)
+  - 신고 관리 탭: 기존 기능 + AI 검토 결과/수정안 컬럼 추가 (2단계에서 채워질 예정)
+  - AI 제안/프롬프트 관리: "2단계에서 구현 예정" placeholder
+  - 신고 상세 모달에 ✅ 승인 / ❌ 거절 / 🔄 재검토 버튼 추가
+- ✅ 빌드 성공 및 GitHub Pages 배포 완료
+- ✅ Git 커밋: "유저 참여 시스템 1단계 구현 (좋아요/신고/메모/admin)" (`99bf7f3`)
+
+**기술적 구현사항:**
+- 좋아요 시스템: 중복 방지를 위한 UNIQUE 제약조건 (signal_id, id)
+- 실시간 카운트 업데이트: insertSignalVote 성공 시 로컬 state 즉시 반영
+- 에러 처리: signal_votes/signal_memos 테이블이 아직 없어도 try/catch로 안전하게 처리
+- UI 일관성: 토스 스타일 디자인 시스템 유지 (둥근 카드, #3182f6 컬러 등)
+- 타입 안전성: TypeScript interface 확장으로 빌드 오류 없이 통과
+
+**다음 작업 예정 (2단계):**
+- AI 리뷰 시스템: 신고된 시그널에 대한 AI 검토 및 수정 제안
+- AI 제안 탭: 자동 품질 개선 제안
+- 프롬프트 관리: AI 분석 프롬프트 설정
+
+## 이전 완료 (2026-03-01)
+
 ### 신고 기능 1단계 구현 완료 ✅ (NEW)
 
 **완료된 작업 (12:07 업데이트):**

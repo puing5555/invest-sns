@@ -251,7 +251,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                   {filterInternalText(signal.analysis_reasoning)}
                 </p>
               ) : (
-                <p className="text-sm text-[#8b95a1] italic">영상 요약 준비 중</p>
+                <p className="text-sm text-[#8b95a1] italic">이 영상은 요약이 제공되지 않습니다</p>
               )}
             </div>
 
