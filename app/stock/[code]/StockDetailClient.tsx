@@ -362,201 +362,222 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
   );
 }
 
-// 애널리스트 탭 컴포넌트
+// 애널리스트 탭 컴포넌트 (테이블형 + 실데이터)
 function AnalystTab({ code }: { code: string }) {
+  const [reports, setReports] = useState<any[]>([]);
+  const [selectedReport, setSelectedReport] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const stockData = getStockData(code);
 
-  // 더미 애널리스트 데이터
-  const analystReports = [
-    {
-      analyst: '김선우',
-      firm: '한국투자증권',
-      rating: '매수',
-      targetPrice: 85000,
-      currentPrice: stockData.price,
-      date: '2024-02-15',
-      title: `${stockData.name} 3분기 실적 컨센서스 상회 예상`,
-      summary: 'AI 반도체 수요 증가로 인한 실적 개선 기대',
-    },
-    {
-      analyst: '이미래',
-      firm: '미래에셋증권',
-      rating: '매수',
-      targetPrice: 82000,
-      currentPrice: stockData.price,
-      date: '2024-02-10',
-      title: `${stockData.name} 메모리 업황 회복 본격화`,
-      summary: '2024년 하반기부터 메모리 수요 회복세 지속 전망',
-    },
-    {
-      analyst: '박테크',
-      firm: '삼성증권',
-      rating: '중립',
-      targetPrice: 70000,
-      currentPrice: stockData.price,
-      date: '2024-02-05',
-      title: `${stockData.name} 단기 조정 후 재평가 필요`,
-      summary: '밸류에이션 부담은 있으나 중장기 성장성은 긍정적',
-    },
-  ];
+  useEffect(() => {
+    const loadReports = async () => {
+      try {
+        setLoading(true);
+        const allReports = (await import('@/data/analyst_reports.json')).default as Record<string, any[]>;
+        const tickerReports = (allReports as any)[code] || [];
+        setReports(tickerReports);
+      } catch {
+        setReports([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadReports();
+  }, [code]);
 
-  const getRatingColor = (rating: string) => {
-    switch (rating) {
-      case '매수': return 'text-green-600 bg-green-100';
-      case '중립': return 'text-yellow-600 bg-yellow-100';
-      case '매도': return 'text-red-600 bg-red-100';
+  const getOpinionLabel = (op: string) => {
+    switch (op) {
+      case 'BUY': return '매수';
+      case 'HOLD': return '중립';
+      case 'SELL': return '매도';
+      default: return op;
+    }
+  };
+
+  const getOpinionColor = (op: string) => {
+    switch (op) {
+      case 'BUY': return 'text-green-600 bg-green-100';
+      case 'HOLD': return 'text-yellow-600 bg-yellow-100';
+      case 'SELL': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
     }
   };
 
-  const getUpside = (target: number, current: number) => {
-    return ((target - current) / current * 100).toFixed(1);
+  const getOpinionEmoji = (op: string) => {
+    switch (op) {
+      case 'BUY': return '🟢';
+      case 'HOLD': return '🟡';
+      case 'SELL': return '🔴';
+      default: return '⚪';
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="text-lg text-[#8b95a1]">데이터를 불러오는 중...</div>
+      </div>
+    );
+  }
+
+  const avgTarget = reports.filter(r => r.target_price).reduce((s, r) => s + r.target_price, 0) / (reports.filter(r => r.target_price).length || 1);
+  const buyCount = reports.filter(r => r.opinion === 'BUY').length;
 
   return (
     <div className="space-y-6">
-      {/* 주가 차트 + 목표주가 */}
+      {/* 요약 카드 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h4 className="font-medium text-[#191f28]">주가 차트 & 목표주가</h4>
-          <div className="text-sm text-[#8b95a1]">
-            애널리스트 {analystReports.length}명
-          </div>
-        </div>
-        
-        <div className="relative h-80 bg-[#f8f9fa] rounded-lg overflow-hidden">
-          <svg className="w-full h-full" viewBox="0 0 400 200">
-            {/* 배경 격자 */}
-            <defs>
-              <pattern id="grid-analyst" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e8e8e8" strokeWidth="0.5"/>
-              </pattern>
-              <linearGradient id="priceGradient-analyst" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#3182f6" stopOpacity="0.2"/>
-                <stop offset="100%" stopColor="#3182f6" stopOpacity="0.05"/>
-              </linearGradient>
-            </defs>
-            
-            <rect width="100%" height="100%" fill="url(#grid-analyst)" />
-            
-            {/* 주가 라인 */}
-            <path
-              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60"
-              fill="none"
-              stroke="#3182f6"
-              strokeWidth="3"
-            />
-            
-            {/* 주가 영역 */}
-            <path
-              d="M 20 120 L 60 100 L 100 90 L 140 110 L 180 80 L 220 70 L 260 85 L 300 65 L 340 75 L 380 60 L 380 200 L 20 200 Z"
-              fill="url(#priceGradient-analyst)"
-            />
-            
-            {/* 목표주가 라인들 */}
-            <line x1="20" y1="40" x2="380" y2="40" stroke="#dc3545" strokeWidth="2" strokeDasharray="5,5" opacity="0.8" />
-            <line x1="20" y1="50" x2="380" y2="50" stroke="#28a745" strokeWidth="2" strokeDasharray="5,5" opacity="0.8" />
-            <line x1="20" y1="80" x2="380" y2="80" stroke="#ffc107" strokeWidth="2" strokeDasharray="5,5" opacity="0.8" />
-            
-            {/* 현재가 라인 */}
-            <line x1="20" y1="60" x2="380" y2="60" stroke="#3182f6" strokeWidth="2" opacity="0.9" />
-            
-            {/* 목표가 라벨 */}
-            <text x="385" y="45" className="text-xs fill-red-600">85,000원</text>
-            <text x="385" y="55" className="text-xs fill-green-600">82,000원</text>
-            <text x="385" y="85" className="text-xs fill-yellow-600">70,000원</text>
-            <text x="385" y="65" className="text-xs fill-blue-600">현재가</text>
-          </svg>
-        </div>
-        
-        {/* 목표주가 요약 */}
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
             <div className="text-sm text-[#8b95a1] mb-1">평균 목표가</div>
             <div className="text-lg font-bold text-[#191f28]">
-              {Math.round(analystReports.reduce((sum, report) => sum + report.targetPrice, 0) / analystReports.length).toLocaleString()}원
+              {avgTarget > 0 ? Math.round(avgTarget).toLocaleString() + '원' : '-'}
             </div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-[#8b95a1] mb-1">평균 상승여력</div>
-            <div className="text-lg font-bold text-green-600">
-              +{Math.round(analystReports.reduce((sum, report) => sum + parseFloat(getUpside(report.targetPrice, report.currentPrice)), 0) / analystReports.length)}%
-            </div>
+            <div className="text-sm text-[#8b95a1] mb-1">리포트 수</div>
+            <div className="text-lg font-bold text-[#191f28]">{reports.length}건</div>
           </div>
           <div className="text-center">
             <div className="text-sm text-[#8b95a1] mb-1">매수 의견</div>
             <div className="text-lg font-bold text-blue-600">
-              {analystReports.filter(r => r.rating === '매수').length}/{analystReports.length}
+              {buyCount}/{reports.length}
             </div>
           </div>
         </div>
       </div>
 
-      {/* 애널리스트 리포트 목록 */}
+      {/* 리포트 테이블 */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] overflow-hidden">
         <div className="p-6 border-b border-[#e8e8e8]">
-          <h4 className="font-medium text-[#191f28]">애널리스트 리포트</h4>
+          <h4 className="font-medium text-[#191f28]">애널리스트 리포트 이력</h4>
         </div>
-        <div className="divide-y divide-[#f0f0f0]">
-          {analystReports.map((report, index) => (
-            <div key={index} className="p-6 hover:bg-[#f8f9fa] transition-colors">
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-medium text-blue-800">
-                      {report.analyst[0]}
-                    </span>
-                  </div>
-                  <div>
-                    <div className="font-medium text-[#191f28]">{report.analyst}</div>
-                    <div className="text-sm text-[#8b95a1]">{report.firm}</div>
+        {reports.length === 0 ? (
+          <div className="p-8 text-center text-[#8b95a1]">이 종목의 애널리스트 리포트가 없습니다.</div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-[#f8f9fa]">
+                <tr>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트 제목</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#f0f0f0]">
+                {reports.map((report, index) => (
+                  <tr
+                    key={index}
+                    className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                    onClick={() => setSelectedReport(report)}
+                  >
+                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                      {new Date(report.published_at).toLocaleDateString('ko-KR', {
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </td>
+                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                      {report.firm}
+                    </td>
+                    <td className="px-4 py-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{getOpinionEmoji(report.opinion)}</span>
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${getOpinionColor(report.opinion)}`}>
+                          {getOpinionLabel(report.opinion)}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                      <div className="truncate" title={report.title}>{report.title}</div>
+                    </td>
+                    <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">
+                      {report.target_price ? report.target_price.toLocaleString() + '원' : '-'}
+                    </td>
+                    <td className="px-4 py-4">
+                      {report.pdf_url ? (
+                        <a
+                          href={report.pdf_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          PDF →
+                        </a>
+                      ) : (
+                        <span className="text-[#8b95a1] text-sm">-</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* 리포트 상세 모달 */}
+      {selectedReport && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedReport(null)}>
+          <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6">
+              {/* 헤더 */}
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-[#191f28] mb-2">{selectedReport.title}</h3>
+                  <div className="flex items-center gap-2 text-sm text-[#8b95a1]">
+                    <span>{selectedReport.firm}</span>
+                    <span>·</span>
+                    <span>{new Date(selectedReport.published_at).toLocaleDateString('ko-KR')}</span>
                   </div>
                 </div>
-                <div className="text-right">
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${getRatingColor(report.rating)}`}>
-                    {report.rating}
-                  </span>
-                  <div className="text-sm text-[#8b95a1] mt-1">
-                    {new Date(report.date).toLocaleDateString('ko-KR', { 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })}
+                <button onClick={() => setSelectedReport(null)} className="text-[#8b95a1] hover:text-[#191f28] text-xl">✕</button>
+              </div>
+
+              {/* 투자의견 + 목표가 */}
+              <div className="bg-[#f8f9fa] rounded-lg p-4 mb-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{getOpinionEmoji(selectedReport.opinion)}</span>
+                    <span className={`px-3 py-1.5 rounded-full text-sm font-bold ${getOpinionColor(selectedReport.opinion)}`}>
+                      {getOpinionLabel(selectedReport.opinion)}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm text-[#8b95a1]">목표가</div>
+                    <div className="text-xl font-bold text-[#191f28]">
+                      {selectedReport.target_price ? selectedReport.target_price.toLocaleString() + '원' : '-'}
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mb-3">
-                <h5 className="font-medium text-[#191f28] mb-1">{report.title}</h5>
-                <p className="text-sm text-[#8b95a1]">{report.summary}</p>
-              </div>
+              {/* PDF 링크 */}
+              {selectedReport.pdf_url && (
+                <a
+                  href={selectedReport.pdf_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-center bg-[#3182f6] text-white py-3 rounded-lg font-medium hover:bg-[#2171e5] transition-colors mb-4"
+                >
+                  📄 PDF 원문 보기
+                </a>
+              )}
 
-              <div className="flex items-center justify-between pt-3 border-t border-[#f0f0f0]">
-                <div className="flex gap-4 text-sm">
-                  <div>
-                    <span className="text-[#8b95a1]">목표가: </span>
-                    <span className="font-medium text-[#191f28]">
-                      {report.targetPrice.toLocaleString()}원
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[#8b95a1]">상승여력: </span>
-                    <span className={`font-medium ${
-                      parseFloat(getUpside(report.targetPrice, report.currentPrice)) > 0 
-                        ? 'text-green-600' 
-                        : 'text-red-600'
-                    }`}>
-                      {getUpside(report.targetPrice, report.currentPrice)}%
-                    </span>
-                  </div>
+              {/* 종목 정보 */}
+              <div className="border-t border-[#e8e8e8] pt-4">
+                <div className="text-sm text-[#8b95a1]">
+                  종목: {stockData.name} ({code})
                 </div>
-                <button className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium">
-                  리포트 보기 →
-                </button>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
