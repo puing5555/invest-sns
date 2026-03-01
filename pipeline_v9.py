@@ -109,6 +109,7 @@ def build_analysis_prompt(transcript, channel_name, video_id):
 - 교육/설명형 = 시그널 제외
 - 조건부 발언 = confidence medium 이하
 - 유료 티저 = 시그널 생성 금지
+- 멤버십/회원전용 영상 = 분석 제외 (자막 추출 불가)
 - 스코프: 한국주식 + 미국주식 + 크립토만 (부동산/원자재/해외주식 제외)
 - 발언자 이름 정규화 필수
 

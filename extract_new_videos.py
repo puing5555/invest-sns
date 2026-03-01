@@ -20,14 +20,15 @@ ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
 SUBS_DIR = r"C:\Users\Mario\work\subs"
 SSL_CTX = ssl.create_default_context()
 
-# 채널 정보
+# 채널 정보 (작동하는 채널들만)
 CHANNELS = [
     {"name": "부읽남TV", "handle": "@buiknam_tv", "current_count": 7},
-    {"name": "이효석아카데미", "handle": "@hyoseok_academy", "current_count": 9},
     {"name": "삼프로TV", "handle": "@3protv", "current_count": 20},
-    {"name": "달란트투자", "handle": "@dalant_invest", "current_count": 4},
-    {"name": "슈카월드", "handle": "@syukasworld", "current_count": 17},
-    {"name": "코린이아빠", "handle": "@corinpapa1106", "current_count": 11}
+    # 추후 정확한 핸들 확인 후 추가:
+    # {"name": "이효석아카데미", "handle": "?", "current_count": 9},
+    # {"name": "달란트투자", "handle": "?", "current_count": 4},
+    # {"name": "슈카월드", "handle": "?", "current_count": 17},
+    # {"name": "코린이아빠", "handle": "?", "current_count": 11}
 ]
 
 def supabase_get(table, params=""):
@@ -60,30 +61,31 @@ def get_channel_videos(channel_handle, max_videos=15):
     try:
         # yt-dlp로 영상 목록 가져오기
         cmd = [
-            "yt-dlp", "--flat-playlist",
+            "python", "-m", "yt_dlp", "--flat-playlist",
             "--print", "%(id)s|%(title)s|%(upload_date)s",
             f"https://www.youtube.com/{channel_handle}/videos",
             "--playlist-items", f"1-{max_videos}"
         ]
         
-        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8')
+        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore')
         if result.returncode != 0:
             print(f"  [ERROR] yt-dlp 에러: {result.stderr}")
             return []
         
         videos = []
-        for line in result.stdout.strip().split('\n'):
-            if '|' in line:
-                parts = line.split('|')
-                if len(parts) >= 2:
-                    video_id = parts[0]
-                    title = parts[1]
-                    upload_date = parts[2] if len(parts) > 2 else None
-                    videos.append({
-                        'video_id': video_id,
-                        'title': title,
-                        'upload_date': upload_date
-                    })
+        if result.stdout and result.stdout.strip():
+            for line in result.stdout.strip().split('\n'):
+                if '|' in line:
+                    parts = line.split('|')
+                    if len(parts) >= 2:
+                        video_id = parts[0]
+                        title = parts[1]
+                        upload_date = parts[2] if len(parts) > 2 else None
+                        videos.append({
+                            'video_id': video_id,
+                            'title': title,
+                            'upload_date': upload_date
+                        })
         
         print(f"  찾은 영상: {len(videos)}개")
         return videos
@@ -173,7 +175,8 @@ def main():
         if new_videos:
             # 자막 추출
             for i, video in enumerate(new_videos):
-                print(f"\n  [{i+1}/{len(new_videos)}] {video['title'][:50]}...")
+                safe_title = video['title'][:50].encode('ascii', 'ignore').decode('ascii')
+                print(f"\n  [{i+1}/{len(new_videos)}] {safe_title}...")
                 
                 # 자막 추출
                 if extract_transcript(video['video_id']):
@@ -191,12 +194,12 @@ def main():
                 rate_limit_delay()
     
     # 결과 요약
-    print(f"\n📊 1차 결과 요약:")
+    print(f"\n[SUMMARY] 1차 결과 요약:")
     print(f"  총 찾은 새 영상: {len(new_videos_found)}개")
     print(f"  자막 추출 성공: {transcripts_extracted}개")
     
     if new_videos_found:
-        print(f"\n🎯 채널별 breakdown:")
+        print(f"\n[BREAKDOWN] 채널별 breakdown:")
         channel_counts = {}
         for video in new_videos_found:
             channel = video['channel_name']
@@ -206,27 +209,27 @@ def main():
             print(f"  - {channel}: {count}개")
         
         # V9.1 파이프라인 실행
-        print(f"\n🧠 V9.1 파이프라인으로 분석 시작...")
+        print(f"\n[PIPELINE] V9.1 파이프라인으로 분석 시작...")
         try:
             result = subprocess.run([
                 "python", "pipeline_v9.py"
             ], capture_output=True, text=True, encoding='utf-8')
             
             if result.returncode == 0:
-                print("  ✅ 파이프라인 실행 완료")
-                print("  📄 출력:")
+                print("  [OK] 파이프라인 실행 완료")
+                print("  [OUTPUT] 출력:")
                 print(result.stdout)
             else:
-                print("  ❌ 파이프라인 에러:")
+                print("  [ERROR] 파이프라인 에러:")
                 print(result.stderr)
         
         except Exception as e:
-            print(f"  ❌ 파이프라인 실행 중 에러: {e}")
+            print(f"  [ERROR] 파이프라인 실행 중 에러: {e}")
     
     else:
-        print("  ℹ️  새로운 영상이 없습니다.")
+        print("  [INFO] 새로운 영상이 없습니다.")
     
-    print(f"\n✅ 작업 완료!")
+    print(f"\n[COMPLETE] 작업 완료!")
 
 if __name__ == "__main__":
     main()
