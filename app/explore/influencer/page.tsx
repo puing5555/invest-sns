@@ -190,6 +190,7 @@ export default function InfluencerPage() {
                 channelName={signal.channelName}
                 confidence={signal.confidence}
                 keyQuote={signal.key_quote}
+                reasoning={signal.reasoning}
                 videoTitle={signal.videoTitle}
                 date={formatDate(signal.video_published_at)}
                 videoUrl={signal.videoUrl}

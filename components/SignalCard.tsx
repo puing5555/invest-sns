@@ -15,6 +15,7 @@ interface SignalCardProps {
   channelName?: string;
   confidence?: string;
   keyQuote?: string;
+  reasoning?: string;
   videoTitle?: string;
   date: string;
   videoUrl?: string;
@@ -23,7 +24,7 @@ interface SignalCardProps {
 
 export default function SignalCard({
   signal, stock, speaker, channelName,
-  keyQuote, videoTitle, date, videoUrl, onClick,
+  keyQuote, reasoning, videoTitle, date, videoUrl, onClick,
 }: SignalCardProps) {
   const signalColor = V9_SIGNAL_COLORS[signal] || 'bg-gray-500 text-white';
 
@@ -44,9 +45,9 @@ export default function SignalCard({
           {isHost ? channelName : speaker}
         </span>
       </div>
-      {keyQuote && (
+      {(keyQuote || reasoning) && (
         <p className="text-[15px] text-gray-700 italic mb-2 leading-relaxed line-clamp-2">
-          &ldquo;{keyQuote}&rdquo;
+          &ldquo;{keyQuote || reasoning}&rdquo;
         </p>
       )}
       {videoTitle && (
