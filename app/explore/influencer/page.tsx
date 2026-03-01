@@ -235,6 +235,7 @@ export default function InfluencerPage() {
                 date={formatDate(signal.video_published_at)}
                 videoUrl={signal.videoUrl}
                 onClick={() => setSelectedSignal({
+                  id: signal.id,
                   date: signal.video_published_at,
                   influencer: signal.speaker,
                   signal: signal.signal_type,

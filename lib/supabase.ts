@@ -363,3 +363,90 @@ export async function getStockSignals(ticker: string) {
     return [];
   }
 }
+
+// 신고 관련 함수들
+export async function insertSignalReport(signalId: string, reason: string, detail?: string) {
+  try {
+    const { data, error } = await supabase
+      .from('signal_reports')
+      .insert({
+        signal_id: signalId,
+        reason,
+        detail: detail || null
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error inserting signal report:', error);
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error in insertSignalReport:', error);
+    throw error;
+  }
+}
+
+export async function getSignalReports() {
+  try {
+    const { data, error } = await supabase
+      .from('signal_reports')
+      .select(`
+        *,
+        influencer_signals (
+          id,
+          stock,
+          ticker,
+          signal,
+          quote,
+          analysis_reasoning,
+          influencer_videos (
+            title,
+            published_at,
+            video_id,
+            influencer_channels (
+              channel_name,
+              channel_handle
+            )
+          ),
+          speakers (
+            name
+          )
+        )
+      `)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching signal reports:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('Error in getSignalReports:', error);
+    return [];
+  }
+}
+
+export async function updateReportStatus(reportId: string, status: string) {
+  try {
+    const { data, error } = await supabase
+      .from('signal_reports')
+      .update({ status })
+      .eq('id', reportId)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error updating report status:', error);
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error in updateReportStatus:', error);
+    throw error;
+  }
+}

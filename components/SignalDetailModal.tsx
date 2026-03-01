@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { insertSignalReport } from '@/lib/supabase';
 
 interface SignalDetail {
+  id?: string;
   date: string;
   influencer: string;
   signal: string;
@@ -43,6 +45,10 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   const [showMemoInput, setShowMemoInput] = useState(false);
   const [memoText, setMemoText] = useState('');
   const [liked, setLiked] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportReason, setReportReason] = useState('');
+  const [reportDetail, setReportDetail] = useState('');
+  const [isSubmittingReport, setIsSubmittingReport] = useState(false);
 
   if (!signal) return null;
 
@@ -100,6 +106,45 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     setShowMemoInput(false);
   };
 
+  const handleReport = () => {
+    if (!signal?.id) {
+      alert('시그널 ID가 없습니다.');
+      return;
+    }
+    setShowReportModal(true);
+  };
+
+  const handleReportSubmit = async () => {
+    if (!signal?.id || !reportReason) {
+      alert('신고 사유를 선택해주세요.');
+      return;
+    }
+
+    if (reportReason === '기타' && !reportDetail.trim()) {
+      alert('기타 사유를 입력해주세요.');
+      return;
+    }
+
+    setIsSubmittingReport(true);
+    try {
+      await insertSignalReport(
+        signal.id, 
+        reportReason, 
+        reportReason === '기타' ? reportDetail : undefined
+      );
+      
+      alert('신고가 접수되었습니다.');
+      setShowReportModal(false);
+      setReportReason('');
+      setReportDetail('');
+    } catch (error) {
+      console.error('신고 처리 중 오류:', error);
+      alert('신고 접수에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmittingReport(false);
+    }
+  };
+
   const videoHref = getVideoUrlWithTimestamp();
 
   return (
@@ -128,7 +173,10 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               >
                 {liked ? '❤️' : '🤍'}
               </button>
-              <button className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm px-2 py-1 rounded-lg">
+              <button 
+                onClick={handleReport}
+                className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm px-2 py-1 rounded-lg"
+              >
                 🚨
               </button>
               <button
@@ -226,6 +274,62 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                 </a>
               )}
             </div>
+
+            {/* 신고 모달 */}
+            {showReportModal && (
+              <div className="absolute inset-0 bg-black/50 rounded-2xl flex items-center justify-center p-4">
+                <div className="bg-white rounded-xl p-5 w-full max-w-sm">
+                  <h3 className="text-lg font-bold text-[#191f28] mb-4">시그널 신고</h3>
+                  
+                  <div className="space-y-3 mb-4">
+                    {['시그널이 틀림', '종목명 오류', '발언 내용 왜곡', '기타'].map((reason) => (
+                      <label key={reason} className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="reportReason"
+                          value={reason}
+                          checked={reportReason === reason}
+                          onChange={(e) => setReportReason(e.target.value)}
+                          className="w-4 h-4 text-[#3182f6]"
+                        />
+                        <span className="text-sm text-[#191f28]">{reason}</span>
+                      </label>
+                    ))}
+                  </div>
+
+                  {reportReason === '기타' && (
+                    <div className="mb-4">
+                      <textarea
+                        value={reportDetail}
+                        onChange={(e) => setReportDetail(e.target.value)}
+                        placeholder="신고 사유를 상세히 입력해주세요..."
+                        className="w-full border border-gray-300 rounded-lg p-3 text-sm resize-none h-20 focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        setShowReportModal(false);
+                        setReportReason('');
+                        setReportDetail('');
+                      }}
+                      className="flex-1 py-2.5 text-sm text-[#8b95a1] bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                    >
+                      취소
+                    </button>
+                    <button
+                      onClick={handleReportSubmit}
+                      disabled={isSubmittingReport || !reportReason}
+                      className="flex-1 py-2.5 text-sm text-white bg-[#3182f6] rounded-lg hover:bg-[#1b64da] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {isSubmittingReport ? '처리 중...' : '신고'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
