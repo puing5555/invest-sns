@@ -201,7 +201,7 @@ export default function InfluencerPage() {
                   analysis_reasoning: signal.reasoning,
                   videoTitle: signal.videoTitle,
                   channelName: signal.channelName,
-                  ticker: signal.ticker,
+                  ticker: signal.ticker || STOCK_CODE_MAP[signal.stock] || null,
                 })}
               />
             ))}
