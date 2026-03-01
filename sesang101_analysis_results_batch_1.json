@@ -1,0 +1,114 @@
+{
+  "start_time": "2026-03-01T23:46:53.931591",
+  "processed": [],
+  "errors": [
+    {
+      "video_id": "-3odSn4Wi2E",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.932485"
+    },
+    {
+      "video_id": "-JsPLE90h1Q",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.932772"
+    },
+    {
+      "video_id": "0z8e_heKtKk",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.933057"
+    },
+    {
+      "video_id": "1bcmmTZRX5Q",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.933324"
+    },
+    {
+      "video_id": "1xfjt7moZEg",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.933633"
+    },
+    {
+      "video_id": "3NUs0JElPvs",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.933865"
+    },
+    {
+      "video_id": "4Bay6eXJH1Q",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.934126"
+    },
+    {
+      "video_id": "4UvO-6eecv8",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.934508"
+    },
+    {
+      "video_id": "4cCGQFHrbK4",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.934772"
+    },
+    {
+      "video_id": "4h-fPWoA2W4",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.935023"
+    },
+    {
+      "video_id": "4kJxnR-XIfY",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.935293"
+    },
+    {
+      "video_id": "4wCO1fdl9iU",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.935541"
+    },
+    {
+      "video_id": "4yZDpfDT7K8",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.935846"
+    },
+    {
+      "video_id": "5I9wb6NKNUs",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.936064"
+    },
+    {
+      "video_id": "5Py7WIb8iYw",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.936265"
+    },
+    {
+      "video_id": "5ZpG1gxdDfg",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.936443"
+    },
+    {
+      "video_id": "5aGn5CqbQls",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.936632"
+    },
+    {
+      "video_id": "6Bk_eG77-5g",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.936965"
+    },
+    {
+      "video_id": "7UoMvJPj0gw",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.937190"
+    },
+    {
+      "video_id": "7mzsY68IhhI",
+      "error": "'SignalAnalyzer' object has no attribute 'analyze_video'",
+      "timestamp": "2026-03-01T23:46:53.937405"
+    }
+  ],
+  "skipped": [],
+  "stats": {
+    "total_videos": 98,
+    "processed": 0,
+    "signals_found": 0,
+    "errors": 0,
+    "skipped": 20
+  }
+}

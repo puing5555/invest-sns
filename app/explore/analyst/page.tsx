@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
+import TargetPriceChart from '@/components/TargetPriceChart';
 
 const TICKER_NAMES: Record<string, string> = {
   '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
@@ -20,6 +21,7 @@ interface Report {
   opinion: string;
   published_at: string;
   pdf_url: string;
+  summary?: string;
 }
 
 const data = reportsData as Record<string, Report[]>;
@@ -45,10 +47,122 @@ function formatPrice(n: number | null) {
   return `${Math.floor(n / 10000)}만원`;
 }
 
+function formatDate(dateStr: string) {
+  try {
+    const date = new Date(dateStr);
+    const year = date.getFullYear().toString().slice(-2); // 2026 -> 26
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  } catch (e) {
+    return dateStr;
+  }
+}
+
+// 리포트 상세 모달 컴포넌트
+interface ReportModalProps {
+  report: Report | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function ReportModal({ report, isOpen, onClose }: ReportModalProps) {
+  if (!isOpen || !report) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
+        <div className="p-6">
+          {/* 헤더 */}
+          <div className="flex items-start justify-between mb-4">
+            <h2 className="text-lg font-bold text-gray-900">리포트 상세</h2>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* 리포트 정보 */}
+          <div className="space-y-4">
+            <div>
+              <h3 className="font-medium text-gray-900 mb-2">{report.title}</h3>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-sm font-medium text-blue-600">
+                  {TICKER_NAMES[report.ticker] || report.ticker}
+                </span>
+                <OpinionBadge opinion={report.opinion} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-500">증권사</span>
+                <p className="font-medium">{report.firm}</p>
+              </div>
+              <div>
+                <span className="text-gray-500">애널리스트</span>
+                <p className="font-medium">{report.analyst || '-'}</p>
+              </div>
+              <div>
+                <span className="text-gray-500">목표가</span>
+                <p className="font-medium">{formatPrice(report.target_price)}</p>
+              </div>
+              <div>
+                <span className="text-gray-500">투자의견</span>
+                <p className="font-medium">{report.opinion}</p>
+              </div>
+              <div className="col-span-2">
+                <span className="text-gray-500">발행일</span>
+                <p className="font-medium">{formatDate(report.published_at)}</p>
+              </div>
+            </div>
+
+            {/* AI 요약 (나중에 추가) */}
+            {report.summary && (
+              <div>
+                <span className="text-gray-500 text-sm">AI 한줄요약</span>
+                <p className="text-sm text-gray-700 mt-1 p-3 bg-gray-50 rounded-lg">
+                  {report.summary}
+                </p>
+              </div>
+            )}
+
+            {/* PDF 링크 */}
+            <div className="pt-4 border-t">
+              <a 
+                href={report.pdf_url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors"
+              >
+                📄 PDF 보고서 보기
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AnalystPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [search, setSearch] = useState('');
+  const [selectedReport, setSelectedReport] = useState<Report | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const q = search.toLowerCase();
+
+  const openReportModal = (report: Report) => {
+    setSelectedReport(report);
+    setIsModalOpen(true);
+  };
+
+  const closeReportModal = () => {
+    setIsModalOpen(false);
+    setSelectedReport(null);
+  };
 
   // 최신순 정렬된 전체 리포트
   const sortedReports = useMemo(() =>
@@ -141,23 +255,25 @@ export default function AnalystPage() {
         {activeTab === 'latest' && (
           <div className="space-y-2">
             {filteredReports.slice(0, 100).map((r, i) => (
-              <div key={i} className="bg-white rounded-xl p-4 shadow-sm">
+              <div 
+                key={i} 
+                className="bg-white rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                onClick={() => openReportModal(r)}
+              >
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs text-gray-400">{r.published_at}</span>
+                      <span className="text-xs text-gray-400">{formatDate(r.published_at)}</span>
                       <OpinionBadge opinion={r.opinion} />
                     </div>
                     <p className="font-medium text-gray-900 text-sm truncate">{r.title}</p>
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-xs text-blue-600 font-medium">{TICKER_NAMES[r.ticker] || r.ticker}</span>
                       <span className="text-xs text-gray-400">·</span>
-                      <span className="text-xs text-gray-500">{r.firm}</span>
-                      <span className="text-xs text-gray-400">·</span>
                       <span className="text-xs text-gray-700 font-medium">목표 {formatPrice(r.target_price)}</span>
                     </div>
                   </div>
-                  <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2 text-lg hover:scale-110 transition-transform">📄</a>
+                  <div className="ml-2 text-lg">📄</div>
                 </div>
               </div>
             ))}
@@ -235,21 +351,30 @@ export default function AnalystPage() {
                   </div>
                 </button>
                 {expandedTicker === g.ticker && (
-                  <div className="border-t border-gray-100 px-4 pb-3">
-                    {g.reports.slice(0, 20).map((r, i) => (
-                      <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-800 truncate">{r.title}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-xs text-gray-500">{r.firm}</span>
-                            <span className="text-xs text-gray-400">{r.published_at}</span>
-                            <OpinionBadge opinion={r.opinion} />
-                            <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price)}</span>
+                  <div className="border-t border-gray-100">
+                    {/* 목표가 차트 */}
+                    <div className="p-4">
+                      <TargetPriceChart reports={g.reports} stockName={g.name} />
+                    </div>
+                    
+                    {/* 리포트 목록 */}
+                    <div className="px-4 pb-3">
+                      <h4 className="font-medium text-gray-900 mb-3 text-sm">📄 리포트 목록</h4>
+                      {g.reports.slice(0, 20).map((r, i) => (
+                        <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-gray-800 truncate">{r.title}</p>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <span className="text-xs text-gray-500">{r.firm}</span>
+                              <span className="text-xs text-gray-400">{formatDate(r.published_at)}</span>
+                              <OpinionBadge opinion={r.opinion} />
+                              <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price)}</span>
+                            </div>
                           </div>
+                          <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
                         </div>
-                        <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -257,6 +382,13 @@ export default function AnalystPage() {
           </div>
         )}
       </div>
+
+      {/* 리포트 상세 모달 */}
+      <ReportModal 
+        report={selectedReport}
+        isOpen={isModalOpen}
+        onClose={closeReportModal}
+      />
     </div>
   );
 }
