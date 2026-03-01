@@ -13,7 +13,7 @@ result = {}
 for code, ticker in stocks.items():
     try:
         t = yf.Ticker(ticker)
-        h = t.history(period='max')
+        h = t.history(period='5y')
         if len(h) < 2:
             print(f"{code}: not enough data ({len(h)} rows)")
             continue
