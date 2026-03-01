@@ -260,7 +260,10 @@ JSON만 출력하고 다른 설명은 하지 마세요.
     }
 
     try {
-      const suggestion = JSON.parse(report.ai_suggestion);
+      // markdown 코드블록 제거 후 파싱
+      let jsonStr = report.ai_suggestion.trim();
+      jsonStr = jsonStr.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
+      const suggestion = JSON.parse(jsonStr);
       
       // influencer_signals 테이블 업데이트
       const { error } = await supabase
@@ -269,10 +272,9 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           stock: suggestion.stock,
           ticker: suggestion.ticker,
           signal: suggestion.signal,
-          key_quote: suggestion.quote,
+          key_quote: suggestion.quote || suggestion.key_quote,
           timestamp: suggestion.timestamp,
-          reasoning: suggestion.analysis_reasoning,
-          updated_at: new Date().toISOString()
+          reasoning: suggestion.analysis_reasoning || suggestion.reasoning
         })
         .eq('id', report.influencer_signals.id);
 
@@ -848,7 +850,9 @@ JSON만 출력하고 다른 설명은 하지 마세요.
       const improvement = aiImprovements[signalId];
       if (!improvement) return;
 
-      const suggestion = JSON.parse(improvement.improvement);
+      let jsonStr2 = improvement.improvement.trim();
+      jsonStr2 = jsonStr2.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
+      const suggestion = JSON.parse(jsonStr2);
       
       const { error } = await supabase
         .from('influencer_signals')
@@ -856,11 +860,10 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           stock: suggestion.stock,
           ticker: suggestion.ticker,
           signal: suggestion.signal,
-          key_quote: suggestion.quote,
+          key_quote: suggestion.quote || suggestion.key_quote,
           timestamp: suggestion.timestamp,
-          reasoning: suggestion.analysis_reasoning,
-          confidence: suggestion.confidence,
-          updated_at: new Date().toISOString()
+          reasoning: suggestion.analysis_reasoning || suggestion.reasoning,
+          confidence: suggestion.confidence
         })
         .eq('id', signalId);
 
