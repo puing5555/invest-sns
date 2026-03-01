@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
           signal,
           quote,
           timestamp,
-          analysis_reasoning,
+          reasoning,
           influencer_videos (
             subtitle_text,
             title,
@@ -78,7 +78,7 @@ ${subtitleText}
 - 신호: ${signalData.signal}
 - 인용문: ${signalData.quote}
 - 타임스탬프: ${signalData.timestamp}
-- 분석근거: ${signalData.analysis_reasoning || 'N/A'}
+- 분석근거: ${signalData.reasoning || 'N/A'}
 
 **신고 정보:**
 - 신고 사유: ${reportData.reason}
@@ -149,7 +149,7 @@ ${subtitleText}
 - 신호: ${signalData.signal}
 - 인용문: ${signalData.quote}
 - 타임스탬프: ${signalData.timestamp}
-- 분석근거: ${signalData.analysis_reasoning}
+- 분석근거: ${signalData.reasoning}
 
 **검토 결과:**
 ${aiReview}

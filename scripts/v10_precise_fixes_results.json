@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-03-01T08:19:02.381Z",
+  "speakerCorrections": [
+    {
+      "id": "75042710-e161-4b46-bb9e-ae97f1e0d98a",
+      "stock": "마이크론",
+      "wrongSpeaker": "김장년",
+      "correctSpeaker": "김장열",
+      "success": true
+    },
+    {
+      "id": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+      "stock": "삼성전자",
+      "wrongSpeaker": "김장년",
+      "correctSpeaker": "김장열",
+      "success": true
+    },
+    {
+      "id": "83d4e654-d9db-4e5a-9a69-ac85b0ce0699",
+      "stock": "SK하이닉스",
+      "wrongSpeaker": "김장년",
+      "correctSpeaker": "김장열",
+      "success": true
+    },
+    {
+      "id": "dfa9fdbc-5485-4a48-a007-14dab596ab31",
+      "stock": "엔비디아",
+      "wrongSpeaker": "김장년",
+      "correctSpeaker": "김장열",
+      "success": true
+    }
+  ],
+  "basketConsolidations": [
+    {
+      "group": "배재규_반도체_바스켓",
+      "baseUpdated": true,
+      "deletedCount": 2,
+      "totalDeleted": 2
+    }
+  ],
+  "summary": {
+    "speakerFixed": 4,
+    "speakerFailed": 0,
+    "basketsConsolidated": 1,
+    "signalsDeleted": 2
+  }
+}

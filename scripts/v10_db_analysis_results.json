@@ -1,0 +1,275 @@
+{
+  "timestamp": "2026-03-01T08:18:03.169Z",
+  "speakerIssues": [
+    {
+      "signalId": "0d83bde0-d91c-45da-af79-0a360db6c6ad",
+      "stock": "NH투자증권",
+      "currentSpeaker": "고연수",
+      "videoTitle": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]...",
+      "extractedGuest": "고연수",
+      "isCorrect": true,
+      "signal_type": "긍정",
+      "key_quote": "배당이랑 실적 성장 둘 다 가져갈 수 있다, DPS는 전년 대비 20% 성장..."
+    },
+    {
+      "signalId": "19d07177-090a-4774-8504-38d177a8117d",
+      "stock": "SK하이닉스",
+      "currentSpeaker": "김장열",
+      "videoTitle": "[2월 25일 마감시황] 쌓여있던 재료가 많았던 현대그룹주…잠자던 외국인이 쐈다 | 홍선애, 김장열, 이권희...",
+      "extractedGuest": null,
+      "isCorrect": "unclear",
+      "signal_type": "긍정",
+      "key_quote": "삼성전자 하이닉스 더블 됐어. 이익 전망도 더블 오르고 주가도 더블 오르고. 리레이팅 없다..."
+    },
+    {
+      "signalId": "33078122-93ea-4001-83bd-58ee6dc8e4df",
+      "stock": "삼성전자",
+      "currentSpeaker": "김장열",
+      "videoTitle": "[2월 25일 마감시황] 쌓여있던 재료가 많았던 현대그룹주…잠자던 외국인이 쐈다 | 홍선애, 김장열, 이권희...",
+      "extractedGuest": null,
+      "isCorrect": "unclear",
+      "signal_type": "긍정",
+      "key_quote": "리레이팅 된 거 없다. 이익 전망 따라간 거. 밸류에이션 상으로 부담되지는 않는다..."
+    },
+    {
+      "signalId": "53975f78-e496-49e8-b92e-8e9c482dbf09",
+      "stock": "삼성전자",
+      "currentSpeaker": "박병창",
+      "videoTitle": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? |...",
+      "extractedGuest": "박병창",
+      "isCorrect": true,
+      "signal_type": "긍정",
+      "key_quote": "삼성전자 목표 주가 34만원 나왔다. 밸류업 관련 프로그램 발표 기대..."
+    },
+    {
+      "signalId": "55bf5a77-ff14-4c2b-9da8-a15c7a94ea74",
+      "stock": "삼성전자",
+      "currentSpeaker": "박명성",
+      "videoTitle": "[2월 26일 마감시황] 반도체, 숨 고르기 오나? 이제는 전략을 바꿔볼 타이밍 | 홍선애, 박명석, 이재규...",
+      "extractedGuest": null,
+      "isCorrect": "unclear",
+      "signal_type": "매수",
+      "key_quote": "모건 스탠리 2027년 삼성전자 영업이익 전세계 1등. 340조원. 2027 포워드 PE ..."
+    },
+    {
+      "signalId": "58b2432f-071a-4208-a1d8-90f3f0222517",
+      "stock": "삼성증권",
+      "currentSpeaker": "고연수",
+      "videoTitle": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]...",
+      "extractedGuest": "고연수",
+      "isCorrect": true,
+      "signal_type": "긍정",
+      "key_quote": "DPS가 전년 대비 30% 이상 증가할 것으로 예상, 배당 수익률 4% 후반..."
+    },
+    {
+      "signalId": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+      "stock": "현대차",
+      "currentSpeaker": "이건희",
+      "videoTitle": "[2월 25일 마감시황] 쌓여있던 재료가 많았던 현대그룹주…잠자던 외국인이 쐈다 | 홍선애, 김장열, 이권희...",
+      "extractedGuest": null,
+      "isCorrect": "unclear",
+      "signal_type": "매수",
+      "key_quote": "현대차 지금이라도 사야 돼요라고 물어보면 저는 예스. 의미 있는 거래량을 터트렸다는 거는 ..."
+    },
+    {
+      "signalId": "6ab0f37a-1bac-4010-988a-f14db3e2b1e8",
+      "stock": "키움증권",
+      "currentSpeaker": "고연수",
+      "videoTitle": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]...",
+      "extractedGuest": "고연수",
+      "isCorrect": true,
+      "signal_type": "매수",
+      "key_quote": "키움 증권 같은 경우에도 전년 대비 순익이 20% 성장할 것으로 예상..."
+    },
+    {
+      "signalId": "71ff56f8-deb9-49c1-9c18-bc4fd717d666",
+      "stock": "삼성전자",
+      "currentSpeaker": "권영화",
+      "videoTitle": "\"젠슨황 폭탄 선언에 발칵\" 극비리에 삼성 찾은 엔비디아. HBM4 판도 180도 뒤집힌다 | 권영화 교수 ...",
+      "extractedGuest": "권영화",
+      "isCorrect": true,
+      "signal_type": "긍정",
+      "key_quote": "삼성은 계속 올라갑니다 SK는 계속 떨어지고 그러면서 제가 보기에는 그때 되면 역전할 것 ..."
+    },
+    {
+      "signalId": "75042710-e161-4b46-bb9e-ae97f1e0d98a",
+      "stock": "마이크론",
+      "currentSpeaker": "김장년",
+      "videoTitle": "엔비디아 실적발표, 서프라이즈는 아닌데...삼성전자, SK하이닉스 매수 기회주나? | 김장열 유니스토리자산운...",
+      "extractedGuest": "김장열",
+      "isCorrect": false,
+      "signal_type": "긍정",
+      "key_quote": "마이크론하고 샌디스크 비슷하 11배... 미국 평균보다 반이잖아요..."
+    },
+    {
+      "signalId": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+      "stock": "삼성전자",
+      "currentSpeaker": "김장년",
+      "videoTitle": "엔비디아 실적발표, 서프라이즈는 아닌데...삼성전자, SK하이닉스 매수 기회주나? | 김장열 유니스토리자산운...",
+      "extractedGuest": "김장열",
+      "isCorrect": false,
+      "signal_type": "매수",
+      "key_quote": "우선순은 메모리... 하이닉 삼성전자, 샌디스크, 마이크론 넷 중에 하나는 갖고 있어야지..."
+    },
+    {
+      "signalId": "83d4e654-d9db-4e5a-9a69-ac85b0ce0699",
+      "stock": "SK하이닉스",
+      "currentSpeaker": "김장년",
+      "videoTitle": "엔비디아 실적발표, 서프라이즈는 아닌데...삼성전자, SK하이닉스 매수 기회주나? | 김장열 유니스토리자산운...",
+      "extractedGuest": "김장열",
+      "isCorrect": false,
+      "signal_type": "긍정",
+      "key_quote": "하이닉스랑 마이크론이랑 삼성전자 비중 거의 30% 정도로 된 ETF를 사세요..."
+    },
+    {
+      "signalId": "9a0f20c2-af24-4c50-b195-5c89d92a6cf9",
+      "stock": "엔비디아",
+      "currentSpeaker": "장우진",
+      "videoTitle": "자금 흐름이 바뀌고 있다. 상승 싸이클 준비하는 코스닥 | 장우진 작가 [여의도 인사이트]...",
+      "extractedGuest": "장우진",
+      "isCorrect": true,
+      "signal_type": "긍정",
+      "key_quote": "성장률이 66.7%가 나오고 있기 때문에 엔비디아 주가가 버틴 이유... 27년까지 60%..."
+    },
+    {
+      "signalId": "a9338662-af28-46b7-ac82-84e475646007",
+      "stock": "엔비디아",
+      "currentSpeaker": "박병창",
+      "videoTitle": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? |...",
+      "extractedGuest": "박병창",
+      "isCorrect": true,
+      "signal_type": "중립",
+      "key_quote": "주가는 70% 이상 반영을 하고서 움직였을 가능성이 있다. 새로운게 나와야 된다. 실적이 ..."
+    },
+    {
+      "signalId": "ab0044b3-5414-4421-a6a6-5dd9077c3fd0",
+      "stock": "SK하이닉스",
+      "currentSpeaker": "박병창",
+      "videoTitle": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? |...",
+      "extractedGuest": "박병창",
+      "isCorrect": true,
+      "signal_type": "긍정",
+      "key_quote": "SK하이닉스 시총 725조에 올해 영업이익 160조면 5배도 안 돼. 내년 더 올라가면 세..."
+    },
+    {
+      "signalId": "bb6deb68-005b-489c-9302-1ac7cd050453",
+      "stock": "한국금융지주",
+      "currentSpeaker": "고연수",
+      "videoTitle": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]...",
+      "extractedGuest": "고연수",
+      "isCorrect": true,
+      "signal_type": "매수",
+      "key_quote": "한국 금융 지주랑 키움 증권을 추천드리고 있는데요... 지난해도 연간 2조원 순익 달성..."
+    },
+    {
+      "signalId": "c5d155e7-b7da-4127-90a5-02e4cd45c8f7",
+      "stock": "SK하이닉스",
+      "currentSpeaker": "권영화",
+      "videoTitle": "\"젠슨황 폭탄 선언에 발칵\" 극비리에 삼성 찾은 엔비디아. HBM4 판도 180도 뒤집힌다 | 권영화 교수 ...",
+      "extractedGuest": "권영화",
+      "isCorrect": true,
+      "signal_type": "경계",
+      "key_quote": "삼성은 계속 올라갑니다 SK는 계속 떨어지고..."
+    },
+    {
+      "signalId": "dfa9fdbc-5485-4a48-a007-14dab596ab31",
+      "stock": "엔비디아",
+      "currentSpeaker": "김장년",
+      "videoTitle": "엔비디아 실적발표, 서프라이즈는 아닌데...삼성전자, SK하이닉스 매수 기회주나? | 김장열 유니스토리자산운...",
+      "extractedGuest": "김장열",
+      "isCorrect": false,
+      "signal_type": "긍정",
+      "key_quote": "갖고 계신 분면 그냥 갖고 계시면 되고요. 안 갖고 계신 분이라면 2%면 들어가도 괜찮을 ..."
+    },
+    {
+      "signalId": "f13c9ca0-d899-4bb3-9c61-849503831329",
+      "stock": "삼성전자",
+      "currentSpeaker": "배재원",
+      "videoTitle": "떨어질 거 걱정하지 말고 제발 사세요 |  배재원 하나증권 인천지점 PB [더블 크루]...",
+      "extractedGuest": "배재원",
+      "isCorrect": true,
+      "signal_type": "매수",
+      "key_quote": "비중이 없는 분은 지금이라도 물리더라도 들어가야 된다... 바라보지만 말고 일단 포지션을 ..."
+    }
+  ],
+  "duplicateIssues": [
+    {
+      "signalId": "cd3a96b4-8c52-4dce-884f-5e89a8e228d5",
+      "stock": "TSMC",
+      "speaker": "배재규",
+      "videoTitle": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배...",
+      "timestamp": "0:19",
+      "key_quote": "GPU를 생산하는 회사는 TSM입니다. 여기에 20%...",
+      "videoDate": "2026-02-08T00:00:00+00:00"
+    },
+    {
+      "signalId": "764703cc-157e-46fe-b265-f2253a1d66ba",
+      "stock": "삼성전자",
+      "speaker": "이효석",
+      "videoTitle": "하이닉스 없거나 추가 매수 고민하는 분들 제가 시원하게 바로 말씀드립니다...",
+      "timestamp": "09:36",
+      "key_quote": "삼성전자도 좋아요. 시티은행 영업이익 251조원, 목표...",
+      "videoDate": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "signalId": "1cda9f77-c6cf-43b6-83be-6542e9930f58",
+      "stock": "SK하이닉스",
+      "speaker": "이효석",
+      "videoTitle": "하이닉스 없거나 추가 매수 고민하는 분들 제가 시원하게 바로 말씀드립니다...",
+      "timestamp": "00:33",
+      "key_quote": "여전히 주인공이다라는 생각을 하고 있습니다...",
+      "videoDate": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "signalId": "c250cb34-04cb-4174-9843-8c069f731271",
+      "stock": "SK하이닉스",
+      "speaker": "조진표",
+      "videoTitle": "코스피 더 올라갈 겁니다, 다만 현금 이만큼은 꼭 갖고 계세요 [조진표 ...",
+      "timestamp": "2:39",
+      "key_quote": "SK하이닉스는 156만 원으로 상향을 하죠...",
+      "videoDate": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "signalId": "ea49a319-181d-4fec-ac91-063be14c73ab",
+      "stock": "엔비디아",
+      "speaker": "배재규",
+      "videoTitle": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배...",
+      "timestamp": "0:09",
+      "key_quote": "GPU를 설계하는 엔비디아의 20%를 투자를 하고요...",
+      "videoDate": "2026-02-08T00:00:00+00:00"
+    },
+    {
+      "signalId": "7ba0f471-6950-4436-8e8f-2ee5989748ce",
+      "stock": "삼성전자",
+      "speaker": "조진표",
+      "videoTitle": "코스피 더 올라갈 겁니다, 다만 현금 이만큼은 꼭 갖고 계세요 [조진표 ...",
+      "timestamp": "02:35",
+      "key_quote": "노무라 증권에서 삼성전자 목표주가를 29만원으로 상향....",
+      "videoDate": "2026-02-25T00:00:00+00:00"
+    },
+    {
+      "signalId": "ffa1dc33-167c-4ea8-9691-5f8aa1bf1f4c",
+      "stock": "삼성전자",
+      "speaker": "이영수",
+      "videoTitle": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형...",
+      "timestamp": "0:52",
+      "key_quote": "둘 다 사는게 좋습니다...",
+      "videoDate": "2026-01-14T00:00:00+00:00"
+    },
+    {
+      "signalId": "ff0d3e8d-9eaf-4d8a-8bde-0b64224c9a86",
+      "stock": "SK하이닉스",
+      "speaker": "배재규",
+      "videoTitle": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배...",
+      "timestamp": "0:14",
+      "key_quote": "GPU는 반드시 HBM이야 작동이 됩니다. SK하이닉스...",
+      "videoDate": "2026-02-08T00:00:00+00:00"
+    }
+  ],
+  "summary": {
+    "speakerCorrect": 11,
+    "speakerIncorrect": 4,
+    "speakerUnclear": 4,
+    "duplicateGroups": 8
+  }
+}

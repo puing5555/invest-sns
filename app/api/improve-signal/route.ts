@@ -69,7 +69,7 @@ ${subtitleText}
 - 신호: ${signalData.signal}
 - 인용문: ${signalData.key_quote || 'null'}
 - 타임스탬프: ${signalData.timestamp || 'N/A'}
-- 분석근거: ${signalData.analysis_reasoning || 'null'}
+- 분석근거: ${signalData.reasoning || 'null'}
 - 신뢰도: ${signalData.confidence || 'null'}
 
 **발견된 품질 이슈:**
@@ -130,7 +130,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
         signal: signalData.signal,
         quote: signalData.key_quote,
         timestamp: signalData.timestamp,
-        analysis_reasoning: signalData.analysis_reasoning,
+        analysis_reasoning: signalData.reasoning,
         confidence: signalData.confidence
       }
     });

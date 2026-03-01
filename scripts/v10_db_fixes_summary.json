@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-03-01T08:14:13.490Z",
+  "totalTasks": 2,
+  "reports": [
+    {
+      "type": "화자 식별 수정",
+      "total": 19,
+      "success": 0,
+      "failed": 19,
+      "details": [
+        {
+          "signalId": "0d83bde0-d91c-45da-af79-0a360db6c6ad",
+          "success": false
+        },
+        {
+          "signalId": "19d07177-090a-4774-8504-38d177a8117d",
+          "success": false
+        },
+        {
+          "signalId": "33078122-93ea-4001-83bd-58ee6dc8e4df",
+          "success": false
+        },
+        {
+          "signalId": "53975f78-e496-49e8-b92e-8e9c482dbf09",
+          "success": false
+        },
+        {
+          "signalId": "55bf5a77-ff14-4c2b-9da8-a15c7a94ea74",
+          "success": false
+        },
+        {
+          "signalId": "58b2432f-071a-4208-a1d8-90f3f0222517",
+          "success": false
+        },
+        {
+          "signalId": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+          "success": false
+        },
+        {
+          "signalId": "6ab0f37a-1bac-4010-988a-f14db3e2b1e8",
+          "success": false
+        },
+        {
+          "signalId": "71ff56f8-deb9-49c1-9c18-bc4fd717d666",
+          "success": false
+        },
+        {
+          "signalId": "75042710-e161-4b46-bb9e-ae97f1e0d98a",
+          "success": false
+        },
+        {
+          "signalId": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+          "success": false
+        },
+        {
+          "signalId": "83d4e654-d9db-4e5a-9a69-ac85b0ce0699",
+          "success": false
+        },
+        {
+          "signalId": "9a0f20c2-af24-4c50-b195-5c89d92a6cf9",
+          "success": false
+        },
+        {
+          "signalId": "a9338662-af28-46b7-ac82-84e475646007",
+          "success": false
+        },
+        {
+          "signalId": "ab0044b3-5414-4421-a6a6-5dd9077c3fd0",
+          "success": false
+        },
+        {
+          "signalId": "bb6deb68-005b-489c-9302-1ac7cd050453",
+          "success": false
+        },
+        {
+          "signalId": "c5d155e7-b7da-4127-90a5-02e4cd45c8f7",
+          "success": false
+        },
+        {
+          "signalId": "dfa9fdbc-5485-4a48-a007-14dab596ab31",
+          "success": false
+        },
+        {
+          "signalId": "f13c9ca0-d899-4bb3-9c61-849503831329",
+          "success": false
+        }
+      ]
+    },
+    {
+      "type": "바스켓 중복 통합",
+      "total": 8,
+      "groupsFound": 4,
+      "signalsUpdated": 0,
+      "signalsDeleted": 0,
+      "details": [
+        {
+          "groupKey": "8bc8b1e0-aea1-4a66-8e7f-4efc9a3f9a34_d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+          "speakerName": "배재규",
+          "videoTitle": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배재규 대표 풀버전]...",
+          "originalCount": 3,
+          "updated": 0,
+          "deleted": 0
+        },
+        {
+          "groupKey": "1a47ae36-c840-4831-9ece-ec88ba5fc7ec_b07d8758-493a-4a51-9bc5-7ef75f0be67c",
+          "speakerName": "이효석",
+          "videoTitle": "하이닉스 없거나 추가 매수 고민하는 분들 제가 시원하게 바로 말씀드립니다 [Z1뉴스]...",
+          "originalCount": 2,
+          "updated": 0,
+          "deleted": 0
+        },
+        {
+          "groupKey": "d68ab7a3-4772-49fe-86f2-eead4f4d1887_6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+          "speakerName": "조진표",
+          "videoTitle": "코스피 더 올라갈 겁니다, 다만 현금 이만큼은 꼭 갖고 계세요 [조진표 대표 1부]...",
+          "originalCount": 2,
+          "updated": 0,
+          "deleted": 0
+        }
+      ]
+    }
+  ],
+  "overall": {
+    "totalProcessed": 27,
+    "totalSuccess": 0,
+    "totalChanges": 0
+  }
+}

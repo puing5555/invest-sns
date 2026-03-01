@@ -1,0 +1,83 @@
+{
+  "total": 19,
+  "success": 0,
+  "failed": 19,
+  "details": [
+    {
+      "signalId": "0d83bde0-d91c-45da-af79-0a360db6c6ad",
+      "success": false
+    },
+    {
+      "signalId": "19d07177-090a-4774-8504-38d177a8117d",
+      "success": false
+    },
+    {
+      "signalId": "33078122-93ea-4001-83bd-58ee6dc8e4df",
+      "success": false
+    },
+    {
+      "signalId": "53975f78-e496-49e8-b92e-8e9c482dbf09",
+      "success": false
+    },
+    {
+      "signalId": "55bf5a77-ff14-4c2b-9da8-a15c7a94ea74",
+      "success": false
+    },
+    {
+      "signalId": "58b2432f-071a-4208-a1d8-90f3f0222517",
+      "success": false
+    },
+    {
+      "signalId": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+      "success": false
+    },
+    {
+      "signalId": "6ab0f37a-1bac-4010-988a-f14db3e2b1e8",
+      "success": false
+    },
+    {
+      "signalId": "71ff56f8-deb9-49c1-9c18-bc4fd717d666",
+      "success": false
+    },
+    {
+      "signalId": "75042710-e161-4b46-bb9e-ae97f1e0d98a",
+      "success": false
+    },
+    {
+      "signalId": "7ed86fea-e0bb-4604-b0c1-3ba7788966c1",
+      "success": false
+    },
+    {
+      "signalId": "83d4e654-d9db-4e5a-9a69-ac85b0ce0699",
+      "success": false
+    },
+    {
+      "signalId": "9a0f20c2-af24-4c50-b195-5c89d92a6cf9",
+      "success": false
+    },
+    {
+      "signalId": "a9338662-af28-46b7-ac82-84e475646007",
+      "success": false
+    },
+    {
+      "signalId": "ab0044b3-5414-4421-a6a6-5dd9077c3fd0",
+      "success": false
+    },
+    {
+      "signalId": "bb6deb68-005b-489c-9302-1ac7cd050453",
+      "success": false
+    },
+    {
+      "signalId": "c5d155e7-b7da-4127-90a5-02e4cd45c8f7",
+      "success": false
+    },
+    {
+      "signalId": "dfa9fdbc-5485-4a48-a007-14dab596ab31",
+      "success": false
+    },
+    {
+      "signalId": "f13c9ca0-d899-4bb3-9c61-849503831329",
+      "success": false
+    }
+  ]
+}

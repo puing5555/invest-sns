@@ -17,7 +17,7 @@ export async function GET() {
         ticker,
         signal,
         key_quote,
-        analysis_reasoning,
+        reasoning,
         confidence,
         created_at,
         influencer_videos (
@@ -48,9 +48,9 @@ export async function GET() {
       const currentValues: Record<string, string> = {};
 
       // 1. reasoning이 null이거나 20자 미만
-      if (!signal.analysis_reasoning || signal.analysis_reasoning.length < 20) {
+      if (!signal.reasoning || signal.reasoning.length < 20) {
         issueTypes.push('분석근거 부족');
-        currentValues['분석근거 부족'] = signal.analysis_reasoning || 'null';
+        currentValues['분석근거 부족'] = signal.reasoning || 'null';
       }
 
       // 2. key_quote가 15자 미만
@@ -73,7 +73,7 @@ export async function GET() {
           ticker: signal.ticker,
           signal: signal.signal,
           quote: signal.key_quote,
-          analysis_reasoning: signal.analysis_reasoning,
+          analysis_reasoning: signal.reasoning,
           confidence: signal.confidence,
           created_at: signal.created_at,
           influencer_videos: signal.influencer_videos,

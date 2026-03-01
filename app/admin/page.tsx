@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getSignalReports, updateReportStatus, getAdminStats, supabase } from '@/lib/supabase';
+import { callAnthropicAPI } from '@/lib/anthropicClient';
 
 interface SignalReport {
   id: string;
@@ -100,24 +101,146 @@ export default function AdminPage() {
     }
   };
 
-  // AI 검토 요청
+  // AI 검토 요청 (클라이언트 직접 호출)
   const handleAiReview = async (reportId: string) => {
     try {
       setIsAiProcessing(true);
       setAiProcessingId(reportId);
 
-      const response = await fetch('/api/review-signal', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ reportId }),
+      // 1. 신고 데이터 조회 (시그널, 자막, 신고 사유 포함)
+      const { data: reportData, error: reportError } = await supabase
+        .from('signal_reports')
+        .select(`
+          *,
+          influencer_signals (
+            id,
+            stock,
+            ticker,
+            signal,
+            key_quote,
+            timestamp,
+            analysis_reasoning,
+            influencer_videos (
+              subtitle_text,
+              title,
+              published_at
+            )
+          )
+        `)
+        .eq('id', reportId)
+        .single();
+
+      if (reportError || !reportData) {
+        throw new Error('신고 데이터를 찾을 수 없습니다.');
+      }
+
+      if (!reportData.influencer_signals?.influencer_videos?.subtitle_text) {
+        throw new Error('자막 데이터가 없습니다.');
+      }
+
+      // 2. AI 검토 요청
+      const signalData = reportData.influencer_signals;
+      const subtitleText = signalData.influencer_videos.subtitle_text;
+
+      const reviewPrompt = `
+원본 자막과 시그널을 비교해서 신고 사유가 타당한지 검토해 주세요.
+
+**원본 자막:**
+${subtitleText}
+
+**추출된 시그널:**
+- 종목: ${signalData.stock} (${signalData.ticker || 'N/A'})
+- 신호: ${signalData.signal}
+- 인용문: ${signalData.key_quote}
+- 타임스탬프: ${signalData.timestamp}
+- 분석근거: ${signalData.reasoning || 'N/A'}
+
+**신고 정보:**
+- 신고 사유: ${reportData.reason}
+- 상세 내용: ${reportData.detail || '없음'}
+
+**검토 기준:**
+1. 인용문이 실제 자막과 일치하는가?
+2. 시그널 타입이 발언 내용과 일치하는가?
+3. 타임스탬프가 정확한가?
+4. 분석근거가 합리적인가?
+
+**결과 형식:**
+상태: [수정필요/문제없음]
+근거: [구체적인 근거 설명]
+`;
+
+      const aiReview = await callAnthropicAPI({
+        model: 'claude-opus-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: reviewPrompt }]
       });
 
-      const data = await response.json();
+      // 3. AI 검토 결과 저장
+      const { error: updateError } = await supabase
+        .from('signal_reports')
+        .update({ 
+          ai_review: aiReview,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', reportId);
 
-      if (!response.ok) {
-        throw new Error(data.error || 'AI 검토 요청에 실패했습니다.');
+      if (updateError) {
+        throw new Error('AI 검토 결과 저장 실패');
+      }
+
+      // 4. "수정필요"인 경우 수정안 생성
+      let aiSuggestion = null;
+      if (aiReview.includes('수정필요') || aiReview.includes('수정 필요')) {
+        const suggestionPrompt = `
+이전 검토 결과에 따라 수정된 시그널을 JSON 형태로 생성해 주세요.
+
+**원본 자막:**
+${subtitleText}
+
+**기존 시그널:**
+- 종목: ${signalData.stock}
+- 티커: ${signalData.ticker}
+- 신호: ${signalData.signal}
+- 인용문: ${signalData.key_quote}
+- 타임스탬프: ${signalData.timestamp}
+- 분석근거: ${signalData.reasoning}
+
+**검토 결과:**
+${aiReview}
+
+**수정안을 다음 JSON 형식으로 제공해 주세요:**
+{
+  "stock": "종목명",
+  "ticker": "티커 또는 null",
+  "signal": "매수|긍정|중립|경계|매도",
+  "quote": "정확한 인용문",
+  "timestamp": "MM:SS",
+  "analysis_reasoning": "수정된 분석근거"
+}
+
+JSON만 출력하고 다른 설명은 하지 마세요.
+`;
+
+        try {
+          aiSuggestion = await callAnthropicAPI({
+            model: 'claude-opus-4-6',
+            max_tokens: 500,
+            messages: [{ role: 'user', content: suggestionPrompt }]
+          });
+
+          // 수정안 저장
+          await supabase
+            .from('signal_reports')
+            .update({ 
+              ai_suggestion: aiSuggestion,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', reportId);
+        } catch (suggestionError) {
+          console.error('수정안 생성 실패:', suggestionError);
+          // 수정안 생성 실패해도 검토는 완료된 것으로 처리
+        }
       }
 
       alert('AI 검토가 완료되었습니다!');
@@ -417,62 +540,301 @@ export default function AdminPage() {
   const [promptImprovements, setPromptImprovements] = useState<string>('');
   const [generatingPrompt, setGeneratingPrompt] = useState(false);
 
-  // 품질 이슈 로딩
+  // 품질 이슈 로딩 (클라이언트 직접 호출)
   const loadQualityIssues = async () => {
     try {
       setLoadingIssues(true);
-      const response = await fetch('/api/quality-issues');
-      const data = await response.json();
       
-      if (data.success) {
-        setQualityIssues(data.issues);
+      // 품질 이슈가 있는 시그널 조회
+      const { data: signals, error } = await supabase
+        .from('influencer_signals')
+        .select(`
+          id,
+          stock,
+          ticker,
+          signal,
+          key_quote,
+          reasoning,
+          confidence,
+          created_at,
+          influencer_videos (
+            title,
+            published_at,
+            video_id,
+            influencer_channels (
+              channel_name,
+              channel_handle
+            )
+          ),
+          speakers (
+            name
+          )
+        `)
+        .order('created_at', { ascending: false })
+        .limit(100); // 최근 100개만 검사
+
+      if (error) {
+        throw new Error('시그널 데이터 조회 실패: ' + error.message);
       }
+
+      // 품질 이슈 탐지
+      const issues: any[] = [];
+
+      signals?.forEach((signal) => {
+        const issueTypes: string[] = [];
+        const currentValues: Record<string, string> = {};
+
+        // 1. reasoning이 null이거나 20자 미만
+        if (!signal.reasoning || signal.reasoning.length < 20) {
+          issueTypes.push('분석근거 부족');
+          currentValues['분석근거 부족'] = signal.reasoning || 'null';
+        }
+
+        // 2. key_quote가 15자 미만
+        if (!signal.key_quote || signal.key_quote.length < 15) {
+          issueTypes.push('인용문 부족');
+          currentValues['인용문 부족'] = signal.key_quote || 'null';
+        }
+
+        // 3. confidence가 없는 경우
+        if (!signal.confidence) {
+          issueTypes.push('신뢰도 누락');
+          currentValues['신뢰도 누락'] = 'null';
+        }
+
+        // 이슈가 있는 경우에만 추가
+        if (issueTypes.length > 0) {
+          issues.push({
+            id: signal.id,
+            stock: signal.stock,
+            ticker: signal.ticker,
+            signal: signal.signal,
+            quote: signal.key_quote,
+            analysis_reasoning: signal.reasoning,
+            confidence: signal.confidence,
+            created_at: signal.created_at,
+            influencer_videos: signal.influencer_videos,
+            speakers: signal.speakers,
+            issueTypes,
+            currentValues
+          });
+        }
+      });
+
+      setQualityIssues(issues);
     } catch (error) {
       console.error('품질 이슈 로딩 실패:', error);
+      alert(error instanceof Error ? error.message : '품질 이슈 로딩에 실패했습니다.');
     } finally {
       setLoadingIssues(false);
     }
   };
 
-  // 신고 패턴 로딩
+  // 신고 패턴 로딩 (클라이언트 직접 호출)
   const loadReportPatterns = async () => {
     try {
       setLoadingPatterns(true);
-      const response = await fetch('/api/report-patterns');
-      const data = await response.json();
       
-      if (data.success) {
-        setReportPatterns(data.patterns);
+      // 신고 데이터와 관련 시그널 정보 조회
+      const { data: reports, error } = await supabase
+        .from('signal_reports')
+        .select(`
+          id,
+          reason,
+          detail,
+          created_at,
+          status,
+          influencer_signals (
+            stock,
+            signal,
+            speakers (
+              name
+            ),
+            influencer_videos (
+              influencer_channels (
+                channel_name
+              )
+            )
+          )
+        `)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw new Error('신고 데이터 조회 실패: ' + error.message);
       }
+
+      // 1. 사유별 신고 건수 집계
+      const reasonStats: Record<string, number> = {};
+      reports?.forEach((report) => {
+        reasonStats[report.reason] = (reasonStats[report.reason] || 0) + 1;
+      });
+
+      // 2. 시그널 타입별 신고 빈도
+      const signalTypeStats: Record<string, number> = {};
+      reports?.forEach((report) => {
+        if (report.influencer_signals?.signal) {
+          const signal = report.influencer_signals.signal;
+          signalTypeStats[signal] = (signalTypeStats[signal] || 0) + 1;
+        }
+      });
+
+      // 3. 종목별 신고 빈도
+      const stockStats: Record<string, number> = {};
+      reports?.forEach((report) => {
+        if (report.influencer_signals?.stock) {
+          const stock = report.influencer_signals.stock;
+          stockStats[stock] = (stockStats[stock] || 0) + 1;
+        }
+      });
+
+      // 4. 화자별 신고 빈도
+      const speakerStats: Record<string, number> = {};
+      reports?.forEach((report) => {
+        const speakerName = report.influencer_signals?.speakers?.name || 
+                           report.influencer_signals?.influencer_videos?.influencer_channels?.channel_name;
+        if (speakerName) {
+          speakerStats[speakerName] = (speakerStats[speakerName] || 0) + 1;
+        }
+      });
+
+      // 5. 월별 신고 트렌드 (최근 6개월)
+      const monthlyStats: Record<string, number> = {};
+      reports?.forEach((report) => {
+        const reportDate = new Date(report.created_at);
+        const monthKey = `${reportDate.getFullYear()}-${String(reportDate.getMonth() + 1).padStart(2, '0')}`;
+        monthlyStats[monthKey] = (monthlyStats[monthKey] || 0) + 1;
+      });
+
+      // 상위 항목만 추출
+      const topReasons = Object.entries(reasonStats)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 10);
+
+      const topSignalTypes = Object.entries(signalTypeStats)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 10);
+
+      const topStocks = Object.entries(stockStats)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 10);
+
+      const topSpeakers = Object.entries(speakerStats)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 10);
+
+      const patterns = {
+        totalReports: reports?.length || 0,
+        reasonStats: topReasons.map(([reason, count]) => ({ reason, count })),
+        signalTypeStats: topSignalTypes.map(([signal, count]) => ({ signal, count })),
+        stockStats: topStocks.map(([stock, count]) => ({ stock, count })),
+        speakerStats: topSpeakers.map(([speaker, count]) => ({ speaker, count })),
+        monthlyStats: Object.entries(monthlyStats)
+          .sort(([a], [b]) => a.localeCompare(b))
+          .map(([month, count]) => ({ month, count }))
+      };
+
+      setReportPatterns(patterns);
     } catch (error) {
       console.error('신고 패턴 로딩 실패:', error);
+      alert(error instanceof Error ? error.message : '신고 패턴 로딩에 실패했습니다.');
     } finally {
       setLoadingPatterns(false);
     }
   };
 
-  // AI 개선 요청
+  // AI 개선 요청 (클라이언트 직접 호출)
   const handleAiImprovement = async (signalId: string, issueTypes: string[]) => {
     try {
       setImprovingSignals(prev => new Set(prev).add(signalId));
-      
-      const response = await fetch('/api/improve-signal', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ signalId, issueTypes })
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        setAiImprovements(prev => ({ ...prev, [signalId]: data }));
-        alert('AI 개선안이 생성되었습니다.');
-      } else {
-        alert('개선안 생성에 실패했습니다: ' + data.error);
+
+      // 1. 시그널 데이터 조회 (자막 포함)
+      const { data: signalData, error: signalError } = await supabase
+        .from('influencer_signals')
+        .select(`
+          *,
+          influencer_videos (
+            subtitle_text,
+            title,
+            published_at
+          )
+        `)
+        .eq('id', signalId)
+        .single();
+
+      if (signalError || !signalData) {
+        throw new Error('시그널 데이터를 찾을 수 없습니다.');
       }
+
+      if (!signalData.influencer_videos?.subtitle_text) {
+        throw new Error('자막 데이터가 없습니다.');
+      }
+
+      // 2. AI 개선 요청
+      const subtitleText = signalData.influencer_videos.subtitle_text;
+      const issueDescription = issueTypes.join(', ');
+
+      const improvePrompt = `
+품질 이슈가 발견된 시그널을 개선해 주세요.
+
+**원본 자막:**
+${subtitleText}
+
+**기존 시그널:**
+- 종목: ${signalData.stock} (${signalData.ticker || 'N/A'})
+- 신호: ${signalData.signal}
+- 인용문: ${signalData.key_quote || 'null'}
+- 타임스탬프: ${signalData.timestamp || 'N/A'}
+- 분석근거: ${signalData.reasoning || 'null'}
+- 신뢰도: ${signalData.confidence || 'null'}
+
+**발견된 품질 이슈:**
+${issueDescription}
+
+**개선 지침:**
+1. 분석근거 부족: 자막을 바탕으로 최소 20자 이상의 구체적인 분석근거 작성
+2. 인용문 부족: 자막에서 정확한 핵심 발언을 15자 이상 인용
+3. 신뢰도 누락: 1-100 점수로 신뢰도 평가
+4. 시그널 타입은 반드시 한글 5단계만 사용: 매수/긍정/중립/경계/매도
+
+**개선안을 다음 JSON 형식으로 제공해 주세요:**
+{
+  "stock": "종목명",
+  "ticker": "티커 또는 null",
+  "signal": "매수|긍정|중립|경계|매도",
+  "quote": "정확한 인용문 (15자 이상)",
+  "timestamp": "MM:SS",
+  "analysis_reasoning": "구체적인 분석근거 (20자 이상)",
+  "confidence": 85
+}
+
+JSON만 출력하고 다른 설명은 하지 마세요.
+`;
+
+      const improvementSuggestion = await callAnthropicAPI({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 800,
+        messages: [{ role: 'user', content: improvePrompt }]
+      });
+
+      const data = {
+        success: true,
+        improvement: improvementSuggestion,
+        originalSignal: {
+          stock: signalData.stock,
+          ticker: signalData.ticker,
+          signal: signalData.signal,
+          quote: signalData.key_quote,
+          timestamp: signalData.timestamp,
+          analysis_reasoning: signalData.reasoning,
+          confidence: signalData.confidence
+        }
+      };
+
+      setAiImprovements(prev => ({ ...prev, [signalId]: data }));
+      alert('AI 개선안이 생성되었습니다.');
     } catch (error) {
       console.error('AI 개선 요청 실패:', error);
-      alert('개선안 생성 중 오류가 발생했습니다.');
+      alert(error instanceof Error ? error.message : '개선안 생성 중 오류가 발생했습니다.');
     } finally {
       setImprovingSignals(prev => {
         const newSet = new Set(prev);
@@ -531,27 +893,62 @@ export default function AdminPage() {
     });
   };
 
-  // 프롬프트 개선안 생성
+  // 프롬프트 개선안 생성 (클라이언트 직접 호출)
   const generatePromptImprovements = async () => {
     try {
       setGeneratingPrompt(true);
-      
-      const response = await fetch('/api/prompt-improvements', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ patterns: reportPatterns })
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        setPromptImprovements(data.improvements);
-      } else {
-        alert('프롬프트 개선안 생성에 실패했습니다: ' + data.error);
+
+      if (!reportPatterns) {
+        throw new Error('신고 패턴 데이터가 필요합니다.');
       }
+
+      // AI에게 프롬프트 개선안 요청
+      const promptImprovementPrompt = `
+신고 패턴 분석 결과를 바탕으로 파이프라인 프롬프트의 개선 규칙을 제안해 주세요.
+
+**현재 프롬프트 버전:** V10
+
+**신고 패턴 분석:**
+1. **사유별 신고 건수 TOP:**
+${reportPatterns.reasonStats.map((item: any) => `   - ${item.reason}: ${item.count}건`).join('\n')}
+
+2. **시그널 타입별 신고 빈도:**
+${reportPatterns.signalTypeStats.map((item: any) => `   - ${item.signal}: ${item.count}건`).join('\n')}
+
+3. **종목별 신고 빈도 TOP:**
+${reportPatterns.stockStats.map((item: any) => `   - ${item.stock}: ${item.count}건`).join('\n')}
+
+4. **화자별 신고 빈도 TOP:**
+${reportPatterns.speakerStats.map((item: any) => `   - ${item.speaker}: ${item.count}건`).join('\n')}
+
+5. **총 신고 건수:** ${reportPatterns.totalReports}건
+
+**분석 기준:**
+- 자주 신고되는 사유를 줄이기 위한 추출 규칙 강화
+- 특정 시그널 타입의 오탐지 방지
+- 종목명/티커 정확도 향상
+- 인용문 및 분석근거의 품질 향상
+
+**개선안 형식:**
+다음과 같이 구체적인 규칙 5-7개를 제안해 주세요:
+
+1. [문제점] → [개선 규칙]
+2. [문제점] → [개선 규칙]
+...
+
+각 규칙은 구체적이고 실행 가능한 지침이어야 합니다.
+`;
+
+      const promptImprovements = await callAnthropicAPI({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        messages: [{ role: 'user', content: promptImprovementPrompt }]
+      });
+
+      setPromptImprovements(promptImprovements);
     } catch (error) {
       console.error('프롬프트 개선안 생성 실패:', error);
-      alert('프롬프트 개선안 생성 중 오류가 발생했습니다.');
+      alert(error instanceof Error ? error.message : '프롬프트 개선안 생성 중 오류가 발생했습니다.');
     } finally {
       setGeneratingPrompt(false);
     }
