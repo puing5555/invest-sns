@@ -336,17 +336,11 @@ export default function InfluencerPage() {
                 : `${speakers.slice(0, 2).join(', ')} 외 ${speakers.length - 2}명`;
               const stockUrl = group.ticker ? `/stock/${group.ticker}?tab=influencer` : null;
 
-              return (
-                <div key={group.stock} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+              const cardContent = (
+                <div className={`bg-white rounded-xl p-5 shadow-sm border border-gray-100 ${stockUrl ? 'cursor-pointer hover:shadow-lg hover:border-[#3182f6]/30 transition-all' : ''}`}>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
-                      {stockUrl ? (
-                        <Link href={stockUrl} className="font-bold text-lg text-[#3182f6] hover:underline">
-                          {group.stock}
-                        </Link>
-                      ) : (
-                        <h3 className="font-bold text-lg text-gray-900">{group.stock}</h3>
-                      )}
+                      <h3 className={`font-bold text-lg ${stockUrl ? 'text-[#3182f6]' : 'text-gray-900'}`}>{group.stock}</h3>
                       <div className={`px-2 py-1 rounded text-xs font-medium ${getSignalColor(group.latest_signal)}`}>
                         최신: {group.latest_signal}
                       </div>
@@ -356,7 +350,6 @@ export default function InfluencerPage() {
                   <div className="text-sm text-gray-600 mb-3">
                     👤 {speakerText}
                   </div>
-                  {/* 최신 1개 key_quote만 표시 */}
                   {(() => {
                     const latestQuote = group.signals.find((s: any) => s.key_quote);
                     return latestQuote ? (
@@ -367,6 +360,12 @@ export default function InfluencerPage() {
                     ) : null;
                   })()}
                 </div>
+              );
+
+              return stockUrl ? (
+                <Link key={group.stock} href={stockUrl}>{cardContent}</Link>
+              ) : (
+                <div key={group.stock}>{cardContent}</div>
               );
             })}
           </div>
