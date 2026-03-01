@@ -31,6 +31,16 @@ function classifySignal(signal: { stock: string; ticker?: string | null }): 'kr'
   return 'us';
 }
 
+// 채널 프로필 이미지 (YouTube 썸네일)
+const CHANNEL_THUMBNAILS: Record<string, string> = {
+  '@3protv': 'https://yt3.googleusercontent.com/--qajlNgqpwDCjcupwfYwXsgXS3szfhMEEFGI1ouLTj4CKOtwGOyXGR7xl8-tzOGCDFt9umfqQ=s88-c-k-c0x00ffffff-no-rj',
+  '@corinpapa1106': 'https://yt3.googleusercontent.com/-HGE7apiUHRw_vzmDlM__1kyxVOFXNhvRp-uhM-3UgkeC5otDLa72I36kErIOpBPMGFybQVdeA=s88-c-k-c0x00ffffff-no-rj',
+  '@buiknam_tv': 'https://yt3.googleusercontent.com/YVgyZe175-BfqGiPUFccAuScDra7tjebtCUWknMRLPrmQb5u9_yqox8ZoLpauXAU-k4gnQTArw=s88-c-k-c0x00ffffff-no-rj',
+  '@hyoseok_academy': 'https://yt3.googleusercontent.com/ytc/AIdro_md5qYQnpwKbDcxHTdMG2zhXe1GbATSYBGmdJiMuO1N2L6lIeC8v1Efuu-zcc-_ytvViw=s88-c-k-c0x00ffffff-no-rj',
+  '@syukasworld': 'https://yt3.googleusercontent.com/ytc/AIdro_nMJ-JJFKw5B0TPk88VDQW9c7cBZwlM5krM_Uphz8HN4jQ=s88-c-k-c0x00ffffff-no-rj',
+  '@dalant_invest': 'https://yt3.googleusercontent.com/ytc/AIdro_mIGlqIYYtCZsZjLU94fyeijqO7zN80pJGCEL9w-uNr2PTUIGNAmRqf5z40HG5jVFRm1w=s88-c-k-c0x00ffffff-no-rj',
+};
+
 const STOCK_CODE_MAP: Record<string, string> = {
   '삼성전자': '005930', 'SK하이닉스': '000660', '현대차': '005380',
   '네이버': '035420', 'NAVER': '035420', 'LG화학': '051910',
@@ -58,6 +68,7 @@ export default function InfluencerPage() {
           signal_type: s.signal,
           speaker: s.speakers?.name || s.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
           channelName: s.influencer_videos?.influencer_channels?.channel_name || '',
+          channelHandle: s.influencer_videos?.influencer_channels?.channel_handle || '',
           content_snippet: s.key_quote || `${s.stock} ${s.signal}`,
           key_quote: s.key_quote,
           video_published_at: s.influencer_videos?.published_at || s.created_at,
@@ -69,6 +80,19 @@ export default function InfluencerPage() {
           ticker: s.ticker || null,
         }));
         setDbSignals(transformed);
+
+        // 좋아요 카운트 가져오기
+        if (transformed.length > 0) {
+          const signalIds = transformed.map((s: any) => s.id).filter(Boolean);
+          if (signalIds.length > 0) {
+            try {
+              const counts = await getSignalVoteCounts(signalIds);
+              setLikeCounts(counts);
+            } catch (e) {
+              console.error('Failed to load like counts:', e);
+            }
+          }
+        }
       } catch (e) {
         console.error('Failed to load signals:', e);
       } finally {
@@ -237,6 +261,7 @@ export default function InfluencerPage() {
                 videoTitle={signal.videoTitle}
                 date={formatDate(signal.video_published_at)}
                 videoUrl={signal.videoUrl}
+                likeCount={likeCounts[signal.id] || 0}
                 onClick={() => setSelectedSignal({
                   id: signal.id,
                   date: signal.video_published_at,
@@ -248,6 +273,7 @@ export default function InfluencerPage() {
                   videoTitle: signal.videoTitle,
                   channelName: signal.channelName,
                   ticker: signal.ticker || STOCK_CODE_MAP[signal.stock] || null,
+                  likeCount: likeCounts[signal.id] || 0,
                 })}
               />
             ))}
@@ -259,13 +285,16 @@ export default function InfluencerPage() {
             {(() => {
               // 카테고리 필터 적용된 시그널로 발언자별 카운트
               const categoryFilteredSignals = allSignals.filter(s => categoryFilter.size === 0 || categoryFilter.has(classifySignal(s)));
-              const speakerMap = new Map<string, { count: number; channels: Set<string>; latestSignal: string; latestDate: string; stockCounts: Map<string, number> }>();
+              const speakerMap = new Map<string, { count: number; channels: Set<string>; channelHandle: string; latestSignal: string; latestDate: string; stockCounts: Map<string, number>; signalTypes: Map<string, number> }>();
               categoryFilteredSignals.forEach(s => {
                 const existing = speakerMap.get(s.speaker);
                 if (existing) {
                   existing.count++;
                   if (s.channelName) existing.channels.add(s.channelName);
+                  // 자기 채널 핸들 우선 (채널명에 발언자 이름 포함 시)
+                  if (s.channelHandle && (!existing.channelHandle || (s.channelName && s.channelName.includes(s.speaker.charAt(0))))) existing.channelHandle = s.channelHandle;
                   if (s.stock) existing.stockCounts.set(s.stock, (existing.stockCounts.get(s.stock) || 0) + 1);
+                  if (s.signal_type) existing.signalTypes.set(s.signal_type, (existing.signalTypes.get(s.signal_type) || 0) + 1);
                   if (s.video_published_at > existing.latestDate) {
                     existing.latestSignal = s.signal_type;
                     existing.latestDate = s.video_published_at;
@@ -275,15 +304,39 @@ export default function InfluencerPage() {
                   if (s.channelName) channels.add(s.channelName);
                   const stockCounts = new Map<string, number>();
                   if (s.stock) stockCounts.set(s.stock, 1);
+                  const signalTypes = new Map<string, number>();
+                  if (s.signal_type) signalTypes.set(s.signal_type, 1);
                   speakerMap.set(s.speaker, {
                     count: 1,
                     channels,
+                    channelHandle: s.channelHandle || '',
                     latestSignal: s.signal_type,
                     latestDate: s.video_published_at || '',
                     stockCounts,
+                    signalTypes,
                   });
                 }
               });
+
+              // 추세 아이콘 결정 함수
+              const getTrendIcon = (signalTypes: Map<string, number>) => {
+                const buy = (signalTypes.get('매수') || 0) + (signalTypes.get('긍정') || 0);
+                const sell = (signalTypes.get('매도') || 0) + (signalTypes.get('경계') || 0);
+                const neutral = signalTypes.get('중립') || 0;
+                if (buy > sell && buy > neutral) return '🟢';
+                if (sell > buy && sell > neutral) return '🟠';
+                return '⚪';
+              };
+
+              // 최근 활동 텍스트
+              const getLastActivity = (dateStr: string) => {
+                if (!dateStr) return '';
+                const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24));
+                if (diff === 0) return '오늘 활동';
+                if (diff === 1) return '어제 활동';
+                return `${diff}일 전 활동`;
+              };
+
               const speakers = Array.from(speakerMap.entries())
                 .map(([name, data]) => ({
                   name,
@@ -293,28 +346,50 @@ export default function InfluencerPage() {
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([stock]) => stock),
+                  trendIcon: getTrendIcon(data.signalTypes),
+                  lastActivity: getLastActivity(data.latestDate),
                 }))
                 .filter(s => searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()))
                 .sort((a, b) => b.count - a.count);
 
               return speakers.map((speaker) => {
                 const speakerId = speakerToSlug(speaker.name);
+                const thumbUrl = speaker.channelHandle
+                  ? CHANNEL_THUMBNAILS[speaker.channelHandle] || null
+                  : null;
                 return (
                   <Link key={speaker.name} href={`/profile/influencer/${speakerId}`}>
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all cursor-pointer">
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer">
                       <div className="flex items-center space-x-4 mb-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                        {thumbUrl ? (
+                          <img
+                            src={thumbUrl}
+                            alt={speaker.name}
+                            className="w-12 h-12 rounded-full object-cover border-2 border-gray-100"
+                            onError={(e) => {
+                              // 이미지 로드 실패 시 이니셜로 폴백
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              target.nextElementSibling?.classList.remove('hidden');
+                            }}
+                          />
+                        ) : null}
+                        <div className={`w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg ${thumbUrl ? 'hidden' : ''}`}>
                           {speaker.name.charAt(0)}
                         </div>
                         <div>
                           <h3 className="font-bold text-gray-900">{speaker.name}</h3>
+                          {speaker.lastActivity && (
+                            <p className="text-xs text-gray-400 mt-0.5">{speaker.lastActivity}</p>
+                          )}
                         </div>
                       </div>
                       <div className="flex items-center justify-between mb-3">
-                        <div className="text-center">
+                        <div className="flex items-center gap-2">
                           <div className="text-2xl font-bold text-[#3182f6]">{speaker.count}</div>
-                          <div className="text-xs text-gray-500">시그널 수</div>
+                          <span className="text-lg">{speaker.trendIcon}</span>
                         </div>
+                        <div className="text-xs text-gray-500">시그널 수</div>
                       </div>
                       {speaker.topStocks.length > 0 && (
                         <div className="text-xs text-gray-400 truncate">

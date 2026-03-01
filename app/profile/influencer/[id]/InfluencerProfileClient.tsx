@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { getInfluencerProfileBySpeaker } from '@/lib/supabase';
+import { getInfluencerProfileBySpeaker, getSignalVoteCounts } from '@/lib/supabase';
 import { slugToSpeaker } from '@/lib/speakerSlugs';
 import SignalDetailModal from '@/components/SignalDetailModal';
 import { formatStockDisplay, formatStockShort } from '@/lib/stockNames';
@@ -16,6 +16,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [activeStock, setActiveStock] = useState<string>('전체');
   const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const load = async () => {
@@ -28,6 +29,20 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
           .catch(() => {}),
       ]);
       setProfile(data);
+
+      // 좋아요 카운트 가져오기
+      if (data?.signals?.length > 0) {
+        const signalIds = data.signals.map((s: any) => s.id).filter(Boolean);
+        if (signalIds.length > 0) {
+          try {
+            const counts = await getSignalVoteCounts(signalIds);
+            setLikeCounts(counts);
+          } catch (e) {
+            console.error('Failed to load like counts:', e);
+          }
+        }
+      }
+
       setLoading(false);
     };
     load();
@@ -84,6 +99,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   const handleCardClick = (signal: any) => {
     const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
     setSelectedSignal({
+      id: signal.id,
       date: signal.influencer_videos?.published_at || signal.created_at,
       influencer: speakerName,
       signal: signal.signal,
@@ -94,6 +110,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
       channelName,
       timestamp: signal.timestamp,
       ticker: signal.ticker,
+      likeCount: likeCounts[signal.id] || 0,
     });
   };
 
@@ -180,6 +197,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">좋아요</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
                 </tr>
               </thead>
@@ -232,6 +250,11 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                             </span>
                           );
                         })()}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-[#8b95a1] whitespace-nowrap">
+                        {likeCounts[signal.id] > 0 && (
+                          <span className="text-red-500">❤️ {likeCounts[signal.id]}</span>
+                        )}
                       </td>
                       <td className="px-4 py-4">
                         {videoId ? (

@@ -550,6 +550,7 @@ function InfluencerTab({ code }: { code: string }) {
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '경계', '매도']);
   const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
 
@@ -559,7 +560,7 @@ function InfluencerTab({ code }: { code: string }) {
       try {
         setLoading(true);
         
-        const { getStockSignals } = await import('@/lib/supabase');
+        const { getStockSignals, getSignalVoteCounts } = await import('@/lib/supabase');
         const videoSummaries = (await import('@/data/video_summaries.json')).default as Record<string, string>;
         const [signals] = await Promise.all([
           getStockSignals(code),
@@ -608,6 +609,19 @@ function InfluencerTab({ code }: { code: string }) {
         // published_at 우선 최신순 정렬
         transformedSignals.sort((a: any, b: any) => (b.date || '').localeCompare(a.date || ''));
         setSignalData(transformedSignals);
+
+        // 좋아요 카운트 가져오기
+        if (transformedSignals.length > 0) {
+          const signalIds = transformedSignals.map((s: any) => s.signalId).filter(Boolean);
+          if (signalIds.length > 0) {
+            try {
+              const counts = await getSignalVoteCounts(signalIds);
+              setLikeCounts(counts);
+            } catch (e) {
+              console.error('Failed to load like counts:', e);
+            }
+          }
+        }
         
         // 인플루언서별 카운트 생성
         const influencerCounts = transformedSignals.reduce((acc: any, signal: any) => {
@@ -802,6 +816,7 @@ function InfluencerTab({ code }: { code: string }) {
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">좋아요</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
               </tr>
             </thead>
@@ -810,7 +825,11 @@ function InfluencerTab({ code }: { code: string }) {
                 <tr
                   key={index}
                   className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
-                  onClick={() => setSelectedSignal(signal)}
+                  onClick={() => setSelectedSignal({
+                    ...signal,
+                    id: signal.signalId,
+                    likeCount: likeCounts[signal.signalId] || 0
+                  })}
                 >
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
@@ -848,6 +867,11 @@ function InfluencerTab({ code }: { code: string }) {
                         </span>
                       );
                     })()}
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[#8b95a1] whitespace-nowrap">
+                    {likeCounts[signal.signalId] > 0 && (
+                      <span className="text-red-500">❤️ {likeCounts[signal.signalId]}</span>
+                    )}
                   </td>
                   <td className="px-4 py-4">
                     <a
