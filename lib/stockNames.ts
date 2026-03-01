@@ -22,8 +22,9 @@ export function formatStockDisplay(stock?: string, ticker?: string): string {
   const isKorean = /[가-힣]/.test(stock);
 
   if (isKorean) {
-    // 이미 한글 → "삼성전자 (005930)" or "삼성전자"
-    return ticker && ticker !== stock ? `${stock} (${ticker})` : stock;
+    // 숫자로만 된 티커(005930 등)는 표시하지 않음
+    if (!ticker || ticker === stock || /^\d+$/.test(ticker)) return stock;
+    return `${stock} (${ticker})`;
   }
 
   // 영문 티커만 있는 경우 → 매핑에서 한글명 찾기

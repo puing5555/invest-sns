@@ -183,7 +183,9 @@ export default function GuruDetail({ guru, isOpen, onClose }: GuruDetailProps) {
                       <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div>
                           <span className="font-bold text-gray-900">{holding.name}</span>
-                          <span className="text-gray-500 ml-1">({holding.ticker})</span>
+                          {holding.ticker && !/^\d+$/.test(holding.ticker) && (
+                            <span className="text-gray-500 ml-1">({holding.ticker})</span>
+                          )}
                         </div>
                         <div className="font-semibold text-gray-900">{holding.percentage}%</div>
                       </div>

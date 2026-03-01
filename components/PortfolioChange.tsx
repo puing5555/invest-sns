@@ -25,7 +25,7 @@ export default function PortfolioChange({ newBuys, increased, decreased, soldAll
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="font-bold text-gray-900">
-                      {stock.name} <span className="text-gray-500 font-normal">({stock.ticker})</span>
+                      {stock.name} {stock.ticker && !/^\d+$/.test(stock.ticker) && <span className="text-gray-500 font-normal">({stock.ticker})</span>}
                     </div>
                   </div>
                   <div className="text-green-600 font-semibold">
@@ -49,7 +49,7 @@ export default function PortfolioChange({ newBuys, increased, decreased, soldAll
             {increased.map((stock, index) => (
               <div key={index} className="flex items-center justify-between py-2">
                 <div className="font-bold text-gray-900">
-                  {stock.name} <span className="text-gray-500 font-normal">({stock.ticker})</span>
+                  {stock.name} {stock.ticker && !/^\d+$/.test(stock.ticker) && <span className="text-gray-500 font-normal">({stock.ticker})</span>}
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-blue-100 rounded-full px-3 py-1">
@@ -79,7 +79,7 @@ export default function PortfolioChange({ newBuys, increased, decreased, soldAll
             {decreased.map((stock, index) => (
               <div key={index} className="flex items-center justify-between py-2">
                 <div className="font-bold text-gray-900">
-                  {stock.name} <span className="text-gray-500 font-normal">({stock.ticker})</span>
+                  {stock.name} {stock.ticker && !/^\d+$/.test(stock.ticker) && <span className="text-gray-500 font-normal">({stock.ticker})</span>}
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="bg-orange-100 rounded-full px-3 py-1">
@@ -109,7 +109,7 @@ export default function PortfolioChange({ newBuys, increased, decreased, soldAll
             {soldAll.map((stock, index) => (
               <div key={index} className="bg-red-50 border border-red-200 rounded-lg px-3 py-2 flex items-center gap-2">
                 <span className="font-bold text-gray-900">
-                  {stock.name} <span className="text-gray-500 font-normal">({stock.ticker})</span>
+                  {stock.name} {stock.ticker && !/^\d+$/.test(stock.ticker) && <span className="text-gray-500 font-normal">({stock.ticker})</span>}
                 </span>
                 <span className="text-red-500">✕</span>
               </div>
