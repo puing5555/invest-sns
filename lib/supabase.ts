@@ -310,9 +310,20 @@ export async function getInfluencerProfileBySpeaker(speakerName: string) {
 // 특정 종목의 시그널을 가져오는 함수
 export async function getStockSignals(ticker: string) {
   try {
-    const { data, error } = await supabase
-      .from('influencer_signals')
-      .select(`
+    // 티커→한글 종목명 매핑 (대부분 시그널이 ticker 없이 stock만 있음)
+    const nameMap: Record<string, string> = {
+      '005930': '삼성전자', '000660': 'SK하이닉스', '035420': 'NAVER',
+      '051910': 'LG화학', '005380': '현대차', '086520': '에코프로',
+      '009540': '한국가스공사', '399720': '퓨처켐', '298040': '효성중공업',
+      '036930': '주성엔지니어링', '042700': '한미반도체', '095610': '테스',
+      '000720': '현대건설', '004170': '신세계', '006400': '삼성SDI',
+      '267260': 'HD현대일렉트릭', '090430': '아모레퍼시픽', '036570': 'NC소프트',
+      '207940': '삼성바이오로직스', '079160': 'CGV', '403870': 'HPSP',
+      '240810': '원익IPS',
+    };
+    const stockName = nameMap[ticker];
+    
+    const selectQuery = `
         *,
         influencer_videos (
           title,
@@ -328,9 +339,16 @@ export async function getStockSignals(ticker: string) {
         speakers (
           name
         )
-      `)
-      .eq('ticker', ticker)
-      .order('created_at', { ascending: false });
+      `;
+
+    // ticker 또는 stock(한글명)으로 검색
+    let query = supabase.from('influencer_signals').select(selectQuery);
+    if (stockName) {
+      query = query.or(`ticker.eq.${ticker},stock.eq.${stockName}`);
+    } else {
+      query = query.eq('ticker', ticker);
+    }
+    const { data, error } = await query.order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching stock signals:', error);

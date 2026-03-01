@@ -178,8 +178,8 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">종목</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
                 </tr>
               </thead>
@@ -213,13 +213,15 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                           <span className="text-xs font-medium">{signal.signal}</span>
                         </div>
                       </td>
+                      <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
+                        <div className="truncate" title={signal.key_quote}>{signal.key_quote || '-'}</div>
+                      </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         {(() => {
                           if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
                           const pd = priceData[signal.id];
                           if (!pd || pd.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
                           const ret = pd.return_pct;
-                          // 매수/긍정: 양수=초록, 음수=빨강 / 경계/매도: 반대
                           const isBullish = signal.signal === '매수' || signal.signal === '긍정';
                           const isGood = isBullish ? ret >= 0 : ret <= 0;
                           const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
@@ -230,9 +232,6 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                             </span>
                           );
                         })()}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                        <div className="truncate" title={signal.key_quote}>{signal.key_quote || '-'}</div>
                       </td>
                       <td className="px-4 py-4">
                         {videoId ? (
