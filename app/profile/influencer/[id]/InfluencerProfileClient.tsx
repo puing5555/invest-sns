@@ -46,20 +46,21 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
     );
   }
 
-  // 종목별 카운트 계산 (발언 많은 순)
+  // 종목별 카운트 계산 (발언 많은 순, 같은 종목 합산)
   const stockCounts: { name: string; count: number; shortName: string }[] = [];
   if (profile?.signals) {
     const countMap: Record<string, number> = {};
-    const shortNameMap: Record<string, string> = {};
+    const displayMap: Record<string, string> = {};
     for (const s of profile.signals) {
-      const name = formatStockDisplay(s.stock, s.ticker) || '기타';
+      // shortName 기준으로 그룹핑 (중복 제거)
       const shortName = formatStockShort(s.stock, s.ticker) || '기타';
-      countMap[name] = (countMap[name] || 0) + 1;
-      shortNameMap[name] = shortName;
+      const displayName = formatStockDisplay(s.stock, s.ticker) || '기타';
+      countMap[shortName] = (countMap[shortName] || 0) + 1;
+      if (!displayMap[shortName]) displayMap[shortName] = displayName;
     }
     Object.entries(countMap)
       .sort((a, b) => b[1] - a[1])
-      .forEach(([name, count]) => stockCounts.push({ name, count, shortName: shortNameMap[name] || name }));
+      .forEach(([shortName, count]) => stockCounts.push({ name: displayMap[shortName], count, shortName }));
   }
 
   // 필터링된 시그널 (published_at 우선 최신순 정렬)
@@ -70,7 +71,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   };
   const filteredSignals = (activeStock === '전체'
     ? (profile?.signals || [])
-    : (profile?.signals || []).filter((s: any) => (formatStockDisplay(s.stock, s.ticker) || '기타') === activeStock)
+    : (profile?.signals || []).filter((s: any) => (formatStockShort(s.stock, s.ticker) || '기타') === activeStock)
   ).sort(sortByDate);
 
   const handleCardClick = (signal: any) => {
@@ -114,8 +115,8 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
           <div className="mt-4">
             <p className="text-xs text-[#8b95a1] mb-1.5">관심 종목</p>
             <p className="text-sm text-[#333d4b]">
-              {stockCounts.map((s, i) => (
-                <span key={s.name}>
+              {stockCounts.slice(0, 5).map((s, i) => (
+                <span key={s.shortName}>
                   {i > 0 && <span className="text-[#d1d6db] mx-1">·</span>}
                   <span className="font-medium">{s.shortName}</span>
                   <span className="text-[#8b95a1]">({s.count})</span>
@@ -126,36 +127,39 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
         )}
       </div>
 
-      {/* 종목 필터 탭 */}
-      {stockCounts.length > 1 && (
-        <div className="px-4 pt-4 pb-0">
-          <div className="flex gap-2 overflow-x-auto no-scrollbar">
-            <button
-              onClick={() => setActiveStock('전체')}
-              className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                activeStock === '전체'
-                  ? 'bg-[#191f28] text-white'
-                  : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
-              }`}
-            >
-              전체 {profile.totalSignals}
-            </button>
-            {stockCounts.map((s) => (
+      {/* 종목 필터 탭 (시그널 5개 이상만) */}
+      {(() => {
+        const filteredTabs = stockCounts.filter(s => s.count >= 5);
+        return filteredTabs.length > 0 ? (
+          <div className="px-4 pt-4 pb-0">
+            <div className="flex gap-2 overflow-x-auto no-scrollbar">
               <button
-                key={s.name}
-                onClick={() => setActiveStock(s.name)}
+                onClick={() => setActiveStock('전체')}
                 className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                  activeStock === s.name
+                  activeStock === '전체'
                     ? 'bg-[#191f28] text-white'
                     : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
                 }`}
               >
-                {s.name} {s.count}
+                전체 {profile.totalSignals}
               </button>
-            ))}
+              {filteredTabs.map((s) => (
+                <button
+                  key={s.shortName}
+                  onClick={() => setActiveStock(s.shortName)}
+                  className={`flex-shrink-0 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                    activeStock === s.shortName
+                      ? 'bg-[#191f28] text-white'
+                      : 'bg-white text-[#8b95a1] border border-[#e8e8e8]'
+                  }`}
+                >
+                  {s.shortName} {s.count}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        ) : null;
+      })()}
 
       {/* 시그널 테이블 */}
       <div className="px-4 py-4">
