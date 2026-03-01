@@ -16,6 +16,21 @@ const V9_SIGNAL_COLORS: Record<string, string> = {
   '매도': 'bg-red-800 text-white'
 };
 
+const CRYPTO_TICKERS = new Set(['CC', 'BTC', 'ETH', 'XRP', 'SOL', 'DOGE', 'ADA', 'DOT', 'AVAX', 'MATIC', 'LINK', 'UNI', '비트코인', '이더리움', '리플']);
+
+function classifySignal(signal: { stock: string; ticker?: string | null }): 'kr' | 'us' | 'crypto' {
+  const t = signal.ticker || '';
+  const s = signal.stock || '';
+  if (CRYPTO_TICKERS.has(t) || CRYPTO_TICKERS.has(s) || s.includes('비트코인') || s.includes('이더리움') || s.includes('크립토') || s.includes('코인')) return 'crypto';
+  if (/^\d+$/.test(t)) return 'kr';
+  // Korean name heuristic: contains hangul
+  if (/[가-힣]/.test(s) && !t) return 'kr';
+  if (/^[A-Z]{1,5}$/.test(t)) return 'us';
+  // Default: if stock name is Korean → kr
+  if (/[가-힣]/.test(s)) return 'kr';
+  return 'us';
+}
+
 const STOCK_CODE_MAP: Record<string, string> = {
   '삼성전자': '005930', 'SK하이닉스': '000660', '현대차': '005380',
   '네이버': '035420', 'NAVER': '035420', 'LG화학': '051910',
@@ -29,6 +44,7 @@ export default function InfluencerPage() {
   const [dbSignals, setDbSignals] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
+  const [categoryFilter, setCategoryFilter] = useState<Set<string>>(new Set(['kr', 'us', 'crypto']));
 
   // DB에서 시그널 로드
   useEffect(() => {
@@ -115,11 +131,20 @@ export default function InfluencerPage() {
     return date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
   };
 
-  const filteredSignals = allSignals.filter(signal =>
-    searchQuery === '' ||
-    signal.stock.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    signal.speaker.toLowerCase().includes(searchQuery.toLowerCase())
-  ).sort((a, b) => (b.video_published_at || '').localeCompare(a.video_published_at || ''));
+  const toggleCategory = (cat: string) => {
+    setCategoryFilter(prev => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat); else next.add(cat);
+      return next;
+    });
+  };
+
+  const filteredSignals = allSignals.filter(signal => {
+    if (categoryFilter.size > 0 && !categoryFilter.has(classifySignal(signal))) return false;
+    return searchQuery === '' ||
+      signal.stock.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      signal.speaker.toLowerCase().includes(searchQuery.toLowerCase());
+  }).sort((a, b) => (b.video_published_at || '').localeCompare(a.video_published_at || ''));
 
   const filteredInfluencers = influencers.filter(influencer =>
     searchQuery === '' ||
@@ -178,8 +203,23 @@ export default function InfluencerPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {activeTab === 'latest' && (
           <div className="space-y-4">
-            <div className="text-sm text-gray-600 mb-4">
+            <div className="text-sm text-gray-600 mb-3">
               총 {filteredSignals.length}개 시그널 {loading && '(로딩 중...)'}
+            </div>
+            <div className="flex gap-2 mb-4">
+              {([['kr', '🇰🇷 한국주식'], ['us', '🇺🇸 미국주식'], ['crypto', '₿ 크립토']] as const).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => toggleCategory(key)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                    categoryFilter.has(key)
+                      ? 'bg-[#3182f6] text-white border-[#3182f6]'
+                      : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
             {filteredSignals.map((signal) => (
               <SignalCard
