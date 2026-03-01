@@ -147,8 +147,8 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
       return;
     }
 
-    if (reportReason === '기타' && !reportDetail.trim()) {
-      alert('기타 사유를 입력해주세요.');
+    if (reportDetail.trim().length < 10) {
+      alert('상세 사유를 최소 10자 이상 입력해주세요.');
       return;
     }
 
@@ -157,7 +157,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
       await insertSignalReport(
         signal.id, 
         reportReason, 
-        reportReason === '기타' ? reportDetail : undefined
+        reportDetail.trim()
       );
       
       alert('신고가 접수되었습니다.');
@@ -195,9 +195,9 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
             <div className="flex items-center gap-1">
               <button
                 onClick={handleLike}
-                className={`transition-colors text-sm px-2 py-1 rounded-lg flex items-center gap-1 ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
+                className={`transition-colors text-lg px-3 py-2 rounded-lg flex items-center gap-1 border-none outline-none ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
               >
-                {liked ? '❤️' : '♡'}{likeCount > 0 && <span className="text-xs">{likeCount}</span>}
+                {liked ? '❤️' : '♡'}{likeCount > 0 && <span className="text-sm">{likeCount}</span>}
               </button>
               <button 
                 onClick={handleReport}
@@ -315,7 +315,10 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                           name="reportReason"
                           value={reason}
                           checked={reportReason === reason}
-                          onChange={(e) => setReportReason(e.target.value)}
+                          onChange={(e) => {
+                            setReportReason(e.target.value);
+                            setReportDetail('');
+                          }}
                           className="w-4 h-4 text-[#3182f6]"
                         />
                         <span className="text-sm text-[#191f28]">{reason}</span>
@@ -323,16 +326,30 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                     ))}
                   </div>
 
-                  {reportReason === '기타' && (
-                    <div className="mb-4">
+                  {reportReason && (
+                    <div className="mb-4" style={{ animation: 'fadeIn 0.2s ease-in' }}>
                       <textarea
                         value={reportDetail}
                         onChange={(e) => setReportDetail(e.target.value)}
-                        placeholder="신고 사유를 상세히 입력해주세요..."
-                        className="w-full border border-gray-300 rounded-lg p-3 text-sm resize-none h-20 focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+                        placeholder="상세 사유를 입력해주세요"
+                        className="w-full border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#3182f6]"
+                        style={{ padding: '8px', fontSize: '14px', lineHeight: '1.5' }}
+                        rows={4}
                       />
+                      {reportDetail.length > 0 && reportDetail.length < 10 && (
+                        <p className="text-xs mt-1" style={{ color: '#ef4444' }}>
+                          최소 10자 이상 입력해주세요 ({reportDetail.length}/10)
+                        </p>
+                      )}
                     </div>
                   )}
+
+                  <style jsx>{`
+                    @keyframes fadeIn {
+                      from { opacity: 0; transform: translateY(-4px); }
+                      to { opacity: 1; transform: translateY(0); }
+                    }
+                  `}</style>
 
                   <div className="flex gap-2">
                     <button
@@ -347,7 +364,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                     </button>
                     <button
                       onClick={handleReportSubmit}
-                      disabled={isSubmittingReport || !reportReason}
+                      disabled={isSubmittingReport || !reportReason || reportDetail.length < 10}
                       className="flex-1 py-2.5 text-sm text-white bg-[#3182f6] rounded-lg hover:bg-[#1b64da] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       {isSubmittingReport ? '처리 중...' : '신고'}

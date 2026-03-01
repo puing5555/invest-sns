@@ -1,0 +1,1 @@
+{"success":true,"patterns":{"totalReports":2,"reasonStats":[{"reason":"시그널 틀림","count":1},{"reason":"종목 오류","count":1}],"signalTypeStats":[{"signal":"긍정","count":2}],"stockStats":[{"stock":"SK하이닉스","count":2}],"speakerStats":[{"speaker":"박병창","count":2}],"monthlyStats":[{"month":"2026-03","count":2}]}}

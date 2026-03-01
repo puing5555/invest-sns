@@ -314,16 +314,29 @@ def main():
         filepath = os.path.join(SUBS_DIR, f)
         with open(filepath, 'r', encoding='utf-8') as fh:
             d = json.load(fh)
-        subs = d.get('subtitles', d.get('segments', []))
+        
+        # Handle different JSON formats
+        if isinstance(d, list):
+            subs = d
+        elif isinstance(d, dict):
+            subs = d.get('subtitles', d.get('segments', []))
+        else:
+            subs = []
         if len(subs) < 50:
             print(f"  SKIP {f}: too few segments ({len(subs)})")
             continue
         
-        vid = d.get('video_id')
+        # Extract video_id
+        if isinstance(d, dict) and 'video_id' in d:
+            vid = d['video_id']
+        else:
+            # Extract from filename
+            vid = f.replace('.json', '').split('_', 1)[-1] if '_' in f else f.replace('.json', '')
         # Check if already analyzed with V9
         already_v9 = False
         for ev in existing_videos:
-            if ev["video_id"] == vid and ev.get("pipeline_version","").startswith("V9"):
+            pipeline_version = ev.get("pipeline_version") or ""
+            if ev["video_id"] == vid and pipeline_version.startswith("V9"):
                 already_v9 = True
                 break
         
@@ -418,7 +431,7 @@ def main():
         
         # Print signals
         for sig in signals:
-            print(f"  📊 {sig['stock']} | {sig['signal']} | {sig['confidence']} | {sig['speaker']} | {sig.get('mention_type','?')}")
+            print(f"  [SIGNAL] {sig['stock']} | {sig['signal']} | {sig['confidence']} | {sig['speaker']} | {sig.get('mention_type','?')}")
         
         time.sleep(1)  # Rate limit
     
