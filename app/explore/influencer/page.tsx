@@ -5,6 +5,7 @@ import { influencers } from '@/data/influencerData';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
 import { speakerToSlug } from '@/lib/speakerSlugs';
 import SignalCard from '@/components/SignalCard';
+import SignalDetailModal from '@/components/SignalDetailModal';
 
 // V9 기준 한글 시그널 타입 색상
 const V9_SIGNAL_COLORS: Record<string, string> = {
@@ -27,6 +28,7 @@ export default function InfluencerPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [dbSignals, setDbSignals] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedSignal, setSelectedSignal] = useState<any>(null);
 
   // DB에서 시그널 로드
   useEffect(() => {
@@ -190,6 +192,17 @@ export default function InfluencerPage() {
                 videoTitle={signal.videoTitle}
                 date={formatDate(signal.video_published_at)}
                 videoUrl={signal.videoUrl}
+                onClick={() => setSelectedSignal({
+                  date: signal.video_published_at,
+                  influencer: signal.speaker,
+                  signal: signal.signal_type,
+                  quote: signal.key_quote || '',
+                  videoUrl: signal.videoUrl || '#',
+                  analysis_reasoning: signal.reasoning,
+                  videoTitle: signal.videoTitle,
+                  channelName: signal.channelName,
+                  ticker: signal.ticker,
+                })}
               />
             ))}
           </div>
@@ -303,6 +316,8 @@ export default function InfluencerPage() {
           </div>
         )}
       </div>
+
+      <SignalDetailModal signal={selectedSignal} onClose={() => setSelectedSignal(null)} />
     </div>
   );
 }
