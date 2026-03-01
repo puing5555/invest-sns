@@ -482,9 +482,16 @@ function InfluencerTab({ code }: { code: string }) {
             ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
             : '#';
 
+          const speakerName = signal.speakers?.name || '';
+          const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
+          // 게스트면 "스피커 · 채널", 호스트(스피커==채널 or 스피커 없음)면 채널명만
+          const influencerDisplay = speakerName && speakerName !== channelName
+            ? `${speakerName} · ${channelName}`
+            : channelName || speakerName || 'Unknown';
+
           return {
             date: publishedDate.toISOString().split('T')[0],
-            influencer: signal.speakers?.name || signal.influencer_videos?.influencer_channels?.channel_name || 'Unknown',
+            influencer: influencerDisplay,
             signal: signal.signal,
             quote: signal.key_quote || '키 인용문이 없습니다.',
             return: 'N/A', // TODO: 수익률 계산
@@ -772,6 +779,7 @@ function InfluencerTab({ code }: { code: string }) {
             <thead className="bg-[#f8f9fa]">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">인플루언서</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
@@ -786,6 +794,9 @@ function InfluencerTab({ code }: { code: string }) {
                       month: 'short', 
                       day: 'numeric' 
                     })}
+                  </td>
+                  <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                    {signal.influencer}
                   </td>
                   <td className="px-4 py-4">
                     <div className="flex items-center gap-2">
