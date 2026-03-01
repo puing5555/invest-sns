@@ -480,17 +480,56 @@ JSON만 출력하고 다른 설명은 하지 마세요.
                         <div className="text-xs text-gray-500 mt-1 truncate max-w-xs">{report.detail}</div>
                       )}
                     </td>
-                    <td className="px-6 py-4" style={{ maxWidth: '200px' }}>
-                      <div className="text-sm text-gray-600 line-clamp-3 overflow-hidden">
-                        {report.ai_review || (
+                    <td className="px-4 py-4" style={{ maxWidth: '180px' }}>
+                      <div className="text-sm">
+                        {report.ai_review ? (
+                          report.ai_review.includes('수정필요') || report.ai_review.includes('수정 필요') ? (
+                            <span className="text-amber-600">⚠️ 수정필요{(() => {
+                              const lines = report.ai_review.split('\n').filter((l: string) => l.trim());
+                              const reasonLine = lines.find((l: string) => l.includes('근거:') || l.includes('이유:') || l.includes('문제:'));
+                              if (reasonLine) {
+                                const short = reasonLine.replace(/^.*?[:：]\s*/, '').slice(0, 30);
+                                return `: ${short}${short.length >= 30 ? '...' : ''}`;
+                              }
+                              return '';
+                            })()}</span>
+                          ) : (
+                            <span className="text-green-600">✅ 문제없음</span>
+                          )
+                        ) : (
                           <span className="text-yellow-600">대기중</span>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4" style={{ maxWidth: '200px' }}>
-                      <div className="text-sm text-gray-600 line-clamp-3 overflow-hidden">
-                        {report.ai_suggestion || (
-                          <span className="text-yellow-600">대기중</span>
+                    <td className="px-4 py-4" style={{ maxWidth: '180px' }}>
+                      <div className="text-sm text-gray-600">
+                        {report.ai_review ? (
+                          report.ai_review.includes('수정필요') || report.ai_review.includes('수정 필요') ? (
+                            report.ai_suggestion ? (
+                              <span className="truncate block max-w-full" title={report.ai_suggestion}>
+                                {(() => {
+                                  try {
+                                    let s = report.ai_suggestion.trim();
+                                    s = s.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
+                                    const json = JSON.parse(s);
+                                    const changes: string[] = [];
+                                    const orig = report.influencer_signals;
+                                    if (orig && json.stock && json.stock !== orig.stock) changes.push(`종목: ${orig.stock}→${json.stock}`);
+                                    if (orig && json.signal && json.signal !== orig.signal) changes.push(`신호: ${orig.signal}→${json.signal}`);
+                                    if (json.quote || json.key_quote) changes.push('인용문 수정');
+                                    if (json.analysis_reasoning || json.reasoning) changes.push('분석근거 수정');
+                                    return changes.length > 0 ? changes.slice(0, 2).join(', ') : '수정안 있음';
+                                  } catch { return '수정안 있음'; }
+                                })()}
+                              </span>
+                            ) : (
+                              <span className="text-yellow-600">생성중...</span>
+                            )
+                          ) : (
+                            <span className="text-gray-400">-</span>
+                          )
+                        ) : (
+                          <span className="text-gray-400">-</span>
                         )}
                       </div>
                     </td>
