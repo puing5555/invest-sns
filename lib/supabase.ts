@@ -530,26 +530,29 @@ export async function insertSignalMemo(signalId: string, memo: string, userId?: 
 // 대시보드 통계 함수
 export async function getAdminStats() {
   try {
-    const [signals, votes, reports] = await Promise.all([
-      supabase.from('influencer_signals').select('id', { count: 'exact', head: true }),
-      supabase.from('signal_votes').select('id', { count: 'exact', head: true }).catch(() => ({ count: 0 })),
-      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).catch(() => ({ count: 0 })),
+    // 안전한 count 헬퍼 (테이블 없거나 RLS 에러 시 0 반환)
+    const safeCount = async (table: string, filter?: { col: string; val: string }) => {
+      try {
+        let query = supabase.from(table).select('*', { count: 'exact', head: true });
+        if (filter) query = query.eq(filter.col, filter.val);
+        const { count, error } = await query;
+        if (error) { console.warn(`Count error for ${table}:`, error.message); return 0; }
+        return count || 0;
+      } catch { return 0; }
+    };
+
+    const [totalSignals, totalVotes, totalReports, totalMemos] = await Promise.all([
+      safeCount('influencer_signals'),
+      safeCount('signal_votes'),
+      safeCount('signal_reports'),
+      safeCount('signal_memos'),
     ]);
 
-    // 상태별 신고 수 조회
-    const [pendingReports, reviewedReports, resolvedReports] = await Promise.all([
-      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).eq('status', 'pending').catch(() => ({ count: 0 })),
-      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).eq('status', 'reviewed').catch(() => ({ count: 0 })),
-      supabase.from('signal_reports').select('id', { count: 'exact', head: true }).eq('status', 'resolved').catch(() => ({ count: 0 })),
+    const [pendingCount, reviewedCount, resolvedCount] = await Promise.all([
+      safeCount('signal_reports', { col: 'status', val: 'pending' }),
+      safeCount('signal_reports', { col: 'status', val: 'reviewed' }),
+      safeCount('signal_reports', { col: 'status', val: 'resolved' }),
     ]);
-
-    const totalSignals = signals.count || 0;
-    const totalVotes = votes.count || 0;
-    const totalReports = reports.count || 0;
-    
-    // 메모 수 조회
-    const memos = await supabase.from('signal_memos').select('id', { count: 'exact', head: true }).catch(() => ({ count: 0 }));
-    const totalMemos = memos.count || 0;
 
     // 유저 참여율 계산 (좋아요+신고+메모 / 시그널 수)
     const participationRate = totalSignals > 0 ? 
@@ -560,9 +563,9 @@ export async function getAdminStats() {
       totalVotes,
       totalReports,
       totalMemos,
-      pendingReports: pendingReports.count || 0,
-      reviewedReports: reviewedReports.count || 0,
-      resolvedReports: resolvedReports.count || 0,
+      pendingReports: pendingCount,
+      reviewedReports: reviewedCount,
+      resolvedReports: resolvedCount,
       participationRate
     };
   } catch (error) {
