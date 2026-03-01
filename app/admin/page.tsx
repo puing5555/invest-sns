@@ -224,7 +224,7 @@ export default function AdminPage() {
   const renderDashboard = () => (
     <div className="space-y-8">
       {/* 통계 카드 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl p-6 shadow-sm border">
           <div className="flex items-center justify-between mb-4">
             <div className="bg-blue-100 rounded-full p-3">
@@ -239,18 +239,6 @@ export default function AdminPage() {
 
         <div className="bg-white rounded-2xl p-6 shadow-sm border">
           <div className="flex items-center justify-between mb-4">
-            <div className="bg-red-100 rounded-full p-3">
-              <span className="text-2xl">❤️</span>
-            </div>
-          </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-1">
-            {stats.totalVotes.toLocaleString()}
-          </h3>
-          <p className="text-sm text-gray-600">총 좋아요 수</p>
-        </div>
-
-        <div className="bg-white rounded-2xl p-6 shadow-sm border">
-          <div className="flex items-center justify-between mb-4">
             <div className="bg-yellow-100 rounded-full p-3">
               <span className="text-2xl">🚨</span>
             </div>
@@ -259,18 +247,6 @@ export default function AdminPage() {
             {stats.totalReports.toLocaleString()}
           </h3>
           <p className="text-sm text-gray-600">총 신고 수</p>
-        </div>
-
-        <div className="bg-white rounded-2xl p-6 shadow-sm border">
-          <div className="flex items-center justify-between mb-4">
-            <div className="bg-green-100 rounded-full p-3">
-              <span className="text-2xl">📈</span>
-            </div>
-          </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-1">
-            {stats.participationRate}%
-          </h3>
-          <p className="text-sm text-gray-600">유저 참여율</p>
         </div>
       </div>
 
