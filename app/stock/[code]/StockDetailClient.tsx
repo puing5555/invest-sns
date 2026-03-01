@@ -53,7 +53,6 @@ const tabs = [
   { id: 'analyst', label: '애널리스트', icon: '📊' },
   { id: 'disclosure', label: '공시', icon: '📋' },
   { id: 'earnings', label: '실적', icon: '📈' },
-  { id: 'reports', label: '리포트', icon: '📄' },
   { id: 'insider', label: '임원매매', icon: '💼' },
   { id: 'calendar', label: '일정', icon: '📅' },
   { id: 'memo', label: '메모', icon: '📝' },
@@ -175,15 +174,6 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
             <div className="text-4xl mb-4">📊</div>
             <h3 className="text-lg font-bold text-[#191f28] mb-2">실적 분석</h3>
             <p className="text-[#8b95a1]">상세 실적 분석을 준비중입니다</p>
-          </div>
-        );
-
-      case 'reports':
-        return (
-          <div className="text-center py-12">
-            <div className="text-4xl mb-4">📄</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">리서치 리포트</h3>
-            <p className="text-[#8b95a1]">증권사 리포트를 준비중입니다</p>
           </div>
         );
 

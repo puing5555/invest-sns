@@ -191,16 +191,13 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
               <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${getSignalStyle(signal.signal)}`}>
                 {signal.signal}
               </span>
-              {likeCount > 0 && (
-                <span className="text-xs text-[#8b95a1]">❤️ {likeCount}</span>
-              )}
             </div>
             <div className="flex items-center gap-1">
               <button
                 onClick={handleLike}
-                className={`transition-colors text-sm px-2 py-1 rounded-lg ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
+                className={`transition-colors text-sm px-2 py-1 rounded-lg flex items-center gap-1 ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
               >
-                {liked ? '❤️' : '🤍'}
+                {liked ? '❤️' : '♡'}{likeCount > 0 && <span className="text-xs">{likeCount}</span>}
               </button>
               <button 
                 onClick={handleReport}
