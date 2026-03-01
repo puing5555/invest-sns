@@ -82,8 +82,8 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
     return signal.videoUrl;
   };
 
-  // influencer 필드에 이미 올바른 표시명이 들어있음 (호스트: 채널명, 게스트: "발언자 · 채널")
-  const isHost = !signal.influencer?.includes(' · ');
+  // influencer: 호스트=채널명, 게스트=화자명. channelName으로 구분
+  const isHost = !signal.channelName || !signal.influencer || signal.channelName === signal.influencer || signal.channelName.includes(signal.influencer) || signal.influencer.includes(signal.channelName);
 
   const handleLike = () => {
     if (liked) {
