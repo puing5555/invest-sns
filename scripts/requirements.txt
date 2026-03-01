@@ -1,0 +1,35 @@
+# 자동화 파이프라인 의존성 패키지
+
+# 유튜브 영상 수집 및 자막 추출
+yt-dlp>=2024.3.10
+youtube-transcript-api>=0.6.2
+
+# AI 분석
+anthropic>=0.18.1
+
+# 데이터베이스
+supabase>=2.4.4
+
+# 가격 수집
+yfinance>=0.2.18
+
+# 환경변수 관리
+python-dotenv>=1.0.1
+
+# HTTP 요청
+requests>=2.31.0
+
+# 데이터 처리
+pandas>=2.2.1
+numpy>=1.24.3
+
+# 날짜/시간 처리
+python-dateutil>=2.8.2
+
+# JSON/텍스트 처리
+beautifulsoup4>=4.12.3
+lxml>=4.9.4
+
+# 프록시 지원
+requests[socks]>=2.31.0
+PySocks>=1.7.1

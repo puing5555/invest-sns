@@ -1518,9 +1518,9 @@ ${reportPatterns.speakerStats.map((item: any) => `   - ${item.speaker}: ${item.c
                                   <div><span className="font-medium">종목:</span> {original.stock}</div>
                                   <div><span className="font-medium">티커:</span> {original.ticker || 'N/A'}</div>
                                   <div><span className="font-medium">신호:</span> {original.signal}</div>
-                                  <div><span className="font-medium">인용문:</span> "{original.quote}"</div>
+                                  <div><span className="font-medium">인용문:</span> "{original.key_quote}"</div>
                                   <div><span className="font-medium">타임스탬프:</span> {original.timestamp}</div>
-                                  <div><span className="font-medium">분석근거:</span> {original.analysis_reasoning || 'N/A'}</div>
+                                  <div><span className="font-medium">분석근거:</span> {original.reasoning || 'N/A'}</div>
                                 </div>
                               </div>
                               

@@ -1,7 +1,7 @@
 # title_filter.py - 제목 필터링 로직
 import re
 from typing import List, Tuple
-from .pipeline_config import PipelineConfig
+from pipeline_config import PipelineConfig
 
 class TitleFilter:
     def __init__(self):

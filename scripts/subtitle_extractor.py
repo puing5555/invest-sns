@@ -7,7 +7,7 @@ from typing import Optional, Dict, Any
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api.formatters import TextFormatter
 import yt_dlp
-from .pipeline_config import PipelineConfig
+from pipeline_config import PipelineConfig
 
 class SubtitleExtractor:
     def __init__(self):
