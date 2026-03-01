@@ -423,28 +423,28 @@ JSON만 출력하고 다른 설명은 하지 마세요.
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
+            <table className="min-w-full divide-y divide-gray-200 table-fixed">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '80px' }}>
                     날짜
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '150px' }}>
                     시그널 내용
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '100px' }}>
                     신고 사유
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '200px' }}>
                     AI 검토 결과
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '200px' }}>
                     AI 수정안
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '70px' }}>
                     상태
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style={{ width: '100px' }}>
                     작업
                   </th>
                 </tr>
@@ -455,10 +455,10 @@ JSON만 출력하고 다른 설명은 하지 마세요.
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {formatDate(report.created_at)}
                     </td>
-                    <td className="px-6 py-4 max-w-xs">
+                    <td className="px-6 py-4" style={{ minWidth: '120px', maxWidth: '180px' }}>
                       <div className="flex flex-col space-y-1">
                         <div className="flex items-center space-x-2">
-                          <span className="font-medium text-sm">
+                          <span className="font-medium text-sm whitespace-nowrap">
                             {report.influencer_signals?.stock || 'Unknown'}
                           </span>
                           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSignalColor(report.influencer_signals?.signal || '')}`}>
@@ -478,15 +478,15 @@ JSON만 출력하고 다른 설명은 하지 마세요.
                         <div className="text-xs text-gray-500 mt-1 truncate max-w-xs">{report.detail}</div>
                       )}
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-600">
+                    <td className="px-6 py-4" style={{ maxWidth: '200px' }}>
+                      <div className="text-sm text-gray-600 line-clamp-3 overflow-hidden">
                         {report.ai_review || (
                           <span className="text-yellow-600">대기중</span>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-600">
+                    <td className="px-6 py-4" style={{ maxWidth: '200px' }}>
+                      <div className="text-sm text-gray-600 line-clamp-3 overflow-hidden">
                         {report.ai_suggestion || (
                           <span className="text-yellow-600">대기중</span>
                         )}
