@@ -214,12 +214,13 @@ export default function InfluencerPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(() => {
               // DB 시그널에서 발언자별 카운트 + 최신 시그널 + 채널 추출
-              const speakerMap = new Map<string, { count: number; channels: Set<string>; latestSignal: string; latestDate: string }>();
+              const speakerMap = new Map<string, { count: number; channels: Set<string>; latestSignal: string; latestDate: string; stockCounts: Map<string, number> }>();
               allSignals.forEach(s => {
                 const existing = speakerMap.get(s.speaker);
                 if (existing) {
                   existing.count++;
                   if (s.channelName) existing.channels.add(s.channelName);
+                  if (s.stock) existing.stockCounts.set(s.stock, (existing.stockCounts.get(s.stock) || 0) + 1);
                   if (s.video_published_at > existing.latestDate) {
                     existing.latestSignal = s.signal_type;
                     existing.latestDate = s.video_published_at;
@@ -227,16 +228,27 @@ export default function InfluencerPage() {
                 } else {
                   const channels = new Set<string>();
                   if (s.channelName) channels.add(s.channelName);
+                  const stockCounts = new Map<string, number>();
+                  if (s.stock) stockCounts.set(s.stock, 1);
                   speakerMap.set(s.speaker, {
                     count: 1,
                     channels,
                     latestSignal: s.signal_type,
                     latestDate: s.video_published_at || '',
+                    stockCounts,
                   });
                 }
               });
               const speakers = Array.from(speakerMap.entries())
-                .map(([name, data]) => ({ name, ...data, channelList: Array.from(data.channels) }))
+                .map(([name, data]) => ({
+                  name,
+                  ...data,
+                  channelList: Array.from(data.channels),
+                  topStocks: Array.from(data.stockCounts.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([stock]) => stock),
+                }))
                 .filter(s => searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()))
                 .sort((a, b) => b.count - a.count);
 
@@ -253,15 +265,17 @@ export default function InfluencerPage() {
                           <h3 className="font-bold text-gray-900">{speaker.name}</h3>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mb-3">
                         <div className="text-center">
                           <div className="text-2xl font-bold text-[#3182f6]">{speaker.count}</div>
                           <div className="text-xs text-gray-500">시그널 수</div>
                         </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${getSignalColor(speaker.latestSignal)}`}>
-                          최신: {speaker.latestSignal}
-                        </div>
                       </div>
+                      {speaker.topStocks.length > 0 && (
+                        <div className="text-xs text-gray-400 truncate">
+                          {speaker.topStocks.join(' · ')}
+                        </div>
+                      )}
                     </div>
                   </Link>
                 );
