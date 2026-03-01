@@ -357,7 +357,11 @@ export default function InfluencerPage() {
 
               return speakers.map((speaker) => {
                 const speakerId = speakerToSlug(speaker.name);
-                const thumbUrl = speaker.channelHandle
+                // 호스트 판별: 채널명에 발언자 이름이 포함되거나, 발언자 이름에 채널명이 포함
+                const isHost = speaker.channelList.some((ch: string) => 
+                  ch.includes(speaker.name) || speaker.name.includes(ch) || ch === speaker.name
+                );
+                const thumbUrl = isHost && speaker.channelHandle
                   ? CHANNEL_THUMBNAILS[speaker.channelHandle] || null
                   : null;
                 return (
