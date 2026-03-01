@@ -1,0 +1,217 @@
+{
+  "42645e3c-79c2-4d42-9efe-50944e8a0cd2": {
+    "price_at_signal": 218000,
+    "price_current": 216500,
+    "return_pct": -0.69
+  },
+  "d8cd1b3e-7d71-4f96-b094-8441b3be64c1": {
+    "price_at_signal": 363500,
+    "price_current": 368500,
+    "return_pct": 1.38
+  },
+  "98a8dfa2-ca7f-4199-a1e1-b4290d9b4a4e": {
+    "price_at_signal": 2763000,
+    "price_current": 2823000,
+    "return_pct": 2.17
+  },
+  "66e79a97-3a96-449f-80cc-63e03c01ee7c": {
+    "price_at_signal": 387500,
+    "price_current": 417500,
+    "return_pct": 7.74
+  },
+  "43700fd4-9b1d-41a7-b3a5-3a79a809d26e": {
+    "price_at_signal": 218000,
+    "price_current": 216500,
+    "return_pct": -0.69
+  },
+  "9482809c-febc-4e93-b84b-2b057486bdb1": {
+    "price_at_signal": 218000,
+    "price_current": 216500,
+    "return_pct": -0.69
+  },
+  "be0669e3-c3b2-4f6e-bc18-c9bb63149997": {
+    "price_at_signal": 569500,
+    "price_current": 674000,
+    "return_pct": 18.35
+  },
+  "f39c6d56-72d3-4a5b-bdcd-6ad495a323a0": {
+    "price_at_signal": 569500,
+    "price_current": 674000,
+    "return_pct": 18.35
+  },
+  "1ae017a5-c302-48ea-be69-ed769d2e82a5": {
+    "price_at_signal": 155200,
+    "price_current": 164700,
+    "return_pct": 6.12
+  },
+  "4e036638-2081-4913-9aac-303c9770ae7f": {
+    "price_at_signal": 1059800,
+    "price_current": 1050000,
+    "return_pct": -0.92
+  },
+  "5df955de-9959-4867-8db1-e7a9d12a1e77": {
+    "price_at_signal": 237500,
+    "price_current": 231000,
+    "return_pct": -2.74
+  },
+  "c3114db1-447e-4d05-b330-32fb1e8bdb08": {
+    "price_at_signal": 203500,
+    "price_current": 216500,
+    "return_pct": 6.39
+  },
+  "eb296331-9a03-4c16-aff8-299b49293c0c": {
+    "price_at_signal": 1016125,
+    "price_current": 1061000,
+    "return_pct": 4.42
+  },
+  "c9d04f21-5570-4d15-b01f-0d8d06412b7b": {
+    "price_at_signal": 190100,
+    "price_current": 216500,
+    "return_pct": 13.89
+  },
+  "414a3173-afac-46b8-af46-48615d2293e6": {
+    "price_at_signal": 947252,
+    "price_current": 1061000,
+    "return_pct": 12.01
+  },
+  "85e74359-3b1f-4694-b9f5-09b8d303659d": {
+    "price_at_signal": 119300,
+    "price_current": 125600,
+    "return_pct": 5.28
+  },
+  "11e95a7f-a408-4a9a-9072-f1b238db28e5": {
+    "price_at_signal": 55800,
+    "price_current": 56100,
+    "return_pct": 0.54
+  },
+  "2bb7d896-a03c-4413-ac3e-9717c59b9090": {
+    "price_at_signal": 200500,
+    "price_current": 323500,
+    "return_pct": 61.35
+  },
+  "4ed7b3c7-e152-4011-85f9-88d7eb331dd6": {
+    "price_at_signal": 45900,
+    "price_current": 44850,
+    "return_pct": -2.29
+  },
+  "20fe5054-8bda-4b78-8285-bd5270fb57f7": {
+    "price_at_signal": 1059800,
+    "price_current": 1050000,
+    "return_pct": -0.92
+  },
+  "2244a98d-2de6-40a7-bd0a-8f0104126e5e": {
+    "price_at_signal": 2763000,
+    "price_current": 2823000,
+    "return_pct": 2.17
+  },
+  "050ddf63-9f8a-487b-ae70-5d7f30ae1b6f": {
+    "price_at_signal": 569500,
+    "price_current": 674000,
+    "return_pct": 18.35
+  },
+  "f3ecfcd0-fc26-4606-989f-9c4fab5b2f3b": {
+    "price_at_signal": 203500,
+    "price_current": 216500,
+    "return_pct": 6.39
+  },
+  "fc445820-5853-4152-bca2-db6eacb10003": {
+    "price_at_signal": 1016125,
+    "price_current": 1061000,
+    "return_pct": 4.42
+  },
+  "f5a73453-15dc-4cb5-bd0e-1da5eea7fb23": {
+    "price_at_signal": 525692,
+    "price_current": 674000,
+    "return_pct": 28.21
+  },
+  "8e42adce-5630-4b8a-9e38-1137df6b4173": {
+    "price_at_signal": 139500,
+    "price_current": 151400,
+    "return_pct": 8.53
+  },
+  "86996087-c16e-4dfd-9f7a-9be7501ef024": {
+    "price_at_signal": 388000,
+    "price_current": 466000,
+    "return_pct": 20.1
+  },
+  "ff0d3e8d-9eaf-4d8a-8bde-0b64224c9a86": {
+    "price_at_signal": 837454,
+    "price_current": 1061000,
+    "return_pct": 26.69
+  },
+  "ffa1dc33-167c-4ea8-9691-5f8aa1bf1f4c": {
+    "price_at_signal": 140300,
+    "price_current": 216500,
+    "return_pct": 54.31
+  },
+  "9c83cb42-6d31-4a9a-9b1c-5a85c125b84d": {
+    "price_at_signal": 740633,
+    "price_current": 1061000,
+    "return_pct": 43.26
+  },
+  "90831b68-b73e-4f53-b215-ffca476fc46e": {
+    "price_at_signal": 78300,
+    "price_current": 125600,
+    "return_pct": 60.41
+  },
+  "21f03a71-d3a6-437a-aafb-1ef0f8b224f6": {
+    "price_at_signal": 51800,
+    "price_current": 73600,
+    "return_pct": 42.08
+  },
+  "63208f63-4c0a-4625-b6b7-48fd75451f29": {
+    "price_at_signal": 203500,
+    "price_current": 216500,
+    "return_pct": 6.39
+  },
+  "c250cb34-04cb-4174-9843-8c069f731271": {
+    "price_at_signal": 1016125,
+    "price_current": 1061000,
+    "return_pct": 4.42
+  },
+  "dc359487-49ef-42ce-ba2c-297b1587e743": {
+    "price_at_signal": 5540,
+    "price_current": 5540,
+    "return_pct": 0.0
+  },
+  "71ff56f8-deb9-49c1-9c18-bc4fd717d666": {
+    "price_at_signal": 216500,
+    "price_current": 216500,
+    "return_pct": 0.0
+  },
+  "c5d155e7-b7da-4127-90a5-02e4cd45c8f7": {
+    "price_at_signal": 1061000,
+    "price_current": 1061000,
+    "return_pct": 0.0
+  },
+  "163d4529-4871-4f34-ac74-271407952cd6": {
+    "price_at_signal": 1016125,
+    "price_current": 1061000,
+    "return_pct": 4.42
+  },
+  "764703cc-157e-46fe-b265-f2253a1d66ba": {
+    "price_at_signal": 203500,
+    "price_current": 216500,
+    "return_pct": 6.39
+  },
+  "f614c684-8fc0-4c7d-a121-8073bee99b09": {
+    "price_at_signal": 162000,
+    "price_current": 164700,
+    "return_pct": 1.67
+  },
+  "d155bb53-c292-48f0-818a-1f25f5b43fe9": {
+    "price_at_signal": 152100,
+    "price_current": 216500,
+    "return_pct": 42.34
+  },
+  "c5ddfab8-d29f-428c-aaab-568aff7db603": {
+    "price_at_signal": 734644,
+    "price_current": 1061000,
+    "return_pct": 44.42
+  },
+  "3f5e9c95-9ec0-41c9-a700-683e9257d5f8": {
+    "price_at_signal": 490347,
+    "price_current": 674000,
+    "return_pct": 37.45
+  }
+}
