@@ -1,28 +1,12 @@
 /**
  * 클라이언트 사이드에서 Anthropic API를 호출하기 위한 유틸리티
- * CORS 제한을 우회하기 위해 corsproxy.io를 사용
- * API 키는 런타임에 입력받아 sessionStorage에 저장
+ * Supabase Edge Function을 통해 Anthropic API를 프록시로 호출
+ * API 키는 Edge Function 환경변수에 저장됨
  */
 
-const CORS_PROXY = 'https://corsproxy.io/';
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-
-function getApiKey(): string {
-  // sessionStorage에서 먼저 확인
-  if (typeof window !== 'undefined') {
-    const stored = sessionStorage.getItem('anthropic_api_key');
-    if (stored) return stored;
-
-    // 없으면 프롬프트로 입력받기
-    const key = prompt('Anthropic API Key를 입력하세요 (세션 동안 유지됩니다):');
-    if (key && key.trim()) {
-      sessionStorage.setItem('anthropic_api_key', key.trim());
-      return key.trim();
-    }
-    throw new Error('API 키가 입력되지 않았습니다.');
-  }
-  throw new Error('브라우저 환경에서만 사용 가능합니다.');
-}
+const SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDYxMTAsImV4cCI6MjA4NzU4MjExMH0.qcqFIvYRiixwu609Wjj9H3HxscU8vNpo9nS_KQ3f00A';
+const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/anthropic-proxy`;
 
 interface AnthropicMessage {
   role: 'user' | 'assistant';
@@ -43,26 +27,20 @@ interface AnthropicResponse {
 }
 
 export async function callAnthropicAPI(request: AnthropicRequest): Promise<string> {
-  const apiKey = getApiKey();
-
   try {
-    const response = await fetch(CORS_PROXY + '?' + ANTHROPIC_API_URL, {
+    const response = await fetch(EDGE_FUNCTION_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'apikey': SUPABASE_ANON_KEY,
       },
       body: JSON.stringify(request)
     });
 
     if (!response.ok) {
       const errorData = await response.text();
-      if (response.status === 401) {
-        // 잘못된 키면 삭제
-        sessionStorage.removeItem('anthropic_api_key');
-        throw new Error('API 키가 유효하지 않습니다. 페이지를 새로고침하고 다시 입력하세요.');
-      }
+      console.error('Edge Function 오류:', errorData);
       throw new Error(`Anthropic API 오류 (${response.status}): ${errorData}`);
     }
 

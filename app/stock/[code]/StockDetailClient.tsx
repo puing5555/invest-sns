@@ -60,33 +60,46 @@ const tabs = [
 
 import stockPricesData from '@/data/stockPrices.json';
 
-// 종목 데이터 - 실제 Yahoo Finance 데이터 사용
-const getStockData = (code: string) => {
+// 종목 데이터 - 실제 Yahoo Finance 데이터 사용 (동적 종목명 지원)
+const getStockData = (code: string, dynamicName?: string) => {
+  // 확장된 종목명 매핑 (기본 fallback용)
   const nameMap: { [key: string]: string } = {
     '005930': '삼성전자', '000660': 'SK하이닉스', '035420': 'NAVER',
     '051910': 'LG화학', '005380': '현대차', '086520': '에코프로',
-    '009540': '한국가스공사', '399720': '퓨처켐',
+    '009540': '한국가스공사', '399720': '퓨처켐', '298040': '효성중공업',
+    '036930': '주성엔지니어링', '042700': '한미반도체', '095610': '테스',
+    '000720': '현대건설', '004170': '신세계', '006400': '삼성SDI',
+    '267260': 'HD현대일렉트릭', '090430': '아모레퍼시픽', '036570': 'NC소프트',
+    '207940': '삼성바이오로직스', '079160': 'CGV', '403870': 'HPSP',
+    '240810': '원익IPS', '284620': '쿠팡', '005940': 'NH투자증권',
+    '016360': '삼성증권', '039490': '키네마스터', '071050': '한국금융지주',
+    '352820': 'COI머티리얼즈', '357780': '솔브레인', '084370': '맘스터치'
   };
+
+  // 동적 종목명이 있으면 우선 사용, 없으면 nameMap fallback
+  const stockName = dynamicName || nameMap[code] || `종목 ${code}`;
 
   const realData = (stockPricesData as any)[code];
   if (realData) {
     return {
-      name: nameMap[code] || `종목 ${code}`,
+      name: stockName,
       price: realData.currentPrice,
       change: realData.change,
       changePercent: realData.changePercent,
     };
   }
 
-  return { name: nameMap[code] || `종목 ${code}`, price: 0, change: 0, changePercent: 0 };
+  return { name: stockName, price: 0, change: 0, changePercent: 0 };
 };
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('feed');
   const [isWatched, setIsWatched] = useState(false);
+  const [realStockSignals, setRealStockSignals] = useState<any[]>([]);
+  const [dynamicStockName, setDynamicStockName] = useState<string>('');
   const searchParams = useSearchParams();
   const router = useRouter();
-  const stockData = getStockData(code);
+  const stockData = getStockData(code, dynamicStockName);
   const timeline = getStockTimeline(code);
 
   // URL 쿼리 파라미터에서 탭 설정
@@ -96,6 +109,26 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
       setActiveTab(tabParam);
     }
   }, [searchParams]);
+
+  // Supabase에서 실제 시그널 데이터와 종목명 정보 가져오기
+  useEffect(() => {
+    const fetchRealStockData = async () => {
+      try {
+        const signals = await getStockSignals(code);
+        setRealStockSignals(signals);
+        
+        // 시그널 데이터에서 종목명 추출 (첫 번째로 찾은 stock 정보 사용)
+        const signalWithStock = signals.find((signal: any) => signal.stock);
+        if (signalWithStock && signalWithStock.stock) {
+          setDynamicStockName(signalWithStock.stock);
+        }
+      } catch (error) {
+        console.error('Error fetching real stock data:', error);
+      }
+    };
+
+    fetchRealStockData();
+  }, [code]);
 
   // 해당 종목의 시그널 가져오기
   const getStockSignals = (code: string, name: string) => {
