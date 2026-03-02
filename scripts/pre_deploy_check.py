@@ -431,7 +431,30 @@ def check_db_signals(cr, auto_fix, verbose):
     else:
         cr.add_pass("날짜 형식: 전부 정상")
 
-    # ─── 3h. 종목명 형식 검증 ───
+    # ─── 3h. key_quote 길이 검증 (20~200자) ───
+    short_quotes = [s for s in signals if s.get("key_quote") and len(s["key_quote"]) < 20]
+    long_quotes = [s for s in signals if s.get("key_quote") and len(s["key_quote"]) > 200]
+    empty_quotes = [s for s in signals if not s.get("key_quote") or len(s["key_quote"].strip()) == 0]
+    
+    if long_quotes:
+        cr.add_fail(f"key_quote 200자 초과: {len(long_quotes)}개",
+                    [f"  {s.get('stock','')} ({len(s['key_quote'])}자) id={s['id'][:8]}" for s in sorted(long_quotes, key=lambda x: len(x['key_quote']), reverse=True)[:10]])
+    else:
+        cr.add_pass("key_quote 200자 초과: 없음")
+    
+    if short_quotes:
+        cr.add_warn(f"key_quote 20자 미만: {len(short_quotes)}개",
+                    [f"  {s.get('stock','')} ({len(s['key_quote'])}자) id={s['id'][:8]}" for s in short_quotes[:10]])
+    else:
+        cr.add_pass("key_quote 20자 미만: 없음")
+    
+    if empty_quotes:
+        cr.add_fail(f"key_quote 비어있음: {len(empty_quotes)}개",
+                    [f"  {s.get('stock','')} id={s['id'][:8]}" for s in empty_quotes[:10]])
+    else:
+        cr.add_pass("key_quote 비어있음: 없음")
+
+    # ─── 3i. 종목명 형식 검증 ───
     # Expected: "종목명 (TICKER)" or just Korean name
     no_ticker = [s for s in signals if s.get("stock") and not s.get("ticker")]
     if no_ticker:
