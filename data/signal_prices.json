@@ -751,8 +751,11 @@
   },
   "서클": {
     "name": "서클",
-    "current_price": null,
-    "last_updated": null
+    "ticker": "CRCL",
+    "market": "US",
+    "current_price": 93.58,
+    "currency": "USD",
+    "last_updated": "2026-03-03"
   },
   "ETH-USD": {
     "name": "이더리움",
