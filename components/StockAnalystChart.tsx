@@ -1,59 +1,27 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import stockPricesData from '@/data/stockPrices.json';
 
-// Recharts를 동적 import로 SSG 문제 해결
-const LineChart = dynamic(
-  () => import('recharts').then((mod) => mod.LineChart),
-  { ssr: false }
-);
-const Line = dynamic(
-  () => import('recharts').then((mod) => mod.Line),
-  { ssr: false }
-);
-const XAxis = dynamic(
-  () => import('recharts').then((mod) => mod.XAxis),
-  { ssr: false }
-);
-const YAxis = dynamic(
-  () => import('recharts').then((mod) => mod.YAxis),
-  { ssr: false }
-);
-const CartesianGrid = dynamic(
-  () => import('recharts').then((mod) => mod.CartesianGrid),
-  { ssr: false }
-);
-const Tooltip = dynamic(
-  () => import('recharts').then((mod) => mod.Tooltip),
-  { ssr: false }
-);
-const ReferenceLine = dynamic(
-  () => import('recharts').then((mod) => mod.ReferenceLine),
-  { ssr: false }
-);
-const Scatter = dynamic(
-  () => import('recharts').then((mod) => mod.Scatter),
-  { ssr: false }
-);
-const ScatterChart = dynamic(
-  () => import('recharts').then((mod) => mod.ScatterChart),
-  { ssr: false }
-);
-const ResponsiveContainer = dynamic(
-  () => import('recharts').then((mod) => mod.ResponsiveContainer),
-  { ssr: false }
-);
-const ComposedChart = dynamic(
-  () => import('recharts').then((mod) => mod.ComposedChart),
-  { ssr: false }
-);
+const LineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
+const Line = dynamic(() => import('recharts').then((mod) => mod.Line), { ssr: false });
+const XAxis = dynamic(() => import('recharts').then((mod) => mod.XAxis), { ssr: false });
+const YAxis = dynamic(() => import('recharts').then((mod) => mod.YAxis), { ssr: false });
+const CartesianGrid = dynamic(() => import('recharts').then((mod) => mod.CartesianGrid), { ssr: false });
+const Tooltip = dynamic(() => import('recharts').then((mod) => mod.Tooltip), { ssr: false });
+const ResponsiveContainer = dynamic(() => import('recharts').then((mod) => mod.ResponsiveContainer), { ssr: false });
+const ComposedChart = dynamic(() => import('recharts').then((mod) => mod.ComposedChart), { ssr: false });
+const Scatter = dynamic(() => import('recharts').then((mod) => mod.Scatter), { ssr: false });
+const ZAxis = dynamic(() => import('recharts').then((mod) => mod.ZAxis), { ssr: false });
 
 interface Signal {
   date: string;
   signal: string;
-  target_price?: number;
+  target_price?: number | null;
   firm: string;
+  analyst?: string | null;
+  title?: string;
 }
 
 interface StockAnalystChartProps {
@@ -62,103 +30,58 @@ interface StockAnalystChartProps {
   currentPrice: number;
 }
 
-// 더미 주가 데이터 생성
-const generatePriceData = (signals: Signal[], currentPrice: number) => {
-  const data = [];
-  const now = new Date();
-  
-  // 6개월 치 일일 데이터 생성
-  for (let i = 180; i >= 0; i--) {
-    const date = new Date(now);
-    date.setDate(date.getDate() - i);
-    
-    // 기본 주가에 노이즈와 트렌드 추가
-    const basePrice = currentPrice;
-    const noise = (Math.random() - 0.5) * basePrice * 0.1; // 10% 변동성
-    const trend = -i * basePrice * 0.0005; // 약간의 상승 트렌드
-    
-    const price = Math.max(basePrice * 0.5, basePrice + noise + trend);
-    
-    data.push({
-      date: date.toISOString().split('T')[0],
-      price: Math.round(price),
-      timestamp: date.getTime()
-    });
-  }
-  
-  return data;
-};
-
-// 목표주가 평균 계산
-const calculateAverageTargetPrice = (signals: Signal[]) => {
-  const validTargets = signals.filter(s => s.target_price && s.target_price > 0);
-  if (validTargets.length === 0) return null;
-  
-  const sum = validTargets.reduce((acc, s) => acc + (s.target_price || 0), 0);
-  return Math.round(sum / validTargets.length);
-};
-
-// 시그널 점 색상
 const getSignalColor = (signal: string) => {
-  switch (signal.toLowerCase()) {
-    case 'buy':
-    case '매수': return '#22c55e';
-    case 'hold':
-    case '중립': return '#eab308';
-    case 'sell':
-    case '매도': return '#ef4444';
+  switch (signal.toUpperCase()) {
+    case 'BUY': return '#22c55e';
+    case 'HOLD': return '#eab308';
+    case 'SELL': return '#ef4444';
     default: return '#8b95a1';
   }
 };
 
-// 한글 시그널명으로 변환
-const getSignalName = (signal: string) => {
-  switch (signal.toLowerCase()) {
-    case 'buy': return '매수';
-    case 'hold': return '중립';
-    case 'sell': return '매도';
-    default: return signal;
-  }
-};
-
 export default function StockAnalystChart({ code, signals, currentPrice }: StockAnalystChartProps) {
+  const [activeSignal, setActiveSignal] = useState<Signal | null>(null);
+  const [popupPos, setPopupPos] = useState<{ x: number; y: number } | null>(null);
+
   const chartData = useMemo(() => {
-    const priceData = generatePriceData(signals, currentPrice || 50000);
-    const avgTargetPrice = calculateAverageTargetPrice(signals);
+    // 실제 주가 데이터 사용
+    const stockData = (stockPricesData as any)[code];
+    const prices: { date: string; close: number }[] = stockData?.prices || [];
     
-    // 날짜별 데이터 맵 생성
-    const dateMap = new Map(priceData.map(d => [d.date, d]));
-    
-    // 시그널 점들을 주가 데이터와 통합
-    const enrichedData = priceData.map(pricePoint => {
-      // 해당 날짜의 시그널 찾기
-      const signalOnDate = signals.find(s => s.date === pricePoint.date);
-      
-      if (signalOnDate) {
-        return {
-          ...pricePoint,
-          signalPrice: pricePoint.price, // 실제 주가 위치에 시그널 표시
-          signalType: signalOnDate.signal,
-          signalFirm: signalOnDate.firm,
-          hasSignal: true
-        };
-      }
-      
-      return pricePoint;
+    if (prices.length === 0) return null;
+
+    // 주가 데이터를 차트용으로 변환
+    const priceData = prices.map(p => ({
+      date: p.date,
+      price: p.close,
+    }));
+
+    // Y축 범위: 주가 + 목표가 모두 고려
+    const allValues = prices.map(p => p.close);
+    signals.forEach(s => {
+      if (s.target_price && s.target_price > 0) allValues.push(s.target_price);
     });
-    
-    // Y축 범위 계산 (0부터 시작하지 않도록)
-    const allPrices = enrichedData.map(d => d.price);
-    if (avgTargetPrice) allPrices.push(avgTargetPrice);
-    const minPrice = Math.min(...allPrices);
-    const maxPrice = Math.max(...allPrices);
-    const yMin = Math.floor(minPrice * 0.9 / 1000) * 1000;
-    const yMax = Math.ceil(maxPrice * 1.1 / 1000) * 1000;
+    const minVal = Math.min(...allValues);
+    const maxVal = Math.max(...allValues);
+    const yMin = Math.floor(minVal * 0.9 / 1000) * 1000;
+    const yMax = Math.ceil(maxVal * 1.1 / 1000) * 1000;
 
-    return { enrichedData, avgTargetPrice, yDomain: [yMin, yMax] as [number, number] };
-  }, [signals, currentPrice]);
+    // 시그널 점 데이터 (목표가 위치에 표시)
+    const signalDots = signals
+      .filter(s => s.target_price && s.target_price > 0)
+      .map(s => ({
+        date: s.date,
+        targetPrice: s.target_price!,
+        signal: s.signal,
+        firm: s.firm,
+        analyst: s.analyst || null,
+        title: s.title || '',
+      }));
 
-  if (!chartData.enrichedData.length) {
+    return { priceData, signalDots, yDomain: [yMin, yMax] as [number, number] };
+  }, [code, signals]);
+
+  if (!chartData || chartData.priceData.length === 0) {
     return (
       <div className="w-full h-64 bg-[#f8f9fa] rounded-lg flex items-center justify-center">
         <div className="text-center">
@@ -169,39 +92,42 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
     );
   }
 
-  // 커스텀 Dot 컴포넌트 
+  // 주가 + 시그널을 합친 데이터
+  const mergedData = chartData.priceData.map(p => {
+    const dot = chartData.signalDots.find(d => d.date === p.date);
+    return dot ? { ...p, targetPrice: dot.targetPrice, signalType: dot.signal, signalFirm: dot.firm, signalAnalyst: dot.analyst, signalTitle: dot.title } : p;
+  });
+
   const CustomSignalDot = (props: any) => {
     const { payload, cx, cy } = props;
-    if (!payload?.hasSignal) return null;
-    
+    if (!payload?.targetPrice) return null;
     return (
       <circle
         cx={cx}
         cy={cy}
-        r={4}
+        r={5}
         fill={getSignalColor(payload.signalType)}
         stroke="white"
         strokeWidth={2}
         style={{ cursor: 'pointer' }}
+        onMouseEnter={(e) => {
+          setActiveSignal({ date: payload.date, signal: payload.signalType, target_price: payload.targetPrice, firm: payload.signalFirm, analyst: payload.signalAnalyst, title: payload.signalTitle });
+          setPopupPos({ x: e.clientX, y: e.clientY });
+        }}
+        onMouseLeave={() => { setActiveSignal(null); setPopupPos(null); }}
       />
     );
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
+    <div className="bg-white rounded-lg border border-[#e8e8e8] p-4 relative">
       <div className="mb-4">
         <h4 className="font-medium text-[#191f28] mb-2">주가 및 애널리스트 목표가</h4>
-        <div className="flex items-center gap-4 text-sm text-[#8b95a1]">
+        <div className="flex items-center gap-4 text-sm text-[#8b95a1] flex-wrap">
           <div className="flex items-center gap-2">
             <div className="w-3 h-0.5 bg-[#3182f6]"></div>
             <span>현재주가</span>
           </div>
-          {chartData.avgTargetPrice && (
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-0.5 border-t-2 border-dashed border-[#8b95a1]"></div>
-              <span>평균목표가</span>
-            </div>
-          )}
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-[#22c55e]"></div>
             <span>매수</span>
@@ -219,7 +145,7 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
       
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={chartData.enrichedData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <ComposedChart data={mergedData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis
               dataKey="date"
@@ -234,64 +160,33 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
               fontSize={12}
             />
             <Tooltip
-              formatter={(value: any, name: string, props: any) => {
-                if (name === 'price') {
-                  return [`${value.toLocaleString()}원`, '주가'];
-                }
-                if (name === 'signalPrice' && props.payload?.hasSignal) {
-                  return [
-                    `${getSignalName(props.payload.signalType)} (${props.payload.signalFirm})`,
-                    '시그널'
-                  ];
-                }
+              formatter={(value: any, name: string) => {
+                if (name === 'price') return [`${value.toLocaleString()}원`, '주가'];
+                if (name === 'targetPrice') return [`${value.toLocaleString()}원`, '목표가'];
                 return [value, name];
               }}
               labelFormatter={(date) => new Date(date).toLocaleDateString('ko-KR')}
-              contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid #e8e8e8',
-                borderRadius: '8px',
-                fontSize: '12px'
-              }}
+              contentStyle={{ backgroundColor: 'white', border: '1px solid #e8e8e8', borderRadius: '8px', fontSize: '12px' }}
             />
-            
-            {/* 주가 라인 차트 */}
-            <Line
-              type="monotone"
-              dataKey="price"
-              stroke="#3182f6"
-              strokeWidth={2}
-              dot={false}
-              activeDot={{ r: 4, fill: '#3182f6' }}
-            />
-            
-            {/* 시그널 점들 - 주가와 같은 위치에 */}
-            <Line
-              type="monotone"
-              dataKey="signalPrice"
-              stroke="transparent"
-              strokeWidth={0}
-              dot={<CustomSignalDot />}
-              activeDot={false}
-              connectNulls={false}
-            />
-            
-            {/* 평균 목표주가 점선 */}
-            {chartData.avgTargetPrice && (
-              <ReferenceLine
-                y={chartData.avgTargetPrice}
-                stroke="#8b95a1"
-                strokeDasharray="5 5"
-                label={{
-                  value: `목표 ${Math.round(chartData.avgTargetPrice / 10000)}만원`,
-                  position: 'right',
-                  style: { fontSize: '11px', fill: '#8b95a1' }
-                }}
-              />
-            )}
+            <Line type="monotone" dataKey="price" stroke="#3182f6" strokeWidth={2} dot={false} activeDot={{ r: 4, fill: '#3182f6' }} />
+            <Line type="monotone" dataKey="targetPrice" stroke="transparent" strokeWidth={0} dot={<CustomSignalDot />} activeDot={false} connectNulls={false} />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
+
+      {/* 시그널 팝업 */}
+      {activeSignal && popupPos && (
+        <div
+          className="fixed z-50 bg-white border border-[#e8e8e8] rounded-xl shadow-lg p-3 text-sm pointer-events-none"
+          style={{ left: popupPos.x + 12, top: popupPos.y - 60 }}
+        >
+          <div className="font-bold text-[#191f28] mb-1">{activeSignal.firm}</div>
+          {activeSignal.analyst && <div className="text-[#8b95a1] text-xs">{activeSignal.analyst}</div>}
+          <div className="text-[#191f28]">목표가: {activeSignal.target_price?.toLocaleString()}원</div>
+          <div className="text-[#191f28]">투자의견: {activeSignal.signal}</div>
+          {activeSignal.title && <div className="text-[#8b95a1] text-xs mt-1 max-w-[200px] truncate">{activeSignal.title}</div>}
+        </div>
+      )}
     </div>
   );
 }
