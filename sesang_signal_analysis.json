@@ -1,0 +1,663 @@
+{
+  "total_signals": 93,
+  "long_quotes": 41,
+  "short_reasoning": 51,
+  "long_quote_samples": [
+    {
+      "id": "c78cc714-3e23-4c2f-a9b3-76d19ed51038",
+      "stock": "피델리티",
+      "signal": "매수",
+      "quote_len": 116,
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+      "key_quote": "약 8,000조원을 굴리고 있는 세계 탑 5파브 투자 회사인 피델리티는 그 회사들이 자산의 1에서 3% 정도를 비트코인에 투자를 한다면은 포트폴리오의 수익률을 높일 수 있다. 그런 리포트를 내놓기도 했습니다."
+    },
+    {
+      "id": "8a2d2603-459b-4577-ae54-4928892721ac",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "quote_len": 489,
+      "video_id": "3394ea3c-af53-4ba1-9cad-e2d3585006ee",
+      "key_quote": "이더리움을 죽일 수 있는 경쟁자는 사실상 없다고 보는데 이에 대해서 한번 얘기를 해보려고 합니다 | 사람들이 너무 많이 사용하기 때문에 수수료가 높은 건데 이거 때문에 사람들이 더 리움을 벌인다 그 말대로 정말 사람들이 스스로 때문에 있 어 리 음을 벌이기 시작한다 많은 수수료는 다시 내려가고 이들이 음의 단점이었던 수수료 문제는 사라지겠죠 | 탈중앙화를 ..."
+    },
+    {
+      "id": "25ac367b-90ac-4a16-9e71-f0bb3ccc7ebd",
+      "stock": "팔란티어",
+      "signal": "긍정",
+      "quote_len": 132,
+      "video_id": "f2ca296c-54a7-4adc-896f-af1f60dfb714",
+      "key_quote": "팔란티어 생각이 나는데 AI 내러티브가 이제 엔비디아 같은 칩 중심 회사에서 B2B AI 소프트웨어 활용 잘하는 회사로 좀 넘어가고 좀 특히 이제 팔란티어 방산 주다 보니까 요즘 같이 이제 전쟁이 많은 시기에 인기가 되게 많은 거 같아요"
+    },
+    {
+      "id": "e23629fa-f4fa-4ead-9403-9d461f3f639c",
+      "stock": "비트코인",
+      "signal": "중립",
+      "quote_len": 138,
+      "video_id": "b1408bd1-07fc-4bd0-bc0e-fa6626b08998",
+      "key_quote": "올해는 코인 시장에서 정말 중요한 분기점입니다. 비트코인 반감기를 중심으로 4년마다 이제 크게 움직였던 공급 사이클보다는 돈의 유동성과 기관 중심의 수요 사이클의 영향이 더 커지는 어떻게 보면 주식 시장과 비슷한 시장이 되어 가고 있는 거 같아요."
+    },
+    {
+      "id": "a6a7c4f0-d43f-4a07-b2ec-58ef542171b8",
+      "stock": "CRYPTO",
+      "signal": "중립",
+      "quote_len": 218,
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+      "key_quote": "이번 장에서는 솔라나 차례인 거 같네요 이번 도 느꼈는데 역시 상승이 어느 정도 예상될 때는 분할 매수보다는 집중 매수가 좋은 전략인 거 같습니다 | 비트코인을 통해서 이런 경제적 자율성을 이제 AI 얻으면 인간의 은행 시스템과 독립적으로 경제 활동을 수행할 수 있게 됩니다 | 만약 인공지능의 인류를 지배하게 된다면은이 시나리오가 어떻게 어떤 식으로 진행이..."
+    },
+    {
+      "id": "255c9bf9-198e-4448-86c5-5e6c89e17ae7",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "quote_len": 202,
+      "video_id": "14526991-611c-472c-a6f0-3ee1fc91874d",
+      "key_quote": "이더리움은 비트코인과 달리 효용성과 수익성이 내재되어 있는 그런 생산적인 자산이다 | 이더리움 위에서 움직이는 자산의 총량이 더 중요하다. 이더리움 위에서 움직이는 모든 활동은 이더를 수수료로 내야 하고 이 활동이 많을수록 이더의 수요가 많아지기 때문 | 비트코인과 달리 이더리움은 다양한 금융 활동(스테이블코인, DeFi, 자산 토큰화 등)의 기반이 되고 ..."
+    },
+    {
+      "id": "c2b8feff-a072-447a-83d0-a6647cb571a3",
+      "stock": "스테이블코인",
+      "signal": "긍정",
+      "quote_len": 101,
+      "video_id": "14526991-611c-472c-a6f0-3ee1fc91874d",
+      "key_quote": "스테이블코인 전체 공급량도 8월에 7월 대비 17% 증가하면서 1조 4천억 달러에 도달했고, 이더리움 체인의 스테이블코인 공급량은 1,600억 달러가 넘고 계속 빠르게 올라가고 있다"
+    },
+    {
+      "id": "599eb599-9acd-4601-ae93-9bab69e106f6",
+      "stock": "테슬라",
+      "signal": "긍정",
+      "quote_len": 134,
+      "video_id": "89b5ef14-0d40-40d1-9430-f9c090ca199f",
+      "key_quote": "테슬라는 테슬라 도 뭐다 포션 냐 이제 앞으로 안하신 야라 고증을 테슬라는 의미 뭐 10배 넘게 먹었기 때문에 다음 이제 10배를 갈 수 있으면 너무 로 이제 옮겨 탄 거고 저는 보유기간은 정해 두지 않아요 항상 평생 이라고 생각하고 삽니다"
+    },
+    {
+      "id": "d7a80c2f-edce-4f5e-add1-d32acd37d3e0",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "quote_len": 1000,
+      "video_id": "839a9ebb-c26d-4689-bdf9-686a3d7c0787",
+      "key_quote": "비트코인은 코드의 전세계 수많은 회원들이 비트코인 블록체인을 저장하고 비트코인 프로그램을 돌리고 있기 때문에 유지가 되는 거에요. 매 10분마다 하나의 블록으로 묶어서 체인으로 붙여서 저장합니다. 그 수많은 사람들이 이를 공짜로 하고 있을까요? 아니죠. 당연히 뭔가 보상이 있습니다. | 비트코인 프로토콜은 그 일정 주기로 한 2,000개씩 난이도를 계속 조..."
+    },
+    {
+      "id": "4e92c463-03b6-4086-8355-5ca8438e1289",
+      "stock": "Riot Blockchain",
+      "signal": "긍정",
+      "quote_len": 122,
+      "video_id": "02165a4c-271d-4a6c-8fcc-86dc6209f77c",
+      "key_quote": "아이는 AI 인프라나 비트코인 채굴에 사용할 수 있는 대형 데이터 센터를 이제 운영하는 기업인데 트럼프 정부에서 유망하다고 보이는 이제 비트코인 그리고 이제 AI이 양대축에 모두 걸쳐 있는 몇 안 되는 상장 기업이고요."
+    }
+  ],
+  "short_reasoning_samples": [
+    {
+      "id": "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04",
+      "stock": "마이크로스트라이즈",
+      "signal": "매수",
+      "reasoning_len": 34,
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+      "reasoning": "마이크로스트라이즈의 비트코인 투자 확대를 긍정적인 논거로 소개"
+    },
+    {
+      "id": "ba2343ce-d1fc-4539-88ca-6c379cdcf10c",
+      "stock": "그레이스케일 비트코인 투자 신탁",
+      "signal": "매수",
+      "reasoning_len": 31,
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+      "reasoning": "그레이스케일의 비트코인 매입 확대를 긍정적인 논거로 소개"
+    },
+    {
+      "id": "ddfdd2be-2ecc-4b25-8e09-68f1a174b979",
+      "stock": "라울 팔",
+      "signal": "매수",
+      "reasoning_len": 26,
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+      "reasoning": "라울 팔의 비트코인 전망을 긍정적인 논거로 소개"
+    },
+    {
+      "id": "c78cc714-3e23-4c2f-a9b3-76d19ed51038",
+      "stock": "피델리티",
+      "signal": "매수",
+      "reasoning_len": 27,
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+      "reasoning": "피델리티의 비트코인 투자 긍정 전망을 논거로 제시"
+    },
+    {
+      "id": "ebe987df-f9d5-473e-b7d3-442aa20da398",
+      "stock": "스퀘어",
+      "signal": "매수",
+      "reasoning_len": 28,
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187",
+      "reasoning": "스퀘어의 비트코인 투자 계획을 긍정적인 논거로 소개"
+    },
+    {
+      "id": "25ac367b-90ac-4a16-9e71-f0bb3ccc7ebd",
+      "stock": "팔란티어",
+      "signal": "긍정",
+      "reasoning_len": 43,
+      "video_id": "f2ca296c-54a7-4adc-896f-af1f60dfb714",
+      "reasoning": "팔란티어가 AI 소프트웨어와 방산 분야에서 강세를 보이고 있어 긍정적으로 전망"
+    },
+    {
+      "id": "f3b62b8f-f858-4489-b100-8520c5b8a110",
+      "stock": "솔라나",
+      "signal": "긍정",
+      "reasoning_len": 26,
+      "video_id": "3394ea3c-af53-4ba1-9cad-e2d3585006ee",
+      "reasoning": "솔라나의 성장세에 대해 긍정적으로 평가하고 있음"
+    },
+    {
+      "id": "eb925c37-a812-43f9-ad57-24100c9a6763",
+      "stock": "엔비디아",
+      "signal": "중립",
+      "reasoning_len": 18,
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+      "reasoning": "엔비디아 투자 경험 언급 (논거)"
+    },
+    {
+      "id": "54a55617-9641-41c6-97bd-b9f464ee5884",
+      "stock": "AMD",
+      "signal": "긍정",
+      "reasoning_len": 31,
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+      "reasoning": "AMD 관련 AI 스타트업에 투자한 것을 긍정적으로 언급"
+    },
+    {
+      "id": "c2b8feff-a072-447a-83d0-a6647cb571a3",
+      "stock": "스테이블코인",
+      "signal": "긍정",
+      "reasoning_len": 35,
+      "video_id": "14526991-611c-472c-a6f0-3ee1fc91874d",
+      "reasoning": "이더리움 기반 스테이블코인 시장의 지속적 성장을 긍정적으로 평가"
+    }
+  ],
+  "need_fix_signals": [
+    {
+      "id": "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04",
+      "stock": "마이크로스트라이즈",
+      "signal": "매수",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "ba2343ce-d1fc-4539-88ca-6c379cdcf10c",
+      "stock": "그레이스케일 비트코인 투자 신탁",
+      "signal": "매수",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "ddfdd2be-2ecc-4b25-8e09-68f1a174b979",
+      "stock": "라울 팔",
+      "signal": "매수",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "c78cc714-3e23-4c2f-a9b3-76d19ed51038",
+      "stock": "피델리티",
+      "signal": "매수",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "ebe987df-f9d5-473e-b7d3-442aa20da398",
+      "stock": "스퀘어",
+      "signal": "매수",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "8a2d2603-459b-4577-ae54-4928892721ac",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "video_id": "3394ea3c-af53-4ba1-9cad-e2d3585006ee"
+    },
+    {
+      "id": "25ac367b-90ac-4a16-9e71-f0bb3ccc7ebd",
+      "stock": "팔란티어",
+      "signal": "긍정",
+      "video_id": "f2ca296c-54a7-4adc-896f-af1f60dfb714"
+    },
+    {
+      "id": "e23629fa-f4fa-4ead-9403-9d461f3f639c",
+      "stock": "비트코인",
+      "signal": "중립",
+      "video_id": "b1408bd1-07fc-4bd0-bc0e-fa6626b08998"
+    },
+    {
+      "id": "f3b62b8f-f858-4489-b100-8520c5b8a110",
+      "stock": "솔라나",
+      "signal": "긍정",
+      "video_id": "3394ea3c-af53-4ba1-9cad-e2d3585006ee"
+    },
+    {
+      "id": "a6a7c4f0-d43f-4a07-b2ec-58ef542171b8",
+      "stock": "CRYPTO",
+      "signal": "중립",
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+    },
+    {
+      "id": "eb925c37-a812-43f9-ad57-24100c9a6763",
+      "stock": "엔비디아",
+      "signal": "중립",
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+    },
+    {
+      "id": "54a55617-9641-41c6-97bd-b9f464ee5884",
+      "stock": "AMD",
+      "signal": "긍정",
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+    },
+    {
+      "id": "255c9bf9-198e-4448-86c5-5e6c89e17ae7",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "video_id": "14526991-611c-472c-a6f0-3ee1fc91874d"
+    },
+    {
+      "id": "c2b8feff-a072-447a-83d0-a6647cb571a3",
+      "stock": "스테이블코인",
+      "signal": "긍정",
+      "video_id": "14526991-611c-472c-a6f0-3ee1fc91874d"
+    },
+    {
+      "id": "76f45ef5-ba9d-43f2-a98b-9df350e5cb98",
+      "stock": "배당주",
+      "signal": "긍정",
+      "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c"
+    },
+    {
+      "id": "c43c443d-7486-4c87-b408-0f6651498ba9",
+      "stock": "테슬라",
+      "signal": "긍정",
+      "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c"
+    },
+    {
+      "id": "8404c2c8-0bf8-4b63-9294-25ba6f2d2e63",
+      "stock": "게임스톱",
+      "signal": "긍정",
+      "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c"
+    },
+    {
+      "id": "970e663b-372d-4213-8b9e-a2673a3876b6",
+      "stock": "코스피",
+      "signal": "긍정",
+      "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c"
+    },
+    {
+      "id": "4e4fa2e2-089d-4ddc-b912-f156c1892ae6",
+      "stock": "프랑키",
+      "signal": "긍정",
+      "video_id": "89b5ef14-0d40-40d1-9430-f9c090ca199f"
+    },
+    {
+      "id": "9fdc229d-8b1a-48bb-a825-f98feeb193c3",
+      "stock": "블랙베어드",
+      "signal": "긍정",
+      "video_id": "89b5ef14-0d40-40d1-9430-f9c090ca199f"
+    },
+    {
+      "id": "599eb599-9acd-4601-ae93-9bab69e106f6",
+      "stock": "테슬라",
+      "signal": "긍정",
+      "video_id": "89b5ef14-0d40-40d1-9430-f9c090ca199f"
+    },
+    {
+      "id": "d4ac5b66-6ab5-4296-bfd7-b8015c46faa5",
+      "stock": "비트코인",
+      "signal": "매수",
+      "video_id": "89b5ef14-0d40-40d1-9430-f9c090ca199f"
+    },
+    {
+      "id": "be1202c7-33a5-49fd-9598-a8d4d01c4271",
+      "stock": "스톤리지",
+      "signal": "매수",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "d7a80c2f-edce-4f5e-add1-d32acd37d3e0",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "839a9ebb-c26d-4689-bdf9-686a3d7c0787"
+    },
+    {
+      "id": "4e92c463-03b6-4086-8355-5ca8438e1289",
+      "stock": "Riot Blockchain",
+      "signal": "긍정",
+      "video_id": "02165a4c-271d-4a6c-8fcc-86dc6209f77c"
+    },
+    {
+      "id": "d1088413-8e9b-48ba-89c4-64557d3704f9",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "video_id": "811fb5ef-0e8f-4c6c-acbb-3e5888f198f3"
+    },
+    {
+      "id": "ccdc7c72-fc71-4a49-90ce-fdcf96ecfdf1",
+      "stock": "네이버",
+      "signal": "긍정",
+      "video_id": "b2479bfc-4389-4990-8b58-d4a639a4ef0d"
+    },
+    {
+      "id": "ea14ef92-216a-42b8-92a1-7f5e64c5edec",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "df3a6ba3-8db4-4c9c-98b3-e8bb6f0662c2"
+    },
+    {
+      "id": "e87dc48c-3ddf-4094-869d-2a9fcdec5b62",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "34a8f107-6654-4bf1-b7f9-29be5b6dc2c5"
+    },
+    {
+      "id": "6b829c5b-9293-4b9d-949e-02ebfc2d12d0",
+      "stock": "DeFi",
+      "signal": "긍정",
+      "video_id": "34a8f107-6654-4bf1-b7f9-29be5b6dc2c5"
+    },
+    {
+      "id": "819ab631-c815-432d-8fdc-cec346799c26",
+      "stock": "NFT",
+      "signal": "중립",
+      "video_id": "34a8f107-6654-4bf1-b7f9-29be5b6dc2c5"
+    },
+    {
+      "id": "2f9f1e0c-d05e-4d0b-b7de-289ed68a2cf6",
+      "stock": "비트코인",
+      "signal": "매수",
+      "video_id": "dd2d399a-532b-43b8-bd78-42953ccfea73"
+    },
+    {
+      "id": "ecb8d10f-d2aa-4d31-976a-d854bdb30ae6",
+      "stock": "엔비디아",
+      "signal": "긍정",
+      "video_id": "dd2d399a-532b-43b8-bd78-42953ccfea73"
+    },
+    {
+      "id": "d5048e12-e9d5-4792-b844-c9a3ddeeeaba",
+      "stock": "팔란티어",
+      "signal": "긍정",
+      "video_id": "dd2d399a-532b-43b8-bd78-42953ccfea73"
+    },
+    {
+      "id": "239ebae9-23d7-451d-8ebc-32073d5c6311",
+      "stock": "현금",
+      "signal": "긍정",
+      "video_id": "236a3d96-291a-4f75-800b-850aaedccf5c"
+    },
+    {
+      "id": "f902ccc3-ddd4-4c50-8623-87d01ad9154e",
+      "stock": "부동산",
+      "signal": "긍정",
+      "video_id": "236a3d96-291a-4f75-800b-850aaedccf5c"
+    },
+    {
+      "id": "c140ce9c-7432-42aa-86a5-ea44319bc676",
+      "stock": "레버리지",
+      "signal": "긍정",
+      "video_id": "236a3d96-291a-4f75-800b-850aaedccf5c"
+    },
+    {
+      "id": "e9dd9043-c88d-4f74-910a-abad9f6c90a0",
+      "stock": "Airen",
+      "signal": "긍정",
+      "video_id": "6075799f-e24a-4e39-9665-23d039ef08d9"
+    },
+    {
+      "id": "602d4f1a-7089-4b60-84a6-a905f355b1e4",
+      "stock": "SpaceX",
+      "signal": "중립",
+      "video_id": "6075799f-e24a-4e39-9665-23d039ef08d9"
+    },
+    {
+      "id": "cd61cc91-38f0-487d-8d90-bbfcfbf7b66f",
+      "stock": "현금",
+      "signal": "긍정",
+      "video_id": "089cb7cc-2797-4bd4-a11e-3c47c21cce05"
+    },
+    {
+      "id": "b17cd1fb-637f-49cf-a458-6a1821a3b4aa",
+      "stock": "가상자산",
+      "signal": "경계",
+      "video_id": "089cb7cc-2797-4bd4-a11e-3c47c21cce05"
+    },
+    {
+      "id": "26095014-a15e-48d4-99ec-0af77a2c06c3",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "bf696051-1fb2-4cba-a9a4-08755c716969"
+    },
+    {
+      "id": "625b974f-c7d8-4898-beef-257c5f8e13b0",
+      "stock": "비트코인",
+      "signal": "매수",
+      "video_id": "78bd17fa-4df1-4249-a659-14bac9913d7a"
+    },
+    {
+      "id": "efb5f618-254b-4f47-bc18-784f39338577",
+      "stock": "비트코인",
+      "signal": "매수",
+      "video_id": "fbd05507-31dc-4ecc-b2d8-c3fbdc4a0cfa"
+    },
+    {
+      "id": "8312f314-1824-461d-8f69-d9c6136e555f",
+      "stock": "자신의 포트폴리오",
+      "signal": "긍정",
+      "video_id": "b608e320-3576-44de-ac6c-8b8f3feaf06a"
+    },
+    {
+      "id": "a89dada5-f4a7-44ba-85ad-e75667d65953",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "dde613a8-9030-4649-88ab-ab3d968227de"
+    },
+    {
+      "id": "35df36b0-d400-427c-8fea-0cfe1998e828",
+      "stock": "금",
+      "signal": "긍정",
+      "video_id": "dde613a8-9030-4649-88ab-ab3d968227de"
+    },
+    {
+      "id": "23cb54a9-51fe-4d60-91fa-6d504cd94177",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "video_id": "dde613a8-9030-4649-88ab-ab3d968227de"
+    },
+    {
+      "id": "566eacd9-acfc-4783-93ad-cd6db9ee76aa",
+      "stock": "비트코인",
+      "signal": "매수",
+      "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3"
+    },
+    {
+      "id": "4d76a146-54f2-474d-a9e0-660a7cef7e68",
+      "stock": "비트코인",
+      "signal": "중립",
+      "video_id": "1199706d-5b1f-46e9-8540-8b5b2bfc1806"
+    },
+    {
+      "id": "4b8b138e-e90a-4f5e-89ff-e8fc35243c78",
+      "stock": "코인베이스",
+      "signal": "중립",
+      "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9"
+    },
+    {
+      "id": "f3831c03-098e-4400-82ee-8e267be53e04",
+      "stock": "팔란티어",
+      "signal": "중립",
+      "video_id": "d1e96d98-2a61-48a2-9a43-710cfe280a1a"
+    },
+    {
+      "id": "9f45bfa1-7f0e-4e93-9fa4-d9f1eb3771ea",
+      "stock": "마이크로스트라이즈",
+      "signal": "긍정",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "0b9ff88f-a8ef-4762-bdbd-ad72f3ed65c3",
+      "stock": "스퀘어",
+      "signal": "긍정",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "095aabf6-70cf-4d17-b23c-4e3d34a153db",
+      "stock": "스톤리지",
+      "signal": "긍정",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "7e00d49b-5b0f-44ea-9077-cc10b0840e20",
+      "stock": "그레이스케일 비트코인 투자 신탁",
+      "signal": "긍정",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "8d2f77b1-047f-48c7-bce9-a5addc8eb7c5",
+      "stock": "라울 팔",
+      "signal": "긍정",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "4e9a038d-49e3-43ed-b77f-04c8bcc4575a",
+      "stock": "피델리티",
+      "signal": "긍정",
+      "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+    },
+    {
+      "id": "b6ef50ed-9f79-46fd-97d6-8fa0d29b993d",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+    },
+    {
+      "id": "87860eb8-38f5-41cf-9937-7c414f197c65",
+      "stock": "이더리움",
+      "signal": "긍정",
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+    },
+    {
+      "id": "2738dd25-5dd5-4f8f-b632-b8668ee418d5",
+      "stock": "솔라나",
+      "signal": "긍정",
+      "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+    },
+    {
+      "id": "dd12cfa5-94c3-46b8-8128-26663d0399a3",
+      "stock": "Rocket Lab",
+      "signal": "긍정",
+      "video_id": "6075799f-e24a-4e39-9665-23d039ef08d9"
+    },
+    {
+      "id": "fe8f5a4d-d549-4eaa-a910-7fd06d622eeb",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "811fb5ef-0e8f-4c6c-acbb-3e5888f198f3"
+    },
+    {
+      "id": "d7747984-1b71-4335-8027-de7f931196b1",
+      "stock": "DeFi 프로토콜",
+      "signal": "중립",
+      "video_id": "34a8f107-6654-4bf1-b7f9-29be5b6dc2c5"
+    },
+    {
+      "id": "bf01a4e0-e1c3-48c4-a4ba-a0184475e451",
+      "stock": "테슬라",
+      "signal": "매수",
+      "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3"
+    },
+    {
+      "id": "8a3db8c2-eedb-481d-abef-fb9472742f90",
+      "stock": "비트코인",
+      "signal": "매수",
+      "video_id": "b608e320-3576-44de-ac6c-8b8f3feaf06a"
+    },
+    {
+      "id": "97a4849c-b273-41eb-b896-39a0679b7b83",
+      "stock": "솔라나",
+      "signal": "중립",
+      "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9"
+    },
+    {
+      "id": "1bccad86-544f-4bec-9a6b-e9a8ff8e4cff",
+      "stock": "이더리움",
+      "signal": "중립",
+      "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9"
+    },
+    {
+      "id": "71d20979-195f-49a4-906d-42f048873b76",
+      "stock": "IREN",
+      "signal": "긍정",
+      "video_id": "399473e3-da76-46d4-9bcd-ef95fa89d480"
+    },
+    {
+      "id": "155cd7b3-b874-4290-81e2-b1bdb35ef1c8",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "f2ca296c-54a7-4adc-896f-af1f60dfb714"
+    },
+    {
+      "id": "401752b1-72f4-4e5f-b3ab-54e524211bea",
+      "stock": "팔라티어",
+      "signal": "긍정",
+      "video_id": "79fdcd4a-f7b9-47b5-a44d-b4288c5c99a0"
+    },
+    {
+      "id": "55123a2a-b25c-478b-84ba-670c3d36840f",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "0f17e179-0f77-49b4-a692-dd8f6ed0d44c"
+    },
+    {
+      "id": "3bf35ea8-f1ca-4173-95f1-c00630792747",
+      "stock": "국내 배당주",
+      "signal": "긍정",
+      "video_id": "89b5ef14-0d40-40d1-9430-f9c090ca199f"
+    },
+    {
+      "id": "d2b6bd3f-99f6-4555-ac0b-4e9d82d2aa48",
+      "stock": "Rocket Lab",
+      "signal": "긍정",
+      "video_id": "02165a4c-271d-4a6c-8fcc-86dc6209f77c"
+    },
+    {
+      "id": "be85eb2d-f5eb-4111-ac45-c9db8fc1ee83",
+      "stock": "클레이튼",
+      "signal": "긍정",
+      "video_id": "df3a6ba3-8db4-4c9c-98b3-e8bb6f0662c2"
+    },
+    {
+      "id": "f0033b26-b94c-491c-b15d-d6644742a395",
+      "stock": "없음",
+      "signal": "긍정",
+      "video_id": "2993195b-a2d6-46f2-b32d-64169a3afda1"
+    },
+    {
+      "id": "ecff29c8-545b-499a-8877-84d1b5b7186c",
+      "stock": "로켓랩",
+      "signal": "긍정",
+      "video_id": "dd2d399a-532b-43b8-bd78-42953ccfea73"
+    },
+    {
+      "id": "70b8ac7e-81cb-410b-b78a-a85cfc65ca2d",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "31927220-3d28-498e-ac85-6421ce10c128"
+    },
+    {
+      "id": "60cb03fd-80f3-460e-a090-d351ee80512e",
+      "stock": "N/A",
+      "signal": "중립",
+      "video_id": "78bd17fa-4df1-4249-a659-14bac9913d7a"
+    },
+    {
+      "id": "a1c13310-5d0d-42c6-ae72-f69935da5aa9",
+      "stock": "금융주",
+      "signal": "매수",
+      "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3"
+    },
+    {
+      "id": "1aa6d95d-365c-4c72-8f31-f590c63a7710",
+      "stock": "리츠",
+      "signal": "매수",
+      "video_id": "38cae4f3-38f6-4d59-86f4-a647ebed7de3"
+    },
+    {
+      "id": "9ec4759d-0cea-48be-bd27-bdece93c0c06",
+      "stock": "비트코인",
+      "signal": "긍정",
+      "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9"
+    }
+  ]
+}

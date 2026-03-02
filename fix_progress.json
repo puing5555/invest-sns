@@ -1,0 +1,42 @@
+{
+  "processed": 5,
+  "succeeded": 5,
+  "failed": 0,
+  "results": [
+    {
+      "signal_id": "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04",
+      "stock": "마이크로스트라이즈",
+      "signal_type": "매수",
+      "key_quote_len": 48,
+      "reasoning_len": 433
+    },
+    {
+      "signal_id": "ba2343ce-d1fc-4539-88ca-6c379cdcf10c",
+      "stock": "그레이스케일 비트코인 투자 신탁",
+      "signal_type": "매수",
+      "key_quote_len": 35,
+      "reasoning_len": 404
+    },
+    {
+      "signal_id": "ddfdd2be-2ecc-4b25-8e09-68f1a174b979",
+      "stock": "라울 팔",
+      "signal_type": "매수",
+      "key_quote_len": 63,
+      "reasoning_len": 480
+    },
+    {
+      "signal_id": "c78cc714-3e23-4c2f-a9b3-76d19ed51038",
+      "stock": "피델리티",
+      "signal_type": "매수",
+      "key_quote_len": 61,
+      "reasoning_len": 493
+    },
+    {
+      "signal_id": "ebe987df-f9d5-473e-b7d3-442aa20da398",
+      "stock": "스퀘어",
+      "signal_type": "매수",
+      "key_quote_len": 50,
+      "reasoning_len": 433
+    }
+  ]
+}
