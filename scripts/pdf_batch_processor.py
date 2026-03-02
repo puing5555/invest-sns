@@ -34,8 +34,8 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 PDF_DIR = Path(__file__).parent.parent / "data" / "analyst_pdfs"
 PROGRESS_FILE = Path(__file__).parent.parent / "data" / "ai_summary_progress.json"
 BATCH_SIZE = 50
-API_DELAY = 2  # 요청 간 2초
-BATCH_DELAY = 60  # 50개마다 1분 휴식
+API_DELAY = 1  # 요청 간 1초 (1회 호출로 줄였으므로)
+BATCH_DELAY = 30  # 50개마다 30초 휴식
 
 
 def supabase_request(method, endpoint, data=None, params=None):
@@ -136,38 +136,32 @@ def extract_analyst_name(text: str) -> Optional[str]:
 
 
 def generate_summary(client, text: str, firm: str, ticker: str) -> Dict[str, str]:
-    """Claude로 한줄요약 + 상세요약"""
+    """Claude로 한줄요약 + 상세요약 (1회 호출)"""
     try:
-        # 한줄요약
-        resp1 = client.messages.create(
+        resp = client.messages.create(
             model="claude-sonnet-4-20250514",
-            max_tokens=150,
-            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 한줄로 요약해주세요. 50자 이내, 구체적인 투자포인트나 전망 포함.
+            max_tokens=1200,
+            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 분석해주세요.
 
 증권사: {firm} | 종목: {ticker}
 
-{text[:4000]}"""}]
+{text[:6000]}
+
+다음 JSON 형식으로만 답변:
+{{"ai_summary": "한줄요약 50자이내, 구체적 투자포인트", "ai_detail": "상세요약 500자이상. 투자포인트/실적전망/밸류에이션/리스크/결론 구조. 구체적 수치 포함"}}"""}]
         )
-        ai_summary = resp1.content[0].text.strip()
-
-        time.sleep(1)  # API 간 간격
-
-        # 상세요약
-        resp2 = client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=1000,
-            messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 상세 요약해주세요.
-
-구조: 투자포인트 / 실적전망 / 밸류에이션 / 리스크 / 결론
-500자 이상, 구체적 수치와 근거 포함.
-
-증권사: {firm} | 종목: {ticker}
-
-{text[:8000]}"""}]
-        )
-        ai_detail = resp2.content[0].text.strip()
-
-        return {"ai_summary": ai_summary, "ai_detail": ai_detail}
+        raw = resp.content[0].text.strip()
+        # JSON 파싱
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        result = json.loads(raw)
+        return {"ai_summary": result.get("ai_summary", ""), "ai_detail": result.get("ai_detail", "")}
+    except json.JSONDecodeError:
+        # JSON 파싱 실패시 전체를 summary로
+        print(f"  JSON 파싱 실패, raw 저장")
+        return {"ai_summary": raw[:100] if raw else "", "ai_detail": raw if raw else ""}
     except Exception as e:
         print(f"  AI 요약 실패: {e}")
         return {}
