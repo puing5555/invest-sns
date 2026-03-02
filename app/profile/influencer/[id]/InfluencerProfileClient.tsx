@@ -7,6 +7,7 @@ import { getInfluencerProfileBySpeaker, getSignalVoteCounts } from '@/lib/supaba
 import { slugToSpeaker } from '@/lib/speakerSlugs';
 import SignalDetailModal from '@/components/SignalDetailModal';
 import { formatStockDisplay, formatStockShort } from '@/lib/stockNames';
+import { formatStockPrice } from '@/lib/currency';
 
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
@@ -256,7 +257,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                           const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
                           const arrow = ret >= 0 ? '▲' : '▼';
                           return (
-                            <span className={`font-medium ${color}`} title={`시점가 ${pd.price_at_signal?.toLocaleString()}원 → 현재 ${pd.price_current?.toLocaleString()}원`}>
+                            <span className={`font-medium ${color}`} title={`시점가 ${formatStockPrice(pd.price_at_signal || 0, signal.stock)} → 현재 ${formatStockPrice(pd.price_current || 0, signal.stock)}`}>
                               {arrow} {ret >= 0 ? '+' : ''}{ret}%
                             </span>
                           );

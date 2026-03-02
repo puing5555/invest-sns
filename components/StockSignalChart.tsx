@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import stockPricesData from '@/data/stockPrices.json';
+import { formatStockPrice } from '@/lib/currency';
 
 interface Signal {
   date: string;
@@ -178,7 +179,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
       <div className="flex justify-between items-center mb-4">
         <h4 className="font-medium text-[#191f28]">주가 차트 & 신호</h4>
         <div className="text-sm text-[#8b95a1]">
-          현재가 <span className="font-bold text-[#191f28]">{chartConfig.currentPrice.toLocaleString()}원</span>
+          현재가 <span className="font-bold text-[#191f28]">{formatStockPrice(chartConfig.currentPrice, code)}</span>
         </div>
       </div>
       <div className="relative h-72 bg-[#f8f9fa] rounded-lg overflow-visible">
@@ -244,7 +245,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
                 'text-gray-600 bg-gray-50'
               }`}>{hoveredSignal.signal}</span>
             </div>
-            <div className="text-xs text-[#8b95a1] mb-1">{hoveredSignal.date} • {(hoveredSignal as any).priceAtSignal?.toLocaleString()}원</div>
+            <div className="text-xs text-[#8b95a1] mb-1">{hoveredSignal.date} • {formatStockPrice((hoveredSignal as any).priceAtSignal || 0, code)}</div>
             <div className="text-xs text-[#191f28] line-clamp-2">&ldquo;{hoveredSignal.quote}&rdquo;</div>
           </div>
         )}

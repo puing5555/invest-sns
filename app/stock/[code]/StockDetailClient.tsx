@@ -9,6 +9,7 @@ import StockAnalystTab from '@/components/stock/StockAnalystTab';
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
+import { formatStockPrice, isKoreanStock } from '@/lib/currency';
 import SignalDetailModal from '@/components/SignalDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
@@ -309,12 +310,12 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
               </h1>
               <div className="flex items-center gap-4 mt-2">
                 <span className="text-3xl font-bold text-[#191f28]">
-                  {stockData.price.toLocaleString()}원
+                  {formatStockPrice(stockData.price, code)}
                 </span>
                 <span className={`text-lg font-medium ${
                   stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
                 }`}>
-                  {stockData.change >= 0 ? '+' : ''}{stockData.change.toLocaleString()}원
+                  {isKoreanStock(code) ? `${stockData.change >= 0 ? '+' : ''}${stockData.change.toLocaleString()}원` : `${stockData.change >= 0 ? '+' : ''}$${stockData.change.toLocaleString()}`}
                   ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
                 </span>
               </div>
@@ -447,7 +448,7 @@ function AnalystTab({ code }: { code: string }) {
           <div className="text-center">
             <div className="text-sm text-[#8b95a1] mb-1">평균 목표가</div>
             <div className="text-lg font-bold text-[#191f28]">
-              {avgTarget > 0 ? Math.round(avgTarget).toLocaleString() + '원' : '-'}
+              {avgTarget > 0 ? formatStockPrice(Math.round(avgTarget), code) : '-'}
             </div>
           </div>
           <div className="text-center">
@@ -512,7 +513,7 @@ function AnalystTab({ code }: { code: string }) {
                       <div className="truncate" title={report.title}>{report.title}</div>
                     </td>
                     <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">
-                      {report.target_price ? report.target_price.toLocaleString() + '원' : '-'}
+                      {report.target_price ? formatStockPrice(report.target_price, code) : '-'}
                     </td>
                     <td className="px-4 py-4">
                       {report.pdf_url ? (
@@ -571,7 +572,7 @@ function AnalystTab({ code }: { code: string }) {
                   <div className="text-right">
                     <div className="text-sm text-[#8b95a1]">목표가</div>
                     <div className="text-xl font-bold text-[#191f28]">
-                      {selectedReport.target_price ? selectedReport.target_price.toLocaleString() + '원' : '-'}
+                      {selectedReport.target_price ? formatStockPrice(selectedReport.target_price, code) : '-'}
                     </div>
                   </div>
                 </div>
@@ -937,7 +938,7 @@ function InfluencerTab({ code }: { code: string }) {
                       const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
                       const arrow = ret >= 0 ? '▲' : '▼';
                       return (
-                        <span className={color} title={`${pd.price_at_signal?.toLocaleString()}원 → ${pd.price_current?.toLocaleString()}원`}>
+                        <span className={color} title={`${formatStockPrice(pd.price_at_signal || 0, code)} → ${formatStockPrice(pd.price_current || 0, code)}`}>
                           {arrow} {ret >= 0 ? '+' : ''}{ret}%
                         </span>
                       );

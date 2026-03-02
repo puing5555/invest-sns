@@ -1,5 +1,7 @@
 'use client';
 
+import { formatStockPrice, isKoreanStock } from '@/lib/currency';
+
 interface Report {
   ticker: string;
   firm: string;
@@ -60,13 +62,14 @@ export default function TargetPriceChart({ reports, stockName }: TargetPriceChar
     }
   };
 
+  const ticker = reportsWithPrice[0]?.ticker || '';
   const formatPrice = (price: number) => {
-    if (price >= 10000) {
-      return `${Math.floor(price / 10000)}만원`;
-    } else if (price >= 1000) {
-      return `${Math.floor(price / 1000)}천원`;
+    if (isKoreanStock(ticker)) {
+      if (price >= 10000) return `${Math.floor(price / 10000)}만원`;
+      if (price >= 1000) return `${Math.floor(price / 1000)}천원`;
+      return `${price}원`;
     }
-    return `${price}원`;
+    return `$${price.toLocaleString()}`;
   };
 
   return (

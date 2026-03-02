@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import stockPricesData from '@/data/stockPrices.json';
+import { formatStockPrice } from '@/lib/currency';
 
 const LineChart = dynamic(() => import('recharts').then((mod) => mod.LineChart), { ssr: false });
 const Line = dynamic(() => import('recharts').then((mod) => mod.Line), { ssr: false });
@@ -224,8 +225,8 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
             />
             <Tooltip
               formatter={(value: any, name: string) => {
-                if (name === 'price') return [`${value.toLocaleString()}원`, '주가'];
-                if (name === 'targetPrice') return [`${value.toLocaleString()}원`, '목표가'];
+                if (name === 'price') return [formatStockPrice(value, code), '주가'];
+                if (name === 'targetPrice') return [formatStockPrice(value, code), '목표가'];
                 return [value, name];
               }}
               labelFormatter={(date) => new Date(date).toLocaleDateString('ko-KR')}
@@ -245,7 +246,7 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
         >
           <div className="font-bold text-[#191f28] mb-1">{activeSignal.firm}</div>
           {activeSignal.analyst && <div className="text-[#8b95a1] text-xs">{activeSignal.analyst}</div>}
-          <div className="text-[#191f28]">목표가: {activeSignal.target_price?.toLocaleString()}원</div>
+          <div className="text-[#191f28]">목표가: {activeSignal.target_price ? formatStockPrice(activeSignal.target_price, code) : '-'}</div>
           <div className="text-[#191f28]">투자의견: {activeSignal.signal}</div>
           {activeSignal.title && <div className="text-[#8b95a1] text-xs mt-1 max-w-[200px] truncate">{activeSignal.title}</div>}
         </div>

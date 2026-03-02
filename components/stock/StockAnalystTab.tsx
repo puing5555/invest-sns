@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
 import stockPricesData from '@/data/stockPrices.json';
 import StockAnalystChart from '@/components/StockAnalystChart';
+import { isKoreanStock } from '@/lib/currency';
 
 interface Report {
   ticker: string;
@@ -26,8 +27,9 @@ interface AnalystReportModalProps {
   onClose: () => void;
 }
 
-function formatTargetPrice(price: number | null): string {
+function formatTargetPrice(price: number | null, ticker?: string): string {
   if (!price) return '-';
+  if (ticker && !isKoreanStock(ticker)) return `$${price.toLocaleString()}`;
   return `${Math.floor(price / 10000)}만원`;
 }
 
@@ -95,7 +97,7 @@ function AnalystReportModal({ report, onClose }: AnalystReportModalProps) {
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-[#8b95a1]">목표가</span>
-                <span className="text-sm font-medium text-[#191f28]">{formatTargetPrice(report.target_price)}</span>
+                <span className="text-sm font-medium text-[#191f28]">{formatTargetPrice(report.target_price, code)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-[#8b95a1]">투자의견</span>
@@ -184,7 +186,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
                     <td className="px-4 py-4 text-sm max-w-xs">
                       <div className="text-[#191f28] font-medium truncate hover:text-[#3182f6] transition-colors">{report.title}</div>
                     </td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] font-medium whitespace-nowrap">{formatTargetPrice(report.target_price)}</td>
+                    <td className="px-4 py-4 text-sm text-[#191f28] font-medium whitespace-nowrap">{formatTargetPrice(report.target_price, code)}</td>
                   </tr>
                 ))}
               </tbody>

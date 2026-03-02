@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
 import TargetPriceChart from '@/components/TargetPriceChart';
+import { isKoreanStock } from '@/lib/currency';
 
 const TICKER_NAMES: Record<string, string> = {
   '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
@@ -42,8 +43,9 @@ function OpinionBadge({ opinion }: { opinion: string }) {
   );
 }
 
-function formatPrice(n: number | null) {
+function formatPrice(n: number | null, ticker?: string) {
   if (n === null || n === undefined) return '-';
+  if (ticker && !isKoreanStock(ticker)) return `$${n.toLocaleString()}`;
   return `${Math.floor(n / 10000)}만원`;
 }
 
@@ -107,7 +109,7 @@ function ReportModal({ report, isOpen, onClose }: ReportModalProps) {
               </div>
               <div>
                 <span className="text-gray-500">목표가</span>
-                <p className="font-medium">{formatPrice(report.target_price)}</p>
+                <p className="font-medium">{formatPrice(report.target_price, report.ticker)}</p>
               </div>
               <div>
                 <span className="text-gray-500">투자의견</span>
@@ -270,7 +272,7 @@ export default function AnalystPage() {
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-xs text-blue-600 font-medium">{TICKER_NAMES[r.ticker] || r.ticker}</span>
                       <span className="text-xs text-gray-400">·</span>
-                      <span className="text-xs text-gray-700 font-medium">목표 {formatPrice(r.target_price)}</span>
+                      <span className="text-xs text-gray-700 font-medium">목표 {formatPrice(r.target_price, r.ticker)}</span>
                     </div>
                   </div>
                   <div className="ml-2 text-lg">📄</div>
@@ -368,7 +370,7 @@ export default function AnalystPage() {
                               <span className="text-xs text-gray-500">{r.firm}</span>
                               <span className="text-xs text-gray-400">{formatDate(r.published_at)}</span>
                               <OpinionBadge opinion={r.opinion} />
-                              <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price)}</span>
+                              <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price, r.ticker)}</span>
                             </div>
                           </div>
                           <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
