@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
+import stockPricesData from '@/data/stockPrices.json';
 
 interface Signal {
   id: string;
@@ -23,18 +24,41 @@ export default function StockChart({ stockCode, stockName, signals }: StockChart
     const chartHeight = 200;
     const padding = 30;
     
-    // 더미 주가 데이터 생성 (실제 환경에서는 API 데이터 사용)
-    const priceData = Array.from({ length: 50 }, (_, i) => {
-      const progress = i / 49;
-      const baseY = chartHeight / 2;
-      const noise = (Math.sin(i * 0.3) + Math.sin(i * 0.7) * 0.5) * 20;
-      const trend = progress * 30 - 15; // 약간의 상승 트렌드
+    // 실제 주가 데이터 사용 (stockPrices.json에서)
+    const realData = (stockPricesData as any)[stockCode];
+    let priceData;
+    
+    if (realData && realData.prices && realData.prices.length > 0) {
+      // 실제 데이터가 있는 경우
+      const prices = realData.prices.slice(-50); // 최근 50일 데이터 사용
+      const minPrice = Math.min(...prices.map((p: any) => p.close));
+      const maxPrice = Math.max(...prices.map((p: any) => p.close));
+      const priceRange = maxPrice - minPrice || 1;
       
-      return {
-        x: progress * (chartWidth - 2 * padding) + padding,
-        y: Math.max(padding, Math.min(chartHeight - padding, baseY + noise + trend))
-      };
-    });
+      priceData = prices.map((price: any, i: number) => {
+        const progress = i / (prices.length - 1 || 1);
+        const normalizedPrice = (price.close - minPrice) / priceRange;
+        
+        return {
+          x: progress * (chartWidth - 2 * padding) + padding,
+          y: Math.max(padding, Math.min(chartHeight - padding, 
+            chartHeight - padding - normalizedPrice * (chartHeight - 2 * padding)))
+        };
+      });
+    } else {
+      // 데이터가 없는 경우 더미 데이터 사용
+      priceData = Array.from({ length: 50 }, (_, i) => {
+        const progress = i / 49;
+        const baseY = chartHeight / 2;
+        const noise = (Math.sin(i * 0.3) + Math.sin(i * 0.7) * 0.5) * 20;
+        const trend = progress * 30 - 15;
+        
+        return {
+          x: progress * (chartWidth - 2 * padding) + padding,
+          y: Math.max(padding, Math.min(chartHeight - padding, baseY + noise + trend))
+        };
+      });
+    }
     
     // 시그널 점들 (실제 데이터 기반, 시간순 정렬)
     const sortedSignals = [...signals].sort((a, b) => 

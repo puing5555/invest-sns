@@ -76,13 +76,13 @@ const getStockData = (code: string, dynamicName?: string) => {
     '016360': '삼성증권', '039490': '키네마스터', '071050': '한국금융지주',
     '352820': 'COI머티리얼즈', '357780': '솔브레인', '084370': '맘스터치',
     // 해외주식
-    'NVDA': '엔비디아', 'TSLA': '테슬라', 'PLTR': '팔란티어', 'AMD': 'AMD',
-    'TSM': 'TSMC', 'ASML': 'ASML', 'GOOGL': '구글', 'MSTR': '마이크로스트래티지',
-    'RKLB': '로켓랩', 'SQ': '스퀘어', 'RIOT': 'Riot Blockchain',
-    'GBTC': '그레이스케일 비트코인 신탁', 'COIN': '코인베이스', 'IREN': 'IREN',
-    'GME': '게임스톱', 'SOXX': 'SOXX ETF', 'MU': '마이크론', 'KS11': '코스피',
+    'NVDA': '엔비디아 (NVDA)', 'TSLA': '테슬라 (TSLA)', 'PLTR': '팔란티어 (PLTR)', 'AMD': 'AMD (AMD)',
+    'TSM': 'TSMC (TSM)', 'ASML': 'ASML (ASML)', 'GOOGL': '구글 (GOOGL)', 'MSTR': '마이크로스트래티지 (MSTR)',
+    'RKLB': '로켓랩 (RKLB)', 'SQ': '스퀘어 (SQ)', 'RIOT': 'Riot Blockchain (RIOT)',
+    'GBTC': '그레이스케일 비트코인 신탁 (GBTC)', 'COIN': '코인베이스 (COIN)', 'IREN': 'IREN (IREN)',
+    'GME': '게임스톱 (GME)', 'SOXX': 'SOXX ETF (SOXX)', 'MU': '마이크론 (MU)', 'KS11': '코스피 (KS11)',
     // 코인
-    'BTC': '비트코인', 'ETH': '이더리움', 'SOL': '솔라나', 'DOGE': '도지코인', 'KLAY': '클레이튼',
+    'BTC': '비트코인 (BTC)', 'ETH': '이더리움 (ETH)', 'SOL': '솔라나 (SOL)', 'DOGE': '도지코인 (DOGE)', 'KLAY': '클레이튼 (KLAY)',
   };
 
   // 한국 종목인지 확인 (숫자로만 이뤄진 코드)
@@ -491,7 +491,7 @@ function AnalystTab({ code }: { code: string }) {
                     <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
                       {new Date(report.published_at).toLocaleDateString('ko-KR', {
                         year: 'numeric',
-                        month: 'short',
+                        month: 'long',
                         day: 'numeric'
                       })}
                     </td>
@@ -547,7 +547,11 @@ function AnalystTab({ code }: { code: string }) {
                   <div className="flex items-center gap-2 text-sm text-[#8b95a1]">
                     <span>{selectedReport.firm}</span>
                     <span>·</span>
-                    <span>{new Date(selectedReport.published_at).toLocaleDateString('ko-KR')}</span>
+                    <span>{new Date(selectedReport.published_at).toLocaleDateString('ko-KR', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}</span>
                   </div>
                 </div>
                 <button onClick={() => setSelectedReport(null)} className="text-[#8b95a1] hover:text-[#191f28] text-xl">✕</button>
@@ -902,7 +906,7 @@ function InfluencerTab({ code }: { code: string }) {
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
                       year: 'numeric',
-                      month: 'short', 
+                      month: 'long', 
                       day: 'numeric' 
                     })}
                   </td>
