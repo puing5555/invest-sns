@@ -395,17 +395,10 @@ def check_db_signals(cr, auto_fix, verbose):
             mismatches.append((s, expected_speaker))
 
     if mismatches:
-        if auto_fix:
-            fixed = 0
-            for s, expected in mismatches:
-                try:
-                    supabase_patch("influencer_signals", s["id"], {"speaker_id": expected})
-                    fixed += 1
-                except Exception:
-                    pass
-            cr.add_fix(f"speaker-channel 불일치 {len(mismatches)}개 → {fixed}개 자동 수정", fixed)
-        else:
-            cr.add_fail(f"speaker-channel 불일치 {len(mismatches)}개 (--auto-fix로 수정 가능)")
+        # NOTE: 자동 수정 비활성화 — 멀티 게스트 채널(삼프로TV, 부읽남TV)에서
+        # 올바른 speaker를 잘못된 primary speaker로 덮어씌우는 문제 있음.
+        # speaker 수정은 수동으로만 진행.
+        cr.add_warn(f"speaker-channel 불일치 {len(mismatches)}개 (멀티 게스트 채널 포함, 수동 확인 필요)")
 
     # ─── 3d. 타임스탬프 0:00 비율 ───
     zero_ts = [s for s in signals if (s.get("timestamp") or "") in ("0:00", "00:00", "0:0", "")]
