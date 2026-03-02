@@ -66,8 +66,8 @@ class PDFBatchProcessor:
                     all_reports.append(report)
         
         print(f"총 {len(all_reports)}개 리포트 발견")
-        # 테스트용: 처음 5개만 처리
-        return all_reports[:5]
+        # 전체 567건 처리
+        return all_reports
     
     def download_pdf(self, pdf_url: str, filename: str) -> bool:
         """PDF 다운로드"""
@@ -154,7 +154,7 @@ class PDFBatchProcessor:
 """
 
             summary_response = self.claude_client.messages.create(
-                model="claude-3-haiku-20240307",
+                model="claude-sonnet-4-20250514",
                 max_tokens=100,
                 messages=[{"role": "user", "content": summary_prompt}]
             )
@@ -179,7 +179,7 @@ class PDFBatchProcessor:
 """
 
             detail_response = self.claude_client.messages.create(
-                model="claude-3-5-sonnet-20241022", 
+                model="claude-sonnet-4-20250514", 
                 max_tokens=1000,
                 messages=[{"role": "user", "content": detail_prompt}]
             )
