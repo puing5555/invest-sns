@@ -21,7 +21,6 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '배재규': 'bae-jaegyu',
   '배제기': 'bae-jegi',
   '김학주': 'kim-hakju',
-  '세상학개론 이효석': 'sesang101',
   '세상학개론': 'sesang101',
 };
 
