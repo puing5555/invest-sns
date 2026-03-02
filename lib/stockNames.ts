@@ -46,9 +46,12 @@ export function formatStockDisplay(stock?: string, ticker?: string): string {
 export function formatStockShort(stock?: string, ticker?: string): string {
   if (!stock) return ticker || '-';
 
-  const isKorean = /[가-힣]/.test(stock);
-  if (isKorean) return stock;
+  // DB에 "종목명 (TICKER)" 형태로 저장된 경우 strip
+  let clean = stock.replace(/\s*\([^)]+\)\s*$/, '').trim();
 
-  const korName = STOCK_NAME_MAP[stock];
-  return korName || stock;
+  const isKorean = /[가-힣]/.test(clean);
+  if (isKorean) return clean;
+
+  const korName = STOCK_NAME_MAP[clean];
+  return korName || clean;
 }

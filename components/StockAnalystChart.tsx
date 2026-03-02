@@ -183,9 +183,20 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis
               dataKey="date"
-              tickFormatter={(date) => new Date(date).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}
+              tickFormatter={(date) => {
+                const d = new Date(date);
+                switch (period) {
+                  case '1개월': return `${d.getMonth() + 1}/${d.getDate()}`;
+                  case '6개월': return `${d.getMonth() + 1}월`;
+                  case '1년': return `${d.getMonth() + 1}월`;
+                  case '3년': return `${d.getFullYear()}.${d.getMonth() + 1}`;
+                  default: return `${d.getFullYear()}`;
+                }
+              }}
               stroke="#8b95a1"
-              fontSize={12}
+              fontSize={11}
+              interval="preserveStartEnd"
+              minTickGap={40}
             />
             <YAxis
               domain={chartData.yDomain}
