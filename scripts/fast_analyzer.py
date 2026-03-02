@@ -44,6 +44,13 @@ class FastAnalyzer:
         self.stats = {'processed': 0, 'skipped': 0, 'errors': 0, 'signals': 0}
         self.results = []
         
+        # 검증 모듈
+        try:
+            from signal_validator import SignalValidator
+            self.validator = SignalValidator()
+        except ImportError:
+            self.validator = None
+        
         # 프롬프트 로드
         if prompt_path:
             with open(prompt_path, 'r', encoding='utf-8') as f:
@@ -143,6 +150,20 @@ URL: https://www.youtube.com/watch?v={video_id}
                             text = data['content'][0].get('text', '')
                             result = self.parse_response(text)
                             signals = result.get('signals', [])
+                            
+                            # 품질 검증
+                            if self.validator:
+                                validated = []
+                                for sig in signals:
+                                    sig['video_id'] = video_id
+                                    vr = self.validator.validate(sig)
+                                    if vr.passed:
+                                        validated.append(sig)
+                                    else:
+                                        self.stats.setdefault('rejected', 0)
+                                        self.stats['rejected'] += 1
+                                signals = validated
+                            
                             self.stats['processed'] += 1
                             self.stats['signals'] += len(signals)
                             
@@ -208,8 +229,12 @@ URL: https://www.youtube.com/watch?v={video_id}
         
         print(f"\n{'='*60}")
         print(f"완료! {elapsed:.0f}초 ({elapsed/60:.1f}분)")
+        rejected = self.stats.get('rejected', 0)
         print(f"처리: {self.stats['processed']}, 스킵: {self.stats['skipped']}, "
-              f"에러: {self.stats['errors']}, 시그널: {self.stats['signals']}")
+              f"에러: {self.stats['errors']}, 시그널: {self.stats['signals']}, "
+              f"reject: {rejected}")
+        if self.validator:
+            self.validator.print_stats()
         print(f"결과: {output_file}")
         print(f"{'='*60}")
 
