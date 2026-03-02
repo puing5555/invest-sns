@@ -1,389 +1,466 @@
 #!/usr/bin/env python3
 """
-sesang101 채널 전용 파이프라인
-YouTube IP 차단 우회를 위해 Invidious API 사용
+세상학개론 누락 영상 전체 파이프라인
+1. 자막 추출 (이미 있는 것 스킵)
+2. 메타데이터 가져오기 (yt-dlp)
+3. DB INSERT (influencer_videos)
+4. 시그널 분석 (Claude Sonnet)
+5. DB INSERT (influencer_signals)
 """
 
-import os
-import sys
-import json
-import time
-import random
-import uuid
-import requests
+import json, os, sys, time, random, asyncio, aiohttp, subprocess
+from pathlib import Path
 from datetime import datetime
+from dotenv import load_dotenv
 
-sys.path.append(os.path.dirname(__file__))
-from signal_analyzer_rest import SignalAnalyzer
-from db_inserter_rest import DatabaseInserter
-from pipeline_config import PipelineConfig
+sys.stdout.reconfigure(encoding='utf-8', line_buffering=True)
 
-# Invidious 인스턴스 목록
-INVIDIOUS_INSTANCES = [
-    "https://vid.puffyan.us",
-    "https://invidious.fdn.fr",
-    "https://inv.nadeko.net",
-    "https://invidious.nerdvpn.de",
-    "https://invidious.jing.rocks",
-    "https://invidious.privacyredirect.com",
-    "https://yt.artemislena.eu",
+load_dotenv(Path(__file__).parent.parent / '.env.local')
+
+# === CONFIG ===
+CHANNEL_ID = "d68f8efd-64c8-4c07-9d34-e98c2954f4e1"
+CHANNEL_URL = "https://www.youtube.com/@sesang101"
+SUBS_DIR = r"C:\Users\Mario\work\subs\sesang101"
+SUPABASE_URL = os.getenv('NEXT_PUBLIC_SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_ROLE_KEY')
+ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+MODEL = "claude-sonnet-4-20250514"
+
+# All 78 video IDs
+ALL_IDS = [
+    "Ke7gQMbIFLI", "4wCO1fdl9iU", "4cCGQFHrbK4", "Lszaj6NhNcA", "-3odSn4Wi2E",
+    "iNAlXUEw9tc", "A2l1-lyzq4Q", "q4vz1jhWS4s", "JzzXPN5v1BI", "6Bk_eG77-5g",
+    "yxt087-C1zk", "QajNAfX5YvI", "BQY0eh1lcUk", "79PFFmQQjOw", "4bClsFvaoLs",
+    "RXdOkIaSIzc", "4UvO-6eecv8", "1bcmmTZRX5Q", "uMglUc_vQ6A", "EaclBpfxjCI",
+    "0z8e_heKtKk", "vpLSDLs6Fis", "cfwN1eWNlFA", "NlWaAL3SOxE", "blAWrFLQ_Lc",
+    "qkpmS6yfO_g", "KvuATAaRxe8", "j3x7149DzDQ", "KkxAjOp-6H4", "Y9JMqS87HEM",
+    "sU0zaA0oJVk", "bk-2Y0tjnZQ", "un9IHz9LnrA", "rde-ahZ29UQ", "cjKV1A7UTvI",
+    "E0l6aYaff0U", "vE55S-x-6Lc", "CN_T1V1ocjg", "VdxXXSCbiEc", "Qowcv46AneI",
+    "NcijgSSeJVU", "zRGNYWXHfV4", "oiAMDjdr334", "Te7EzydvBT4", "YbbV60KVe_c",
+    "vR-IeyHBRkg", "4yZDpfDT7K8", "4Bay6eXJH1Q", "UCX7_tJGgc4", "FrOAHoV0pH4",
+    "3NUs0JElPvs", "QJf40N2wvh8", "5I9wb6NKNUs", "NVieilk8oHI", "RNvKFfEru-o",
+    "HK9jUm9lcEA", "5Py7WIb8iYw", "pmlsIYTKiw4", "OadsiFLklsM", "-JsPLE90h1Q",
+    "PPsCEEUIGqk", "tR5OyzvKCgE", "4h-fPWoA2W4", "5aGn5CqbQls", "AaJTT_GTkKY",
+    "RrSo7nQFSGY", "peYoNFd3z9E", "WVYVfmpLg4Q", "eiC2ndorjDQ", "Du_VW1HIG5s",
+    "U3Xa3h3kztg", "7UoMvJPj0gw", "O0OVrGY7JUc", "eXlKZ1D-mwM", "7mzsY68IhhI",
+    "9cg-iVIkg20", "JF34kovcvPk", "ojsKQd_mJmk"
 ]
 
-CHANNEL_URL = "https://www.youtube.com/@sesang101"
-CHANNEL_ID = None  # Will be resolved
+# Exclude non-investment videos
+EXCLUDE_IDS = {
+    "QJf40N2wvh8", "NVieilk8oHI", "WVYVfmpLg4Q", "U3Xa3h3kztg", "7UoMvJPj0gw",
+    "Du_VW1HIG5s", "eXlKZ1D-mwM", "9cg-iVIkg20", "JF34kovcvPk", "ojsKQd_mJmk",
+    "A2l1-lyzq4Q"
+}
 
-def get_invidious_api(path, params=None):
-    """Invidious API 호출 (여러 인스턴스 시도)"""
-    for instance in INVIDIOUS_INSTANCES:
+INVEST_IDS = [v for v in ALL_IDS if v not in EXCLUDE_IDS]
+print(f"투자 영상: {len(INVEST_IDS)}개 (제외: {len(EXCLUDE_IDS)}개)")
+
+# === STEP 1: Subtitle extraction ===
+def step1_subtitles():
+    """자막 추출 - 이미 있는 건 스킵"""
+    from youtube_transcript_api import YouTubeTranscriptApi
+    from youtube_transcript_api.proxies import WebshareProxyConfig
+    
+    os.makedirs(SUBS_DIR, exist_ok=True)
+    api = YouTubeTranscriptApi(
+        proxy_config=WebshareProxyConfig(
+            proxy_username="pvljrgkf",
+            proxy_password="0e0eqk9rbwzq",
+        )
+    )
+    
+    existing = {os.path.splitext(f)[0] for f in os.listdir(SUBS_DIR) if f.endswith('.json')}
+    need = [v for v in INVEST_IDS if v not in existing]
+    print(f"\n=== STEP 1: 자막 추출 ===")
+    print(f"이미 있음: {len(INVEST_IDS) - len(need)}, 추출 필요: {len(need)}")
+    
+    if not need:
+        print("모든 자막 있음, 스킵")
+        return
+    
+    success, fail = 0, 0
+    no_subs = []
+    for i, vid in enumerate(need):
+        print(f"[{i+1}/{len(need)}] {vid}...", end=" ", flush=True)
         try:
-            url = f"{instance}/api/v1{path}"
-            r = requests.get(url, params=params, timeout=15)
-            if r.status_code == 200:
-                return r.json()
-        except Exception:
-            continue
-    return None
-
-def get_channel_videos():
-    """Invidious로 세상학개론 채널 영상 목록 수집"""
-    # 먼저 채널 검색
-    data = get_invidious_api("/search", {"q": "세상학개론", "type": "channel"})
-    if not data:
-        print("[ERROR] Invidious 채널 검색 실패")
-        return None, []
-    
-    channel_id = None
-    for item in data:
-        if item.get("type") == "channel" and "sesang" in item.get("authorUrl", "").lower():
-            channel_id = item["authorId"]
-            break
-    
-    if not channel_id:
-        # 직접 알려진 ID 사용
-        channel_id = "UCsJ6RuBiTVWRX156FVbeaGg"  # 세상학개론 채널 ID
-    
-    print(f"[OK] 채널 ID: {channel_id}")
-    
-    # 채널 영상 목록
-    all_videos = []
-    page = 1
-    while len(all_videos) < 100:
-        data = get_invidious_api(f"/channels/{channel_id}/videos", {"page": str(page)})
-        if not data or len(data) == 0:
-            break
-        all_videos.extend(data)
-        page += 1
-        time.sleep(1)
-    
-    print(f"[OK] 총 {len(all_videos)}개 영상 수집")
-    return channel_id, all_videos
-
-def get_transcript_invidious(video_id):
-    """Invidious로 자막 추출"""
-    data = get_invidious_api(f"/captions/{video_id}")
-    if not data or not data.get("captions"):
-        return None
-    
-    # 한국어 자막 찾기
-    ko_caption = None
-    for cap in data["captions"]:
-        if cap.get("language_code", "").startswith("ko"):
-            ko_caption = cap
-            break
-    
-    if not ko_caption:
-        # 자동 생성 한국어 자막
-        for cap in data["captions"]:
-            if "auto" in cap.get("label", "").lower() and "ko" in cap.get("language_code", ""):
-                ko_caption = cap
-                break
-    
-    if not ko_caption:
-        return None
-    
-    # 자막 URL로 다운로드
-    for instance in INVIDIOUS_INSTANCES:
-        try:
-            url = f"{instance}{ko_caption['url']}"
-            r = requests.get(url, timeout=15)
-            if r.status_code == 200:
-                return r.text
-        except:
-            continue
-    
-    return None
-
-def get_transcript_direct(video_id):
-    """YouTube Transcript API 직접 호출 (IP 차단 우회용 대안)"""
-    # timedtext API 직접 호출
-    url = f"https://www.youtube.com/watch?v={video_id}"
-    try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
-        }
-        r = requests.get(url, headers=headers, timeout=15)
-        if r.status_code != 200:
-            return None
+            transcript = api.fetch(vid, languages=['ko', 'en'])
+            entries = [{'text': s.text, 'start': s.start, 'duration': s.duration} for s in transcript]
+            with open(os.path.join(SUBS_DIR, f"{vid}.json"), 'w', encoding='utf-8') as f:
+                json.dump(entries, f, ensure_ascii=False, indent=1)
+            print(f"OK ({len(entries)} segments)")
+            success += 1
+        except Exception as e:
+            err = str(e)[:80]
+            print(f"FAIL: {err}")
+            fail += 1
+            no_subs.append(vid)
         
-        # 페이지에서 자막 URL 추출
-        import re
-        match = re.search(r'"captionTracks":\[.*?"baseUrl":"(.*?)"', r.text)
-        if match:
-            caption_url = match.group(1).replace('\\u0026', '&')
-            # 한국어 자막 URL로 변환
-            if 'lang=ko' not in caption_url:
-                caption_url += '&lang=ko&fmt=srv3'
-            r2 = requests.get(caption_url, headers=headers, timeout=15)
-            if r2.status_code == 200:
-                # XML에서 텍스트 추출
-                from bs4 import BeautifulSoup
-                soup = BeautifulSoup(r2.text, 'lxml')
-                texts = [t.text for t in soup.find_all('text')]
-                return ' '.join(texts)
-    except Exception as e:
-        pass
+        # Rate limiting
+        if (i + 1) % 20 == 0 and i + 1 < len(need):
+            print("--- 20개 완료, 5분 휴식 ---")
+            time.sleep(300)
+        else:
+            time.sleep(random.uniform(2, 3))
     
-    return None
+    print(f"자막 추출 완료: 성공 {success}, 실패 {fail}")
+    return no_subs
 
-def filter_investment_videos(videos):
-    """투자 관련 영상 필터링"""
-    investment_keywords = [
-        'bitcoin', 'btc', 'ethereum', 'eth', 'crypto', 'blockchain',
-        'palantir', 'pltr', 'tesla', 'tsla', 'nvidia', 'nvda', 'apple', 'aapl',
-        'investment', 'investing', 'stock', 'stocks', 'market', 'bubble',
-        'portfolio', 'asset', 'wealth', 'economy', 'economic', 'trump',
-        'buy', 'sell', 'crash', 'rally', 'bull', 'bear', 'dividend',
-        'finance', 'financial', 'coin', 'nft',
-        # 한글
-        '투자', '주식', '코인', '비트코인', '이더리움', '팔란티어', '테슬라',
-        '엔비디아', '시장', '경제', '매수', '매도', '종목', '증시', '나스닥',
-        '금리', '포트폴리오', '자산', '배당', '버블', '전망', '실적',
-        '투자학', '세상학개론',
-    ]
+# === STEP 2: Metadata via yt-dlp ===
+def step2_metadata():
+    """yt-dlp로 메타데이터 가져오기"""
+    print(f"\n=== STEP 2: 메타데이터 ===")
+    meta = {}
+    errors = []
     
-    skip_keywords = [
-        '멤버십', '멤버쉽', 'members only', '회원전용',
-        '쇼츠', 'shorts', '#shorts',
-        '와인', '향수', '음주', '술',
-    ]
-    
-    passed = []
-    for v in videos:
-        title = v.get('title', '').lower()
-        
-        # 스킵 키워드 체크
-        should_skip = False
-        for kw in skip_keywords:
-            if kw.lower() in title:
-                should_skip = True
-                break
-        if should_skip:
-            continue
-        
-        # 투자 관련 키워드 체크
-        for kw in investment_keywords:
-            if kw.lower() in title:
-                passed.append(v)
-                break
-    
-    return passed
-
-def run_pipeline():
-    """메인 파이프라인 실행"""
-    config = PipelineConfig()
-    analyzer = SignalAnalyzer()
-    db = DatabaseInserter()
-    
-    print("=" * 60)
-    print("sesang101 채널 시그널 추출 파이프라인")
-    print("=" * 60)
-    
-    # 1. 채널 영상 목록 수집
-    print("\n[STEP 1] 채널 영상 목록 수집...")
-    channel_id, all_videos = get_channel_videos()
-    
-    if not all_videos:
-        print("[ERROR] 영상 목록 수집 실패. yt-dlp flat-playlist 대안 시도...")
-        # yt-dlp로 영상 ID 목록만 추출 (flat playlist는 IP 차단에 덜 민감)
-        import subprocess
+    for i, vid in enumerate(INVEST_IDS):
+        print(f"[{i+1}/{len(INVEST_IDS)}] {vid}...", end=" ", flush=True)
         try:
             result = subprocess.run(
-                ['python', '-m', 'yt_dlp', '--flat-playlist', '--print', '%(id)s\t%(title)s\t%(upload_date)s',
-                 'https://www.youtube.com/@sesang101/videos'],
-                capture_output=True, text=True, timeout=120
+                [sys.executable, "-m", "yt_dlp", "--dump-json", "--no-download",
+                 f"https://www.youtube.com/watch?v={vid}"],
+                capture_output=True, timeout=60
             )
             if result.returncode == 0:
-                lines = result.stdout.strip().split('\n')
-                all_videos = []
-                for line in lines:
-                    parts = line.split('\t')
-                    if len(parts) >= 2:
-                        all_videos.append({
-                            'videoId': parts[0],
-                            'title': parts[1],
-                            'publishedText': parts[2] if len(parts) > 2 else ''
-                        })
-                print(f"[OK] yt-dlp로 {len(all_videos)}개 영상 수집")
-        except Exception as e:
-            print(f"[ERROR] yt-dlp도 실패: {e}")
-            return
-    
-    if not all_videos:
-        print("[ERROR] 영상 목록을 전혀 수집할 수 없습니다.")
-        return
-    
-    # 2. 투자 관련 영상 필터링
-    print("\n[STEP 2] 투자 관련 영상 필터링...")
-    investment_videos = filter_investment_videos(all_videos)
-    print(f"[OK] {len(all_videos)}개 중 {len(investment_videos)}개 투자 관련 영상 선별")
-    
-    # 3. 기존 DB 영상 확인 (중복 방지)
-    print("\n[STEP 3] 기존 DB 확인...")
-    existing_videos = []
-    try:
-        response = requests.get(
-            f"{db.base_url}/influencer_videos",
-            headers=db.headers,
-            params={'select': 'video_id', 'channel_id': f'not.is.null'}
-        )
-        if response.status_code == 200:
-            existing_videos = [v['video_id'] for v in response.json()]
-            print(f"[OK] DB에 기존 {len(existing_videos)}개 영상 존재")
-    except Exception as e:
-        print(f"[WARNING] 기존 DB 확인 실패: {e}")
-    
-    # 새로운 영상만 필터링
-    new_videos = [v for v in investment_videos if v.get('videoId', '') not in existing_videos]
-    print(f"[OK] 새로운 영상: {len(new_videos)}개")
-    
-    if not new_videos:
-        print("[OK] 새로운 투자 영상이 없습니다.")
-        return
-    
-    # 4. 자막 추출 + AI 분석
-    print(f"\n[STEP 4] 자막 추출 + AI 분석 ({len(new_videos)}개 영상)...")
-    
-    total_signals = 0
-    success_count = 0
-    fail_count = 0
-    all_signals = []
-    
-    for i, video in enumerate(new_videos):
-        video_id = video.get('videoId', '')
-        title = video.get('title', 'Unknown')
-        
-        print(f"\n--- [{i+1}/{len(new_videos)}] {title[:60]} ---")
-        
-        # 레이트 리밋 규칙: 20개마다 5분 휴식
-        if i > 0 and i % 20 == 0:
-            print(f"[SLEEP] 20개 처리 완료, 5분 휴식...")
-            time.sleep(300)
-        
-        # 자막 추출 (여러 방법 시도)
-        subtitle = None
-        
-        # 방법 1: Invidious
-        subtitle = get_transcript_invidious(video_id)
-        if subtitle:
-            print(f"  [OK] Invidious 자막 수집 성공 ({len(subtitle)} chars)")
-        else:
-            # 방법 2: 직접 YouTube 페이지 파싱
-            subtitle = get_transcript_direct(video_id)
-            if subtitle:
-                print(f"  [OK] Direct 자막 수집 성공 ({len(subtitle)} chars)")
-            else:
-                print(f"  [SKIP] 자막 추출 실패")
-                fail_count += 1
-                time.sleep(random.uniform(2, 3))
-                continue
-        
-        # 자막이 너무 짧으면 스킵
-        if len(subtitle.strip()) < 100:
-            print(f"  [SKIP] 자막 너무 짧음 ({len(subtitle)} chars)")
-            fail_count += 1
-            continue
-        
-        # AI 분석
-        video_data = {
-            'title': title,
-            'video_id': video_id,
-            'url': f'https://www.youtube.com/watch?v={video_id}',
-            'duration': str(video.get('lengthSeconds', 'Unknown')),
-            'upload_date': video.get('publishedText', '')
-        }
-        
-        analysis = analyzer.analyze_video_subtitle(CHANNEL_URL, video_data, subtitle[:15000])
-        
-        if analysis:
-            # DB용 채널/영상 생성
-            try:
-                channel_db_id = db.get_or_create_channel({
-                    'url': CHANNEL_URL,
-                    'name': '세상학개론',
-                    'subscriber_count': 0,
-                    'video_count': 0,
-                    'description': '세상학개론 (sesang101) 투자 유튜브 채널'
-                })
-                
-                video_uuid = db.get_or_create_video(video_data, channel_db_id)
-                
-                signals = analyzer.convert_to_database_format(analysis, video_uuid)
-                
-                if signals:
-                    result = db.batch_insert_signals(signals)
-                    total_signals += result['success']
-                    all_signals.extend(signals)
-                    print(f"  [SUCCESS] {result['success']}개 시그널 DB 삽입")
-                    success_count += 1
+                stdout_text = result.stdout.decode('utf-8', errors='replace')
+                data = json.loads(stdout_text)
+                upload_date = data.get('upload_date', '')
+                if upload_date and len(upload_date) == 8:
+                    published = f"{upload_date[:4]}-{upload_date[4:6]}-{upload_date[6:8]}T00:00:00Z"
                 else:
-                    print(f"  [WARNING] 시그널 변환 결과 없음")
-                    
-            except Exception as e:
-                print(f"  [ERROR] DB 처리 실패: {e}")
-                fail_count += 1
-        else:
-            print(f"  [ERROR] AI 분석 실패")
-            fail_count += 1
+                    published = None
+                meta[vid] = {
+                    'title': data.get('title', ''),
+                    'published_at': published,
+                    'description': (data.get('description', '') or '')[:500]
+                }
+                print(f"OK: {meta[vid]['title'][:40]}")
+            else:
+                stderr_text = result.stderr.decode('utf-8', errors='replace')[:80] if result.stderr else 'unknown'
+                print(f"FAIL: {stderr_text}")
+                errors.append(vid)
+        except Exception as e:
+            print(f"ERROR: {e}")
+            errors.append(vid)
         
-        # 요청 간 2-3초 딜레이
-        time.sleep(random.uniform(2, 3))
+        time.sleep(0.5)
     
-    # 5. 결과 보고
-    print("\n" + "=" * 60)
-    print("파이프라인 실행 완료!")
-    print("=" * 60)
-    print(f"총 영상 수: {len(all_videos)}")
-    print(f"투자 관련 영상: {len(investment_videos)}")
-    print(f"새 영상: {len(new_videos)}")
-    print(f"분석 성공: {success_count}")
-    print(f"분석 실패: {fail_count}")
-    print(f"추출 시그널: {total_signals}개")
+    # Save metadata cache
+    cache_file = os.path.join(SUBS_DIR, "_metadata.json")
+    with open(cache_file, 'w', encoding='utf-8') as f:
+        json.dump(meta, f, ensure_ascii=False, indent=2)
+    print(f"메타데이터 완료: {len(meta)}개 성공, {len(errors)}개 실패")
+    return meta, errors
+
+# === STEP 3: DB INSERT videos ===
+def step3_insert_videos(meta):
+    """Supabase에 영상 INSERT"""
+    print(f"\n=== STEP 3: DB INSERT (videos) ===")
+    import requests
     
-    # 결과 JSON 저장
-    result_data = {
-        'timestamp': datetime.now().isoformat(),
-        'channel': 'sesang101',
-        'total_videos': len(all_videos),
-        'investment_videos': len(investment_videos),
-        'new_videos': len(new_videos),
-        'success': success_count,
-        'failed': fail_count,
-        'signals_extracted': total_signals,
-        'signals': [
-            {
-                'stock': s['stock_symbol'],
-                'signal': s['signal_type'],
-                'confidence': s['confidence']
-            } for s in all_signals
-        ]
+    headers = {
+        'apikey': SUPABASE_KEY,
+        'Authorization': f'Bearer {SUPABASE_KEY}',
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
     }
     
-    with open(os.path.join(os.path.dirname(__file__), '..', 'sesang101_results.json'), 'w', encoding='utf-8') as f:
-        json.dump(result_data, f, ensure_ascii=False, indent=2)
+    inserted, skipped, errors = 0, 0, []
     
-    print(f"\n결과 저장: sesang101_results.json")
-    return result_data
+    for vid in INVEST_IDS:
+        m = meta.get(vid)
+        if not m:
+            print(f"  {vid}: 메타데이터 없음, 스킵")
+            skipped += 1
+            continue
+        
+        # Check subtitle
+        sub_file = os.path.join(SUBS_DIR, f"{vid}.json")
+        has_sub = os.path.exists(sub_file)
+        subtitle_text = None
+        subtitle_lang = None
+        if has_sub:
+            try:
+                with open(sub_file, 'r', encoding='utf-8') as f:
+                    segments = json.load(f)
+                subtitle_text = " ".join(s.get('text', '') for s in segments if isinstance(s, dict))
+                subtitle_lang = 'ko'
+            except:
+                has_sub = False
+        
+        row = {
+            'channel_id': CHANNEL_ID,
+            'video_id': vid,
+            'title': m['title'],
+            'published_at': m['published_at'],
+            'subtitle_text': subtitle_text,
+            'has_subtitle': has_sub,
+            'subtitle_language': subtitle_lang
+        }
+        
+        resp = requests.post(
+            f"{SUPABASE_URL}/rest/v1/influencer_videos",
+            headers=headers,
+            json=row
+        )
+        if resp.status_code in (200, 201):
+            inserted += 1
+            print(f"  ✓ {vid}: {m['title'][:30]}")
+        elif resp.status_code == 409:
+            skipped += 1
+        else:
+            errors.append((vid, resp.status_code, resp.text[:100]))
+            print(f"  ✗ {vid}: {resp.status_code} {resp.text[:80]}")
+    
+    print(f"INSERT 완료: {inserted}개 성공, {skipped}개 스킵, {len(errors)}개 에러")
+    return errors
 
-if __name__ == "__main__":
-    run_pipeline()
+# === STEP 4 & 5: Analyze + Insert signals ===
+async def step4_5_analyze_and_insert():
+    """Claude Sonnet으로 분석 후 시그널 INSERT"""
+    print(f"\n=== STEP 4-5: 분석 + 시그널 INSERT ===")
+    
+    # Load prompt
+    prompt_file = Path(__file__).parent.parent / 'prompts' / 'pipeline_v10.md'
+    with open(prompt_file, 'r', encoding='utf-8') as f:
+        prompt_template = f.read()
+    
+    # Load metadata
+    cache_file = os.path.join(SUBS_DIR, "_metadata.json")
+    with open(cache_file, 'r', encoding='utf-8') as f:
+        meta = json.load(f)
+    
+    # Build list of videos to analyze (must have subtitle)
+    to_analyze = []
+    for vid in INVEST_IDS:
+        sub_file = os.path.join(SUBS_DIR, f"{vid}.json")
+        if not os.path.exists(sub_file):
+            continue
+        try:
+            with open(sub_file, 'r', encoding='utf-8') as f:
+                segments = json.load(f)
+            subtitle = " ".join(s.get('text', '') for s in segments if isinstance(s, dict)).strip()
+            if len(subtitle) < 100:
+                continue
+        except:
+            continue
+        title = meta.get(vid, {}).get('title', f'영상 {vid}')
+        to_analyze.append({'video_id': vid, 'title': title, 'subtitle': subtitle})
+    
+    print(f"분석 대상: {len(to_analyze)}개")
+    
+    # Check which already have signals in DB
+    import requests
+    sb_headers = {
+        'apikey': SUPABASE_KEY,
+        'Authorization': f'Bearer {SUPABASE_KEY}',
+        'Content-Type': 'application/json'
+    }
+    
+    # Get existing signals
+    resp = requests.get(
+        f"{SUPABASE_URL}/rest/v1/influencer_signals?channel_id=eq.{CHANNEL_ID}&select=video_id",
+        headers=sb_headers
+    )
+    existing_signal_vids = set()
+    if resp.status_code == 200:
+        existing_signal_vids = {r['video_id'] for r in resp.json()}
+    
+    to_analyze = [v for v in to_analyze if v['video_id'] not in existing_signal_vids]
+    print(f"이미 시그널 있는 영상 제외 후: {len(to_analyze)}개")
+    
+    if not to_analyze:
+        print("분석할 영상 없음!")
+        return 0, 0
+    
+    semaphore = asyncio.Semaphore(3)
+    stats = {'processed': 0, 'signals': 0, 'errors': 0}
+    all_signals = []
+    
+    async def analyze_one(session, video):
+        async with semaphore:
+            vid = video['video_id']
+            title = video['title']
+            subtitle = video['subtitle'][:8000]
+            
+            prompt = prompt_template + f"""
+
+=== 분석 대상 영상 ===
+제목: {title}
+URL: https://www.youtube.com/watch?v={vid}
+
+=== 자막 내용 ===
+{subtitle}
+
+=== 분석 지시사항 ===
+위 영상의 자막을 분석하고 JSON 형태로 시그널을 추출해주세요.
+"""
+            
+            headers = {
+                'Content-Type': 'application/json',
+                'x-api-key': ANTHROPIC_API_KEY,
+                'anthropic-version': '2023-06-01'
+            }
+            payload = {
+                'model': MODEL,
+                'max_tokens': 4000,
+                'messages': [{'role': 'user', 'content': prompt}]
+            }
+            
+            for attempt in range(3):
+                try:
+                    async with session.post(
+                        "https://api.anthropic.com/v1/messages",
+                        json=payload, headers=headers,
+                        timeout=aiohttp.ClientTimeout(total=180)
+                    ) as resp:
+                        if resp.status == 429:
+                            retry = int(resp.headers.get('retry-after', '60'))
+                            print(f"  [429] {vid} waiting {retry}s")
+                            await asyncio.sleep(retry)
+                            continue
+                        if resp.status == 529:
+                            print(f"  [529] overloaded, waiting 60s")
+                            await asyncio.sleep(60)
+                            continue
+                        resp.raise_for_status()
+                        data = await resp.json()
+                        text = data['content'][0].get('text', '')
+                        
+                        # Parse JSON
+                        result = None
+                        try:
+                            if '```json' in text:
+                                s = text.find('```json') + 7
+                                e = text.find('```', s)
+                                result = json.loads(text[s:e].strip())
+                            elif '{' in text:
+                                s = text.find('{')
+                                e = text.rfind('}') + 1
+                                result = json.loads(text[s:e])
+                        except:
+                            pass
+                        
+                        signals = []
+                        if result:
+                            signals = result.get('signals', [])
+                            if isinstance(result, list):
+                                signals = result
+                        
+                        stats['processed'] += 1
+                        stats['signals'] += len(signals)
+                        
+                        for sig in signals:
+                            sig['video_id'] = vid
+                            sig['title'] = title
+                        
+                        all_signals.extend(signals)
+                        print(f"  ✓ {vid} '{title[:25]}' → {len(signals)}개 시그널")
+                        await asyncio.sleep(1.0)
+                        return
+                        
+                except asyncio.TimeoutError:
+                    print(f"  [TIMEOUT] {vid} attempt {attempt+1}")
+                    await asyncio.sleep(10)
+                except Exception as e:
+                    print(f"  [ERROR] {vid}: {str(e)[:60]}")
+                    await asyncio.sleep(5)
+            
+            stats['errors'] += 1
+            print(f"  ✗ {vid} 최종 실패")
+    
+    async with aiohttp.ClientSession() as session:
+        tasks = [analyze_one(session, v) for v in to_analyze]
+        await asyncio.gather(*tasks)
+    
+    print(f"\n분석 완료: {stats['processed']}개 처리, {stats['signals']}개 시그널, {stats['errors']}개 에러")
+    
+    # STEP 5: Insert signals
+    if all_signals:
+        print(f"\n=== STEP 5: 시그널 INSERT ({len(all_signals)}개) ===")
+        import requests as req
+        
+        insert_headers = {
+            'apikey': SUPABASE_KEY,
+            'Authorization': f'Bearer {SUPABASE_KEY}',
+            'Content-Type': 'application/json',
+            'Prefer': 'resolution=merge-duplicates'
+        }
+        
+        # Map signal types
+        SIGNAL_MAP = {
+            '매수': 'BUY', '긍정': 'POSITIVE', '중립': 'NEUTRAL',
+            '경계': 'CONCERN', '매도': 'SELL',
+            '강력매수': 'STRONG_BUY', '강력매도': 'STRONG_SELL'
+        }
+        
+        inserted = 0
+        for sig in all_signals:
+            signal_type_kr = sig.get('signal_type', sig.get('signal', '중립'))
+            signal_type_en = SIGNAL_MAP.get(signal_type_kr, 'NEUTRAL')
+            
+            confidence = sig.get('confidence', 5)
+            if isinstance(confidence, str):
+                try:
+                    confidence = int(confidence)
+                except:
+                    confidence = 5
+            
+            row = {
+                'channel_id': CHANNEL_ID,
+                'video_id': sig['video_id'],
+                'stock_name': sig.get('stock', ''),
+                'ticker': sig.get('ticker'),
+                'signal_type': signal_type_en,
+                'key_quote': sig.get('key_quote', ''),
+                'reasoning': sig.get('reasoning', ''),
+                'timestamp': sig.get('timestamp', ''),
+                'confidence': confidence,
+                'status': 'pending'
+            }
+            
+            r = req.post(
+                f"{SUPABASE_URL}/rest/v1/influencer_signals",
+                headers=insert_headers,
+                json=row
+            )
+            if r.status_code in (200, 201):
+                inserted += 1
+            else:
+                print(f"  시그널 INSERT 에러: {r.status_code} {r.text[:80]}")
+        
+        print(f"시그널 INSERT 완료: {inserted}/{len(all_signals)}")
+    
+    return stats['processed'], stats['signals']
+
+# === MAIN ===
+def main():
+    print("=" * 60)
+    print("세상학개론 누락 영상 파이프라인 시작")
+    print(f"대상: {len(INVEST_IDS)}개 투자 영상")
+    print("=" * 60)
+    
+    # Step 1 - SKIP (already done, 55 have subs, 12 have no transcripts)
+    no_subs = []
+    print("\n=== STEP 1: 자막 추출 (스킵 - 이미 완료) ===")
+    
+    # Step 2
+    meta, meta_errors = step2_metadata()
+    
+    # Step 3
+    video_errors = step3_insert_videos(meta)
+    
+    # Step 4-5
+    processed, total_signals = asyncio.run(step4_5_analyze_and_insert())
+    
+    # Summary
+    print("\n" + "=" * 60)
+    print("파이프라인 완료!")
+    print(f"  투자 영상: {len(INVEST_IDS)}개")
+    print(f"  메타데이터 에러: {len(meta_errors)}개")
+    print(f"  분석 처리: {processed}개")
+    print(f"  총 시그널: {total_signals}개")
+    print("=" * 60)
+
+if __name__ == '__main__':
+    main()

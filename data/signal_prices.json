@@ -1105,9 +1105,9 @@
     "return_pct": null
   },
   "ddfc372f-0da1-4315-881c-0a723d4a0709": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 3117881,
+    "price_current": 2856674,
+    "return_pct": -8.38
   },
   "c2b8feff-a072-447a-83d0-a6647cb571a3": {
     "price_at_signal": null,
@@ -1120,9 +1120,9 @@
     "return_pct": null
   },
   "d2b6bd3f-99f6-4555-ac0b-4e9d82d2aa48": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 37281,
+    "price_current": 100748,
+    "return_pct": 170.24
   },
   "0b9ff88f-a8ef-4762-bdbd-ad72f3ed65c3": {
     "price_at_signal": null,
@@ -1145,9 +1145,9 @@
     "return_pct": null
   },
   "d5048e12-e9d5-4792-b844-c9a3ddeeeaba": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 207182,
+    "price_current": 200023,
+    "return_pct": -3.46
   },
   "e9dd9043-c88d-4f74-910a-abad9f6c90a0": {
     "price_at_signal": null,
@@ -1185,9 +1185,9 @@
     "return_pct": null
   },
   "f3831c03-098e-4400-82ee-8e267be53e04": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 252628,
+    "price_current": 200023,
+    "return_pct": -20.82
   },
   "ba2343ce-d1fc-4539-88ca-6c379cdcf10c": {
     "price_at_signal": null,
@@ -1195,9 +1195,9 @@
     "return_pct": null
   },
   "ecb8d10f-d2aa-4d31-976a-d854bdb30ae6": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 240426,
+    "price_current": 258343,
+    "return_pct": 7.45
   },
   "a6a7c4f0-d43f-4a07-b2ec-58ef542171b8": {
     "price_at_signal": null,
@@ -1205,9 +1205,9 @@
     "return_pct": null
   },
   "ecff29c8-545b-499a-8877-84d1b5b7186c": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 56906,
+    "price_current": 100748,
+    "return_pct": 77.04
   },
   "d4ac5b66-6ab5-4296-bfd7-b8015c46faa5": {
     "price_at_signal": null,
@@ -1240,9 +1240,9 @@
     "return_pct": null
   },
   "4e92c463-03b6-4086-8355-5ca8438e1289": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 13341,
+    "price_current": 23751,
+    "return_pct": 78.03
   },
   "cfd5b3af-f7e2-4b4b-86cd-b5a3da7e7dd4": {
     "price_at_signal": null,
@@ -1345,9 +1345,9 @@
     "return_pct": null
   },
   "e23629fa-f4fa-4ead-9403-9d461f3f639c": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 139420846,
+    "price_current": 96970059,
+    "return_pct": -30.45
   },
   "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04": {
     "price_at_signal": null,
@@ -1380,9 +1380,9 @@
     "return_pct": null
   },
   "255c9bf9-198e-4448-86c5-5e6c89e17ae7": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 6200688,
+    "price_current": 2856674,
+    "return_pct": -53.93
   },
   "87860eb8-38f5-41cf-9937-7c414f197c65": {
     "price_at_signal": null,
@@ -1390,9 +1390,9 @@
     "return_pct": null
   },
   "71d20979-195f-49a4-906d-42f048873b76": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 31245,
+    "price_current": 59705,
+    "return_pct": 91.09
   },
   "b6ef50ed-9f79-46fd-97d6-8fa0d29b993d": {
     "price_at_signal": null,
@@ -1415,9 +1415,9 @@
     "return_pct": null
   },
   "2f9f1e0c-d05e-4d0b-b7de-289ed68a2cf6": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 161939529,
+    "price_current": 96970059,
+    "return_pct": -40.12
   },
   "819ab631-c815-432d-8fdc-cec346799c26": {
     "price_at_signal": null,
@@ -1445,14 +1445,14 @@
     "return_pct": null
   },
   "23cb54a9-51fe-4d60-91fa-6d504cd94177": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 5178178,
+    "price_current": 2856674,
+    "return_pct": -44.83
   },
   "a89dada5-f4a7-44ba-85ad-e75667d65953": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 163213541,
+    "price_current": 96970059,
+    "return_pct": -40.59
   },
   "095aabf6-70cf-4d17-b23c-4e3d34a153db": {
     "price_at_signal": null,
@@ -1465,9 +1465,9 @@
     "return_pct": null
   },
   "dd12cfa5-94c3-46b8-8128-26663d0399a3": {
-    "price_at_signal": null,
-    "price_current": null,
-    "return_pct": null
+    "price_at_signal": 51992,
+    "price_current": 100748,
+    "return_pct": 93.78
   },
   "35df36b0-d400-427c-8fea-0cfe1998e828": {
     "price_at_signal": null,

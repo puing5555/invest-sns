@@ -74,11 +74,24 @@ const getStockData = (code: string, dynamicName?: string) => {
     '207940': '삼성바이오로직스', '079160': 'CGV', '403870': 'HPSP',
     '240810': '원익IPS', '284620': '쿠팡', '005940': 'NH투자증권',
     '016360': '삼성증권', '039490': '키네마스터', '071050': '한국금융지주',
-    '352820': 'COI머티리얼즈', '357780': '솔브레인', '084370': '맘스터치'
+    '352820': 'COI머티리얼즈', '357780': '솔브레인', '084370': '맘스터치',
+    // 해외주식
+    'NVDA': '엔비디아', 'TSLA': '테슬라', 'PLTR': '팔란티어', 'AMD': 'AMD',
+    'TSM': 'TSMC', 'ASML': 'ASML', 'GOOGL': '구글', 'MSTR': '마이크로스트래티지',
+    'RKLB': '로켓랩', 'SQ': '스퀘어', 'RIOT': 'Riot Blockchain',
+    'GBTC': '그레이스케일 비트코인 신탁', 'COIN': '코인베이스', 'IREN': 'IREN',
+    'GME': '게임스톱', 'SOXX': 'SOXX ETF', 'MU': '마이크론', 'KS11': '코스피',
+    // 코인
+    'BTC': '비트코인', 'ETH': '이더리움', 'SOL': '솔라나', 'DOGE': '도지코인', 'KLAY': '클레이튼',
   };
 
+  // 한국 종목인지 확인 (숫자로만 이뤄진 코드)
+  const isKoreanStock = /^\d+$/.test(code);
+  
   // 동적 종목명이 있으면 우선 사용, 없으면 nameMap fallback
-  const stockName = dynamicName || nameMap[code] || `종목 ${code}`;
+  // 해외/코인 종목은 "비트코인 (BTC)" 형식으로 표시
+  const baseName = dynamicName || nameMap[code] || code;
+  const stockName = isKoreanStock ? baseName : (nameMap[code] ? `${nameMap[code]} (${code})` : `${dynamicName || code}`);
 
   const realData = (stockPricesData as any)[code];
   if (realData) {
@@ -477,6 +490,7 @@ function AnalystTab({ code }: { code: string }) {
                   >
                     <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
                       {new Date(report.published_at).toLocaleDateString('ko-KR', {
+                        year: 'numeric',
                         month: 'short',
                         day: 'numeric'
                       })}
@@ -887,6 +901,7 @@ function InfluencerTab({ code }: { code: string }) {
                 >
                   <td className="px-4 py-4 text-sm text-[#191f28]">
                     {new Date(signal.date).toLocaleDateString('ko-KR', { 
+                      year: 'numeric',
                       month: 'short', 
                       day: 'numeric' 
                     })}
