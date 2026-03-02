@@ -8,6 +8,7 @@ import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
 import StockAnalystTab from '@/components/stock/StockAnalystTab';
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
+import { formatStockDisplay } from '@/lib/stockNames';
 import SignalDetailModal from '@/components/SignalDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
@@ -91,11 +92,8 @@ const getStockData = (code: string, dynamicName?: string) => {
   // 동적 종목명이 있으면 우선 사용, 없으면 nameMap fallback
   // 해외/코인 종목은 "비트코인 (BTC)" 형식으로 표시
   const baseName = dynamicName || nameMap[code] || code;
-  // ticker 중복 방지: name에 이미 (CODE)가 포함되어 있으면 그대로 사용
-  const hasTickerInName = (name: string) => name.includes(`(${code})`);
-  const stockName = isKoreanStock ? baseName : (
-    hasTickerInName(baseName) ? baseName : `${baseName} (${code})`
-  );
+  // 공통 유틸 함수로 ticker 중복 방지
+  const stockName = isKoreanStock ? baseName : formatStockDisplay(baseName, code);
 
   const realData = (stockPricesData as any)[code];
   if (realData) {
