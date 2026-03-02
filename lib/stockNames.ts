@@ -24,6 +24,8 @@ export function formatStockDisplay(stock?: string, ticker?: string): string {
   if (isKorean) {
     // 숫자로만 된 티커(005930 등)는 표시하지 않음
     if (!ticker || ticker === stock || /^\d+$/.test(ticker)) return stock;
+    // stock_name에 이미 (TICKER)가 포함되어 있으면 중복 방지
+    if (stock.includes(`(${ticker})`)) return stock;
     return `${stock} (${ticker})`;
   }
 

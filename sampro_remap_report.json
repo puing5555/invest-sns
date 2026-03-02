@@ -1,0 +1,190 @@
+{
+  "changes": [
+    {
+      "signal_id": "9a0f20c2-af24-4c50-b195-5c89d92a6cf9",
+      "stock": "엔비디아 (NVDA)",
+      "old_speaker": "김장열",
+      "new_speaker": "장우진",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "aa25b0e6-aadf-4bae-a2fa-afc0a067e315",
+      "title": "자금 흐름이 바뀌고 있다. 상승 싸이클 준비하는 코스닥 | 장우진 작가 [여의도 인사이트]"
+    },
+    {
+      "signal_id": "ab0044b3-5414-4421-a6a6-5dd9077c3fd0",
+      "stock": "SK하이닉스 (000660)",
+      "old_speaker": "김장열",
+      "new_speaker": "박병창",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "2720d0ee-b7e2-4006-80df-90bc9de07797",
+      "title": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? |"
+    },
+    {
+      "signal_id": "53975f78-e496-49e8-b92e-8e9c482dbf09",
+      "stock": "삼성전자 (005930)",
+      "old_speaker": "김장열",
+      "new_speaker": "박병창",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "2720d0ee-b7e2-4006-80df-90bc9de07797",
+      "title": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? |"
+    },
+    {
+      "signal_id": "a9338662-af28-46b7-ac82-84e475646007",
+      "stock": "엔비디아 (NVDA)",
+      "old_speaker": "김장열",
+      "new_speaker": "박병창",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "2720d0ee-b7e2-4006-80df-90bc9de07797",
+      "title": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? |"
+    },
+    {
+      "signal_id": "493f2bf6-d84d-43c6-898e-7ec2e68ed1a3",
+      "stock": "삼성전자 (005930)",
+      "old_speaker": "김장열",
+      "new_speaker": "김동훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "5783838f-af5f-4e74-bcbf-bbc20141b199",
+      "title": "외국인 관광객 더 들어온다! 일본 이세탄 백화점 주가급등, 신세계도 따라갑니다 | 김동훈, 여도은, 허재무 "
+    },
+    {
+      "signal_id": "a12ab318-7173-4365-8d4d-140ab5b54506",
+      "stock": "신세계 (004170)",
+      "old_speaker": "김장열",
+      "new_speaker": "김동훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "5783838f-af5f-4e74-bcbf-bbc20141b199",
+      "title": "외국인 관광객 더 들어온다! 일본 이세탄 백화점 주가급등, 신세계도 따라갑니다 | 김동훈, 여도은, 허재무 "
+    },
+    {
+      "signal_id": "f13c9ca0-d899-4bb3-9c61-849503831329",
+      "stock": "삼성전자 (005930)",
+      "old_speaker": "김장열",
+      "new_speaker": "배재원",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "7fef30a4-a248-44d6-99b9-02bda6f47eb2",
+      "title": "떨어질 거 걱정하지 말고 제발 사세요 |  배재원 하나증권 인천지점 PB [더블 크루]"
+    },
+    {
+      "signal_id": "58b2432f-071a-4208-a1d8-90f3f0222517",
+      "stock": "삼성증권 (016360)",
+      "old_speaker": "김장열",
+      "new_speaker": "고연수",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "3508abce-70e0-4eaa-a0d4-686b61071dd9",
+      "title": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]"
+    },
+    {
+      "signal_id": "0d83bde0-d91c-45da-af79-0a360db6c6ad",
+      "stock": "NH투자증권 (005940)",
+      "old_speaker": "김장열",
+      "new_speaker": "고연수",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "3508abce-70e0-4eaa-a0d4-686b61071dd9",
+      "title": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]"
+    },
+    {
+      "signal_id": "6ab0f37a-1bac-4010-988a-f14db3e2b1e8",
+      "stock": "키움증권 (039490)",
+      "old_speaker": "김장열",
+      "new_speaker": "고연수",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "3508abce-70e0-4eaa-a0d4-686b61071dd9",
+      "title": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]"
+    },
+    {
+      "signal_id": "bb6deb68-005b-489c-9302-1ac7cd050453",
+      "stock": "한국금융지주 (071050)",
+      "old_speaker": "김장열",
+      "new_speaker": "고연수",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "3508abce-70e0-4eaa-a0d4-686b61071dd9",
+      "title": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]"
+    },
+    {
+      "signal_id": "b2fc3fdd-422e-4611-ad17-2a8be169d68d",
+      "stock": "LG화학 (051910)",
+      "old_speaker": "김장열",
+      "new_speaker": "박지훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 ["
+    },
+    {
+      "signal_id": "b5ab47f3-aa0c-4584-8a87-41a53aacb0be",
+      "stock": "NC소프트 (036570)",
+      "old_speaker": "김장열",
+      "new_speaker": "박지훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 ["
+    },
+    {
+      "signal_id": "997ba1c8-40cc-4255-a8f5-7a8ccd001b5e",
+      "stock": "효성중공업 (298040)",
+      "old_speaker": "김장열",
+      "new_speaker": "박지훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 ["
+    },
+    {
+      "signal_id": "999ac2a9-60b3-42e6-8b24-f3ef97a36eb1",
+      "stock": "HD현대일렉트릭 (267260)",
+      "old_speaker": "김장열",
+      "new_speaker": "박지훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 ["
+    },
+    {
+      "signal_id": "fd197edb-e670-46c0-ac68-1626c26e129e",
+      "stock": "솔브레인 (357780)",
+      "old_speaker": "김장열",
+      "new_speaker": "박지훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 ["
+    },
+    {
+      "signal_id": "1c3a1827-db67-458f-955b-11bb7b554575",
+      "stock": "하이브 (352820)",
+      "old_speaker": "김장열",
+      "new_speaker": "박지훈",
+      "old_id": "8234cd75-1d0d-458c-b01c-62080c7d91e3",
+      "new_id": "e59ed6f5-7a8d-4111-af1c-502ad3344e79",
+      "title": "드디어 6천피 시대! 뭘 사야 지금부터 돈 벌까? 반도체 다음 주자는 화학? | 박지훈, 여도은, 허재무 ["
+    }
+  ],
+  "errors": [
+    {
+      "signal_id": "55bf5a77-ff14-4c2b-9da8-a15c7a94ea74",
+      "name": "홍선애",
+      "error": "400 Client Error: Bad Request for url: https://arypzhotxflimroprmdk.supabase.co/rest/v1/speakers"
+    },
+    {
+      "signal_id": "5a8d8634-625b-4e6a-b93b-47380dbe329c",
+      "name": "홍선애",
+      "error": "400 Client Error: Bad Request for url: https://arypzhotxflimroprmdk.supabase.co/rest/v1/speakers"
+    },
+    {
+      "signal_id": "19d07177-090a-4774-8504-38d177a8117d",
+      "name": "홍선애",
+      "error": "400 Client Error: Bad Request for url: https://arypzhotxflimroprmdk.supabase.co/rest/v1/speakers"
+    },
+    {
+      "signal_id": "33078122-93ea-4001-83bd-58ee6dc8e4df",
+      "name": "홍선애",
+      "error": "400 Client Error: Bad Request for url: https://arypzhotxflimroprmdk.supabase.co/rest/v1/speakers"
+    },
+    {
+      "signal_id": "889cc0ca-b605-46af-8ec6-65360b496d5d",
+      "title": "삼성·하이닉스 부담 구간? 장비주가 대안일까? ㅣ 김장열 유니스토리자산운용 본부장 [집중, 오늘의 주식]",
+      "reason": "no_name_in_title"
+    },
+    {
+      "signal_id": "418512f8-30ff-438a-9f56-f5a151536b09",
+      "title": "삼성·하이닉스 부담 구간? 장비주가 대안일까? ㅣ 김장열 유니스토리자산운용 본부장 [집중, 오늘의 주식]",
+      "reason": "no_name_in_title"
+    }
+  ],
+  "total_signals": 27
+}

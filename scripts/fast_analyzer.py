@@ -8,6 +8,7 @@ fast_analyzer.py - 고속 병렬 시그널 분석기
 """
 
 import os
+import re
 import json
 import asyncio
 import aiohttp
@@ -29,6 +30,29 @@ MAX_CONCURRENT = 3  # 시작 동시성 (rate limit시 자동 감소)
 MIN_CONCURRENT = 1
 DELAY_BETWEEN = 1.0  # 요청 간 최소 간격 (초)
 MAX_RETRIES = 2
+
+# 멀티 게스트 채널 설정
+MULTI_GUEST_CHANNELS = {
+    'https://www.youtube.com/@3protv',
+    'https://www.youtube.com/@3ProTV',
+    '삼프로TV',
+}
+
+def extract_guest_from_title(title: str) -> List[str]:
+    """영상 제목에서 게스트명 추출 (삼프로TV 등 멀티 게스트 채널용)
+    패턴: "... | 김장열 유니스토리자산운용", "... | 홍선애, 박명석, 이재규"
+    """
+    if '|' not in title:
+        return []
+    after_pipe = title.split('|')[-1].strip()
+    parts = [p.strip() for p in after_pipe.split(',')]
+    names = []
+    for part in parts:
+        match = re.match(r'([가-힣]{2,3})', part.strip())
+        if match:
+            names.append(match.group(1))
+    return names
+
 
 class FastAnalyzer:
     def __init__(self, prompt_path: str = None):
@@ -77,12 +101,21 @@ class FastAnalyzer:
         subtitle_trimmed = subtitle[:8000] if len(subtitle) > 8000 else subtitle
         
         prompt = self.prompt_template.replace('{CHANNEL_URL}', channel_url)
+        
+        # 멀티 게스트 채널: 제목에서 게스트명 추출하여 힌트 제공
+        speaker_hint = ""
+        is_multi_guest = any(ch in channel_url for ch in MULTI_GUEST_CHANNELS)
+        if is_multi_guest:
+            guests = extract_guest_from_title(video_title)
+            if guests:
+                speaker_hint = f"\n⚠️ 이 영상의 출연자(speaker): {', '.join(guests)}\n시그널의 화자를 위 출연자명으로 정확히 구분해주세요.\n"
+        
         prompt += f"""
 
 === 분석 대상 영상 ===
 제목: {video_title}
 URL: https://www.youtube.com/watch?v={video_id}
-
+{speaker_hint}
 === 자막 내용 ===
 {subtitle_trimmed}
 
@@ -163,6 +196,15 @@ URL: https://www.youtube.com/watch?v={video_id}
                                         self.stats.setdefault('rejected', 0)
                                         self.stats['rejected'] += 1
                                 signals = validated
+                            
+                            # 멀티 게스트 채널: 시그널에 speaker 정보 추가
+                            is_multi = any(ch in channel_url for ch in MULTI_GUEST_CHANNELS)
+                            if is_multi:
+                                guests = extract_guest_from_title(video_title)
+                                if guests:
+                                    for sig in signals:
+                                        if 'speaker' not in sig or not sig.get('speaker'):
+                                            sig['speaker'] = guests[0]  # 기본: 첫 번째 게스트
                             
                             self.stats['processed'] += 1
                             self.stats['signals'] += len(signals)
