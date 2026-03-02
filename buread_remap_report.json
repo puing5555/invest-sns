@@ -1,0 +1,241 @@
+{
+  "changes": [
+    {
+      "signal_id": "8e42adce-5630-4b8a-9e38-1137df6b4173",
+      "stock": "아모레퍼시픽 (090430)",
+      "old_speaker": "조진표",
+      "new_speaker": "이정윤",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "title": "현금으로 딱 5개 주식 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 4부]"
+    },
+    {
+      "signal_id": "f5a73453-15dc-4cb5-bd0e-1da5eea7fb23",
+      "stock": "현대차 (005380)",
+      "old_speaker": "조진표",
+      "new_speaker": "이정윤",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "title": "현금으로 딱 5개 주식 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 4부]"
+    },
+    {
+      "signal_id": "146207b1-702e-44a5-8d7f-026bf6181cbb",
+      "stock": "하이브 (352820)",
+      "old_speaker": "조진표",
+      "new_speaker": "이정윤",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "title": "현금으로 딱 5개 주식 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 4부]"
+    },
+    {
+      "signal_id": "86996087-c16e-4dfd-9f7a-9be7501ef024",
+      "stock": "삼성SDI (006400)",
+      "old_speaker": "조진표",
+      "new_speaker": "이정윤",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "title": "현금으로 딱 5개 주식 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 4부]"
+    },
+    {
+      "signal_id": "ff39bd30-09b5-40cc-b8d2-413ff2b32138",
+      "stock": "ASML (ASML)",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배재규 대표 풀버전]"
+    },
+    {
+      "signal_id": "ea49a319-181d-4fec-ac91-063be14c73ab",
+      "stock": "엔비디아 (NVDA)",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배재규 대표 풀버전]"
+    },
+    {
+      "signal_id": "ff0d3e8d-9eaf-4d8a-8bde-0b64224c9a86",
+      "stock": "SK하이닉스 (000660)",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배재규 대표 풀버전]"
+    },
+    {
+      "signal_id": "cd3a96b4-8c52-4dce-884f-5e89a8e228d5",
+      "stock": "반도체 섹터 (TSM)",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "\"전세계 돈 다 빨아들일 겁니다\" 현금 있다면 이 4개 주식 사세요 [배재규 대표 풀버전]"
+    },
+    {
+      "signal_id": "c6df1cd3-246d-40b7-850b-cb0a8d624a65",
+      "stock": "아이덴 (284620)",
+      "old_speaker": "조진표",
+      "new_speaker": "한정수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d4219d6b-f423-423c-9527-7c8dec839618",
+      "title": "현금 대부분 '이 주식' 샀어요, 앞으로도 팔 생각 없습니다 [한정수 작가 풀버전]"
+    },
+    {
+      "signal_id": "e7426ae0-0fdd-47f7-be0e-c7d4f4f2956a",
+      "stock": "SK하이닉스 (000660)",
+      "old_speaker": "조진표",
+      "new_speaker": "한정수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d4219d6b-f423-423c-9527-7c8dec839618",
+      "title": "현금 대부분 '이 주식' 샀어요, 앞으로도 팔 생각 없습니다 [한정수 작가 풀버전]"
+    },
+    {
+      "signal_id": "e33133c1-cd42-4a51-975e-f092c50f3f46",
+      "stock": "반도체",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "현금 있다면 '이 3가지' 사세요, 앞으로 무섭게 많이 오를 겁니다 [배재규 대표 1부]"
+    },
+    {
+      "signal_id": "78b3f927-0ecb-49a7-93df-2dea1ea4d630",
+      "stock": "테크 기업",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "현금 있다면 '이 3가지' 사세요, 앞으로 무섭게 많이 오를 겁니다 [배재규 대표 1부]"
+    },
+    {
+      "signal_id": "87f3fa04-503b-4cb5-9000-ee39bd0ce907",
+      "stock": "빅테크",
+      "old_speaker": "조진표",
+      "new_speaker": "배재규",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "d5ea4443-d1cb-4927-aabc-68061f59a3e0",
+      "title": "현금 있다면 '이 3가지' 사세요, 앞으로 무섭게 많이 오를 겁니다 [배재규 대표 1부]"
+    },
+    {
+      "signal_id": "9aeda838-cd78-49c4-afe0-779fe6924305",
+      "stock": "바이오 AI 기업",
+      "old_speaker": "조진표",
+      "new_speaker": "김학주",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "289de288-d587-4381-9f3d-b03ab63baf21",
+      "title": "앞으로 정말 많이 오를 겁니다, '이 주식' 돈을 쓸어담는다 [김학주 교수 3부]"
+    },
+    {
+      "signal_id": "0b1207d3-8144-4e27-b5b6-adad57709e27",
+      "stock": "HM파마",
+      "old_speaker": "조진표",
+      "new_speaker": "김학주",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "289de288-d587-4381-9f3d-b03ab63baf21",
+      "title": "앞으로 정말 많이 오를 겁니다, '이 주식' 돈을 쓸어담는다 [김학주 교수 3부]"
+    },
+    {
+      "signal_id": "90524688-c8f2-4640-9614-61f79ec3ce58",
+      "stock": "HCM파마",
+      "old_speaker": "조진표",
+      "new_speaker": "김학주",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "289de288-d587-4381-9f3d-b03ab63baf21",
+      "title": "앞으로 정말 많이 오를 겁니다, '이 주식' 돈을 쓸어담는다 [김학주 교수 3부]"
+    },
+    {
+      "signal_id": "9d79c0a4-7e2a-4852-b303-b24f05a980fd",
+      "stock": "현대차그룹주",
+      "old_speaker": "조진표",
+      "new_speaker": "이정윤",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "title": "현금 있다면 '이 5개 주식' 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 풀버전]"
+    },
+    {
+      "signal_id": "fc8c30a4-911c-45e3-b6f4-ce290ae0d806",
+      "stock": "현대차 (005380)",
+      "old_speaker": "조진표",
+      "new_speaker": "이정윤",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "fcc6738d-49b6-48f0-9ec7-b20ec5594536",
+      "title": "현금 있다면 '이 5개 주식' 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 풀버전]"
+    },
+    {
+      "signal_id": "9c83cb42-6d31-4a9a-9b1c-5a85c125b84d",
+      "stock": "SK하이닉스 (000660)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "bf5c5e09-5518-466d-bf4d-4655a92e4548",
+      "stock": "마이크론 (MU)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "41daad11-7b68-4815-b380-eef73f8555c0",
+      "stock": "테슬라 (TSLA)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "90831b68-b73e-4f53-b215-ffca476fc46e",
+      "stock": "원익IPS (240810)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "ffa1dc33-167c-4ea8-9691-5f8aa1bf1f4c",
+      "stock": "삼성전자 (005930)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "072420e3-2ae3-4942-84f8-2c38a6e835f4",
+      "stock": "엔비디아 (NVDA)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "21f03a71-d3a6-437a-aafb-1ef0f8b224f6",
+      "stock": "테스 (095610)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    },
+    {
+      "signal_id": "5ae58cc4-830b-4abe-8d2e-c0dc7d3fe76d",
+      "stock": "유진테크 (084370)",
+      "old_speaker": "조진표",
+      "new_speaker": "이형수",
+      "old_id": "6b2696ff-f6a6-424b-a6de-0cd837f7bbb0",
+      "new_id": "88892b60-9e6b-4390-ba3b-c6d1453b3cef",
+      "title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]"
+    }
+  ],
+  "errors": [],
+  "kept": 9,
+  "total_signals": 35
+}
