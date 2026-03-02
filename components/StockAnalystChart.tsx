@@ -147,7 +147,15 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
       return pricePoint;
     });
     
-    return { enrichedData, avgTargetPrice };
+    // Y축 범위 계산 (0부터 시작하지 않도록)
+    const allPrices = enrichedData.map(d => d.price);
+    if (avgTargetPrice) allPrices.push(avgTargetPrice);
+    const minPrice = Math.min(...allPrices);
+    const maxPrice = Math.max(...allPrices);
+    const yMin = Math.floor(minPrice * 0.9 / 1000) * 1000;
+    const yMax = Math.ceil(maxPrice * 1.1 / 1000) * 1000;
+
+    return { enrichedData, avgTargetPrice, yDomain: [yMin, yMax] as [number, number] };
   }, [signals, currentPrice]);
 
   if (!chartData.enrichedData.length) {
@@ -220,6 +228,7 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
               fontSize={12}
             />
             <YAxis
+              domain={chartData.yDomain}
               tickFormatter={(value) => `${Math.round(value / 1000)}k`}
               stroke="#8b95a1"
               fontSize={12}
