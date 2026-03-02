@@ -1,6 +1,17 @@
 # PROJECT STATUS - invest-sns
 
-## 🔥 최신 업데이트 (2026-03-03 01:45) ✅
+## 🔥 최신 업데이트 (2026-03-03 02:15) ✅
+
+### 해외종목 통화표시 수정: 원→달러 💲
+- **lib/currency.ts** 생성: `isKoreanStock()`, `getCurrencySymbol()`, `formatStockPrice()` 유틸
+- **규칙:** 숫자 ticker(005930) → "원", 영문 ticker(NVDA, BTC) → "$"
+- **수정 파일:** StockDetailClient, StockSignalChart, StockAnalystChart, TargetPriceChart, StockAnalystTab, InfluencerProfileClient, explore/analyst/page
+- **빌드 + 배포:** 완료
+- **커밋:** `f6ee12e`
+
+---
+
+## 이전 업데이트 (2026-03-03 01:45) ✅
 
 ### 애널리스트 탭 전면 수정 완료 🎯
 - **차트:** 더미 주가 → stockPricesData 실제 데이터 사용, 시그널 점을 목표가(Y축=target_price) 위치에 표시, 평균목표가 점선 제거, hover 팝업(증권사/애널리스트/목표가/의견/제목)
