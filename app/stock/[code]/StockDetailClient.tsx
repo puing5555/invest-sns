@@ -621,9 +621,18 @@ function InfluencerTab({ code }: { code: string }) {
             ? new Date(signal.influencer_videos.published_at)
             : new Date();
           
-          const videoUrl = signal.influencer_videos?.video_id 
-            ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}`
-            : '#';
+          const videoUrl = (() => {
+            const vid = signal.influencer_videos?.video_id;
+            if (!vid) return '#';
+            let url = `https://youtube.com/watch?v=${vid}`;
+            const ts = signal.timestamp;
+            if (ts && ts !== 'N/A' && ts !== 'null') {
+              const parts = ts.split(':').map(Number);
+              const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : parts[0];
+              if (secs > 0) url += `&t=${secs}`;
+            }
+            return url;
+          })();
 
           const speakerName = signal.speakers?.name || '';
           const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';

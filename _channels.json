@@ -1,0 +1,42 @@
+[
+  {
+    "id": "4867e157-2126-4c67-aa5e-638372de8f03",
+    "channel_name": "삼프로TV",
+    "channel_handle": "@3protv"
+  },
+  {
+    "id": "c9c4dc38-c108-4988-b1d2-b177c3b324fc",
+    "channel_name": "코린이 아빠",
+    "channel_handle": "@corinpapa1106"
+  },
+  {
+    "id": "12facb47-407d-4fd3-a310-12dd5a802d1f",
+    "channel_name": "부읽남TV",
+    "channel_handle": "@buiknam_tv"
+  },
+  {
+    "id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "channel_name": "이효석아카데미",
+    "channel_handle": "@hyoseok_academy"
+  },
+  {
+    "id": "dde0918d-5237-4402-9782-e2d968958f64",
+    "channel_name": "슈카월드",
+    "channel_handle": "@syukasworld"
+  },
+  {
+    "id": "08642417-1b38-4295-a36f-3ed53713cfd5",
+    "channel_name": "달란트투자",
+    "channel_handle": "@dalant_invest"
+  },
+  {
+    "id": "d68f8efd-64c8-4c07-9d34-e98c2954f4e1",
+    "channel_name": "세상학개론",
+    "channel_handle": "sesang101"
+  },
+  {
+    "id": "076505ae-efa7-4e7c-b176-de6d7f75520d",
+    "channel_name": "세상학개론",
+    "channel_handle": "@sesang101"
+  }
+]

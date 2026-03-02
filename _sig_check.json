@@ -1,0 +1,37 @@
+[
+  {
+    "id": "dd12cfa5-94c3-46b8-8128-26663d0399a3",
+    "video_id": "6075799f-e24a-4e39-9665-23d039ef08d9",
+    "stock": "Rocket Lab",
+    "timestamp": "중반",
+    "created_at": "2026-03-02T07:14:10.400893+00:00"
+  },
+  {
+    "id": "9ec4759d-0cea-48be-bd27-bdece93c0c06",
+    "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9",
+    "stock": "비트코인",
+    "timestamp": "전반부",
+    "created_at": "2026-03-02T07:14:09.978045+00:00"
+  },
+  {
+    "id": "2738dd25-5dd5-4f8f-b632-b8668ee418d5",
+    "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+    "stock": "솔라나",
+    "timestamp": "N/A",
+    "created_at": "2026-03-02T07:14:09.495108+00:00"
+  },
+  {
+    "id": "87860eb8-38f5-41cf-9937-7c414f197c65",
+    "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+    "stock": "이더리움",
+    "timestamp": "N/A",
+    "created_at": "2026-03-02T07:14:09.047664+00:00"
+  },
+  {
+    "id": "b6ef50ed-9f79-46fd-97d6-8fa0d29b993d",
+    "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31",
+    "stock": "비트코인",
+    "timestamp": "N/A",
+    "created_at": "2026-03-02T07:14:08.554123+00:00"
+  }
+]

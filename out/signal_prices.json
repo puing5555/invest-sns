@@ -783,5 +783,735 @@
     "price_at_signal": 134000,
     "price_current": 134000,
     "return_pct": 0
+  },
+  "BTC-USD": {
+    "name": "비트코인",
+    "current_price": null,
+    "last_updated": null
+  },
+  "도지코인": {
+    "name": "도지코인",
+    "current_price": null,
+    "last_updated": null
+  },
+  "팔란티어": {
+    "name": "팔란티어",
+    "current_price": null,
+    "last_updated": null
+  },
+  "서클": {
+    "name": "서클",
+    "current_price": null,
+    "last_updated": null
+  },
+  "ETH-USD": {
+    "name": "이더리움",
+    "current_price": null,
+    "last_updated": null
+  },
+  "SOL-USD": {
+    "name": "솔라나",
+    "current_price": null,
+    "last_updated": null
+  },
+  "CRYPTO": {
+    "name": "CRYPTO",
+    "current_price": null,
+    "last_updated": null
+  },
+  "엔비디아": {
+    "name": "엔비디아",
+    "current_price": null,
+    "last_updated": null
+  },
+  "AMD": {
+    "name": "AMD",
+    "current_price": null,
+    "last_updated": null
+  },
+  "스테이블코인": {
+    "name": "스테이블코인",
+    "current_price": null,
+    "last_updated": null
+  },
+  "AI 에이전트": {
+    "name": "AI 에이전트",
+    "current_price": null,
+    "last_updated": null
+  },
+  "이더리움 관련 기업": {
+    "name": "이더리움 관련 기업",
+    "current_price": null,
+    "last_updated": null
+  },
+  "팔라티어": {
+    "name": "팔라티어",
+    "current_price": null,
+    "last_updated": null
+  },
+  "배당주": {
+    "name": "배당주",
+    "current_price": null,
+    "last_updated": null
+  },
+  "테슬라": {
+    "name": "테슬라",
+    "current_price": null,
+    "last_updated": null
+  },
+  "게임스톱": {
+    "name": "게임스톱",
+    "current_price": null,
+    "last_updated": null
+  },
+  "^KOSPI.KS": {
+    "name": "코스피",
+    "current_price": null,
+    "last_updated": null
+  },
+  "프랑키": {
+    "name": "프랑키",
+    "current_price": null,
+    "last_updated": null
+  },
+  "블랙베어드": {
+    "name": "블랙베어드",
+    "current_price": null,
+    "last_updated": null
+  },
+  "국내 배당주": {
+    "name": "국내 배당주",
+    "current_price": null,
+    "last_updated": null
+  },
+  "Riot Blockchain": {
+    "name": "Riot Blockchain",
+    "current_price": null,
+    "last_updated": null
+  },
+  "Rocket Lab": {
+    "name": "Rocket Lab",
+    "current_price": null,
+    "last_updated": null
+  },
+  "네이버": {
+    "name": "네이버",
+    "current_price": null,
+    "last_updated": null
+  },
+  "클레이튼": {
+    "name": "클레이튼",
+    "current_price": null,
+    "last_updated": null
+  },
+  "코인베이스": {
+    "name": "코인베이스",
+    "current_price": null,
+    "last_updated": null
+  },
+  "IREN": {
+    "name": "IREN",
+    "current_price": null,
+    "last_updated": null
+  },
+  "없음": {
+    "name": "없음",
+    "current_price": null,
+    "last_updated": null
+  },
+  "블록체인 프로토콜": {
+    "name": "블록체인 프로토콜",
+    "current_price": null,
+    "last_updated": null
+  },
+  "DeFi": {
+    "name": "DeFi",
+    "current_price": null,
+    "last_updated": null
+  },
+  "DeFi 프로토콜": {
+    "name": "DeFi 프로토콜",
+    "current_price": null,
+    "last_updated": null
+  },
+  "NFT": {
+    "name": "NFT",
+    "current_price": null,
+    "last_updated": null
+  },
+  "로켓랩": {
+    "name": "로켓랩",
+    "current_price": null,
+    "last_updated": null
+  },
+  "현금": {
+    "name": "현금",
+    "current_price": null,
+    "last_updated": null
+  },
+  "부동산": {
+    "name": "부동산",
+    "current_price": null,
+    "last_updated": null
+  },
+  "권앰버핏, 마이클버리": {
+    "name": "권앰버핏, 마이클버리",
+    "current_price": null,
+    "last_updated": null
+  },
+  "레버리지": {
+    "name": "레버리지",
+    "current_price": null,
+    "last_updated": null
+  },
+  "N/A": {
+    "name": "N/A",
+    "current_price": null,
+    "last_updated": null
+  },
+  "Airen": {
+    "name": "Airen",
+    "current_price": null,
+    "last_updated": null
+  },
+  "SpaceX": {
+    "name": "SpaceX",
+    "current_price": null,
+    "last_updated": null
+  },
+  "가상자산": {
+    "name": "가상자산",
+    "current_price": null,
+    "last_updated": null
+  },
+  "자신의 포트폴리오": {
+    "name": "자신의 포트폴리오",
+    "current_price": null,
+    "last_updated": null
+  },
+  "MrBeast": {
+    "name": "MrBeast",
+    "current_price": null,
+    "last_updated": null
+  },
+  "금": {
+    "name": "금",
+    "current_price": null,
+    "last_updated": null
+  },
+  "금융주": {
+    "name": "금융주",
+    "current_price": null,
+    "last_updated": null
+  },
+  "리츠": {
+    "name": "리츠",
+    "current_price": null,
+    "last_updated": null
+  },
+  "마이크로스트라이즈": {
+    "name": "마이크로스트라이즈",
+    "current_price": null,
+    "last_updated": null
+  },
+  "스퀘어": {
+    "name": "스퀘어",
+    "current_price": null,
+    "last_updated": null
+  },
+  "스톤리지": {
+    "name": "스톤리지",
+    "current_price": null,
+    "last_updated": null
+  },
+  "그레이스케일 비트코인 투자 신탁": {
+    "name": "그레이스케일 비트코인 투자 신탁",
+    "current_price": null,
+    "last_updated": null
+  },
+  "라울 팔": {
+    "name": "라울 팔",
+    "current_price": null,
+    "last_updated": null
+  },
+  "피델리티": {
+    "name": "피델리티",
+    "current_price": null,
+    "last_updated": null
+  },
+  "4ed63794-8f63-41dd-9ff4-747003964b4e": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "54a55617-9641-41c6-97bd-b9f464ee5884": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "401752b1-72f4-4e5f-b3ab-54e524211bea": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "4b8b138e-e90a-4f5e-89ff-e8fc35243c78": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "a1c13310-5d0d-42c6-ae72-f69935da5aa9": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "602d4f1a-7089-4b60-84a6-a905f355b1e4": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "4d76a146-54f2-474d-a9e0-660a7cef7e68": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "b3ab3ba2-4f15-4390-abbb-ed2e89c277b7": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "8312f314-1824-461d-8f69-d9c6136e555f": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "6bdb5818-c919-43d6-b216-c05c89214066": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "eb925c37-a812-43f9-ad57-24100c9a6763": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "c78cc714-3e23-4c2f-a9b3-76d19ed51038": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "4e4fa2e2-089d-4ddc-b912-f156c1892ae6": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ddfc372f-0da1-4315-881c-0a723d4a0709": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "c2b8feff-a072-447a-83d0-a6647cb571a3": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "f0033b26-b94c-491c-b15d-d6644742a395": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "d2b6bd3f-99f6-4555-ac0b-4e9d82d2aa48": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "0b9ff88f-a8ef-4762-bdbd-ad72f3ed65c3": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "60cb03fd-80f3-460e-a090-d351ee80512e": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ebe987df-f9d5-473e-b7d3-442aa20da398": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "f902ccc3-ddd4-4c50-8623-87d01ad9154e": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "d5048e12-e9d5-4792-b844-c9a3ddeeeaba": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "e9dd9043-c88d-4f74-910a-abad9f6c90a0": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "e87dc48c-3ddf-4094-869d-2a9fcdec5b62": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "2738dd25-5dd5-4f8f-b632-b8668ee418d5": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "566eacd9-acfc-4783-93ad-cd6db9ee76aa": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "70b8ac7e-81cb-410b-b78a-a85cfc65ca2d": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "d7747984-1b71-4335-8027-de7f931196b1": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "8a3db8c2-eedb-481d-abef-fb9472742f90": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "f3831c03-098e-4400-82ee-8e267be53e04": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ba2343ce-d1fc-4539-88ca-6c379cdcf10c": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ecb8d10f-d2aa-4d31-976a-d854bdb30ae6": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "a6a7c4f0-d43f-4a07-b2ec-58ef542171b8": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ecff29c8-545b-499a-8877-84d1b5b7186c": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "d4ac5b66-6ab5-4296-bfd7-b8015c46faa5": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "970e663b-372d-4213-8b9e-a2673a3876b6": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ccdc7c72-fc71-4a49-90ce-fdcf96ecfdf1": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "26095014-a15e-48d4-99ec-0af77a2c06c3": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "90524688-c8f2-4640-9614-61f79ec3ce58": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "76f45ef5-ba9d-43f2-a98b-9df350e5cb98": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "4e92c463-03b6-4086-8355-5ca8438e1289": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "cfd5b3af-f7e2-4b4b-86cd-b5a3da7e7dd4": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "fe8f5a4d-d549-4eaa-a910-7fd06d622eeb": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "a12a8b70-e0e7-4813-bad1-71bfb2816a23": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "4e9a038d-49e3-43ed-b77f-04c8bcc4575a": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "1aa6d95d-365c-4c72-8f31-f590c63a7710": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "8a2d2603-459b-4577-ae54-4928892721ac": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "6b829c5b-9293-4b9d-949e-02ebfc2d12d0": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "c140ce9c-7432-42aa-86a5-ea44319bc676": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "9f45bfa1-7f0e-4e93-9fa4-d9f1eb3771ea": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "c3980937-0d16-44e4-bc58-d21eefbee26b": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "9ec4759d-0cea-48be-bd27-bdece93c0c06": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "0b1207d3-8144-4e27-b5b6-adad57709e27": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "eaf6db56-7037-4d85-bd60-0c9e477eafd9": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "9a53dd26-ff49-49a1-9b43-a43767daf020": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ddfdd2be-2ecc-4b25-8e09-68f1a174b979": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "3bf35ea8-f1ca-4173-95f1-c00630792747": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "239ebae9-23d7-451d-8ebc-32073d5c6311": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "c43c443d-7486-4c87-b408-0f6651498ba9": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "ea14ef92-216a-42b8-92a1-7f5e64c5edec": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "97a4849c-b273-41eb-b896-39a0679b7b83": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "e23629fa-f4fa-4ead-9403-9d461f3f639c": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "7e00d49b-5b0f-44ea-9077-cc10b0840e20": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "d7a80c2f-edce-4f5e-add1-d32acd37d3e0": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "9fdc229d-8b1a-48bb-a825-f98feeb193c3": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "f3b62b8f-f858-4489-b100-8520c5b8a110": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "efb5f618-254b-4f47-bc18-784f39338577": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "255c9bf9-198e-4448-86c5-5e6c89e17ae7": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "87860eb8-38f5-41cf-9937-7c414f197c65": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "71d20979-195f-49a4-906d-42f048873b76": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "b6ef50ed-9f79-46fd-97d6-8fa0d29b993d": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "b17cd1fb-637f-49cf-a458-6a1821a3b4aa": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "bf01a4e0-e1c3-48c4-a4ba-a0184475e451": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "55123a2a-b25c-478b-84ba-670c3d36840f": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "2f9f1e0c-d05e-4d0b-b7de-289ed68a2cf6": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "819ab631-c815-432d-8fdc-cec346799c26": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "599eb599-9acd-4601-ae93-9bab69e106f6": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "155cd7b3-b874-4290-81e2-b1bdb35ef1c8": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "8d2f77b1-047f-48c7-bce9-a5addc8eb7c5": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "25ac367b-90ac-4a16-9e71-f0bb3ccc7ebd": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "23cb54a9-51fe-4d60-91fa-6d504cd94177": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "a89dada5-f4a7-44ba-85ad-e75667d65953": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "095aabf6-70cf-4d17-b23c-4e3d34a153db": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "be85eb2d-f5eb-4111-ac45-c9db8fc1ee83": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "dd12cfa5-94c3-46b8-8128-26663d0399a3": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "35df36b0-d400-427c-8fea-0cfe1998e828": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "d1088413-8e9b-48ba-89c4-64557d3704f9": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "8404c2c8-0bf8-4b63-9294-25ba6f2d2e63": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "be1202c7-33a5-49fd-9598-a8d4d01c4271": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "cd61cc91-38f0-487d-8d90-bbfcfbf7b66f": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "67eebb6f-f2d8-41fa-9262-f85ce1abc06b": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "1bccad86-544f-4bec-9a6b-e9a8ff8e4cff": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "625b974f-c7d8-4898-beef-257c5f8e13b0": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
+  },
+  "0677feb9-fefc-4d5f-8886-4d8fe72aea04": {
+    "price_at_signal": null,
+    "price_current": null,
+    "return_pct": null
   }
 }

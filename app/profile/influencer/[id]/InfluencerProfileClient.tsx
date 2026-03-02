@@ -104,7 +104,18 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
       influencer: speakerName,
       signal: signal.signal,
       quote: signal.key_quote || '',
-      videoUrl: signal.influencer_videos?.video_id ? `https://youtube.com/watch?v=${signal.influencer_videos.video_id}` : '#',
+      videoUrl: (() => {
+        const vid = signal.influencer_videos?.video_id;
+        if (!vid) return '#';
+        let url = `https://youtube.com/watch?v=${vid}`;
+        const ts = signal.timestamp;
+        if (ts && ts !== 'N/A' && ts !== 'null') {
+          const parts = ts.split(':').map(Number);
+          const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : parts[0];
+          if (secs > 0) url += `&t=${secs}`;
+        }
+        return url;
+      })(),
       analysis_reasoning: signal.reasoning,
       videoTitle: signal.influencer_videos?.title,
       channelName,
@@ -259,7 +270,16 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       <td className="px-4 py-4">
                         {videoId ? (
                           <a
-                            href={`https://youtube.com/watch?v=${videoId}`}
+                            href={(() => {
+                              let url = `https://youtube.com/watch?v=${videoId}`;
+                              const ts = signal.timestamp;
+                              if (ts && ts !== 'N/A' && ts !== 'null') {
+                                const parts = ts.split(':').map(Number);
+                                const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : parts[0];
+                                if (secs > 0) url += `&t=${secs}`;
+                              }
+                              return url;
+                            })()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
