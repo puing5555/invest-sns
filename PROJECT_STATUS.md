@@ -1,6 +1,25 @@
 # PROJECT STATUS - invest-sns
 
-## 🔥 최신 업데이트 (2026-03-02 13:50) ✅
+## 🔥 최신 업데이트 (2026-03-02 16:30) ✅
+
+### DB 정리 + 해외종목 페이지 + 배포 완료 🎯
+1. **DB 정리 완료** ✅
+   - 잘못된 시그널 23개 삭제 (사람이름, 모호한 카테고리, 펀드사 등)
+   - stock="없음", "N/A" 삭제, "스톤리지" (자산운용사, 비실제종목) 삭제
+   - 종목명 통일: 팔라티어→팔란티어, 마이크로스트라이즈→마이크로스트래티지, Rocket Lab→로켓랩
+   - 누락 ticker DB 업데이트: BTC, ETH, SOL, PLTR, TSLA, SQ, RIOT, GBTC, KLAY, IREN 등 30건
+   - **현재 DB: 167개 시그널, 70개 고유 종목**
+
+2. **해외종목 페이지 생성** ✅
+   - generateStaticParams 수정: 한국 6자리 코드 + 해외 ticker 모두 포함
+   - 새로 생성된 페이지: ASML, BTC, GOOGL, KS11, MU, NVDA, SOXX, TSLA, TSM
+   - 총 37+ 종목 페이지 (한국 25개 + 해외 12개+)
+
+3. **빌드 + GitHub Pages 배포 완료** ✅
+   - `npx next build` 성공
+   - `npx gh-pages -d out --dotfiles` 배포 완료
+
+---
 
 ### 세상학개론 시그널 분석 완료 + PDF 567건 AI 요약 진행중 🎯
 1. **세상학개론 98개 영상 시그널 분석 완료** ✅
