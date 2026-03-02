@@ -1,0 +1,42 @@
+[
+  {
+    "id": "240810_SK증권_2026-02-27",
+    "ticker": "240810",
+    "firm": "SK증권",
+    "analyst_name": null,
+    "ai_summary": "",
+    "success": false
+  },
+  {
+    "id": "240810_한국IR협의회_2026-02-13",
+    "ticker": "240810",
+    "firm": "한국IR협의회",
+    "analyst_name": "되었습니",
+    "ai_summary": "",
+    "success": true
+  },
+  {
+    "id": "240810_SK증권_2026-01-13",
+    "ticker": "240810",
+    "firm": "SK증권",
+    "analyst_name": null,
+    "ai_summary": "",
+    "success": false
+  },
+  {
+    "id": "240810_SK증권_2025-11-10",
+    "ticker": "240810",
+    "firm": "SK증권",
+    "analyst_name": "되었음을",
+    "ai_summary": "",
+    "success": true
+  },
+  {
+    "id": "240810_SK증권_2025-10-21",
+    "ticker": "240810",
+    "firm": "SK증권",
+    "analyst_name": "되었음을",
+    "ai_summary": "",
+    "success": true
+  }
+]
