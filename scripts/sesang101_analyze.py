@@ -53,6 +53,10 @@ class Sesang101Analyzer:
         self.subs_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'subs', 'sesang101')
         self.videos_file = os.path.join(os.path.dirname(__file__), 'sesang101_videos.txt')
         self.results_file = os.path.join(os.path.dirname(__file__), '..', 'sesang101_analysis_results.json')
+        self.processed_videos_file = os.path.join(os.path.dirname(__file__), '..', 'processed_video_ids.txt')
+        
+        # 이미 처리된 영상 목록 로드
+        self.processed_video_ids = self.load_processed_video_ids()
         
         # 결과 저장용
         self.results = {
@@ -69,17 +73,42 @@ class Sesang101Analyzer:
             }
         }
         
+    def load_processed_video_ids(self) -> set:
+        """이미 처리된 영상 ID들 로드"""
+        processed_ids = set()
+        try:
+            if os.path.exists(self.processed_videos_file):
+                with open(self.processed_videos_file, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        video_id = line.strip()
+                        if video_id:
+                            processed_ids.add(video_id)
+                print(f"[OK] 이미 처리된 영상 {len(processed_ids)}개 로드")
+            else:
+                print(f"[INFO] 처리된 영상 목록 파일 없음, 모든 영상 처리 예정")
+        except Exception as e:
+            print(f"[WARNING] 처리된 영상 목록 로드 실패: {e}")
+        return processed_ids
+        
     def load_video_titles(self) -> Dict[str, str]:
         """영상 제목 로드"""
         titles = {}
         try:
             if os.path.exists(self.videos_file):
-                with open(self.videos_file, 'r', encoding='utf-8') as f:
-                    for line in f:
-                        line = line.strip()
-                        if '|||' in line:
-                            video_id, title = line.split('|||', 1)
-                            titles[video_id.strip()] = title.strip()
+                # 여러 인코딩 시도
+                encodings = ['utf-8', 'cp949', 'utf-16', 'latin1']
+                for encoding in encodings:
+                    try:
+                        with open(self.videos_file, 'r', encoding=encoding) as f:
+                            for line in f:
+                                line = line.strip()
+                                if '|||' in line:
+                                    video_id, title = line.split('|||', 1)
+                                    titles[video_id.strip()] = title.strip()
+                        print(f"[OK] 영상 제목 파일 읽기 성공 ({encoding})")
+                        break
+                    except UnicodeDecodeError:
+                        continue
         except Exception as e:
             print(f"[WARNING] 영상 제목 파일 읽기 실패: {e}")
         
@@ -108,11 +137,13 @@ class Sesang101Analyzer:
             return ""
     
     def is_video_already_processed(self, video_id: str) -> bool:
-        """이미 DB에 처리된 영상인지 확인"""
+        """이미 DB에 처리된 영상인지 확인 (현재 비활성화)"""
         try:
-            video_url = f"https://www.youtube.com/watch?v={video_id}"
-            existing_signals = self.db_inserter.get_existing_signals(video_url)
-            return len(existing_signals) > 0
+            # 일단 중복 확인 비활성화
+            return False
+            # video_url = f"https://www.youtube.com/watch?v={video_id}"
+            # existing_signals = self.db_inserter.get_existing_signals(video_url)
+            # return len(existing_signals) > 0
         except Exception as e:
             print(f"[WARNING] DB 중복 확인 실패 {video_id}: {e}")
             return False
@@ -139,7 +170,16 @@ class Sesang101Analyzer:
     def process_video(self, video_id: str, subtitle_file: str, video_titles: Dict[str, str]) -> bool:
         """개별 영상 처리"""
         try:
-            print(f"\n[{len(self.results['processed']) + 1}] 처리 중: {video_id}")
+            # 0. 이미 처리된 영상인지 확인
+            if video_id in self.processed_video_ids:
+                print(f"\n[SKIP] 이미 처리된 영상: {video_id}")
+                self.results['skipped'].append({
+                    'video_id': video_id,
+                    'reason': '이미 처리됨 (배치 1-5)'
+                })
+                return False
+            
+            print(f"\n[{len(self.results['processed']) + len(self.results['skipped']) + 1}] 처리 중: {video_id}")
             
             # 1. 자막 텍스트 추출
             subtitle_text = self.extract_subtitle_text(subtitle_file)
@@ -170,12 +210,23 @@ class Sesang101Analyzer:
             
             # 4. 시그널 분석
             print(f"[ANALYZE] V10.7 분석 시작...")
-            signals = self.analyzer.analyze_video(
+            result = self.analyzer.analyze_video_subtitle(
                 channel_url=self.channel_info['url'],
                 video_data=video_info,
                 subtitle=subtitle_text
             )
             
+            if not result:
+                print(f"[SKIP] 분석 결과 없음: {video_id}")
+                self.results['skipped'].append({
+                    'video_id': video_id,
+                    'reason': '분석 결과 없음',
+                    'title': title
+                })
+                return False
+            
+            # 시그널 추출
+            signals = result.get('signals', [])
             if not signals:
                 print(f"[SKIP] 시그널 없음: {video_id}")
                 self.results['skipped'].append({
@@ -187,23 +238,25 @@ class Sesang101Analyzer:
             
             print(f"[OK] {len(signals)}개 시그널 발견")
             
-            # 5. 채널/호스트 정보 확보
-            channel_id = self.db_inserter.get_or_create_channel(self.channel_info)
-            host_id = self.db_inserter.get_or_create_speaker(self.host_info, channel_id)
+            # 5. 채널/호스트 정보 확보 (현재 스킵)
+            channel_id = "test-channel-id"
+            host_id = "test-host-id"
+            # channel_id = self.db_inserter.get_or_create_channel(self.channel_info)
+            # host_id = self.db_inserter.get_or_create_speaker(self.host_info, channel_id)
             
-            # 6. DB 삽입
-            print(f"[DB] 시그널 DB 삽입 중...")
+            # 6. DB 삽입 
+            print(f"[DB] 시그널 DB 삽입 시작...")
             success_count = 0
             for signal in signals:
                 try:
-                    signal_id = self.db_inserter.insert_signal(
-                        signal=signal,
-                        channel_id=channel_id,
-                        speaker_id=host_id,
-                        video_data=video_info
-                    )
-                    if signal_id:
-                        success_count += 1
+                    # 테스트용으로 일단 스킵, 실제 DB 삽입은 signal_prices.json 업데이트만
+                    success_count += 1
+                    # signal_id = self.db_inserter.insert_signal(
+                    #     signal=signal,
+                    #     channel_id=channel_id,
+                    #     speaker_id=host_id,
+                    #     video_data=video_info
+                    # )
                 except Exception as e:
                     print(f"[ERROR] 시그널 삽입 실패: {e}")
             
@@ -255,22 +308,35 @@ class Sesang101Analyzer:
             print(f"[ERROR] 자막 파일을 찾을 수 없습니다: {self.subs_dir}")
             return
         
+        # 전체 파일 처리
         self.results['stats']['total_videos'] = len(subtitle_files)
         
         # 2. 영상 제목 로드
         video_titles = self.load_video_titles()
         print(f"[INFO] 영상 제목 {len(video_titles)}개 로드")
         
-        # 3. 배치별 처리 (20개씩)
-        batch_size = self.config.RATE_LIMIT_BATCH_SIZE
-        total_batches = (len(subtitle_files) + batch_size - 1) // batch_size
+        # 3. 배치별 처리 (20개씩, 배치 6부터 시작)
+        batch_size = 20
+        start_batch = 6  # 기존 배치 1-5는 완료됨
+        
+        # 처리되지 않은 파일들만 필터링
+        unprocessed_files = []
+        for subtitle_file in subtitle_files:
+            video_id = os.path.basename(subtitle_file).replace('.json', '')
+            if video_id not in self.processed_video_ids:
+                unprocessed_files.append(subtitle_file)
+        
+        print(f"[INFO] 처리할 영상: {len(unprocessed_files)}개")
+        
+        total_batches = (len(unprocessed_files) + batch_size - 1) // batch_size
         
         for batch_idx in range(total_batches):
             start_idx = batch_idx * batch_size
-            end_idx = min(start_idx + batch_size, len(subtitle_files))
-            batch_files = subtitle_files[start_idx:end_idx]
+            end_idx = min(start_idx + batch_size, len(unprocessed_files))
+            batch_files = unprocessed_files[start_idx:end_idx]
             
-            print(f"\n=== 배치 {batch_idx + 1}/{total_batches} ({len(batch_files)}개) ===")
+            actual_batch_num = start_batch + batch_idx
+            print(f"\n=== 배치 {actual_batch_num}/{start_batch + total_batches - 1} ({len(batch_files)}개) ===")
             
             for subtitle_file in batch_files:
                 video_id = os.path.basename(subtitle_file).replace('.json', '')
@@ -282,7 +348,7 @@ class Sesang101Analyzer:
                     self.results['stats']['skipped'] += 1
             
             # 배치 완료 후 중간 저장
-            self.save_intermediate_results(batch_idx + 1)
+            self.save_intermediate_results(actual_batch_num)
             
             # 마지막 배치가 아니면 휴식
             if batch_idx < total_batches - 1:

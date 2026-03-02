@@ -42,8 +42,8 @@ def test_single_video():
     
     # 테스트 파일
     subs_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'subs', 'sesang101')
-    test_file = os.path.join(subs_dir, 'Ke7gQMbIFLI.json')  # 트럼프 관련 영상
-    video_id = 'Ke7gQMbIFLI'
+    test_file = os.path.join(subs_dir, 'BeEHwOe-J98.json')  # 팰런티어 관련 영상
+    video_id = 'BeEHwOe-J98'
     
     print(f"테스트 파일: {test_file}")
     print(f"비디오 ID: {video_id}")
@@ -65,7 +65,7 @@ def test_single_video():
         
         # 2. 영상 정보
         video_info = {
-            'title': 'Why are markets panicking over Trump\'s choice? Should we panic too?',
+            'title': 'Palantir\'s Future Amidst the New Year\'s Market Crash',
             'url': f'https://www.youtube.com/watch?v={video_id}',
             'duration': 'N/A',
             'upload_date': 'N/A'

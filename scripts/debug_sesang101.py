@@ -65,7 +65,10 @@ URL: {video_info['url']}
     print(f"프롬프트 길이: {len(final_prompt)}자")
     print(f"프롬프트 미리보기:")
     print("="*50)
-    print(final_prompt[:500] + "...")
+    try:
+        print(final_prompt[:500] + "...")
+    except UnicodeEncodeError:
+        print("(프롬프트에 특수문자 포함으로 출력 생략)")
     print("="*50)
     
     # API 호출

@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Scatter } from 'recharts';
 import reportsData from '@/data/analyst_reports.json';
-import signalPricesData from '@/data/signal_prices.json';
+import stockPricesData from '@/data/stockPrices.json';
 
 const TICKER_NAMES: Record<string, string> = {
   '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
@@ -22,6 +22,7 @@ interface Report {
   opinion: string;
   published_at: string;
   pdf_url: string;
+  summary?: string;
 }
 
 interface StockAnalystTabProps {
@@ -37,6 +38,15 @@ interface AnalystReportModalProps {
 function formatTargetPrice(price: number | null): string {
   if (!price) return '-';
   return `${Math.floor(price / 10000)}만원`;
+}
+
+// 날짜 포맷팅 (26.02.24)
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  const yy = String(d.getFullYear()).slice(2);
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yy}.${mm}.${dd}`;
 }
 
 function AnalystReportModal({ report, onClose }: AnalystReportModalProps) {
@@ -81,36 +91,37 @@ function AnalystReportModal({ report, onClose }: AnalystReportModalProps) {
                 {report.title}
               </h2>
               <p className="text-sm text-[#8b95a1] mt-1">
-                {report.firm} · {new Date(report.published_at).toLocaleDateString('ko-KR', { 
-                  year: 'numeric', month: 'long', day: 'numeric' 
-                })}
+                {formatDate(report.published_at)}
               </p>
             </div>
 
-            {/* 핵심 발언 박스 (AI 한줄요약) */}
-            <div className="bg-[#f8f9fa] rounded-xl p-4 border-l-4 border-[#3182f6]">
-              <div className="text-xs font-medium text-[#8b95a1] mb-2">핵심 발언</div>
-              <p className="text-[15px] text-[#191f28] leading-relaxed">
-                이 종목에 대한 투자 매력도가 높아지고 있으며, 현재 밸류에이션이 저평가되어 있다고 판단됩니다. 
-                목표가 달성 가능성이 높아 보입니다.
-              </p>
-            </div>
+            {/* AI 한줄요약 */}
+            {report.summary && (
+              <div className="bg-[#f8f9fa] rounded-xl p-4 border-l-4 border-[#3182f6]">
+                <div className="text-xs font-medium text-[#8b95a1] mb-2">🤖 AI 한줄요약</div>
+                <p className="text-[15px] text-[#191f28] leading-relaxed">
+                  {report.summary}
+                </p>
+              </div>
+            )}
 
-            {/* 내용요약 */}
-            <div>
-              <div className="text-xs font-medium text-[#8b95a1] mb-2">내용요약</div>
-              <div className="text-sm text-[#333d4b] leading-relaxed space-y-2">
-                <p>• 이 리포트는 현재 시장 상황과 기업의 펀더멘털을 종합적으로 분석했습니다.</p>
-                <p>• 주요 성장 동력과 리스크 요인을 균형있게 검토한 것으로 평가됩니다.</p>
-                <p>• 목표가 설정의 합리성과 투자의견의 근거가 명확히 제시되었습니다.</p>
-                <p>• 업계 내 경쟁사 대비 밸류에이션 매력도가 고려되었습니다.</p>
-                <p>• 단기/중기 실적 전망과 장기 성장성을 구분하여 접근했습니다.</p>
-                <p>• ESG 요소와 규제 환경 변화가 투자판단에 반영되었습니다.</p>
-                <p>• 글로벌 경기 동향과 국내 정책 변화가 종합적으로 고려되었습니다.</p>
-                <p>• 기술적 분석과 펀더멘털 분석이 적절히 조화된 것으로 판단됩니다.</p>
-                <p>• 투자자의 리스크 성향별 접근 전략이 구체적으로 제시되었습니다.</p>
-                <p>• 향후 주요 모니터링 포인트와 투자 시점이 명시되었습니다.</p>
-                <p className="text-[#8b95a1] text-xs mt-4">* 이는 AI가 생성한 분석으로, 실제 리포트 내용과 다를 수 있습니다.</p>
+            {/* 상세 정보 */}
+            <div className="space-y-3">
+              <div className="flex justify-between">
+                <span className="text-sm text-[#8b95a1]">증권사</span>
+                <span className="text-sm font-medium text-[#191f28]">{report.firm}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-[#8b95a1]">애널리스트</span>
+                <span className="text-sm font-medium text-[#191f28]">{report.analyst || '-'}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-[#8b95a1]">목표가</span>
+                <span className="text-sm font-medium text-[#191f28]">{formatTargetPrice(report.target_price)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sm text-[#8b95a1]">투자의견</span>
+                <span className="text-sm font-medium text-[#191f28]">{report.opinion}</span>
               </div>
             </div>
 
@@ -163,15 +174,18 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
   const data = reportsData as Record<string, Report[]>;
   const reports = data[code] || [];
   
-  // 가격 데이터 (차트용)
+  // 가격 데이터 (차트용) - stockPrices.json에서 최근 90일
   const priceData = useMemo(() => {
     try {
-      const prices = (signalPricesData as any)[code] || [];
-      return prices.map((item: any) => ({
-        date: item.date,
-        price: item.close,
-        dateFormatted: new Date(item.date).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })
-      })).slice(-30); // 최근 30일
+      const stockData = (stockPricesData as any)[code];
+      if (!stockData?.prices) return [];
+      return stockData.prices
+        .slice(-90)
+        .map((item: any) => ({
+          date: item.date,
+          price: item.close,
+          dateFormatted: formatDate(item.date)
+        }));
     } catch {
       return [];
     }
@@ -338,8 +352,6 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
               <thead className="bg-[#f8f9fa]">
                 <tr>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트명</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
@@ -347,27 +359,15 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
               </thead>
               <tbody className="divide-y divide-[#f0f0f0]">
                 {sortedReports.map((report, index) => (
-                  <tr key={index} className="hover:bg-[#f8f9fa] transition-colors">
+                  <tr key={index} className="hover:bg-[#f8f9fa] transition-colors cursor-pointer" onClick={() => setSelectedReport(report)}>
                     <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
-                      {new Date(report.published_at).toLocaleDateString('ko-KR', { 
-                        month: 'short', 
-                        day: 'numeric' 
-                      })}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
-                      {report.firm}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-[#8b95a1] whitespace-nowrap">
-                      {report.analyst || '-'}
+                      {formatDate(report.published_at)}
                     </td>
                     <td className="px-4 py-4">
                       <OpinionBadge opinion={report.opinion} />
                     </td>
                     <td className="px-4 py-4 text-sm max-w-xs">
-                      <div 
-                        className="cursor-pointer group"
-                        onClick={() => setSelectedReport(report)}
-                      >
+                      <div className="group">
                         <div className="text-[#191f28] font-medium truncate group-hover:text-[#3182f6] transition-colors">
                           {report.title}
                           {report.pdf_url && (
@@ -382,9 +382,11 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
                             </a>
                           )}
                         </div>
-                        <div className="text-xs text-[#8b95a1] mt-1">
-                          이 리포트에 대한 AI 분석을 확인해보세요
-                        </div>
+                        {report.summary && (
+                          <div className="text-xs text-[#8b95a1] mt-1 truncate">
+                            {report.summary}
+                          </div>
+                        )}
                       </div>
                     </td>
                     <td className="px-4 py-4 text-sm text-[#191f28] font-medium whitespace-nowrap">

@@ -1,0 +1,129 @@
+{
+  "test_date": "2026-03-02T00:02:06.658617",
+  "results": [
+    {
+      "video_id": "UVeJSmWGzRw",
+      "title": "3 Reasons to Buy IREN",
+      "expected": "IREN 매수 시그널",
+      "signals_found": 1,
+      "signals": [
+        {
+          "speaker": "발표자",
+          "stock": "IREN",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "IREN은 저렴하고 풍부한 재생 에너지로 구동되는 유연한 고성능 컴퓨팅 인프라를 운영하는 기업이에요. 물리적인 인프라부터 직접 소유하고 통제하면서 전체 밸류 체인을 수직 개어라 하는게 장기적으로 수익권 측면으로나 선택권 측면으로 더 좋다라는 믿음에 기반하고 있습니다.",
+          "reasoning": "IREN의 수직계열화된 사업 구조와 재생에너지 활용이 장기적으로 긍정적일 것으로 판단"
+        }
+      ],
+      "analysis_time": 7.234185457229614
+    },
+    {
+      "video_id": "iLUIU1sU1Ug",
+      "title": "Airen has tripled in 3 months, Rocket Lab has doubled. Are you really not selling it for 10 times?",
+      "expected": "IREN/RKLB 관련 시그널",
+      "signals_found": 2,
+      "signals": [
+        {
+          "speaker": "박성훈",
+          "stock": "Airen",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "아이레는 벌써 세 배, 로켓레븐이 이제 두 배가 되었지만 제가 바라보고 있는 미래가 도달하려면 아직 그래도 많이 남았기 때문에 저는 아직 매도를 생각하지 않고 일단 계속 가져갈 생각입니다.",
+          "reasoning": "유튜버는 Airen의 주가가 빠르게 상승했지만, 자신이 바라보는 미래에 도달하기 위해서는 더 오랜 시간이 필요할 것으로 판단하여 매도할 계획이 없음."
+        },
+        {
+          "speaker": "박성훈",
+          "stock": "Rocket Lab",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "로켓랩도 수이에요. 최근 로켓랩이 이제 우주에서 센서 같은 감지 솔루션 기업인 지오스트를 인수한다고 커뮤니티 글로 전해드렸었는데 지오스트는 이미 오랜 업력과 이제 미국 정부 납품 1력을 가진 방위 산업체인만큼 어 로켈랩이 트럼프가 밀고 있는 이제 방위산업 골든의 어 주요 플레이어가 될 거라는 CEO의 말이 좀 하나씩 실현되고 있는 느낌이에요.",
+          "reasoning": "유튜버는 Rocket Lab이 최근 방위산업 업체인 Geostar를 인수하면서 트럼프 정부가 밀고 있는 방위산업 분야의 주요 플레이어로 부상할 것으로 기대하고 있음."
+        }
+      ],
+      "analysis_time": 25.527891874313354
+    },
+    {
+      "video_id": "1xfjt7moZEg",
+      "title": "Stop Watching Bitcoin Halvings Anymore: How to Read Bitcoin Market Changes After Trump",
+      "expected": "Bitcoin 관련 시그널",
+      "signals_found": 4,
+      "signals": [
+        {
+          "speaker": "세상학 이론",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "비트코인이 미국의 전략적 비축 자산이 됨으로써 가격 안정성을 유지하게 된다면은 크립토 기업의 르네상스가 올 수도 있지 않을까 하는 생각이 듭니다.",
+          "reasoning": "미국 정부의 비트코인 전략적 자산화 논의로 가격 변동성 감소, 이에 따른 암호화폐 기업 성장 전망"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "도지코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "medium",
+          "timestamp": null,
+          "key_quote": "최근에 가장 재미를 본 투자도 이제 트럼프가 당선될 것 같아서 투자한 이제 도지 코인인데 지금 거기서 나온 수익을 이제 트럼프 정권의 수혜를 좀 볼 만한 볼 수 있을 만한 것들로 이것저것 조금씩 좀 뿌려두고 있습니다.",
+          "reasoning": "트럼프 대선 당선에 대한 기대감으로 도지코인에 투자했고, 추가 상승 기대"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "비트코인은 뭐 당연히 상승장에서 가장 안정적으로 돈을 불릴 수 있는 자산이라 사실 뭐 현금처럼 들고 있고 특히 요즘 같은 시기에는 비트코인이 대한민국 원화보다 더 안전한 자산인 거 같아서 이렇게 현금처럼 들고 있습니다.",
+          "reasoning": "비트코인을 상승장에서 가장 안정적인 자산으로 판단하며, 원화보다 안전한 자산으로 여기고 있음"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "팔란티어",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "긍정",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "예전에 소개해 드렸던 팔란티어 생각이 나는데 AI 내러티브가 이제 엔비디아 같은 칩 중심 회사에서 B2B AI 소프트웨어 활용 잘하는 회사로 좀 넘어가고 좀 특히 이제 팔란티어 방산 주다 보니까 요즘 같이 이제 전쟁이 많은 시기에 인기가 되게 많은 거 같아요.",
+          "reasoning": "팔란티어의 AI 및 방산 사업 수혜에 긍정적이며, 과거 낮은 가격에 투자한 것을 자랑스럽게 언급"
+        }
+      ],
+      "analysis_time": 14.759206295013428
+    },
+    {
+      "video_id": "0z8e_heKtKk",
+      "title": "Should we be concerned about Bitcoin crash after the Hungda bankruptcy and Tether collapse?",
+      "expected": "Bitcoin 관련 시그널",
+      "signals_found": 0,
+      "signals": [],
+      "analysis_time": 5.616013526916504
+    }
+  ],
+  "summary": {
+    "total_videos": 4,
+    "successful_videos": 3,
+    "total_signals": 7
+  }
+}

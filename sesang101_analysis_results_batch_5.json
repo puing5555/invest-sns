@@ -1,0 +1,421 @@
+{
+  "start_time": "2026-03-02T00:02:46.588051",
+  "processed": [
+    {
+      "video_id": "1xfjt7moZEg",
+      "title": "Stop Watching Bitcoin Halvings Anymore: How to Read Bitcoin Market Changes After Trump",
+      "subtitle_length": 4665,
+      "signals_found": 4,
+      "signals_inserted": 4,
+      "timestamp": "2026-03-02T00:03:30.407272",
+      "signals": [
+        {
+          "speaker": "세상학 이론",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "미국이 전략적 비축 자산인 비트코인의 수요를 조절함으로써 시장을 좀 안정적으로 운전한다면 이전과 같은 광기어린 상승장이 좀 안 올 수도 있지 않을까 그런 상승장에 필연적으로 뒤따르는 가파른 폭락이 안 오게 될 수도 있지 않을까",
+          "reasoning": "미국이 비트코인을 전략적 비축 자산으로 삼으면 가격 변동성이 줄어들 것이라는 긍정적 전망 제시"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "도지코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "medium",
+          "timestamp": null,
+          "key_quote": "도지 코인인데 지금 거기서 나온 수익을 이제 트럼프 정권의 수혜를 좀 볼만한 볼 수 있을 만한 것들로 이것저것 조금씩 좀 뿌려두고 있습니다",
+          "reasoning": "도지코인 투자로 수익을 얻었고, 트럼프 정권의 수혜를 볼 수 있는 자산에 재투자하고 있다고 언급"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "팔란티어",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "팔란티어 생각이 나는데 AI 내러티브가 이제 엔비디아 같은 칩 중심 회사에서 B2B AI 소프트웨어 활용 잘하는 회사로 좀 넘어가고 좀 특히 이제 팔란티어 방산 주다 보니까 요즘 같이 이제 전쟁이 많은 시기에 인기가 되게 많은 거 같아요",
+          "reasoning": "팔란티어가 AI 소프트웨어와 방산 분야에서 강세를 보이고 있어 긍정적으로 전망"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "보유",
+          "signal": null,
+          "confidence": null,
+          "timestamp": null,
+          "key_quote": "비트코인은 뭐 당연히 상승장에서 가장 안정적으로 돈을 불릴 수 있는 자산이라 사실 뭐 현금처럼 들고 있고",
+          "reasoning": "비트코인을 장기적으로 보유하고 있다고 언급"
+        }
+      ]
+    },
+    {
+      "video_id": "4kJxnR-XIfY",
+      "title": "폭등하는 써클, 내 코인은 언제 오를까? 트럼프가 준 두번째 기회",
+      "subtitle_length": 3929,
+      "signals_found": 3,
+      "signals_inserted": 3,
+      "timestamp": "2026-03-02T00:14:24.363537",
+      "signals": [
+        {
+          "speaker": "발언자",
+          "stock": "서클",
+          "ticker": null,
+          "market": "CRYPTO_DEFI",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "서클의 상승세가 어마어마합니다. 스테이블 코인 시장 규모가 3년 동안 10배 이상 성장한다면 스테이블 코인이 미국 국채의 가장 큰 수요처로 떠오르는 것도 뭐지 않은 거 같아요.",
+          "reasoning": "발언자가 스테이블 코인 시장의 장기 성장을 예측하며 서클 주식에 대한 강력한 매수 의견을 제시하고 있어 매수 신호로 분류함."
+        },
+        {
+          "speaker": "발언자",
+          "stock": "이더리움",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "medium",
+          "timestamp": "N/A",
+          "key_quote": "반면에 그 스테이블 코인이 작동하는 플랫폼 역할을 하는 이더리움은 오르지 못하고 정체되어 있는 모양세인데요.",
+          "reasoning": "이더리움이 스테이블 코인 플랫폼으로서 언급되고는 있으나, 발언자의 주된 관심사는 스테이블 코인 시장이므로 논거로 분류함."
+        },
+        {
+          "speaker": "발언자",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "중립",
+          "confidence": "medium",
+          "timestamp": "N/A",
+          "key_quote": "올해는 코인 시장에서 정말 중요한 분기점입니다. 비트코인 반감기를 중심으로 4년마다 이제 크게 움직였던 공급 사이클보다는 돈의 유동성과 기관 중심의 수요 사이클의 영향이 더 커지는 어떻게 보면 주식 시장과 비슷한 시장이 되어 가고 있는 거 같아요.",
+          "reasoning": "비트코인 시장에 대한 전반적인 분석을 제공하고 있으나, 발언자의 핵심 투자 의견은 스테이블 코인 시장이므로 논거로 분류함."
+        }
+      ]
+    },
+    {
+      "video_id": "5ZpG1gxdDfg",
+      "title": "Don't buy and sell based on price | Introduction to Investments, Episode 17",
+      "subtitle_length": 3288,
+      "signals_found": 6,
+      "signals_inserted": 6,
+      "timestamp": "2026-03-02T00:21:25.829204",
+      "signals": [
+        {
+          "speaker": "박병창",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "단기적으로 뭐 조정이 울지 않으면 이래로 쭉 올라 갈지는 아무도 정확히 예측할 수도 예측할 수 없어요 이 세상에서 제일 투자를 잘하는 사람도 단기적으로 모든것을 예측 정확히 예측할 수는 없습니다 그래서 물론 지금 진입하면 안된다 이런 것은 아니지만 다만 그 지금 더 사겠다는 그 선택에 기반이 된 의사 결정 과정이 부실 할까봐 우려를 하는거 가격이 올라가면 신뢰도가 올라가니까 더 사고 그게 떨어지니까 신뢰도가 떨어진다 팔아야지 이렇게 생각이 작동하는 것은 건강한 전략이 아니니까 추세가 지속될 거라는 생각에 기반이 등 욕심입니다",
+          "reasoning": "발언자가 비트코인 매수를 추천하고 있으나, 단기적 가격 변동에 대해 불확실성을 인정하고 있어 confidence를 'high'로 분류"
+        },
+        {
+          "speaker": "박병창",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "비트코인은 저번에도 말씀드렸듯이 이제 자상 개통이 고 화폐 개통이 아니죠 4 화폐로 앱에 대해 실생활 그 실 사형의 쓰이기 위해 위한 그런 비전을 갖고 있는게 아니고 오히려 디지털 금과 같은 이제 성격으로 봐야 한데 우리가 금을 일상생활에 거래할 때 쓰지 않지만 비트코인 보다 어마어마한 가케 시장가치를 영상 하고 있잖아요",
+          "reasoning": "발언자가 비트코인의 특성을 디지털 금으로 보며, 비트코인의 시장가치가 높다는 점을 긍정적으로 설명하고 있어 'mention_type=논거, signal=긍정'으로 분류"
+        },
+        {
+          "speaker": "박병창",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "최근에 이제 주요 이제 경제 신문을 제가 봤는데 거기서도 이제 비트코인을 굉장히 회의적으로 바라보는 경기 4 한 기사에서 비트코인이 아직도 결제가 0건 이다 뭐 이런 말이 있었는데 비트코인은 저번에도 말씀드렸듯이 이제 자상 개통이 고 화폐 개통이 아니죠 4 화폐로 앱에 대해 실생활 그 실 사형의 쓰이기 위해 위한 그런 비전을 갖고 있는게 아니고 오히려 디지털 금과 같은 이제 성격으로 봐야 한데",
+          "reasoning": "발언자가 비트코인을 화폐가 아닌 디지털 금과 유사한 성격으로 보고 있으며, 경제 신문의 회의적 평가를 반박하는 논리를 펼치고 있어 'mention_type=논거, signal=긍정'으로 분류"
+        },
+        {
+          "speaker": "박병창",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "전 아직 한참 적 평가를 받고 있다고 생각을 합니다 최근에 이제 주요 이제 경제 신문을 제가 봤는데 거기서도 이제 비트코인을 굉장히 회의적으로 바라보는 경기 4 한 기사에서 비트코인이 아직도 결제가 0건 이다 뭐 이런 말이 있었는데 비트코인은 저번에도 말씀드렸듯이 이제 자상 개통이 고 화폐 개통이 아니죠 4 화폐로 앱에 대해 실생활 그 실 사형의 쓰이기 위해 위한 그런 비전을 갖고 있는게 아니고 오히려 디지털 금과 같은 이제 성격으로 봐야 한데 우리가 금을 일상생활에 거래할 때 쓰지 않지만 비트코인 보다 어마어마한 가케 시장가치를 영상 하고 있잖아요 그때 아직도 이렇게 나름 뭐 경제에 대해서 어느정도 이제 아시는 언론인 분들도 이 비트코인 에서 정확히 이해하는 분들이 거의 없다는 사실은 비트코인이 굉장히 저평가돼 있다는 것을 보여주는 것 같고",
+          "reasoning": "발언자가 비트코인이 저평가되어 있다고 판단하며, 경제 신문의 회의적 평가를 반박하는 근거를 제시하고 있어 'mention_type=결론, signal=매수'로 분류"
+        },
+        {
+          "speaker": "박병창",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "그리고 최근 이제 기꺼이 이제 만 8천 달러 를 넘었는데 가장 최근 비트코인 의 강풍 대 2017년 테죠 그때 18,000달러를 비트코인이 넘은 일쑤 가 단 3일 입니다 그리고 만 9천 달러에 넘은거 는 24시간 밖에 안돼요 19,500 달 얼른 먹어 는 3시간 특정 돈대 지금은 주목도 로 보나 거래량으로 번 아 그때 한참 못 미치지만 그 때보다 훨씬 안정적으로 그 정도의 가기 걸리지 해주고 있어요",
+          "reasoning": "발언자가 최근 비트코인 가격 상승이 2017년 대비 더 안정적이라고 설명하며, 이를 근거로 매수 추천을 하고 있어 'mention_type=결론, signal=매수'로 분류"
+        },
+        {
+          "speaker": "박병창",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "보유",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "예전에 제가 비트코인이 안 400만원 1때부터 말씀을 들어왔지만 그 때랑 지금 바뀐 것은 없습니다 야시장이 조금 저의 전망을 어느정도 따라 잡아서 시장가격이 그냥 네 배가 됐을 뿐 이 딱 그 때는 뭔가 살 마음이 없었지만 지금 살 마음이 생긴 이유가 무엇인지 한번 잘 생각해 보시는게 좋을꺼 같아서 영상으로 말씀을 드렸고 장기적으로 저는 비트코인 20년 이상 보유 할 만 하지만 단기적으로는 제가 올거라고 약간 베팅을 걸어보는 그런 카메 서현 4 그런 법을 현상이 그 잠깐 매도할 수 있는 타이밍으로 보이고 저는 그때 매도를 하더라도 그 카메 센 상 단기적 버블이 꺼지면 다시 매수를 할 생각이에요",
+          "reasoning": "발언자가 과거부터 비트코인을 보유해왔으며, 장기적으로도 보유할 계획이라고 밝히고 있어 'mention_type=보유, signal=긍정'으로 분류"
+        }
+      ]
+    },
+    {
+      "video_id": "AnHiiYa48Y0",
+      "title": "The final puzzle piece for an era where humans take orders from AI...",
+      "subtitle_length": 5268,
+      "signals_found": 9,
+      "signals_inserted": 9,
+      "timestamp": "2026-03-02T00:29:30.665990",
+      "signals": [
+        {
+          "speaker": "speaker",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "긍정",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "비트코인 가격이 7천만 원 정도였는데 공교롭게도 영상 업로드 직후부터 40% 정도 폭등을 하기 시작해서 전고점을 뚫고 1억 원을 넘겼다",
+          "reasoning": "비트코인 가격 상승에 대한 긍정적 평가"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "market": "CRYPTO",
+          "mention_type": "긍정",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "이더리움도 이더리움 etf 대한 기대감으로 잘 오르고 있고",
+          "reasoning": "이더리움 가격 상승에 대한 긍정적 평가"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "market": "CRYPTO",
+          "mention_type": "긍정",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "솔라나 계열 민 코인 붐을 타고 오늘부로 BNB 제치고 시총 4위로 올라섰습니다",
+          "reasoning": "솔라나 가격 상승에 대한 긍정적 평가"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "CRYPTO",
+          "market": "CRYPTO",
+          "mention_type": "교육",
+          "signal": "중립",
+          "confidence": "medium",
+          "timestamp": "N/A",
+          "key_quote": "이번 장에서는 솔라나 차례인 거 같네요 이번 도 느꼈는데 역시 상승이 어느 정도 예상될 때는 분할 매수보다는 집중 매수가 좋은 전략인 거 같습니다",
+          "reasoning": "가상화폐 투자 전략에 대한 일반적 교육"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "market": "US",
+          "mention_type": "논거",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "엔비디아 마이크로소프트 큰 재미는 보지 못했지만 이제 팔란티어 같은 AI 관련 뭐 미국 성장주도 투자를 했었고",
+          "reasoning": "엔비디아 투자 경험 언급 (논거)"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "AMD",
+          "ticker": "AMD",
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "최근 이제 AMD 투자를 받은 AI 인프라 분야 비상장 스타트업에 투자를 하기도 했습니다",
+          "reasoning": "AMD 관련 AI 스타트업에 투자한 것을 긍정적으로 언급"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "비트코인의 탄생이 AI 인류를 지배하는 과정에서 꼭 필요한 단계가 아닐까 하는 생각입니다",
+          "reasoning": "비트코인이 AI 우위 사회에서 필요한 단계라고 긍정적으로 평가"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "CRYPTO",
+          "market": "CRYPTO",
+          "mention_type": "교육",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "비트코인을 통해서 이런 경제적 자율성을 이제 AI 얻으면 인간의 은행 시스템과 독립적으로 경제 활동을 수행할 수 있게 됩니다",
+          "reasoning": "비트코인이 AI에 경제적 자율성을 부여할 수 있다는 일반론 설명"
+        },
+        {
+          "speaker": "speaker",
+          "stock": "CRYPTO",
+          "market": "CRYPTO",
+          "mention_type": "교육",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "만약 인공지능의 인류를 지배하게 된다면은이 시나리오가 어떻게 어떤 식으로 진행이 될까 좀 생각을 해보곤 하거든요",
+          "reasoning": "AI 지배 시나리오에 대한 일반적 고찰"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "skipped": [
+    {
+      "video_id": "-3odSn4Wi2E",
+      "reason": "시그널 없음",
+      "title": "Trump's Dream of a Second Plaza Accord? Investors' Attitudes to the Great Transformation"
+    },
+    {
+      "video_id": "-JsPLE90h1Q",
+      "reason": "시그널 없음",
+      "title": "How Diversification Destroys Returns | Introduction to Investment Studies, Episode 15"
+    },
+    {
+      "video_id": "0z8e_heKtKk",
+      "reason": "시그널 없음",
+      "title": "Should we be concerned about Bitcoin crash after the Hungda bankruptcy and Tether collapse?"
+    },
+    {
+      "video_id": "1bcmmTZRX5Q",
+      "reason": "분석 결과 없음",
+      "title": "Memecoins and Meme Stocks, Are They Really Just a Game of Fate?"
+    },
+    {
+      "video_id": "3NUs0JElPvs",
+      "reason": "시그널 없음",
+      "title": "I will answer the question of why you should not invest in Ripple."
+    },
+    {
+      "video_id": "4Bay6eXJH1Q",
+      "reason": "시그널 없음",
+      "title": "Let's take a look at Palantir, a big data company with a nationalistic founder from PayPal."
+    },
+    {
+      "video_id": "4UvO-6eecv8",
+      "reason": "시그널 없음",
+      "title": "How to overcome investment failure and ride the wave of change | Introduction to World Studies Q&A"
+    },
+    {
+      "video_id": "4cCGQFHrbK4",
+      "reason": "시그널 없음",
+      "title": "The Second Palantir: Why You Can't Get 10x the Price Even If You Know It"
+    },
+    {
+      "video_id": "4h-fPWoA2W4",
+      "reason": "시그널 없음",
+      "title": "Is it a bubble if prices are skyrocketing? | Investment Theory 11"
+    },
+    {
+      "video_id": "4wCO1fdl9iU",
+      "reason": "시그널 없음",
+      "title": "The psychology of riding a bubble that could burst at any moment"
+    },
+    {
+      "video_id": "4yZDpfDT7K8",
+      "reason": "시그널 없음",
+      "title": "How Palantir, a nationalist company, is thriving under the Biden administration"
+    },
+    {
+      "video_id": "5I9wb6NKNUs",
+      "reason": "시그널 없음",
+      "title": "How to get ahead in life | Introduction to Success"
+    },
+    {
+      "video_id": "5Py7WIb8iYw",
+      "reason": "시그널 없음",
+      "title": "주식 폭락 필수 준비물 1위 | 투자학개론 6화"
+    },
+    {
+      "video_id": "5aGn5CqbQls",
+      "reason": "시그널 없음",
+      "title": "I regret the days when I didn't know about investing... | Introduction to Investment, Episode 3"
+    },
+    {
+      "video_id": "6Bk_eG77-5g",
+      "reason": "시그널 없음",
+      "title": "How to study investment (important)"
+    },
+    {
+      "video_id": "7UoMvJPj0gw",
+      "reason": "시그널 없음",
+      "title": "Things you need to know to pretend to drink wine | Introduction to Drinking Science, Part 1"
+    },
+    {
+      "video_id": "7mzsY68IhhI",
+      "reason": "시그널 없음",
+      "title": "The concept of living without working | Introduction to Investment Studies, Part 4"
+    },
+    {
+      "video_id": "9cg-iVIkg20",
+      "reason": "시그널 없음",
+      "title": "홍차 좀 마셔본 척 하려면 알아야 하는 것들 | 홍차학개론"
+    },
+    {
+      "video_id": "A2l1-lyzq4Q",
+      "reason": "시그널 없음",
+      "title": "Announcement of winners of the publication event"
+    },
+    {
+      "video_id": "AaJTT_GTkKY",
+      "reason": "시그널 없음",
+      "title": "Why are stocks rising when the world is going to end? | Investment Theory 10"
+    },
+    {
+      "video_id": "BQY0eh1lcUk",
+      "reason": "시그널 없음",
+      "title": "30억 있는 30대 청년 300명이 모여 1조원을 모은다면?"
+    }
+  ],
+  "stats": {
+    "total_videos": 98,
+    "processed": 4,
+    "signals_found": 22,
+    "errors": 0,
+    "skipped": 21
+  }
+}

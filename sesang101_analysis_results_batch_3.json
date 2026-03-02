@@ -1,0 +1,184 @@
+{
+  "start_time": "2026-03-02T00:02:46.588051",
+  "processed": [
+    {
+      "video_id": "1xfjt7moZEg",
+      "title": "Stop Watching Bitcoin Halvings Anymore: How to Read Bitcoin Market Changes After Trump",
+      "subtitle_length": 4665,
+      "signals_found": 4,
+      "signals_inserted": 4,
+      "timestamp": "2026-03-02T00:03:30.407272",
+      "signals": [
+        {
+          "speaker": "세상학 이론",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "미국이 전략적 비축 자산인 비트코인의 수요를 조절함으로써 시장을 좀 안정적으로 운전한다면 이전과 같은 광기어린 상승장이 좀 안 올 수도 있지 않을까 그런 상승장에 필연적으로 뒤따르는 가파른 폭락이 안 오게 될 수도 있지 않을까",
+          "reasoning": "미국이 비트코인을 전략적 비축 자산으로 삼으면 가격 변동성이 줄어들 것이라는 긍정적 전망 제시"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "도지코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "medium",
+          "timestamp": null,
+          "key_quote": "도지 코인인데 지금 거기서 나온 수익을 이제 트럼프 정권의 수혜를 좀 볼만한 볼 수 있을 만한 것들로 이것저것 조금씩 좀 뿌려두고 있습니다",
+          "reasoning": "도지코인 투자로 수익을 얻었고, 트럼프 정권의 수혜를 볼 수 있는 자산에 재투자하고 있다고 언급"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "팔란티어",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": null,
+          "key_quote": "팔란티어 생각이 나는데 AI 내러티브가 이제 엔비디아 같은 칩 중심 회사에서 B2B AI 소프트웨어 활용 잘하는 회사로 좀 넘어가고 좀 특히 이제 팔란티어 방산 주다 보니까 요즘 같이 이제 전쟁이 많은 시기에 인기가 되게 많은 거 같아요",
+          "reasoning": "팔란티어가 AI 소프트웨어와 방산 분야에서 강세를 보이고 있어 긍정적으로 전망"
+        },
+        {
+          "speaker": "세상학 이론",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "보유",
+          "signal": null,
+          "confidence": null,
+          "timestamp": null,
+          "key_quote": "비트코인은 뭐 당연히 상승장에서 가장 안정적으로 돈을 불릴 수 있는 자산이라 사실 뭐 현금처럼 들고 있고",
+          "reasoning": "비트코인을 장기적으로 보유하고 있다고 언급"
+        }
+      ]
+    },
+    {
+      "video_id": "4kJxnR-XIfY",
+      "title": "폭등하는 써클, 내 코인은 언제 오를까? 트럼프가 준 두번째 기회",
+      "subtitle_length": 3929,
+      "signals_found": 3,
+      "signals_inserted": 3,
+      "timestamp": "2026-03-02T00:14:24.363537",
+      "signals": [
+        {
+          "speaker": "발언자",
+          "stock": "서클",
+          "ticker": null,
+          "market": "CRYPTO_DEFI",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "서클의 상승세가 어마어마합니다. 스테이블 코인 시장 규모가 3년 동안 10배 이상 성장한다면 스테이블 코인이 미국 국채의 가장 큰 수요처로 떠오르는 것도 뭐지 않은 거 같아요.",
+          "reasoning": "발언자가 스테이블 코인 시장의 장기 성장을 예측하며 서클 주식에 대한 강력한 매수 의견을 제시하고 있어 매수 신호로 분류함."
+        },
+        {
+          "speaker": "발언자",
+          "stock": "이더리움",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "medium",
+          "timestamp": "N/A",
+          "key_quote": "반면에 그 스테이블 코인이 작동하는 플랫폼 역할을 하는 이더리움은 오르지 못하고 정체되어 있는 모양세인데요.",
+          "reasoning": "이더리움이 스테이블 코인 플랫폼으로서 언급되고는 있으나, 발언자의 주된 관심사는 스테이블 코인 시장이므로 논거로 분류함."
+        },
+        {
+          "speaker": "발언자",
+          "stock": "비트코인",
+          "ticker": null,
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "중립",
+          "confidence": "medium",
+          "timestamp": "N/A",
+          "key_quote": "올해는 코인 시장에서 정말 중요한 분기점입니다. 비트코인 반감기를 중심으로 4년마다 이제 크게 움직였던 공급 사이클보다는 돈의 유동성과 기관 중심의 수요 사이클의 영향이 더 커지는 어떻게 보면 주식 시장과 비슷한 시장이 되어 가고 있는 거 같아요.",
+          "reasoning": "비트코인 시장에 대한 전반적인 분석을 제공하고 있으나, 발언자의 핵심 투자 의견은 스테이블 코인 시장이므로 논거로 분류함."
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "skipped": [
+    {
+      "video_id": "-3odSn4Wi2E",
+      "reason": "시그널 없음",
+      "title": "Trump's Dream of a Second Plaza Accord? Investors' Attitudes to the Great Transformation"
+    },
+    {
+      "video_id": "-JsPLE90h1Q",
+      "reason": "시그널 없음",
+      "title": "How Diversification Destroys Returns | Introduction to Investment Studies, Episode 15"
+    },
+    {
+      "video_id": "0z8e_heKtKk",
+      "reason": "시그널 없음",
+      "title": "Should we be concerned about Bitcoin crash after the Hungda bankruptcy and Tether collapse?"
+    },
+    {
+      "video_id": "1bcmmTZRX5Q",
+      "reason": "분석 결과 없음",
+      "title": "Memecoins and Meme Stocks, Are They Really Just a Game of Fate?"
+    },
+    {
+      "video_id": "3NUs0JElPvs",
+      "reason": "시그널 없음",
+      "title": "I will answer the question of why you should not invest in Ripple."
+    },
+    {
+      "video_id": "4Bay6eXJH1Q",
+      "reason": "시그널 없음",
+      "title": "Let's take a look at Palantir, a big data company with a nationalistic founder from PayPal."
+    },
+    {
+      "video_id": "4UvO-6eecv8",
+      "reason": "시그널 없음",
+      "title": "How to overcome investment failure and ride the wave of change | Introduction to World Studies Q&A"
+    },
+    {
+      "video_id": "4cCGQFHrbK4",
+      "reason": "시그널 없음",
+      "title": "The Second Palantir: Why You Can't Get 10x the Price Even If You Know It"
+    },
+    {
+      "video_id": "4h-fPWoA2W4",
+      "reason": "시그널 없음",
+      "title": "Is it a bubble if prices are skyrocketing? | Investment Theory 11"
+    },
+    {
+      "video_id": "4wCO1fdl9iU",
+      "reason": "시그널 없음",
+      "title": "The psychology of riding a bubble that could burst at any moment"
+    },
+    {
+      "video_id": "4yZDpfDT7K8",
+      "reason": "시그널 없음",
+      "title": "How Palantir, a nationalist company, is thriving under the Biden administration"
+    },
+    {
+      "video_id": "5I9wb6NKNUs",
+      "reason": "시그널 없음",
+      "title": "How to get ahead in life | Introduction to Success"
+    },
+    {
+      "video_id": "5Py7WIb8iYw",
+      "reason": "시그널 없음",
+      "title": "주식 폭락 필수 준비물 1위 | 투자학개론 6화"
+    }
+  ],
+  "stats": {
+    "total_videos": 98,
+    "processed": 2,
+    "signals_found": 7,
+    "errors": 0,
+    "skipped": 13
+  }
+}

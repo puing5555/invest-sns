@@ -229,6 +229,32 @@ class DatabaseInserter:
         
         return stats
 
+    def get_existing_signals(self, video_url: str) -> List[Dict[str, Any]]:
+        """
+        특정 영상의 기존 시그널 조회
+        
+        Args:
+            video_url: 영상 URL
+        
+        Returns:
+            List[Dict]: 기존 시그널 목록
+        """
+        try:
+            response = requests.get(
+                f"{self.base_url}/investment_signals",
+                headers=self.headers,
+                params={
+                    'video_url': f'eq.{video_url}',
+                    'select': '*'
+                }
+            )
+            response.raise_for_status()
+            return response.json()
+            
+        except Exception as e:
+            print(f"[ERROR] 기존 시그널 조회 실패: {e}")
+            return []
+
     def get_existing_videos(self, channel_id: str) -> List[str]:
         """
         채널의 기존 영상 ID 목록 조회

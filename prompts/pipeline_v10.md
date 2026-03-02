@@ -90,3 +90,47 @@ JSON 배열로 각 시그널 객체 포함:
 - key_quote 15자 미만
 - reasoning 20자 미만
 - **같은 영상, 같은 종목으로 2개 이상 시그널 생성**
+
+## 최종 출력 지시사항
+
+**중요**: 반드시 정확히 아래 JSON 형식으로만 출력하세요. 다른 필드는 절대 포함하지 마세요.
+
+```json
+{
+  "signals": [
+    {
+      "stock": "종목명",
+      "ticker": "종목코드 또는 null",
+      "signal_type": "매수|긍정|중립|경계|매도",
+      "key_quote": "실제 발언 인용 (15자 이상)",
+      "reasoning": "구체적 근거 (20자 이상)",
+      "timestamp": "MM:SS 형태 (예: 05:23)",
+      "confidence": 1
+    }
+  ]
+}
+```
+
+**절대 규칙**:
+1. `signal_type`: "매수", "긍정", "중립", "경계", "매도" 중 하나만 (영문 금지)
+2. `confidence`: 1~10 사이 정수 (텍스트 "high", "medium" 등 절대 금지)
+3. `timestamp`: "MM:SS" 형태 (예: "05:23", "12:45", "00:30")
+4. 다른 필드 (`speaker`, `market`, `mention_type` 등) 절대 추가하지 마세요
+5. 시그널이 없으면: `{"signals": []}`
+
+**예시**:
+```json
+{
+  "signals": [
+    {
+      "stock": "삼성전자",
+      "ticker": "005930", 
+      "signal_type": "매수",
+      "key_quote": "삼성전자는 지금이 매수 타이밍이라고 봅니다",
+      "reasoning": "반도체 사이클 회복과 AI 수요 증가로 실적 개선 기대",
+      "timestamp": "15:30",
+      "confidence": 8
+    }
+  ]
+}
+```
