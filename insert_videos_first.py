@@ -54,7 +54,7 @@ def insert_videos():
         
         # 기존 영상 확인
         resp = requests.get(
-            f"{SUPABASE_URL}/rest/v1/influencer_videos?youtube_video_id=eq.{video_id}",
+            f"{SUPABASE_URL}/rest/v1/influencer_videos?video_id=eq.{video_id}",
             headers=headers
         )
         
@@ -63,12 +63,13 @@ def insert_videos():
             continue
         
         videos_to_insert.append({
-            'youtube_video_id': video_id,
+            'video_id': video_id,
             'title': title,
-            'speaker_id': speaker_id,
-            'channel_url': 'https://www.youtube.com/@sesang101',
+            'channel_id': speaker_id,  # speaker_id를 channel_id로 사용
             'published_at': datetime.now().isoformat(),  # 임시값
-            'created_at': datetime.now().isoformat()
+            'created_at': datetime.now().isoformat(),
+            'has_subtitle': True,
+            'duration_seconds': 0  # 임시값
         })
     
     print(f"INSERT할 영상: {len(videos_to_insert)}개")

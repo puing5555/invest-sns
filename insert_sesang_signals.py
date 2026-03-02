@@ -59,7 +59,7 @@ def get_or_create_speaker():
 def get_video_uuid(youtube_video_id):
     """YouTube video_id로 influencer_videos 테이블의 UUID 조회"""
     resp = requests.get(
-        f"{SUPABASE_URL}/rest/v1/influencer_videos?youtube_video_id=eq.{youtube_video_id}",
+        f"{SUPABASE_URL}/rest/v1/influencer_videos?video_id=eq.{youtube_video_id}",
         headers=headers
     )
     

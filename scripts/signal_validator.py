@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-signal_validator.py - 시그널 품질 검증 모듈 (14개 항목)
+signal_validator.py - 시그널 품질 검증 모듈 (15개 항목)
 DB INSERT 전 자동 검증. reject된 건 별도 로그 저장.
 
 검증 항목 (14개):
@@ -18,6 +18,7 @@ DB INSERT 전 자동 검증. reject된 건 별도 로그 저장.
 12. 언어 검증 (key_quote가 자막에 실제 존재하는지 — AI 날조 방지)
 13. 수익률 범위 검증 (±500% 이상 reject)
 14. 과잉 추출 경고 (한 영상 시그널 10개 이상)
+15. 영상 채널-화자 채널 일치 검증 (데이터 오염 방지)
 
 사용법:
     from signal_validator import SignalValidator
@@ -234,6 +235,12 @@ class SignalValidator:
                 result.warn(f'[14] 과잉 추출: 영상 {video_id[:12]}...에서 {count}개 시그널')
             elif count == 10:
                 result.warn(f'[14] 과잉 추출 경고: 영상에서 10개 시그널 도달')
+        
+        # === 15. 영상 채널과 speaker 채널 일치 여부 ===
+        signal_channel = signal.get('channel_id', '')
+        speaker_channel = signal.get('speaker_channel_id', '')
+        if signal_channel and speaker_channel and signal_channel != speaker_channel:
+            result.reject(f'[15] 채널-화자 불일치: 영상 채널({signal_channel[:8]}) ≠ 화자 채널({speaker_channel[:8]}) — 데이터 오염 위험')
         
         # === 결과 처리 ===
         if result.passed:
