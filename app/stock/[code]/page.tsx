@@ -25,19 +25,23 @@ export async function generateStaticParams() {
     
     const data = await response.json();
     
-    // null을 제거하고 고유 ticker 목록 생성 (한국 종목코드 6자리만 필터링)
+    // null을 제거하고 고유 ticker 목록 생성 (한국 + 해외 모두)
     const uniqueTickers = [...new Set(
       data
         .map((item: any) => item.ticker)
         .filter((ticker: string | null) => 
           ticker && 
-          /^[0-9]{6}$/.test(ticker) // 6자리 숫자인 한국 종목코드만
+          ticker !== 'null' &&
+          ticker.trim() !== ''
         )
     )];
     
+    // ^KOSPI 같은 특수문자 제거, KS11과 중복 제거
+    const cleanedTickers = uniqueTickers.filter((t: string) => !t.startsWith('^'));
+    
     // 기존 하드코딩 종목도 포함 (중복 제거됨)
     const hardcodedCodes = ['005930', '086520', '000660', '399720', '009540'];
-    const allCodes = [...new Set([...uniqueTickers, ...hardcodedCodes])];
+    const allCodes = [...new Set([...cleanedTickers, ...hardcodedCodes])];
     
     console.log('Generated static params for stock codes:', allCodes.length, 'codes');
     
