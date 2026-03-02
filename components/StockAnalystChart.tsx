@@ -183,20 +183,38 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
             <XAxis
               dataKey="date"
+              ticks={(() => {
+                if (!mergedData.length) return [];
+                const dates = mergedData.map(d => d.date).filter(Boolean);
+                const total = dates.length;
+                // Show ~5 evenly spaced ticks
+                const step = Math.max(1, Math.floor(total / 5));
+                const picks: string[] = [];
+                const seen = new Set<string>();
+                for (let i = 0; i < total; i += step) {
+                  const d = new Date(dates[i]);
+                  let key: string;
+                  switch (period) {
+                    case '1개월': key = `${d.getMonth()+1}/${d.getDate()}`; break;
+                    case '6개월': case '1년': key = `${d.getFullYear()}-${d.getMonth()}`; break;
+                    case '3년': key = `${d.getFullYear()}-Q${Math.floor(d.getMonth()/3)}`; break;
+                    default: key = `${d.getFullYear()}`; break;
+                  }
+                  if (!seen.has(key)) { seen.add(key); picks.push(dates[i]); }
+                }
+                return picks;
+              })()}
               tickFormatter={(date) => {
                 const d = new Date(date);
                 switch (period) {
-                  case '1개월': return `${d.getMonth() + 1}/${d.getDate()}`;
-                  case '6개월': return `${d.getMonth() + 1}월`;
-                  case '1년': return `${d.getMonth() + 1}월`;
-                  case '3년': return `${d.getFullYear()}.${d.getMonth() + 1}`;
+                  case '1개월': return `${d.getMonth()+1}/${d.getDate()}`;
+                  case '6개월': case '1년': return `${d.getMonth()+1}월`;
+                  case '3년': return `${d.getFullYear().toString().slice(2)}.${d.getMonth()+1}`;
                   default: return `${d.getFullYear()}`;
                 }
               }}
               stroke="#8b95a1"
               fontSize={11}
-              interval="preserveStartEnd"
-              minTickGap={40}
             />
             <YAxis
               domain={chartData.yDomain}
