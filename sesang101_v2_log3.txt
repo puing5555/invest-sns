@@ -1,0 +1,35 @@
+=== 세상학개론 분석 v2 시작 (08:26:25) ===
+[INFO] 이미 처리됨: 25개
+[INFO] 처리할 영상: 73개
+
+==================================================
+배치 6 (20개, 1-20/73)
+==================================================
+
+[1/20] BdNikaqw238
+  제목: A video to watch when you still don't know much ab
+  자막: 5408자
+  [API] 시도 1/3...
+  [OK] 10개 시그널
+    - 이더리움 | 긍정 | high
+    - 스테이블코인 | 중립 | very_high
+    - 이더리움 | 중립 | very_high
+    - 이더리움 | None | None
+    - 이더리움 | 긍정 | high
+    - AI | 중립 | high
+    - 이더리움 | 긍정 | high
+    - 코인홀딩회사 | 경계 | medium
+    - 이더리움 | 긍정 | high
+    - altcoin | 경계 | medium
+
+[2/20] BeEHwOe-J98
+  제목: Palantir's Future Amidst the New Year's Market Cra
+  자막: 4312자
+  [API] 시도 1/3...
+  [OK] 1개 시그널
+    - PALANTIR | 긍정 | high
+
+[3/20] Cgj6y_1_sS4
+  제목: The story of how I increased my assets 10-fold thr
+  자막: 6705자
+  [API] 시도 1/3...

@@ -1,0 +1,29 @@
+=== 세상학개론 분석 v2 시작 (08:25:02) ===
+[INFO] 이미 처리됨: 25개
+[INFO] 처리할 영상: 73개
+
+==================================================
+배치 6 (20개, 1-20/73)
+==================================================
+
+[1/20] BdNikaqw238
+  제목: A video to watch when you still don't know much ab
+  자막: 5408자
+  [API] 시도 1/3...
+  [SKIP] 시그널 없음
+
+[2/20] BeEHwOe-J98
+  제목: Palantir's Future Amidst the New Year's Market Cra
+  자막: 4312자
+  [API] 시도 1/3...
+  [OK] 5개 시그널
+    - None | 중립 | medium
+    - 비트코인 | 중립 | medium
+    - 팔라티어 | 긍정 | medium
+    - 팔라티어 | 긍정 | medium
+    - None | 중립 | medium
+
+[3/20] Cgj6y_1_sS4
+  제목: The story of how I increased my assets 10-fold thr
+  자막: 6705자
+  [API] 시도 1/3...

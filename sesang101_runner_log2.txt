@@ -1,0 +1,37 @@
+=== 세상학개론 나머지 영상 분석 시작 (08:23:00) ===
+[INFO] 이미 처리된 영상: 25개
+[INFO] 전체 자막 파일: 98개
+[INFO] 처리할 영상: 73개
+[INFO] 영상 제목: 111개 로드
+
+============================================================
+=== 배치 6 (20개, 1-20/73) ===
+============================================================
+
+[1/20] BdNikaqw238
+  제목: A video to watch when you still don't know much about Ethere...
+  자막: 5408자
+[AI] Claude 분석 중... (시도 1/3)
+[ERROR] API 요청 오류: 529 Server Error: <none> for url: https://api.anthropic.com/v1/messages
+[AI] Claude 분석 중... (시도 2/3)
+[SUCCESS] 분석 완료
+  [OK] 10개 시그널 발견
+    - 이더리움 | 긍정 | high
+    - 이더리움 | 긍정 | high
+    - 이더리움 | 긍정 | high
+    - 이더리움 | 긍정 | high
+    - 스테이블코인 | 긍정 | high
+    - 이더리움 | 긍정 | high
+    - 이더리움 | 긍정 | high
+    - 이더리움 | 긍정 | high
+    - 이더리움 관련 회사 | 경계 | medium
+    - 소기모 코인 | 경계 | medium
+  [WAIT] 5초 대기...
+
+[2/20] BeEHwOe-J98
+  제목: Palantir's Future Amidst the New Year's Market Crash...
+  자막: 4312자
+[AI] Claude 분석 중... (시도 1/3)
+[SUCCESS] 분석 완료
+  [SKIP] 시그널 없음
+  [WAIT] 5초 대기...

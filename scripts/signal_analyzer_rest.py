@@ -125,7 +125,7 @@ URL: {video_data['url']}
                     self.api_url,
                     headers=self.headers,
                     json=payload,
-                    timeout=60
+                    timeout=(10, 120)  # (connect, read) timeout
                 )
                 
                 # 레이트 리밋 처리

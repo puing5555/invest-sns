@@ -1,0 +1,460 @@
+{
+  "batch_num": 8,
+  "start_time": "2026-03-02T08:48:28.588918",
+  "processed": [
+    {
+      "video_id": "ZM589mmdDcc",
+      "title": "1 Investment Metric That Will Distinguish a Bubble That Won't Burst (ft. Bitcoin, AI, Palantir)",
+      "signals_found": 4,
+      "signals": [
+        {
+          "speaker": "세상학교",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "제가 10년 동안 뭐 겨울잠 동면 상태에 들어가야 된다면 저는 제 모든 돈을 현금이 아닌 비트코인에 넣었을 거예요.",
+          "reasoning": "발언자가 비트코인의 장기적 상승을 확신하고 있어 강력 매수 의견 제시"
+        },
+        {
+          "speaker": "세상학교",
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "market": "US",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "AI 같은 중요한 기술은 공장처럼 가격이 싸다고 해서 해외에 짓거나 할 수가 없습니다. 그래서 미국은 엔비디아의 중국 수출을 규제하면서 중국을 견제하고 있어요.",
+          "reasoning": "엔비디아가 AI 기술의 중요성으로 인해 국가 안보에 연계되어 있음을 언급하며 긍정적 평가"
+        },
+        {
+          "speaker": "세상학교",
+          "stock": "팔란티어",
+          "ticker": "PLTR",
+          "market": "US",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "팔란티어가 매출 대비 가장 기억 가치가 높은 기업 중 하나로 성장한 것도 바로 그 지점을 정확히 노렸기 때문이고",
+          "reasoning": "팔란티어가 국가 안보 관련 분야에서 중요한 기업으로 성장했음을 긍정적으로 평가"
+        },
+        {
+          "speaker": "세상학교",
+          "stock": "로켓랩",
+          "ticker": "N/A",
+          "market": "US",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "5월에 로켓랩이라는 기업을 소개드린 이유도 이런 맥락에서 항공우주 안보 분야가 국가 차원에서 꾸준히 키울 분야라고 생각했기 때문이고요.",
+          "reasoning": "로켓랩이 항공우주 안보 분야에서 중요한 기업으로 평가되고 있어 긍정적 견해 제시"
+        }
+      ],
+      "timestamp": "2026-03-02T08:48:51.438004"
+    },
+    {
+      "video_id": "aW0cZ-rmzz8",
+      "title": "Bubbles make rich people, whether they burst or rise | Investment Theory, Episode 20",
+      "signals_found": 4,
+      "signals": [
+        {
+          "speaker": "발언자",
+          "stock": "현금",
+          "ticker": null,
+          "market": "OTHER",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "초반",
+          "key_quote": "현금 몰빵도 좋지 않고 투자 몰빵도 좋지 않다고 생각을 해요",
+          "reasoning": "현금과 투자 모두 극단적 쏠림은 바람직하지 않다고 판단. 균형잡힌 포트폴리오 구축을 권장"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "부동산",
+          "ticker": null,
+          "market": "OTHER",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "중반",
+          "key_quote": "부동산이나 통신 뭐 소비재 이런 것들에 비중을 좀 돌려도 될 것 같고",
+          "reasoning": "버블 우려 속에서도 부동산, 통신, 소비재 섹터에 투자를 권장"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "권앰버핏, 마이클버리",
+          "ticker": null,
+          "market": "OTHER",
+          "mention_type": "논거",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "중반",
+          "key_quote": "권앰버핏이나 마이클버리 같은 그런 사람들도 뭐 이런 약간 하락의 당한 그런 분야들을 좀 들리고 있는 것 같아요",
+          "reasoning": "버블 우려 속에서 투자가치가 있는 섹터/종목을 권앰버핏, 마이클버리 등 유명 투자자들이 주목하고 있다고 언급"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "레버리지",
+          "ticker": null,
+          "market": "OTHER",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "medium",
+          "timestamp": "중반",
+          "key_quote": "또 레버리지도 청산을 하거나 적당한 수준을 조금 유지하는게 중요합니다",
+          "reasoning": "레버리지 사용에 대해 신중한 접근이 필요하다고 강조. 과도한 레버리지는 위험할 수 있음"
+        }
+      ],
+      "timestamp": "2026-03-02T08:49:06.747194"
+    },
+    {
+      "video_id": "awxGkVGfQ_w",
+      "title": "Bitcoin 100 million?! A comfortable investment has a higher chance of success",
+      "signals_found": 3,
+      "signals": [
+        {
+          "speaker": "세상 학교",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "전체",
+          "key_quote": "비트코인은 1년 동안 내가 현금이 더 많이 오를지 비트코인이 더 많이 올지 생각해보시면 은 현금의 가치가 더 많이 오를까 저는 아닐 것 같아요 비트코인의 가치가 더 많이 오를 것 같다고 생각하기 때문에 비트코인을 살 것 같습니다",
+          "reasoning": "발언자가 비트코인이 더 상승할 것이라고 전망하면서 직접적인 매수 의견을 표현했기 때문에 긍정 시그널로 분류"
+        },
+        {
+          "speaker": "세상 학교",
+          "stock": "N/A",
+          "ticker": "N/A",
+          "market": "N/A",
+          "mention_type": "교육",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "전체",
+          "key_quote": "투자를 이제 제가 항상 말하는 표현으로는 쓸데없는 짓을 안 하는 게 중요한 것 같아요 내가 딱 비전이 있고 내 계획이 있고 내가 딱 믿는 종목의 그 내가 원하는 데로 이제 포지션을 잡아놓은 후에는 사실 가만히 게 제일 좋아요 장기 투자의 경우 뭐 6개월이나 한 1 2년 까지도 이제 가만히 있어도 되는 사실 포지션 이거든요 그래서 가만히 있는게 사실 제일 좋은 선택인데 괜히 많이 벗었다가 접었다가 많이 옮겼다가 이러면서 그런 상승 지혜들을 많이 놓치고 약간 시장의 가격 변동을 선제적으로 겜이 준비하는 게 아니라 그걸 따라가게 됩니다 그러면은 당연히 수익률이 쪼갠 알 수가 없고",
+          "reasoning": "발언자가 투기적 행태를 경계하며 장기 투자의 중요성을 교육하는 내용이므로 시그널 대상이 아니라 교육 부문으로 분류"
+        },
+        {
+          "speaker": "세상 학교",
+          "stock": "N/A",
+          "ticker": "N/A",
+          "market": "CRYPTO",
+          "mention_type": "논거",
+          "signal": "중립",
+          "confidence": "medium",
+          "timestamp": "전체",
+          "key_quote": "비트코인은 뽀 모닝이 됐든 10년이 됐든 1억엔 100% 거의 찌를 거에요 임 시장은 점점 커지고 있고 이제 물리 1은 사실 거의 90% 채굴이 되서 더 이상 이제 신기 물량이 나오지 않고 그마저도 이제 100% 까지 물량이 책이 들려 면은 2128 년 거의 1 100년을 부터 이제 100년에 걸쳐서 나눠서 이제 채굴이 되기 때문에 시기에 문제인것 같아요",
+          "reasoning": "비트코인 시장 전반에 대한 현상 설명으로, 투자 의견이 아닌 논거로 분류"
+        }
+      ],
+      "timestamp": "2026-03-02T08:49:23.772229"
+    },
+    {
+      "video_id": "iLUIU1sU1Ug",
+      "title": "Airen has tripled in 3 months, Rocket Lab has doubled. Are you really not selling it for 10 times?",
+      "signals_found": 3,
+      "signals": [
+        {
+          "speaker": "이상기",
+          "stock": "Airen",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "초반",
+          "key_quote": "Airen은 올 상반기까지 데이터 센터로 이제 운영할 수 있도록 확보한 전력량이 한 810MW고 총 확보한 이제 전력량은 2,900MW 정도 됩니다. Airen도 이런 희소한 백엔드 전력 기반을 아주 많이 확보해 놨다고 볼 수 있는데 뭐 사실 채굴에서 AI 전형으로 얼마나 최적화돼서 전환됐는지에 따라서 단순히 전력량 비교는 어렵겠지만 Airen의 성장 속도가 정말 이제 무섭다는 걸 감안하면 유망한 분야에서 충분히 주요 플레이어로 올라설 수 있다는 이제 잠재력이 있다는 생각이 들어요.",
+          "reasoning": "Airen의 전력 인프라 확보와 성장 속도를 긍정적으로 평가하여 결론적으로 투자 매력이 있다고 판단"
+        },
+        {
+          "speaker": "이상기",
+          "stock": "Rocket Lab",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "긍정",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "중반",
+          "key_quote": "Rocket Lab도 수이에요. 최근 Rocket Lab이 이제 우주에서 센서 같은 감지 솔루션 기업인 Geosoft를 인수한다고 커뮤니티 글로 전해드렸었는데 Geosoft는 이미 오랜 업력과 이제 미국 정부 납품 1력을 가진 방위 산업체인만큼 어 Rocket Lab이 트럼프가 밀고 있는 이제 방위산업 골든의 어 주요 플레이어가 될 거라는 CEO의 말이 좀 하나씩 실현되고 있는 느낌이에요.",
+          "reasoning": "Rocket Lab의 Geosoft 인수와 방위산업 진출 등을 긍정적으로 평가"
+        },
+        {
+          "speaker": "이상기",
+          "stock": "SpaceX",
+          "ticker": null,
+          "market": "US",
+          "mention_type": "논거",
+          "signal": "중립",
+          "confidence": "medium",
+          "timestamp": "중반",
+          "key_quote": "어떤 분들은 이렇게 말씀하시더라고요. 이제 Musk랑 트럼프랑 실제 싸우는게 아니라 뭐 싸우는 척을 하는 거다. SpaceX한테 일감을 몰아 주더라도 이상해 보이지 않기 하기 위해서 하기 위해서 일부러 거리를 두는 거다. 뭐 이런 말씀을 하시는 분들도 있던데",
+          "reasoning": "SpaceX와 트럼프의 관계에 대한 다른 시각을 중립적으로 전달"
+        }
+      ],
+      "timestamp": "2026-03-02T08:51:21.161837"
+    },
+    {
+      "video_id": "lFb4s3I5cKc",
+      "title": "엇갈리는 미래 전망, 아무도 믿지 마세요 | 투자학개론 25화",
+      "signals_found": 2,
+      "signals": [
+        {
+          "speaker": "발언자",
+          "stock": "현금",
+          "market": "OTHER",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "불명확",
+          "key_quote": "전 항상 현금을 통한 경영을 갖추는 게 중요하다고 생각해요",
+          "reasoning": "발언자가 현금 포지션을 늘리고 있다고 언급하여 긍정적인 시그널을 제공"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "가상자산",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "경계",
+          "confidence": "high",
+          "timestamp": "불명확",
+          "key_quote": "가상자산 시장에 대해서는 매우 신중한 접근이 필요하다고 강조하고 있습니다",
+          "reasoning": "발언자가 가상자산 시장에 대해 신중한 접근이 필요하다고 강조하여 경계 신호를 제공"
+        }
+      ],
+      "timestamp": "2026-03-02T08:51:57.158207"
+    },
+    {
+      "video_id": "ni_DydrX_uI",
+      "title": "Bitcoin, the secret to profit for millennial investors",
+      "signals_found": 2,
+      "signals": [
+        {
+          "speaker": "발표자",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "9:09",
+          "key_quote": "비트코인은 정부나 기관의 개입 없이 전세계적 합의와 검증을 통해 작동하는 분산 원장 기술이며, 물리적 제약 없이 누구나 거래할 수 있다는 점에서 혁신적이다.",
+          "reasoning": "발표자가 비트코인의 기술적 혁신성과 거래의 편의성을 강조하며 긍정적인 투자 의견을 제시함"
+        },
+        {
+          "speaker": "발표자",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "13:25",
+          "key_quote": "비트코인의 가치는 사람들이 비트코인을 얼마나 가치 있다고 여기는지에 따라 달라지며, 아직 초기 단계라 성장 여력이 크다.",
+          "reasoning": "발표자가 비트코인의 가치가 대중들의 인식에 달려있다고 설명하면서, 현재 초기 단계이므로 향후 성장 가능성이 크다고 긍정적인 전망을 제시함"
+        }
+      ],
+      "timestamp": "2026-03-02T08:52:37.482065"
+    },
+    {
+      "video_id": "qMhEf1864vc",
+      "title": "MicroStrategy - From Bitcoin Anti to Maxi in 7 Years",
+      "signals_found": 5,
+      "signals": [
+        {
+          "speaker": "마이클 세일러",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "제승당 순위 투하츠 도리스 답 백호 asos 모스 와이어드 업데이트할 때 그런 c 이제 디펜더 보스 ou 내는 취합된 nds 맨날 3 뭐 이런 놈 top 50 붙은 쇼 코딩 캐쉬 대충 해석하면 이번 투자는 세계에서 가장 널리 인정받는 비트코인 이란 자산이 안정적인 같이 저장 수단 이자 현금 보다 훨씬 잠재 수익률이 높은 뭐 투자처가 이런 얘기 인데요",
+          "reasoning": "비트코인을 안정적인 저장 수단이자 현금 대비 수익성 높다고 판단하여 강력히 매수 추천하는 발언"
+        },
+        {
+          "speaker": "마이클 세일러",
+          "stock": "N/A",
+          "ticker": "N/A",
+          "market": "CRYPTO",
+          "mention_type": "보유",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "하지만 웃긴건 이 처음에 이 마이클 세일러 아저씨가 처음에 비트코인을 봤을 때는 니콘 안티 였어요 비트코인에 종말을 예언했던 사람입니다",
+          "reasoning": "과거에는 비트코인에 부정적이었으나 현재는 긍정적으로 바뀐 것으로 전환점을 겪었음"
+        },
+        {
+          "speaker": "마이클 세일러",
+          "stock": "N/A",
+          "ticker": "N/A",
+          "market": "CRYPTO",
+          "mention_type": "보유",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "이번 투자가 굉장히 좀 의미가 있는게 이 회사의 순수 저희 자본이 5억 9백만 달러에 2019년 말 기준 이중 절반인 이어 5천만 달러를 그 넘는다는 것은 회사의 주력 같이 저장 수단으로 비트코인에 활용하겠다 상당히 야심찬 결정이 고 심지어 에게 비트코인 현대 넣는게 아니라 실제 b 테이블로 체험에서 비트코인을 차서 직접 보유하고 있는 겁니다",
+          "reasoning": "마이크로스트래티지가 보유한 비트코인 규모가 매우 크다는 것을 설명하고 있음"
+        },
+        {
+          "speaker": "N/A",
+          "stock": "N/A",
+          "ticker": "N/A",
+          "market": "CRYPTO",
+          "mention_type": "교육",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "급히 톤의 총 발행 냥의 2천 100만 개 로 정해져 있는건 다들 했을 텐데 지금 2.1 만개를 갖고 있다는 것은 회사 하나가 어마어마한 거죠 왜냐면 총 발행 냥의 첨부 내 일이니까 다르게 상 생각하며 는 앞으로 이정도의 비트코인을 가질 수 있는 회사가 전세계에 1000개 999 개 도 안된다는 거에요",
+          "reasoning": "비트코인의 총 발행량 및 마이크로스트래티지의 보유 규모에 대한 일반적인 설명을 하고 있음"
+        },
+        {
+          "speaker": "N/A",
+          "stock": "N/A",
+          "ticker": "N/A",
+          "market": "CRYPTO",
+          "mention_type": "교육",
+          "signal": "중립",
+          "confidence": "high",
+          "timestamp": "N/A",
+          "key_quote": "본 영상은 좀 짧게 간단하게 왔는데 때까지 세상아 길어졌습니다",
+          "reasoning": "영상 전반에 대한 간단한 요약을 제공하고 있음"
+        }
+      ],
+      "timestamp": "2026-03-02T08:53:59.184727"
+    },
+    {
+      "video_id": "qXsMMse-vos",
+      "title": "Can you make 7x your investment in one year? | Investment Theory, Episode 18",
+      "signals_found": 4,
+      "signals": [
+        {
+          "speaker": "발언자",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "도입부",
+          "key_quote": "비트코인 2만 9천 달러를 계속 한 거 20일 넘게 좀 그 왔다갔다 하는것 같은데 점은 굉장히 또 기관 투자자들이 많이 들어오고 있고 뭐 개인 투자자들도 이제 점점 뭐 예전에 이제 망한 거 아니야 라고 생각하다가 다시 이제 사시는 거죠 그러면 저희 좀씩 들어오셔서 이렇게 전 가격을 안정적으로 이지 해오고 있는 것 같은데 저는 아직 이 조용한 분위기 있는 제가 생각하는 곧장 은 절대 아니기 때문에 단기적으로 절단기 이건 안 나지만 통제 책은 아니지만 제가 말한 그 다음이고 짧은 시기에 제 버블이 저는 내년에 올거라고 예전부터 말씀드렸지만 이제 좀 그렇게 생각하고 있기 때문에 개인적인 의견입니다",
+          "reasoning": "비트코인 가격 안정화와 기관/개인 투자 유입이 긍정적이며, 내년 상반기 중 버블 형성이 예상됨"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "market": "CRYPTO",
+          "mention_type": "결론",
+          "signal": "매수",
+          "confidence": "medium",
+          "timestamp": "도입부",
+          "key_quote": "그냥 더 4시면 됩니다 뭐 불필요 쭉 조실 필요 없이 여전히 믿음이 있으면 은 맹목적인 비린 아니라 뭐 공부와 이런 뭐 이렇게 1일 개수가 기반이 된 그 거긴 하지만 믿음 이긴 하지만 그래도 믿음이 있으면 은 이제 떨어질 때 계속 이제사 가지고 평가를 점장 닫혀 나가는 저는 이미 거의 있 어림도 먹고 있 어림도 집행 원가가 20만원 정도 되고 제 비트코인 평가가 하는 700만원 때 돈 들여 가지고 저는 지금 아무리 사도",
+          "reasoning": "비트코인에 대한 장기적인 믿음을 가지고 있으며, 가격 하락 시 추가 매수하려는 전략을 가지고 있음. 다만 구체적인 근거 없이 개인적인 의견이므로 confidence는 medium으로 판단"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "자신의 포트폴리오",
+          "market": "OTHER",
+          "mention_type": "결론",
+          "signal": "긍정",
+          "confidence": "high",
+          "timestamp": "중반",
+          "key_quote": "지금은 한 9억 정도 불리고 있습니다 거기 넘을 때도 있고 지금 살짝 후 안될때도 있고 베트콩 거의 더 리온 가격 변동에 따라서 좀 변하긴 하는데 자람에 는 좀 한번 쯤 이제 더 지금 올라 주면은 어 10억을 올해 한해 찍을 수도 있을 것 같아요",
+          "reasoning": "현재 약 9억 원 규모의 포트폴리오를 운용 중이며, 올해 내에 10억 원 달성이 가능할 것으로 전망함"
+        },
+        {
+          "speaker": "발언자",
+          "stock": "자신의 포트폴리오",
+          "market": "OTHER",
+          "mention_type": "보유",
+          "signal": null,
+          "confidence": null,
+          "timestamp": "중반",
+          "key_quote": "작년 말 12월 말에 제가 1억 3000 으로 마감을 했는데 역 3000 1억 3297 만원 좀 더 제 총 이제 굴리는 포트폴리오가 그 정도 됐었는데 지금은 한 9억 정도 불리고 있습니다",
+          "reasoning": "과거 1억 3297만 원 규모의 포트폴리오를 운용했으며, 현재 약 9억 원 수준으로 늘어났음을 보여줌. 시그널은 아니며 단순 보유 경험 언급"
+        }
+      ],
+      "timestamp": "2026-03-02T08:54:19.018717"
+    }
+  ],
+  "skipped": [
+    {
+      "video_id": "bk-2Y0tjnZQ",
+      "reason": "시그널 없음",
+      "title": "중국의 비트코인 채굴 금지, 비트코인 전력 낭비에 대한 생각"
+    },
+    {
+      "video_id": "blAWrFLQ_Lc",
+      "reason": "시그널 없음",
+      "title": "젊은 기부가 가성비 좋은 이유"
+    },
+    {
+      "video_id": "cfwN1eWNlFA",
+      "reason": "시그널 없음",
+      "title": "A 30-year-old YouTuber who made 30 years of money through investments"
+    },
+    {
+      "video_id": "cjKV1A7UTvI",
+      "reason": "시그널 없음",
+      "title": "We almost made 1 billion each, but we made 10 billion together | Investment Theory Episode 23"
+    },
+    {
+      "video_id": "eiC2ndorjDQ",
+      "reason": "시그널 없음",
+      "title": "How to Catch the Bottom in a Stock Market Crash | Investment 101, Episode 7"
+    },
+    {
+      "video_id": "iNAlXUEw9tc",
+      "reason": "시그널 없음",
+      "title": "Ants' Struggle to Understand Trump's Whims"
+    },
+    {
+      "video_id": "j3x7149DzDQ",
+      "reason": "시그널 없음",
+      "title": "Characteristics of people who don't make progress no matter how hard they try"
+    },
+    {
+      "video_id": "ojsKQd_mJmk",
+      "reason": "시그널 없음",
+      "title": "Things you need to know to pretend to wear perfume | Introduction to Perfume"
+    },
+    {
+      "video_id": "peYoNFd3z9E",
+      "reason": "시그널 없음",
+      "title": "You can't get rich just by working comfortably | Introduction to Investment Studies, Part 1"
+    },
+    {
+      "video_id": "pmlsIYTKiw4",
+      "reason": "시그널 없음",
+      "title": "How to Make Money Without Looking at a Graph | Investment 101, Episode 5"
+    },
+    {
+      "video_id": "q4vz1jhWS4s",
+      "reason": "시그널 없음",
+      "title": "경제적 자유 이후의 현실... 그리고 특별한 이벤트"
+    },
+    {
+      "video_id": "rde-ahZ29UQ",
+      "reason": "시그널 없음",
+      "title": "A 30-year-old who quit his job to a job seeker"
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "processed": 8,
+    "skipped": 12,
+    "errors": 0,
+    "signals_found": 27
+  },
+  "end_time": "2026-03-02T08:54:29.215080"
+}
