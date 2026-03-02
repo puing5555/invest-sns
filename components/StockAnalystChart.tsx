@@ -39,16 +39,33 @@ const getSignalColor = (signal: string) => {
   }
 };
 
+const PERIOD_OPTIONS = ['1개월', '6개월', '1년', '3년', '전체'] as const;
+
 export default function StockAnalystChart({ code, signals, currentPrice }: StockAnalystChartProps) {
   const [activeSignal, setActiveSignal] = useState<Signal | null>(null);
   const [popupPos, setPopupPos] = useState<{ x: number; y: number } | null>(null);
+  const [period, setPeriod] = useState<string>('1년');
 
   const chartData = useMemo(() => {
     // 실제 주가 데이터 사용
     const stockData = (stockPricesData as any)[code];
-    const prices: { date: string; close: number }[] = stockData?.prices || [];
+    let prices: { date: string; close: number }[] = stockData?.prices || [];
     
     if (prices.length === 0) return null;
+
+    // 기간 필터 적용
+    if (period !== '전체') {
+      const now = new Date();
+      let cutoff = new Date();
+      switch (period) {
+        case '1개월': cutoff.setMonth(now.getMonth() - 1); break;
+        case '6개월': cutoff.setMonth(now.getMonth() - 6); break;
+        case '1년': cutoff.setFullYear(now.getFullYear() - 1); break;
+        case '3년': cutoff.setFullYear(now.getFullYear() - 3); break;
+      }
+      const filtered = prices.filter(p => new Date(p.date) >= cutoff);
+      if (filtered.length >= 2) prices = filtered;
+    }
 
     // 주가 데이터를 차트용으로 변환
     const priceData = prices.map(p => ({
@@ -79,7 +96,7 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
       }));
 
     return { priceData, signalDots, yDomain: [yMin, yMax] as [number, number] };
-  }, [code, signals]);
+  }, [code, signals, period]);
 
   if (!chartData || chartData.priceData.length === 0) {
     return (
@@ -122,7 +139,24 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
   return (
     <div className="bg-white rounded-lg border border-[#e8e8e8] p-4 relative">
       <div className="mb-4">
-        <h4 className="font-medium text-[#191f28] mb-2">주가 및 애널리스트 목표가</h4>
+        <div className="flex items-center justify-between mb-2">
+          <h4 className="font-medium text-[#191f28]">주가 및 애널리스트 목표가</h4>
+          <div className="flex gap-1">
+            {PERIOD_OPTIONS.map(p => (
+              <button
+                key={p}
+                onClick={() => setPeriod(p)}
+                className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+                  period === p
+                    ? 'bg-[#3182f6] text-white'
+                    : 'bg-[#f2f4f6] text-[#8b95a1] hover:bg-[#e5e8eb]'
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="flex items-center gap-4 text-sm text-[#8b95a1] flex-wrap">
           <div className="flex items-center gap-2">
             <div className="w-3 h-0.5 bg-[#3182f6]"></div>
