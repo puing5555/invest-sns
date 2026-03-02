@@ -127,17 +127,17 @@ export default function StockAnalystChart({ code, signals, currentPrice }: Stock
         stroke="white"
         strokeWidth={2}
         style={{ cursor: 'pointer' }}
-        onMouseEnter={(e) => {
+        onClick={(e) => {
+          e.stopPropagation();
           setActiveSignal({ date: payload.date, signal: payload.signalType, target_price: payload.targetPrice, firm: payload.signalFirm, analyst: payload.signalAnalyst, title: payload.signalTitle });
           setPopupPos({ x: e.clientX, y: e.clientY });
         }}
-        onMouseLeave={() => { setActiveSignal(null); setPopupPos(null); }}
       />
     );
   };
 
   return (
-    <div className="bg-white rounded-lg border border-[#e8e8e8] p-4 relative">
+    <div className="bg-white rounded-lg border border-[#e8e8e8] p-4 relative" onClick={() => { setActiveSignal(null); setPopupPos(null); }}>
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
           <h4 className="font-medium text-[#191f28]">주가 및 애널리스트 목표가</h4>
