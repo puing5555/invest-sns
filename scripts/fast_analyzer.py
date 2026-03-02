@@ -280,11 +280,14 @@ async def main():
             except:
                 continue
     
-    # 영상 목록 구성
+    # 영상 목록 구성 (titles 파일에 있는 것만 처리)
     videos = []
     for sf in subs_files:
         vid = os.path.splitext(os.path.basename(sf))[0]
         if vid not in skip_ids:
+            # titles 파일이 제공된 경우, 해당 파일에 있는 video_id만 처리
+            if titles and vid not in titles:
+                continue
             videos.append({
                 'video_id': vid,
                 'subtitle_file': sf,

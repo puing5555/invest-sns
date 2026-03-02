@@ -1,0 +1,465 @@
+{
+  "timestamp": "2026-03-02T16:41:01.650552",
+  "elapsed_seconds": 66.0,
+  "stats": {
+    "processed": 30,
+    "skipped": 0,
+    "errors": 0,
+    "signals": 0,
+    "rejected": 17
+  },
+  "results": [
+    {
+      "video_id": "-3odSn4Wi2E",
+      "title": "트럼프가 꿈꾸는 제2의 플라자 합의? 대변혁을 맞이하는 투자자의 자세",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "일본 증시",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "달러 가치가 떨어지면 일본 증시나 국장이 한동안 이제 미장 수익률을 이기게 될 수도 있고요",
+            "reasoning": "달러 약세 시나리오에서 일본 증시가 미국 시장 대비 상대적으로 우수한 성과를 낼 것으로 전망",
+            "timestamp": "25:14",
+            "confidence": 6,
+            "video_id": "-3odSn4Wi2E"
+          },
+          {
+            "stock": "가상자산",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "미국 자산의 매력도가 낮아지는 시기가 가상자산 시장에 기회가 될지도 모릅니다",
+            "reasoning": "미국 자산의 매력도 하락으로 인한 자금 이동으로 가상자산 시장에 투자 기회가 생길 가능성 언급",
+            "timestamp": "25:22",
+            "confidence": 5,
+            "video_id": "-3odSn4Wi2E"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "0z8e_heKtKk",
+      "title": "헝다 파산과 테더 붕괴 후 비트코인 폭락설, 걱정해야 할까?",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "비트코인",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "오히려 그런 큰 공포 심리로 뭐 좋은 매수 기회를 잡을 수도 있다고 생각을 하고요",
+            "reasoning": "테더 붕괴나 헝다 파산으로 인한 공포 심리가 발생하더라도 장기적으로는 큰 영향이 없을 것이라 보며, 오히려 공포로 인한 하락을 매수 기회로 활용할 수 있다고 판단",
+            "timestamp": "12:45",
+            "confidence": 6,
+            "video_id": "0z8e_heKtKk"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "1bcmmTZRX5Q",
+      "title": "밈코인과 밈주식, 정말 불장난에 불과할까?",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "테슬라",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "실적이나 재무적인 측면만을 보는게 맞는 시장이라면 당연히 지금 테슬라의 소스를 계속 치는 게 맞겠죠",
+            "reasoning": "테슬라가 전체 자동차 판매량의 1%만 차지하지만 높은 시가총액을 유지하는 것을 밈투자와 감성투자 요소로 설명하며, 이러한 투자 트렌드의 긍정적 사례로 언급",
+            "timestamp": "08:45",
+            "confidence": 6,
+            "video_id": "1bcmmTZRX5Q"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "4cCGQFHrbK4",
+      "title": "제2의 팔란티어, 알고도 10배 못 먹는 이유",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "아이레",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "제가 4월 초에 처음 투자한 아이레는 6개월 만에 거의 아홉배가 올랐지만",
+            "reasoning": "본인이 직접 투자하여 6개월 만에 9배 수익을 달성한 성공 사례로 언급",
+            "timestamp": "01:15",
+            "confidence": 6,
+            "video_id": "4cCGQFHrbK4"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "4UvO-6eecv8",
+      "title": "투자 실패를 딛고 시대변화의 흐름을 타는 법 | 세상학개론 Q&A",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "4wCO1fdl9iU",
+      "title": "언제 터질지 모르는 버블에 올라타는 심리",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "6Bk_eG77-5g",
+      "title": "투자 공부 하는법(중요)",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "워런 버핏 관련 투자서적",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "원앤 버핏의 주주 서안 원앤 버핏 책이죠 피터린치 존 로스차일드의 전설로 떠나는 월가의 영웅 코스톨라니의 돈 뜨겁게 사랑하고 짧게 다루어 이 세개 고전 정도 읽어보시면 충분하다고 생각하고",
+            "reasoning": "투자 공부를 위한 필수 도서로 워런 버핏, 피터 린치, 코스톨라니의 고전 투자서적 3권을 적극 추천",
+            "timestamp": "18:45",
+            "confidence": 7,
+            "video_id": "6Bk_eG77-5g"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "bk-2Y0tjnZQ",
+      "title": "중국의 비트코인 채굴 금지, 비트코인 전력 낭비에 대한 생각",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "비트코인",
+            "ticker": "BTC",
+            "signal_type": "긍정",
+            "key_quote": "결국 비트코인의 가치는 죽지 않고 조정도 결국 지나갈 일이라고 생각을 하고 있습니다",
+            "reasoning": "중국 채굴 금지로 인한 폭락에도 불구하고 비트코인의 근본적 가치는 유지되며 현재 조정은 일시적이라고 판단",
+            "timestamp": "18:45",
+            "confidence": 7,
+            "video_id": "bk-2Y0tjnZQ"
+          },
+          {
+            "stock": "이더리움 클래식",
+            "ticker": "ETC",
+            "signal_type": "긍정",
+            "key_quote": "이더리움 클래식이 채굴자들에게 굉장히 매력적인 좋은 환경이니까 그래서 이제 많이 몰리는 거죠",
+            "reasoning": "이더리움 2.0 전환으로 채굴자들이 이더리움 클래식으로 이동하면서 가격 상승 요인으로 작용",
+            "timestamp": "16:30",
+            "confidence": 6,
+            "video_id": "bk-2Y0tjnZQ"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "blAWrFLQ_Lc",
+      "title": "젊은 기부가 가성비 좋은 이유",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "BQY0eh1lcUk",
+      "title": "30억 있는 30대 청년 300명이 모여 1조원을 모은다면?",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "cfwN1eWNlFA",
+      "title": "투자로 30년을 벌어버린 서른살 유튜버",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "cjKV1A7UTvI",
+      "title": "각자 10억씩 벌 뻔했지만 함께 100억 번 이야기 | 투자학개론 23화",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "비트코인",
+            "ticker": null,
+            "signal_type": "매수",
+            "key_quote": "지금부터 그날 매수를 하는 것이 옳다고 생각한다. 충분히 저렴한 구간이고 지금 대출 투자를 결정한다",
+            "reasoning": "2020년 3월 코로나 폭락 당시 역사적 저점으로 판단하며, 사이클 분석에 따라 2021년 12월~2022년 상반기 상승 예상",
+            "timestamp": "18:45",
+            "confidence": 9,
+            "video_id": "cjKV1A7UTvI"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E0l6aYaff0U",
+      "title": "투자 공부는 어디서부터 시작해야 할까? | 투자학개론 22화",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "EaclBpfxjCI",
+      "title": "넷플릭스 말고 틱톡처럼 살아야 하는 이유",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "eiC2ndorjDQ",
+      "title": "주식 폭락장에서 저점을 잡는 방법 | 투자학개론 7화",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "iNAlXUEw9tc",
+      "title": "트럼프의 변덕을 이해하려는 개미의 발버둥",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "비트코인",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "비트코인은 오늘 미국의 전략적 비축 자산 지위로 올라서면서 정부에서 팔지 않겠다고 선언했습니다",
+            "reasoning": "미국 정부가 비트코인을 전략적 비축 자산으로 지정하고 매도하지 않겠다고 선언하여 가격 지지 요인으로 작용",
+            "timestamp": "03:45",
+            "confidence": 7,
+            "video_id": "iNAlXUEw9tc"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "j3x7149DzDQ",
+      "title": "아무리 노력해도 발전이 없는 사람 특징",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "Ke7gQMbIFLI",
+      "title": "트럼프의 선택에 시장이 패닉하는 이유, 우리도 패닉해야 하나요?",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "AI 인프라 관련주",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "AI 인프라 방산 제조업 에너지 이렇게 트럼프의 매나탄 프로젝트와 괴를 같이하는 섹터들은 앞으로도 가장 매력적이지 않을까",
+            "reasoning": "케빈 워시 연준의장 지명으로 정부 주도 성장 정책이 예상되며, 트럼프의 매나탄 프로젝트와 연계된 섹터가 수혜 예상",
+            "timestamp": "18:45",
+            "confidence": 7,
+            "video_id": "Ke7gQMbIFLI"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "KkxAjOp-6H4",
+      "title": "단기에 부자되고 싶어도 장기로 투자하세요 | 투자학개론 26화",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "비트코인",
+            "ticker": null,
+            "signal_type": "매수",
+            "key_quote": "아직도 비트코인이 그대로 유망하다고 생각하고 있어 리어는 더 폭발적으로 성장할 거라고 생각하고 있기 때문에 아직도 포트폴리오의 가장 큰 부분을 투자하고 있고",
+            "reasoning": "장기적 성장 확신으로 현재도 포트폴리오 최대 비중 유지하며 적극 투자 중",
+            "timestamp": "12:45",
+            "confidence": 8,
+            "video_id": "KkxAjOp-6H4"
+          },
+          {
+            "stock": "이더리움",
+            "ticker": null,
+            "signal_type": "매수",
+            "key_quote": "리어는 더 폭발적으로 성장할 거라고 생각하고 있기 때문에 아직도 포트폴리오의 가장 큰 부분을 투자하고 있고",
+            "reasoning": "비트코인보다 더 폭발적 성장 예상으로 포트폴리오 주요 투자 대상 유지",
+            "timestamp": "13:02",
+            "confidence": 8,
+            "video_id": "KkxAjOp-6H4"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "Lszaj6NhNcA",
+      "title": "미장보다 국장? 대선 이후 현실이 될 3가지 변화들",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "코스피",
+            "ticker": "KOSPI",
+            "signal_type": "긍정",
+            "key_quote": "코스피 5,000을 만들겠다는 공약이 있고, 정부가 진지하게 코스피 5천을 만들 의지가 강력하다고 가정하면 국내 자산 시장에도 큰 변화가 있을 것",
+            "reasoning": "대선 후보의 코스피 5,000 공약과 정부의 강력한 의지, 유동성 완화와 자금 이동으로 인한 상승 압력 예상",
+            "timestamp": "12:45",
+            "confidence": 7,
+            "video_id": "Lszaj6NhNcA"
+          },
+          {
+            "stock": "비트코인",
+            "ticker": "BTC",
+            "signal_type": "긍정",
+            "key_quote": "우리나라 투자자들은 미국에 대한 투자 비중을 줄이고 국장이나 아니면 미국 외에 다른 해외 시장 아니면 또는 비트코인 시장으로 일부 옮겨가게 되지 않을까",
+            "reasoning": "미국 투자자 세금 부과 등으로 인한 미국 투자 매력도 하락으로 대체 투자처로서 비트코인 시장 유입 예상",
+            "timestamp": "18:30",
+            "confidence": 6,
+            "video_id": "Lszaj6NhNcA"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "q4vz1jhWS4s",
+      "title": "경제적 자유 이후의 현실... 그리고 특별한 이벤트",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "QajNAfX5YvI",
+      "title": "인생을 바꿔준 유튜브를 1년간 접은 이유",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "rde-ahZ29UQ",
+      "title": "직장 퇴사한 30살이 취준생에게",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "RXdOkIaSIzc",
+      "title": "경제적 자유 이후 소비 습관의 변화",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "sU0zaA0oJVk",
+      "title": "증시 나락 VS 초인플레이션 중에 고르기",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "uMglUc_vQ6A",
+      "title": "블록체인 대중화가 걸음마 수준을 못 벗어나는 이유",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "un9IHz9LnrA",
+      "title": "이더리움 뭐시기가 정말 대중화가 될까?",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": [
+          {
+            "stock": "비트코인",
+            "ticker": null,
+            "signal_type": "경계",
+            "key_quote": "올 하반기부터는 슬슬 비트코인 반감기 상승 힘이 죽지 않을까 하는 생각이 듭니다",
+            "reasoning": "반감기 효과가 1-1.5년 지속되는데 이미 1년이 지나 상승 동력이 약해질 시점이라고 판단",
+            "timestamp": "3:45",
+            "confidence": 6,
+            "video_id": "un9IHz9LnrA"
+          },
+          {
+            "stock": "이더리움",
+            "ticker": null,
+            "signal_type": "긍정",
+            "key_quote": "이더리움은 비트코인과 상관없이 전세계 개발자들이 힘을 합쳐서 계속 꾸준한 업데이트를 해오고 있습니다",
+            "reasoning": "개발 생태계의 지속적 성장과 디파이 등 애플리케이션 분야의 꾸준한 확장으로 장기 성장 전망",
+            "timestamp": "5:20",
+            "confidence": 7,
+            "video_id": "un9IHz9LnrA"
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "vE55S-x-6Lc",
+      "title": "구독자를 더 늘리고 싶지 않은 유튜버",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "vpLSDLs6Fis",
+      "title": "창업은 거창한 비전보다 경제적 자유가 먼저입니다 | 라이프해킹스쿨 이한별 대표",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    },
+    {
+      "video_id": "Y9JMqS87HEM",
+      "title": "퇴사해서 행복하신가요?",
+      "status": "ok",
+      "signals": [],
+      "raw_result": {
+        "signals": []
+      }
+    }
+  ]
+}
