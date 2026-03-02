@@ -19,24 +19,25 @@ const STOCK_NAME_MAP: Record<string, string> = {
 export function formatStockDisplay(stock?: string, ticker?: string): string {
   if (!stock) return ticker || '-';
 
-  const isKorean = /[가-힣]/.test(stock);
+  // DB에 "종목명 (TICKER)" 형태로 저장된 경우 strip
+  let cleanStock = stock.replace(/\s*\([^)]+\)\s*$/, '').trim();
+
+  const isKorean = /[가-힣]/.test(cleanStock);
 
   if (isKorean) {
     // 숫자로만 된 티커(005930 등)는 표시하지 않음
-    if (!ticker || ticker === stock || /^\d+$/.test(ticker)) return stock;
-    // stock_name에 이미 (TICKER)가 포함되어 있으면 중복 방지
-    if (stock.includes(`(${ticker})`)) return stock;
-    return `${stock} (${ticker})`;
+    if (!ticker || ticker === cleanStock || /^\d+$/.test(ticker)) return cleanStock;
+    return `${cleanStock} (${ticker})`;
   }
 
   // 영문 티커만 있는 경우 → 매핑에서 한글명 찾기
-  const korName = STOCK_NAME_MAP[stock];
+  const korName = STOCK_NAME_MAP[cleanStock];
   if (korName) {
-    return `${korName} (${stock})`;
+    return `${korName} (${cleanStock})`;
   }
 
   // 매핑 없으면 그대로
-  return stock;
+  return cleanStock;
 }
 
 /**
