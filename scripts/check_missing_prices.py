@@ -1,32 +1,68 @@
-import json, urllib.request
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+import requests, json
 
-SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co'
-ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyMjIxNjcsImV4cCI6MjA1NTc5ODE2N30.N8vJRyFMOImA0uQzCMiMac0GdFn2MqSFSdXDcmknJHA'
+key = open('.env.local').readlines()[2].split('=',1)[1].strip()
+h = {'apikey': key, 'Authorization': 'Bearer ' + key}
+r = requests.get('https://arypzhotxflimroprmdk.supabase.co/rest/v1/influencer_signals?select=id,stock,ticker,signal', headers=h)
+signals = r.json()
 
-headers = {'apikey': ANON_KEY, 'Authorization': f'Bearer {ANON_KEY}'}
-url = f'{SUPABASE_URL}/rest/v1/influencer_signals?select=id,stock,ticker,signal_date'
-req = urllib.request.Request(url, headers=headers)
-data = json.loads(urllib.request.urlopen(req).read())
-print(f'Total signals: {len(data)}')
+# All unique tickers from DB
+db_tickers = {}
+null_tickers = []
+for s in signals:
+    if s['ticker'] and s['ticker'].strip():
+        if s['ticker'] not in db_tickers:
+            db_tickers[s['ticker']] = s['stock']
+    else:
+        null_tickers.append(s)
 
-prices = json.load(open('data/signal_prices.json', 'r', encoding='utf-8'))
-covered = set(prices.keys())
-print(f'Covered in prices: {len(covered)}')
+# Load stockPrices.json
+sp = json.load(open('data/stockPrices.json', 'r', encoding='utf-8'))
+# Load signal_prices.json
+sigp = json.load(open('data/signal_prices.json', 'r', encoding='utf-8'))
 
-missing = [d for d in data if d['id'] not in covered]
-print(f'Missing: {len(missing)}')
-for m in missing:
-    print(f"  {m['id'][:8]}.. | {m['stock']} | {m['ticker']} | {m['signal_date']}")
+print(f"=== DB 시그널 현황 ===")
+print(f"Total signals: {len(signals)}")
+print(f"Unique tickers: {len(db_tickers)}")
+print(f"Null ticker signals: {len(null_tickers)}")
 
-# Also show unique tickers for all signals
-all_tickers = {}
-for d in data:
-    t = d.get('ticker', '')
-    if t:
-        if t not in all_tickers:
-            all_tickers[t] = []
-        all_tickers[t].append(d['stock'])
+print(f"\n=== stockPrices.json ===")
+print(f"Total entries: {len(sp)}")
+has_prices = [k for k,v in sp.items() if v.get('prices') and len(v['prices']) > 0]
+no_prices = [k for k,v in sp.items() if not v.get('prices') or len(v['prices']) == 0]
+print(f"With price history: {len(has_prices)}")
+print(f"Without price history: {len(no_prices)}")
+if no_prices:
+    print(f"  Missing prices: {no_prices}")
 
-print(f"\nUnique tickers ({len(all_tickers)}):")
-for t in sorted(all_tickers.keys()):
-    print(f"  {t} -> {all_tickers[t][0]}")
+print(f"\n=== ticker 있는데 stockPrices.json에 없는 종목 ===")
+missing_sp = []
+for ticker, stock in sorted(db_tickers.items()):
+    if ticker not in sp:
+        in_sigp = '✅' if stock in sigp or ticker in sigp else '❌'
+        missing_sp.append((ticker, stock, in_sigp))
+        print(f"  {ticker} ({stock}) | signal_prices: {in_sigp}")
+print(f"Total missing from stockPrices: {len(missing_sp)}")
+
+print(f"\n=== signal_prices.json에서 price null인 종목 ===")
+for name, v in sorted(sigp.items()):
+    if v.get('current_price') is None:
+        print(f"  {name} | ticker={v.get('ticker','?')}")
+
+print(f"\n=== ticker가 null인 시그널 ===")
+for s in null_tickers:
+    print(f"  [{s['id'][:8]}] {s['stock']} | signal={s['signal']}")
+
+# Classify missing tickers
+print(f"\n=== 분류 ===")
+coins = ['BTC', 'ETH', 'DOGE', 'SOL', 'KLAY']
+kr_pattern = lambda t: t.isdigit() and len(t) == 6
+for ticker, stock, _ in missing_sp:
+    if ticker in coins:
+        cat = 'COIN'
+    elif kr_pattern(ticker):
+        cat = 'KR'
+    else:
+        cat = 'US'
+    print(f"  {cat}: {ticker} ({stock})")
