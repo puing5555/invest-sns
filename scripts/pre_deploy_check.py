@@ -39,6 +39,36 @@ VALID_SIGNALS = {
 
 OVERSEAS_TICKERS = ["BTC", "ETH", "SOL", "DOGE", "NVDA", "TSLA", "AAPL", "MSFT", "AMZN", "GOOG", "META"]
 
+# ─── 종목명 정규화 매핑 (같은 종목 다른 이름 감지용) ──────────────────────────
+STOCK_NORMALIZE = {
+    "팔라티어": "PLTR", "팔란티어": "PLTR",
+    "비트코인": "BTC", "이더리움": "ETH", "솔라나": "SOL",
+    "테슬라": "TSLA", "엔비디아": "NVDA", "마이크론": "MU",
+    "도지코인": "DOGE", "리플": "XRP", "애플": "AAPL",
+    "마이크로소프트": "MSFT", "아마존": "AMZN", "구글": "GOOG",
+    "알파벳": "GOOG", "메타": "META", "페이스북": "META",
+    "코인베이스": "COIN", "마이크로스트래티지": "MSTR", "스트래티지": "MSTR",
+    "브로드컴": "AVGO", "AMD": "AMD", "인텔": "INTC", "퀄컴": "QCOM",
+    "ARM": "ARM", "수이": "SUI", "에이다": "ADA", "카르다노": "ADA",
+    "체인링크": "LINK", "아발란체": "AVAX", "폴카닷": "DOT",
+    "앱토스": "APT", "삼성전자": "005930", "SK하이닉스": "000660",
+}
+
+def _resolve_ticker(stock_name, ticker=None):
+    """종목명에서 ticker 추출/정규화. 반환: ticker or None"""
+    if ticker:
+        return ticker.upper()
+    if not stock_name:
+        return None
+    import re
+    m = re.match(r'^.+?\s*\(([A-Z0-9.^]+)\)\s*$', stock_name)
+    if m:
+        return m.group(1)
+    for key, tk in STOCK_NORMALIZE.items():
+        if key in stock_name:
+            return tk
+    return None
+
 PLACEHOLDER_SUMMARIES = [
     "이 리포트에 대한 AI 분석을 확인해보세요",
     "AI 분석 준비 중",
@@ -302,6 +332,35 @@ def check_db_signals(cr, auto_fix, verbose):
             signals = [s for s in signals if s["id"] not in set(ids)]
         else:
             cr.add_fail(f"중복 시그널 {len(duplicates)}개 발견 (--auto-fix로 삭제 가능)")
+
+    # ─── 3b2. 같은 영상+같은 종목 중복 (정규화 후 비교) ───
+    from collections import defaultdict as _dd
+    by_vid_stock = _dd(list)
+    for s in signals:
+        resolved = _resolve_ticker(s.get("stock", ""), s.get("ticker"))
+        if resolved and s.get("video_id"):
+            by_vid_stock[(s["video_id"], resolved)].append(s)
+
+    norm_dups = []
+    for (vid, tk), group in by_vid_stock.items():
+        if len(group) <= 1:
+            continue
+        group.sort(key=lambda x: (0 if x.get("ticker") else 1, x.get("created_at", "")))
+        for dup in group[1:]:
+            norm_dups.append(dup)
+
+    if norm_dups:
+        if auto_fix:
+            ids = [s["id"] for s in norm_dups]
+            deleted = supabase_delete("influencer_signals", ids)
+            cr.add_fix(f"같은영상+같은종목 중복 {len(norm_dups)}개 → 자동 삭제", len(norm_dups),
+                       [f"  {s.get('stock','')} vid={s.get('video_id','')[:12]}..." for s in norm_dups[:10]])
+            signals = [s for s in signals if s["id"] not in set(ids)]
+        else:
+            cr.add_fail(f"같은영상+같은종목 중복 {len(norm_dups)}개 (--auto-fix로 삭제 가능)",
+                        [f"  {s.get('stock','')} vid={s.get('video_id','')[:12]}..." for s in norm_dups[:10]])
+    else:
+        cr.add_pass("같은영상+같은종목 중복: 없음")
 
     # ─── 3c. speaker-channel 불일치 ───
     videos = supabase_get("influencer_videos")
