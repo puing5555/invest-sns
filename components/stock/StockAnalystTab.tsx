@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Scatter } from 'recharts';
+import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
 import stockPricesData from '@/data/stockPrices.json';
 
@@ -159,87 +158,31 @@ function OpinionBadge({ opinion }: { opinion: string }) {
   );
 }
 
-function getSignalPointColor(opinion: string) {
-  switch (opinion) {
-    case 'BUY': return '#22c55e';
-    case 'HOLD': return '#eab308'; 
-    case 'SELL': return '#ef4444';
-    default: return '#8b95a1';
-  }
-}
-
 export default function StockAnalystTab({ code }: StockAnalystTabProps) {
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   
   const data = reportsData as Record<string, Report[]>;
   const reports = data[code] || [];
   
-  // 가격 데이터 (차트용) - stockPrices.json에서 최근 90일
-  const priceData = useMemo(() => {
+  // 현재 주가
+  const currentPrice = useMemo(() => {
     try {
       const stockData = (stockPricesData as any)[code];
-      if (!stockData?.prices) return [];
-      return stockData.prices
-        .slice(-90)
-        .map((item: any) => ({
-          date: item.date,
-          price: item.close,
-          dateFormatted: formatDate(item.date)
-        }));
-    } catch {
-      return [];
-    }
+      return stockData?.currentPrice || 0;
+    } catch { return 0; }
   }, [code]);
-  
-  // 목표가 데이터 (차트용)
-  const targetPriceData = useMemo(() => {
-    return reports
-      .filter(r => r.target_price && r.target_price > 0)
-      .map(r => ({
-        date: r.published_at,
-        targetPrice: r.target_price,
-        opinion: r.opinion,
-        dateFormatted: new Date(r.published_at).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' }),
-        firm: r.firm
-      }))
-      .slice(-10); // 최근 10개
-  }, [reports]);
-  
-  // 차트 데이터 합치기
-  const chartData = useMemo(() => {
-    const combinedData: any[] = [];
-    
-    // 가격 데이터 기본으로 사용
-    priceData.forEach(price => {
-      combinedData.push({
-        date: price.date,
-        price: price.price,
-        dateFormatted: price.dateFormatted
-      });
-    });
-    
-    // 목표가 데이터 추가
-    targetPriceData.forEach(target => {
-      const existingIndex = combinedData.findIndex(item => 
-        item.date === target.date || 
-        Math.abs(new Date(item.date).getTime() - new Date(target.date).getTime()) < 86400000 // 1일 이내
-      );
-      
-      if (existingIndex !== -1) {
-        combinedData[existingIndex].targetPrice = target.targetPrice;
-        combinedData[existingIndex].opinion = target.opinion;
-      } else {
-        combinedData.push({
-          date: target.date,
-          targetPrice: target.targetPrice,
-          opinion: target.opinion,
-          dateFormatted: target.dateFormatted
-        });
+
+  // 증권사별 최신 목표가 (바 차트용)
+  const firmTargets = useMemo(() => {
+    const firmMap: Record<string, { firm: string; target_price: number; opinion: string; date: string }> = {};
+    const sorted = [...reports].sort((a, b) => a.published_at.localeCompare(b.published_at));
+    for (const r of sorted) {
+      if (r.target_price && r.target_price > 0) {
+        firmMap[r.firm] = { firm: r.firm, target_price: r.target_price, opinion: r.opinion, date: r.published_at };
       }
-    });
-    
-    return combinedData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }, [priceData, targetPriceData]);
+    }
+    return Object.values(firmMap).sort((a, b) => b.target_price - a.target_price);
+  }, [reports]);
   
   const sortedReports = useMemo(() => 
     [...reports].sort((a, b) => b.published_at.localeCompare(a.published_at)),
@@ -248,89 +191,56 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
 
   return (
     <div className="space-y-6">
-      {/* 차트 섹션 */}
-      {chartData.length > 0 && (
+      {/* 증권사별 목표가 비교 차트 */}
+      {firmTargets.length > 0 && (
         <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] p-6">
-          <h3 className="font-bold text-[#191f28] mb-4">주가 & 애널리스트 목표가</h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis 
-                  dataKey="dateFormatted" 
-                  stroke="#8b95a1"
-                  fontSize={12}
-                />
-                <YAxis 
-                  stroke="#8b95a1"
-                  fontSize={12}
-                  tickFormatter={(value) => `${(value / 1000).toFixed(0)}k`}
-                />
-                <Tooltip
-                  formatter={(value: any, name: string) => [
-                    `${value?.toLocaleString()}원`,
-                    name === 'price' ? '주가' : '목표가'
-                  ]}
-                  labelFormatter={(label) => `날짜: ${label}`}
-                />
-                
-                {/* 실제 주가 라인 */}
-                <Line
-                  type="monotone"
-                  dataKey="price"
-                  stroke="#3182f6"
-                  strokeWidth={2}
-                  dot={false}
-                />
-                
-                {/* 목표가 라인 */}
-                <Line
-                  type="monotone"
-                  dataKey="targetPrice"
-                  stroke="#8b95a1"
-                  strokeWidth={2}
-                  strokeDasharray="5 5"
-                  dot={false}
-                />
-                
-                {/* 시그널 점들 */}
-                {chartData.map((point, index) => 
-                  point.opinion && (
-                    <Scatter 
-                      key={index}
-                      data={[{ x: index, y: point.price || point.targetPrice }]}
-                      fill={getSignalPointColor(point.opinion)}
+          <h3 className="font-bold text-[#191f28] mb-1">증권사별 목표가 비교</h3>
+          {currentPrice > 0 && (
+            <p className="text-sm text-[#8b95a1] mb-4">현재가 {currentPrice.toLocaleString()}원</p>
+          )}
+          <div className="space-y-3">
+            {firmTargets.map((ft, i) => {
+              const maxTarget = firmTargets[0]?.target_price || 1;
+              const pct = (ft.target_price / maxTarget) * 100;
+              const upside = currentPrice > 0 ? ((ft.target_price - currentPrice) / currentPrice * 100).toFixed(1) : null;
+              return (
+                <div key={i}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-[#333d4b] font-medium">{ft.firm}</span>
+                    <span className="text-[#191f28] font-bold">
+                      {formatTargetPrice(ft.target_price)}
+                      {upside && <span className={`ml-2 text-xs ${Number(upside) >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]'}`}>({upside}%)</span>}
+                    </span>
+                  </div>
+                  <div className="w-full bg-[#f0f0f0] rounded-full h-2.5 relative">
+                    <div
+                      className="h-2.5 rounded-full bg-[#3182f6]"
+                      style={{ width: `${pct}%` }}
                     />
-                  )
-                )}
-              </LineChart>
-            </ResponsiveContainer>
+                    {currentPrice > 0 && (
+                      <div
+                        className="absolute top-0 h-2.5 w-0.5 bg-[#ef4444]"
+                        style={{ left: `${(currentPrice / maxTarget) * 100}%` }}
+                        title={`현재가 ${currentPrice.toLocaleString()}원`}
+                      />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          
-          <div className="flex items-center gap-4 mt-4 text-sm text-[#8b95a1]">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-0.5 bg-[#3182f6]"></div>
-              <span>실제 주가</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-0.5 bg-[#8b95a1] border-dashed"></div>
-              <span>애널리스트 목표가</span>
-            </div>
-            <div className="flex items-center gap-4">
+          {currentPrice > 0 && (
+            <div className="flex items-center gap-4 mt-4 text-xs text-[#8b95a1]">
               <div className="flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-[#22c55e]"></div>
-                <span>매수</span>
+                <div className="w-3 h-2 rounded bg-[#3182f6]"></div>
+                <span>목표가</span>
               </div>
               <div className="flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-[#eab308]"></div>
-                <span>중립</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-[#ef4444]"></div>
-                <span>매도</span>
+                <div className="w-0.5 h-3 bg-[#ef4444]"></div>
+                <span>현재가</span>
               </div>
             </div>
-          </div>
+          )}
         </div>
       )}
 
