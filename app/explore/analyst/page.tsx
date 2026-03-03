@@ -62,6 +62,76 @@ function formatDate(dateStr: string) {
   }
 }
 
+// AI Detail 렌더러 컴포넌트
+function AiDetailRenderer({ content }: { content: string }) {
+  const sections = parseAiDetail(content);
+  
+  if (sections.length === 0) {
+    return (
+      <div className="p-3 bg-gray-50 rounded-lg text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+        {content}
+      </div>
+    );
+  }
+  
+  return (
+    <div className="space-y-3">
+      {sections.map((section, index) => (
+        <div key={index} className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-200">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-lg">{getSectionIcon(section.title)}</span>
+            <h4 className="font-medium text-gray-900 text-sm">{section.title}</h4>
+          </div>
+          <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+            {section.content}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function parseAiDetail(content: string) {
+  const sections = [];
+  const lines = content.split('\n');
+  let currentSection = null;
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    
+    // ## 헤더 감지
+    if (trimmed.startsWith('## ')) {
+      if (currentSection) {
+        sections.push(currentSection);
+      }
+      currentSection = {
+        title: trimmed.slice(3).trim(),
+        content: ''
+      };
+    } else if (currentSection && trimmed) {
+      currentSection.content += (currentSection.content ? '\n' : '') + trimmed;
+    }
+  }
+  
+  if (currentSection) {
+    sections.push(currentSection);
+  }
+  
+  return sections;
+}
+
+function getSectionIcon(title: string) {
+  const iconMap: Record<string, string> = {
+    '투자포인트': '📌',
+    '실적전망': '📊',
+    '밸류에이션': '💰',
+    '리스크': '⚠️',
+    '결론': '✅'
+  };
+  
+  return iconMap[title] || '📄';
+}
+
 // 리포트 상세 모달 컴포넌트
 interface ReportModalProps {
   report: Report | null;
@@ -134,9 +204,9 @@ function ReportModal({ report, isOpen, onClose }: ReportModalProps) {
             {report.ai_detail && (
               <div>
                 <span className="text-gray-500 text-sm">상세 분석</span>
-                <p className="text-sm text-gray-600 mt-1 p-3 bg-gray-50 rounded-lg whitespace-pre-line leading-relaxed">
-                  {report.ai_detail}
-                </p>
+                <div className="mt-1">
+                  <AiDetailRenderer content={report.ai_detail} />
+                </div>
               </div>
             )}
 
