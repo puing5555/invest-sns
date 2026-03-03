@@ -42,49 +42,14 @@ interface FeedItem {
   detailLink?: string;
 }
 
-// ---- 더미 데이터 ----
-
-const h = (hoursAgo: number) => new Date(Date.now() - hoursAgo * 3600000).toISOString();
-
-const dummyAnalystReports = [
-  { id: 'analyst_1', stockName: '삼성전자', stockCode: '005930', firm: '한국투자증권', analyst: '김선우', rating: 'BUY', targetPrice: '85,000원', summary: '3분기 실적 서프라이즈, HBM 수요 증가', publishedAt: h(5) },
-  { id: 'analyst_2', stockName: '현대차', stockCode: '005380', firm: '미래에셋증권', analyst: '박자동차', rating: 'BUY', targetPrice: '220,000원', summary: '전기차 판매 증가, 인도법인 호조', publishedAt: h(3) },
-  { id: 'analyst_3', stockName: 'SK하이닉스', stockCode: '000660', firm: 'KB증권', analyst: '이메모리', rating: 'BUY', targetPrice: '190,000원', summary: 'AI 반도체 수요 지속, D램 가격 회복', publishedAt: h(1) },
-];
-
-const dummyDisclosures = [
-  { id: 'disc_1', stockName: '삼성전자', stockCode: '005930', title: '자사주 500만주 취득 결정', grade: 'A', amount: '3조원', publishedAt: h(4) },
-  { id: 'disc_2', stockName: '카카오', stockCode: '035720', title: '3분기 실적 공시 (매출 1.8조원)', grade: 'A', publishedAt: h(2) },
-  { id: 'disc_3', stockName: 'NAVER', stockCode: '035420', title: '주식매수선택권 부여 결정', grade: 'B', publishedAt: h(8) },
-];
-
-const dummyNews = [
-  { id: 'news_1', stockName: 'LG에너지', stockCode: '373220', title: 'GM과 배터리 공급계약 연장 협의', source: '서울경제', publishedAt: h(6) },
-  { id: 'news_2', stockName: 'NAVER', stockCode: '035420', title: 'AI 클로바X 글로벌 확장 계획 발표', source: '매일경제', publishedAt: h(0.5) },
-  { id: 'news_3', stockName: '삼성전자', stockCode: '005930', title: '갤럭시 S26 양산 일정 앞당겨', source: '한국경제', publishedAt: h(7) },
-];
-
-const dummyInsider = [
-  { id: 'insider_1', stockName: '삼성전자', stockCode: '005930', exec: '이재용 회장', action: '매수', shares: '50,000주', publishedAt: h(3.5) },
-  { id: 'insider_2', stockName: '현대차', stockCode: '005380', exec: '정의선 회장', action: '매수', shares: '10,000주', publishedAt: h(9) },
-  { id: 'insider_3', stockName: 'SK하이닉스', stockCode: '000660', exec: '곽노정 CEO', action: '매수', shares: '5,000주', publishedAt: h(14) },
-];
-
-const dummyReports = [
-  { id: 'report_1', stockName: 'SK하이닉스', stockCode: '000660', firm: '삼성증권', title: 'HBM3E 양산 본격화, 목표가 상향', rating: 'BUY', publishedAt: h(2.5) },
-  { id: 'report_2', stockName: 'LG에너지', stockCode: '373220', firm: 'NH투자증권', title: '북미 IRA 보조금 수혜 지속', rating: 'BUY', publishedAt: h(10) },
-];
-
-const dummyCalendar = [
-  { id: 'cal_1', stockName: '삼성전자', stockCode: '005930', title: '4분기 실적 발표 (잠정)', date: '2026-03-07', publishedAt: h(1.5) },
-  { id: 'cal_2', stockName: 'NAVER', stockCode: '035420', title: '정기 주주총회', date: '2026-03-20', publishedAt: h(12) },
-  { id: 'cal_3', stockName: '현대차', stockCode: '005380', title: '전기차 신모델 언팩 행사', date: '2026-03-15', publishedAt: h(5.5) },
-];
-
-const dummyEarnings = [
-  { id: 'earn_1', stockName: '삼성전자', stockCode: '005930', title: '3분기 영업이익 12.8조원 (컨센 +8%)', beat: true, publishedAt: h(11) },
-  { id: 'earn_2', stockName: 'SK하이닉스', stockCode: '000660', title: '3분기 영업이익 7.3조원 (컨센 +15%)', beat: true, publishedAt: h(13) },
-];
+// ---- 더미 데이터 제거됨 (실제 데이터 연동 후 교체 예정) ----
+const dummyAnalystReports: any[] = [];
+const dummyDisclosures: any[] = [];
+const dummyNews: any[] = [];
+const dummyInsider: any[] = [];
+const dummyReports: any[] = [];
+const dummyCalendar: any[] = [];
+const dummyEarnings: any[] = [];
 
 // ---- 유틸리티 ----
 

@@ -2,48 +2,7 @@
 
 import { useState } from 'react';
 
-const upcomingEvents = [
-  {
-    id: 1,
-    title: '삼성전자 3분기 실적발표',
-    date: '2024-10-31',
-    time: '16:00',
-    type: 'earnings',
-    importance: 'high',
-  },
-  {
-    id: 2,
-    title: 'SK하이닉스 임시주주총회',
-    date: '2024-11-05',
-    time: '14:00',
-    type: 'meeting',
-    importance: 'medium',
-  },
-  {
-    id: 3,
-    title: 'NAVER IR Day',
-    date: '2024-11-12',
-    time: '10:00',
-    type: 'ir',
-    importance: 'high',
-  },
-  {
-    id: 4,
-    title: '현대차 신차 발표회',
-    date: '2024-11-15',
-    time: '15:30',
-    type: 'event',
-    importance: 'medium',
-  },
-  {
-    id: 5,
-    title: 'LG에너지 배당 기준일',
-    date: '2024-11-20',
-    time: '종일',
-    type: 'dividend',
-    importance: 'low',
-  },
-];
+const upcomingEvents: { id: number; title: string; date: string; time: string; type: string; importance: string }[] = [];
 
 const eventTypes = {
   earnings: { icon: '📊', label: '실적발표', color: 'bg-blue-100 text-blue-700' },
@@ -179,6 +138,12 @@ export default function CalendarPage() {
                 <h3 className="font-bold text-[#191f28]">다가오는 일정</h3>
               </div>
               <div className="divide-y divide-[#f0f0f0]">
+                {upcomingEvents.length === 0 && (
+                  <div className="p-8 text-center text-[#8b95a1]">
+                    <div className="text-3xl mb-2">📭</div>
+                    <p className="text-sm">등록된 일정이 없습니다</p>
+                  </div>
+                )}
                 {upcomingEvents.slice(0, 5).map((event) => {
                   const eventType = eventTypes[event.type as keyof typeof eventTypes];
                   return (
