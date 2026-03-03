@@ -16,12 +16,12 @@ export async function generateStaticParams() {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
     );
     const { data } = await supabase
-      .from('influencer_signals')
-      .select('speaker_id')
+      .from('speakers')
+      .select('name')
       .limit(500);
 
     if (data) {
-      const dbSpeakers = [...new Set(data.map((d: any) => d.speaker_id).filter(Boolean))];
+      const dbSpeakers = [...new Set(data.map((d: any) => d.name).filter(Boolean))];
       const dbSlugs = dbSpeakers.map((name: string) => speakerToSlug(name));
       const allSlugs = [...new Set([...knownSlugs, ...dbSlugs])];
       return allSlugs.map(slug => ({ id: slug }));
