@@ -56,71 +56,146 @@ function OpinionBadge({ opinion }: { opinion: string }) {
   );
 }
 
+// AI Detail 파서 & 렌더러
+function parseAiDetail(content: string) {
+  const sections: { title: string; content: string }[] = [];
+  const lines = content.split('\n');
+  let currentSection: { title: string; content: string } | null = null;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('## ')) {
+      if (currentSection) sections.push(currentSection);
+      currentSection = { title: trimmed.slice(3).trim(), content: '' };
+    } else if (currentSection && trimmed) {
+      currentSection.content += (currentSection.content ? '\n' : '') + trimmed;
+    }
+  }
+  if (currentSection) sections.push(currentSection);
+  return sections;
+}
+
+function getSectionIcon(title: string) {
+  const iconMap: Record<string, string> = {
+    '투자포인트': '📌', '실적전망': '📊', '밸류에이션': '💰', '리스크': '⚠️', '결론': '✅'
+  };
+  return iconMap[title] || '📄';
+}
+
+function AiDetailRenderer({ content }: { content: string }) {
+  const sections = parseAiDetail(content);
+  if (sections.length === 0) {
+    return (
+      <div className="p-3 bg-gray-50 rounded-lg text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+        {content}
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-3">
+      {sections.map((section, index) => (
+        <div key={index} className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-200">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-lg">{getSectionIcon(section.title)}</span>
+            <h4 className="font-medium text-gray-900 text-sm">{section.title}</h4>
+          </div>
+          <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{section.content}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const TICKER_NAMES: Record<string, string> = {
+  '005930': '삼성전자', '000660': 'SK하이닉스', '005380': '현대차', '006400': '삼성SDI',
+  '051910': 'LG화학', '035420': 'NAVER', '036570': '엔씨소프트', '005940': 'NH투자증권',
+  '009540': 'HD한국조선해양', '016360': '삼성증권', '036930': '주성엔지니어링',
+  '039490': '키움증권', '042700': '한미반도체', '071050': '한국금융지주', '079160': 'CJ CGV',
+  '084370': '유진테크', '086520': '에코프로', '090430': '아모레퍼시픽', '095610': '테스',
+  '240810': '원익IPS', '267260': 'HD현대일렉트릭', '284620': '카카오헬스케어',
+  '298040': '효성중공업', '352820': '하이브', '357780': '솔브레인', '399720': '가온칩스',
+  '403870': 'HPSP', '004170': '신세계', '000720': '현대건설', '095610': '테스',
+};
+
 function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) {
   if (!report) return null;
+
+  const stockName = TICKER_NAMES[code] || code;
 
   return (
     <>
       <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-          <div className="sticky top-0 bg-white z-10 px-4 pt-4 pb-2 flex items-center justify-between rounded-t-2xl">
-            <div className="flex items-center gap-2">
-              <OpinionBadge opinion={report.opinion} />
-            </div>
-            <div className="flex items-center gap-1">
-              <button className="text-[#8b95a1] hover:text-red-400 transition-colors text-lg px-3 py-2 rounded-lg">♡</button>
-              <button className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm px-2 py-1 rounded-lg">🚨</button>
-              <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f8f9fa] transition-colors text-[#8b95a1] text-lg">✕</button>
-            </div>
-          </div>
-
-          <div className="px-5 pb-5 space-y-4">
-            <div>
-              <h2 className="text-lg font-bold text-[#191f28] leading-snug">{report.title}</h2>
-              <p className="text-sm text-[#8b95a1] mt-1">{formatDate(report.published_at)}</p>
+        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="p-6">
+            {/* 헤더 */}
+            <div className="flex items-start justify-between mb-4">
+              <h2 className="text-lg font-bold text-gray-900">리포트 상세</h2>
+              <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-xl">✕</button>
             </div>
 
-            {/* AI 한줄요약 */}
-            <div className="bg-[#f0f7ff] rounded-xl p-4 border-l-4 border-[#3182f6]">
-              <p className="text-xs text-[#8b95a1] mb-1">AI 한줄요약</p>
-              <p className="text-[15px] text-[#191f28] leading-relaxed font-medium">
-                {report.summary || <span className="text-[#8b95a1]">리포트 요약 준비 중</span>}
-              </p>
-            </div>
-
-            {/* AI 상세 분석 */}
-            <div className="bg-[#f8f9fa] rounded-xl p-4">
-              <p className="text-xs text-[#8b95a1] mb-2">AI 상세 분석</p>
-              <p className="text-sm text-[#333] leading-relaxed whitespace-pre-line">
-                {report.ai_detail || <span className="text-[#8b95a1]">리포트 요약 준비 중</span>}
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <span className="text-sm text-[#8b95a1]">증권사</span>
-                <span className="text-sm font-medium text-[#191f28]">{report.firm}</span>
+            <div className="space-y-4">
+              {/* 제목 + 종목/의견 */}
+              <div>
+                <h3 className="font-medium text-gray-900 mb-2">{report.title}</h3>
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-sm font-medium text-blue-600">{stockName}</span>
+                  <OpinionBadge opinion={report.opinion} />
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-[#8b95a1]">애널리스트</span>
-                <span className="text-sm font-medium text-[#191f28]">{report.analyst || '-'}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-[#8b95a1]">목표가</span>
-                <span className="text-sm font-medium text-[#191f28]">{formatTargetPrice(report.target_price, code)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-[#8b95a1]">투자의견</span>
-                <span className="text-sm font-medium text-[#191f28]">{report.opinion}</span>
-              </div>
-            </div>
 
-            <div>
+              {/* 정보 그리드 */}
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-gray-500">증권사</span>
+                  <p className="font-medium">{report.firm}</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">애널리스트</span>
+                  <p className="font-medium">{report.analyst || '-'}</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">목표가</span>
+                  <p className="font-medium">{formatTargetPrice(report.target_price, code)}</p>
+                </div>
+                <div>
+                  <span className="text-gray-500">투자의견</span>
+                  <p className="font-medium">{report.opinion}</p>
+                </div>
+                <div className="col-span-2">
+                  <span className="text-gray-500">발행일</span>
+                  <p className="font-medium">{formatDate(report.published_at)}</p>
+                </div>
+              </div>
+
+              {/* AI 한줄요약 */}
+              {report.summary && (
+                <div>
+                  <span className="text-gray-500 text-sm">AI 한줄요약</span>
+                  <p className="text-sm text-gray-700 mt-1 p-3 bg-blue-50 rounded-lg font-medium">
+                    {report.summary}
+                  </p>
+                </div>
+              )}
+
+              {/* AI 상세 분석 - 섹션 카드 */}
+              {report.ai_detail && (
+                <div>
+                  <span className="text-gray-500 text-sm">상세 분석</span>
+                  <div className="mt-1">
+                    <AiDetailRenderer content={report.ai_detail} />
+                  </div>
+                </div>
+              )}
+
+              {/* PDF 링크 */}
               {report.pdf_url && (
-                <a href={report.pdf_url} target="_blank" rel="noopener noreferrer" className="w-full text-center bg-[#ff0000] hover:bg-[#cc0000] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px] block">
-                  📄 PDF 보기
-                </a>
+                <div className="pt-4 border-t">
+                  <a href={report.pdf_url} target="_blank" rel="noopener noreferrer"
+                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors">
+                    📄 PDF 보고서 보기
+                  </a>
+                </div>
               )}
             </div>
           </div>

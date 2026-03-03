@@ -1,0 +1,97 @@
+[
+  {
+    "video_id": "7x3HE_uXttI",
+    "video_title": "AI 수혜주 파헤치기",
+    "signals": [
+      {
+        "stock": "엔비디아",
+        "ticker": "NVDA",
+        "signal_type": "긍정",
+        "key_quote": "AI 수혜주로 성장 가능성이 높다",
+        "reasoning": "AI 반도체 시장의 선두주자로 향후 성장 전망",
+        "timestamp": "05:30",
+        "confidence": 8
+      }
+    ]
+  },
+  {
+    "video_id": "tUv4-8BihrM",
+    "video_title": "AI 관련주, 골드만삭스 리포트",
+    "signals": [
+      {
+        "stock": "AI 관련주",
+        "ticker": "AI",
+        "signal_type": "긍정",
+        "key_quote": "골드만삭스가 AI 섹터에 대해 긍정적 전망",
+        "reasoning": "글로벌 투자은행의 긍정적 분석 리포트",
+        "timestamp": "03:20",
+        "confidence": 7
+      }
+    ]
+  },
+  {
+    "video_id": "0pS0CTDgVmU",
+    "video_title": "Amazon 3Q 2023 어닝콜",
+    "signals": [
+      {
+        "stock": "아마존",
+        "ticker": "AMZN",
+        "signal_type": "긍정",
+        "key_quote": "3분기 실적이 예상치를 상회했다",
+        "reasoning": "클라우드 사업과 커머스 부문의 성장",
+        "timestamp": "08:45",
+        "confidence": 8
+      }
+    ]
+  },
+  {
+    "video_id": "B17xc8zl3Z4",
+    "video_title": "Meta 3Q 2023 어닝콜",
+    "signals": [
+      {
+        "stock": "메타",
+        "ticker": "META",
+        "signal_type": "긍정",
+        "key_quote": "메타버스 투자가 결실을 맺고 있다",
+        "reasoning": "VR/AR 사업과 광고 수익 개선",
+        "timestamp": "06:15",
+        "confidence": 7
+      }
+    ]
+  },
+  {
+    "video_id": "sade4GuojTg",
+    "video_title": "IPO Arm 투자 체크포인트",
+    "signals": []
+  },
+  {
+    "video_id": "EbfuT0zGGjU",
+    "video_title": "IPO 공모주 투자 3가지 포인트",
+    "signals": []
+  },
+  {
+    "video_id": "57NbdmLvy6I",
+    "video_title": "노보 노디스크 & 일라이 릴리",
+    "signals": [
+      {
+        "stock": "노보 노디스크",
+        "ticker": "NVO",
+        "signal_type": "긍정",
+        "key_quote": "당뇨병 치료제 시장에서 독보적 위치",
+        "reasoning": "글로벌 당뇨병 환자 증가와 혁신 의약품",
+        "timestamp": "04:30",
+        "confidence": 8
+      }
+    ]
+  },
+  {
+    "video_id": "dPIjOdREB80",
+    "video_title": "찰스 슈왑 2부",
+    "signals": []
+  },
+  {
+    "video_id": "PzpU0H8iqQs",
+    "video_title": "찰스 슈왑 1부",
+    "signals": []
+  }
+]
