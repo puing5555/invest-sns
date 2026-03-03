@@ -1,6 +1,30 @@
 # PROJECT STATUS - invest-sns
 
-## 🔥 최신 업데이트 (2026-03-03 02:15) ✅
+## 🔥 최신 업데이트 (2026-03-03 10:55)
+### PDF AI 요약 배치 처리 진행 중 🔄
+- **테이블:** `analyst_reports` (총 565건)
+- **AI 요약 완료:** 102건 (시작 시 98건 → 배치 돌리는 중)
+- **미완료 (pdf_url 있음):** ~422건 처리 중
+- **미완료 (pdf_url 없음):** ~45건 (처리 불가)
+- **로컬 PDF:** 517개 (`data/analyst_pdfs/`)
+- **스크립트:** `scripts/pdf_batch_processor.py` (Claude Sonnet으로 한줄요약+상세요약)
+- **처리 속도:** ~2.7건/분 (Claude API 호출 포함)
+- **예상 완료:** ~2.5시간 후 (약 13:30 ICT)
+- **세션:** `good-shore` (background, pid 27652)
+- **진행파일:** `data/ai_summary_progress.json` (50건마다 중간 저장)
+
+---
+
+## 이전 업데이트 (2026-03-03 10:50) ✅
+### 2단계 유저 참여 시스템 4~5번 확인 완료 ✅
+- **4. AI제안 탭** (`ai-suggestions`): 품질 이슈 검사 + AI 개선안 생성 + 승인/거절 UI - 이미 구현 완료
+- **5. 프롬프트관리 탭** (`prompts`): 신고 패턴 분석 + 통계 카드 + AI 프롬프트 개선안 생성 - 이미 구현 완료
+- **빌드:** `npm run build` 성공
+- **2단계 전체 (1~5번) 완료 상태**
+
+---
+
+## 이전 업데이트 (2026-03-03 02:15) ✅
 
 ### 해외종목 통화표시 수정: 원→달러 💲
 - **lib/currency.ts** 생성: `isKoreanStock()`, `getCurrencySymbol()`, `formatStockPrice()` 유틸
