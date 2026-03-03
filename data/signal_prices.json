@@ -1,153 +1,9 @@
 {
-  "090430": {
-    "name": "아모레퍼시픽",
-    "ticker": "090430",
-    "market": "KR",
-    "current_price": 143100.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "005380": {
-    "name": "현대차",
-    "ticker": "005380",
-    "market": "KR",
-    "current_price": 618000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "000660": {
-    "name": "SK하이닉스",
-    "ticker": "000660",
-    "market": "KR",
-    "current_price": 996000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "079160": {
-    "name": "CJ CGV",
-    "ticker": "079160",
-    "market": "KR",
-    "current_price": 5290.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "005930": {
-    "name": "삼성전자",
-    "ticker": "005930",
-    "market": "KR",
-    "current_price": 203500.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "000720": {
-    "name": "현대건설",
-    "ticker": "000720",
-    "market": "KR",
-    "current_price": 152700.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
   "240810": {
     "name": "원익IPS",
     "ticker": "240810",
     "market": "KR",
-    "current_price": 132400.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "036930": {
-    "name": "주성엔지니어링",
-    "ticker": "036930",
-    "market": "KR",
-    "current_price": 61300.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "042700": {
-    "name": "한미반도체",
-    "ticker": "042700",
-    "market": "KR",
-    "current_price": 294500.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "403870": {
-    "name": "HPSP",
-    "ticker": "403870",
-    "market": "KR",
-    "current_price": 45000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "298040": {
-    "name": "효성중공업",
-    "ticker": "298040",
-    "market": "KR",
-    "current_price": 2683000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "016360": {
-    "name": "삼성증권",
-    "ticker": "016360",
-    "market": "KR",
-    "current_price": 103600.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "005940": {
-    "name": "NH투자증권",
-    "ticker": "005940",
-    "market": "KR",
-    "current_price": 34500.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "352820": {
-    "name": "하이브",
-    "ticker": "352820",
-    "market": "KR",
-    "current_price": 364000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "284620": {
-    "name": "카이노스메드",
-    "ticker": "284620",
-    "market": "KR",
-    "current_price": 1087.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "051910": {
-    "name": "LG화학",
-    "ticker": "051910",
-    "market": "KR",
-    "current_price": 377000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "036570": {
-    "name": "엔씨소프트",
-    "ticker": "036570",
-    "market": "KR",
-    "current_price": 227000.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "039490": {
-    "name": "키움증권",
-    "ticker": "039490",
-    "market": "KR",
-    "current_price": 437500.0,
-    "currency": "KRW",
-    "last_updated": "2026-03-03"
-  },
-  "006400": {
-    "name": "삼성SDI",
-    "ticker": "006400",
-    "market": "KR",
-    "current_price": 428250.0,
+    "current_price": 132400,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
@@ -155,23 +11,31 @@
     "name": "HD현대일렉트릭",
     "ticker": "267260",
     "market": "KR",
-    "current_price": 1018000.0,
+    "current_price": 1018000,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
-  "004170": {
-    "name": "신세계",
-    "ticker": "004170",
+  "284620": {
+    "name": "카이노스메드",
+    "ticker": "284620",
     "market": "KR",
-    "current_price": 366500.0,
+    "current_price": 1087,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
-  "071050": {
-    "name": "한국금융지주",
-    "ticker": "071050",
+  "298040": {
+    "name": "효성중공업",
+    "ticker": "298040",
     "market": "KR",
-    "current_price": 246750.0,
+    "current_price": 2683000,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "352820": {
+    "name": "하이브",
+    "ticker": "352820",
+    "market": "KR",
+    "current_price": 364000,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
@@ -179,7 +43,143 @@
     "name": "솔브레인",
     "ticker": "357780",
     "market": "KR",
-    "current_price": 462500.0,
+    "current_price": 462500,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "403870": {
+    "name": "HPSP",
+    "ticker": "403870",
+    "market": "KR",
+    "current_price": 45000,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "090430": {
+    "name": "아모레퍼시픽",
+    "ticker": "090430",
+    "market": "KR",
+    "current_price": 143100,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "005380": {
+    "name": "현대차",
+    "ticker": "005380",
+    "market": "KR",
+    "current_price": 618000,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "000660": {
+    "name": "SK하이닉스",
+    "ticker": "000660",
+    "market": "KR",
+    "current_price": 996000,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "079160": {
+    "name": "CJ CGV",
+    "ticker": "079160",
+    "market": "KR",
+    "current_price": 5290,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "005930": {
+    "name": "삼성전자",
+    "ticker": "005930",
+    "market": "KR",
+    "current_price": 203500,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "000720": {
+    "name": "현대건설",
+    "ticker": "000720",
+    "market": "KR",
+    "current_price": 152700,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "036930": {
+    "name": "주성엔지니어링",
+    "ticker": "036930",
+    "market": "KR",
+    "current_price": 61300,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "042700": {
+    "name": "한미반도체",
+    "ticker": "042700",
+    "market": "KR",
+    "current_price": 294500,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "016360": {
+    "name": "삼성증권",
+    "ticker": "016360",
+    "market": "KR",
+    "current_price": 103600,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "005940": {
+    "name": "NH투자증권",
+    "ticker": "005940",
+    "market": "KR",
+    "current_price": 34500,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "051910": {
+    "name": "LG화학",
+    "ticker": "051910",
+    "market": "KR",
+    "current_price": 377000,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "036570": {
+    "name": "엔씨소프트",
+    "ticker": "036570",
+    "market": "KR",
+    "current_price": 227000,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "039490": {
+    "name": "키움증권",
+    "ticker": "039490",
+    "market": "KR",
+    "current_price": 437500,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "006400": {
+    "name": "삼성SDI",
+    "ticker": "006400",
+    "market": "KR",
+    "current_price": 428250,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "004170": {
+    "name": "신세계",
+    "ticker": "004170",
+    "market": "KR",
+    "current_price": 366500,
+    "currency": "KRW",
+    "last_updated": "2026-03-03"
+  },
+  "071050": {
+    "name": "한국금융지주",
+    "ticker": "071050",
+    "market": "KR",
+    "current_price": 246750,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
@@ -187,7 +187,7 @@
     "name": "NAVER",
     "ticker": "035420",
     "market": "KR",
-    "current_price": 241500.0,
+    "current_price": 241500,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
@@ -195,7 +195,7 @@
     "name": "테스",
     "ticker": "095610",
     "market": "KR",
-    "current_price": 74300.0,
+    "current_price": 74300,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
@@ -203,7 +203,7 @@
     "name": "유진테크",
     "ticker": "084370",
     "market": "KR",
-    "current_price": 136200.0,
+    "current_price": 136200,
     "currency": "KRW",
     "last_updated": "2026-03-03"
   },
@@ -219,7 +219,7 @@
     "name": "SPDR Gold Shares",
     "ticker": "GLD",
     "market": "US",
-    "current_price": 490.0,
+    "current_price": 490,
     "currency": "USD",
     "last_updated": "2026-03-03"
   },
@@ -347,7 +347,7 @@
     "name": "비트코인 (BTC)",
     "ticker": "BTC",
     "market": "CRYPTO",
-    "current_price": 68340.0,
+    "current_price": 68340,
     "currency": "USD",
     "last_updated": "2026-03-03"
   },
@@ -390,5 +390,13 @@
     "current_price": 16.43,
     "currency": "USD",
     "last_updated": "2026-03-03"
+  },
+  "NVO": {
+    "name": "노보 노디스크",
+    "ticker": "NVO",
+    "market": "NYSE",
+    "price": 35.9,
+    "currency": "USD",
+    "updated": "2026-03-03"
   }
 }

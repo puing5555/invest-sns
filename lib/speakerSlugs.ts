@@ -22,6 +22,7 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '배제기': 'bae-jegi',
   '김학주': 'kim-hakju',
   '세상학개론': 'sesang101',
+  '월가아재': 'wallstreet-uncle',
 };
 
 // 한글 → hash 기반 slug (매핑에 없는 발언자 fallback용)
