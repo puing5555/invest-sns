@@ -1,0 +1,1004 @@
+{
+  "total_reports": 519,
+  "valid_reports": 353,
+  "remaining_issues": {
+    "None_type": [
+      {
+        "ticker": "298040",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "3Q25 Review: YTD 400% 상승에도 남아있..."
+      },
+      {
+        "ticker": "298040",
+        "firm": "SK증권",
+        "analyst": null,
+        "title": "중공업 사업부 실적개선 이어진다..."
+      },
+      {
+        "ticker": "298040",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "4Q25 Perview: 또 다시 증명..."
+      },
+      {
+        "ticker": "298040",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "미래가 준비된 초고압 전력기기 업체로 증명..."
+      },
+      {
+        "ticker": "298040",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "2Q25 Review: 더, 더, 더 할 수 있다..."
+      },
+      {
+        "ticker": "298040",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "4Q25 일시적 실적 우려가 준 저가 매수 기회..."
+      },
+      {
+        "ticker": "298040",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "아직도 보여 줄 것이 많이 남았다...."
+      },
+      {
+        "ticker": "298040",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "4Q25 NDR Review: 자명한 상승여력..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "비싼 C앗, 내년에는 수확하겠지..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "이제부터 1년 내내 BTS..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "다시 없을 역사적 모멘텀에서 지속적인 비중....."
+      },
+      {
+        "ticker": "352820",
+        "firm": "삼성증권",
+        "analyst": null,
+        "title": "다음 챕터를 위한 기반 다지기..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "4Q25 Preview: 나를 버리고 가시는 님은 십리..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "삼성증권",
+        "analyst": null,
+        "title": "2026년, 무대는 준비됐다..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "비용 다 끝났니? 이제 할 일을 하자..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "불편한 희극..."
+      },
+      {
+        "ticker": "352820",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "BTS 오기 전에 깔끔하게 대청소 한 번 했습니....."
+      },
+      {
+        "ticker": "352820",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "역사적인 BTS 투어와 신인 그룹들의 성장 속....."
+      },
+      {
+        "ticker": "403870",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "부활의 시점이 다가온다..."
+      },
+      {
+        "ticker": "403870",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "한국의 ASML..."
+      },
+      {
+        "ticker": "403870",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "우리는 딱히 어렵지 않은데요?..."
+      },
+      {
+        "ticker": "403870",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "과도기가 지나간다..."
+      },
+      {
+        "ticker": "403870",
+        "firm": "삼성증권",
+        "analyst": null,
+        "title": "대장의 품격..."
+      },
+      {
+        "ticker": "051910",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "4Q25는 부진하나, 2026년 기대감은 유효..."
+      },
+      {
+        "ticker": "051910",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "본업은 하반기도 부진. LGES 지분 활용만이 ....."
+      },
+      {
+        "ticker": "051910",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "첨단소재부문 기대치 상회..."
+      },
+      {
+        "ticker": "051910",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "2Q25 Review - 올해보다 내년을 보자..."
+      },
+      {
+        "ticker": "051910",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "상반기 양극재 부진 vs. LGES 지분 활용..."
+      },
+      {
+        "ticker": "051910",
+        "firm": "삼성증권",
+        "analyst": null,
+        "title": "2Q25 preview - NAV 할인율 축소가 필요한..."
+      },
+      {
+        "ticker": "051910",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "석유화학 개선 가능성 vs. 양극재 판매량 감....."
+      },
+      {
+        "ticker": "000720",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "2026년, 해외 원전의 실질적 성과 기대..."
+      },
+      {
+        "ticker": "000720",
+        "firm": "SK증권",
+        "analyst": null,
+        "title": "실적 불확실성으로 낮아진 주가와 높아질 원....."
+      },
+      {
+        "ticker": "000720",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "쏟아지는 조명, 아쉬운 CAPA..."
+      },
+      {
+        "ticker": "000720",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "미국 원전 시장 Comment..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "올해부터 확실히 보여줄께..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "5개월만에 “삼”천만..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "거의 다 왔습니다..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "는 4DX에서 봐야죠..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "올림픽 끝. 극장 고! 실적 고!..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "케이프투자증권",
+        "analyst": null,
+        "title": "코로나19의 상흔에서 천천히 회복중..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "효율화 마무리. 돈 버는 구간..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "이건 극장에서 봐야해..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "넷플에는 영화 없어요..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "4DX로 승부수..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "드디어 마지막 관문 통과..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "이제 시작이야. V커브를 기대해..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "거의 다 왔습니다...."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "이제는 믿으시겠죠?..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "신작은 스크린에서 봐야죠..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "구조 개선 막바지..."
+      },
+      {
+        "ticker": "079160",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "안정적인 흑자 구간에 진입..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "전 부문 실적 개선..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "증시 호조에도 점유율은 하락..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "안정적인 트레이딩 성과 시현..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "증시 추가 상승 필요..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "기대를 충분히 반영한 주가..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "‘26년 BK수수료수익만 2조원..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "2Q25 Review: 유동성 수혜주는 키움이죠. 업...."
+      },
+      {
+        "ticker": "039490",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "거래대금 50조원의 시대..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "못하는게 없네..."
+      },
+      {
+        "ticker": "039490",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "IB 수수료 호조로 추정치 부합..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "2Q24 Review: 분기 최고 OPM 기록..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "이베스트증권",
+        "analyst": null,
+        "title": "2H22 모멘텀에 주목..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q24 Preview: 기술을 주도하는 방향으로..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "이베스트증권",
+        "analyst": null,
+        "title": "4Q21 잠정 실적 기대치 부합..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "1Q21 잠정 실적, 예상 부합..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "이베스트증권",
+        "analyst": null,
+        "title": "2H22 모멘텀 둔화되나 주주환원 확대..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "삼성증권",
+        "analyst": null,
+        "title": "TC Bonder 매출 인식 본격화..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "이베스트증권",
+        "analyst": null,
+        "title": "1Q22 잠정 실적 기대치 하회..."
+      },
+      {
+        "ticker": "042700",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "I am Still Hungry...."
+      },
+      {
+        "ticker": "005930",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "기지개 켜는 대장주..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "나야, 삼성전자..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "업황과 함께 돌아온 경쟁력..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "폭력적인 메모리 가격..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "보다 더 유리해지는 환경..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "놀라운 실적, 더 놀라울 주주환원..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q25 Preview: 메모리 맹수, 앙!..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "푸른 피의 힘..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "국민 1등 주식..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q25 Review: 메모리 가격 상승을 등에 업고..."
+      },
+      {
+        "ticker": "005930",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q25 Review: 너무 잘나가서 죄송합니다..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "잊혀진 SDC 가치 재조명..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "SDC 지분 매각 가정 시 벌어지는 일들..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "이것이 밸류업..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "Gap 축소 시작, 목표주가 45만원으로 상향..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "iM증권",
+        "analyst": null,
+        "title": "EV 실적 부진을 상쇄시켜 줄 ESS의 높은 성장....."
+      },
+      {
+        "ticker": "006400",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "T사 향 사업 시작. Gap 축소 유효..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "SK증권",
+        "analyst": null,
+        "title": "업황부진 지속, 그러나 돋보이는 기저효과..."
+      },
+      {
+        "ticker": "006400",
+        "firm": "삼성증권",
+        "analyst": null,
+        "title": "라인 전환과 ESS에 거는 기대..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "환차손 및 기타손실에 따른 어닝쇼크 전망..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "눈 앞으로 다가온 별도 자본 8조원..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "3Q24 Review: 예상을 상회한 실적, 기대되는 ..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "배당소득 분리과세 시 수혜 가능..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "주당배당금 추정치 부합..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "배당으로 돌아올 실적 호조..."
+      },
+      {
+        "ticker": "016360",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "높은 배당수익률 지속 예상..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "놀라운 2Q 실적,  기대되는 하반기..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "테크 마이그레이션의 대표 수혜주..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "3Q24 실적 서프라이즈,  불확실성 요인 해소..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "주가 조정 이후에 비중확대 기회 도래..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "전공정 투자에서 가장 편안한 선택지..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "2Q24 Review: 불확실성 헤쳐나가기..."
+      },
+      {
+        "ticker": "036930",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "태평양을 건너는 원년..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q25 Review: 도움 닫기..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "연간 실적 개선, 로봇/SDV/로보택시 수혜..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "4Q25 리뷰: 실적 우려를 지나 로봇/자율주행..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "로봇 => 자율주행으로 이어질 모멘텀..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "3Q25 Review: 보릿고개를 넘기고, 다시 한번 ..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "3Q25 리뷰: 관세 상쇄 지속, 미국 점유율 주....."
+      },
+      {
+        "ticker": "005380",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "3Q25 Review: 30만 고지를 넘어..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "4Q25 Review: 차별적 경쟁력, 대체 불가 선택..."
+      },
+      {
+        "ticker": "005380",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "비 온 뒤에 땅은 굳는다..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "기분 좋은 출발..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "유안타증권",
+        "analyst": null,
+        "title": "주주환원 관련 기대감 상승 중..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "남들과는 다른 환율 민감도..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "분기 최대 실적 달성..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "높은 주주환원율이 경쟁력..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "MA 3호 신청사..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "고배당주의 면모를 이어갈 것..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "6%대 배당수익률 기대..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "추정치 부합하는 무난한 실적..."
+      },
+      {
+        "ticker": "005940",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "거래대금 증가 수혜에 우량한 환원까지..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "2Q25 Review: 순항 중인 해외 사업..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "원천 기술의 경쟁력..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "본업 성장 흐름 지속..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "차근차근 개선 중..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "취향대로 골라 쓰는 브랜드 부자..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "해외 본업 순항 중, COSRX도 재도약 준비 중..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "교보증권",
+        "analyst": null,
+        "title": "오래 기다리셨습니다..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "기대를 가져볼만한 구간..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "안정적인 실적과 성장성..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "안정적 체력 유지..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "서구권 확장 + 수익성 개선 지속..."
+      },
+      {
+        "ticker": "090430",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "완벽한 타이밍에 코스알엑스 턴어라운드..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "미친거 아니야..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "주주환원 계획 없이는 추가 상승 난망..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "소름 돋아..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "언제나 훌륭한 최선호주..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "자산건전성 우려 극복..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "배당소득 분리과세 요건 충족..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "조달 수단 추가는 동사에게 무조건 유리..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "기록적인 실적 지속..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "놀라운 실적, 목표주가 상향!..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "대규모 평가익으로 서프라이즈..."
+      },
+      {
+        "ticker": "071050",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "차원이 다른 이익 체력..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "하.의.치 (하이닉스-의대-치대)..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "곳간에서 인심 난다..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "가격 강세를 온전히 실적으로..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "진격의 메모리..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "두쫀쿠보다 달달한 HBM칩스..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q25 Review: 잘 벌어서 많이 돌려 드릴게요..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "하나증권",
+        "analyst": null,
+        "title": "거침 없는 실적 상향..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "4Q25 Preview: 그래도 역시 HBM..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "이익의 가시성이 투명에 가깝다..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "이번에 다르기 위해선..."
+      },
+      {
+        "ticker": "000660",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "전인미답..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "아이온2 이후 대작 부재..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "지급수수료율 급감 기대..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "아이온2 이후가 보이기 시작했다..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "준비는 끝났다..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "대신증권",
+        "analyst": null,
+        "title": "2026년 증익이 가장 명확한 게임주..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "상반기보다는 하반기를 기대..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "미래에셋증권",
+        "analyst": null,
+        "title": "자체 결제로의 대전환..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "SK증권",
+        "analyst": null,
+        "title": "1분기부터가 진짜 실적..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "2026년이 기대되는 이유..."
+      },
+      {
+        "ticker": "036570",
+        "firm": "유진투자증권",
+        "analyst": null,
+        "title": "2026년 매출 추정치: 2조원..."
+      }
+    ]
+  }
+}

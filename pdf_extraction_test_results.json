@@ -1,0 +1,41 @@
+{
+  "test_count": 5,
+  "success_count": 5,
+  "corrections": [
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "원익",
+      "pdf_url": "https://stock.pstatic.net/stock-research/company/31/20250410_company_570892000.pdf"
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "원익",
+      "pdf_url": "https://stock.pstatic.net/stock-research/company/64/20251110_company_467608000.pdf"
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "원익",
+      "pdf_url": "https://stock.pstatic.net/stock-research/company/64/20250904_company_493110000.pdf"
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "원익",
+      "pdf_url": "https://stock.pstatic.net/stock-research/company/31/20241118_company_84645000.pdf"
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "원익",
+      "pdf_url": "https://stock.pstatic.net/stock-research/company/64/20251021_company_816722000.pdf"
+    }
+  ]
+}

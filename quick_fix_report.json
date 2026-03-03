@@ -1,0 +1,1171 @@
+{
+  "timestamp": "2026-03-03 19:24:27",
+  "method": "quick_fix_by_pattern_and_firm",
+  "total_fixes": 145,
+  "fixes_by_type": {
+    "되었음을": 122,
+    "None": 0,
+    "null": 0,
+    "자의": 23,
+    "other": 0
+  },
+  "corrections_sample": [
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "모멘텀 약세 구간을 지나는 중..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "Keep Going..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "장비 내 주도주..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "낮은 기저로 삼는 위안..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "다시금 주도주의 시간..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "모멘텀 서서히 회복..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "메모리 투자 사이클의 정석..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "낮은 기저, 작은 호재에도 상승 여력..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "황제주의 질주, 멈출 이유가 없다..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "더 강해진 확신, 질주는 계속된다..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "765kV 변압기 수혜전망..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "확신을 넘어, 질주는 계속된다..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "서프라이즈, 미국향 변압기 출하증가..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "일시적인 성장률 둔화..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "여전히 확신의 영역..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "4Q25 Review: 2026년 &lsquo;방&rsquo;향은 &lsquo;탄&rsqu..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "숫자로 증명할 2026년..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "육각형 포트폴리오의 완성..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "새롭게 쓸 역사..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "단기 실적 부진에도 목표주가 상향 조정..."
+    }
+  ],
+  "all_corrections": [
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "모멘텀 약세 구간을 지나는 중..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "Keep Going..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "장비 내 주도주..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "낮은 기저로 삼는 위안..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "다시금 주도주의 시간..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "모멘텀 서서히 회복..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "메모리 투자 사이클의 정석..."
+    },
+    {
+      "ticker": "240810",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "낮은 기저, 작은 호재에도 상승 여력..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "황제주의 질주, 멈출 이유가 없다..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "더 강해진 확신, 질주는 계속된다..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "765kV 변압기 수혜전망..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "확신을 넘어, 질주는 계속된다..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "서프라이즈, 미국향 변압기 출하증가..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "일시적인 성장률 둔화..."
+    },
+    {
+      "ticker": "298040",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "여전히 확신의 영역..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "4Q25 Review: 2026년 &lsquo;방&rsquo;향은 &lsquo;탄&rsqu..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "숫자로 증명할 2026년..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "육각형 포트폴리오의 완성..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "새롭게 쓸 역사..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "단기 실적 부진에도 목표주가 상향 조정..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "모든 준비는 끝났다..."
+    },
+    {
+      "ticker": "352820",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "예상보다 더 부진한 실적, 그럼에도 불구하고..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "될놈될..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "NDR 후기: 성장은 이어진다..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "하이투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "What a surprise?..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "바닥 다지기..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "1Q24 Review: 점진적 회복 시작..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "하이투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "믿고 담는 HPSP..."
+    },
+    {
+      "ticker": "403870",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "하반기 V자 반등..."
+    },
+    {
+      "ticker": "051910",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "26년 실적 개선과 LGES 지분 추가 활용에 주....."
+    },
+    {
+      "ticker": "051910",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "하반기 3가지 관전 포인트..."
+    },
+    {
+      "ticker": "051910",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "글로벌 석화 폐쇄 사이클 수혜를 기대한다!..."
+    },
+    {
+      "ticker": "051910",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "기대할 것과 기대 낮춰야 하는 것의 공존..."
+    },
+    {
+      "ticker": "051910",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "하반기 실적 부진 vs LGES 지분 활용 기대..."
+    },
+    {
+      "ticker": "051910",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "2025년 하반기, 저PBR 해소 흐름 이어진다!..."
+    },
+    {
+      "ticker": "000720",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "4Q25 Review: 본업 컨센서스 부합 수준..."
+    },
+    {
+      "ticker": "000720",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "기대되는 원전 수주, 높은 밸류애이션 정당화..."
+    },
+    {
+      "ticker": "000720",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "혼조의 실적으로 주가 하락, 결국 인정받을 ....."
+    },
+    {
+      "ticker": "000720",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "밸류를 정당화해볼까요?..."
+    },
+    {
+      "ticker": "000720",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "내려간 실적 기대감만큼 올라간 원전 기대감..."
+    },
+    {
+      "ticker": "079160",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "Beyond Movies, 콘텐츠 플랫폼 사업자로 도약..."
+    },
+    {
+      "ticker": "079160",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "실적 개선세는 지속된다..."
+    },
+    {
+      "ticker": "079160",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "3Q24 영업이익 개선세 지속..."
+    },
+    {
+      "ticker": "079160",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "플랫폼의 CJ. 특별관 콘텐츠 플랫폼으로 도약..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "높은 베타의 이유..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "기존 강점 유지+사업 영역 확대..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "단일 종목 레버리지 ETF 거래는 키움이지..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "변동성 확대 구간의 수혜주..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "기대 이상을 해주는 IB와 Trading..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "브로커리지 그 잡채..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "3Q25 Review: 주식시장 상승의 최대 수혜주..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "이대로만 가자..."
+    },
+    {
+      "ticker": "039490",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "4분기도 기대된다..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "하이투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "추가적인 Val. 배수 상승은 어려울 듯..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "3Q24 NDR 후기: 본딩 시장 성장에 주목할 때..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "하이투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "잠시 쉬어 갈 필요..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "종합 반도체 후공정 장비 Portfolio 구축..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "HBM의 승부사..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "하이투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "장기 성장성 유지..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "비상을 준비하는 구간..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "질적 성장에 주목..."
+    },
+    {
+      "ticker": "042700",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "2Q24 Review: On Track..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "Still 'LONG'..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "1Q26 예상 영업이익 증가율 43.3%..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "완전한 경쟁력 회복과 실적 대폭 개선..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "경쟁력 회복과 Val. 배수 상승..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "재평가가 필요하다..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "4Q25 잠정실적 공시관련 Comment..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "4Q25 Re: 메모리만 믿으라구..."
+    },
+    {
+      "ticker": "005930",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "강력한 메모리 업황..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "3Q25 Review: 실적보단 2026년 ESS에 주목..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "3Q25 Review 컨센하회, 보상금 반영 이연..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "IBK투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "보유자산 매각 추진 검토 공시 관련 코멘트..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "단기 실적보다는 중장기 ESS 기회 요인에 주....."
+    },
+    {
+      "ticker": "006400",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "낮춰진 눈높이, 턴어라운드에 주목..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "부진한 숫자들 속, 의미 있는 흐름..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "단기 실적보다는 중장기 ESS 기회 요인에 주....."
+    },
+    {
+      "ticker": "006400",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "4분기 흑전에 대한 기다림..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "점진적인 적자폭 축소 전망..."
+    },
+    {
+      "ticker": "006400",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "적자 해소 지연 vs. ESS..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "가장 높은 배당수익률 전망..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "안정적인 이익체력에 비해 다소 저평가..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "안정적인 선택지..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "판관비 증가 외 특이요인 없음..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "향후 더욱 높아질 주주환원 측면의 매력..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "거래대금 상승 수혜 전망..."
+    },
+    {
+      "ticker": "016360",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "2Q25 Review: 실적개선 및 가정치 조정으로 ....."
+    },
+    {
+      "ticker": "036930",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "업황 대비 양호한 1Q23 실적..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "4Q24, 일회성 비용 제거시 부합..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "우려에서 기대의 시선으로..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "중국 장비 셋업 지연, 시선은 PO 로..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "고객사 CAPA 증가 전망..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "2024년 준비 완료..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "전공정 내 매력도 상위..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "2022년 최대실적 경신 전망..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "견조한 실적 아래 고객 및 제품 저변 확대..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "2분기도 순항..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "4Q23 Review 전화위복..."
+    },
+    {
+      "ticker": "036930",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "실적으로 우려를 불식..."
+    },
+    {
+      "ticker": "005380",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "26년 신차 골드 사이클과 미국 시장 재편에 ....."
+    },
+    {
+      "ticker": "005380",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "돈도 잘 버는 로봇회사..."
+    },
+    {
+      "ticker": "005380",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "미국시장 MS 사상 최고치 돌파! 다음은 주가 ....."
+    },
+    {
+      "ticker": "005380",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "이제 모멘텀 상방에 집중할 시점..."
+    },
+    {
+      "ticker": "005380",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "백조가 된 현대차..."
+    },
+    {
+      "ticker": "005380",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "3Q25 Review: 은혜 갚을 기말환율..."
+    },
+    {
+      "ticker": "005380",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "착실한 미래 사업 준비에 주목..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "2Q25 Review: IMA 진출을 위한 유상증자(6,50....."
+    },
+    {
+      "ticker": "005940",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "3Q25Review: 매력적인 배당수익률 구간..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "회사의 결정을 긍정적으로 평가..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "불확실성 감안하여 일단 지켜보기..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "상방/하방 모두 리스크는 제한적일 전망..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "가장 높은 배당수익률 전망..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "총주주환원수익률 9.1% 기대..."
+    },
+    {
+      "ticker": "005940",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "향후 관건은 주주환원과 성장의 균형이 될 전....."
+    },
+    {
+      "ticker": "090430",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "일회성 비용에도 해외·COSRX 턴어라운드..."
+    },
+    {
+      "ticker": "090430",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "코스알엑스 부진 상쇄할 자체 브랜드 성장..."
+    },
+    {
+      "ticker": "090430",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "재정비의 시간..."
+    },
+    {
+      "ticker": "090430",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "코스알엑스만 턴어라운드 한다면..."
+    },
+    {
+      "ticker": "090430",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "폼 돌아오는 중..."
+    },
+    {
+      "ticker": "071050",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "2Q25 Review: 사상 최대 실적을 통해 보여준 ....."
+    },
+    {
+      "ticker": "071050",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "금리 내리면 더 좋아진다..."
+    },
+    {
+      "ticker": "071050",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "환 영향 큰 폭 발생. 향후 금리 하락 국면 기....."
+    },
+    {
+      "ticker": "071050",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "높은 레버리지에 기반한 실적 개선 기대감..."
+    },
+    {
+      "ticker": "071050",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "3분기 연속 컨센 상회..."
+    },
+    {
+      "ticker": "071050",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "운용손익의 로켓점프..."
+    },
+    {
+      "ticker": "071050",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "더 좋아질 수 있다..."
+    },
+    {
+      "ticker": "071050",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "일회성 요인 감안해도 업종 내 최상위 수익성..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "Still 'LONG'..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "메모리 시장 내 위상과 강한 현금 창출력을 ....."
+    },
+    {
+      "ticker": "000660",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "4Q25 Re: 수요 폭발..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "높아진 기대치마저 상회..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "NDR 후기: 메모리의 TSMC로 변화..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "iM증권",
+      "old_name": "되었음을",
+      "new_name": "이민우",
+      "title": "역대급 분기 가격 상승 예상..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "솔드 아웃..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "시급한 재평가..."
+    },
+    {
+      "ticker": "000660",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "공급업체의 Bargaining power 극대화 국면 진....."
+    },
+    {
+      "ticker": "036570",
+      "firm": "SK증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "D-7..."
+    },
+    {
+      "ticker": "036570",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "기대에 부합한 아이온2 성과와 반영될 매출변....."
+    },
+    {
+      "ticker": "036570",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "캐주얼 게임 시장 도전 본격화, 공격적 가이....."
+    },
+    {
+      "ticker": "036570",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "보이는 것만 믿어도..."
+    },
+    {
+      "ticker": "036570",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "조롱을 환호로 바꾼다면..."
+    },
+    {
+      "ticker": "036570",
+      "firm": "DS투자증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "올해의 KEY도 아이온, 글로벌 흥행전망..."
+    },
+    {
+      "ticker": "036570",
+      "firm": "교보증권",
+      "old_name": "자의",
+      "new_name": "자성원",
+      "title": "일주일 뒤 정해질 이익과 주가의 향방..."
+    },
+    {
+      "ticker": "036570",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "아이온2 다음은?..."
+    },
+    {
+      "ticker": "036570",
+      "firm": "유안타증권",
+      "old_name": "되었음을",
+      "new_name": "김현우",
+      "title": "우려를 떨쳐낸 아이온2 그리고 M&A..."
+    }
+  ]
+}
