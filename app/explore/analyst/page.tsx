@@ -23,6 +23,7 @@ interface Report {
   published_at: string;
   pdf_url: string;
   summary?: string;
+  ai_detail?: string;
 }
 
 const data = reportsData as Record<string, Report[]>;
@@ -121,12 +122,20 @@ function ReportModal({ report, isOpen, onClose }: ReportModalProps) {
               </div>
             </div>
 
-            {/* AI 요약 (나중에 추가) */}
+            {/* AI 요약 */}
             {report.summary && (
               <div>
                 <span className="text-gray-500 text-sm">AI 한줄요약</span>
-                <p className="text-sm text-gray-700 mt-1 p-3 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-700 mt-1 p-3 bg-blue-50 rounded-lg font-medium">
                   {report.summary}
+                </p>
+              </div>
+            )}
+            {report.ai_detail && (
+              <div>
+                <span className="text-gray-500 text-sm">상세 분석</span>
+                <p className="text-sm text-gray-600 mt-1 p-3 bg-gray-50 rounded-lg whitespace-pre-line leading-relaxed">
+                  {report.ai_detail}
                 </p>
               </div>
             )}
@@ -269,6 +278,9 @@ export default function AnalystPage() {
                       <OpinionBadge opinion={r.opinion} />
                     </div>
                     <p className="font-medium text-gray-900 text-sm truncate">{r.title}</p>
+                    {r.summary && (
+                      <p className="text-xs text-gray-500 mt-0.5 truncate">{r.summary}</p>
+                    )}
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-xs text-blue-600 font-medium">{TICKER_NAMES[r.ticker] || r.ticker}</span>
                       <span className="text-xs text-gray-400">·</span>
