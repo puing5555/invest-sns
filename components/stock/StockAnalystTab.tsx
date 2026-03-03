@@ -24,6 +24,7 @@ interface StockAnalystTabProps {
 
 interface AnalystReportModalProps {
   report: Report;
+  code: string;
   onClose: () => void;
 }
 
@@ -54,7 +55,7 @@ function OpinionBadge({ opinion }: { opinion: string }) {
   );
 }
 
-function AnalystReportModal({ report, onClose }: AnalystReportModalProps) {
+function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) {
   if (!report) return null;
 
   return (
@@ -196,7 +197,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
       </div>
 
       {selectedReport && (
-        <AnalystReportModal report={selectedReport} onClose={() => setSelectedReport(null)} />
+        <AnalystReportModal report={selectedReport} code={code} onClose={() => setSelectedReport(null)} />
       )}
     </div>
   );
