@@ -209,7 +209,6 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">좋아요</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
                 </tr>
               </thead>
@@ -262,11 +261,6 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                             </span>
                           );
                         })()}
-                      </td>
-                      <td className="px-4 py-4 text-sm text-[#8b95a1] whitespace-nowrap">
-                        {likeCounts[signal.id] > 0 && (
-                          <span className="text-red-500">❤️ {likeCounts[signal.id]}</span>
-                        )}
                       </td>
                       <td className="px-4 py-4">
                         {videoId ? (

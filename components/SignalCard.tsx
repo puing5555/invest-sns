@@ -58,9 +58,6 @@ export default function SignalCard({
       )}
       <div className="flex items-center justify-between text-xs text-gray-400">
         <span>{date}</span>
-        {likeCount && likeCount > 0 && (
-          <span className="text-xs text-red-500">❤️ {likeCount}</span>
-        )}
       </div>
     </div>
   );
