@@ -16,6 +16,7 @@ interface Report {
   published_at: string;
   pdf_url: string;
   summary?: string;
+  ai_detail?: string;
 }
 
 interface StockAnalystTabProps {
@@ -80,10 +81,19 @@ function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) 
               <p className="text-sm text-[#8b95a1] mt-1">{formatDate(report.published_at)}</p>
             </div>
 
-            {/* 요약: 라벨 없이 텍스트만 */}
-            <div className="bg-[#f8f9fa] rounded-xl p-4 border-l-4 border-[#3182f6]">
-              <p className="text-[15px] text-[#191f28] leading-relaxed">
+            {/* AI 한줄요약 */}
+            <div className="bg-[#f0f7ff] rounded-xl p-4 border-l-4 border-[#3182f6]">
+              <p className="text-xs text-[#8b95a1] mb-1">AI 한줄요약</p>
+              <p className="text-[15px] text-[#191f28] leading-relaxed font-medium">
                 {report.summary || <span className="text-[#8b95a1]">리포트 요약 준비 중</span>}
+              </p>
+            </div>
+
+            {/* AI 상세 분석 */}
+            <div className="bg-[#f8f9fa] rounded-xl p-4">
+              <p className="text-xs text-[#8b95a1] mb-2">AI 상세 분석</p>
+              <p className="text-sm text-[#333] leading-relaxed whitespace-pre-line">
+                {report.ai_detail || <span className="text-[#8b95a1]">리포트 요약 준비 중</span>}
               </p>
             </div>
 
@@ -171,9 +181,8 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
                 <tr>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트 제목</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
                 </tr>
               </thead>
@@ -181,11 +190,14 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
                 {sortedReports.map((report, index) => (
                   <tr key={index} className="hover:bg-[#f8f9fa] transition-colors cursor-pointer" onClick={() => setSelectedReport(report)}>
                     <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{formatDate(report.published_at)}</td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{report.analyst || '-'}</td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{report.firm}</td>
+                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                      <div>{report.analyst || '-'}</div>
+                      <div className="text-xs text-[#8b95a1]">{report.firm}</div>
+                    </td>
                     <td className="px-4 py-4"><OpinionBadge opinion={report.opinion} /></td>
-                    <td className="px-4 py-4 text-sm max-w-xs">
+                    <td className="px-4 py-4 text-sm max-w-md">
                       <div className="text-[#191f28] font-medium truncate hover:text-[#3182f6] transition-colors">{report.title}</div>
+                      {report.summary && <div className="text-xs text-[#8b95a1] mt-0.5 truncate">{report.summary}</div>}
                     </td>
                     <td className="px-4 py-4 text-sm text-[#191f28] font-medium whitespace-nowrap">{formatTargetPrice(report.target_price, code)}</td>
                   </tr>
