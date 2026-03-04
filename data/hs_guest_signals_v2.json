@@ -1,0 +1,981 @@
+{
+  "summary": {
+    "total_videos": 411,
+    "guest_videos": 127,
+    "unique_guests": 42,
+    "total_affected_signals": 242
+  },
+  "guests": [
+    {
+      "name": "이형수",
+      "affiliation": "",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "8495556c-8d00-4b14-bea8-d646c64ddd9a",
+          "title": "TSMC를 잡을 삼성의 진짜 비밀 무기월간아신 11월 3부 [IT의신 이형수 대표]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "bf88d77c-8a1d-486e-8758-149599efa210",
+          "title": "엔비디아 말고 AMD선택한 OpenAI, GPU 시장에 불어온 피바람 월간아신 10월 2부 [IT의신 이형수 대표]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13",
+          "title": "[월간아신] 코스피 대장 삼성전자, 겹겹이 악재 쏟아진다 | IT의 신 이형수 대표 [1부]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "cf745b3d-7425-40fe-bbde-cc1926404a01",
+          "title": "[월간아신] 하락세인 삼성·하이닉스 다음 실적도 쇼크일거 같습니다..⎮IT의 신 이형수 대표",
+          "signal_count": 2
+        },
+        {
+          "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+          "title": "[월간아신] 앙숙인 대만 TSMC 활약에 웃음짓는 시진핑⎮IT의 신 이형수 대표",
+          "signal_count": 3
+        },
+        {
+          "video_id": "79e8893c-c1c0-4adc-b846-017c1998d81f",
+          "title": "[월간아신] 호실적에도 급락한 엔비디아! 반도체 투자 전략 '이렇게' 잡아보세요⎮IT의 신 이형수 대표 [풀영상]",
+          "signal_count": 4
+        },
+        {
+          "video_id": "1ca614cf-4d18-4cdf-b795-b746eeb209b5",
+          "title": "[월간아신] 삼성은 AI 온디바이스 시장에서 애플을 어떻게 상대할까?⎮IT의 신 이형수 대표",
+          "signal_count": 3
+        },
+        {
+          "video_id": "2c9c23e3-3d32-466f-b25c-2f0250d8de0b",
+          "title": "[월간아신] 무서워진 삼성전자! 무엇이 달라진걸까?⎮IT의 신 이형수 대표",
+          "signal_count": 2
+        },
+        {
+          "video_id": "a9960100-c406-41aa-8491-fb7031d13b0d",
+          "title": "[월간아신] TSMC 낙수 노리던 삼성전자, 믿는 도끼에 발등 제대로 찍혔습니다⎮IT의 신 이형수 대표",
+          "signal_count": 4
+        },
+        {
+          "video_id": "33d1cb70-7e31-4b3d-baf3-d499deb0ebd9",
+          "title": "[월간아신] 애플도 뺏기고 구글도 뺏긴 삼성IT의 신 이형수 대표",
+          "signal_count": 4
+        },
+        {
+          "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+          "title": "[월간아신] 벼랑끝에 내몰린 삼성전자! 비장의 무기가 남아있을까?⎮IT의 신 이형수 대표",
+          "signal_count": 6
+        },
+        {
+          "video_id": "ecdadb37-6dd0-4348-82b4-bd21f6c7dad3",
+          "title": "[월간아신] 삼성전자 이번엔 다르다? 한번더 믿어봐야 할까?⎮IT의 신 이형수 대표",
+          "signal_count": 3
+        },
+        {
+          "video_id": "e284ee64-d2f0-471f-a5cb-6a5cd16e57c0",
+          "title": "[월간아신] 엔비디아에게서 벗어나려는 빅테크들의 발버둥?⎮IT의 신 이형수 대표",
+          "signal_count": 3
+        },
+        {
+          "video_id": "37fb73f3-5e81-4772-88a5-a213d7cddef9",
+          "title": "[월간아신] 위기의 삼성전자와 현대차를 살릴 반도체의 지존이 옵니다⎮IT의 신 이형수 대표",
+          "signal_count": 5
+        },
+        {
+          "video_id": "db3fc81e-dee7-49c9-b7b1-d34884a0365e",
+          "title": "[월간아신] 애플과 엔비디아의 소름끼치는 평행이론⎮IT의 신 이형수 대표",
+          "signal_count": 3
+        },
+        {
+          "video_id": "51de7607-c392-4e71-995e-671f206b86fb",
+          "title": "[월간아신] 10월 풀버전! 이달의 반도체 시장 총정리! 삼성전자가 맞이한 기회!⎮IT의 신 이형수 대표",
+          "signal_count": 2
+        },
+        {
+          "video_id": "93ea8a5a-d66e-42b2-b051-190612abb170",
+          "title": "삼성전자에게 찾아온 역대급 기회⎮IT의 신 이형수 대표",
+          "signal_count": 3
+        },
+        {
+          "video_id": "f7c18429-44e0-4c76-bb80-3df8b59ffa44",
+          "title": "[월간아신] 삼성전자, TSMC의 빈틈을 노리다!⎮IT의 신 이형수 대표",
+          "signal_count": 5
+        },
+        {
+          "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+          "title": "[월간아신] 엔비디아가 주춤한 이유는 '이것' 때문!⎮IT의 신 이형수 대표",
+          "signal_count": 4
+        },
+        {
+          "video_id": "91d82818-b993-4130-908c-d8bb3e3ce97b",
+          "title": "[월간아신] 엔비디아 고공행진 속 숨겨진 의미⎮IT의 신 이형수 대표",
+          "signal_count": 7
+        },
+        {
+          "video_id": "2eafa800-31e3-47dc-8d21-7bf353f380da",
+          "title": "[월간아신] 삼성전자 vs SK하이닉스 반도체 전쟁⎮IT의 신 이형수 대표",
+          "signal_count": 4
+        },
+        {
+          "video_id": "a1d4e814-e6a7-4960-9817-6f3d57019fde",
+          "title": "[월간아신] '호재가 쏟아져요' 삼성전자 파운드리 소식 총정리⎮IT의 신 이형수 대표 1부",
+          "signal_count": 1
+        },
+        {
+          "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+          "title": "[월간아신] 삼성전자 파운드리 수혜기업 리스트⎮IT의 신 이형수 대표",
+          "signal_count": 7
+        }
+      ],
+      "total_signals": 83
+    },
+    {
+      "name": "강정수",
+      "affiliation": "",
+      "title": "박사",
+      "videos": [
+        {
+          "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+          "title": "테슬라 FSD는 전기차보다 세상을 더 빨리 바꿀 겁니다ㅣ강정수 박사 블루닷AI [3부]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "ead07983-5226-4736-aea6-fc50be63e380",
+          "title": "드디어 움직인다! 테슬라 로보택시!ㅣ강정수 박사 [풀영상]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "43abb187-6ff0-4405-b15b-4663de89746b",
+          "title": "6월 테슬라 로보택시, 진짜 시작합니다ㅣ강정수 센터장 [1부]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "15848bb5-15a5-4c8b-9fb2-64540c7fd695",
+          "title": "로봇 춤이 세상을 흔든다? 테슬라의 충격적인 기술ㅣ강정수 센터장 [2부]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "9ad72303-3fe7-421b-bcca-16579a4b5d7c",
+          "title": "테슬라 저가형 모델 출시, 반등 시작되나?ㅣ강정수 센터장 [3부]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "22f73ebc-dcb1-4800-bb95-0af07f6082e2",
+          "title": "테슬라 로보택시 행사 D-1, 우리가 집중해야할 '이것' | 강정수 박사",
+          "signal_count": 3
+        },
+        {
+          "video_id": "ab923d87-60b4-40bb-b5d7-8a8ee5db4ba9",
+          "title": "경쟁사는 진땀뺄 때, 테슬라는 마우스 딸깍으로 문제 해결? | 강정수 박사 [2부]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "ce165137-728a-4f14-a24e-aec378a88cb0",
+          "title": "전기차 시장 압도적 1등을 노리는 테슬라가 준비한 비장의 무기 | 강정수 박사 [1부]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "e0055607-263d-403b-b768-b91d84c7599e",
+          "title": "AI시대와 네이버의 몰락, 이제는 하다하다 국뽕에 기대고 있어요 | 강정수 박사",
+          "signal_count": 2
+        },
+        {
+          "video_id": "a7d9c2c1-5a8c-4058-b9c7-7130d3bd3aff",
+          "title": "테슬라 1,000% 상승 충분히 가능합니다. 하지만 차만 팔아서는 절대 안됩니다⎮강정수 박사 [풀영상]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "c614e75b-ec09-4c08-a038-8d5304e0e918",
+          "title": "향후 테슬라의 주가... 저는 이렇게 봅니다⎮강정수 박사",
+          "signal_count": 1
+        },
+        {
+          "video_id": "c5e09aff-28cc-4eec-bd3f-95ed099d77fd",
+          "title": "테슬라의 미래가 밝을 수 밖에 없는 '이유'⎮강정수 박사",
+          "signal_count": 1
+        },
+        {
+          "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68",
+          "title": "테슬라 주가 고공행진 하는 이유? 월가에서 인정하기 시작했습니다⎮강정수 박사",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 23
+    },
+    {
+      "name": "맹성준",
+      "affiliation": "전 테슬라",
+      "title": "엔지니어",
+      "videos": [
+        {
+          "video_id": "3a17ad46-d367-423e-8029-3260e401c0ca",
+          "title": "테슬라 직원도 외면하는 FSD 이유를 직접 물어봤습니다ㅣ맹성준 전 테슬라 엔지니어",
+          "signal_count": 3
+        },
+        {
+          "video_id": "78314a4c-c307-4e87-9988-ed14c409be15",
+          "title": "일론 머스크 vs 샘 알트먼 누가 AI 왕이 될 상인가?ㅣ맹성준 전 테슬라 엔지니어",
+          "signal_count": 0
+        },
+        {
+          "video_id": "17cfbd09-7f0a-4608-b26c-f1b45442e557",
+          "title": "1조 달러 받게 된 일론 머스크 바로 옆에서 보면 이렇습니다ㅣ맹성준 전 테슬라 엔지니어 [풀영상]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "bbb001a4-4a64-4b30-b81f-568f990e97ee",
+          "title": "한국에서는 잘 모르는 실리콘밸리 최대 이슈ㅣ맹성준 전 테슬라 엔지니어 [3부]",
+          "signal_count": 5
+        },
+        {
+          "video_id": "bf3ea9fa-bbc9-49b4-b72c-e4ba0791da4b",
+          "title": "'전기차의 시대가 온다' 이 말은 철저히 틀렸습니다ㅣ맹성준 전 테슬라 엔지니어 [2부]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "f0ffc181-2af3-4a2e-9980-bc0071e1a511",
+          "title": "머스크 밑에서 일할 때 바들바들 떨었던 이유ㅣ맹성준 전 테슬라 엔지니어 [1부]",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 12
+    },
+    {
+      "name": "정지훈",
+      "affiliation": "ASIA2G캐피탈 제네럴",
+      "title": "파트너",
+      "videos": [
+        {
+          "video_id": "3d82af68-09bf-4e97-a184-8e8fb8e45c8b",
+          "title": "삼성을 시험에 들게 한 테슬라와 일론 머스크ㅣ정지훈 ASIA2G캐피탈 제네럴 파트너/박사 [풀영상]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "1b0508ad-3e15-4433-8757-78f9364af252",
+          "title": "테슬라가 TSMC 버리고 삼성전자와 손 잡은 이유ㅣ정지훈 ASIA2G캐피탈 제네럴 파트너/박사 [1부]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+          "title": "테슬라의 AI 전략에는 왜 모든 시선이 집중되는가?⎮정지훈 Asia2G 캐피털 제네럴 파트너 [3부]",
+          "signal_count": 8
+        },
+        {
+          "video_id": "22b42ef8-b20b-4b90-ac91-2791b74eeed9",
+          "title": "미국 정부 인텔에 11조 지원 논의중..??!!⎮정지훈 ASIA 2G 캐피털 제네럴 파트너 [풀영상]",
+          "signal_count": 5
+        },
+        {
+          "video_id": "f6b446a0-7981-4ce8-a167-0800ad573c91",
+          "title": "엔비디아가 아니라구? AI 시대 최강자의 자리를 노리는 '이곳'⎮정지훈 ASIA 2G 캐피털 제네럴 파트너",
+          "signal_count": 3
+        },
+        {
+          "video_id": "416b9fbf-448a-49bc-8249-6254e3bdde99",
+          "title": "엔비디아의 진짜 무서운점은 기술이 아닌 '이것' 입니다⎮정지훈 ASIA 2G 캐피털 제네럴 파트너",
+          "signal_count": 3
+        }
+      ],
+      "total_signals": 23
+    },
+    {
+      "name": "윤수목",
+      "affiliation": "",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "f2f7f805-b95c-498d-983d-698f91e8963e",
+          "title": "9만달러 돌파한 비트코인! 경기침체가 와도 안전한 자산일까? | 윤수목 대표 [풀영상]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "b162f186-6e7e-4be9-9ab7-c53102bd154c",
+          "title": "'크립토 프레지던트' 등장! 트럼프 당선이 비트코인 시장에 가져올 '의미' | 윤수목 대표 [1부]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "8c76f6eb-4255-47e0-8c49-0525da3c117a",
+          "title": "국민연금 비트코인 투자했네요. 근데 '이곳'은 진작 투자했습니다 | 수목튜브 윤수목 대표",
+          "signal_count": 1
+        },
+        {
+          "video_id": "af932297-31f0-4c48-b473-3219b2ba6290",
+          "title": "비트코인으로 돈 버는 기본 원칙은 '이것' | 수목튜브 윤수목 대표",
+          "signal_count": 0
+        },
+        {
+          "video_id": "588a0717-31a8-4797-9005-dbf93f87bc02",
+          "title": "비트코인 폭망 시나리오 한번 써볼게요| 수목튜브 윤수목 대표",
+          "signal_count": 0
+        },
+        {
+          "video_id": "8792d2ae-a699-4cb8-8ea9-53d223472148",
+          "title": "비트코인 반감기인데 왜 떨어져요? 알려드릴게요 | 수목튜브 윤수목 대표",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "변우철",
+      "affiliation": "KT",
+      "title": "본부장",
+      "videos": [
+        {
+          "video_id": "96d08d06-f2a3-4f23-8125-146430663e17",
+          "title": "팔란티어를 넘어서는 AI기업은 나올 수가 없어요ㅣ변우철 KT 본부장 [풀영상]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "9e82689e-c61d-42eb-894a-a5da65c705ce",
+          "title": "팔란티어 온톨로지, 이것 이상의 설명은 없습니다ㅣ변우철 KT 본부장 [3부]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "33bebc26-dc6d-4556-b701-909916e62baf",
+          "title": "수천억 아껴주는 팔란티어를 국내 기업은 안 쓰는 '이유'ㅣ변우철 KT 본부장 [2부]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "6ff1e2a9-33d8-48a3-a5f5-e09346cbd101",
+          "title": "대한민국 최초, 팔란티어 국내 도입한 썰ㅣ변우철 KT 본부장 [1부]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "29af6860-6687-4ee4-b66f-6a7a98869679",
+          "title": "팔란티어가 AI 시대의 '리바이스'인 이유ㅣ변우철 KT 본부장 [4부]",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 2
+    },
+    {
+      "name": "홍진채",
+      "affiliation": "라쿤자산운용",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "d4970cc6-b705-43a2-aebd-064a8cd6d62e",
+          "title": "이번 주주총회를 통해 버핏이 우리에게 내려준 가르침 | 라쿤자산운용 홍진채 대표 [풀영상]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "554b9bca-c0a3-4d0c-8076-d4c229fc0a6d",
+          "title": "가치투자의 제왕 버핏이 생각하는 애플과 테슬라의 투자 가치 | 라쿤자산운용 홍진채 대표",
+          "signal_count": 2
+        },
+        {
+          "video_id": "8cdd91e7-6a6f-4727-bc33-78f297c6039d",
+          "title": "찰리 없이 혼자하는 주총에서 버핏이 밝힌 비밀 | 라쿤자산운용 홍진채 대표",
+          "signal_count": 2
+        },
+        {
+          "video_id": "75a261ce-0981-49d4-bbc1-f3e7639468f2",
+          "title": "버핏형님 주주총회 다녀온 썰 & 최근 시장에 관한 생각⎮홍진채 라쿤자산운용 대표 1부",
+          "signal_count": 2
+        },
+        {
+          "video_id": "c0a54601-a043-4663-b4fa-d18750b56a8a",
+          "title": "워런 버핏, 시장이 어려울 때 생각나는 사람 (w. 홍진채 대표)",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 9
+    },
+    {
+      "name": "이용재",
+      "affiliation": "",
+      "title": "선임",
+      "videos": [
+        {
+          "video_id": "594c120f-fefb-4080-aee6-b415d0405413",
+          "title": "비트코인 반감기가 왔습니다. 근데 이건 시작에 불과합니다 | 미래에셋증권 이용재 선임매니저",
+          "signal_count": 0
+        },
+        {
+          "video_id": "2fca8356-b469-4c9f-83dc-48062392eeec",
+          "title": "비트코인 ETF 약발은 떨어진건가요? 아뇨 이제 시작입니다 | 미래에셋증권 이용재 선임매니저",
+          "signal_count": 0
+        },
+        {
+          "video_id": "759b4eef-fee4-42c9-9f2d-0b48caf521bc",
+          "title": "이더리움 ETF 승인 노리는 블랙록! 승인 가능할까?  | 미래에셋증권 이용재 선임매니저",
+          "signal_count": 0
+        },
+        {
+          "video_id": "ab83d730-89aa-42a2-b968-6eb8febeabbe",
+          "title": "비트코인 ETF만큼 중요하다? 중앙은행이 찍어내는 디지털 화폐 CBDC 설명해드립니다 | 미래에셋증권 이용재 선임매니저",
+          "signal_count": 0
+        },
+        {
+          "video_id": "108b98a3-94d9-4b47-9100-9fc3beaf1f5c",
+          "title": "비트코인 ETF 승인되면 엄청난 일들이 벌어집니다! | 미래에셋증권 이용재 선임매니저",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "정주용",
+      "affiliation": "그래비티벤처스",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "a83a633b-27e6-42b0-a252-001c9ee2b252",
+          "title": "테슬라에는 없고 웨이모에는 잇는 것ㅣ정주용 그래비티벤처스 대표 [1부]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "61560326-1ea3-490b-8af2-b0961d4016b5",
+          "title": "팔란티어 적정주가를 생각하는 방법ㅣ정주용 그래비티벤처스 CIO [풀영상]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+          "title": "팔란티어가 타의 추종을 절대로 불허하는 이유ㅣ정주용 그래비티벤처스 CIO [1부]",
+          "signal_count": 4
+        },
+        {
+          "video_id": "e368d454-ff5e-4171-99d1-ac6962a22418",
+          "title": "K-팔란티어, 이제는 시작해야 합니다ㅣ정주용 그래비티벤처스 CIO [3부]",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 7
+    },
+    {
+      "name": "김동환",
+      "affiliation": "원더프레임",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "e325fb3b-edd4-4fa6-b169-b6c6f23147fb",
+          "title": "미국 대선 후보들이 비트코인을 대하는 자세 | 원더프레임 김동환 대표 [풀영상]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "033b0c49-8daf-4c08-9a8c-faa94fcc00c5",
+          "title": "최근 상승하는 비트코인! 이유는 '이것' | 원더프레임 김동환 대표",
+          "signal_count": 0
+        },
+        {
+          "video_id": "d51da54e-2762-4dd5-a7b8-b5460066f566",
+          "title": "하반기 비트코인 상승장 제대로 짚어드립니다 | 원더프레임 김동환 대표",
+          "signal_count": 0
+        },
+        {
+          "video_id": "d8963b2c-885f-4693-8a74-7a9108b6e688",
+          "title": "이더리움 ETF 승인! 비트코인은 웃고있을까 울고있을까?⎮김동환 원더프레임 대표",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "박형근",
+      "affiliation": "",
+      "title": "연구원",
+      "videos": [
+        {
+          "video_id": "c551bfde-1370-4b24-94d7-60d0f69a2f5b",
+          "title": "중국 전기차의 반란? 일론 머스크는 어떻게 볼까⎮테슬라 삼촌 박형근 연구원 [풀영상]",
+          "signal_count": 3
+        },
+        {
+          "video_id": "7f24db03-1c50-4191-80cc-6ca95702d6de",
+          "title": "애플도 접은 전기차, 테슬라의 미래는?⎮테슬라 삼촌 박형근 연구원",
+          "signal_count": 1
+        },
+        {
+          "video_id": "9970ad31-cd10-4db9-a2af-141fd45dd422",
+          "title": "손해보고 파는 전기차가 있다? 후발주자의 설움⎮테슬라 삼촌 박형근 연구원",
+          "signal_count": 3
+        },
+        {
+          "video_id": "5218b749-302f-4163-98d4-a0eda953369d",
+          "title": "생태계를 파괴하는 중국 전기차의 습격⎮테슬라 삼촌 박형근 연구원",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 9
+    },
+    {
+      "name": "오태민",
+      "affiliation": "",
+      "title": "작가",
+      "videos": [
+        {
+          "video_id": "09664cbd-f358-4f20-8cbf-39977f3b872f",
+          "title": "비트코인 가격? 결국엔 이렇게 될수밖에 없습니다 | 오태민 작가",
+          "signal_count": 0
+        },
+        {
+          "video_id": "a118f1ae-7468-4d26-8d96-65de0062aeed",
+          "title": "비트코인에 대해서 이렇게 접근하는 건 처음입니다 | 오태민 작가",
+          "signal_count": 0
+        },
+        {
+          "video_id": "a27675fa-0d3e-4ea3-b89c-b4df924cce2f",
+          "title": "[풀버전] 달러패권의 종말, 비트코인은 미국의 지정학적 무기가 됩니다 l 오태민 작가 '비트코인, 그리고 달러의 지정학'",
+          "signal_count": 2
+        },
+        {
+          "video_id": "e464764f-f769-4539-a78f-82a48a540f3b",
+          "title": "목표는 금융망 붕괴입니다. 최강대국 미국이 흔들리는 진짜 이유 l 오태민 작가 '비트코인, 그리고 달러의 지정학' 2부",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 3
+    },
+    {
+      "name": "조봉수",
+      "affiliation": "",
+      "title": "상무",
+      "videos": [
+        {
+          "video_id": "fbb2c2a5-64af-4a00-8b16-a5f05de1ba86",
+          "title": "한국은 AI 시장에서 실패하는 아주 정석적인 루트로 가고 있습니다ㅣLG전자 조봉수 상무 [2부]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "98e5d4af-24bc-4a71-96d2-42d391c59977",
+          "title": "AI는 선택이 아닌 필수입니다. 사용하는자와 안하는자의 초격차는 더 벌어집니다ㅣLG전자 조봉수 상무 [1부]",
+          "signal_count": 0
+        },
+        {
+          "video_id": "cdb30df5-0bc1-487b-8889-f754d67a33ad",
+          "title": "이효석의 인터뷰 - 네이버, 카카오, 구글, 애플이 흔들릴 때 봐야하는 영상, 데이터는 왜 돈이 되는가?? (with. 조봉수 실장)",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "백수전",
+      "affiliation": "한국경제신문",
+      "title": "기자",
+      "videos": [
+        {
+          "video_id": "d2aeab79-ae1c-40ee-bef0-ffd47dea705e",
+          "title": "테슬라 투자하려는 분들은 '이것' 반드시 기억하셔야 합니다. | 백수전 한국경제신문 기자 [풀영상]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "03a2af36-934f-43ac-847e-d98d9400d57a",
+          "title": "테슬라 자율주행 최신근황, 냉정하게 팩트만 분석해보겠습니다 | 백수전 한국경제신문 기자 [1부]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "f2064035-6d7d-4890-9588-82eb39a1f7c4",
+          "title": "테슬라 시총 '3경원' 간다고? 일론 머스크가 자신하는 이유 | 백수전 한국경제신문 기자 [2부]",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 4
+    },
+    {
+      "name": "장민환",
+      "affiliation": "iM증권",
+      "title": "연구원",
+      "videos": [
+        {
+          "video_id": "24869c45-f547-41f8-9f38-44bc133a0977",
+          "title": "삼성바이오로직스 분석의 '거의' 모든것⎮장민환 iM증권 연구원 [풀영상]",
+          "signal_count": 1
+        },
+        {
+          "video_id": "27d61afe-1d54-4185-a467-195f32b9b0d8",
+          "title": "삼성바이오로직스의 미래 먹거리는 '이 것' | iM증권 장민환 연구원",
+          "signal_count": 1
+        },
+        {
+          "video_id": "088a815e-4982-4cca-8773-467bae73a6ce",
+          "title": "월드클래스가 된 삼성바이오로직스, 더 갈 수 있는 이유는 '이 것' | iM증권 장민환 연구원",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 3
+    },
+    {
+      "name": "신형관",
+      "affiliation": "중국자본연구소",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "39cbdd47-7d81-431f-a874-95ab2f21b5b4",
+          "title": "엔비디아를 위협하는 단 하나의 기업, 여기입니다ㅣ신형관 중국자본연구소 대표 [풀영상]",
+          "signal_count": 2
+        },
+        {
+          "video_id": "d8f8940c-9ccb-44d6-92b7-0182db493d38",
+          "title": "애플이 망한다면 이 회사 떄문ㅣ신형관 중국자본시장연구소 대표 [3부]",
+          "signal_count": 4
+        }
+      ],
+      "total_signals": 6
+    },
+    {
+      "name": "강동진",
+      "affiliation": "",
+      "title": "연구위원",
+      "videos": [
+        {
+          "video_id": "08fdc779-c602-4227-adae-ff585aba6b5b",
+          "title": "꼼수부리다 철퇴 맞은 중국! 빈자리를 차지할 기업은?⎮현대차증권 강동진 연구위원",
+          "signal_count": 1
+        },
+        {
+          "video_id": "82b124b1-fa9a-4443-be0f-00b6a66df288",
+          "title": "'이것' 때문에 원전 16개가 필요하다고요?⎮현대차증권 강동진 연구위원",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 3
+    },
+    {
+      "name": "양희창",
+      "affiliation": "",
+      "title": "매니저",
+      "videos": [
+        {
+          "video_id": "d1bdb604-1a77-400c-903f-c8274f0c722f",
+          "title": "엔비디아 실적 발표전 AI 빅테크 총정리 영상보고 가세요 | 삼성액티브자산운용 양희창 매니저 [풀영상]",
+          "signal_count": 7
+        },
+        {
+          "video_id": "51767b89-2066-40e6-97dd-9d3eef2b59c2",
+          "title": "AI 대장주는 이제 엔비디아가 아닙니다⎮삼성액티브자산운용 양희창 매니저, 바바리안 리서치 정희석 이사",
+          "signal_count": 3
+        }
+      ],
+      "total_signals": 10
+    },
+    {
+      "name": "강하나",
+      "affiliation": "",
+      "title": "연구원",
+      "videos": [
+        {
+          "video_id": "326af6e2-45f6-45de-a0a3-db094f41ffde",
+          "title": "역대급 실적의 엔비디아! 바이오에 손을 댄다고??⎮원리버 강하나 연구원",
+          "signal_count": 8
+        },
+        {
+          "video_id": "33bed8cc-0c81-4eb1-a335-533411a2bff2",
+          "title": "손대면 오르는 엔비디아! 다음 타겟은 바이오?⎮원리버 강하나 연구원",
+          "signal_count": 6
+        }
+      ],
+      "total_signals": 14
+    },
+    {
+      "name": "김대식",
+      "affiliation": "",
+      "title": "총괄",
+      "videos": [
+        {
+          "video_id": "8fd2f3ed-ffea-42e1-a9c6-e7ff1dc1d31d",
+          "title": "AI가 만화도 그리는 세상(w.네이버 웹툰AI 김대식 총괄 2부)",
+          "signal_count": 0
+        },
+        {
+          "video_id": "efcd74c8-9315-4f39-ac43-c3e09f6c8d18",
+          "title": "'테슬라의 경쟁력' AI 박사의 생각은 이렇습니다(w.네이버 웹툰AI 김대식 총괄 1부)",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "김단테",
+      "affiliation": "",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "664ddf3c-f437-44d8-9635-18c958006dc1",
+          "title": "[투자 아카데미 #모아보기]  이루다투자일임 김단테 대표님의 강의 집대성! 투자 성공을 원하시는 모든 분들을 위한 자산배분의 모든것!! #주식 #투자 #자산배분 #비트코인",
+          "signal_count": 0
+        },
+        {
+          "video_id": "4a36172f-ff82-4768-a9cb-07fe7c40ff59",
+          "title": "[투자 아카데미 22강] 비트코인도 투자 자산일까?? (강사 : 김단테 대표) #자산배분 #주식 #비트코인 #변동성 #상관관계 #투자 #집중투자 #bitcoin #경제공부",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "박성진",
+      "affiliation": "",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "b9f5279b-d25e-47ce-a03c-c20187f7a26d",
+          "title": "\"지우개로~ 기억을 지울 수만 있다면~\"ㅣ이효석아카데미 오리지날 박성진 대표 [버핏 2부]",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 2
+    },
+    {
+      "name": "배경율",
+      "affiliation": "",
+      "title": "교수",
+      "videos": [
+        {
+          "video_id": "4527d27f-ef23-41ec-8306-17d433e2df43",
+          "title": "팔란티어 주가, 지금이 딱 매력적인 이유ㅣ배경율 교수 [풀영상]",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "김수헌",
+      "affiliation": "MTN 기업경제센터",
+      "title": "센터장",
+      "videos": [
+        {
+          "video_id": "3df2c39b-4ddf-4a4e-9f84-44e26065dce6",
+          "title": "영업이익 870% 폭등해버린 셀트리온 회계 장부를 까보니까 이런게 있네요ㅣ김수헌 MTN 기업경제센터 센터장",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 2
+    },
+    {
+      "name": "김민석",
+      "affiliation": "",
+      "title": "기자",
+      "videos": [
+        {
+          "video_id": "4b2b8c6d-b6d8-4a5c-a515-84a7b1028831",
+          "title": "TSMC, 가질 수 없다면 부셔버리겠어ㅣ김민석 기자 [2부]",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "최준",
+      "affiliation": "한국은행",
+      "title": "박사",
+      "videos": [
+        {
+          "video_id": "027a14f5-ec2d-4ac0-8ec0-270fb04b4879",
+          "title": "넷플릭스 납품하고 저작권 사골을 끝까지 우려먹는 일본, 만들고 끝 권리는 없는 한국ㅣ최준 한국은행 박사 [2부]",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "최도연",
+      "affiliation": "SK증권",
+      "title": "센터장",
+      "videos": [
+        {
+          "video_id": "375da29f-6a13-49aa-959e-70999fda3078",
+          "title": "아직 희망이 남아 있을지도 모릅니다! 삼성전자를 기다리는 봄날ㅣ최도연 SK증권 센터장 [2부]",
+          "signal_count": 5
+        }
+      ],
+      "total_signals": 5
+    },
+    {
+      "name": "오종태",
+      "affiliation": "",
+      "title": "이사",
+      "videos": [
+        {
+          "video_id": "283d58d0-063d-47ea-8872-c021f49e64c0",
+          "title": "삼성전자 당연히 응원해야죠 근데 지금은 마음으로만 하세요⎮오종태 이사 [1부]",
+          "signal_count": 3
+        }
+      ],
+      "total_signals": 3
+    },
+    {
+      "name": "김탁",
+      "affiliation": "밸류시스템자산운용",
+      "title": "상무",
+      "videos": [
+        {
+          "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5",
+          "title": "52주 신저가 경신한 삼성전자! 지금이라도 '주도주'를 보셔야 합니다⎮김탁 밸류시스템자산운용 상무 [풀영상]",
+          "signal_count": 6
+        }
+      ],
+      "total_signals": 6
+    },
+    {
+      "name": "이장우",
+      "affiliation": "루트컴퍼니",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "9aa44382-1469-4d48-b169-f799f14ef610",
+          "title": "게임체인저 비트코인의 진짜 중요한 '3가지' | 이장우 루트컴퍼니 대표 [풀영상]",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "김현지",
+      "affiliation": "업라이즈 비트버니 부문",
+      "title": "PM",
+      "videos": [
+        {
+          "video_id": "6f850f3c-20f0-48e8-827b-07d77557b43f",
+          "title": "걷고 퀴즈풀면 비트코인이랑 금을 주는 어플이 있다!⎮김현지 업라이즈 비트버니 부문 PM",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "이선엽",
+      "affiliation": "신한투자증권",
+      "title": "이사",
+      "videos": [
+        {
+          "video_id": "7412997b-a9d6-4081-8e7f-3059ba53e981",
+          "title": "버핏이 애플 팔아서 시장이 위기다? 아니에요 '이것' 팔아야 진짜 위기죠 | 이선엽 신한투자증권 이사",
+          "signal_count": 2
+        }
+      ],
+      "total_signals": 2
+    },
+    {
+      "name": "엄민용",
+      "affiliation": "",
+      "title": "연구위원",
+      "videos": [
+        {
+          "video_id": "4327d538-c998-4367-b39a-aaabeb9029cf",
+          "title": "삼성바이오, 셀트리온 뒤를 이을 차세대 바이오 대장주는 '여기'⎮신한투자증권 엄민용 연구위원 [알테오젠 3부]",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "안유화",
+      "affiliation": "",
+      "title": "교수",
+      "videos": [
+        {
+          "video_id": "880d89b0-47af-4071-93c9-96f6e6dc1d15",
+          "title": "비트코인 대표 금지국 중국! 홍콩에서 ETF는 허용된 이유⎮중국증권행정연구원 안유화 교수",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "안희철",
+      "affiliation": "",
+      "title": "변호사",
+      "videos": [
+        {
+          "video_id": "9a74f556-8562-485b-aff3-5fa053da4538",
+          "title": "라인을 꿀꺽하려는 일본과 네이버의 치열한 공방⎮법무법인 디엘지 안희철 변호사",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "송종호",
+      "affiliation": "",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "3ae2512d-23f5-4c95-97bf-42e1cf6679bf",
+          "title": "국내 반도체 시장의 열쇠를 쥐고 있는 엔비디아의 선택은?⎮팔라티노 프라이빗에쿼티 송종호 대표 [풀영상]",
+          "signal_count": 4
+        }
+      ],
+      "total_signals": 4
+    },
+    {
+      "name": "박세익",
+      "affiliation": "",
+      "title": "전무",
+      "videos": [
+        {
+          "video_id": "faf1d517-a64f-4067-aba8-272a4edb5b43",
+          "title": "위기의 삼성전자, 올해엔 반드시 갑니다⎮체슬리투자자문 박세익 전무",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "김도형",
+      "affiliation": "",
+      "title": "본부장",
+      "videos": [
+        {
+          "video_id": "7d7a8aad-a54a-43f3-820e-d51bc0965fee",
+          "title": "테슬라 많이 빠져서 힘드시죠? 이런 방법도 있습니다삼성자산운용 김도형 본부장",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "이승우",
+      "affiliation": "",
+      "title": "센터장",
+      "videos": [
+        {
+          "video_id": "90642423-4c58-43a7-9614-be7bc0e8507b",
+          "title": "AI 반도체 시장, 엔비디아를 위협할 기업은 '이곳'입니다!⎮유진투자증권 이승우 센터장",
+          "signal_count": 1
+        }
+      ],
+      "total_signals": 1
+    },
+    {
+      "name": "주기영",
+      "affiliation": "",
+      "title": "대표",
+      "videos": [
+        {
+          "video_id": "dce0cd6e-989d-4b2a-ad75-4ff5db1a33fd",
+          "title": "비트코인 투자하려면 이 지표부터 봐야합니다(ft. 크립토퀀트 주기영 대표)",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "배상수",
+      "affiliation": "",
+      "title": "교수",
+      "videos": [
+        {
+          "video_id": "5279eeb4-4285-4cc0-87cc-192ac05bece8",
+          "title": "[1편] 이효석의 인터뷰 - 제2의 테슬라가 여기서? 유전자 가위의 모든 것 (feat. 한양대학교 배상수 교수)",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    },
+    {
+      "name": "홍성철",
+      "affiliation": "",
+      "title": "본부장",
+      "videos": [
+        {
+          "video_id": "fa3c446e-d0d5-49d9-91d4-d9b19e9bc46e",
+          "title": "책선물 이벤트 - 넥스트테슬라를 찾아라(w. 홍성철 본부장)",
+          "signal_count": 0
+        }
+      ],
+      "total_signals": 0
+    }
+  ]
+}

@@ -1198,5 +1198,5493 @@
     "current_price": 47.07,
     "currency": "USD",
     "last_updated": "2026-03-04"
+  },
+  "8e42adce-5630-4b8a-9e38-1137df6b4173": {
+    "price_at_signal": 139500.0,
+    "price_current": 125400,
+    "return_pct": -10.11,
+    "signal_date": "2026-01-29",
+    "ticker": "090430"
+  },
+  "f5a73453-15dc-4cb5-bd0e-1da5eea7fb23": {
+    "price_at_signal": 525692.31,
+    "price_current": 501000,
+    "return_pct": -4.7,
+    "signal_date": "2026-01-29",
+    "ticker": "005380"
+  },
+  "c5ddfab8-d29f-428c-aaab-568aff7db603": {
+    "price_at_signal": 734644.38,
+    "price_current": 849000,
+    "return_pct": 15.57,
+    "signal_date": "2026-01-26",
+    "ticker": "000660"
+  },
+  "dc359487-49ef-42ce-ba2c-297b1587e743": {
+    "price_at_signal": 5540.0,
+    "price_current": 4850,
+    "return_pct": -12.45,
+    "signal_date": "2026-02-27",
+    "ticker": "079160"
+  },
+  "c9d04f21-5570-4d15-b01f-0d8d06412b7b": {
+    "price_at_signal": 190100.0,
+    "price_current": 172200,
+    "return_pct": -9.42,
+    "signal_date": "2026-02-22",
+    "ticker": "005930"
+  },
+  "414a3173-afac-46b8-af46-48615d2293e6": {
+    "price_at_signal": 947252.06,
+    "price_current": 849000,
+    "return_pct": -10.37,
+    "signal_date": "2026-02-22",
+    "ticker": "000660"
+  },
+  "0f3c3f27-ddb4-4dec-a16d-7f28163db5f1": {
+    "price_at_signal": 203500.0,
+    "price_current": 172200,
+    "return_pct": -15.38,
+    "signal_date": "2026-02-25",
+    "ticker": "005930"
+  },
+  "7ba0f471-6950-4436-8e8f-2ee5989748ce": {
+    "price_at_signal": 203500.0,
+    "price_current": 172200,
+    "return_pct": -15.38,
+    "signal_date": "2026-02-25",
+    "ticker": "005930"
+  },
+  "b97347cb-f51c-4180-9717-e11ebc8cccef": {
+    "price_at_signal": 162000.0,
+    "price_current": 126900,
+    "return_pct": -21.67,
+    "signal_date": "2026-02-26",
+    "ticker": "000720"
+  },
+  "7a782744-c985-4eb3-9675-5d066a37e864": {
+    "price_at_signal": 179.53,
+    "price_current": 147.22,
+    "return_pct": -18.0,
+    "signal_date": "2025-10-06",
+    "ticker": "PLTR"
+  },
+  "df751595-2532-4dd2-b636-50c441790f86": {
+    "price_at_signal": 57.75,
+    "price_current": 38.85,
+    "return_pct": -32.73,
+    "signal_date": "2025-10-06",
+    "ticker": "IREN"
+  },
+  "5663cf93-950e-4e8c-88a1-e7656e4ad8e9": {
+    "price_at_signal": 180.75,
+    "price_current": 263.75,
+    "return_pct": 45.92,
+    "signal_date": "2024-05-07",
+    "ticker": "AAPL"
+  },
+  "fc445820-5853-4152-bca2-db6eacb10003": {
+    "price_at_signal": 1016125.0,
+    "price_current": 849000,
+    "return_pct": -16.45,
+    "signal_date": "2026-02-25",
+    "ticker": "000660"
+  },
+  "9c83cb42-6d31-4a9a-9b1c-5a85c125b84d": {
+    "price_at_signal": 740633.38,
+    "price_current": 849000,
+    "return_pct": 14.63,
+    "signal_date": "2026-01-14",
+    "ticker": "000660"
+  },
+  "85e74359-3b1f-4694-b9f5-09b8d303659d": {
+    "price_at_signal": 119300.0,
+    "price_current": 123500,
+    "return_pct": 3.52,
+    "signal_date": "2026-02-22",
+    "ticker": "240810"
+  },
+  "11e95a7f-a408-4a9a-9072-f1b238db28e5": {
+    "price_at_signal": 55800.0,
+    "price_current": 59000,
+    "return_pct": 5.73,
+    "signal_date": "2026-02-22",
+    "ticker": "036930"
+  },
+  "2bb7d896-a03c-4413-ac3e-9717c59b9090": {
+    "price_at_signal": 200500.0,
+    "price_current": 259000,
+    "return_pct": 29.18,
+    "signal_date": "2026-02-22",
+    "ticker": "042700"
+  },
+  "4ed7b3c7-e152-4011-85f9-88d7eb331dd6": {
+    "price_at_signal": 45900.0,
+    "price_current": 43200,
+    "return_pct": -5.88,
+    "signal_date": "2026-02-22",
+    "ticker": "403870"
+  },
+  "2244a98d-2de6-40a7-bd0a-8f0104126e5e": {
+    "price_at_signal": 2763000.0,
+    "price_current": 2297000,
+    "return_pct": -16.87,
+    "signal_date": "2026-02-25",
+    "ticker": "298040"
+  },
+  "d472a4bb-8e3d-4e25-ba5a-5d6f357d4d9f": {
+    "price_at_signal": 181.58,
+    "price_current": 180.05,
+    "return_pct": -0.84,
+    "signal_date": "2025-08-27",
+    "ticker": "NVDA"
+  },
+  "78f92023-c88e-4401-bdd5-fdf6cb468e3c": {
+    "price_at_signal": 185.99,
+    "price_current": 263.75,
+    "return_pct": 41.81,
+    "signal_date": "2024-05-14",
+    "ticker": "AAPL"
+  },
+  "d358c322-4518-41a3-9c5a-f53de3030c17": {
+    "price_at_signal": 349.98,
+    "price_current": 392.43,
+    "return_pct": 12.13,
+    "signal_date": "2025-05-17",
+    "ticker": "TSLA"
+  },
+  "88c38a8b-808e-4638-833d-cc34e9a568ab": {
+    "price_at_signal": 53349.3,
+    "price_current": 172200,
+    "return_pct": 222.78,
+    "signal_date": "2025-03-03",
+    "ticker": "005930"
+  },
+  "750ea077-77fa-40b4-8422-59ab55602578": {
+    "price_at_signal": 114.03,
+    "price_current": 180.05,
+    "return_pct": 57.9,
+    "signal_date": "2025-03-03",
+    "ticker": "NVDA"
+  },
+  "e1794472-5881-419b-979e-049511c16725": {
+    "price_at_signal": 18.58,
+    "price_current": 11.54,
+    "return_pct": -37.89,
+    "signal_date": "2023-04-09",
+    "ticker": "RUN"
+  },
+  "c250cb34-04cb-4174-9843-8c069f731271": {
+    "price_at_signal": 1016125.0,
+    "price_current": 849000,
+    "return_pct": -16.45,
+    "signal_date": "2026-02-25",
+    "ticker": "000660"
+  },
+  "ff39bd30-09b5-40cc-b8d2-413ff2b32138": {
+    "price_at_signal": 1411.15,
+    "price_current": 1360.94,
+    "return_pct": -3.56,
+    "signal_date": "2026-02-08",
+    "ticker": "ASML"
+  },
+  "41daad11-7b68-4815-b380-eef73f8555c0": {
+    "price_at_signal": 439.2,
+    "price_current": 392.43,
+    "return_pct": -10.65,
+    "signal_date": "2026-01-14",
+    "ticker": "TSLA"
+  },
+  "71ff56f8-deb9-49c1-9c18-bc4fd717d666": {
+    "price_at_signal": 216500.0,
+    "price_current": 172200,
+    "return_pct": -20.46,
+    "signal_date": "2026-02-27",
+    "ticker": "005930"
+  },
+  "bf5c5e09-5518-466d-bf4d-4655a92e4548": {
+    "price_at_signal": 333.35,
+    "price_current": 379.68,
+    "return_pct": 13.9,
+    "signal_date": "2026-01-14",
+    "ticker": "MU"
+  },
+  "d4dec84f-372e-442f-a085-3a58b0242bca": {
+    "price_at_signal": 26.86,
+    "price_current": 180.05,
+    "return_pct": 570.36,
+    "signal_date": "2023-04-05",
+    "ticker": "NVDA"
+  },
+  "894ab6b2-cb5e-4b05-a552-425816dec461": {
+    "price_at_signal": 27.94,
+    "price_current": 180.05,
+    "return_pct": 544.38,
+    "signal_date": "2023-04-03",
+    "ticker": "NVDA"
+  },
+  "cd54423a-c0bf-469d-951c-4a6e476a363c": {
+    "price_at_signal": 45.98,
+    "price_current": 180.05,
+    "return_pct": 291.54,
+    "signal_date": "2023-08-25",
+    "ticker": "NVDA"
+  },
+  "c28156da-809b-45ff-8ba9-9d40ef60dac6": {
+    "price_at_signal": 242.68,
+    "price_current": 392.43,
+    "return_pct": 61.71,
+    "signal_date": "2023-10-18",
+    "ticker": "TSLA"
+  },
+  "008c16ac-711a-41a3-8b0c-40093ad717f5": {
+    "price_at_signal": 46.47,
+    "price_current": 180.05,
+    "return_pct": 287.43,
+    "signal_date": "2023-08-01",
+    "ticker": "NVDA"
+  },
+  "f8f95f45-5953-422c-9746-caaa3526bc23": {
+    "price_at_signal": 45.87,
+    "price_current": 180.05,
+    "return_pct": 292.55,
+    "signal_date": "2023-07-27",
+    "ticker": "NVDA"
+  },
+  "f13c9ca0-d899-4bb3-9c61-849503831329": {
+    "price_at_signal": 218000.0,
+    "price_current": 172200,
+    "return_pct": -21.01,
+    "signal_date": "2026-02-26",
+    "ticker": "005930"
+  },
+  "58b2432f-071a-4208-a1d8-90f3f0222517": {
+    "price_at_signal": 111100.0,
+    "price_current": 88000,
+    "return_pct": -20.79,
+    "signal_date": "2026-02-26",
+    "ticker": "016360"
+  },
+  "0d83bde0-d91c-45da-af79-0a360db6c6ad": {
+    "price_at_signal": 36500.0,
+    "price_current": 28800,
+    "return_pct": -21.1,
+    "signal_date": "2026-02-26",
+    "ticker": "005940"
+  },
+  "163d4529-4871-4f34-ac74-271407952cd6": {
+    "price_at_signal": 1016125.0,
+    "price_current": 849000,
+    "return_pct": -16.45,
+    "signal_date": "2026-02-25",
+    "ticker": "000660"
+  },
+  "f800f3ee-bfeb-4c14-8a9a-8ebc6693d360": {
+    "price_at_signal": 241.05,
+    "price_current": 392.43,
+    "return_pct": 62.8,
+    "signal_date": "2023-06-26",
+    "ticker": "TSLA"
+  },
+  "7a8c8653-6089-4023-8a43-10913741218d": {
+    "price_at_signal": 69946.39,
+    "price_current": 172200,
+    "return_pct": 146.19,
+    "signal_date": "2025-07-29",
+    "ticker": "005930"
+  },
+  "a909dc87-f0dd-4f4b-8107-b4f94560cdde": {
+    "price_at_signal": 321.2,
+    "price_current": 392.43,
+    "return_pct": 22.18,
+    "signal_date": "2025-07-29",
+    "ticker": "TSLA"
+  },
+  "146207b1-702e-44a5-8d7f-026bf6181cbb": {
+    "price_at_signal": 377500.0,
+    "price_current": 327000,
+    "return_pct": -13.38,
+    "signal_date": "2026-01-29",
+    "ticker": "352820"
+  },
+  "d8dd8ec6-5fe7-489b-bd58-068236d16e43": {
+    "price_at_signal": 86500.0,
+    "price_current": 97500,
+    "return_pct": 12.72,
+    "signal_date": "2024-02-19",
+    "ticker": "326030"
+  },
+  "626f47ef-36c1-43a2-83f9-77c6cf30ae25": {
+    "price_at_signal": 33312.11,
+    "price_current": 30050,
+    "return_pct": -9.79,
+    "signal_date": "2024-02-19",
+    "ticker": "001060"
+  },
+  "d91fd9b3-eb4c-4e9e-a08f-c9d8d8a0b0c0": {
+    "price_at_signal": 12294.89,
+    "price_current": 8750,
+    "return_pct": -28.83,
+    "signal_date": "2024-02-19",
+    "ticker": "003850"
+  },
+  "90831b68-b73e-4f53-b215-ffca476fc46e": {
+    "price_at_signal": 78300.0,
+    "price_current": 123500,
+    "return_pct": 57.73,
+    "signal_date": "2026-01-14",
+    "ticker": "240810"
+  },
+  "f3ecfcd0-fc26-4606-989f-9c4fab5b2f3b": {
+    "price_at_signal": 203500.0,
+    "price_current": 172200,
+    "return_pct": -15.38,
+    "signal_date": "2026-02-25",
+    "ticker": "005930"
+  },
+  "c6df1cd3-246d-40b7-850b-cb0a8d624a65": {
+    "price_at_signal": 1087.0,
+    "price_current": 4325,
+    "return_pct": 297.88,
+    "signal_date": "2026-02-06",
+    "ticker": "284620"
+  },
+  "9d79c0a4-7e2a-4852-b303-b24f05a980fd": {
+    "price_at_signal": 497814.69,
+    "price_current": 501000,
+    "return_pct": 0.64,
+    "signal_date": "2026-01-30",
+    "ticker": "005380"
+  },
+  "b2fc3fdd-422e-4611-ad17-2a8be169d68d": {
+    "price_at_signal": 387500.0,
+    "price_current": 307000,
+    "return_pct": -20.77,
+    "signal_date": "2026-02-25",
+    "ticker": "051910"
+  },
+  "b5ab47f3-aa0c-4584-8a87-41a53aacb0be": {
+    "price_at_signal": 237500.0,
+    "price_current": 195600,
+    "return_pct": -17.64,
+    "signal_date": "2026-02-25",
+    "ticker": "036570"
+  },
+  "517736ec-28a4-4d63-afe8-d7200e1d97de": {
+    "price_at_signal": 1262317.0,
+    "price_current": 1516000,
+    "return_pct": 20.1,
+    "signal_date": "2024-02-19",
+    "ticker": "207940"
+  },
+  "49b55763-4df9-4cd5-89b5-164c7469c519": {
+    "price_at_signal": 47.08,
+    "price_current": 180.05,
+    "return_pct": 282.42,
+    "signal_date": "2023-08-23",
+    "ticker": "NVDA"
+  },
+  "ab0044b3-5414-4421-a6a6-5dd9077c3fd0": {
+    "price_at_signal": 1061000.0,
+    "price_current": 849000,
+    "return_pct": -19.98,
+    "signal_date": "2026-02-27",
+    "ticker": "000660"
+  },
+  "493f2bf6-d84d-43c6-898e-7ec2e68ed1a3": {
+    "price_at_signal": 203500.0,
+    "price_current": 172200,
+    "return_pct": -15.38,
+    "signal_date": "2026-02-25",
+    "ticker": "005930"
+  },
+  "6ab0f37a-1bac-4010-988a-f14db3e2b1e8": {
+    "price_at_signal": 471500.0,
+    "price_current": 372500,
+    "return_pct": -21.0,
+    "signal_date": "2026-02-26",
+    "ticker": "039490"
+  },
+  "55bf5a77-ff14-4c2b-9da8-a15c7a94ea74": {
+    "price_at_signal": 218000.0,
+    "price_current": 172200,
+    "return_pct": -21.01,
+    "signal_date": "2026-02-26",
+    "ticker": "005930"
+  },
+  "86996087-c16e-4dfd-9f7a-9be7501ef024": {
+    "price_at_signal": 388000.0,
+    "price_current": 351000,
+    "return_pct": -9.54,
+    "signal_date": "2026-01-29",
+    "ticker": "006400"
+  },
+  "5da4e87b-af90-4acf-b92a-d84f04555394": {
+    "price_at_signal": 72.57,
+    "price_current": 180.05,
+    "return_pct": 148.1,
+    "signal_date": "2024-02-19",
+    "ticker": "NVDA"
+  },
+  "c5d155e7-b7da-4127-90a5-02e4cd45c8f7": {
+    "price_at_signal": 1061000.0,
+    "price_current": 849000,
+    "return_pct": -19.98,
+    "signal_date": "2026-02-27",
+    "ticker": "000660"
+  },
+  "ea49a319-181d-4fec-ac91-063be14c73ab": {
+    "price_at_signal": 185.41,
+    "price_current": 180.05,
+    "return_pct": -2.89,
+    "signal_date": "2026-02-08",
+    "ticker": "NVDA"
+  },
+  "19d07177-090a-4774-8504-38d177a8117d": {
+    "price_at_signal": 1016125.0,
+    "price_current": 849000,
+    "return_pct": -16.45,
+    "signal_date": "2026-02-25",
+    "ticker": "000660"
+  },
+  "37a9ac45-1d32-4458-a263-6a760e0871b7": {
+    "price_at_signal": 13.15,
+    "price_current": 3.54,
+    "return_pct": -73.08,
+    "signal_date": "2024-02-19",
+    "ticker": "RXRX"
+  },
+  "ff0d3e8d-9eaf-4d8a-8bde-0b64224c9a86": {
+    "price_at_signal": 837454.69,
+    "price_current": 849000,
+    "return_pct": 1.38,
+    "signal_date": "2026-02-08",
+    "ticker": "000660"
+  },
+  "ffa1dc33-167c-4ea8-9691-5f8aa1bf1f4c": {
+    "price_at_signal": 140300.0,
+    "price_current": 172200,
+    "return_pct": 22.74,
+    "signal_date": "2026-01-14",
+    "ticker": "005930"
+  },
+  "01d4e1ef-44d8-41b7-96f0-08efcf0f1eb9": {
+    "price_at_signal": 95.14,
+    "price_current": 36.66,
+    "return_pct": -61.47,
+    "signal_date": "2023-10-11",
+    "ticker": "NVO"
+  },
+  "a105e15c-de6d-4b97-b3c9-7a8ade998e63": {
+    "price_at_signal": 421.06,
+    "price_current": 392.43,
+    "return_pct": -6.8,
+    "signal_date": "2024-12-21",
+    "ticker": "TSLA"
+  },
+  "4b728f9c-f588-469e-a31d-f920b8aca6d3": {
+    "price_at_signal": 357500.0,
+    "price_current": 347500,
+    "return_pct": -2.8,
+    "signal_date": "2024-12-21",
+    "ticker": "373220"
+  },
+  "5d698e13-0c75-43d6-bcca-147edf60bf2c": {
+    "price_at_signal": 106.27,
+    "price_current": 147.22,
+    "return_pct": 38.53,
+    "signal_date": "2025-02-20",
+    "ticker": "PLTR"
+  },
+  "ce30aa0d-ec2b-40cf-83cc-b8b036199c84": {
+    "price_at_signal": 186.97,
+    "price_current": 147.22,
+    "return_pct": -21.26,
+    "signal_date": "2025-08-12",
+    "ticker": "PLTR"
+  },
+  "d155bb53-c292-48f0-818a-1f25f5b43fe9": {
+    "price_at_signal": 152100.0,
+    "price_current": 172200,
+    "return_pct": 13.21,
+    "signal_date": "2026-01-26",
+    "ticker": "005930"
+  },
+  "eb925c37-a812-43f9-ad57-24100c9a6763": {
+    "price_at_signal": 89.35,
+    "price_current": 180.05,
+    "return_pct": 101.51,
+    "signal_date": "2024-03-19",
+    "ticker": "NVDA"
+  },
+  "431ba50e-87d5-408b-b34f-ffe7d6a73302": {
+    "price_at_signal": 110.44,
+    "price_current": 180.05,
+    "return_pct": 63.02,
+    "signal_date": "2024-05-30",
+    "ticker": "NVDA"
+  },
+  "65cf7a56-55b1-4401-983e-6d6615710747": {
+    "price_at_signal": 177.19,
+    "price_current": 180.05,
+    "return_pct": 1.61,
+    "signal_date": "2026-02-27",
+    "ticker": "NVDA"
+  },
+  "e4d1dbec-0bdb-4dce-ae47-101b2857128b": {
+    "price_at_signal": 65.45,
+    "price_current": 379.68,
+    "return_pct": 480.11,
+    "signal_date": "2020-12-01",
+    "ticker": "MU"
+  },
+  "5a8d8634-625b-4e6a-b93b-47380dbe329c": {
+    "price_at_signal": 569500.0,
+    "price_current": 501000,
+    "return_pct": -12.03,
+    "signal_date": "2026-02-25",
+    "ticker": "005380"
+  },
+  "e11ea0c6-f62d-4d54-b9cf-26540e442204": {
+    "price_at_signal": 59493.6,
+    "price_current": 172200,
+    "return_pct": 189.44,
+    "signal_date": "2020-12-01",
+    "ticker": "005930"
+  },
+  "23326b0f-838c-4825-ab54-14a5e5a62012": {
+    "price_at_signal": 94343.53,
+    "price_current": 849000,
+    "return_pct": 799.9,
+    "signal_date": "2020-12-01",
+    "ticker": "000660"
+  },
+  "25ac367b-90ac-4a16-9e71-f0bb3ccc7ebd": {
+    "price_at_signal": 82.38,
+    "price_current": 147.22,
+    "return_pct": 78.71,
+    "signal_date": "2024-12-25",
+    "ticker": "PLTR"
+  },
+  "75042710-e161-4b46-bb9e-ae97f1e0d98a": {
+    "price_at_signal": 429.0,
+    "price_current": 379.68,
+    "return_pct": -11.5,
+    "signal_date": "2026-02-25",
+    "ticker": "MU"
+  },
+  "cd3a96b4-8c52-4dce-884f-5e89a8e228d5": {
+    "price_at_signal": 348.85,
+    "price_current": 353.13,
+    "return_pct": 1.23,
+    "signal_date": "2026-02-08",
+    "ticker": "TSM"
+  },
+  "5521f481-8192-4ad8-817d-4941327c5e15": {
+    "price_at_signal": 420.97,
+    "price_current": 379.68,
+    "return_pct": -9.81,
+    "signal_date": "2026-02-23",
+    "ticker": "MU"
+  },
+  "e12e6284-a6bd-4c1c-9895-cfc5037dab49": {
+    "price_at_signal": 120.94,
+    "price_current": 180.05,
+    "return_pct": 48.88,
+    "signal_date": "2024-06-06",
+    "ticker": "NVDA"
+  },
+  "46e4953a-88db-4aaf-bd32-dfa9d3c8d2ab": {
+    "price_at_signal": 202.74,
+    "price_current": 138.13,
+    "return_pct": -31.87,
+    "signal_date": "2024-06-06",
+    "ticker": "QCOM"
+  },
+  "14c248e4-15ed-4cb6-a83b-ff225bf9fafb": {
+    "price_at_signal": 30.23,
+    "price_current": 43.1,
+    "return_pct": 42.58,
+    "signal_date": "2024-06-06",
+    "ticker": "INTC"
+  },
+  "a9093327-639c-4cc3-9b34-52a8d01089ea": {
+    "price_at_signal": 60604.62,
+    "price_current": 172200,
+    "return_pct": 184.14,
+    "signal_date": "2023-05-11",
+    "ticker": "005930"
+  },
+  "55201485-1317-4b4f-9aed-853d435b1e4e": {
+    "price_at_signal": 70746.62,
+    "price_current": 172200,
+    "return_pct": 143.4,
+    "signal_date": "2024-05-30",
+    "ticker": "005930"
+  },
+  "3906eaf2-2f5d-4cc7-b222-b7292cfb28ac": {
+    "price_at_signal": 198.25,
+    "price_current": 138.13,
+    "return_pct": -30.33,
+    "signal_date": "2024-05-30",
+    "ticker": "QCOM"
+  },
+  "64889bf8-044b-4103-86ec-572fa1f1a906": {
+    "price_at_signal": 122.28,
+    "price_current": 208.73,
+    "return_pct": 70.7,
+    "signal_date": "2022-07-28",
+    "ticker": "AMZN"
+  },
+  "c84d8705-85ea-4cb7-b91a-d9fb54db86ac": {
+    "price_at_signal": 311.69,
+    "price_current": 303.56,
+    "return_pct": -2.61,
+    "signal_date": "2026-02-23",
+    "ticker": "GOOG"
+  },
+  "83d4e654-d9db-4e5a-9a69-ac85b0ce0699": {
+    "price_at_signal": 1016125.0,
+    "price_current": 849000,
+    "return_pct": -16.45,
+    "signal_date": "2026-02-25",
+    "ticker": "000660"
+  },
+  "9b0236ec-d587-472e-a257-ad0356ca1f4e": {
+    "price_at_signal": 181.42,
+    "price_current": 190.95,
+    "return_pct": 5.25,
+    "signal_date": "2024-03-19",
+    "ticker": "AMD"
+  },
+  "ba8871e2-4cdc-468b-8255-2a91f59d774e": {
+    "price_at_signal": 154.4,
+    "price_current": 263.75,
+    "return_pct": 70.83,
+    "signal_date": "2022-07-28",
+    "ticker": "AAPL"
+  },
+  "1bc43a4d-4e2b-4889-8d5e-4124d1c66074": {
+    "price_at_signal": 37.4,
+    "price_current": 43.1,
+    "return_pct": 15.23,
+    "signal_date": "2022-07-28",
+    "ticker": "INTC"
+  },
+  "81367d06-3cac-4a6a-bed0-4e817dcc94d1": {
+    "price_at_signal": 69.41,
+    "price_current": 180.05,
+    "return_pct": 159.39,
+    "signal_date": "2024-02-20",
+    "ticker": "NVDA"
+  },
+  "a778e641-a354-4f0e-b69f-4eac306db1cb": {
+    "price_at_signal": 396.7,
+    "price_current": 403.93,
+    "return_pct": 1.82,
+    "signal_date": "2024-02-20",
+    "ticker": "MSFT"
+  },
+  "b93bfbe9-9179-472e-8a0e-64a99f648672": {
+    "price_at_signal": 240.28,
+    "price_current": 99.63,
+    "return_pct": -58.54,
+    "signal_date": "2025-06-22",
+    "ticker": "CRCL"
+  },
+  "997ba1c8-40cc-4255-a8f5-7a8ccd001b5e": {
+    "price_at_signal": 2763000.0,
+    "price_current": 2297000,
+    "return_pct": -16.87,
+    "signal_date": "2026-02-25",
+    "ticker": "298040"
+  },
+  "999ac2a9-60b3-42e6-8b24-f3ef97a36eb1": {
+    "price_at_signal": 1059800.0,
+    "price_current": 871000,
+    "return_pct": -17.81,
+    "signal_date": "2026-02-25",
+    "ticker": "267260"
+  },
+  "9ef8ca4d-9878-4fcf-9bd5-a7677819fa19": {
+    "price_at_signal": 260.99,
+    "price_current": 324.87,
+    "return_pct": 24.48,
+    "signal_date": "2024-09-25",
+    "ticker": "CEG"
+  },
+  "19281760-f133-4712-a6de-18465675056a": {
+    "price_at_signal": 80.96,
+    "price_current": 92.59,
+    "return_pct": 14.36,
+    "signal_date": "2024-09-25",
+    "ticker": "NEE"
+  },
+  "a12ab318-7173-4365-8d4d-140ab5b54506": {
+    "price_at_signal": 363500.0,
+    "price_current": 320000,
+    "return_pct": -11.97,
+    "signal_date": "2026-02-25",
+    "ticker": "004170"
+  },
+  "0bfb9b50-9b91-4d84-af14-859ba5b0ffdd": {
+    "price_at_signal": 248.09,
+    "price_current": 392.43,
+    "return_pct": 58.18,
+    "signal_date": "2025-03-12",
+    "ticker": "TSLA"
+  },
+  "bb6deb68-005b-489c-9302-1ac7cd050453": {
+    "price_at_signal": 267000.0,
+    "price_current": 206500,
+    "return_pct": -22.66,
+    "signal_date": "2026-02-26",
+    "ticker": "071050"
+  },
+  "d4144804-de65-4593-b6e5-2f477e618c81": {
+    "price_at_signal": 199.4,
+    "price_current": 392.43,
+    "return_pct": 96.81,
+    "signal_date": "2024-02-26",
+    "ticker": "TSLA"
+  },
+  "7ed86fea-e0bb-4604-b0c1-3ba7788966c1": {
+    "price_at_signal": 203500.0,
+    "price_current": 172200,
+    "return_pct": -15.38,
+    "signal_date": "2026-02-25",
+    "ticker": "005930"
+  },
+  "dfa9fdbc-5485-4a48-a007-14dab596ab31": {
+    "price_at_signal": 195.56,
+    "price_current": 180.05,
+    "return_pct": -7.93,
+    "signal_date": "2026-02-25",
+    "ticker": "NVDA"
+  },
+  "e7426ae0-0fdd-47f7-be0e-c7d4f4f2956a": {
+    "price_at_signal": 837454.69,
+    "price_current": 849000,
+    "return_pct": 1.38,
+    "signal_date": "2026-02-06",
+    "ticker": "000660"
+  },
+  "22f86e5f-3fab-4ec0-8eba-94b727fe5c33": {
+    "price_at_signal": 210404.88,
+    "price_current": 501000,
+    "return_pct": 138.11,
+    "signal_date": "2024-02-26",
+    "ticker": "005380"
+  },
+  "e8ce469b-0fae-4433-a4f7-9ea5d36c270d": {
+    "price_at_signal": 102376.63,
+    "price_current": 156700,
+    "return_pct": 53.06,
+    "signal_date": "2024-02-26",
+    "ticker": "000270"
+  },
+  "fd197edb-e670-46c0-ac68-1626c26e129e": {
+    "price_at_signal": 404500.0,
+    "price_current": 440500,
+    "return_pct": 8.9,
+    "signal_date": "2026-02-25",
+    "ticker": "357780"
+  },
+  "af7eb78c-459f-4664-be5f-e0cc31511b4d": {
+    "price_at_signal": 168424.12,
+    "price_current": 849000,
+    "return_pct": 404.08,
+    "signal_date": "2024-04-23",
+    "ticker": "000660"
+  },
+  "1c3a1827-db67-458f-955b-11bb7b554575": {
+    "price_at_signal": 396500.0,
+    "price_current": 327000,
+    "return_pct": -17.53,
+    "signal_date": "2026-02-25",
+    "ticker": "352820"
+  },
+  "8ffedca5-be48-4cd7-8edc-a44f7553f113": {
+    "price_at_signal": 72671.7,
+    "price_current": 172200,
+    "return_pct": 136.96,
+    "signal_date": "2024-04-23",
+    "ticker": "005930"
+  },
+  "8404c2c8-0bf8-4b63-9294-25ba6f2d2e63": {
+    "price_at_signal": 15.94,
+    "price_current": 23.82,
+    "return_pct": 49.41,
+    "signal_date": "2021-02-07",
+    "ticker": "GME"
+  },
+  "889cc0ca-b605-46af-8ec6-65360b496d5d": {
+    "price_at_signal": 184.89,
+    "price_current": 180.05,
+    "return_pct": -2.62,
+    "signal_date": "2026-02-26",
+    "ticker": "NVDA"
+  },
+  "36e8184c-926d-4788-ba9c-1d69af1f8a2b": {
+    "price_at_signal": 130.35,
+    "price_current": 353.13,
+    "return_pct": 170.92,
+    "signal_date": "2024-04-23",
+    "ticker": "TSM"
+  },
+  "fe9098df-cbf0-4890-90a4-7d9f272950fb": {
+    "price_at_signal": 82.38,
+    "price_current": 180.05,
+    "return_pct": 118.56,
+    "signal_date": "2024-04-23",
+    "ticker": "NVDA"
+  },
+  "81e3bc36-6ddc-40b4-84d0-eee9752d2177": {
+    "price_at_signal": 155.55,
+    "price_current": 138.13,
+    "return_pct": -11.2,
+    "signal_date": "2024-04-23",
+    "ticker": "QCOM"
+  },
+  "829d66f4-8f8e-4428-a188-8d7c807638b5": {
+    "price_at_signal": 96.04,
+    "price_current": 121.72,
+    "return_pct": 26.74,
+    "signal_date": "2024-04-23",
+    "ticker": "ARM"
+  },
+  "bf82de5c-3f9d-4fe5-a10a-d18d877904a4": {
+    "price_at_signal": 60397.29,
+    "price_current": 172200,
+    "return_pct": 185.11,
+    "signal_date": "2025-03-22",
+    "ticker": "005930"
+  },
+  "a5d76e99-2105-4a96-bfdd-67dec0a95669": {
+    "price_at_signal": 214252.16,
+    "price_current": 849000,
+    "return_pct": 296.26,
+    "signal_date": "2025-03-22",
+    "ticker": "000660"
+  },
+  "73a48f99-7f9c-430f-a9c2-80f21b268870": {
+    "price_at_signal": 449074.84,
+    "price_current": 2297000,
+    "return_pct": 411.5,
+    "signal_date": "2025-03-22",
+    "ticker": "298040"
+  },
+  "8ecb977f-0bf5-49c9-95d9-d3fceaf242f7": {
+    "price_at_signal": 90.96,
+    "price_current": 147.22,
+    "return_pct": 61.85,
+    "signal_date": "2025-03-22",
+    "ticker": "PLTR"
+  },
+  "c0759d36-dcba-412d-b46d-fcc464eb5d23": {
+    "price_at_signal": 174.16,
+    "price_current": 180.05,
+    "return_pct": 3.38,
+    "signal_date": "2025-08-30",
+    "ticker": "NVDA"
+  },
+  "2d7a50a6-1dfa-404e-b9f9-accbe2298cc6": {
+    "price_at_signal": 171.89,
+    "price_current": 353.13,
+    "return_pct": 105.44,
+    "signal_date": "2024-09-23",
+    "ticker": "TSM"
+  },
+  "53975f78-e496-49e8-b92e-8e9c482dbf09": {
+    "price_at_signal": 216500.0,
+    "price_current": 172200,
+    "return_pct": -20.46,
+    "signal_date": "2026-02-27",
+    "ticker": "005930"
+  },
+  "a9338662-af28-46b7-ac82-84e475646007": {
+    "price_at_signal": 177.19,
+    "price_current": 180.05,
+    "return_pct": 1.61,
+    "signal_date": "2026-02-27",
+    "ticker": "NVDA"
+  },
+  "4e92c463-03b6-4086-8355-5ca8438e1289": {
+    "price_at_signal": 9.15,
+    "price_current": 15.29,
+    "return_pct": 67.1,
+    "signal_date": "2025-05-18",
+    "ticker": "RIOT"
+  },
+  "ccdc7c72-fc71-4a49-90ce-fdcf96ecfdf1": {
+    "price_at_signal": 367384.19,
+    "price_current": 208000,
+    "return_pct": -43.38,
+    "signal_date": "2021-03-06",
+    "ticker": "035420"
+  },
+  "39a76b66-94b5-48ea-b720-c503745a1176": {
+    "price_at_signal": 284.08,
+    "price_current": 392.43,
+    "return_pct": 38.14,
+    "signal_date": "2021-02-07",
+    "ticker": "TSLA"
+  },
+  "5eaa34ac-631a-425b-b394-4ca6922e7198": {
+    "price_at_signal": 109200.0,
+    "price_current": 202000,
+    "return_pct": 84.98,
+    "signal_date": "2025-04-29",
+    "ticker": "064350"
+  },
+  "565f90cb-9faf-4332-a263-3ad4c7a466cb": {
+    "price_at_signal": 149949.52,
+    "price_current": 197400,
+    "return_pct": 31.64,
+    "signal_date": "2025-05-21",
+    "ticker": "068270"
+  },
+  "dadd9b24-fc12-48b1-9fcc-20d412adeae9": {
+    "price_at_signal": 37450.0,
+    "price_current": 47050,
+    "return_pct": 25.63,
+    "signal_date": "2025-05-21",
+    "ticker": "035720"
+  },
+  "47a31f45-4b39-4325-b71e-d63d95d375c7": {
+    "price_at_signal": 84211.07,
+    "price_current": 172200,
+    "return_pct": 104.49,
+    "signal_date": "2024-07-05",
+    "ticker": "005930"
+  },
+  "853e8377-4036-46fd-819b-943799cdff6b": {
+    "price_at_signal": 83561.2,
+    "price_current": 137700,
+    "return_pct": 64.79,
+    "signal_date": "2024-07-05",
+    "ticker": "105560"
+  },
+  "9a0f20c2-af24-4c50-b195-5c89d92a6cf9": {
+    "price_at_signal": 195.56,
+    "price_current": 180.05,
+    "return_pct": -7.93,
+    "signal_date": "2026-02-25",
+    "ticker": "NVDA"
+  },
+  "33078122-93ea-4001-83bd-58ee6dc8e4df": {
+    "price_at_signal": 203500.0,
+    "price_current": 172200,
+    "return_pct": -15.38,
+    "signal_date": "2026-02-25",
+    "ticker": "005930"
+  },
+  "418512f8-30ff-438a-9f56-f5a151536b09": {
+    "price_at_signal": 218000.0,
+    "price_current": 172200,
+    "return_pct": -21.01,
+    "signal_date": "2026-02-26",
+    "ticker": "005930"
+  },
+  "072420e3-2ae3-4942-84f8-2c38a6e835f4": {
+    "price_at_signal": 183.14,
+    "price_current": 180.05,
+    "return_pct": -1.69,
+    "signal_date": "2026-01-14",
+    "ticker": "NVDA"
+  },
+  "050ddf63-9f8a-487b-ae70-5d7f30ae1b6f": {
+    "price_at_signal": 569500.0,
+    "price_current": 501000,
+    "return_pct": -12.03,
+    "signal_date": "2026-02-25",
+    "ticker": "005380"
+  },
+  "20fe5054-8bda-4b78-8285-bd5270fb57f7": {
+    "price_at_signal": 1059800.0,
+    "price_current": 871000,
+    "return_pct": -17.81,
+    "signal_date": "2026-02-25",
+    "ticker": "267260"
+  },
+  "cf2515c6-f117-43cc-acef-2a099d223f16": {
+    "price_at_signal": 74.17,
+    "price_current": 197.53,
+    "return_pct": 166.32,
+    "signal_date": "2022-02-09",
+    "ticker": "FSLR"
+  },
+  "1bce020e-61ee-40fd-86e4-713287711707": {
+    "price_at_signal": 32.17,
+    "price_current": 36.93,
+    "return_pct": 14.78,
+    "signal_date": "2022-02-09",
+    "ticker": "CMG"
+  },
+  "68b5b9a0-450b-42a2-954a-87af2d3d40c7": {
+    "price_at_signal": 122.66,
+    "price_current": 46.38,
+    "return_pct": -62.19,
+    "signal_date": "2022-02-09",
+    "ticker": "PYPL"
+  },
+  "21f03a71-d3a6-437a-aafb-1ef0f8b224f6": {
+    "price_at_signal": 51800.0,
+    "price_current": 70300,
+    "return_pct": 35.71,
+    "signal_date": "2026-01-14",
+    "ticker": "095610"
+  },
+  "3f5e9c95-9ec0-41c9-a700-683e9257d5f8": {
+    "price_at_signal": 490347.47,
+    "price_current": 501000,
+    "return_pct": 2.17,
+    "signal_date": "2026-01-26",
+    "ticker": "005380"
+  },
+  "5ae58cc4-830b-4abe-8d2e-c0dc7d3fe76d": {
+    "price_at_signal": 84100.0,
+    "price_current": 129700,
+    "return_pct": 54.22,
+    "signal_date": "2026-01-14",
+    "ticker": "084370"
+  },
+  "5b2624d4-7445-4f09-821f-dc832a296597": {
+    "price_at_signal": 156.01,
+    "price_current": 147.22,
+    "return_pct": -5.63,
+    "signal_date": "2025-08-20",
+    "ticker": "PLTR"
+  },
+  "bede1293-8c30-4923-adce-ab1a31edb4b3": {
+    "price_at_signal": 344.37,
+    "price_current": 132.68,
+    "return_pct": -61.47,
+    "signal_date": "2025-08-20",
+    "ticker": "MSTR"
+  },
+  "9fd3df47-628c-4471-b6c9-762f81c9f928": {
+    "price_at_signal": 158.48,
+    "price_current": 263.75,
+    "return_pct": 66.43,
+    "signal_date": "2022-08-01",
+    "ticker": "AAPL"
+  },
+  "29a3cea6-0158-438b-b2c2-04edeebb0bd9": {
+    "price_at_signal": 297.28,
+    "price_current": 392.43,
+    "return_pct": 32.01,
+    "signal_date": "2022-08-01",
+    "ticker": "TSLA"
+  },
+  "452dee9d-f370-4c1b-ac17-0099889b4127": {
+    "price_at_signal": 50.83,
+    "price_current": 97.7,
+    "return_pct": 92.23,
+    "signal_date": "2022-01-20",
+    "ticker": "NFLX"
+  },
+  "4b8b138e-e90a-4f5e-89ff-e8fc35243c78": {
+    "price_at_signal": 165.98,
+    "price_current": 182.36,
+    "return_pct": 9.87,
+    "signal_date": "2024-02-23",
+    "ticker": "COIN"
+  },
+  "d5048e12-e9d5-4792-b844-c9a3ddeeeaba": {
+    "price_at_signal": 142.1,
+    "price_current": 147.22,
+    "return_pct": 3.6,
+    "signal_date": "2025-07-13",
+    "ticker": "PLTR"
+  },
+  "ecb8d10f-d2aa-4d31-976a-d854bdb30ae6": {
+    "price_at_signal": 164.9,
+    "price_current": 180.05,
+    "return_pct": 9.19,
+    "signal_date": "2025-07-13",
+    "ticker": "NVDA"
+  },
+  "78529b40-4419-4813-9e42-3d6ce0a10097": {
+    "price_at_signal": 24.22,
+    "price_current": 3.91,
+    "return_pct": -83.86,
+    "signal_date": "2022-01-20",
+    "ticker": "PTON"
+  },
+  "b7abc26b-e161-4f38-bd4a-f219059b2a49": {
+    "price_at_signal": 359.2,
+    "price_current": 392.43,
+    "return_pct": 9.25,
+    "signal_date": "2022-03-31",
+    "ticker": "TSLA"
+  },
+  "04ed811a-14d8-4977-8b60-f5fbbaa190e4": {
+    "price_at_signal": 138.2,
+    "price_current": 180.05,
+    "return_pct": 30.28,
+    "signal_date": "2024-11-29",
+    "ticker": "NVDA"
+  },
+  "a3cdc851-9645-4559-b2d5-c30743af070c": {
+    "price_at_signal": 236.04,
+    "price_current": 263.75,
+    "return_pct": 11.74,
+    "signal_date": "2024-11-29",
+    "ticker": "AAPL"
+  },
+  "64fe1036-47ea-472d-aedc-0aa853d74799": {
+    "price_at_signal": 572.05,
+    "price_current": 655.08,
+    "return_pct": 14.51,
+    "signal_date": "2024-11-29",
+    "ticker": "META"
+  },
+  "b80074bb-2d64-4a02-80a5-b6e120ac0b3b": {
+    "price_at_signal": 345.16,
+    "price_current": 392.43,
+    "return_pct": 13.7,
+    "signal_date": "2024-11-29",
+    "ticker": "TSLA"
+  },
+  "c24e2668-fd2a-4caa-9dfc-d58c9a46db38": {
+    "price_at_signal": 168.1,
+    "price_current": 303.58,
+    "return_pct": 80.6,
+    "signal_date": "2024-11-29",
+    "ticker": "GOOGL"
+  },
+  "fde0d400-0701-4f1c-b1ec-5f35baace1a7": {
+    "price_at_signal": 216.42,
+    "price_current": 190.95,
+    "return_pct": -11.77,
+    "signal_date": "2025-10-13",
+    "ticker": "AMD"
+  },
+  "60b6e9f9-4b1e-408e-9c55-e3100a4a3329": {
+    "price_at_signal": 282.12,
+    "price_current": 392.43,
+    "return_pct": 39.1,
+    "signal_date": "2022-01-28",
+    "ticker": "TSLA"
+  },
+  "df891954-8b75-459d-8f3f-5013c6538e0a": {
+    "price_at_signal": 450000.0,
+    "price_current": 347500,
+    "return_pct": -22.78,
+    "signal_date": "2022-01-28",
+    "ticker": "373220"
+  },
+  "33958536-a866-4647-b942-51dd0bc9c412": {
+    "price_at_signal": 293.94,
+    "price_current": 392.43,
+    "return_pct": 33.51,
+    "signal_date": "2025-07-07",
+    "ticker": "TSLA"
+  },
+  "7309fab0-9323-463f-aab0-321844655675": {
+    "price_at_signal": 194.7,
+    "price_current": 392.43,
+    "return_pct": 101.56,
+    "signal_date": "2022-12-01",
+    "ticker": "TSLA"
+  },
+  "d05d72fa-b68f-40c5-86e2-47e2b1ada0c2": {
+    "price_at_signal": 54738.06,
+    "price_current": 172200,
+    "return_pct": 214.59,
+    "signal_date": "2024-11-27",
+    "ticker": "005930"
+  },
+  "a50e66bf-a9a3-41e8-873e-c3fb29323400": {
+    "price_at_signal": 166250.62,
+    "price_current": 849000,
+    "return_pct": 410.67,
+    "signal_date": "2024-11-27",
+    "ticker": "000660"
+  },
+  "dc2aed0f-7b92-48e9-9fff-55991f63118d": {
+    "price_at_signal": 73285.88,
+    "price_current": 172200,
+    "return_pct": 134.97,
+    "signal_date": "2024-08-27",
+    "ticker": "005930"
+  },
+  "16d17ecf-efc6-4afa-92f7-2d2511c819d0": {
+    "price_at_signal": 172582.34,
+    "price_current": 849000,
+    "return_pct": 391.94,
+    "signal_date": "2024-08-27",
+    "ticker": "000660"
+  },
+  "92b28cc0-189b-4b07-8fec-28827bfbe41d": {
+    "price_at_signal": 109.1,
+    "price_current": 392.43,
+    "return_pct": 259.7,
+    "signal_date": "2022-12-27",
+    "ticker": "TSLA"
+  },
+  "64e66163-76e6-44b0-a465-6bccbee0ebff": {
+    "price_at_signal": 127.98,
+    "price_current": 263.75,
+    "return_pct": 106.09,
+    "signal_date": "2022-12-27",
+    "ticker": "AAPL"
+  },
+  "b64586c1-bbd1-4642-8aed-8b3ef6ef5970": {
+    "price_at_signal": 260.48,
+    "price_current": 392.43,
+    "return_pct": 50.66,
+    "signal_date": "2024-10-24",
+    "ticker": "TSLA"
+  },
+  "3724c377-fe6b-48f0-b147-74a9d74fa884": {
+    "price_at_signal": 430.17,
+    "price_current": 392.43,
+    "return_pct": -8.77,
+    "signal_date": "2025-11-30",
+    "ticker": "TSLA"
+  },
+  "1093382d-04a2-4899-9843-43d519d42eb2": {
+    "price_at_signal": 319.97,
+    "price_current": 303.58,
+    "return_pct": -5.12,
+    "signal_date": "2025-11-30",
+    "ticker": "GOOGL"
+  },
+  "f266ec71-a29d-4130-aa1d-432b9a61611d": {
+    "price_at_signal": 168.45,
+    "price_current": 147.22,
+    "return_pct": -12.6,
+    "signal_date": "2025-11-30",
+    "ticker": "PLTR"
+  },
+  "e41b4033-0426-41a1-b0bc-408e6d0e58b3": {
+    "price_at_signal": 75174.3,
+    "price_current": 172200,
+    "return_pct": 129.07,
+    "signal_date": "2024-06-17",
+    "ticker": "005930"
+  },
+  "eeb36701-7f98-4fc4-9db8-abedf323667f": {
+    "price_at_signal": 250.08,
+    "price_current": 392.43,
+    "return_pct": 56.92,
+    "signal_date": "2024-10-04",
+    "ticker": "TSLA"
+  },
+  "ab46eb80-1ecc-44f6-94e2-68034d98b5f0": {
+    "price_at_signal": 264.77,
+    "price_current": 842.0,
+    "return_pct": 218.01,
+    "signal_date": "2024-10-04",
+    "ticker": "GEV"
+  },
+  "204339d9-23f2-4912-ad93-4d386a4495f9": {
+    "price_at_signal": 231.13,
+    "price_current": 197.53,
+    "return_pct": -14.54,
+    "signal_date": "2024-10-04",
+    "ticker": "FSLR"
+  },
+  "0f81f822-90e2-482c-9ede-035a53d232eb": {
+    "price_at_signal": 2.15,
+    "price_current": 2.23,
+    "return_pct": 3.72,
+    "signal_date": "2024-10-04",
+    "ticker": "PLUG"
+  },
+  "c3980937-0d16-44e4-bc58-d21eefbee26b": {
+    "price_at_signal": 25.64,
+    "price_current": 147.22,
+    "return_pct": 474.18,
+    "signal_date": "2021-01-18",
+    "ticker": "PLTR"
+  },
+  "33df09b3-b297-4809-a1bc-b3c2fd6d7386": {
+    "price_at_signal": 10.83,
+    "price_current": 153.02,
+    "return_pct": 1312.93,
+    "signal_date": "2024-10-04",
+    "ticker": "BE"
+  },
+  "1dfe8a06-4cf3-42a6-8046-2a489664591c": {
+    "price_at_signal": 1529848.25,
+    "price_current": 1516000,
+    "return_pct": -0.91,
+    "signal_date": "2024-10-10",
+    "ticker": "207940"
+  },
+  "0e86155a-8a9f-45cb-848a-d5ca301d5ec4": {
+    "price_at_signal": 107.95,
+    "price_current": 180.05,
+    "return_pct": 66.78,
+    "signal_date": "2024-09-03",
+    "ticker": "NVDA"
+  },
+  "9f681ef7-4f6d-4ad9-aaf9-a10c23051993": {
+    "price_at_signal": 221.32,
+    "price_current": 263.75,
+    "return_pct": 19.17,
+    "signal_date": "2024-09-03",
+    "ticker": "AAPL"
+  },
+  "d3de57c5-79de-4e46-8810-369947cacd19": {
+    "price_at_signal": 213.46,
+    "price_current": 300.26,
+    "return_pct": 40.67,
+    "signal_date": "2024-09-03",
+    "ticker": "JPM"
+  },
+  "f3831c03-098e-4400-82ee-8e267be53e04": {
+    "price_at_signal": 173.27,
+    "price_current": 147.22,
+    "return_pct": -15.03,
+    "signal_date": "2025-08-05",
+    "ticker": "PLTR"
+  },
+  "795daef6-b4ef-4818-8945-6413e0ef7e2f": {
+    "price_at_signal": 69.9,
+    "price_current": 79.34,
+    "return_pct": 13.5,
+    "signal_date": "2024-09-03",
+    "ticker": "KO"
+  },
+  "70786833-898b-41b4-aaec-4a19c47e7bb1": {
+    "price_at_signal": 190.77,
+    "price_current": 263.75,
+    "return_pct": 38.25,
+    "signal_date": "2024-06-01",
+    "ticker": "AAPL"
+  },
+  "164ae414-2b53-41ef-958e-3913562f2d2d": {
+    "price_at_signal": 266.4,
+    "price_current": 338.3,
+    "return_pct": 26.99,
+    "signal_date": "2024-06-01",
+    "ticker": "CB"
+  },
+  "f8ae74c7-e482-46de-acb1-1598d95e5bfa": {
+    "price_at_signal": 60.4,
+    "price_current": 53.68,
+    "return_pct": -11.12,
+    "signal_date": "2024-06-01",
+    "ticker": "OXY"
+  },
+  "84e5a440-372c-436f-b563-38c2401fe91a": {
+    "price_at_signal": 140.16,
+    "price_current": 188.77,
+    "return_pct": 34.68,
+    "signal_date": "2024-03-01",
+    "ticker": "CVX"
+  },
+  "0ea626ad-7c12-4f06-81f0-1c783b5a1c59": {
+    "price_at_signal": 59.08,
+    "price_current": 53.68,
+    "return_pct": -9.14,
+    "signal_date": "2024-03-01",
+    "ticker": "OXY"
+  },
+  "bcc4ba4e-4415-4eb2-bf2a-fee7afb93267": {
+    "price_at_signal": 264937.38,
+    "price_current": 849000,
+    "return_pct": 220.45,
+    "signal_date": "2025-07-26",
+    "ticker": "000660"
+  },
+  "c3b339ff-95be-4150-85a4-75485bc6195c": {
+    "price_at_signal": 67069.28,
+    "price_current": 172200,
+    "return_pct": 156.75,
+    "signal_date": "2021-08-18",
+    "ticker": "005930"
+  },
+  "56eb55c0-22c2-4a2d-8fca-7381d02f67ff": {
+    "price_at_signal": 20.16,
+    "price_current": 97.7,
+    "return_pct": 384.55,
+    "signal_date": "2022-07-19",
+    "ticker": "NFLX"
+  },
+  "354154b8-558e-4104-919c-dab8c7947c92": {
+    "price_at_signal": 68262.12,
+    "price_current": 172200,
+    "return_pct": 152.26,
+    "signal_date": "2025-08-03",
+    "ticker": "005930"
+  },
+  "e51cf2cb-4884-41d5-b187-8302b719748f": {
+    "price_at_signal": 302.63,
+    "price_current": 392.43,
+    "return_pct": 29.67,
+    "signal_date": "2025-08-03",
+    "ticker": "TSLA"
+  },
+  "0087659f-71c3-410f-a42c-4fdb787ca415": {
+    "price_at_signal": 188.22,
+    "price_current": 180.05,
+    "return_pct": -4.34,
+    "signal_date": "2025-12-29",
+    "ticker": "NVDA"
+  },
+  "0a553b66-dacb-4601-a5e1-89e1e1f241a2": {
+    "price_at_signal": 82.23,
+    "price_current": 180.05,
+    "return_pct": 118.95,
+    "signal_date": "2024-03-01",
+    "ticker": "NVDA"
+  },
+  "4a5b026d-9060-40fd-9ae6-68b92c4480e5": {
+    "price_at_signal": 292.5,
+    "price_current": 392.43,
+    "return_pct": 34.16,
+    "signal_date": "2022-04-28",
+    "ticker": "TSLA"
+  },
+  "d421d901-5b3d-4c02-b0d0-e927b4e01cf7": {
+    "price_at_signal": 180.75,
+    "price_current": 156.02,
+    "return_pct": -13.68,
+    "signal_date": "2025-05-23",
+    "ticker": "STZ"
+  },
+  "6f0575ff-7b87-4e32-9ef2-565f046c65d7": {
+    "price_at_signal": 299.67,
+    "price_current": 221.22,
+    "return_pct": -26.18,
+    "signal_date": "2025-05-23",
+    "ticker": "POOL"
+  },
+  "37734d27-8669-4b6c-a01d-baaaa0351e96": {
+    "price_at_signal": 181.19,
+    "price_current": 392.43,
+    "return_pct": 116.58,
+    "signal_date": "2024-05-04",
+    "ticker": "TSLA"
+  },
+  "dd12cfa5-94c3-46b8-8128-26663d0399a3": {
+    "price_at_signal": 35.66,
+    "price_current": 70.13,
+    "return_pct": 96.66,
+    "signal_date": "2025-07-06",
+    "ticker": "RKLB"
+  },
+  "58b50e81-c0d1-46a8-9b0f-8161d86f55e7": {
+    "price_at_signal": 240.81,
+    "price_current": 392.43,
+    "return_pct": 62.96,
+    "signal_date": "2022-10-05",
+    "ticker": "TSLA"
+  },
+  "ea47cb41-0adc-477f-a229-7c3d86aaa768": {
+    "price_at_signal": 120.94,
+    "price_current": 180.05,
+    "return_pct": 48.88,
+    "signal_date": "2024-06-06",
+    "ticker": "NVDA"
+  },
+  "0e44761e-0f78-4e2c-98cf-2fc061ea4e30": {
+    "price_at_signal": 57946.51,
+    "price_current": 172200,
+    "return_pct": 197.17,
+    "signal_date": "2024-10-29",
+    "ticker": "005930"
+  },
+  "44c80f18-b78e-483f-ab33-8ad79832931b": {
+    "price_at_signal": 187982.73,
+    "price_current": 849000,
+    "return_pct": 351.64,
+    "signal_date": "2024-10-29",
+    "ticker": "000660"
+  },
+  "d659f07e-d0a8-4262-99e9-c7458a91370a": {
+    "price_at_signal": 259.52,
+    "price_current": 392.43,
+    "return_pct": 51.21,
+    "signal_date": "2024-10-29",
+    "ticker": "TSLA"
+  },
+  "3bc2a231-779f-4522-84cf-efd0c7ff3b2c": {
+    "price_at_signal": 398526.66,
+    "price_current": 208000,
+    "return_pct": -47.81,
+    "signal_date": "2021-09-08",
+    "ticker": "035420"
+  },
+  "7fd547b8-8b4f-4e02-9011-8e11a1d115e2": {
+    "price_at_signal": 137925.84,
+    "price_current": 47050,
+    "return_pct": -65.89,
+    "signal_date": "2021-09-08",
+    "ticker": "035720"
+  },
+  "8844d00f-3ec0-485e-a0d0-7de1b3d17f80": {
+    "price_at_signal": 368.17,
+    "price_current": 403.93,
+    "return_pct": 9.71,
+    "signal_date": "2023-12-03",
+    "ticker": "MSFT"
+  },
+  "b25e5c19-0abe-4c20-8f1d-474bf2cc6227": {
+    "price_at_signal": 189.27,
+    "price_current": 263.75,
+    "return_pct": 39.35,
+    "signal_date": "2023-12-03",
+    "ticker": "AAPL"
+  },
+  "052b22c9-4770-43ad-af62-b1dbd2f87022": {
+    "price_at_signal": 181.65,
+    "price_current": 263.75,
+    "return_pct": 45.2,
+    "signal_date": "2024-05-11",
+    "ticker": "AAPL"
+  },
+  "e7c43627-be0f-471f-9e1c-bba5b41aebd1": {
+    "price_at_signal": 168.47,
+    "price_current": 392.43,
+    "return_pct": 132.94,
+    "signal_date": "2024-05-11",
+    "ticker": "TSLA"
+  },
+  "a5f6a000-fbe8-4e90-9285-2a92fd45757e": {
+    "price_at_signal": 61103.79,
+    "price_current": 172200,
+    "return_pct": 181.82,
+    "signal_date": "2024-09-24",
+    "ticker": "005930"
+  },
+  "a86d2df8-e596-4026-bc86-e582c4978c25": {
+    "price_at_signal": 161241.23,
+    "price_current": 849000,
+    "return_pct": 426.54,
+    "signal_date": "2024-09-24",
+    "ticker": "000660"
+  },
+  "71d20979-195f-49a4-906d-42f048873b76": {
+    "price_at_signal": 21.43,
+    "price_current": 38.85,
+    "return_pct": 81.29,
+    "signal_date": "2025-08-22",
+    "ticker": "IREN"
+  },
+  "69517714-36f6-4b2b-9819-c78d99b0da6f": {
+    "price_at_signal": 62263.99,
+    "price_current": 172200,
+    "return_pct": 176.56,
+    "signal_date": "2024-09-15",
+    "ticker": "005930"
+  },
+  "401752b1-72f4-4e5f-b3ab-54e524211bea": {
+    "price_at_signal": 16.01,
+    "price_current": 147.22,
+    "return_pct": 819.55,
+    "signal_date": "2022-01-17",
+    "ticker": "PLTR"
+  },
+  "25091243-8562-4d6d-a0a5-b88e626eee88": {
+    "price_at_signal": 160550.91,
+    "price_current": 849000,
+    "return_pct": 428.8,
+    "signal_date": "2024-09-15",
+    "ticker": "000660"
+  },
+  "3f0c2c9a-8a34-46b0-b562-d6482799c5fa": {
+    "price_at_signal": 221.05,
+    "price_current": 263.75,
+    "return_pct": 19.32,
+    "signal_date": "2024-09-15",
+    "ticker": "AAPL"
+  },
+  "2f2d38d8-a983-4086-8455-109ce8861187": {
+    "price_at_signal": 159.65,
+    "price_current": 149.01,
+    "return_pct": -6.67,
+    "signal_date": "2024-09-15",
+    "ticker": "ORCL"
+  },
+  "fae714c0-56fe-460e-8ac0-5b24a8f7915e": {
+    "price_at_signal": 56.25,
+    "price_current": 53.68,
+    "return_pct": -4.56,
+    "signal_date": "2023-05-26",
+    "ticker": "OXY"
+  },
+  "60723ec6-b22a-4668-aa90-687540a23830": {
+    "price_at_signal": 403.15,
+    "price_current": 403.93,
+    "return_pct": 0.19,
+    "signal_date": "2024-05-07",
+    "ticker": "MSFT"
+  },
+  "b96216d8-d917-4f30-a40c-c34f5269a630": {
+    "price_at_signal": 231.94,
+    "price_current": 303.58,
+    "return_pct": 30.89,
+    "signal_date": "2025-09-04",
+    "ticker": "GOOGL"
+  },
+  "05a6cc65-9b1f-4664-995f-35120863c1a6": {
+    "price_at_signal": 239.32,
+    "price_current": 263.75,
+    "return_pct": 10.21,
+    "signal_date": "2025-09-04",
+    "ticker": "AAPL"
+  },
+  "e0c2bbf3-c9d6-4628-9d5a-049862a5ac6b": {
+    "price_at_signal": 338.53,
+    "price_current": 392.43,
+    "return_pct": 15.92,
+    "signal_date": "2025-09-04",
+    "ticker": "TSLA"
+  },
+  "5d15423e-46ad-478e-9faf-18d9ecc6abc1": {
+    "price_at_signal": 79.48,
+    "price_current": 180.05,
+    "return_pct": 126.54,
+    "signal_date": "2024-04-22",
+    "ticker": "NVDA"
+  },
+  "79f51ef7-878c-4ed8-9e2e-a84638f270b9": {
+    "price_at_signal": 73249.23,
+    "price_current": 172200,
+    "return_pct": 135.09,
+    "signal_date": "2024-04-22",
+    "ticker": "005930"
+  },
+  "2b5a5104-a789-4f58-a3eb-5e18401e4398": {
+    "price_at_signal": 857.29,
+    "price_current": 1360.94,
+    "return_pct": 58.75,
+    "signal_date": "2024-04-22",
+    "ticker": "ASML"
+  },
+  "eca52658-f131-43be-be24-c3a562fa2b44": {
+    "price_at_signal": 181.09,
+    "price_current": 263.75,
+    "return_pct": 45.64,
+    "signal_date": "2024-05-08",
+    "ticker": "AAPL"
+  },
+  "a34ee2b4-6431-4aa1-aed1-df402815e0bf": {
+    "price_at_signal": 190.74,
+    "price_current": 147.22,
+    "return_pct": -22.82,
+    "signal_date": "2025-11-04",
+    "ticker": "PLTR"
+  },
+  "6549868d-23ce-4378-9258-9d276855783e": {
+    "price_at_signal": 182.2,
+    "price_current": 147.22,
+    "return_pct": -19.2,
+    "signal_date": "2025-08-07",
+    "ticker": "PLTR"
+  },
+  "6ddd523f-9bb7-4c9c-90b0-97a4b4a7d563": {
+    "price_at_signal": 180.75,
+    "price_current": 180.05,
+    "return_pct": -0.39,
+    "signal_date": "2025-08-07",
+    "ticker": "NVDA"
+  },
+  "e9014acc-37ef-4a81-b772-e6a0fcb4700b": {
+    "price_at_signal": 322.27,
+    "price_current": 392.43,
+    "return_pct": 21.77,
+    "signal_date": "2025-08-07",
+    "ticker": "TSLA"
+  },
+  "97ee7fe6-94f5-4702-8427-bbb2e5ed38de": {
+    "price_at_signal": 69847.31,
+    "price_current": 172200,
+    "return_pct": 146.54,
+    "signal_date": "2025-08-07",
+    "ticker": "005930"
+  },
+  "a344310e-4cee-4431-a4d1-2af8ef2c1910": {
+    "price_at_signal": 839451.0,
+    "price_current": 849000,
+    "return_pct": 1.14,
+    "signal_date": "2026-01-28",
+    "ticker": "000660"
+  },
+  "3422ea5f-11f2-4bd0-bd4e-4b186bbd578d": {
+    "price_at_signal": 490347.47,
+    "price_current": 501000,
+    "return_pct": 2.17,
+    "signal_date": "2026-01-28",
+    "ticker": "005380"
+  },
+  "844663db-356b-4ee0-997f-35954b9437ce": {
+    "price_at_signal": 149700.0,
+    "price_current": 156700,
+    "return_pct": 4.68,
+    "signal_date": "2026-01-28",
+    "ticker": "000270"
+  },
+  "e8502c90-9459-43c0-8b61-80ec6ca59ce9": {
+    "price_at_signal": 218.43,
+    "price_current": 392.43,
+    "return_pct": 79.66,
+    "signal_date": "2021-07-21",
+    "ticker": "TSLA"
+  },
+  "c6cb4cc9-5101-4457-8916-7402cf757ed8": {
+    "price_at_signal": 229.9,
+    "price_current": 313.84,
+    "return_pct": 36.51,
+    "signal_date": "2025-01-02",
+    "ticker": "AVGO"
+  },
+  "df9239ab-4f1d-4949-b751-3065dc606fad": {
+    "price_at_signal": 138.27,
+    "price_current": 180.05,
+    "return_pct": 30.21,
+    "signal_date": "2025-01-02",
+    "ticker": "NVDA"
+  },
+  "ecff29c8-545b-499a-8877-84d1b5b7186c": {
+    "price_at_signal": 39.03,
+    "price_current": 70.13,
+    "return_pct": 79.68,
+    "signal_date": "2025-07-13",
+    "ticker": "RKLB"
+  },
+  "28c88b35-d6dd-47c2-95f0-081733e94947": {
+    "price_at_signal": 379.28,
+    "price_current": 392.43,
+    "return_pct": 3.47,
+    "signal_date": "2025-01-02",
+    "ticker": "TSLA"
+  },
+  "4072c4b1-6f9d-4bd2-b0c0-3e869150ef04": {
+    "price_at_signal": 16.47,
+    "price_current": 132.68,
+    "return_pct": 705.59,
+    "signal_date": "2020-10-18",
+    "ticker": "MSTR"
+  },
+  "d6124106-570e-4161-af7a-069c4a446845": {
+    "price_at_signal": 242.53,
+    "price_current": 263.75,
+    "return_pct": 8.75,
+    "signal_date": "2025-01-02",
+    "ticker": "AAPL"
+  },
+  "4a7ae072-e800-4650-ba7e-34bd8beb670f": {
+    "price_at_signal": 188.69,
+    "price_current": 303.58,
+    "return_pct": 60.89,
+    "signal_date": "2025-01-02",
+    "ticker": "GOOGL"
+  },
+  "71252d6b-d57c-4fef-a640-db4d5893c17a": {
+    "price_at_signal": 597.36,
+    "price_current": 655.08,
+    "return_pct": 9.66,
+    "signal_date": "2025-01-02",
+    "ticker": "META"
+  },
+  "d1d2ff32-9af3-4e3b-8ae4-a3ddc9b81a45": {
+    "price_at_signal": 169115.31,
+    "price_current": 849000,
+    "return_pct": 402.02,
+    "signal_date": "2025-01-02",
+    "ticker": "000660"
+  },
+  "ace9dc7c-4747-4680-af31-9f8d2b8e6a7e": {
+    "price_at_signal": 52272.53,
+    "price_current": 172200,
+    "return_pct": 229.43,
+    "signal_date": "2025-01-02",
+    "ticker": "005930"
+  },
+  "602d8b8c-d916-440d-86b4-294d58f9e03b": {
+    "price_at_signal": 316.06,
+    "price_current": 392.43,
+    "return_pct": 24.16,
+    "signal_date": "2025-07-26",
+    "ticker": "TSLA"
+  },
+  "bf01a4e0-e1c3-48c4-a4ba-a0184475e451": {
+    "price_at_signal": 136.67,
+    "price_current": 392.43,
+    "return_pct": 187.15,
+    "signal_date": "2020-08-23",
+    "ticker": "TSLA"
+  },
+  "778d03fa-60ae-458e-808a-a94c17af28e1": {
+    "price_at_signal": 643.85,
+    "price_current": 842.0,
+    "return_pct": 30.78,
+    "signal_date": "2025-07-26",
+    "ticker": "GEV"
+  },
+  "88780925-a7e4-44e5-96ac-ea29acb09d86": {
+    "price_at_signal": 65230.95,
+    "price_current": 172200,
+    "return_pct": 163.99,
+    "signal_date": "2023-09-28",
+    "ticker": "005930"
+  },
+  "3e1c48d5-3dfa-4769-a7ed-c8d4185f3531": {
+    "price_at_signal": 37771.62,
+    "price_current": 51300,
+    "return_pct": 35.82,
+    "signal_date": "2023-09-28",
+    "ticker": "222800"
+  },
+  "389a3a64-66b4-4b0f-9cc2-06fe5fdf39a9": {
+    "price_at_signal": 38134.3,
+    "price_current": 129700,
+    "return_pct": 240.11,
+    "signal_date": "2023-09-28",
+    "ticker": "084370"
+  },
+  "7aef7261-3715-4c2d-8fbd-5cb7e7d9185a": {
+    "price_at_signal": 32652.38,
+    "price_current": 52900,
+    "return_pct": 62.01,
+    "signal_date": "2023-09-28",
+    "ticker": "005290"
+  },
+  "554bdb1f-d006-4244-a4f1-5426bfe072f8": {
+    "price_at_signal": 225365.67,
+    "price_current": 440500,
+    "return_pct": 95.46,
+    "signal_date": "2023-09-28",
+    "ticker": "357780"
+  },
+  "fc366143-76a6-4d8c-93f7-ca30f41a461e": {
+    "price_at_signal": 431.66,
+    "price_current": 392.43,
+    "return_pct": -9.09,
+    "signal_date": "2024-12-27",
+    "ticker": "TSLA"
+  },
+  "f554e3c9-ff3c-41a8-b9ea-67f24b46ac42": {
+    "price_at_signal": 55992.3,
+    "price_current": 172200,
+    "return_pct": 207.54,
+    "signal_date": "2025-02-25",
+    "ticker": "005930"
+  },
+  "cbbed4aa-755d-43dd-9366-48f92bcb3d5b": {
+    "price_at_signal": 126.6,
+    "price_current": 180.05,
+    "return_pct": 42.22,
+    "signal_date": "2025-02-25",
+    "ticker": "NVDA"
+  },
+  "00c690c7-2b15-41da-8eeb-1e4eb357439c": {
+    "price_at_signal": 69847.31,
+    "price_current": 172200,
+    "return_pct": 146.54,
+    "signal_date": "2025-08-07",
+    "ticker": "005930"
+  },
+  "d4696fb9-77cd-4b9f-ac3a-a0b74a1f4056": {
+    "price_at_signal": 219.36,
+    "price_current": 263.75,
+    "return_pct": 20.23,
+    "signal_date": "2025-08-07",
+    "ticker": "AAPL"
+  },
+  "a9a76068-64d1-4937-b482-627a01283090": {
+    "price_at_signal": 92.62,
+    "price_current": 180.05,
+    "return_pct": 94.39,
+    "signal_date": "2024-03-07",
+    "ticker": "NVDA"
+  },
+  "0774fa3d-43b8-4ee4-bb90-0df97986d067": {
+    "price_at_signal": 162147.12,
+    "price_current": 849000,
+    "return_pct": 423.6,
+    "signal_date": "2024-03-07",
+    "ticker": "000660"
+  },
+  "d2b6bd3f-99f6-4555-ac0b-4e9d82d2aa48": {
+    "price_at_signal": 25.57,
+    "price_current": 70.13,
+    "return_pct": 174.27,
+    "signal_date": "2025-05-18",
+    "ticker": "RKLB"
+  },
+  "86ebf240-8a00-4c7d-a36f-56a39936189d": {
+    "price_at_signal": 145.16,
+    "price_current": 353.13,
+    "return_pct": 143.27,
+    "signal_date": "2024-03-07",
+    "ticker": "TSM"
+  },
+  "c56a4b2d-bf22-425a-80ec-6ca3439e4ae3": {
+    "price_at_signal": 97919.08,
+    "price_current": 259000,
+    "return_pct": 164.5,
+    "signal_date": "2024-03-07",
+    "ticker": "042700"
+  },
+  "c1c840e6-43b2-48a0-a08c-ee66bc6c12b3": {
+    "price_at_signal": 69180.92,
+    "price_current": 172200,
+    "return_pct": 148.91,
+    "signal_date": "2024-03-07",
+    "ticker": "005930"
+  },
+  "2fee6153-ec12-4b8c-b3be-823926910dfb": {
+    "price_at_signal": 183.28,
+    "price_current": 392.43,
+    "return_pct": 114.12,
+    "signal_date": "2024-04-30",
+    "ticker": "TSLA"
+  },
+  "3f95260c-e9c6-4208-905f-3f508048fc02": {
+    "price_at_signal": 168.79,
+    "price_current": 263.75,
+    "return_pct": 56.26,
+    "signal_date": "2024-04-30",
+    "ticker": "AAPL"
+  },
+  "eb8ca41c-5bcf-4ebb-8dac-01b10058991b": {
+    "price_at_signal": 209.14,
+    "price_current": 392.43,
+    "return_pct": 87.64,
+    "signal_date": "2024-01-23",
+    "ticker": "TSLA"
+  },
+  "2e5939bc-7ebf-4198-bda4-0b0bce4b47f7": {
+    "price_at_signal": 182.47,
+    "price_current": 392.43,
+    "return_pct": 115.07,
+    "signal_date": "2024-06-13",
+    "ticker": "TSLA"
+  },
+  "80ff80d8-aea0-433f-bd2a-7b5bcd76f4f9": {
+    "price_at_signal": 263.79,
+    "price_current": 392.43,
+    "return_pct": 48.77,
+    "signal_date": "2021-09-27",
+    "ticker": "TSLA"
+  },
+  "9e791447-a5f9-466c-8b2b-f60115555703": {
+    "price_at_signal": 73.35,
+    "price_current": 379.68,
+    "return_pct": 417.61,
+    "signal_date": "2021-09-27",
+    "ticker": "MU"
+  },
+  "5f747510-e7c5-4c72-97ad-5f3af498f948": {
+    "price_at_signal": 186.57,
+    "price_current": 180.05,
+    "return_pct": -3.49,
+    "signal_date": "2025-09-30",
+    "ticker": "NVDA"
+  },
+  "bf014307-e031-4468-accb-01692d69ebfb": {
+    "price_at_signal": 139.54,
+    "price_current": 147.22,
+    "return_pct": 5.5,
+    "signal_date": "2026-02-04",
+    "ticker": "PLTR"
+  },
+  "7280cbba-058f-4ffd-9c05-9f008c0ed94f": {
+    "price_at_signal": 379.4,
+    "price_current": 379.68,
+    "return_pct": 0.07,
+    "signal_date": "2026-02-04",
+    "ticker": "MU"
+  },
+  "c5a0ad66-d579-4b29-ae07-abd9099c8e4a": {
+    "price_at_signal": 200.19,
+    "price_current": 190.95,
+    "return_pct": -4.62,
+    "signal_date": "2026-02-04",
+    "ticker": "AMD"
+  },
+  "769b7ab8-990d-401c-b6de-4680aa903cb8": {
+    "price_at_signal": 44.86,
+    "price_current": 147.22,
+    "return_pct": 228.18,
+    "signal_date": "2024-10-25",
+    "ticker": "PLTR"
+  },
+  "5f35b295-8e93-4026-99b0-64c8671d9c6c": {
+    "price_at_signal": 505000.0,
+    "price_current": 347500,
+    "return_pct": -31.19,
+    "signal_date": "2022-01-13",
+    "ticker": "373220"
+  },
+  "ad45ea2f-df42-426e-9598-165a6f1d5b46": {
+    "price_at_signal": 660847.62,
+    "price_current": 351000,
+    "return_pct": -46.89,
+    "signal_date": "2022-01-13",
+    "ticker": "006400"
+  },
+  "3928d1ff-9c2f-4197-8579-bb1442be8023": {
+    "price_at_signal": 193775.44,
+    "price_current": 93200,
+    "return_pct": -51.9,
+    "signal_date": "2022-01-13",
+    "ticker": "066970"
+  },
+  "83d6cb67-dc8e-4938-979c-51fdbc3ad7aa": {
+    "price_at_signal": 42.7,
+    "price_current": 147.22,
+    "return_pct": 244.78,
+    "signal_date": "2024-10-21",
+    "ticker": "PLTR"
+  },
+  "a463b351-9505-41b5-9cf5-315c11eab5b6": {
+    "price_at_signal": 187.91,
+    "price_current": 147.22,
+    "return_pct": -21.65,
+    "signal_date": "2025-12-10",
+    "ticker": "PLTR"
+  },
+  "ffe2b65a-cc72-40bd-a92c-b5f78c986e69": {
+    "price_at_signal": 451.45,
+    "price_current": 392.43,
+    "return_pct": -13.07,
+    "signal_date": "2025-12-10",
+    "ticker": "TSLA"
+  },
+  "c2230cc0-4030-4a29-9e89-e354806ffca4": {
+    "price_at_signal": 301177.88,
+    "price_current": 501000,
+    "return_pct": 66.35,
+    "signal_date": "2025-12-10",
+    "ticker": "005380"
+  },
+  "593728e5-348a-4b89-bf56-c358c12a2861": {
+    "price_at_signal": 222.42,
+    "price_current": 149.01,
+    "return_pct": -33.01,
+    "signal_date": "2025-12-10",
+    "ticker": "ORCL"
+  },
+  "9c2f0f22-facf-42fc-bc50-04328f8876fc": {
+    "price_at_signal": 412.18,
+    "price_current": 313.84,
+    "return_pct": -23.86,
+    "signal_date": "2025-12-10",
+    "ticker": "AVGO"
+  },
+  "6bf70394-0ad7-47d7-a9b3-e085b421c593": {
+    "price_at_signal": 216.63,
+    "price_current": 392.43,
+    "return_pct": 81.15,
+    "signal_date": "2020-12-08",
+    "ticker": "TSLA"
+  },
+  "08a2160e-542b-4d6d-9d4e-758fee8c5675": {
+    "price_at_signal": 144.43,
+    "price_current": 392.43,
+    "return_pct": 171.71,
+    "signal_date": "2023-01-25",
+    "ticker": "TSLA"
+  },
+  "c409442b-6d6b-4e0c-98c7-712196d75ef3": {
+    "price_at_signal": 139.92,
+    "price_current": 147.22,
+    "return_pct": 5.22,
+    "signal_date": "2025-06-23",
+    "ticker": "PLTR"
+  },
+  "d4308152-5b35-4377-9daf-0c4601384064": {
+    "price_at_signal": 46.57,
+    "price_current": 180.05,
+    "return_pct": 286.62,
+    "signal_date": "2023-12-07",
+    "ticker": "NVDA"
+  },
+  "d1b52e4b-f76a-4b35-bfe1-a6ae01b44624": {
+    "price_at_signal": 35112.33,
+    "price_current": 51300,
+    "return_pct": 46.1,
+    "signal_date": "2023-12-07",
+    "ticker": "222800"
+  },
+  "563641bb-e636-428f-b441-3c00ecd638ae": {
+    "price_at_signal": 49584.09,
+    "price_current": 48400,
+    "return_pct": -2.39,
+    "signal_date": "2023-12-07",
+    "ticker": "195870"
+  },
+  "91c5e9f4-2401-41c2-afb2-f9934baff3ea": {
+    "price_at_signal": 53469.33,
+    "price_current": 172200,
+    "return_pct": 222.05,
+    "signal_date": "2025-05-03",
+    "ticker": "005930"
+  },
+  "e17fe49a-8250-4dae-8685-65f42f4a1dbc": {
+    "price_at_signal": 184922.97,
+    "price_current": 849000,
+    "return_pct": 359.11,
+    "signal_date": "2025-05-03",
+    "ticker": "000660"
+  },
+  "d1eb38ef-f554-4161-9005-91d36f48067d": {
+    "price_at_signal": 25050.0,
+    "price_current": 63200,
+    "return_pct": 152.3,
+    "signal_date": "2025-05-03",
+    "ticker": "131970"
+  },
+  "045cbeca-c197-4e7d-a676-a6919ddde69c": {
+    "price_at_signal": 76300.0,
+    "price_current": 259000,
+    "return_pct": 239.45,
+    "signal_date": "2025-05-03",
+    "ticker": "042700"
+  },
+  "b38fbfca-3cfe-4e67-8c64-f8100e86cb69": {
+    "price_at_signal": 189.97,
+    "price_current": 263.75,
+    "return_pct": 38.83,
+    "signal_date": "2023-07-03",
+    "ticker": "AAPL"
+  },
+  "b78915fa-dcb7-4dd2-bff6-4d59b7adf53c": {
+    "price_at_signal": 53469.33,
+    "price_current": 172200,
+    "return_pct": 222.05,
+    "signal_date": "2025-05-02",
+    "ticker": "005930"
+  },
+  "ea583763-a694-4bf4-940a-398e5a5f1c1f": {
+    "price_at_signal": 25050.0,
+    "price_current": 63200,
+    "return_pct": 152.3,
+    "signal_date": "2025-05-02",
+    "ticker": "131970"
+  },
+  "fadc55f6-475f-4c45-b1e7-c2c957a21e90": {
+    "price_at_signal": 11010.0,
+    "price_current": 34050,
+    "return_pct": 209.26,
+    "signal_date": "2025-05-02",
+    "ticker": "067310"
+  },
+  "5f181940-c403-4f5e-8917-6f71d67f3a88": {
+    "price_at_signal": 41300.0,
+    "price_current": 63700,
+    "return_pct": 54.24,
+    "signal_date": "2025-05-02",
+    "ticker": "399720"
+  },
+  "fa12c37c-1799-47a3-b377-0cf37e286d0b": {
+    "price_at_signal": 6140.0,
+    "price_current": 4285,
+    "return_pct": -30.21,
+    "signal_date": "2025-05-02",
+    "ticker": "317530"
+  },
+  "6cd0fb46-a658-4e10-b032-ee73563d715d": {
+    "price_at_signal": 195859.27,
+    "price_current": 849000,
+    "return_pct": 333.47,
+    "signal_date": "2025-04-01",
+    "ticker": "000660"
+  },
+  "67fa415c-3bcf-4c7f-bfe3-d1febf53a9dc": {
+    "price_at_signal": 88.54,
+    "price_current": 379.68,
+    "return_pct": 328.85,
+    "signal_date": "2025-04-01",
+    "ticker": "MU"
+  },
+  "2349bfb0-df63-428c-bfe3-d3b378939b41": {
+    "price_at_signal": 57900.49,
+    "price_current": 172200,
+    "return_pct": 197.41,
+    "signal_date": "2025-04-01",
+    "ticker": "005930"
+  },
+  "a50399f1-5665-4d6a-b35a-aabf81988da9": {
+    "price_at_signal": 200.01,
+    "price_current": 138.13,
+    "return_pct": -30.94,
+    "signal_date": "2024-06-07",
+    "ticker": "QCOM"
+  },
+  "4ce7910e-2ee6-40ac-8fc5-21c57ce73795": {
+    "price_at_signal": 49.23,
+    "price_current": 180.05,
+    "return_pct": 265.75,
+    "signal_date": "2023-08-30",
+    "ticker": "NVDA"
+  },
+  "5471a1c6-47ab-4af2-bf0e-d250d65d8aaa": {
+    "price_at_signal": 116856.34,
+    "price_current": 849000,
+    "return_pct": 626.53,
+    "signal_date": "2023-08-30",
+    "ticker": "000660"
+  },
+  "5525467d-5cf2-4835-8c72-ad9aeedee7d1": {
+    "price_at_signal": 63658.32,
+    "price_current": 172200,
+    "return_pct": 170.51,
+    "signal_date": "2023-08-30",
+    "ticker": "005930"
+  },
+  "f73bbdb4-8d7e-4027-98d5-950822e1d943": {
+    "price_at_signal": 655.4,
+    "price_current": 1360.94,
+    "return_pct": 107.65,
+    "signal_date": "2023-08-30",
+    "ticker": "ASML"
+  },
+  "abc03312-d2ea-4489-b8c2-baee6885ed22": {
+    "price_at_signal": 56397.25,
+    "price_current": 259000,
+    "return_pct": 359.24,
+    "signal_date": "2023-08-30",
+    "ticker": "042700"
+  },
+  "917a30ec-4914-4e05-ba93-740165a4394d": {
+    "price_at_signal": 17417.77,
+    "price_current": 34050,
+    "return_pct": 95.49,
+    "signal_date": "2023-08-30",
+    "ticker": "067310"
+  },
+  "728e051f-452d-451e-be20-8c737c4ad97d": {
+    "price_at_signal": 32186.29,
+    "price_current": 111500,
+    "return_pct": 246.42,
+    "signal_date": "2023-08-30",
+    "ticker": "058470"
+  },
+  "3394026e-08a4-4eba-b4ef-f3e295b4f3a7": {
+    "price_at_signal": 241.21,
+    "price_current": 353.13,
+    "return_pct": 46.4,
+    "signal_date": "2025-08-07",
+    "ticker": "TSM"
+  },
+  "e6bda9a9-62fa-4558-9c0c-6ceed3fba705": {
+    "price_at_signal": 64569.41,
+    "price_current": 172200,
+    "return_pct": 166.69,
+    "signal_date": "2023-05-23",
+    "ticker": "005930"
+  },
+  "0430bfb2-3554-44fe-9b46-28cb9cc0292f": {
+    "price_at_signal": 181.65,
+    "price_current": 263.75,
+    "return_pct": 45.2,
+    "signal_date": "2024-05-11",
+    "ticker": "AAPL"
+  },
+  "6abf888a-8cb4-4e9a-ad34-a54bcb2d736b": {
+    "price_at_signal": 280.44,
+    "price_current": 263.75,
+    "return_pct": -5.95,
+    "signal_date": "2025-12-04",
+    "ticker": "AAPL"
+  },
+  "c486a167-2cb6-417e-b214-7f177916f207": {
+    "price_at_signal": 317.41,
+    "price_current": 303.58,
+    "return_pct": -4.36,
+    "signal_date": "2025-12-04",
+    "ticker": "GOOGL"
+  },
+  "60dec2e6-c0e2-4de0-9030-15dc95508fbe": {
+    "price_at_signal": 343.69,
+    "price_current": 303.58,
+    "return_pct": -11.67,
+    "signal_date": "2026-02-02",
+    "ticker": "GOOGL"
+  },
+  "cb355809-73af-4451-9427-16ef952165f2": {
+    "price_at_signal": 256.56,
+    "price_current": 392.43,
+    "return_pct": 52.96,
+    "signal_date": "2024-07-16",
+    "ticker": "TSLA"
+  },
+  "9fc06a72-5c60-4394-9cb4-f8b19f9f524a": {
+    "price_at_signal": 340.47,
+    "price_current": 392.43,
+    "return_pct": 15.26,
+    "signal_date": "2025-06-24",
+    "ticker": "TSLA"
+  },
+  "a1bd53ca-4ae0-4725-b32a-e3d35d4b672d": {
+    "price_at_signal": 147.88,
+    "price_current": 180.05,
+    "return_pct": 21.75,
+    "signal_date": "2025-06-24",
+    "ticker": "NVDA"
+  },
+  "87b2a41a-57a7-45d0-bb65-f9c303c6d0db": {
+    "price_at_signal": 42.71,
+    "price_current": 97.7,
+    "return_pct": 128.73,
+    "signal_date": "2022-01-31",
+    "ticker": "NFLX"
+  },
+  "4d882184-1d3d-49a3-ad80-a92643aa1eac": {
+    "price_at_signal": 312.24,
+    "price_current": 392.43,
+    "return_pct": 25.68,
+    "signal_date": "2022-01-31",
+    "ticker": "TSLA"
+  },
+  "166e50e2-360e-4068-9105-e10cf586f845": {
+    "price_at_signal": 171.03,
+    "price_current": 263.75,
+    "return_pct": 54.21,
+    "signal_date": "2022-01-31",
+    "ticker": "AAPL"
+  },
+  "7aaa6816-1030-49aa-ae32-cf15d4e25e75": {
+    "price_at_signal": 24.44,
+    "price_current": 180.05,
+    "return_pct": 636.74,
+    "signal_date": "2022-01-31",
+    "ticker": "NVDA"
+  },
+  "18098536-53e0-495e-bd11-705a28fee1ec": {
+    "price_at_signal": 308.27,
+    "price_current": 392.43,
+    "return_pct": 27.3,
+    "signal_date": "2025-07-31",
+    "ticker": "TSLA"
+  },
+  "d926f517-6a21-4229-a4ca-18f9f87e7bfc": {
+    "price_at_signal": 194.64,
+    "price_current": 303.58,
+    "return_pct": 55.97,
+    "signal_date": "2024-12-11",
+    "ticker": "GOOGL"
+  },
+  "06e10f57-5ec0-4564-bb09-6977ec35b6a7": {
+    "price_at_signal": 217.8,
+    "price_current": 392.43,
+    "return_pct": 80.18,
+    "signal_date": "2024-10-11",
+    "ticker": "TSLA"
+  },
+  "e2a0f747-4af8-4948-b248-9a10326a01b7": {
+    "price_at_signal": 404.35,
+    "price_current": 392.43,
+    "return_pct": -2.95,
+    "signal_date": "2025-11-16",
+    "ticker": "TSLA"
+  },
+  "e7b638f9-679e-4c3c-8dbc-2b59edbc072e": {
+    "price_at_signal": 169.97,
+    "price_current": 303.58,
+    "return_pct": 78.61,
+    "signal_date": "2024-05-07",
+    "ticker": "GOOGL"
+  },
+  "62aff156-9006-4a74-a5bb-93e3006d695e": {
+    "price_at_signal": 395.94,
+    "price_current": 392.43,
+    "return_pct": -0.89,
+    "signal_date": "2025-09-12",
+    "ticker": "TSLA"
+  },
+  "70fbc8fb-0471-4aea-859d-9c3e4ad9eaaf": {
+    "price_at_signal": 131.24,
+    "price_current": 180.05,
+    "return_pct": 37.19,
+    "signal_date": "2025-02-26",
+    "ticker": "NVDA"
+  },
+  "2fd334ae-4c40-4bc3-90a5-75221fc77216": {
+    "price_at_signal": 55404.97,
+    "price_current": 172200,
+    "return_pct": 210.8,
+    "signal_date": "2025-02-26",
+    "ticker": "005930"
+  },
+  "4205cdf0-d438-4caa-93dc-f257afddb14a": {
+    "price_at_signal": 200528.08,
+    "price_current": 849000,
+    "return_pct": 323.38,
+    "signal_date": "2025-02-26",
+    "ticker": "000660"
+  },
+  "37b20712-9a29-4573-b6a9-9febb5f5b9cc": {
+    "price_at_signal": 23.52,
+    "price_current": 43.1,
+    "return_pct": 83.25,
+    "signal_date": "2025-02-26",
+    "ticker": "INTC"
+  },
+  "2e68e858-c0c7-4289-ad07-74909f6e6d42": {
+    "price_at_signal": 182.31,
+    "price_current": 353.13,
+    "return_pct": 93.69,
+    "signal_date": "2024-07-16",
+    "ticker": "TSM"
+  },
+  "10d62044-a137-4ccb-a74a-70e79b77d7e7": {
+    "price_at_signal": 126.31,
+    "price_current": 180.05,
+    "return_pct": 42.55,
+    "signal_date": "2024-07-16",
+    "ticker": "NVDA"
+  },
+  "ad8e0369-059e-4286-993c-c3adf2d66238": {
+    "price_at_signal": 141.9,
+    "price_current": 180.05,
+    "return_pct": 26.88,
+    "signal_date": "2024-11-23",
+    "ticker": "NVDA"
+  },
+  "f1bb4730-070d-443f-96f9-7d3b1f6ca6e8": {
+    "price_at_signal": 54446.39,
+    "price_current": 172200,
+    "return_pct": 216.27,
+    "signal_date": "2024-11-23",
+    "ticker": "005930"
+  },
+  "9b6bb383-38c6-408b-91b5-6cae3f6065dd": {
+    "price_at_signal": 229.07,
+    "price_current": 392.43,
+    "return_pct": 71.32,
+    "signal_date": "2021-08-01",
+    "ticker": "TSLA"
+  },
+  "57c78b4e-4c0c-482f-bbb2-6d00424e5e57": {
+    "price_at_signal": 678962.06,
+    "price_current": 307000,
+    "return_pct": -54.78,
+    "signal_date": "2021-09-02",
+    "ticker": "051910"
+  },
+  "d40c55ca-34d0-4669-9713-48dc3614c52e": {
+    "price_at_signal": 78722.69,
+    "price_current": 22200,
+    "return_pct": -71.8,
+    "signal_date": "2021-09-02",
+    "ticker": "323410"
+  },
+  "585ff655-9fa4-485a-974a-304b426addad": {
+    "price_at_signal": 419.67,
+    "price_current": 403.93,
+    "return_pct": -3.75,
+    "signal_date": "2024-05-20",
+    "ticker": "MSFT"
+  },
+  "04ff9334-94ab-476d-8e56-448f9592dcf0": {
+    "price_at_signal": 94.73,
+    "price_current": 180.05,
+    "return_pct": 90.06,
+    "signal_date": "2024-05-20",
+    "ticker": "NVDA"
+  },
+  "76fbc42a-2b78-4a2f-9bc4-d3cb988d9095": {
+    "price_at_signal": 99.09,
+    "price_current": 244.44,
+    "return_pct": 146.68,
+    "signal_date": "2024-05-20",
+    "ticker": "VRT"
+  },
+  "2c089403-574e-4c1f-896e-8fb0a25f8d57": {
+    "price_at_signal": 79.85,
+    "price_current": 124.6,
+    "return_pct": 56.05,
+    "signal_date": "2024-05-20",
+    "ticker": "ANET"
+  },
+  "005daa2c-b89b-41ca-87d6-89973ea08773": {
+    "price_at_signal": 138.86,
+    "price_current": 313.84,
+    "return_pct": 126.01,
+    "signal_date": "2024-05-20",
+    "ticker": "AVGO"
+  },
+  "f49d1e4f-6ff7-41d1-a4ab-749985ba9a3f": {
+    "price_at_signal": 189.57,
+    "price_current": 263.75,
+    "return_pct": 39.13,
+    "signal_date": "2024-05-20",
+    "ticker": "AAPL"
+  },
+  "e0bcee1a-39c4-4746-9789-8ef04d9e54d1": {
+    "price_at_signal": 174.95,
+    "price_current": 392.43,
+    "return_pct": 124.31,
+    "signal_date": "2024-05-20",
+    "ticker": "TSLA"
+  },
+  "f7bf8fef-a64e-4b0e-b47e-ad7a9501f7ff": {
+    "price_at_signal": 201.49,
+    "price_current": 392.43,
+    "return_pct": 94.76,
+    "signal_date": "2020-12-09",
+    "ticker": "TSLA"
+  },
+  "7dc89aa5-b275-4543-ba21-c64c077a326a": {
+    "price_at_signal": 120.83,
+    "price_current": 180.05,
+    "return_pct": 49.02,
+    "signal_date": "2024-06-07",
+    "ticker": "NVDA"
+  },
+  "716344a9-f588-4ef9-a04d-4853d1c3e0fc": {
+    "price_at_signal": 195.38,
+    "price_current": 263.75,
+    "return_pct": 34.99,
+    "signal_date": "2024-06-07",
+    "ticker": "AAPL"
+  },
+  "fc1d8263-9389-4826-88e4-50daa41a3e5e": {
+    "price_at_signal": 30.49,
+    "price_current": 43.1,
+    "return_pct": 41.37,
+    "signal_date": "2024-05-07",
+    "ticker": "INTC"
+  },
+  "c382621f-6592-4064-ba52-7fa3d17d9658": {
+    "price_at_signal": 397.03,
+    "price_current": 132.68,
+    "return_pct": -66.58,
+    "signal_date": "2025-05-15",
+    "ticker": "MSTR"
+  },
+  "e0744fc2-adb1-4686-9bed-58365c7ba383": {
+    "price_at_signal": 42.7,
+    "price_current": 147.22,
+    "return_pct": 244.78,
+    "signal_date": "2024-10-21",
+    "ticker": "PLTR"
+  },
+  "f6100433-8826-4293-8af9-2e463d44328a": {
+    "price_at_signal": 145.84,
+    "price_current": 180.05,
+    "return_pct": 23.46,
+    "signal_date": "2024-11-20",
+    "ticker": "NVDA"
+  },
+  "a747b64e-7ab1-4384-8fe4-c7962938e30c": {
+    "price_at_signal": 57460.39,
+    "price_current": 172200,
+    "return_pct": 199.68,
+    "signal_date": "2024-10-23",
+    "ticker": "005930"
+  },
+  "e00c1579-4bba-475d-99bf-e975914da1fd": {
+    "price_at_signal": 193613.33,
+    "price_current": 849000,
+    "return_pct": 338.5,
+    "signal_date": "2024-10-23",
+    "ticker": "000660"
+  },
+  "f9709ee4-3d24-42f8-bc82-17a96e1fc8ec": {
+    "price_at_signal": 139.51,
+    "price_current": 180.05,
+    "return_pct": 29.06,
+    "signal_date": "2024-10-23",
+    "ticker": "NVDA"
+  },
+  "a1227470-9621-4878-aaff-ca702e3a80ff": {
+    "price_at_signal": 61.0,
+    "price_current": 180.05,
+    "return_pct": 195.18,
+    "signal_date": "2024-01-28",
+    "ticker": "NVDA"
+  },
+  "6f293111-ce27-4139-a2f5-0021182026ea": {
+    "price_at_signal": 240.83,
+    "price_current": 392.43,
+    "return_pct": 62.95,
+    "signal_date": "2024-10-07",
+    "ticker": "TSLA"
+  },
+  "5d0c42af-4f4d-46f0-9b5a-c496c9c7a448": {
+    "price_at_signal": 406.58,
+    "price_current": 392.43,
+    "return_pct": -3.48,
+    "signal_date": "2025-01-24",
+    "ticker": "TSLA"
+  },
+  "c3156419-6641-4c98-9487-6eabc109a50d": {
+    "price_at_signal": 188.03,
+    "price_current": 135.59,
+    "return_pct": -27.89,
+    "signal_date": "2025-10-03",
+    "ticker": "BABA"
+  },
+  "8f78b563-c34e-4796-ad70-c216713d4ee5": {
+    "price_at_signal": 142.0,
+    "price_current": 118.71,
+    "return_pct": -16.4,
+    "signal_date": "2025-10-03",
+    "ticker": "BIDU"
+  },
+  "c13e1400-c124-4502-84b8-494d877041cd": {
+    "price_at_signal": 227.04,
+    "price_current": 263.75,
+    "return_pct": 16.17,
+    "signal_date": "2024-11-19",
+    "ticker": "AAPL"
+  },
+  "3950fe64-8942-4ffe-a1b0-2469864f3f64": {
+    "price_at_signal": 262.9,
+    "price_current": 392.43,
+    "return_pct": 49.27,
+    "signal_date": "2023-07-20",
+    "ticker": "TSLA"
+  },
+  "e4f83de3-148e-46d4-b348-cc1b6cecabe9": {
+    "price_at_signal": 130.01,
+    "price_current": 147.22,
+    "return_pct": 13.24,
+    "signal_date": "2026-02-05",
+    "ticker": "PLTR"
+  },
+  "cf3f09c6-8e8b-40fa-be18-5f460a91aa5b": {
+    "price_at_signal": 331.25,
+    "price_current": 303.58,
+    "return_pct": -8.35,
+    "signal_date": "2026-02-05",
+    "ticker": "GOOGL"
+  },
+  "2e8610db-88a1-489e-b56a-f65ddd9d9dd9": {
+    "price_at_signal": 310.51,
+    "price_current": 313.84,
+    "return_pct": 1.07,
+    "signal_date": "2026-02-05",
+    "ticker": "AVGO"
+  },
+  "5542c842-f92c-4f95-9fe8-62607b19ca67": {
+    "price_at_signal": 185.04,
+    "price_current": 180.05,
+    "return_pct": -2.7,
+    "signal_date": "2026-01-08",
+    "ticker": "NVDA"
+  },
+  "b000a4b9-23c7-46b4-9f18-7aa2e8898ba9": {
+    "price_at_signal": 435.8,
+    "price_current": 392.43,
+    "return_pct": -9.95,
+    "signal_date": "2026-01-08",
+    "ticker": "TSLA"
+  },
+  "9409a281-b484-4952-945d-588b5fca8b08": {
+    "price_at_signal": 246.29,
+    "price_current": 208.73,
+    "return_pct": -15.25,
+    "signal_date": "2026-01-08",
+    "ticker": "AMZN"
+  },
+  "bb2974b2-a88b-4d5b-84da-104096eb85c8": {
+    "price_at_signal": 339011.81,
+    "price_current": 501000,
+    "return_pct": 47.78,
+    "signal_date": "2026-01-08",
+    "ticker": "005380"
+  },
+  "f0e89897-6d2c-446d-9222-a01855d27bf4": {
+    "price_at_signal": 754607.56,
+    "price_current": 849000,
+    "return_pct": 12.51,
+    "signal_date": "2026-01-08",
+    "ticker": "000660"
+  },
+  "887ed5fb-d957-4055-a0f4-67b64997c370": {
+    "price_at_signal": 145636.84,
+    "price_current": 501000,
+    "return_pct": 244.01,
+    "signal_date": "2020-12-02",
+    "ticker": "005380"
+  },
+  "e3cc951c-101d-4feb-b611-cf6704fdab9d": {
+    "price_at_signal": 400.28,
+    "price_current": 392.43,
+    "return_pct": -1.96,
+    "signal_date": "2025-01-30",
+    "ticker": "TSLA"
+  },
+  "ce0b0b57-190e-4a50-9ba1-f3179df4aaa4": {
+    "price_at_signal": 684.84,
+    "price_current": 655.08,
+    "return_pct": -4.35,
+    "signal_date": "2025-01-30",
+    "ticker": "META"
+  },
+  "ad717822-036c-49fc-a345-1df1b212103c": {
+    "price_at_signal": 52566.2,
+    "price_current": 172200,
+    "return_pct": 227.59,
+    "signal_date": "2025-01-30",
+    "ticker": "005930"
+  },
+  "0b515590-5be8-4452-99d5-22dea940a163": {
+    "price_at_signal": 124.62,
+    "price_current": 180.05,
+    "return_pct": 44.48,
+    "signal_date": "2025-01-30",
+    "ticker": "NVDA"
+  },
+  "de7821fd-0323-4b29-abdc-342c023503e2": {
+    "price_at_signal": 171.89,
+    "price_current": 392.43,
+    "return_pct": 128.3,
+    "signal_date": "2024-05-13",
+    "ticker": "TSLA"
+  },
+  "91490396-eacc-47a7-be0a-5daa43bb396b": {
+    "price_at_signal": 222.04,
+    "price_current": 392.43,
+    "return_pct": 76.74,
+    "signal_date": "2022-10-19",
+    "ticker": "TSLA"
+  },
+  "528f768a-f06b-407b-8228-1f99f7d00a6f": {
+    "price_at_signal": 141.35,
+    "price_current": 263.75,
+    "return_pct": 86.59,
+    "signal_date": "2022-10-19",
+    "ticker": "AAPL"
+  },
+  "0308bcad-81ff-4b79-a3bd-95eb5d87f96e": {
+    "price_at_signal": 18539.97,
+    "price_current": 45550,
+    "return_pct": 145.69,
+    "signal_date": "2024-06-24",
+    "ticker": "015760"
+  },
+  "cac2c300-cd81-4f7e-a8f1-cf621d5a80aa": {
+    "price_at_signal": 219640.86,
+    "price_current": 849000,
+    "return_pct": 286.54,
+    "signal_date": "2024-06-24",
+    "ticker": "000660"
+  },
+  "0f0c831a-625c-49fe-aa93-04a32c4fd1ac": {
+    "price_at_signal": 248.23,
+    "price_current": 392.43,
+    "return_pct": 58.09,
+    "signal_date": "2024-07-12",
+    "ticker": "TSLA"
+  },
+  "a2e76bab-544a-4058-b9d9-6b8c40e2a327": {
+    "price_at_signal": 421.06,
+    "price_current": 392.43,
+    "return_pct": -6.8,
+    "signal_date": "2024-12-21",
+    "ticker": "TSLA"
+  },
+  "d68b5330-9833-41ef-9094-ba63837bfab4": {
+    "price_at_signal": 179819.78,
+    "price_current": 208000,
+    "return_pct": 15.67,
+    "signal_date": "2024-05-22",
+    "ticker": "035420"
+  },
+  "0d6c4ecf-fff2-4ee0-b137-cba16f7e4045": {
+    "price_at_signal": 183.25,
+    "price_current": 392.43,
+    "return_pct": 114.15,
+    "signal_date": "2024-01-26",
+    "ticker": "TSLA"
+  },
+  "de06da9b-7f80-4ef0-882e-5bf30ce63526": {
+    "price_at_signal": 164890.52,
+    "price_current": 501000,
+    "return_pct": 203.84,
+    "signal_date": "2024-01-26",
+    "ticker": "005380"
+  },
+  "f5c479ee-f205-4e50-8038-da1179b60d64": {
+    "price_at_signal": 84331.19,
+    "price_current": 156700,
+    "return_pct": 85.82,
+    "signal_date": "2024-01-26",
+    "ticker": "000270"
+  },
+  "6fe48927-088c-4000-a40a-cd90cb75746a": {
+    "price_at_signal": 241.03,
+    "price_current": 392.43,
+    "return_pct": 62.81,
+    "signal_date": "2024-07-11",
+    "ticker": "TSLA"
+  },
+  "190d3e8f-a0f3-4f40-a4c9-d6f710d699d5": {
+    "price_at_signal": 69851.66,
+    "price_current": 172200,
+    "return_pct": 146.52,
+    "signal_date": "2024-03-06",
+    "ticker": "005930"
+  },
+  "45ed6d66-c154-46b1-8754-095a6e41f5e7": {
+    "price_at_signal": 54738.06,
+    "price_current": 172200,
+    "return_pct": 214.59,
+    "signal_date": "2024-11-27",
+    "ticker": "005930"
+  },
+  "32b06bca-4dbd-40a5-9e63-08f7c2c8c854": {
+    "price_at_signal": 166250.62,
+    "price_current": 849000,
+    "return_pct": 410.67,
+    "signal_date": "2024-11-27",
+    "ticker": "000660"
+  },
+  "7797698f-94ca-4ded-a6ff-730c35908555": {
+    "price_at_signal": 135.29,
+    "price_current": 180.05,
+    "return_pct": 33.08,
+    "signal_date": "2024-11-27",
+    "ticker": "NVDA"
+  },
+  "a001b9cf-dd0b-4e1c-9102-15bcbc2638bc": {
+    "price_at_signal": 199909.19,
+    "price_current": 208000,
+    "return_pct": 4.05,
+    "signal_date": "2024-11-27",
+    "ticker": "035420"
+  },
+  "cdfbfcc2-30e6-40c1-af59-a4a242c38abd": {
+    "price_at_signal": 85.86,
+    "price_current": 180.05,
+    "return_pct": 109.7,
+    "signal_date": "2024-04-04",
+    "ticker": "NVDA"
+  },
+  "7c2f55ee-87a3-48f6-85e0-18f7cb89a13d": {
+    "price_at_signal": 173.27,
+    "price_current": 147.22,
+    "return_pct": -15.03,
+    "signal_date": "2025-08-05",
+    "ticker": "PLTR"
+  },
+  "a2fff166-ad5a-4845-b9c0-002ceb506893": {
+    "price_at_signal": 125.56,
+    "price_current": 180.05,
+    "return_pct": 43.4,
+    "signal_date": "2024-08-28",
+    "ticker": "NVDA"
+  },
+  "36f001d2-7b06-40a5-aea8-8bad16a1ab7c": {
+    "price_at_signal": 90.51,
+    "price_current": 180.05,
+    "return_pct": 98.93,
+    "signal_date": "2024-05-07",
+    "ticker": "NVDA"
+  },
+  "b2420467-07a0-437b-871f-534f4b9c38b4": {
+    "price_at_signal": 250.0,
+    "price_current": 392.43,
+    "return_pct": 56.97,
+    "signal_date": "2024-09-23",
+    "ticker": "TSLA"
+  },
+  "ae23b2fe-ea9c-4508-a783-b46200a51cf4": {
+    "price_at_signal": 54738.06,
+    "price_current": 172200,
+    "return_pct": 214.59,
+    "signal_date": "2024-11-19",
+    "ticker": "005930"
+  },
+  "f92ec4d9-6d30-40e0-a8e8-01a390c943a9": {
+    "price_at_signal": 98.62,
+    "price_current": 303.58,
+    "return_pct": 207.81,
+    "signal_date": "2023-02-08",
+    "ticker": "GOOGL"
+  },
+  "4ac24c5e-3ee6-4989-845e-6c4445f91bc3": {
+    "price_at_signal": 201.29,
+    "price_current": 392.43,
+    "return_pct": 94.96,
+    "signal_date": "2023-02-08",
+    "ticker": "TSLA"
+  },
+  "370b6eb0-8c6f-4f15-a2d5-2899380f7971": {
+    "price_at_signal": 75237.4,
+    "price_current": 172200,
+    "return_pct": 128.88,
+    "signal_date": "2021-08-04",
+    "ticker": "005930"
+  },
+  "143161df-74d0-43f3-a3b4-e6edd0ddcbe5": {
+    "price_at_signal": 421396.94,
+    "price_current": 208000,
+    "return_pct": -50.64,
+    "signal_date": "2021-08-04",
+    "ticker": "035420"
+  },
+  "2cea43ac-b304-48da-a5e1-9b5e5436671b": {
+    "price_at_signal": 148880.27,
+    "price_current": 47050,
+    "return_pct": -68.4,
+    "signal_date": "2021-08-04",
+    "ticker": "035720"
+  },
+  "24edb37b-1a2b-4aa8-89fa-8fac1848d329": {
+    "price_at_signal": 67092.1,
+    "price_current": 22200,
+    "return_pct": -66.91,
+    "signal_date": "2021-08-04",
+    "ticker": "323410"
+  },
+  "2abcb97c-c137-44cf-8fd7-227f97eab056": {
+    "price_at_signal": 236.97,
+    "price_current": 392.43,
+    "return_pct": 65.6,
+    "signal_date": "2021-08-04",
+    "ticker": "TSLA"
+  },
+  "178b8120-5228-4f13-839b-4550484a2148": {
+    "price_at_signal": 324.92,
+    "price_current": 132.68,
+    "return_pct": -59.17,
+    "signal_date": "2025-02-13",
+    "ticker": "MSTR"
+  },
+  "e3334104-db32-4c43-b4cb-5d3f3dae6481": {
+    "price_at_signal": 298.11,
+    "price_current": 182.36,
+    "return_pct": -38.83,
+    "signal_date": "2025-02-13",
+    "ticker": "COIN"
+  },
+  "89741ee9-3e7b-45b3-afad-8530609e5aac": {
+    "price_at_signal": 270.77,
+    "price_current": 300.26,
+    "return_pct": 10.89,
+    "signal_date": "2025-02-13",
+    "ticker": "JPM"
+  },
+  "721b39ab-9f90-4f59-9f82-467993122e21": {
+    "price_at_signal": 79.28,
+    "price_current": 47.83,
+    "return_pct": -39.67,
+    "signal_date": "2025-02-13",
+    "ticker": "AFRM"
+  },
+  "33e925e2-e834-4b74-89f4-fd1e6135a015": {
+    "price_at_signal": 23.91,
+    "price_current": 43.1,
+    "return_pct": 80.26,
+    "signal_date": "2024-09-29",
+    "ticker": "INTC"
+  },
+  "c6ef2b9f-f59e-49c4-a9a4-f2db58313d3e": {
+    "price_at_signal": 226.3,
+    "price_current": 263.75,
+    "return_pct": 16.55,
+    "signal_date": "2024-09-29",
+    "ticker": "AAPL"
+  },
+  "2f8cba0b-7a05-478d-8516-97fdb2a55edf": {
+    "price_at_signal": 166.26,
+    "price_current": 149.01,
+    "return_pct": -10.38,
+    "signal_date": "2024-09-29",
+    "ticker": "ORCL"
+  },
+  "160c4b84-0933-4f9a-9e7f-45d1ca2322ff": {
+    "price_at_signal": 121.36,
+    "price_current": 180.05,
+    "return_pct": 48.36,
+    "signal_date": "2024-09-29",
+    "ticker": "NVDA"
+  },
+  "62ff36f4-4d67-4ea4-bfb0-797894e58716": {
+    "price_at_signal": 62418.9,
+    "price_current": 172200,
+    "return_pct": 175.88,
+    "signal_date": "2024-09-29",
+    "ticker": "005930"
+  },
+  "3cd34d68-5221-4457-9c1b-33ef0803e556": {
+    "price_at_signal": 94.95,
+    "price_current": 180.05,
+    "return_pct": 89.62,
+    "signal_date": "2024-03-25",
+    "ticker": "NVDA"
+  },
+  "a986e63e-3d7d-4631-b4ec-823a4385a706": {
+    "price_at_signal": 178.63,
+    "price_current": 190.95,
+    "return_pct": 6.9,
+    "signal_date": "2024-03-25",
+    "ticker": "AMD"
+  },
+  "808f641c-c19b-4bd8-88db-6797fe48ba55": {
+    "price_at_signal": 349.98,
+    "price_current": 392.43,
+    "return_pct": 12.13,
+    "signal_date": "2025-05-17",
+    "ticker": "TSLA"
+  },
+  "b0c72ebd-2ddf-4880-ac01-ba7188750b51": {
+    "price_at_signal": 336.26,
+    "price_current": 392.43,
+    "return_pct": 16.7,
+    "signal_date": "2022-04-21",
+    "ticker": "TSLA"
+  },
+  "08751e43-ce2b-4e8a-9d87-373033cbc71b": {
+    "price_at_signal": 86.74,
+    "price_current": 46.38,
+    "return_pct": -46.53,
+    "signal_date": "2024-11-26",
+    "ticker": "PYPL"
+  },
+  "12cf2efb-ae2e-4f42-97fc-cddcfed11334": {
+    "price_at_signal": 168.27,
+    "price_current": 303.58,
+    "return_pct": 80.42,
+    "signal_date": "2024-11-26",
+    "ticker": "GOOGL"
+  },
+  "1154680a-733c-4b04-bc89-d171d05916a1": {
+    "price_at_signal": 210.5,
+    "price_current": 263.75,
+    "return_pct": 25.3,
+    "signal_date": "2025-07-09",
+    "ticker": "AAPL"
+  },
+  "ba75a2bd-1a23-4cf1-bc99-a026494b325a": {
+    "price_at_signal": 57.4,
+    "price_current": 31.94,
+    "return_pct": -44.36,
+    "signal_date": "2025-07-09",
+    "ticker": "1810.HK"
+  },
+  "55274017-b071-488e-83b6-891321a64057": {
+    "price_at_signal": 295.88,
+    "price_current": 392.43,
+    "return_pct": 32.63,
+    "signal_date": "2025-07-09",
+    "ticker": "TSLA"
+  },
+  "9f919dac-6caa-47ef-b9dc-9411e1fa463f": {
+    "price_at_signal": 121.3,
+    "price_current": 93.85,
+    "return_pct": -22.63,
+    "signal_date": "2025-07-09",
+    "ticker": "1211.HK"
+  },
+  "b71fda28-c56e-4646-b3f0-d7ace9192e4c": {
+    "price_at_signal": 157667.45,
+    "price_current": 501000,
+    "return_pct": 217.76,
+    "signal_date": "2022-07-21",
+    "ticker": "005380"
+  },
+  "b978da43-85ba-4f55-acb7-5210d346da67": {
+    "price_at_signal": 167.77,
+    "price_current": 263.75,
+    "return_pct": 57.21,
+    "signal_date": "2024-05-01",
+    "ticker": "AAPL"
+  },
+  "7879a2c6-70bb-41f2-9172-a4fa028409e9": {
+    "price_at_signal": 445.91,
+    "price_current": 392.43,
+    "return_pct": -11.99,
+    "signal_date": "2025-11-06",
+    "ticker": "TSLA"
+  },
+  "42dace27-ef94-49cf-98af-76a96f2cba49": {
+    "price_at_signal": 85355.0,
+    "price_current": 22200,
+    "return_pct": -73.99,
+    "signal_date": "2021-09-01",
+    "ticker": "323410"
+  },
+  "b727da8a-e6f8-42aa-816b-e593a33840f6": {
+    "price_at_signal": 264.35,
+    "price_current": 392.43,
+    "return_pct": 48.45,
+    "signal_date": "2023-07-26",
+    "ticker": "TSLA"
+  },
+  "c8d0822a-7192-4894-9630-89561f62481e": {
+    "price_at_signal": 175.84,
+    "price_current": 263.75,
+    "return_pct": 49.99,
+    "signal_date": "2022-01-04",
+    "ticker": "AAPL"
+  },
+  "ba3a350e-41fa-4ebd-83d8-76a0c9c1c573": {
+    "price_at_signal": 383.2,
+    "price_current": 392.43,
+    "return_pct": 2.41,
+    "signal_date": "2022-01-04",
+    "ticker": "TSLA"
+  },
+  "0fb2fa49-997e-4b50-9a04-ac187da04ac5": {
+    "price_at_signal": 261.63,
+    "price_current": 392.43,
+    "return_pct": 49.99,
+    "signal_date": "2024-09-30",
+    "ticker": "TSLA"
+  },
+  "a30d93c2-15d5-42aa-87ee-29aa82823794": {
+    "price_at_signal": 224.99,
+    "price_current": 263.75,
+    "return_pct": 17.23,
+    "signal_date": "2024-09-23",
+    "ticker": "AAPL"
+  },
+  "e65dc190-b899-453b-a581-47df8c11ea05": {
+    "price_at_signal": 202.64,
+    "price_current": 392.43,
+    "return_pct": 93.66,
+    "signal_date": "2024-03-03",
+    "ticker": "TSLA"
+  },
+  "7c29cf8f-3176-4a0a-9d5b-249bf131de58": {
+    "price_at_signal": 94.9,
+    "price_current": 180.05,
+    "return_pct": 89.72,
+    "signal_date": "2024-05-22",
+    "ticker": "NVDA"
+  },
+  "5e277a8e-2064-4b3a-a7b1-d5ca386457ba": {
+    "price_at_signal": 194721.95,
+    "price_current": 849000,
+    "return_pct": 336.01,
+    "signal_date": "2024-05-22",
+    "ticker": "000660"
+  },
+  "05d49eb9-acff-4387-8963-550787103669": {
+    "price_at_signal": 146134.55,
+    "price_current": 259000,
+    "return_pct": 77.23,
+    "signal_date": "2024-05-22",
+    "ticker": "042700"
+  },
+  "f9e49da7-d962-48d9-bd94-0e2c56c713e6": {
+    "price_at_signal": 224.92,
+    "price_current": 263.75,
+    "return_pct": 17.26,
+    "signal_date": "2024-08-21",
+    "ticker": "AAPL"
+  },
+  "f662594e-aed8-4fc6-8873-291333276505": {
+    "price_at_signal": 164.8,
+    "price_current": 303.58,
+    "return_pct": 84.22,
+    "signal_date": "2024-08-21",
+    "ticker": "GOOGL"
+  },
+  "f3af1ba7-75cb-47bf-843f-6bac54606a41": {
+    "price_at_signal": 84887.86,
+    "price_current": 172200,
+    "return_pct": 102.86,
+    "signal_date": "2024-07-09",
+    "ticker": "005930"
+  },
+  "bc8ba287-594a-4848-a7ed-d1888bed1196": {
+    "price_at_signal": 235205.09,
+    "price_current": 849000,
+    "return_pct": 260.96,
+    "signal_date": "2024-07-09",
+    "ticker": "000660"
+  },
+  "dc3a8b0a-ce50-4a83-9acb-f2eb271efac9": {
+    "price_at_signal": 130.4,
+    "price_current": 379.68,
+    "return_pct": 191.18,
+    "signal_date": "2024-07-09",
+    "ticker": "MU"
+  },
+  "7832fd96-e36f-4190-8529-f981893cf656": {
+    "price_at_signal": 177.1,
+    "price_current": 190.95,
+    "return_pct": 7.82,
+    "signal_date": "2024-07-09",
+    "ticker": "AMD"
+  },
+  "3edb3863-219b-41e6-bc3b-7b9061d24e1e": {
+    "price_at_signal": 66314.7,
+    "price_current": 172200,
+    "return_pct": 159.67,
+    "signal_date": "2023-08-02",
+    "ticker": "005930"
+  },
+  "0fc3ae57-8bfa-48dc-a5dc-915e1c1e685d": {
+    "price_at_signal": 116954.2,
+    "price_current": 849000,
+    "return_pct": 625.93,
+    "signal_date": "2023-08-02",
+    "ticker": "000660"
+  },
+  "996268b9-bda3-4f42-b139-d3356d697e10": {
+    "price_at_signal": 48643.86,
+    "price_current": 259000,
+    "return_pct": 432.44,
+    "signal_date": "2023-08-02",
+    "ticker": "042700"
+  },
+  "f9c72f1c-3df7-46f1-821c-3490afe07bd1": {
+    "price_at_signal": 223214.86,
+    "price_current": 208000,
+    "return_pct": -6.82,
+    "signal_date": "2023-08-02",
+    "ticker": "035420"
+  },
+  "51f429a8-e4fb-4a05-9a71-07242588f60a": {
+    "price_at_signal": 381.82,
+    "price_current": 392.43,
+    "return_pct": 2.78,
+    "signal_date": "2022-04-04",
+    "ticker": "TSLA"
+  },
+  "70a3fff6-e899-4c28-bb98-4396ce48f0a9": {
+    "price_at_signal": 216.38,
+    "price_current": 43.2,
+    "return_pct": -80.04,
+    "signal_date": "2022-04-04",
+    "ticker": "ENPH"
+  },
+  "03bf0119-854b-4287-99f8-973c24a58f00": {
+    "price_at_signal": 243.0,
+    "price_current": 9.5,
+    "return_pct": -96.09,
+    "signal_date": "2022-04-04",
+    "ticker": "STEM"
+  },
+  "e764d786-c77a-4b3d-ae08-1838b2355c86": {
+    "price_at_signal": 410.04,
+    "price_current": 392.43,
+    "return_pct": -4.29,
+    "signal_date": "2025-09-15",
+    "ticker": "TSLA"
+  },
+  "c0695623-c6cf-4f96-9c37-eb4a9b292c9a": {
+    "price_at_signal": 82.23,
+    "price_current": 180.05,
+    "return_pct": 118.95,
+    "signal_date": "2024-03-03",
+    "ticker": "NVDA"
+  },
+  "126503f4-cfde-432e-94ac-c38d459adbeb": {
+    "price_at_signal": 259280.7,
+    "price_current": 383000,
+    "return_pct": 47.72,
+    "signal_date": "2024-06-20",
+    "ticker": "196170"
+  },
+  "e86fe610-2c0d-4a62-81d7-948c409cc52c": {
+    "price_at_signal": 543.18,
+    "price_current": 424.32,
+    "return_pct": -21.88,
+    "signal_date": "2024-01-30",
+    "ticker": "SNPS"
+  },
+  "b2fe810e-29dd-45be-bf94-965dc9ad7abe": {
+    "price_at_signal": 294.62,
+    "price_current": 300.63,
+    "return_pct": 2.04,
+    "signal_date": "2024-01-30",
+    "ticker": "CDNS"
+  },
+  "ed6d545f-6793-4f75-9afd-8cb15a0e53f8": {
+    "price_at_signal": 71.97,
+    "price_current": 121.72,
+    "return_pct": 69.13,
+    "signal_date": "2024-01-30",
+    "ticker": "ARM"
+  },
+  "6389b61f-9c18-4e40-a97a-872b14915ed4": {
+    "price_at_signal": 71.43,
+    "price_current": 87.59,
+    "return_pct": 22.62,
+    "signal_date": "2024-01-30",
+    "ticker": "RMBS"
+  },
+  "461cf8a8-777c-47ce-a3fa-38341e8b6054": {
+    "price_at_signal": 140.02,
+    "price_current": 138.13,
+    "return_pct": -1.35,
+    "signal_date": "2024-01-30",
+    "ticker": "QCOM"
+  },
+  "9dc2c5e6-9821-4a3b-96b8-f9a00e4739c4": {
+    "price_at_signal": 181.19,
+    "price_current": 392.43,
+    "return_pct": 116.58,
+    "signal_date": "2024-05-03",
+    "ticker": "TSLA"
+  },
+  "b73aaf06-2399-45ea-83e0-ccfc05dfd7b1": {
+    "price_at_signal": 346.4,
+    "price_current": 392.43,
+    "return_pct": 13.29,
+    "signal_date": "2025-09-08",
+    "ticker": "TSLA"
+  },
+  "68892384-3da1-4a80-87a2-7aebc2c8a303": {
+    "price_at_signal": 197.08,
+    "price_current": 392.43,
+    "return_pct": 99.12,
+    "signal_date": "2022-11-07",
+    "ticker": "TSLA"
+  },
+  "19630bc7-6733-419c-a00c-ff5344901180": {
+    "price_at_signal": 136.73,
+    "price_current": 263.75,
+    "return_pct": 92.9,
+    "signal_date": "2022-11-07",
+    "ticker": "AAPL"
+  },
+  "c859f6f1-9127-408b-a48a-2a8a6886f6fa": {
+    "price_at_signal": 282.3,
+    "price_current": 338.3,
+    "return_pct": 19.84,
+    "signal_date": "2025-03-04",
+    "ticker": "CB"
+  },
+  "c88e03fd-28ac-4438-bac2-5d570b728b53": {
+    "price_at_signal": 45.53,
+    "price_current": 53.68,
+    "return_pct": 17.91,
+    "signal_date": "2025-03-04",
+    "ticker": "OXY"
+  },
+  "d30ce2c1-e20f-4da5-b7d4-03b5190d93ba": {
+    "price_at_signal": 43.45,
+    "price_current": 58.06,
+    "return_pct": 33.62,
+    "signal_date": "2025-03-04",
+    "ticker": "CRSP"
+  },
+  "2c667222-8d3e-4a03-8505-80ed37bc1f36": {
+    "price_at_signal": 168.19,
+    "price_current": 156.02,
+    "return_pct": -7.24,
+    "signal_date": "2025-03-04",
+    "ticker": "STZ"
+  },
+  "29035135-28c9-46bd-8115-8db276327d8f": {
+    "price_at_signal": 146.89,
+    "price_current": 303.58,
+    "return_pct": 106.67,
+    "signal_date": "2022-02-02",
+    "ticker": "GOOGL"
+  },
+  "c57eafc5-7234-493e-9029-84ba4f13e69e": {
+    "price_at_signal": 201327.42,
+    "price_current": 849000,
+    "return_pct": 321.7,
+    "signal_date": "2025-05-27",
+    "ticker": "000660"
+  },
+  "58bc051d-20cb-40bd-ba2e-e172fc223ab6": {
+    "price_at_signal": 53075.45,
+    "price_current": 172200,
+    "return_pct": 224.44,
+    "signal_date": "2025-05-27",
+    "ticker": "005930"
+  },
+  "5d0a397d-bac7-438d-b846-cdcf0bcc5c0e": {
+    "price_at_signal": 181889.36,
+    "price_current": 208000,
+    "return_pct": 14.36,
+    "signal_date": "2025-05-27",
+    "ticker": "035420"
+  },
+  "65441389-2517-4bae-9457-7a12b47068ba": {
+    "price_at_signal": 323.23,
+    "price_current": 303.58,
+    "return_pct": -6.08,
+    "signal_date": "2025-11-25",
+    "ticker": "GOOGL"
+  },
+  "30a3e952-4538-41f6-9ec4-e23cdf25dd46": {
+    "price_at_signal": 419.4,
+    "price_current": 392.43,
+    "return_pct": -6.43,
+    "signal_date": "2025-11-25",
+    "ticker": "TSLA"
+  },
+  "9d61fe6e-c05c-4262-9767-b0c53ce7f61c": {
+    "price_at_signal": 384.29,
+    "price_current": 313.84,
+    "return_pct": -18.33,
+    "signal_date": "2025-11-25",
+    "ticker": "AVGO"
+  },
+  "7a53549c-b059-41cb-aba9-4336ff6a6a5d": {
+    "price_at_signal": 240.83,
+    "price_current": 392.43,
+    "return_pct": 62.95,
+    "signal_date": "2024-10-07",
+    "ticker": "TSLA"
+  },
+  "328419c4-cec6-423d-97d7-7f858a6f8d0e": {
+    "price_at_signal": 230610.17,
+    "price_current": 501000,
+    "return_pct": 117.25,
+    "signal_date": "2024-10-07",
+    "ticker": "005380"
+  },
+  "559a7e98-6364-433c-8dcf-ca944e097dab": {
+    "price_at_signal": 70234.93,
+    "price_current": 172200,
+    "return_pct": 145.18,
+    "signal_date": "2024-03-08",
+    "ticker": "005930"
+  },
+  "6efbc432-ec40-4c23-b46e-286cbd44819e": {
+    "price_at_signal": 169030.28,
+    "price_current": 849000,
+    "return_pct": 402.28,
+    "signal_date": "2024-03-08",
+    "ticker": "000660"
+  },
+  "3ad21f53-5d2a-4b98-a1f2-ed8c84e2575b": {
+    "price_at_signal": 393000.0,
+    "price_current": 347500,
+    "return_pct": -11.58,
+    "signal_date": "2025-07-30",
+    "ticker": "373220"
+  },
+  "9dc76448-4dc2-4877-bf0d-ce1aa1e6d823": {
+    "price_at_signal": 71927.88,
+    "price_current": 172200,
+    "return_pct": 139.41,
+    "signal_date": "2025-07-30",
+    "ticker": "005930"
+  },
+  "a1003a18-b802-44d1-8885-d0bf3af46bcf": {
+    "price_at_signal": 319.04,
+    "price_current": 392.43,
+    "return_pct": 23.0,
+    "signal_date": "2025-07-30",
+    "ticker": "TSLA"
+  },
+  "5115e97d-ffbf-4725-8c7f-e2b51717bff5": {
+    "price_at_signal": 103.83,
+    "price_current": 147.22,
+    "return_pct": 41.79,
+    "signal_date": "2025-02-04",
+    "ticker": "PLTR"
+  },
+  "6701deba-5cd5-4dfd-a4b5-ba5b4fc53d64": {
+    "price_at_signal": 321.22,
+    "price_current": 392.43,
+    "return_pct": 22.17,
+    "signal_date": "2024-11-08",
+    "ticker": "TSLA"
+  },
+  "3bae1a4a-e690-4896-a6d7-1836efff7c17": {
+    "price_at_signal": 147.58,
+    "price_current": 180.05,
+    "return_pct": 22.0,
+    "signal_date": "2024-11-08",
+    "ticker": "NVDA"
+  },
+  "93de47ac-82f6-4cca-a9d9-f1d590f0740d": {
+    "price_at_signal": 225.73,
+    "price_current": 263.75,
+    "return_pct": 16.84,
+    "signal_date": "2024-11-08",
+    "ticker": "AAPL"
+  },
+  "00ebef7e-18fb-4608-907d-6d5e63e592e1": {
+    "price_at_signal": 424.77,
+    "price_current": 392.43,
+    "return_pct": -7.61,
+    "signal_date": "2024-12-11",
+    "ticker": "TSLA"
+  },
+  "0a0091eb-da28-4c90-9a7a-6fc245cee650": {
+    "price_at_signal": 166448.19,
+    "price_current": 849000,
+    "return_pct": 410.07,
+    "signal_date": "2024-12-24",
+    "ticker": "000660"
+  },
+  "62626b38-35ef-4e95-a403-453c42a03888": {
+    "price_at_signal": 52890.77,
+    "price_current": 172200,
+    "return_pct": 225.58,
+    "signal_date": "2024-12-24",
+    "ticker": "005930"
+  },
+  "3a94f8ad-0de0-4f4d-9a7b-2273bde9abe4": {
+    "price_at_signal": 92848.65,
+    "price_current": 172200,
+    "return_pct": 85.46,
+    "signal_date": "2025-10-13",
+    "ticker": "005930"
+  },
+  "52da8416-354a-4e3d-adbb-cd5ee69479ae": {
+    "price_at_signal": 188.31,
+    "price_current": 180.05,
+    "return_pct": -4.39,
+    "signal_date": "2025-10-13",
+    "ticker": "NVDA"
+  },
+  "868a3b9b-3bb9-4d59-9bc3-0eb317bc837d": {
+    "price_at_signal": 108.1,
+    "price_current": 392.43,
+    "return_pct": 263.02,
+    "signal_date": "2023-01-03",
+    "ticker": "TSLA"
+  },
+  "15bdbb14-b140-4b57-b4c6-87307a2e54b9": {
+    "price_at_signal": 123.1,
+    "price_current": 263.75,
+    "return_pct": 114.26,
+    "signal_date": "2023-01-03",
+    "ticker": "AAPL"
+  },
+  "8987142a-9fe8-4131-980c-4b33db0a0f7b": {
+    "price_at_signal": 74.41,
+    "price_current": 46.38,
+    "return_pct": -37.67,
+    "signal_date": "2023-01-03",
+    "ticker": "PYPL"
+  },
+  "74793aa1-339a-46b5-816c-85fd3233a89d": {
+    "price_at_signal": 460.55,
+    "price_current": 392.43,
+    "return_pct": -14.79,
+    "signal_date": "2025-10-28",
+    "ticker": "TSLA"
+  },
+  "2293b3af-9294-442a-9552-44304b671ac5": {
+    "price_at_signal": 90.31,
+    "price_current": 180.05,
+    "return_pct": 99.37,
+    "signal_date": "2024-03-30",
+    "ticker": "NVDA"
+  },
+  "4be62512-acf7-409a-83bf-e8948e05e98c": {
+    "price_at_signal": 52859.86,
+    "price_current": 172200,
+    "return_pct": 225.77,
+    "signal_date": "2025-02-06",
+    "ticker": "005930"
+  },
+  "3a064846-bf7c-457c-b8a7-843756bf2839": {
+    "price_at_signal": 201021.98,
+    "price_current": 849000,
+    "return_pct": 322.34,
+    "signal_date": "2025-02-06",
+    "ticker": "000660"
+  },
+  "3e8d7904-bfca-464d-a88a-150447e3a2bb": {
+    "price_at_signal": 128.64,
+    "price_current": 180.05,
+    "return_pct": 39.96,
+    "signal_date": "2025-02-06",
+    "ticker": "NVDA"
+  },
+  "61f8c567-fc8f-4cca-8219-fbd7e34f01f5": {
+    "price_at_signal": 229.29,
+    "price_current": 313.84,
+    "return_pct": 36.88,
+    "signal_date": "2025-02-06",
+    "ticker": "AVGO"
+  },
+  "b7df6048-2d88-4408-ad79-ca79da5b1688": {
+    "price_at_signal": 374.32,
+    "price_current": 392.43,
+    "return_pct": 4.84,
+    "signal_date": "2025-02-06",
+    "ticker": "TSLA"
+  },
+  "b7f216a0-fd81-469a-af0e-f1b4363053b2": {
+    "price_at_signal": 153.93,
+    "price_current": 138.08,
+    "return_pct": -10.3,
+    "signal_date": "2025-03-27",
+    "ticker": "MTN"
+  },
+  "43f7b582-5097-49b7-8719-f3dfbccf3844": {
+    "price_at_signal": 124.18,
+    "price_current": 163.62,
+    "return_pct": 31.76,
+    "signal_date": "2025-03-27",
+    "ticker": "H"
+  },
+  "ab5565c8-f87d-491d-ac1d-1e27eb133af7": {
+    "price_at_signal": 558.24,
+    "price_current": 565.59,
+    "return_pct": 1.32,
+    "signal_date": "2025-03-27",
+    "ticker": "MSCI"
+  },
+  "f8f16e7d-c3b9-42f8-8752-f3d44ee49a34": {
+    "price_at_signal": 395.23,
+    "price_current": 392.43,
+    "return_pct": -0.71,
+    "signal_date": "2025-11-20",
+    "ticker": "TSLA"
+  },
+  "2686ff43-b399-4dd2-883b-08c480dd3f06": {
+    "price_at_signal": 569540.44,
+    "price_current": 849000,
+    "return_pct": 49.07,
+    "signal_date": "2025-11-20",
+    "ticker": "000660"
+  },
+  "d31cd7a6-8485-490d-a48b-652cee387cd4": {
+    "price_at_signal": 100113.34,
+    "price_current": 172200,
+    "return_pct": 72.01,
+    "signal_date": "2025-11-20",
+    "ticker": "005930"
+  },
+  "dd24c610-0d0c-48f5-ab4c-7162186c0792": {
+    "price_at_signal": 160.27,
+    "price_current": 392.43,
+    "return_pct": 144.86,
+    "signal_date": "2023-01-26",
+    "ticker": "TSLA"
+  },
+  "5e7f1ea6-55f1-4313-a889-4f05197cd98c": {
+    "price_at_signal": 300.82,
+    "price_current": 149.01,
+    "return_pct": -50.47,
+    "signal_date": "2025-09-15",
+    "ticker": "ORCL"
+  },
+  "8f506dde-682f-4f78-a71c-86a42b820de9": {
+    "price_at_signal": 75791.77,
+    "price_current": 172200,
+    "return_pct": 127.2,
+    "signal_date": "2025-09-15",
+    "ticker": "005930"
+  },
+  "f4c96586-2efe-4b83-9378-38e7e8d14831": {
+    "price_at_signal": 330153.91,
+    "price_current": 849000,
+    "return_pct": 157.15,
+    "signal_date": "2025-09-15",
+    "ticker": "000660"
+  },
+  "eac20ffd-67c6-4014-af09-77d2cce7e363": {
+    "price_at_signal": 147.03,
+    "price_current": 180.05,
+    "return_pct": 22.46,
+    "signal_date": "2025-01-22",
+    "ticker": "NVDA"
+  },
+  "058b633c-69ae-4a49-a5d8-e59f77fc9a7d": {
+    "price_at_signal": 415.11,
+    "price_current": 392.43,
+    "return_pct": -5.46,
+    "signal_date": "2025-01-22",
+    "ticker": "TSLA"
+  },
+  "8e65751a-d321-4738-a228-7c99003aa62b": {
+    "price_at_signal": 621.54,
+    "price_current": 655.08,
+    "return_pct": 5.4,
+    "signal_date": "2025-01-22",
+    "ticker": "META"
+  },
+  "8e70fcf1-f338-4c27-9ccf-6b5f857d44ad": {
+    "price_at_signal": 134.79,
+    "price_current": 180.05,
+    "return_pct": 33.58,
+    "signal_date": "2025-05-28",
+    "ticker": "NVDA"
+  },
+  "21e4950c-fe8c-4dfd-8968-9277f522e3cd": {
+    "price_at_signal": 356.9,
+    "price_current": 392.43,
+    "return_pct": 9.96,
+    "signal_date": "2025-05-28",
+    "ticker": "TSLA"
+  },
+  "2d3dcf29-4535-47bf-b56c-f31b76b6754f": {
+    "price_at_signal": 267684.81,
+    "price_current": 321500,
+    "return_pct": 20.1,
+    "signal_date": "2021-08-19",
+    "ticker": "005490"
+  },
+  "faf63b36-d553-4037-b1be-478055d26f72": {
+    "price_at_signal": 224.49,
+    "price_current": 392.43,
+    "return_pct": 74.81,
+    "signal_date": "2021-08-19",
+    "ticker": "TSLA"
+  },
+  "65db1571-5735-42a7-aa16-4f8522b149c0": {
+    "price_at_signal": 106.16,
+    "price_current": 180.05,
+    "return_pct": 69.6,
+    "signal_date": "2024-09-04",
+    "ticker": "NVDA"
+  },
+  "b0ac0bb8-68e1-47d4-ac30-10fb1234ec45": {
+    "price_at_signal": 72479.19,
+    "price_current": 172200,
+    "return_pct": 137.59,
+    "signal_date": "2024-06-04",
+    "ticker": "005930"
+  },
+  "55f50944-f93f-4fb1-96fa-69d33a0f8e90": {
+    "price_at_signal": 190388.25,
+    "price_current": 849000,
+    "return_pct": 345.93,
+    "signal_date": "2024-06-04",
+    "ticker": "000660"
+  },
+  "24177bde-2c5b-404b-9c66-0edd1582427c": {
+    "price_at_signal": 116.38,
+    "price_current": 180.05,
+    "return_pct": 54.71,
+    "signal_date": "2024-06-04",
+    "ticker": "NVDA"
+  },
+  "4fb38db2-25b5-4431-9bd4-df024fb4a5aa": {
+    "price_at_signal": 192.86,
+    "price_current": 263.75,
+    "return_pct": 36.76,
+    "signal_date": "2024-06-04",
+    "ticker": "AAPL"
+  },
+  "3337492a-e7b1-4414-b0be-bf39bbb8586c": {
+    "price_at_signal": 197.83,
+    "price_current": 138.13,
+    "return_pct": -30.18,
+    "signal_date": "2024-06-04",
+    "ticker": "QCOM"
+  },
+  "0d6e525d-bb46-4929-919c-1ac7c77f31bb": {
+    "price_at_signal": 147424.27,
+    "price_current": 259000,
+    "return_pct": 75.68,
+    "signal_date": "2024-06-04",
+    "ticker": "042700"
+  },
+  "3a91da89-dda9-4192-81ec-d215a70f4c3a": {
+    "price_at_signal": 126.6,
+    "price_current": 180.05,
+    "return_pct": 42.22,
+    "signal_date": "2025-02-25",
+    "ticker": "NVDA"
+  },
+  "b98b0999-4f5d-4260-9582-c51cc76c88bd": {
+    "price_at_signal": 198058.52,
+    "price_current": 849000,
+    "return_pct": 328.66,
+    "signal_date": "2025-02-25",
+    "ticker": "000660"
+  },
+  "e0a814d6-3ee0-4698-a810-663002f8b8ae": {
+    "price_at_signal": 55992.3,
+    "price_current": 172200,
+    "return_pct": 207.54,
+    "signal_date": "2025-02-25",
+    "ticker": "005930"
+  },
+  "f05ea4d3-a19e-4459-94f1-c322855a2178": {
+    "price_at_signal": 552979.62,
+    "price_current": 849000,
+    "return_pct": 53.53,
+    "signal_date": "2025-12-15",
+    "ticker": "000660"
+  },
+  "b647c9b7-7aa8-42db-9649-1337d5d51dc8": {
+    "price_at_signal": 104293.02,
+    "price_current": 172200,
+    "return_pct": 65.11,
+    "signal_date": "2025-12-15",
+    "ticker": "005930"
+  },
+  "2736d1fa-6fb6-4642-9301-b0f302fb71bf": {
+    "price_at_signal": 339.16,
+    "price_current": 313.84,
+    "return_pct": -7.47,
+    "signal_date": "2025-12-15",
+    "ticker": "AVGO"
+  },
+  "cfdbcdb6-3827-47f7-8b57-7bc1896b0b81": {
+    "price_at_signal": 308.22,
+    "price_current": 303.58,
+    "return_pct": -1.51,
+    "signal_date": "2025-12-15",
+    "ticker": "GOOGL"
+  },
+  "e39ed051-9fdb-4201-81be-f8f87d5a9039": {
+    "price_at_signal": 176.29,
+    "price_current": 180.05,
+    "return_pct": 2.13,
+    "signal_date": "2025-12-15",
+    "ticker": "NVDA"
+  },
+  "f2f82535-cd69-42ba-8f78-292a2f36525e": {
+    "price_at_signal": 164.57,
+    "price_current": 303.58,
+    "return_pct": 84.47,
+    "signal_date": "2024-08-24",
+    "ticker": "GOOGL"
+  },
+  "f1b95942-ae0d-4139-8c12-77497585131f": {
+    "price_at_signal": 162389.28,
+    "price_current": 208000,
+    "return_pct": 28.09,
+    "signal_date": "2024-08-24",
+    "ticker": "035420"
+  },
+  "d0638f82-59ab-432a-b607-3abfdce83470": {
+    "price_at_signal": 106.41,
+    "price_current": 180.05,
+    "return_pct": 69.2,
+    "signal_date": "2024-05-27",
+    "ticker": "NVDA"
+  },
+  "10f381ca-e968-4966-9ee9-bfc207efe62b": {
+    "price_at_signal": 166.36,
+    "price_current": 190.95,
+    "return_pct": 14.78,
+    "signal_date": "2024-05-27",
+    "ticker": "AMD"
+  },
+  "e5f8573f-72f0-4c24-bf08-69010ea10941": {
+    "price_at_signal": 114.64,
+    "price_current": 121.72,
+    "return_pct": 6.18,
+    "signal_date": "2024-05-27",
+    "ticker": "ARM"
+  },
+  "3e7ef6b9-bd37-4b7e-bbf1-112ec9b449e3": {
+    "price_at_signal": 248.23,
+    "price_current": 392.43,
+    "return_pct": 58.09,
+    "signal_date": "2024-07-12",
+    "ticker": "TSLA"
+  },
+  "354fdc13-d5db-46ea-be0f-1c3ed2c89f51": {
+    "price_at_signal": 1529848.25,
+    "price_current": 1516000,
+    "return_pct": -0.91,
+    "signal_date": "2024-10-10",
+    "ticker": "207940"
+  },
+  "bcf87830-7002-4d2b-a723-b4d9ff01a027": {
+    "price_at_signal": 273.13,
+    "price_current": 392.43,
+    "return_pct": 43.68,
+    "signal_date": "2025-03-27",
+    "ticker": "TSLA"
+  },
+  "11ee5440-f5fe-4bb7-8c46-317a8b0b63d1": {
+    "price_at_signal": 277.9,
+    "price_current": 392.43,
+    "return_pct": 41.21,
+    "signal_date": "2023-07-13",
+    "ticker": "TSLA"
+  },
+  "9d6242d2-6bd4-4c25-b779-106874c7030e": {
+    "price_at_signal": 15.03,
+    "price_current": 3.53,
+    "return_pct": -76.51,
+    "signal_date": "2023-07-13",
+    "ticker": "DNUT"
+  },
+  "21a5d973-5c5c-44cf-ace2-cbe594b36180": {
+    "price_at_signal": 113494.86,
+    "price_current": 259000,
+    "return_pct": 128.2,
+    "signal_date": "2024-03-27",
+    "ticker": "042700"
+  },
+  "750c3d64-856c-4b16-8396-91ea01c7080d": {
+    "price_at_signal": 517000.0,
+    "price_current": 347500,
+    "return_pct": -32.79,
+    "signal_date": "2023-01-26",
+    "ticker": "373220"
+  },
+  "2d406dc1-20f3-4f9a-9741-2ebe07f702fc": {
+    "price_at_signal": 269.19,
+    "price_current": 392.43,
+    "return_pct": 45.78,
+    "signal_date": "2024-10-25",
+    "ticker": "TSLA"
+  },
+  "3c631438-3072-4557-ad58-57e5cc5dacf3": {
+    "price_at_signal": 116.97,
+    "price_current": 180.05,
+    "return_pct": 53.93,
+    "signal_date": "2024-07-31",
+    "ticker": "NVDA"
+  },
+  "0459e8ad-a5cd-4b43-b886-8166bbc5c99c": {
+    "price_at_signal": 253.87,
+    "price_current": 392.43,
+    "return_pct": 54.58,
+    "signal_date": "2022-05-17",
+    "ticker": "TSLA"
+  },
+  "4ac70a2d-a550-4940-aed0-cd9cbf8e0042": {
+    "price_at_signal": 66.3,
+    "price_current": 182.36,
+    "return_pct": 175.05,
+    "signal_date": "2023-03-23",
+    "ticker": "COIN"
+  },
+  "f0267c2a-2578-4fa3-ad56-c0b2bd8b558c": {
+    "price_at_signal": 303.58,
+    "price_current": 303.58,
+    "return_pct": 0.0,
+    "signal_date": "2026-03-03",
+    "ticker": "GOOGL"
+  },
+  "ed951661-696d-4c78-8533-e2477f59901c": {
+    "price_at_signal": 171.52,
+    "price_current": 156.02,
+    "return_pct": -9.04,
+    "signal_date": "2025-02-21",
+    "ticker": "STZ"
+  },
+  "d800e5bc-390f-4974-b71a-5af73e7823fd": {
+    "price_at_signal": 271.71,
+    "price_current": 392.43,
+    "return_pct": 44.43,
+    "signal_date": "2022-07-21",
+    "ticker": "TSLA"
+  },
+  "9d1d7ec0-65e6-4f2f-ac62-056bce27ed8d": {
+    "price_at_signal": 236.17,
+    "price_current": 208.73,
+    "return_pct": -11.62,
+    "signal_date": "2025-02-05",
+    "ticker": "AMZN"
+  },
+  "4ada0476-7506-442d-be12-8d1ab37e6f07": {
+    "price_at_signal": 179.62,
+    "price_current": 147.22,
+    "return_pct": -18.04,
+    "signal_date": "2025-10-15",
+    "ticker": "PLTR"
+  },
+  "1470aae4-e764-472d-9610-374ec910c725": {
+    "price_at_signal": 140416.09,
+    "price_current": 849000,
+    "return_pct": 504.63,
+    "signal_date": "2024-02-12",
+    "ticker": "000660"
+  },
+  "2deb64ad-fabc-4140-93b6-154315c364c8": {
+    "price_at_signal": 77533.87,
+    "price_current": 259000,
+    "return_pct": 234.05,
+    "signal_date": "2024-02-12",
+    "ticker": "042700"
+  },
+  "138b6ac5-aa4c-443d-a802-4c52260c691e": {
+    "price_at_signal": 148.97,
+    "price_current": 121.72,
+    "return_pct": -18.29,
+    "signal_date": "2024-02-12",
+    "ticker": "ARM"
+  },
+  "2f933364-27a4-4d23-9fd1-383e814bc98c": {
+    "price_at_signal": 188.41,
+    "price_current": 263.75,
+    "return_pct": 39.99,
+    "signal_date": "2024-05-19",
+    "ticker": "AAPL"
+  },
+  "e361b05b-bdfe-4fcc-8c88-c5794bc65111": {
+    "price_at_signal": 177.46,
+    "price_current": 392.43,
+    "return_pct": 121.14,
+    "signal_date": "2024-05-19",
+    "ticker": "TSLA"
+  },
+  "ea78524c-a024-4f02-9dc5-53fb6fe93a60": {
+    "price_at_signal": 211003.64,
+    "price_current": 501000,
+    "return_pct": 137.44,
+    "signal_date": "2025-01-11",
+    "ticker": "005380"
+  },
+  "5a567d56-8ec2-4686-ab7d-b759ab74f500": {
+    "price_at_signal": 201021.98,
+    "price_current": 849000,
+    "return_pct": 322.34,
+    "signal_date": "2025-01-11",
+    "ticker": "000660"
+  },
+  "bea958a6-0d36-48ea-a2c8-68ec679aceaa": {
+    "price_at_signal": 73.64,
+    "price_current": 334.14,
+    "return_pct": 353.77,
+    "signal_date": "2023-04-09",
+    "ticker": "GE"
+  },
+  "65d46857-f86f-4df9-89ab-600f7e35ffed": {
+    "price_at_signal": 54132.41,
+    "price_current": 172200,
+    "return_pct": 218.11,
+    "signal_date": "2025-01-11",
+    "ticker": "005930"
+  },
+  "3a2bb51a-ec52-4028-90ec-2f95c4640465": {
+    "price_at_signal": 135.87,
+    "price_current": 180.05,
+    "return_pct": 32.51,
+    "signal_date": "2025-01-11",
+    "ticker": "NVDA"
+  },
+  "e83ddcec-7e88-4b9d-8fbb-e7867e422b4e": {
+    "price_at_signal": 213.92,
+    "price_current": 392.43,
+    "return_pct": 83.45,
+    "signal_date": "2020-12-07",
+    "ticker": "TSLA"
+  },
+  "978b0925-5a29-453f-99f5-ddf3b1b4dc9b": {
+    "price_at_signal": 429.52,
+    "price_current": 392.43,
+    "return_pct": -8.64,
+    "signal_date": "2025-11-09",
+    "ticker": "TSLA"
+  },
+  "28515b9f-a6e1-4a09-8c95-1b3f69cf0d25": {
+    "price_at_signal": 177.93,
+    "price_current": 147.22,
+    "return_pct": -17.26,
+    "signal_date": "2025-11-09",
+    "ticker": "PLTR"
+  },
+  "b03e8192-df19-4891-bceb-81454aacd013": {
+    "price_at_signal": 188.14,
+    "price_current": 180.05,
+    "return_pct": -4.3,
+    "signal_date": "2025-11-09",
+    "ticker": "NVDA"
+  },
+  "6584b77e-4ae8-4f41-bc77-0010108f1dc8": {
+    "price_at_signal": 337.8,
+    "price_current": 392.43,
+    "return_pct": 16.17,
+    "signal_date": "2025-02-21",
+    "ticker": "TSLA"
+  },
+  "665b423c-d048-4b53-ad5f-15c1b4bb5e17": {
+    "price_at_signal": 134.39,
+    "price_current": 180.05,
+    "return_pct": 33.97,
+    "signal_date": "2025-02-21",
+    "ticker": "NVDA"
+  },
+  "3c517d5a-170e-424a-8b44-e092b791e45b": {
+    "price_at_signal": 33.34,
+    "price_current": 26.9,
+    "return_pct": -19.32,
+    "signal_date": "2025-02-21",
+    "ticker": "APPN"
+  },
+  "9f015918-a4a2-469e-9d3a-73a60c5ddc5a": {
+    "price_at_signal": 234.21,
+    "price_current": 392.43,
+    "return_pct": 67.55,
+    "signal_date": "2023-11-22",
+    "ticker": "TSLA"
+  },
+  "f1da5932-d0ed-406e-a3bd-81381a5d0b8c": {
+    "price_at_signal": 48.68,
+    "price_current": 180.05,
+    "return_pct": 269.83,
+    "signal_date": "2023-11-22",
+    "ticker": "NVDA"
+  },
+  "c938fbba-cf04-4904-a295-a607b78b640e": {
+    "price_at_signal": 405.07,
+    "price_current": 252.73,
+    "return_pct": -37.61,
+    "signal_date": "2023-11-22",
+    "ticker": "MDB"
+  },
+  "1eb2616b-b08e-461b-937c-98b299e8a535": {
+    "price_at_signal": 59.46,
+    "price_current": 180.05,
+    "return_pct": 202.82,
+    "signal_date": "2024-01-20",
+    "ticker": "NVDA"
+  },
+  "aa9cca85-4fcc-47f6-aafb-3e4d8bdcf239": {
+    "price_at_signal": 391.92,
+    "price_current": 403.93,
+    "return_pct": 3.06,
+    "signal_date": "2024-01-20",
+    "ticker": "MSFT"
+  },
+  "ecf00f6e-c880-49e7-9861-c3a83906e3be": {
+    "price_at_signal": 138941.11,
+    "price_current": 849000,
+    "return_pct": 511.05,
+    "signal_date": "2024-01-20",
+    "ticker": "000660"
+  },
+  "52fa0f86-ed22-409c-9924-20e1d955d3cc": {
+    "price_at_signal": 94.95,
+    "price_current": 180.05,
+    "return_pct": 89.62,
+    "signal_date": "2024-03-25",
+    "ticker": "NVDA"
+  },
+  "9a3e7a35-9d30-48ec-92e8-217d2e9eac59": {
+    "price_at_signal": 395.94,
+    "price_current": 392.43,
+    "return_pct": -0.89,
+    "signal_date": "2025-09-14",
+    "ticker": "TSLA"
+  },
+  "3d128713-f2d5-4b9d-ad78-b52036cd7bca": {
+    "price_at_signal": 349.98,
+    "price_current": 392.43,
+    "return_pct": 12.13,
+    "signal_date": "2025-05-17",
+    "ticker": "TSLA"
+  },
+  "f9b0b477-a8e7-4e16-90be-f79e807f1fba": {
+    "price_at_signal": 61.44,
+    "price_current": 182.36,
+    "return_pct": 196.81,
+    "signal_date": "2023-04-09",
+    "ticker": "COIN"
+  },
+  "8c6c7a22-bf3b-486b-a30f-1c4eb2584dea": {
+    "price_at_signal": 65.41,
+    "price_current": 379.68,
+    "return_pct": 480.44,
+    "signal_date": "2023-05-22",
+    "ticker": "MU"
+  },
+  "1d119bd0-41dc-4b65-904f-f5ff0037b261": {
+    "price_at_signal": 26.37,
+    "price_current": 49.97,
+    "return_pct": 89.53,
+    "signal_date": "2023-05-22",
+    "ticker": "BAC"
+  },
+  "a18c1cad-82bd-4604-b2a7-ac17680e1841": {
+    "price_at_signal": 46.28,
+    "price_current": 110.5,
+    "return_pct": 138.79,
+    "signal_date": "2023-05-22",
+    "ticker": "EWBC"
+  },
+  "e4dd0e56-5910-47d8-b507-e9c728a5e8e9": {
+    "price_at_signal": 162.13,
+    "price_current": 392.43,
+    "return_pct": 142.05,
+    "signal_date": "2024-04-24",
+    "ticker": "TSLA"
+  },
+  "c3e06a80-0a41-4714-8211-cc8fd7229f00": {
+    "price_at_signal": 240.55,
+    "price_current": 392.43,
+    "return_pct": 63.14,
+    "signal_date": "2022-07-18",
+    "ticker": "TSLA"
+  },
+  "1c0a186c-3485-45b6-b01a-41ecb3145006": {
+    "price_at_signal": 274.05,
+    "price_current": 862.58,
+    "return_pct": 214.75,
+    "signal_date": "2022-07-18",
+    "ticker": "GS"
+  },
+  "5a436e37-dafc-4936-bdcd-758674f0f5e1": {
+    "price_at_signal": 29.45,
+    "price_current": 49.97,
+    "return_pct": 69.67,
+    "signal_date": "2022-07-18",
+    "ticker": "BAC"
+  },
+  "38c89a2e-dfc1-44d5-8386-def954c3e4ea": {
+    "price_at_signal": 128.26,
+    "price_current": 263.75,
+    "return_pct": 105.64,
+    "signal_date": "2020-12-22",
+    "ticker": "AAPL"
+  },
+  "a0339c4b-09f4-49b3-b285-d1cbbeb21245": {
+    "price_at_signal": 213.45,
+    "price_current": 392.43,
+    "return_pct": 83.85,
+    "signal_date": "2020-12-22",
+    "ticker": "TSLA"
+  },
+  "a77ba3bc-7841-4da8-a7f1-6ecc835a88ff": {
+    "price_at_signal": 505000.0,
+    "price_current": 347500,
+    "return_pct": -31.19,
+    "signal_date": "2020-12-22",
+    "ticker": "373220"
+  },
+  "e0dcfc43-431e-4d76-9d5f-30fa896e2409": {
+    "price_at_signal": 190.77,
+    "price_current": 263.75,
+    "return_pct": 38.25,
+    "signal_date": "2024-05-31",
+    "ticker": "AAPL"
+  },
+  "bcad0af0-7fff-4393-8e6e-ef73d981f8fe": {
+    "price_at_signal": 162.87,
+    "price_current": 263.75,
+    "return_pct": 61.94,
+    "signal_date": "2022-03-03",
+    "ticker": "AAPL"
+  },
+  "bac46ce1-22cf-44d5-914c-b97a0d199de6": {
+    "price_at_signal": 28677.98,
+    "price_current": 53700,
+    "return_pct": 87.25,
+    "signal_date": "2022-03-03",
+    "ticker": "053610"
+  },
+  "53008b15-a438-4f9a-8dd2-98e247f641b9": {
+    "price_at_signal": 51483.21,
+    "price_current": 51300,
+    "return_pct": -0.36,
+    "signal_date": "2022-03-03",
+    "ticker": "222800"
+  },
+  "53fcd4b0-a0c9-4edf-bd8a-0ac1555c9e4e": {
+    "price_at_signal": 148632.2,
+    "price_current": 197400,
+    "return_pct": 32.81,
+    "signal_date": "2022-03-03",
+    "ticker": "068270"
+  },
+  "a6220807-2159-48f9-b53d-d356294de730": {
+    "price_at_signal": 225435.81,
+    "price_current": 362500,
+    "return_pct": 60.8,
+    "signal_date": "2025-11-11",
+    "ticker": "009150"
+  },
+  "ba60edc2-48d2-4e4b-a658-6371cf0f72eb": {
+    "price_at_signal": 203.0,
+    "price_current": 203,
+    "return_pct": 0.0,
+    "signal_date": "2025-11-11",
+    "ticker": "196490"
+  },
+  "3b5f456c-0578-4d60-99b3-0bdf0cccca8d": {
+    "price_at_signal": 90.2,
+    "price_current": 180.05,
+    "return_pct": 99.6,
+    "signal_date": "2024-03-27",
+    "ticker": "NVDA"
+  },
+  "777f4727-6996-4314-aefc-1282abf42e72": {
+    "price_at_signal": 178175.02,
+    "price_current": 849000,
+    "return_pct": 376.5,
+    "signal_date": "2024-03-27",
+    "ticker": "000660"
+  },
+  "26f22ddb-d17a-4c93-8877-3e143d213d3f": {
+    "price_at_signal": 76463.13,
+    "price_current": 172200,
+    "return_pct": 125.21,
+    "signal_date": "2024-03-27",
+    "ticker": "005930"
+  },
+  "f4d29867-5c75-47de-a106-c79de74c9649": {
+    "price_at_signal": 52112.97,
+    "price_current": 172200,
+    "return_pct": 230.44,
+    "signal_date": "2024-12-03",
+    "ticker": "005930"
+  },
+  "ffca1e80-46ee-41d4-807e-33ab27f62c2a": {
+    "price_at_signal": 256.53,
+    "price_current": 392.43,
+    "return_pct": 52.98,
+    "signal_date": "2022-05-15",
+    "ticker": "TSLA"
+  },
+  "536fbc36-4fda-4e00-b260-618380221191": {
+    "price_at_signal": 116.22,
+    "price_current": 180.05,
+    "return_pct": 54.92,
+    "signal_date": "2024-09-23",
+    "ticker": "NVDA"
+  },
+  "0333b06f-28d0-416f-8737-178ca6e07d4f": {
+    "price_at_signal": 163.51,
+    "price_current": 149.01,
+    "return_pct": -8.87,
+    "signal_date": "2024-09-23",
+    "ticker": "ORCL"
+  },
+  "060fa922-69ab-463a-a5c7-dc8c4c499a69": {
+    "price_at_signal": 224.99,
+    "price_current": 263.75,
+    "return_pct": 17.23,
+    "signal_date": "2024-09-23",
+    "ticker": "AAPL"
+  },
+  "bac53753-ce06-4f0e-ab83-db041db85b8d": {
+    "price_at_signal": 455.0,
+    "price_current": 392.43,
+    "return_pct": -13.75,
+    "signal_date": "2025-12-05",
+    "ticker": "TSLA"
+  },
+  "b33e9c79-8585-4ec4-97cf-103ed14059d1": {
+    "price_at_signal": 180.82,
+    "price_current": 353.13,
+    "return_pct": 95.29,
+    "signal_date": "2024-07-09",
+    "ticker": "TSM"
+  },
+  "0a4f1ddf-9978-4ce8-9b36-b0d890859604": {
+    "price_at_signal": 235205.09,
+    "price_current": 849000,
+    "return_pct": 260.96,
+    "signal_date": "2024-07-09",
+    "ticker": "000660"
+  },
+  "50cdb1fe-64f1-4d66-b855-ad09f458424f": {
+    "price_at_signal": 84887.86,
+    "price_current": 172200,
+    "return_pct": 102.86,
+    "signal_date": "2024-07-09",
+    "ticker": "005930"
+  },
+  "c8ac6e7b-ca6c-444b-a629-3d14ffc0c830": {
+    "price_at_signal": 162801.62,
+    "price_current": 259000,
+    "return_pct": 59.09,
+    "signal_date": "2024-07-09",
+    "ticker": "042700"
+  },
+  "2510565d-4eec-49b1-a8a1-768e1ee0ea59": {
+    "price_at_signal": 33998.96,
+    "price_current": 30050,
+    "return_pct": -11.61,
+    "signal_date": "2024-02-24",
+    "ticker": "001060"
+  },
+  "9bb5f3f3-32a5-4528-bc84-26c6954f6e9e": {
+    "price_at_signal": 11779.36,
+    "price_current": 8750,
+    "return_pct": -25.72,
+    "signal_date": "2024-02-24",
+    "ticker": "003850"
+  },
+  "da11a42a-6380-4dbb-8d46-911dfcfbe81b": {
+    "price_at_signal": 92600.0,
+    "price_current": 97500,
+    "return_pct": 5.29,
+    "signal_date": "2024-02-24",
+    "ticker": "326030"
+  },
+  "9ecb057d-2304-4e3a-ae39-4f2e19441371": {
+    "price_at_signal": 1251554.25,
+    "price_current": 1516000,
+    "return_pct": 21.13,
+    "signal_date": "2024-02-24",
+    "ticker": "207940"
+  },
+  "e35320ad-3031-480d-be79-ff9004d339c7": {
+    "price_at_signal": 78.77,
+    "price_current": 180.05,
+    "return_pct": 128.57,
+    "signal_date": "2024-02-24",
+    "ticker": "NVDA"
+  },
+  "0418488a-7cb6-4630-af30-16d706b923fc": {
+    "price_at_signal": 13.37,
+    "price_current": 3.54,
+    "return_pct": -73.52,
+    "signal_date": "2024-02-24",
+    "ticker": "RXRX"
+  },
+  "455f1178-4cd7-49ac-b458-8c69d942eabc": {
+    "price_at_signal": 118.83,
+    "price_current": 36.66,
+    "return_pct": -69.15,
+    "signal_date": "2024-02-24",
+    "ticker": "NVO"
+  },
+  "6632bccc-fd2e-45b5-9dfb-67413fd19637": {
+    "price_at_signal": 758.95,
+    "price_current": 1007.73,
+    "return_pct": 32.78,
+    "signal_date": "2024-02-24",
+    "ticker": "LLY"
+  },
+  "684a9def-df3a-4002-b231-02ea303c7f58": {
+    "price_at_signal": 52566.2,
+    "price_current": 172200,
+    "return_pct": 227.59,
+    "signal_date": "2025-01-30",
+    "ticker": "005930"
+  },
+  "ebc672b7-50b2-4d5c-8223-d3e74107bb21": {
+    "price_at_signal": 73285.88,
+    "price_current": 172200,
+    "return_pct": 134.97,
+    "signal_date": "2024-08-27",
+    "ticker": "005930"
+  },
+  "72495faf-f399-42ca-a2db-870ca2a2bbb0": {
+    "price_at_signal": 218308.91,
+    "price_current": 849000,
+    "return_pct": 288.9,
+    "signal_date": "2025-01-30",
+    "ticker": "000660"
+  },
+  "588b4e17-ea8f-4072-9674-7afd0a7f2f72": {
+    "price_at_signal": 205.56,
+    "price_current": 263.75,
+    "return_pct": 28.31,
+    "signal_date": "2024-06-11",
+    "ticker": "AAPL"
+  },
+  "527bd07f-4452-4ff6-9300-6fc1613a25c7": {
+    "price_at_signal": 90.37,
+    "price_current": 180.05,
+    "return_pct": 99.25,
+    "signal_date": "2024-05-08",
+    "ticker": "NVDA"
+  },
+  "9fb5eb6a-caff-4dec-9692-b1bc7fbaa84c": {
+    "price_at_signal": 90.31,
+    "price_current": 180.05,
+    "return_pct": 99.37,
+    "signal_date": "2024-03-31",
+    "ticker": "NVDA"
+  },
+  "41ae3546-1699-42a0-8640-419d65d5260c": {
+    "price_at_signal": 175.79,
+    "price_current": 392.43,
+    "return_pct": 123.24,
+    "signal_date": "2024-03-31",
+    "ticker": "TSLA"
+  },
+  "1c1d8c01-1083-46c2-be56-f1fa30651faa": {
+    "price_at_signal": 388308.0,
+    "price_current": 208000,
+    "return_pct": -46.43,
+    "signal_date": "2021-09-09",
+    "ticker": "035420"
+  },
+  "650269f8-cb30-4585-9ac9-380aedb7affd": {
+    "price_at_signal": 127967.3,
+    "price_current": 47050,
+    "return_pct": -63.23,
+    "signal_date": "2021-09-09",
+    "ticker": "035720"
+  },
+  "86da3d18-b7e7-4374-a8b2-2c9298839232": {
+    "price_at_signal": 114499.32,
+    "price_current": 217500,
+    "return_pct": 89.96,
+    "signal_date": "2021-09-09",
+    "ticker": "018670"
+  },
+  "9eb9c4cc-3472-4e99-ba29-438aa1e0a914": {
+    "price_at_signal": 307.4,
+    "price_current": 392.43,
+    "return_pct": 27.66,
+    "signal_date": "2022-08-03",
+    "ticker": "TSLA"
+  },
+  "27b1e7f3-b89d-49c2-9e25-b8c5e5e554ec": {
+    "price_at_signal": 80.04,
+    "price_current": 353.13,
+    "return_pct": 341.2,
+    "signal_date": "2023-05-14",
+    "ticker": "TSM"
+  },
+  "5a9c287f-7279-4011-bd2b-12df2774a7d6": {
+    "price_at_signal": 60510.23,
+    "price_current": 172200,
+    "return_pct": 184.58,
+    "signal_date": "2023-05-14",
+    "ticker": "005930"
+  },
+  "f8d63ea0-4229-4fa6-9a40-0c7edb3145db": {
+    "price_at_signal": 52385.96,
+    "price_current": 172200,
+    "return_pct": 228.71,
+    "signal_date": "2020-10-11",
+    "ticker": "005930"
+  },
+  "1aed6d41-d42c-4c96-b337-e6281a0cf146": {
+    "price_at_signal": 73684.41,
+    "price_current": 172200,
+    "return_pct": 133.7,
+    "signal_date": "2024-03-20",
+    "ticker": "005930"
+  },
+  "141a015c-7597-48bc-8d73-17c570ccf2d7": {
+    "price_at_signal": 153887.36,
+    "price_current": 849000,
+    "return_pct": 451.7,
+    "signal_date": "2024-03-20",
+    "ticker": "000660"
+  },
+  "09cecd10-0cc7-4125-81d2-864872db2f97": {
+    "price_at_signal": 90.33,
+    "price_current": 180.05,
+    "return_pct": 99.33,
+    "signal_date": "2024-03-20",
+    "ticker": "NVDA"
+  },
+  "10ffc68c-823f-446d-bf6d-f687b5b1e688": {
+    "price_at_signal": 582106.56,
+    "price_current": 307000,
+    "return_pct": -47.26,
+    "signal_date": "2022-07-28",
+    "ticker": "051910"
+  },
+  "029b47d0-ee99-4d31-bb84-07fce020659e": {
+    "price_at_signal": 44.42,
+    "price_current": 37.05,
+    "return_pct": -16.59,
+    "signal_date": "2024-12-20",
+    "ticker": "IONQ"
+  },
+  "14595425-7032-4c8e-b9ce-878012bbbdbc": {
+    "price_at_signal": 114.48,
+    "price_current": 180.05,
+    "return_pct": 57.28,
+    "signal_date": "2025-05-02",
+    "ticker": "NVDA"
+  },
+  "db815844-33d4-4f24-b2b8-e72d41baac52": {
+    "price_at_signal": 123.31,
+    "price_current": 147.22,
+    "return_pct": 19.39,
+    "signal_date": "2025-05-25",
+    "ticker": "PLTR"
+  },
+  "8e10764f-f9ab-4abd-949f-2736f0934e06": {
+    "price_at_signal": 505000.0,
+    "price_current": 347500,
+    "return_pct": -31.19,
+    "signal_date": "2022-01-14",
+    "ticker": "373220"
+  },
+  "25019939-7755-4fbb-91c2-3d3df1f157b4": {
+    "price_at_signal": 490083.88,
+    "price_current": 1632000,
+    "return_pct": 233.0,
+    "signal_date": "2022-01-14",
+    "ticker": "010130"
+  },
+  "4c3d5460-7368-4a38-bc3e-890f9d4b2079": {
+    "price_at_signal": 123352.65,
+    "price_current": 849000,
+    "return_pct": 588.27,
+    "signal_date": "2022-01-14",
+    "ticker": "000660"
+  },
+  "c27b5f29-4b05-4343-85b3-2979c7f8ae1f": {
+    "price_at_signal": 106.41,
+    "price_current": 180.05,
+    "return_pct": 69.2,
+    "signal_date": "2024-05-25",
+    "ticker": "NVDA"
+  },
+  "3cfa6d2e-27d1-49ff-ab42-babdbcf97c52": {
+    "price_at_signal": 248.23,
+    "price_current": 392.43,
+    "return_pct": 58.09,
+    "signal_date": "2024-07-12",
+    "ticker": "TSLA"
+  },
+  "0938fdf2-5c81-4b17-9270-dc16200e0ab2": {
+    "price_at_signal": 410.44,
+    "price_current": 392.43,
+    "return_pct": -4.39,
+    "signal_date": "2025-01-04",
+    "ticker": "TSLA"
+  },
+  "c042245d-e5bb-4785-ae21-2041b6d2f138": {
+    "price_at_signal": 179685.0,
+    "price_current": 849000,
+    "return_pct": 372.49,
+    "signal_date": "2025-01-04",
+    "ticker": "000660"
+  },
+  "e24d65fb-8cab-4f81-a103-a1b16198fd9d": {
+    "price_at_signal": 111.28,
+    "price_current": 147.22,
+    "return_pct": 32.3,
+    "signal_date": "2025-02-06",
+    "ticker": "PLTR"
+  },
+  "9d9ca76d-fc3d-4afe-b6b1-c840739f5df9": {
+    "price_at_signal": 29288.91,
+    "price_current": 39950,
+    "return_pct": 36.4,
+    "signal_date": "2024-06-25",
+    "ticker": "009830"
+  },
+  "261532a2-5bc6-45de-abb6-c88ae6dfa89a": {
+    "price_at_signal": 93.99,
+    "price_current": 147.22,
+    "return_pct": 56.63,
+    "signal_date": "2025-04-22",
+    "ticker": "PLTR"
+  },
+  "1b5d9c4c-92bd-48be-879e-2fc5a05920aa": {
+    "price_at_signal": 144.31,
+    "price_current": 263.75,
+    "return_pct": 82.77,
+    "signal_date": "2022-07-18",
+    "ticker": "AAPL"
+  },
+  "f30b61d8-97ab-455d-85c0-5e08a641ebe3": {
+    "price_at_signal": 54.76,
+    "price_current": 30.68,
+    "return_pct": -43.98,
+    "signal_date": "2024-08-27",
+    "ticker": "SMCI"
+  },
+  "9a5bc854-4118-445b-ad4b-ce12f699fb43": {
+    "price_at_signal": 128.25,
+    "price_current": 180.05,
+    "return_pct": 40.4,
+    "signal_date": "2024-08-27",
+    "ticker": "NVDA"
+  },
+  "8fc51f20-fc5d-40de-8571-25500daeae1e": {
+    "price_at_signal": 23.64,
+    "price_current": 180.05,
+    "return_pct": 661.62,
+    "signal_date": "2023-02-23",
+    "ticker": "NVDA"
+  },
+  "c11cff37-2ccd-45cc-be4a-86eadcf100e4": {
+    "price_at_signal": 85.97,
+    "price_current": 353.13,
+    "return_pct": 310.76,
+    "signal_date": "2023-02-23",
+    "ticker": "TSM"
+  },
+  "ff7aa057-8800-4fe9-b71e-c490091ecbad": {
+    "price_at_signal": 90174.63,
+    "price_current": 849000,
+    "return_pct": 841.51,
+    "signal_date": "2023-02-23",
+    "ticker": "000660"
+  },
+  "44704919-eb81-4752-8fc3-19cf0801959c": {
+    "price_at_signal": 65230.95,
+    "price_current": 172200,
+    "return_pct": 163.99,
+    "signal_date": "2023-09-28",
+    "ticker": "005930"
+  },
+  "1d26899b-b9bd-4317-aaf8-70f840f95e09": {
+    "price_at_signal": 184922.97,
+    "price_current": 849000,
+    "return_pct": 359.11,
+    "signal_date": "2025-05-02",
+    "ticker": "000660"
+  },
+  "973963c0-50a9-4745-916a-b1cee56fe1bd": {
+    "price_at_signal": 53469.33,
+    "price_current": 172200,
+    "return_pct": 222.05,
+    "signal_date": "2025-05-02",
+    "ticker": "005930"
+  },
+  "661f7a53-6b9d-4845-aee3-57647454e4c8": {
+    "price_at_signal": 176.23,
+    "price_current": 180.05,
+    "return_pct": 2.17,
+    "signal_date": "2025-09-18",
+    "ticker": "NVDA"
+  },
+  "3d0e3cc0-fd2f-4829-a35f-5db998c7400d": {
+    "price_at_signal": 176.97,
+    "price_current": 147.22,
+    "return_pct": -16.81,
+    "signal_date": "2025-09-18",
+    "ticker": "PLTR"
+  },
+  "d6e7de6f-956e-4612-90a1-ed161e29af13": {
+    "price_at_signal": 153.24,
+    "price_current": 263.75,
+    "return_pct": 72.11,
+    "signal_date": "2022-09-07",
+    "ticker": "AAPL"
+  },
+  "c6341e40-1dea-4ed9-8256-c55b75fbef8b": {
+    "price_at_signal": 108.63,
+    "price_current": 303.58,
+    "return_pct": 179.46,
+    "signal_date": "2022-09-07",
+    "ticker": "GOOGL"
+  },
+  "c8406e74-6e31-4d53-879b-d8ab0da148c9": {
+    "price_at_signal": 283.7,
+    "price_current": 392.43,
+    "return_pct": 38.33,
+    "signal_date": "2022-09-07",
+    "ticker": "TSLA"
+  },
+  "aec7cee1-e2a3-4bc1-8755-7c3ca0e11ff3": {
+    "price_at_signal": 241.05,
+    "price_current": 392.43,
+    "return_pct": 62.8,
+    "signal_date": "2024-10-09",
+    "ticker": "TSLA"
+  },
+  "d14f0d88-c473-4034-ba8b-6bd7a294d310": {
+    "price_at_signal": 229676.53,
+    "price_current": 501000,
+    "return_pct": 118.13,
+    "signal_date": "2024-10-09",
+    "ticker": "005380"
+  },
+  "8d26e37f-50c4-49db-8389-e61e3e71aed9": {
+    "price_at_signal": 87.66,
+    "price_current": 93.58,
+    "return_pct": 6.75,
+    "signal_date": "2024-10-09",
+    "ticker": "VOW3.DE"
+  },
+  "2feb5d42-2bbc-4248-814f-766dc88deaab": {
+    "price_at_signal": 54.79,
+    "price_current": 180.05,
+    "return_pct": 228.61,
+    "signal_date": "2024-01-11",
+    "ticker": "NVDA"
+  },
+  "abcb352f-7a32-4671-8d73-778809c499ee": {
+    "price_at_signal": 378.12,
+    "price_current": 403.93,
+    "return_pct": 6.83,
+    "signal_date": "2024-01-11",
+    "ticker": "MSFT"
+  },
+  "b5f32b15-5216-4b57-9141-606de50063fd": {
+    "price_at_signal": 64181.91,
+    "price_current": 172200,
+    "return_pct": 168.3,
+    "signal_date": "2023-10-27",
+    "ticker": "005930"
+  },
+  "379c967e-5880-4f9f-9bbb-de6707678f82": {
+    "price_at_signal": 116862.36,
+    "price_current": 849000,
+    "return_pct": 626.5,
+    "signal_date": "2023-10-27",
+    "ticker": "000660"
+  },
+  "b1cd2afd-1f0c-4099-b374-82004b64fe8f": {
+    "price_at_signal": 40.47,
+    "price_current": 180.05,
+    "return_pct": 344.85,
+    "signal_date": "2023-10-27",
+    "ticker": "NVDA"
+  },
+  "fdc9ca48-9d98-42a1-b68e-cc62af14da3c": {
+    "price_at_signal": 223.07,
+    "price_current": 392.43,
+    "return_pct": 75.92,
+    "signal_date": "2022-10-08",
+    "ticker": "TSLA"
+  },
+  "20d681cc-d034-4bda-8626-8ac081dd369a": {
+    "price_at_signal": 91.1,
+    "price_current": 303.58,
+    "return_pct": 233.23,
+    "signal_date": "2023-02-21",
+    "ticker": "GOOGL"
+  },
+  "08523ec6-78f6-453d-ac74-203ed97f0d13": {
+    "price_at_signal": 246.82,
+    "price_current": 403.93,
+    "return_pct": 63.65,
+    "signal_date": "2023-02-21",
+    "ticker": "MSFT"
+  },
+  "27f360b8-84d0-4aad-9060-c9707b2a2bdf": {
+    "price_at_signal": 467.26,
+    "price_current": 392.43,
+    "return_pct": -16.01,
+    "signal_date": "2025-12-17",
+    "ticker": "TSLA"
+  },
+  "37c811dd-498b-499e-9014-43fe943b8104": {
+    "price_at_signal": 549985.12,
+    "price_current": 849000,
+    "return_pct": 54.37,
+    "signal_date": "2025-12-17",
+    "ticker": "000660"
+  },
+  "801abd94-0ce5-4366-8156-01b78b3e51a8": {
+    "price_at_signal": 284750.0,
+    "price_current": 501000,
+    "return_pct": 75.94,
+    "signal_date": "2025-12-17",
+    "ticker": "005380"
+  },
+  "aba7d294-1dfc-4eb3-9a82-5608bcded520": {
+    "price_at_signal": 237.07,
+    "price_current": 392.43,
+    "return_pct": 65.54,
+    "signal_date": "2021-08-25",
+    "ticker": "TSLA"
+  },
+  "2475389c-4585-46e4-b799-083fd3bc2066": {
+    "price_at_signal": 68702.93,
+    "price_current": 172200,
+    "return_pct": 150.64,
+    "signal_date": "2021-08-25",
+    "ticker": "005930"
+  },
+  "5a5374f0-5f94-4122-8c44-6b0001c65db3": {
+    "price_at_signal": 762996.75,
+    "price_current": 307000,
+    "return_pct": -59.76,
+    "signal_date": "2021-08-25",
+    "ticker": "051910"
+  },
+  "7bdc1e8e-25ef-4ac9-b62d-e9da5d005490": {
+    "price_at_signal": 228.49,
+    "price_current": 392.43,
+    "return_pct": 71.75,
+    "signal_date": "2022-06-29",
+    "ticker": "TSLA"
+  },
+  "8cf3fff4-32d7-444c-84c6-00b733ba0f18": {
+    "price_at_signal": 199.73,
+    "price_current": 392.43,
+    "return_pct": 96.48,
+    "signal_date": "2024-02-27",
+    "ticker": "TSLA"
+  },
+  "f27be37f-2504-4349-8c59-8de79d2a3fe0": {
+    "price_at_signal": 74693.03,
+    "price_current": 172200,
+    "return_pct": 130.54,
+    "signal_date": "2024-05-28",
+    "ticker": "005930"
+  },
+  "69ffed40-907c-4f6c-b626-79229cf2329e": {
+    "price_at_signal": 199449.67,
+    "price_current": 849000,
+    "return_pct": 325.67,
+    "signal_date": "2024-05-28",
+    "ticker": "000660"
+  },
+  "ce2f42b7-645a-4e6c-bdb6-10f9eb3e5aec": {
+    "price_at_signal": 161710.33,
+    "price_current": 259000,
+    "return_pct": 60.16,
+    "signal_date": "2024-05-28",
+    "ticker": "042700"
+  },
+  "80d1e904-857b-47d7-a1ce-d60c71128b07": {
+    "price_at_signal": 87.26,
+    "price_current": 97.7,
+    "return_pct": 11.96,
+    "signal_date": "2024-11-26",
+    "ticker": "NFLX"
+  },
+  "7be351b6-a30b-4119-95b0-3ed9efac8ec7": {
+    "price_at_signal": 40650.0,
+    "price_current": 43600,
+    "return_pct": 7.26,
+    "signal_date": "2025-11-29",
+    "ticker": "001460"
+  },
+  "ff7df99b-112f-49b8-9e52-f2360c194c7e": {
+    "price_at_signal": 58398.56,
+    "price_current": 55100,
+    "return_pct": -5.65,
+    "signal_date": "2025-11-29",
+    "ticker": "009450"
+  },
+  "aebb902a-4ff6-498d-961c-0067bb5ac756": {
+    "price_at_signal": 65972.15,
+    "price_current": 202000,
+    "return_pct": 206.19,
+    "signal_date": "2024-10-22",
+    "ticker": "064350"
+  },
+  "ab84e110-0cab-42c6-becf-6077eeeb37a5": {
+    "price_at_signal": 227290.3,
+    "price_current": 328500,
+    "return_pct": 44.53,
+    "signal_date": "2024-10-22",
+    "ticker": "214450"
+  },
+  "2c9b045d-3cc3-4e20-8ae9-445b1949afac": {
+    "price_at_signal": 90032.36,
+    "price_current": 137700,
+    "return_pct": 52.95,
+    "signal_date": "2024-10-22",
+    "ticker": "105560"
+  },
+  "e38bc470-4ffd-4d87-bd67-00b726d56e23": {
+    "price_at_signal": 241.03,
+    "price_current": 392.43,
+    "return_pct": 62.81,
+    "signal_date": "2024-07-11",
+    "ticker": "TSLA"
+  },
+  "615334cf-65ac-4087-b7b1-743835966408": {
+    "price_at_signal": 127.35,
+    "price_current": 180.05,
+    "return_pct": 41.39,
+    "signal_date": "2024-07-11",
+    "ticker": "NVDA"
+  },
+  "9fb10e60-11ad-4577-83f8-102c0e5cd7ba": {
+    "price_at_signal": 215.99,
+    "price_current": 392.43,
+    "return_pct": 81.69,
+    "signal_date": "2024-07-24",
+    "ticker": "TSLA"
+  },
+  "950cda65-5ef7-4123-aabe-1dc0338d7811": {
+    "price_at_signal": 58190.86,
+    "price_current": 172200,
+    "return_pct": 195.92,
+    "signal_date": "2023-02-23",
+    "ticker": "005930"
+  },
+  "8322b271-551b-43be-9bcb-f62bae91cb66": {
+    "price_at_signal": 15546.28,
+    "price_current": 259000,
+    "return_pct": 1565.99,
+    "signal_date": "2023-02-23",
+    "ticker": "042700"
+  },
+  "e158f873-2de8-47f4-b979-970d9ade6d6b": {
+    "price_at_signal": 108.86,
+    "price_current": 147.22,
+    "return_pct": 35.24,
+    "signal_date": "2025-05-06",
+    "ticker": "PLTR"
+  },
+  "3c74e437-de39-4053-9741-8daefacf515f": {
+    "price_at_signal": 38.26,
+    "price_current": 118.52,
+    "return_pct": 209.75,
+    "signal_date": "2024-04-07",
+    "ticker": "NEM"
+  },
+  "9081e67f-c9a2-4dfb-9fc2-a73bb61d451e": {
+    "price_at_signal": 69.41,
+    "price_current": 180.05,
+    "return_pct": 159.39,
+    "signal_date": "2024-02-20",
+    "ticker": "NVDA"
+  },
+  "d4ca8042-a395-4648-8117-7109d3565072": {
+    "price_at_signal": 147102.58,
+    "price_current": 849000,
+    "return_pct": 477.15,
+    "signal_date": "2024-02-20",
+    "ticker": "000660"
+  },
+  "716b14ed-ea52-4565-bb9a-96224755a195": {
+    "price_at_signal": 70234.93,
+    "price_current": 172200,
+    "return_pct": 145.18,
+    "signal_date": "2024-02-20",
+    "ticker": "005930"
+  },
+  "563377b5-56cc-4b3e-ae40-b0f1a62ccbd0": {
+    "price_at_signal": 331.25,
+    "price_current": 303.58,
+    "return_pct": -8.35,
+    "signal_date": "2026-02-05",
+    "ticker": "GOOGL"
+  },
+  "3ab3ff62-171d-4657-8fde-a97bbfca19c0": {
+    "price_at_signal": 24.09,
+    "price_current": 97.7,
+    "return_pct": 305.63,
+    "signal_date": "2022-10-18",
+    "ticker": "NFLX"
+  },
+  "3fa09887-ce1d-4805-a323-39c2406fd3d7": {
+    "price_at_signal": 220.19,
+    "price_current": 392.43,
+    "return_pct": 78.22,
+    "signal_date": "2022-10-18",
+    "ticker": "TSLA"
+  },
+  "19cc2096-bbac-4423-b415-e28d1db7acdc": {
+    "price_at_signal": 287.66,
+    "price_current": 862.58,
+    "return_pct": 199.86,
+    "signal_date": "2022-10-18",
+    "ticker": "GS"
+  },
+  "bf2438bb-58a6-4db3-bb2e-c9dff3075bb8": {
+    "price_at_signal": 393.44,
+    "price_current": 667.82,
+    "return_pct": 69.74,
+    "signal_date": "2022-10-18",
+    "ticker": "LMT"
+  },
+  "d7c1ebf6-175f-4c4f-8ef9-edd3669ab0d5": {
+    "price_at_signal": 141.25,
+    "price_current": 263.75,
+    "return_pct": 86.73,
+    "signal_date": "2022-10-18",
+    "ticker": "AAPL"
+  },
+  "b8e671f7-981b-4738-8c9d-6bed3a74e276": {
+    "price_at_signal": 92.28,
+    "price_current": 147.22,
+    "return_pct": 59.54,
+    "signal_date": "2025-03-26",
+    "ticker": "PLTR"
+  },
+  "a83c5e41-4635-426f-91f6-8431774e86cd": {
+    "price_at_signal": 43.06,
+    "price_current": 180.05,
+    "return_pct": 318.13,
+    "signal_date": "2023-09-28",
+    "ticker": "NVDA"
+  },
+  "8372cb1f-0f56-433d-b855-3fe01d2ce7fc": {
+    "price_at_signal": 112545.05,
+    "price_current": 849000,
+    "return_pct": 654.36,
+    "signal_date": "2023-09-28",
+    "ticker": "000660"
+  },
+  "36b85714-3d5d-48c2-a8b3-09b70e784be6": {
+    "price_at_signal": 52051.4,
+    "price_current": 259000,
+    "return_pct": 397.59,
+    "signal_date": "2023-09-28",
+    "ticker": "042700"
+  },
+  "ac5a5e35-e0ef-44dd-b53c-1d245b8a23a9": {
+    "price_at_signal": 202.04,
+    "price_current": 392.43,
+    "return_pct": 94.23,
+    "signal_date": "2024-02-28",
+    "ticker": "TSLA"
+  },
+  "d8995c8d-1bea-42a3-b8b4-09f4ad2efd32": {
+    "price_at_signal": 156.01,
+    "price_current": 147.22,
+    "return_pct": -5.63,
+    "signal_date": "2025-08-20",
+    "ticker": "PLTR"
+  },
+  "4805b0d5-2f15-40f9-afcc-f74741dea66f": {
+    "price_at_signal": 120.12,
+    "price_current": 180.05,
+    "return_pct": 49.9,
+    "signal_date": "2025-02-27",
+    "ticker": "NVDA"
+  },
+  "ddf7a393-7c1f-4d46-a19f-3f99e08d93c0": {
+    "price_at_signal": 166.67,
+    "price_current": 263.75,
+    "return_pct": 58.24,
+    "signal_date": "2022-01-28",
+    "ticker": "AAPL"
+  },
+  "311de845-b270-4b10-a4ed-8a1096ac40d9": {
+    "price_at_signal": 282.12,
+    "price_current": 392.43,
+    "return_pct": 39.1,
+    "signal_date": "2022-01-28",
+    "ticker": "TSLA"
+  },
+  "aecf725a-352e-4212-8efd-fa608cf95d66": {
+    "price_at_signal": 248.5,
+    "price_current": 392.43,
+    "return_pct": 57.92,
+    "signal_date": "2024-07-17",
+    "ticker": "TSLA"
+  },
+  "65e125ff-eda1-433d-93df-f51e3a6dbc0a": {
+    "price_at_signal": 117.94,
+    "price_current": 180.05,
+    "return_pct": 52.66,
+    "signal_date": "2024-07-17",
+    "ticker": "NVDA"
+  },
+  "9c0bd813-3938-4e99-86c5-88e0b451564a": {
+    "price_at_signal": 79.06,
+    "price_current": 93.85,
+    "return_pct": 18.71,
+    "signal_date": "2024-07-17",
+    "ticker": "1211.HK"
+  },
+  "27e91ae0-545f-4880-9c17-b5c74deed171": {
+    "price_at_signal": 61103.79,
+    "price_current": 172200,
+    "return_pct": 181.82,
+    "signal_date": "2024-09-24",
+    "ticker": "005930"
+  },
+  "6b52051b-376d-462c-be2d-ff48e7f90b48": {
+    "price_at_signal": 161241.23,
+    "price_current": 849000,
+    "return_pct": 426.54,
+    "signal_date": "2024-09-24",
+    "ticker": "000660"
+  },
+  "c2fc4a09-ac4d-4d92-ae8f-9ed6651d8479": {
+    "price_at_signal": 178.98,
+    "price_current": 353.13,
+    "return_pct": 97.3,
+    "signal_date": "2024-09-24",
+    "ticker": "TSM"
+  },
+  "f7d94844-34fd-4ce2-81e5-0c230d3f4534": {
+    "price_at_signal": 1629788.12,
+    "price_current": 1516000,
+    "return_pct": -6.98,
+    "signal_date": "2024-10-19",
+    "ticker": "207940"
+  },
+  "fad12257-8577-4d63-9a25-e815620ea949": {
+    "price_at_signal": 333.87,
+    "price_current": 392.43,
+    "return_pct": 17.54,
+    "signal_date": "2025-08-31",
+    "ticker": "TSLA"
+  },
+  "f009e951-e3eb-4084-8f53-a5f485868186": {
+    "price_at_signal": 207.28,
+    "price_current": 392.43,
+    "return_pct": 89.32,
+    "signal_date": "2022-10-20",
+    "ticker": "TSLA"
+  },
+  "5994ff62-87d3-46ac-9e8a-40c55d61bbb5": {
+    "price_at_signal": 71545.58,
+    "price_current": 172200,
+    "return_pct": 140.69,
+    "signal_date": "2024-08-29",
+    "ticker": "005930"
+  },
+  "a92048f7-88c0-4055-92d9-19f18cb95efa": {
+    "price_at_signal": 165.76,
+    "price_current": 353.13,
+    "return_pct": 113.04,
+    "signal_date": "2024-08-29",
+    "ticker": "TSM"
+  },
+  "88a34cff-ae74-4375-8393-f81ca6552b62": {
+    "price_at_signal": 167355.56,
+    "price_current": 849000,
+    "return_pct": 407.3,
+    "signal_date": "2024-08-29",
+    "ticker": "000660"
+  },
+  "dfefda5a-0f46-4cb5-9b2a-c950d2ff97ba": {
+    "price_at_signal": 117.54,
+    "price_current": 180.05,
+    "return_pct": 53.18,
+    "signal_date": "2024-08-29",
+    "ticker": "NVDA"
+  },
+  "7024c0ff-56ec-48b3-9bd0-a2be435e8a1c": {
+    "price_at_signal": 135.35,
+    "price_current": 132.68,
+    "return_pct": -1.97,
+    "signal_date": "2024-08-19",
+    "ticker": "MSTR"
+  },
+  "5b46ebdb-ebf9-4b31-9d31-0ccc5f7753c6": {
+    "price_at_signal": 119.32,
+    "price_current": 180.05,
+    "return_pct": 50.9,
+    "signal_date": "2024-08-31",
+    "ticker": "NVDA"
+  },
+  "940d5a5e-9cb2-4f04-88e9-57e49d62eac4": {
+    "price_at_signal": 171300.31,
+    "price_current": 849000,
+    "return_pct": 395.62,
+    "signal_date": "2024-08-31",
+    "ticker": "000660"
+  },
+  "ed39346e-ed1b-4b75-a22e-79e818cdf647": {
+    "price_at_signal": 227.51,
+    "price_current": 263.75,
+    "return_pct": 15.93,
+    "signal_date": "2024-08-31",
+    "ticker": "AAPL"
+  },
+  "cf2c2504-e5e0-4f8d-91de-9f5b773181aa": {
+    "price_at_signal": 56099.22,
+    "price_current": 172200,
+    "return_pct": 206.96,
+    "signal_date": "2024-10-22",
+    "ticker": "005930"
+  },
+  "989537fd-97c9-4323-a0f1-7e887f2f5deb": {
+    "price_at_signal": 185513.16,
+    "price_current": 849000,
+    "return_pct": 357.65,
+    "signal_date": "2024-10-22",
+    "ticker": "000660"
+  },
+  "2caddd5d-e324-49ac-a160-24865e521c4e": {
+    "price_at_signal": 378315.56,
+    "price_current": 1323000,
+    "return_pct": 249.71,
+    "signal_date": "2024-10-22",
+    "ticker": "012450"
+  },
+  "1222535e-b86f-4097-b24b-6ed4be196019": {
+    "price_at_signal": 93.4,
+    "price_current": 313.84,
+    "return_pct": 236.01,
+    "signal_date": "2023-11-16",
+    "ticker": "AVGO"
+  },
+  "f06133f0-8db1-4c61-bd12-9aa24388544a": {
+    "price_at_signal": 198.81,
+    "price_current": 147.22,
+    "return_pct": -25.95,
+    "signal_date": "2025-10-29",
+    "ticker": "PLTR"
+  },
+  "27b56f86-1c60-4f28-83a4-16467e5f22d4": {
+    "price_at_signal": 556573.62,
+    "price_current": 849000,
+    "return_pct": 52.54,
+    "signal_date": "2025-10-29",
+    "ticker": "000660"
+  },
+  "62b62b4c-4816-4246-90d9-1ec415bf86c2": {
+    "price_at_signal": 461.51,
+    "price_current": 392.43,
+    "return_pct": -14.97,
+    "signal_date": "2025-10-29",
+    "ticker": "TSLA"
+  },
+  "47b52499-c411-4ce0-8826-4427441eac91": {
+    "price_at_signal": 254416.62,
+    "price_current": 501000,
+    "return_pct": 96.92,
+    "signal_date": "2025-10-29",
+    "ticker": "005380"
+  },
+  "a8db861f-ab2b-42bb-b06b-a9faecc3979b": {
+    "price_at_signal": 207.03,
+    "price_current": 180.05,
+    "return_pct": -13.03,
+    "signal_date": "2025-10-29",
+    "ticker": "NVDA"
+  },
+  "5b3f0974-fd1c-42f7-bfa9-6777683e07a9": {
+    "price_at_signal": 175.5,
+    "price_current": 263.75,
+    "return_pct": 50.28,
+    "signal_date": "2023-09-07",
+    "ticker": "AAPL"
+  },
+  "cb988019-e9e6-4553-816c-2d2daba87b90": {
+    "price_at_signal": 9642.59,
+    "price_current": 7200,
+    "return_pct": -25.33,
+    "signal_date": "2023-05-23",
+    "ticker": "023810"
+  },
+  "69418bca-2585-4fc5-8c3f-8a31a620b87f": {
+    "price_at_signal": 393.09,
+    "price_current": 424.32,
+    "return_pct": 7.94,
+    "signal_date": "2023-05-23",
+    "ticker": "SNPS"
+  },
+  "69a1a017-add0-46f4-8782-fe17c2325114": {
+    "price_at_signal": 205.76,
+    "price_current": 300.63,
+    "return_pct": 46.11,
+    "signal_date": "2023-05-23",
+    "ticker": "CDNS"
+  },
+  "83ddf62e-c693-4b9b-800e-ef65cef1c735": {
+    "price_at_signal": 22.05,
+    "price_current": 44.59,
+    "return_pct": 102.24,
+    "signal_date": "2023-05-23",
+    "ticker": "AMKR"
+  },
+  "0bdeba8a-0763-416a-80d2-afe60489251e": {
+    "price_at_signal": 35810.72,
+    "price_current": 52900,
+    "return_pct": 47.72,
+    "signal_date": "2023-05-23",
+    "ticker": "005290"
+  },
+  "cfa14a5a-07c5-41c5-a814-07ecc74f7f2f": {
+    "price_at_signal": 230766.61,
+    "price_current": 440500,
+    "return_pct": 90.89,
+    "signal_date": "2023-05-23",
+    "ticker": "357780"
+  },
+  "7833238b-48ee-42c3-b90f-4ad5c33dd908": {
+    "price_at_signal": 37363.16,
+    "price_current": 63200,
+    "return_pct": 69.15,
+    "signal_date": "2023-05-23",
+    "ticker": "131970"
+  },
+  "f9c2e5ea-ad3c-466a-be8c-b691c87ea31b": {
+    "price_at_signal": 184.94,
+    "price_current": 180.05,
+    "return_pct": -2.64,
+    "signal_date": "2026-01-12",
+    "ticker": "NVDA"
+  },
+  "dfb13a60-f027-4930-accd-14e70b2a3c9b": {
+    "price_at_signal": 448.96,
+    "price_current": 392.43,
+    "return_pct": -12.59,
+    "signal_date": "2026-01-12",
+    "ticker": "TSLA"
+  },
+  "228890ef-dee8-4590-baca-73deef47f4ab": {
+    "price_at_signal": 154.29,
+    "price_current": 180.05,
+    "return_pct": 16.69,
+    "signal_date": "2025-06-25",
+    "ticker": "NVDA"
+  },
+  "b5c3fbbc-e5c0-48b4-a737-3593b62f453a": {
+    "price_at_signal": 97364.5,
+    "price_current": 109000,
+    "return_pct": 11.95,
+    "signal_date": "2024-08-27",
+    "ticker": "066570"
+  },
+  "7cc29af3-8b7a-4e42-b169-f387456a02bc": {
+    "price_at_signal": 128.25,
+    "price_current": 180.05,
+    "return_pct": 40.4,
+    "signal_date": "2024-08-27",
+    "ticker": "NVDA"
+  },
+  "36ad4f25-8dc1-4a99-aece-a1016b08ccef": {
+    "price_at_signal": 723.39,
+    "price_current": 694.43,
+    "return_pct": -4.0,
+    "signal_date": "2026-02-25",
+    "ticker": "LITE"
+  },
+  "5c016ac4-1e11-4580-84ae-6bb82f9fe53b": {
+    "price_at_signal": 195.56,
+    "price_current": 180.05,
+    "return_pct": -7.93,
+    "signal_date": "2026-02-25",
+    "ticker": "NVDA"
+  },
+  "eeb7aac9-0899-4e97-aa30-69e96e074fd6": {
+    "price_at_signal": 210.86,
+    "price_current": 190.95,
+    "return_pct": -9.44,
+    "signal_date": "2026-02-25",
+    "ticker": "AMD"
+  },
+  "dc5bd2b5-4bd8-40a5-8d0f-376696c105b4": {
+    "price_at_signal": 81815.82,
+    "price_current": 172200,
+    "return_pct": 110.47,
+    "signal_date": "2024-04-02",
+    "ticker": "005930"
+  },
+  "22956f5a-2289-42ff-894b-cba4ca782702": {
+    "price_at_signal": 276.23,
+    "price_current": 303.58,
+    "return_pct": 9.9,
+    "signal_date": "2025-11-16",
+    "ticker": "GOOGL"
+  },
+  "87f74afb-6fe9-4525-a288-3f06fad7b06c": {
+    "price_at_signal": 284.7,
+    "price_current": 392.43,
+    "return_pct": 37.84,
+    "signal_date": "2025-06-05",
+    "ticker": "TSLA"
+  },
+  "b4bf9db5-3d8c-46c9-9a21-0736b81fb935": {
+    "price_at_signal": 119.91,
+    "price_current": 147.22,
+    "return_pct": 22.78,
+    "signal_date": "2025-06-05",
+    "ticker": "PLTR"
+  },
+  "0f44c851-1d36-47a8-bfde-6f23087c9510": {
+    "price_at_signal": 64181.91,
+    "price_current": 172200,
+    "return_pct": 168.3,
+    "signal_date": "2023-10-28",
+    "ticker": "005930"
+  },
+  "1ba2e580-f6f5-4d56-b865-a3764a5280c2": {
+    "price_at_signal": 116862.36,
+    "price_current": 849000,
+    "return_pct": 626.5,
+    "signal_date": "2023-10-28",
+    "ticker": "000660"
+  },
+  "184d0dbc-d19e-479f-9763-e572b5d1eafb": {
+    "price_at_signal": 199.4,
+    "price_current": 392.43,
+    "return_pct": 96.81,
+    "signal_date": "2024-02-26",
+    "ticker": "TSLA"
+  },
+  "01aff976-cba7-4b28-a138-d13a22896561": {
+    "price_at_signal": 167.48,
+    "price_current": 263.75,
+    "return_pct": 57.49,
+    "signal_date": "2024-03-07",
+    "ticker": "AAPL"
+  },
+  "b56bba78-5771-468b-ad0a-28d480397af1": {
+    "price_at_signal": 92.62,
+    "price_current": 180.05,
+    "return_pct": 94.39,
+    "signal_date": "2024-03-07",
+    "ticker": "NVDA"
+  },
+  "ed45f9fa-7953-4038-a0d3-ae654d942c47": {
+    "price_at_signal": 145.16,
+    "price_current": 353.13,
+    "return_pct": 143.27,
+    "signal_date": "2024-03-07",
+    "ticker": "TSM"
+  },
+  "7c27122b-90c7-402b-a960-d7d75c430cab": {
+    "price_at_signal": 22350.0,
+    "price_current": 77800,
+    "return_pct": 248.1,
+    "signal_date": "2024-03-07",
+    "ticker": "322000"
+  },
+  "3066dac4-43a6-48be-a5a9-f1c1e9654d0f": {
+    "price_at_signal": 29324.06,
+    "price_current": 51300,
+    "return_pct": 74.94,
+    "signal_date": "2024-03-07",
+    "ticker": "222800"
   }
 }

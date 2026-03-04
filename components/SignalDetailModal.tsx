@@ -195,13 +195,13 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
             <div className="flex items-center gap-1">
               <button
                 onClick={handleLike}
-                className={`transition-colors text-lg px-3 py-2 rounded-lg flex items-center gap-1 border-none outline-none ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
+                className={`transition-colors text-2xl px-4 py-3 rounded-lg flex items-center gap-1 border-none outline-none ${liked ? 'text-red-500' : 'text-[#8b95a1] hover:text-red-400'}`}
               >
-                {liked ? '❤️' : '♡'}{likeCount > 0 && <span className="text-sm">{likeCount}</span>}
+                {liked ? '❤️' : '♡'}{likeCount > 0 && <span className="text-base">{likeCount}</span>}
               </button>
               <button 
                 onClick={handleReport}
-                className="text-[#8b95a1] hover:text-red-500 transition-colors text-sm px-2 py-1 rounded-lg"
+                className="text-[#8b95a1] hover:text-red-500 transition-colors text-xl px-3 py-2 rounded-lg"
               >
                 🚨
               </button>

@@ -1,13 +1,29 @@
-import requests, json
-KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8"
-headers = {"apikey": KEY, "Authorization": f"Bearer {KEY}"}
+import urllib.request, json, os
 
-# List tables
-r = requests.get("https://arypzhotxflimroprmdk.supabase.co/rest/v1/signals?select=*&limit=2", headers=headers)
-print("Status:", r.status_code)
-print("Response:", r.text[:1000])
+env = {}
+with open(os.path.join(os.path.dirname(__file__), '..', '.env.local'), 'r') as f:
+    for line in f:
+        line = line.strip()
+        if '=' in line and not line.startswith('#'):
+            k, v = line.split('=', 1)
+            env[k] = v
 
-# Try other table names
-for table in ['signal', 'stock_signals', 'influencer_signals']:
-    r2 = requests.get(f"https://arypzhotxflimroprmdk.supabase.co/rest/v1/{table}?select=*&limit=1", headers=headers)
-    print(f"\n{table}: {r2.status_code} {r2.text[:200]}")
+URL = env['NEXT_PUBLIC_SUPABASE_URL']
+KEY = env['SUPABASE_SERVICE_ROLE_KEY']
+H = {'apikey': KEY, 'Authorization': f'Bearer {KEY}'}
+
+# Check influencer_channels columns
+req = urllib.request.Request(f'{URL}/rest/v1/influencer_channels?select=*&limit=2', headers=H)
+resp = urllib.request.urlopen(req)
+data = json.loads(resp.read().decode())
+if data:
+    print("influencer_channels columns:", list(data[0].keys()))
+    print("Sample:", json.dumps(data[0], ensure_ascii=False, indent=2))
+
+# Check speakers columns
+req2 = urllib.request.Request(f'{URL}/rest/v1/speakers?select=*&limit=3', headers=H)
+resp2 = urllib.request.urlopen(req2)
+data2 = json.loads(resp2.read().decode())
+if data2:
+    print("\nspeakers columns:", list(data2[0].keys()))
+    print("Sample:", json.dumps(data2[0], ensure_ascii=False, indent=2))
