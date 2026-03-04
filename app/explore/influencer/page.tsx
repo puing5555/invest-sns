@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { influencers } from '@/data/influencerData';
-import { getLatestInfluencerSignals, getSignalVoteCounts } from '@/lib/supabase';
+import { getLatestInfluencerSignals, getInfluencerSignalsSampled, getSignalVoteCounts } from '@/lib/supabase';
 import { speakerToSlug } from '@/lib/speakerSlugs';
 import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
@@ -64,7 +64,7 @@ export default function InfluencerPage() {
   useEffect(() => {
     const loadSignals = async () => {
       try {
-        const signals = await getLatestInfluencerSignals(200); // 전부 가져오기
+        const signals = await getLatestInfluencerSignals(1000); // 전체 시그널 최신순
         const transformed = signals.map((s: any) => ({
           id: s.id,
           stock: s.stock,
@@ -78,7 +78,16 @@ export default function InfluencerPage() {
           confidence: s.confidence,
           reasoning: s.reasoning,
           videoSummary: s.influencer_videos?.video_summary,
-          videoUrl: s.influencer_videos?.video_id ? `https://youtube.com/watch?v=${s.influencer_videos.video_id}` : '#',
+          videoUrl: s.influencer_videos?.video_id ? (() => {
+            const base = `https://youtube.com/watch?v=${s.influencer_videos.video_id}`;
+            const ts = s.timestamp;
+            if (!ts) return base;
+            const parts = ts.split(':').map(Number);
+            let secs = 0;
+            if (parts.length === 2) secs = parts[0] * 60 + parts[1];
+            else if (parts.length === 3) secs = parts[0] * 3600 + parts[1] * 60 + parts[2];
+            return secs > 0 ? `${base}&t=${secs}` : base;
+          })() : '#',
           videoTitle: s.influencer_videos?.title,
           ticker: s.ticker || null,
         }));

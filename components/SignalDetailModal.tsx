@@ -83,7 +83,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   const getVideoUrlWithTimestamp = () => {
     if (!signal.videoUrl || signal.videoUrl === '#') return null;
     const seconds = timestampToSeconds(signal.timestamp);
-    if (seconds && signal.videoUrl.includes('youtube.com') || signal.videoUrl.includes('youtu.be')) {
+    if (seconds && (signal.videoUrl.includes('youtube.com') || signal.videoUrl.includes('youtu.be'))) {
       const sep = signal.videoUrl.includes('?') ? '&' : '?';
       return `${signal.videoUrl}${sep}t=${seconds}`;
     }

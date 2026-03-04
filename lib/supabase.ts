@@ -82,6 +82,68 @@ export async function getLatestInfluencerSignals(limit = 20) {
   }
 }
 
+export async function getInfluencerSignalsSampled(perChannelLimit = 50) {
+  try {
+    // 1. 모든 채널 ID 가져오기
+    const { data: channels, error: chErr } = await supabase
+      .from('influencer_channels')
+      .select('id, channel_name');
+    if (chErr || !channels) return [];
+
+    // 2. 채널별로 최신 N개씩 가져오기
+    const allSignals: any[] = [];
+    for (const ch of channels) {
+      const { data: videos } = await supabase
+        .from('influencer_videos')
+        .select('id')
+        .eq('channel_id', ch.id);
+      if (!videos || videos.length === 0) continue;
+      
+      const videoIds = videos.map((v: any) => v.id);
+      // video_id가 많으면 URL 한도 초과하므로 청크로 나눠서 쿼리
+      const CHUNK = 100;
+      const channelSignals: any[] = [];
+      for (let i = 0; i < videoIds.length; i += CHUNK) {
+        const chunk = videoIds.slice(i, i + CHUNK);
+        const { data: signals, error: sigErr } = await supabase
+          .from('influencer_signals')
+          .select(`
+            *,
+            influencer_videos (
+              title,
+              published_at,
+              video_id,
+              video_summary,
+              channel_id,
+              influencer_channels (
+                channel_name,
+                channel_handle
+              )
+            ),
+            speakers (
+              name
+            )
+          `)
+          .in('video_id', chunk)
+          .order('created_at', { ascending: false })
+          .limit(perChannelLimit);
+        
+        if (!sigErr && signals) {
+          channelSignals.push(...signals);
+        }
+      }
+      // 청크 결과 합친 후 최신순 정렬 & limit 적용
+      channelSignals.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      allSignals.push(...channelSignals.slice(0, perChannelLimit));
+    }
+    
+    return allSignals;
+  } catch (error) {
+    console.error('Error in getInfluencerSignalsSampled:', error);
+    return [];
+  }
+}
+
 // 인플루언서 채널 목록과 시그널 수를 가져오는 함수
 export async function getInfluencerChannels() {
   try {
