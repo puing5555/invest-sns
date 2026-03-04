@@ -178,12 +178,8 @@ def step2_extract_subtitles(videos):
                 no_subtitle.append(vid)
                 sub_file.write_text('', encoding='utf-8')
         
-        # Rate limiting - shorter delays, pause only on errors
-        if (i + 1) % 50 == 0:
-            print(f"  --- {i+1}개 완료, 30초 휴식 ---")
-            time.sleep(30)
-        else:
-            time.sleep(1.5)
+        # Minimal delay
+        time.sleep(0.5)
     
     print(f"\n  자막 추출 완료: {len(results)}개 성공, {len(no_subtitle)}개 실패")
     return results, no_subtitle
