@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-signal_validator.py - 시그널 품질 검증 모듈 (15개 항목)
+signal_validator.py - 시그널 품질 검증 모듈 (16개 항목)
 DB INSERT 전 자동 검증. reject된 건 별도 로그 저장.
 
 검증 항목 (14개):
@@ -19,6 +19,7 @@ DB INSERT 전 자동 검증. reject된 건 별도 로그 저장.
 13. 수익률 범위 검증 (±500% 이상 reject)
 14. 과잉 추출 경고 (한 영상 시그널 10개 이상)
 15. 영상 채널-화자 채널 일치 검증 (데이터 오염 방지)
+16. stock_name 한글 필수 체크 (영문만 종목명 거부)
 
 사용법:
     from signal_validator import SignalValidator
@@ -242,6 +243,11 @@ class SignalValidator:
         if signal_channel and speaker_channel and signal_channel != speaker_channel:
             result.reject(f'[15] 채널-화자 불일치: 영상 채널({signal_channel[:8]}) ≠ 화자 채널({speaker_channel[:8]}) — 데이터 오염 위험')
         
+        # === 16. stock_name 한글 필수 체크 ===
+        stock_name = signal.get('stock_name', '') or signal.get('stock', '') or ''
+        if stock_name and not self._check_stock_name_korean(stock_name):
+            result.reject(f'[16] stock_name 한글 없음: "{stock_name}" — 한글 종목명 필수 (영문만 불가)')
+        
         # === 결과 처리 ===
         if result.passed:
             self._stats['passed'] += 1
@@ -300,6 +306,17 @@ class SignalValidator:
         
         return best
     
+    # 영문 통용 종목명 예외 리스트
+    _ENGLISH_ALLOWED = {'AMD', 'TSMC', 'ASML', 'SK', 'LG', 'KT', 'GS', 'CJ', 'HD', 'OCI', 'LS', 'DL', 'HMM', 'BGF', 'NHN'}
+
+    def _check_stock_name_korean(self, stock_name: str) -> bool:
+        """stock_name이 한글 포함인지 체크. 영어만으로 된 종목명 거부."""
+        if stock_name.upper() in self._ENGLISH_ALLOWED:
+            return True
+        if not re.search(r'[가-힣]', stock_name):
+            return False
+        return True
+
     def _verify_ticker_exists(self, ticker: str, market: str = '') -> bool:
         """ticker가 실제 존재하는지 확인 (캐시 사용)"""
         cache_key = f"{ticker}:{market}"

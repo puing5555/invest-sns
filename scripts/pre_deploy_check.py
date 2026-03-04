@@ -308,6 +308,25 @@ def check_db_signals(cr, auto_fix, verbose):
             cr.add_fail(f"블랙리스트 종목 {len(blacklisted)}개 발견 (--auto-fix로 삭제 가능)",
                         [f"  {s.get('stock','')} (id: {s['id'][:8]}...)" for s in blacklisted[:10]])
 
+    # ─── 3a2. 영어 종목명 체크 ───
+    # 약어(AMD, TSMC, ASML, BYD, ARM, CGV, HPSP, IREN, MSCI, SOXX, BYC 등)는 허용
+    ALLOWED_ENGLISH = {"AMD", "TSMC", "ASML", "BYD", "ARM", "CGV", "HPSP", "IREN",
+                       "MSCI", "SOXX", "BYC", "ETF", "S&P", "SOL", "XRP", "BTC", "ETH"}
+    english_stocks = []
+    for s in signals:
+        stock = (s.get("stock") or "").strip()
+        if not stock:
+            continue
+        # stock에 한글이 하나도 없고, 허용 약어가 아닌 경우
+        if not re.search(r'[가-힣]', stock) and stock.upper() not in ALLOWED_ENGLISH:
+            english_stocks.append(s)
+
+    if english_stocks:
+        cr.add_warn(f"영어 종목명 {len(english_stocks)}개 발견 (한글로 변환 필요)",
+                    [f"  {s.get('stock','')} (id: {s['id'][:8]}...)" for s in english_stocks[:10]])
+    else:
+        cr.add_pass("영어 종목명: 없음 (전부 한글)")
+
     # ─── 3b. 중복 시그널 ───
     seen = {}
     duplicates = []
@@ -418,6 +437,26 @@ def check_db_signals(cr, auto_fix, verbose):
         cr.add_fail(f"잘못된 시그널 타입 {len(invalid_signals)}개: {dict(invalid_types)}")
     else:
         cr.add_pass(f"시그널 타입: 전부 유효 ({len(signals)}개)")
+
+    # ─── 3g. stock_name 한글 필수 체크 ───
+    ENGLISH_ALLOWED = {'AMD', 'TSMC', 'ASML', 'SK', 'LG', 'KT', 'GS', 'CJ', 'HD', 'OCI', 'LS', 'DL', 'HMM', 'BGF', 'NHN'}
+    english_only = []
+    for s in signals:
+        sn = (s.get("stock_name") or s.get("stock") or "").strip()
+        if sn and sn.upper() not in ENGLISH_ALLOWED and not re.search(r'[가-힣]', sn):
+            english_only.append(s)
+    if english_only:
+        if auto_fix:
+            ids = [s["id"] for s in english_only]
+            deleted = supabase_delete("influencer_signals", ids)
+            cr.add_fix(f"영문만 종목명 {len(english_only)}개 → 자동 삭제", len(english_only),
+                       [f"  {s.get('stock','')} (id: {s['id'][:8]}...)" for s in english_only[:10]])
+            signals = [s for s in signals if s["id"] not in set(ids)]
+        else:
+            cr.add_fail(f"영문만 종목명 {len(english_only)}개 (한글 필수, --auto-fix로 삭제 가능)",
+                        [f"  {s.get('stock','')} (id: {s['id'][:8]}...)" for s in english_only[:10]])
+    else:
+        cr.add_pass("stock_name 한글 체크: 전부 통과")
 
     # ─── 3g. 날짜 형식 검증 ───
     # Check video published_at dates
