@@ -2,243 +2,182 @@
 
 import { useState, useEffect } from 'react';
 
-// Dummy data for real-time feed
-const realTimeDisclosures = [
-  {
-    id: '1',
-    time: '13:45:23',
-    company: '아이빔테크놀로지',
-    marketCap: '983억',
-    grade: 'A',
-    title: '단일판매·공급계약 체결',
-    amount: '23.5억',
-    percentage: '14.77%',
-    aiInsight: '매출대비 14.77%, 과거 유사 47건 D+3 +8.2%',
-    priceChange: '+2.3%',
-    isNew: true
-  },
-  {
-    id: '2',
-    time: '13:32:15',
-    company: '와이엠씨',
-    marketCap: '1,337억',
-    grade: 'A',
-    title: '자사주 500,000주 소각',
-    amount: '50억',
-    percentage: '3.75%',
-    aiInsight: '소형주 소각 D+5 +6.3%',
-    priceChange: '+1.8%',
-    isNew: false
-  },
-  {
-    id: '3',
-    time: '13:18:07',
-    company: '세아제강지주',
-    marketCap: '4,200억',
-    grade: 'A',
-    title: '기업가치 제고 계획 예고',
-    amount: '-',
-    percentage: 'PBR 0.38',
-    aiInsight: '예고→확정 36%',
-    priceChange: '+0.9%',
-    isNew: false
-  },
-  {
-    id: '4',
-    time: '13:02:44',
-    company: 'HD한국조선해양',
-    marketCap: '33조',
-    grade: 'B',
-    title: '해명공시 "미확정"',
-    amount: '-',
-    percentage: '인도 합작법인',
-    aiInsight: '미확정 후 확정 36%',
-    priceChange: '+0.5%',
-    isNew: false
-  },
-  {
-    id: '5',
-    time: '12:55:12',
-    company: '롯데케미칼',
-    marketCap: '3.8조',
-    grade: 'B',
-    title: '사업재편 승인',
-    amount: '6,000억',
-    percentage: '출자',
-    aiInsight: '기업활력법 D+5 +2.1%',
-    priceChange: '-0.2%',
-    isNew: false
-  }
-];
+interface Disclosure {
+  id: string;
+  corp_name: string;
+  corp_code: string;
+  stock_code: string;
+  market: string;
+  report_nm: string;
+  rcept_no: string;
+  rcept_dt: string;
+  disclosure_type: string;
+  importance: string;
+  ai_summary: string;
+  ai_impact: string;
+  ai_impact_reason: string;
+  ai_score: number;
+  source: string;
+  created_at: string;
+}
 
-const todayStats = {
-  totalCount: 127,
-  aGradeCount: 18,
-  bGradeCount: 34,
-  majorNews: 5,
-  marketImpact: '+0.3%'
+type PeriodFilter = 'today' | 'week' | 'month' | 'all';
+type ImpactFilter = '전체' | '긍정' | '부정' | '중립';
+
+const impactColor: Record<string, { bg: string; text: string; border: string }> = {
+  '긍정': { bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
+  '부정': { bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
+  '중립': { bg: 'bg-gray-100', text: 'text-gray-600', border: 'border-gray-200' },
 };
 
+const importanceIcon: Record<string, string> = {
+  high: '🔴',
+  medium: '🟡',
+  low: '🟢',
+};
+
+function ScoreBar({ score }: { score: number }) {
+  const color = score >= 70 ? 'bg-blue-500' : score >= 40 ? 'bg-yellow-400' : 'bg-red-500';
+  return (
+    <div className="flex items-center gap-2 mt-2">
+      <span className="text-xs text-gray-500 w-14 shrink-0">AI 점수</span>
+      <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className={`h-full rounded-full ${color}`} style={{ width: `${score}%` }} />
+      </div>
+      <span className="text-xs font-semibold text-gray-700 w-8 text-right">{score}</span>
+    </div>
+  );
+}
+
 export default function RealTimeFeedTab() {
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [data, setData] = useState<Disclosure[]>([]);
+  const [period, setPeriod] = useState<PeriodFilter>('all');
+  const [impact, setImpact] = useState<ImpactFilter>('전체');
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
+    fetch('/disclosure_seed.json')
+      .then(r => r.json())
+      .then(setData)
+      .catch(() => {});
   }, []);
 
-  const toggleExpanded = (id: string) => {
-    setExpandedItems(prev => 
-      prev.includes(id) 
-        ? prev.filter(item => item !== id)
-        : [...prev, id]
-    );
+  const toggle = (id: string) => {
+    setExpanded(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
   };
 
+  const filtered = data.filter(d => {
+    if (impact !== '전체' && d.ai_impact !== impact) return false;
+    if (period === 'all') return true;
+    const dt = new Date(d.rcept_dt);
+    const now = new Date('2026-03-04');
+    const diff = (now.getTime() - dt.getTime()) / (1000 * 60 * 60 * 24);
+    if (period === 'today') return diff < 1;
+    if (period === 'week') return diff < 7;
+    if (period === 'month') return diff < 30;
+    return true;
+  });
+
+  const periods: { key: PeriodFilter; label: string }[] = [
+    { key: 'today', label: '오늘' },
+    { key: 'week', label: '1주' },
+    { key: 'month', label: '1개월' },
+    { key: 'all', label: '전체' },
+  ];
+
+  const impacts: ImpactFilter[] = ['전체', '긍정', '부정', '중립'];
+
   return (
-    <div className="py-6 space-y-6">
-      {/* Summary Banner */}
-      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-xl p-6 text-white">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            <h2 className="text-lg font-bold">실시간 공시 현황</h2>
-            <span className="text-sm bg-white/20 px-2 py-1 rounded text-gray-200">
-              {currentTime.toLocaleTimeString('ko-KR')}
-            </span>
-          </div>
-          <div className="text-sm text-gray-300">
-            마켓 임팩트: <span className="text-green-400 font-medium">{todayStats.marketImpact}</span>
-          </div>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center">
-            <div className="text-2xl font-bold">{todayStats.totalCount}</div>
-            <div className="text-sm text-gray-300">전체 공시</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-red-400">{todayStats.aGradeCount}</div>
-            <div className="text-sm text-gray-300">A등급</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-orange-400">{todayStats.bGradeCount}</div>
-            <div className="text-sm text-gray-300">B등급</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-blue-400">{todayStats.majorNews}</div>
-            <div className="text-sm text-gray-300">주요 뉴스</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Real-time Feed */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900">실시간 공시 피드</h3>
-          <div className="flex items-center space-x-2 text-sm text-gray-500">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span>Live</span>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          {realTimeDisclosures.map((disclosure) => (
-            <div 
-              key={disclosure.id}
-              className={`bg-white rounded-xl border transition-all duration-200 hover:shadow-lg ${
-                disclosure.isNew ? 'ring-2 ring-blue-200 shadow-lg' : 'border-gray-200'
+    <div className="py-4 space-y-4">
+      {/* Filters */}
+      <div className="flex flex-wrap gap-2">
+        <div className="flex gap-1 bg-white rounded-xl p-1 shadow-sm">
+          {periods.map(p => (
+            <button
+              key={p.key}
+              onClick={() => setPeriod(p.key)}
+              className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                period === p.key ? 'bg-gray-900 text-white' : 'text-gray-500 hover:bg-gray-100'
               }`}
             >
-              <div 
-                className="p-4 cursor-pointer"
-                onClick={() => toggleExpanded(disclosure.id)}
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <span className={`inline-block w-6 h-6 text-xs font-bold text-white rounded-full text-center leading-6 ${
-                        disclosure.grade === 'A' ? 'bg-red-500' : 'bg-orange-500'
-                      }`}>
-                        {disclosure.grade}
-                      </span>
-                      <span className="text-sm text-gray-500">{disclosure.time}</span>
-                      {disclosure.isNew && (
-                        <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">
-                          NEW
-                        </span>
-                      )}
-                      <span className={`text-sm font-medium ${
-                        disclosure.priceChange.startsWith('+') ? 'text-red-500' : 'text-blue-500'
-                      }`}>
-                        {disclosure.priceChange}
-                      </span>
-                    </div>
-                    
-                    <div className="mb-2">
-                      <h4 className="font-semibold text-gray-900 mb-1">
-                        {disclosure.company}
-                        <span className="text-sm text-gray-500 ml-2">시가총액 {disclosure.marketCap}</span>
-                      </h4>
-                      <p className="text-gray-700">{disclosure.title}</p>
-                      {disclosure.amount !== '-' && (
-                        <p className="text-sm text-gray-600">
-                          계약금액: <span className="font-medium">{disclosure.amount}</span> 
-                          ({disclosure.percentage})
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                    <svg className={`w-5 h-5 transform transition-transform ${
-                      expandedItems.includes(disclosure.id) ? 'rotate-180' : ''
-                    }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              {/* Expanded Content */}
-              {expandedItems.includes(disclosure.id) && (
-                <div className="px-4 pb-4 border-t border-gray-100">
-                  <div className="pt-4">
-                    <div className="bg-blue-50 p-3 rounded-lg">
-                      <div className="flex items-start space-x-2">
-                        <span className="text-blue-600 font-medium text-sm">🤖 AI 분석:</span>
-                        <span className="text-sm text-gray-700">{disclosure.aiInsight}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-3 flex space-x-3">
-                      <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
-                        상세 분석
-                      </button>
-                      <button className="flex-1 bg-gray-100 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
-                        유사 공시
-                      </button>
-                      <button className="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 transition-colors">
-                        ⭐
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+              {p.label}
+            </button>
           ))}
         </div>
-
-        {/* Load More */}
-        <div className="text-center py-6">
-          <button className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">
-            더 많은 공시 보기
-          </button>
+        <div className="flex gap-1 bg-white rounded-xl p-1 shadow-sm">
+          {impacts.map(i => (
+            <button
+              key={i}
+              onClick={() => setImpact(i)}
+              className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+                impact === i ? 'bg-gray-900 text-white' : 'text-gray-500 hover:bg-gray-100'
+              }`}
+            >
+              {i}
+            </button>
+          ))}
         </div>
       </div>
+
+      {/* Results count */}
+      <p className="text-sm text-gray-500">{filtered.length}건의 공시</p>
+
+      {/* Cards */}
+      <div className="space-y-3">
+        {filtered.map(d => {
+          const ic = impactColor[d.ai_impact] || impactColor['중립'];
+          const isOpen = expanded.has(d.id);
+          return (
+            <div
+              key={d.id}
+              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden cursor-pointer active:bg-gray-50 transition-colors"
+              onClick={() => toggle(d.id)}
+            >
+              <div className="p-4">
+                {/* Top row: badges */}
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border ${ic.bg} ${ic.text} ${ic.border}`}>
+                    {d.ai_impact}
+                  </span>
+                  <span className="text-sm">{importanceIcon[d.importance] || '🟢'}</span>
+                  <span className="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded">{d.disclosure_type}</span>
+                </div>
+
+                {/* Title */}
+                <h3 className="font-semibold text-gray-900 text-sm leading-snug">{d.report_nm}</h3>
+                <p className="text-xs text-gray-500 mt-1">{d.corp_name} · {d.rcept_dt}</p>
+
+                {/* Summary */}
+                <p className={`text-sm text-gray-700 mt-2 leading-relaxed ${isOpen ? '' : 'line-clamp-2'}`}>
+                  {d.ai_summary}
+                </p>
+
+                {/* Expanded content */}
+                {isOpen && (
+                  <div className="mt-3 pt-3 border-t border-gray-100">
+                    <p className="text-xs font-medium text-gray-500 mb-1">💡 AI 영향 분석</p>
+                    <p className="text-sm text-gray-700 leading-relaxed">{d.ai_impact_reason}</p>
+                  </div>
+                )}
+
+                {/* Score bar */}
+                <ScoreBar score={d.ai_score} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="text-center py-16 text-gray-400">
+          <p className="text-4xl mb-2">📭</p>
+          <p>해당 조건의 공시가 없습니다</p>
+        </div>
+      )}
     </div>
   );
 }
