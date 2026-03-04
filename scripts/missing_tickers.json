@@ -1,0 +1,10 @@
+{
+  "SQ": {
+    "name": "스퀘어",
+    "market": "US"
+  },
+  "IXIC": {
+    "name": "나스닥",
+    "market": "US"
+  }
+}

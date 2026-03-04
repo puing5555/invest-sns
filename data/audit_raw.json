@@ -1,0 +1,272 @@
+[
+  {
+    "ticker": "000660",
+    "signal_type": null,
+    "key_quote": "내년 상반기까지는 걱정이 없을 것 같긴 한데, 엔비디아 블랙웰만 잘되면 크게 무난하게 우상향할 수 있을 것 같고요",
+    "confidence": "high",
+    "video_title": "[월간아신 11월] 중국 모바일 회사를 보는 삼성전자, 그리고 미국 빅테크를 보는 SK 하이닉스 [3부]",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "e5375198-0257-4641-a600-d2ee3e6cb114"
+  },
+  {
+    "ticker": "SOL",
+    "signal_type": null,
+    "key_quote": "솔라나 계열 밈코인 붐을 타고 오늘부로 BNB를 제치고 시총 4위로 올라섰습니다. 솔라나 생태계 전반에 대한 투자자들의 관심과 자금 유입이 크게 늘어나면서 메인넷 토큰인 솔라나의 가치도 함께 상승하는 모습을 보이고 있어, 단기적으로는 이런 상승 모멘텀이 지속될 가능성이 높아 보입니다.",
+    "confidence": "high",
+    "video_title": "인간이 AI의 명령을 받드는 시대...를 위한 마지막 퍼즐 조각",
+    "channel_id": "d68f8efd-64c8-4c07-9d34-e98c2954f4e1",
+    "video_id": "8b8ddea2-1548-4db9-976f-da0b6e877a31"
+  },
+  {
+    "ticker": "NVDA",
+    "signal_type": null,
+    "key_quote": "엔비디아가 그록을 인수함으로써 학습에 더해서 추론까지 완벽하게 보완해서 내년도에 완전히 달라진 모습을 보여줄 수 있을 것",
+    "confidence": "very_high",
+    "video_title": "새해에도 AI 전쟁은 계속된다! 엔비디아의 28조 배팅ㅣ쇼미더 연수르",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "d95bb376-4f17-4e5d-bcbd-4d6eaac6207d"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라는 이제 단순한 자동차 회사가 아니라 AI 기술력을 바탕으로 한 미래 모빌리티 기업으로 완전히 탈바꿈하고 있어서, 주가는 앞으로 정말 날개를 달고 날아오를 것 같습니다.",
+    "confidence": "very_high",
+    "video_title": "테슬라 주가 고공행진 하는 이유? 월가에서 인정하기 시작했습니다⎮강정수 박사",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68"
+  },
+  {
+    "ticker": "NVDA",
+    "signal_type": null,
+    "key_quote": "엔비디아가 연일 사상 최고치를 경신하며 AI 혁명의 중심에서 독보적인 위치를 확고히 하고 있습니다. 특히 H100, A100 등 핵심 AI 칩의 공급 부족이 지속되면서 가격 결정력이 더욱 강화되고 있고, ChatGPT 열풍으로 촉발된 생성형 AI 붐이 클라우드 기업들의 GPU 투자 러시를 이끌어내고 있어 당분간 강세 모멘텀이 지속될 것으로 전망됩니다.",
+    "confidence": "high",
+    "video_title": "[속보효] 오늘은 역사적인 날입니다 | 비트코인ETF 통과!, GPT store 출시!",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "30bf6b0a-5ee6-4e0a-8f38-c1de7cebe44b"
+  },
+  {
+    "ticker": "000660",
+    "signal_type": null,
+    "key_quote": "엔비디아도 그 반도체 만들려고 했는데 아 이거 HBM 없네 그러면서 하이닉스의 줄을 쫙 썼던 거거든요",
+    "confidence": "medium",
+    "video_title": "[2024 조선일보 재테크 박람회 강의 영상] AI에 계속 투자하고, 비트코인으로 헤지하자!",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "138acc80-a52e-4ee5-aeba-9c49d8361818"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라가 생산량보다 인도량이 많아지고 있지만, 4분기 인도량이 예상치를 크게 밑돌며 판매 둔화 우려가 커지고 있어 투자에 신중함이 필요한 상황입니다.",
+    "confidence": "high",
+    "video_title": "애플·테슬라 쇼크... 고통스러운 첫출발입니다",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "be358c4a-119a-4053-a433-84ce92ec4306"
+  },
+  {
+    "ticker": "SQ",
+    "signal_type": null,
+    "key_quote": "스퀘어라는 미국의 지불제 회사가 자산의 1%를 비트코인으로 보관하겠다라고 발표를 했습니다.",
+    "confidence": "high",
+    "video_title": "2021년은 비트코인의 해입니다 feat.월스트릿",
+    "channel_id": "d68f8efd-64c8-4c07-9d34-e98c2954f4e1",
+    "video_id": "b63cdda1-1ae5-41cb-9cc9-09aa7391e187"
+  },
+  {
+    "ticker": "AAPL",
+    "signal_type": null,
+    "key_quote": "애플이 굉장히 괜찮은 투자처인 것 같은데 현재 시장에서 너무 저평가받고 있는 것 같습니다. 특히 WWDC에서 오픈AI 협업 발표와 함께 iOS에 AI 기능이 본격 탑재되면서 사용자 경험이 혁신적으로 개선될 것으로 보이고, 이미 뉴럴엔진 준비도 완료되어 있어 온디바이스 AI 서비스 제공이 가능한 상황이라 투자 기회로 판단됩니다.",
+    "confidence": "high",
+    "video_title": "[안단효] 결전의 날을 준비하는 애플",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "dd73a745-ecf0-4987-bd8f-84d503704ecc"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라의 매수 의견이 2015년 이후로 최고 수준까지 올라간 상황에서, 주가가 55% 급락하며 밸류에이션 부담이 크게 완화되어 월스트리트 애널리스트들의 60%가 매수 의견을 제시하고 있어 전기차 시장 선두주자로서의 지위와 자율주행 기술력을 고려할 때 매력적인 투자 기회가 열리고 있습니다.",
+    "confidence": "high",
+    "video_title": "테슬라도 산타랠리 끼워 주나요?",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "499e7ca7-e7ba-48d6-97a2-aad155e1a5af"
+  },
+  {
+    "ticker": "GE",
+    "signal_type": null,
+    "key_quote": "제너럴일렉트릭의 애널리스트 평균 목표주가가 89달러로 설정되어 있는데, 현재 주가는 90달러를 넘어서며 과대평가 구간에 들어선 상황입니다. 분사 작업을 통한 구조조정 성과와 포트폴리오 정리 등의 긍정적 요인들이 이미 주가에 충분히 반영되었다고 보여, 현 수준에서는 매도 타이밍으로 판단됩니다.",
+    "confidence": "high",
+    "video_title": "어둠의 워런 버핏이 전하는 지금 공매도하기 좋은 이유",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "6a577b9a-1da5-41cd-81e9-3352b609fe4d"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "원론적으로 어떤 주식이든 못 살 이유는 없다고 생각하는데, 테슬라 같은 경우에는 전기차 시장에서의 독보적인 위치와 기술력은 분명히 매력적이지만, 한편으로는 일론 머스크라는 개인에게 너무 의존적인 구조라는 점과 현재 주가가 상당히 높은 밸류에이션을 반영하고 있다는 점에서 신중하게 접근할 필요가 있다고 봅니다.",
+    "confidence": "medium",
+    "video_title": "이번 주주총회를 통해 버핏이 우리에게 내려준 가르침 | 라쿤자산운용 홍진채 대표 [풀영상]",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "d4970cc6-b705-43a2-aebd-064a8cd6d62e"
+  },
+  {
+    "ticker": "GEV",
+    "signal_type": null,
+    "key_quote": "G베르노바는 올해 주가가 90% 올랐어요. 다행히 실적이 굉장히 서프라이즈가 났고 주가도 좋은 반응을 보여주고 있는데",
+    "confidence": "very_high",
+    "video_title": "테슬라, 계속 믿어야 할까? '이렇게' 생각하면 됩니다ㅣ모라구효",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "67a78357-8dfe-4f87-beff-869b8679759d"
+  },
+  {
+    "ticker": "084370",
+    "signal_type": null,
+    "key_quote": "원익 IPS 테스 유진테크 뭐 두산 테스나 뭐 하나 마이크론 뭐 이런 회사들도 여전히 업사이드가 있다고 보고 있습니다",
+    "confidence": "medium",
+    "video_title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]",
+    "channel_id": "12facb47-407d-4fd3-a310-12dd5a802d1f",
+    "video_id": "cef2c937-db77-4bf6-9173-2e3fd8533334"
+  },
+  {
+    "ticker": "NFLX",
+    "signal_type": null,
+    "key_quote": "아크 인베스트먼트에서 넷플릭스 300만 주를 대량 매수했다고 공식 발표했는데, 이는 현재 조정받은 주가 수준에서 상당한 투자 기회가 있다고 판단한 것으로 보입니다. 넷플릭스가 광고 기반 구독 모델과 게임 콘텐츠 사업 등 새로운 성장 동력을 확보하면서 글로벌 OTT 시장에서의 독보적 경쟁력을 더욱 강화하고 있어, 기관투자자들의 관심이 집중되고 있는 상황입니다.",
+    "confidence": "high",
+    "video_title": "오늘부터 진짜 새해, 시장이 자신감을 찾은 진짜 이유 #나스닥 #비트코인 #테슬라",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "59db2d82-10df-4384-b2cc-7a6631cd962c"
+  },
+  {
+    "ticker": "AMZN",
+    "signal_type": null,
+    "key_quote": "아마존 실적 대박입니다! 매출과 수익성을 모두 지켜냈다는 평가를 받으면서 AWS 클라우드 서비스가 견조한 성장세를 이어가고 있고, 이커머스 부문의 운영 효율성도 크게 개선되어 투자자들에게 강력한 매수 신호를 보내고 있습니다.",
+    "confidence": "very_high",
+    "video_title": "애플·아마존 실적발표, 빅테크 기업의 눈부신 귀환",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "1f453577-3eb0-4646-8945-952f0e703d4b"
+  },
+  {
+    "ticker": "005380",
+    "signal_type": null,
+    "key_quote": "올해는 저는 피지컬 AI 해라고 보고 있기 때문에 로봇과 자율주쟁이 두 가지 축이 가장 크다고 보고요. 어 그 두 가지 축에서 현대차 그룹주가 일순이",
+    "confidence": "medium",
+    "video_title": "현금 있다면 '이 5개 주식' 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 풀버전]",
+    "channel_id": "12facb47-407d-4fd3-a310-12dd5a802d1f",
+    "video_id": "396cdcc6-78ef-40ea-a2c3-df59c825f492"
+  },
+  {
+    "ticker": "240810",
+    "signal_type": null,
+    "key_quote": "원익 IPS 테스 유진테크 뭐 두산 테스나 뭐 하나 마이크론 뭐 이런 회사들도 여전히 업사이드가 있다고 보고 있습니다",
+    "confidence": "medium",
+    "video_title": "현금으로 '이 11개 주식' 사세요, 26년 미친듯이 오를 겁니다 [이형수 대표 4부]",
+    "channel_id": "12facb47-407d-4fd3-a310-12dd5a802d1f",
+    "video_id": "cef2c937-db77-4bf6-9173-2e3fd8533334"
+  },
+  {
+    "ticker": "COIN",
+    "signal_type": null,
+    "key_quote": "작년에 코인베이스 주식을 조금 담았는데, 미국이 크립토 시장을 제도권으로 편입시키려는 것 같아서 투자한 것이다.",
+    "confidence": "low",
+    "video_title": "4년 전에 놓친 비트코인 반감기 개념정리",
+    "channel_id": "d68f8efd-64c8-4c07-9d34-e98c2954f4e1",
+    "video_id": "50aea750-fca7-4373-8ad5-0d9d2a4275c9"
+  },
+  {
+    "ticker": "373220",
+    "signal_type": null,
+    "key_quote": "LG에너지솔루션이 테슬라와 5.9조원 규모의 ESS용 LFP 배터리 공급계약을 체결하며 글로벌 배터리 시장에서 게임 체인저 역할을 하고 있다. 이번 대형 계약은 단순한 매출 증가를 넘어서 LG엔솔이 기존 NCM 배터리 기술력에 더해 LFP 배터리 분야까지 독보적 경쟁력을 확보했다는 점에서 의미가 크다.",
+    "confidence": "very_high",
+    "video_title": "삼성전자와 LG에너지솔루션의 빛이 되어준 테슬라ㅣ7월 5주 해외주간뉴스",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "aa42c49b-5266-432f-9857-6c1a623431a5"
+  },
+  {
+    "ticker": "000660",
+    "signal_type": null,
+    "key_quote": "하이닉스가 VFO(버티컬 팬아웃) 방식으로 LLW 메모리를 개발하고 있고, 애플 비전프로에 하이닉스가 만든 LLW 칩이 사용되었다",
+    "confidence": "high",
+    "video_title": "[월간아신] 또 한번 제대로 큰판 벌리는 엔비디아! 코앞으로 다가온 실적발표! 엔비디아는 반도체의 역사를 새로 쓸 수 있을까요? [1부]",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "d1f52ddf-01aa-4dc9-bd7d-096fca78b745"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라가 보여주고 있는 혁신은 누가 봐도 전세계에서 가장 빠르고 잘 하고 있으며, 특히 AI 데이 발표를 통해 자율주행 기술을 휴머노이드 로봇까지 확장하는 통합적 접근법이 매우 인상적이다.",
+    "confidence": "high",
+    "video_title": "소름돋는 테슬라의 큰그림(AI데이 리뷰)ㅣ내일은투자왕 김단테",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "3c17b562-8aac-459f-95f5-4d7fdecf4917"
+  },
+  {
+    "ticker": "GOOGL",
+    "signal_type": null,
+    "key_quote": "재미나이 3.0 사실 너무 뛰어납니다. 너무 뛰어나고 실제로 지금 그 채치 비싼 요금제보다 낫다라는 평도 있습니다",
+    "confidence": "very_high",
+    "video_title": "오라클·브로드컴 쇼크,AI가 꺾인 게 아니라 ‘이게’ 문제였다월간아신 12월 1부",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5"
+  },
+  {
+    "ticker": "352820",
+    "signal_type": null,
+    "key_quote": "엔터조에서 대장은 하이브인데 저는 근데 하이브는 조금 좋게 말씀드리고 싶은 이유가 뭐냐면 역사 신고가 근처예요. 근데 이제 근처인데 어 BTS가 너무 기대되기 때문입니다",
+    "confidence": "high",
+    "video_title": "현금으로 딱 5개 주식 사세요, 27년까지 무섭게 오를 겁니다 [이정윤 세무사 4부]",
+    "channel_id": "12facb47-407d-4fd3-a310-12dd5a802d1f",
+    "video_id": "98a76d69-6bb2-4d93-8168-4b063da57812"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "일론 머스크는 이 시대의 최고의 경영자이자 엔지니어로서, 테슬라를 단순한 전기차 회사에서 배터리 기술과 자율주행, 에너지 솔루션까지 아우르는 종합 기술 기업으로 변모시켰습니다. 그의 탁월한 리더십과 혁신적 사고가 테슬라의 미래 성장을 이끌어갈 핵심 동력이라고 봅니다.",
+    "confidence": "high",
+    "video_title": "테슬라와 일론 머스크의 1조 달러 보상안! 일론 머스크가 이 보상을 반드시 받아야 하는 이유ㅣ11월 1주 Z1뉴스 - 2부",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "de114ec2-8c0a-4a74-99dd-52059ca2976f"
+  },
+  {
+    "ticker": "005930",
+    "signal_type": null,
+    "key_quote": "삼성전자가 SK하이닉스를 따라가고 있는 상황에서, HBM 기술 격차 해소와 NCF 방식의 성공 여부, 그리고 엔비디아 납품 승인까지 넘어야 할 산이 많아 앞으로 어떤 일들이 일어날지 예측하기 어려운 상황입니다.",
+    "confidence": "medium",
+    "video_title": "[월간아신] 제2의 엔비디아가 될 기업은 '이곳' 일 수도 있습니다",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "21ef25b1-44fd-469a-9361-328513c59b30"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라는 계속 좋게 받고 더 좋아질 것 같습니다. 전기차 브랜드에서 AI 업체로 굉정히 잘 전환하고 있다",
+    "confidence": "very_high",
+    "video_title": "[월간아신] 코스피 대장 삼성전자, 겹겹이 악재 쏟아진다 | IT의 신 이형수 대표 [1부]",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라와 삼성전자 간의 파운드리 협력이 성사된다면, 훗날 애플과 TSMC의 전설적인 파트너십처럼 양사 모두에게 엄청난 성장 동력이 되는 역사적 계약으로 회자될 수도 있어요. 특히 자율주행과 AI 칩 수요가 폭발적으로 증가하는 지금 시점에서 이런 전략적 제휴는 테슬라에게 완전한 게임체인저가 될 가능성이 높습니다.",
+    "confidence": "high",
+    "video_title": "테슬라가 TSMC 버리고 삼성전자와 손 잡은 이유ㅣ정지훈 ASIA2G캐피탈 제네럴 파트너/박사 [1부]",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "1b0508ad-3e15-4433-8757-78f9364af252"
+  },
+  {
+    "ticker": "005930",
+    "signal_type": null,
+    "key_quote": "삼성전자를 지금 굳이 사야 될 이유가 없습니다. 반도체 업황이 좋아진다고 해도 다른 반도체 관련 종목들을 사는 게 낫겠어요. 삼성전자는 대형주 특성상 주가 탄력성이 제한적이고, 메모리 반도체 회복세가 와도 상대적으로 수익률 면에서 아쉬울 것 같습니다. 지금은 삼성전자가 쉬는 구간에 들어온 것 같아서, 굳이 이 종목에 집착할 필요는 없다고 봅니다.",
+    "confidence": "high",
+    "video_title": "52주 신저가 경신한 삼성전자! 지금이라도 '주도주'를 보셔야 합니다⎮김탁 밸류시스템자산운용 상무 [풀영상]",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5"
+  },
+  {
+    "ticker": "TSLA",
+    "signal_type": null,
+    "key_quote": "테슬라 같은 고변동성 종목은 확실한 투자 신념과 리스크 관리 능력이 뒷받침되어야만 접근할 수 있는 종목입니다. 최근 급등세를 보이고 있지만 그만큼 급락 위험도 크기 때문에 신중한 투자 판단이 필요한 상황이라고 봅니다.",
+    "confidence": "medium",
+    "video_title": "돈 빌려서 주식 사는 애플 | 펠로시 대만 방문으로 미중 충돌하나?",
+    "channel_id": "d153b75b-1843-4a99-b49f-c31081a8f566",
+    "video_id": "38ce0ce0-ef71-46ec-85ab-1ded45c6aad1"
+  }
+]
