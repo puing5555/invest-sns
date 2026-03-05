@@ -1,4 +1,4 @@
--- ============================================
+﻿-- ============================================
 -- 인플루언서 시그널 파이프라인 테이블
 -- Supabase SQL Editor에서 실행
 -- 2026-02-27
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS public.influencer_signals (
     '결론', '논거', '뉴스', '리포트', '교육', '티저', '보유', '컨센서스'
   )),
   signal TEXT NOT NULL CHECK (signal IN (
-    '매수', '긍정', '중립', '경계', '매도'
+    '매수', '긍정', '중립', '부정', '매도'
   )),
   confidence TEXT NOT NULL DEFAULT 'high' CHECK (confidence IN (
     'high', 'medium', 'low'

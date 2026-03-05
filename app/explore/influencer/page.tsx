@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { influencers } from '@/data/influencerData';
@@ -12,7 +12,7 @@ const V9_SIGNAL_COLORS: Record<string, string> = {
   '매수': 'bg-green-600 text-white',
   '긍정': 'bg-blue-600 text-white',
   '중립': 'bg-gray-500 text-white',
-  '경계': 'bg-yellow-600 text-white',
+  '부정': 'bg-yellow-600 text-white',
   '매도': 'bg-red-800 text-white'
 };
 
@@ -316,7 +316,7 @@ export default function InfluencerPage() {
               // 추세 아이콘 결정 함수
               const getTrendIcon = (signalTypes: Map<string, number>) => {
                 const buy = (signalTypes.get('매수') || 0) + (signalTypes.get('긍정') || 0);
-                const sell = (signalTypes.get('매도') || 0) + (signalTypes.get('경계') || 0);
+                const sell = (signalTypes.get('매도') || 0) + (signalTypes.get('부정') || 0);
                 const neutral = signalTypes.get('중립') || 0;
                 if (buy > sell && buy > neutral) return '🟢';
                 if (sell > buy && sell > neutral) return '🟠';

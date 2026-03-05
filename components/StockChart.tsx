@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useMemo } from 'react';
 import stockPricesData from '@/data/stockPrices.json';
@@ -111,7 +111,7 @@ export default function StockChart({ stockCode, stockName, signals }: StockChart
       case 'POSITIVE': return -15;
       case '중립':
       case 'NEUTRAL': return 0;
-      case '경계':
+      case '부정':
       case 'CONCERN': return 15;
       case '매도':
       case 'SELL': return 25;
@@ -128,7 +128,7 @@ export default function StockChart({ stockCode, stockName, signals }: StockChart
       case 'POSITIVE': return '#10B981';
       case '중립':
       case 'NEUTRAL': return '#F59E0B';
-      case '경계':
+      case '부정':
       case 'CONCERN': return '#F97316';
       case '매도':
       case 'SELL': return '#EF4444';
@@ -145,8 +145,8 @@ export default function StockChart({ stockCode, stockName, signals }: StockChart
       case 'POSITIVE': return '긍정';
       case '중립':
       case 'NEUTRAL': return '중립';
-      case '경계':
-      case 'CONCERN': return '경계';
+      case '부정':
+      case 'CONCERN': return '부정';
       case '매도':
       case 'SELL': return '매도';
       default: return signalType;
@@ -257,7 +257,7 @@ export default function StockChart({ stockCode, stockName, signals }: StockChart
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
-              <span>경계 ({chartData.signalPoints.filter(p => ['경계', 'CONCERN'].includes(p.signal)).length})</span>
+              <span>부정 ({chartData.signalPoints.filter(p => ['부정', 'CONCERN'].includes(p.signal)).length})</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 bg-red-500 rounded-full"></span>

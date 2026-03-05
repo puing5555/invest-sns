@@ -1,10 +1,10 @@
-'use client';
+﻿'use client';
 
 const V9_SIGNAL_COLORS: Record<string, string> = {
   '매수': 'bg-green-600 text-white',
   '긍정': 'bg-blue-600 text-white',
   '중립': 'bg-gray-500 text-white',
-  '경계': 'bg-yellow-600 text-white',
+  '부정': 'bg-yellow-600 text-white',
   '매도': 'bg-red-800 text-white',
 };
 

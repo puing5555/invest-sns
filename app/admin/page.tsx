@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState } from 'react';
 import { getSignalReports, updateReportStatus, getAdminStats, supabase } from '@/lib/supabase';
@@ -223,7 +223,7 @@ ${aiReview}
 {
   "stock": "종목명",
   "ticker": "티커 또는 null",
-  "signal": "매수|긍정|중립|경계|매도",
+  "signal": "매수|긍정|중립|부정|매도",
   "key_quote": "원본 자막에서 추출한 실제 발언 (15자 이상, 반드시 자막 원문 그대로)",
   "timestamp": "MM:SS (자막에서 해당 발언이 시작되는 시점)",
   "reasoning": "자막 내용 기반 구체적 분석근거 (20자 이상, 왜 이 시그널인지 설명)"
@@ -351,7 +351,7 @@ ${aiReview}
       case '매수': return 'bg-green-100 text-green-800';
       case '긍정': return 'bg-blue-100 text-blue-800';
       case '중립': return 'bg-yellow-100 text-yellow-800';
-      case '경계': return 'bg-orange-100 text-orange-800';
+      case '부정': return 'bg-orange-100 text-orange-800';
       case '매도': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -856,13 +856,13 @@ ${issueDescription}
 1. 분석근거 부족: 자막을 바탕으로 최소 20자 이상의 구체적인 분석근거 작성
 2. 인용문 부족: 자막에서 정확한 핵심 발언을 15자 이상 인용
 3. 신뢰도 누락: 1-100 점수로 신뢰도 평가
-4. 시그널 타입은 반드시 한글 5단계만 사용: 매수/긍정/중립/경계/매도
+4. 시그널 타입은 반드시 한글 5단계만 사용: 매수/긍정/중립/부정/매도
 
 **개선안을 다음 JSON 형식으로 제공해 주세요:**
 {
   "stock": "종목명",
   "ticker": "티커 또는 null",
-  "signal": "매수|긍정|중립|경계|매도",
+  "signal": "매수|긍정|중립|부정|매도",
   "key_quote": "원본 자막에서 추출한 실제 발언 (15자 이상, 반드시 자막 원문 그대로)",
   "timestamp": "MM:SS (자막에서 해당 발언이 시작되는 시점)",
   "reasoning": "자막 내용 기반 구체적 분석근거 (20자 이상)",

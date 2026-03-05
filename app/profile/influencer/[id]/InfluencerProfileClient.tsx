@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -222,7 +222,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       case '매수': return '🟢';
                       case '긍정': return '🔵';
                       case '중립': return '🟡';
-                      case '경계': return '🟠';
+                      case '부정': return '🟠';
                       case '매도': return '🔴';
                       default: return '⚪';
                     }

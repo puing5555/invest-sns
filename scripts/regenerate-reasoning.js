@@ -1,4 +1,4 @@
-const { createClient } = require('@supabase/supabase-js');
+﻿const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config({ path: '.env.local' });
 
 // Supabase 클라이언트 설정
@@ -46,7 +46,7 @@ async function callAnthropicAPI(prompt) {
 async function generateReasoning(stock, signal, keyQuote, subtitleText) {
   const subtitle = subtitleText ? subtitleText.substring(0, 2000) : '';
   
-  const prompt = `다음 투자 시그널의 분석 근거(reasoning)를 작성하라. 80~150자. 왜 이 시그널 타입(매수/긍정/중립/경계/매도)으로 분류했는지, 발언자의 핵심 논거를 구체적으로. 종목: ${stock}, 시그널: ${signal}, 핵심발언: ${keyQuote}${subtitle ? `, 자막(앞 2000자): ${subtitle}` : ''}`;
+  const prompt = `다음 투자 시그널의 분석 근거(reasoning)를 작성하라. 80~150자. 왜 이 시그널 타입(매수/긍정/중립/부정/매도)으로 분류했는지, 발언자의 핵심 논거를 구체적으로. 종목: ${stock}, 시그널: ${signal}, 핵심발언: ${keyQuote}${subtitle ? `, 자막(앞 2000자): ${subtitle}` : ''}`;
 
   return await callAnthropicAPI(prompt);
 }

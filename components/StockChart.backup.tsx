@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useRef } from 'react';
 
@@ -27,7 +27,7 @@ const SIGNAL_COLORS = {
   '매수': '#dc2626',     // 빨강
   '긍정': '#16a34a',     // 초록
   '중립': '#6b7280',     // 회색
-  '경계': '#ca8a04',     // 노랑
+  '부정': '#ca8a04',     // 노랑
   '매도': '#991b1b'      // 진한 빨강
 };
 
