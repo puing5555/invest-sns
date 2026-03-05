@@ -33,6 +33,18 @@ const stockPrices = stockPricesData as Record<string, { currentPrice: number }>;
 
 const allReports: Report[] = Object.values(data).flat();
 
+// 종목별 성과 데이터 타입
+interface StockPerformance {
+  ticker: string;
+  stockName: string;
+  reports: Report[];
+  totalReports: number;
+  achievementRate: number;
+  avgReturn: number;
+  validReports: number;
+  latestReport: Report;
+}
+
 // 애널리스트 분석 데이터 타입
 interface AnalystStats {
   analyst: string;
@@ -43,6 +55,7 @@ interface AnalystStats {
   achievementRate: number;
   avgReturn: number;
   validReports: number; // 목표가가 있는 리포트 수
+  stockPerformances: StockPerformance[]; // 종목별 성과
 }
 
 // 애널리스트별 성과 계산 함수
@@ -97,6 +110,64 @@ function calculateAnalystStats(reports: Report[]): AnalystStats[] {
       
       avgReturn = returns.reduce((sum, ret) => sum + ret, 0) / returns.length;
     }
+
+    // 종목별 성과 계산
+    const stockPerformances: StockPerformance[] = [];
+    const stockMap = new Map<string, Report[]>();
+    
+    // 종목별로 리포트 그룹화
+    analystReports.forEach(report => {
+      if (!stockMap.has(report.ticker)) {
+        stockMap.set(report.ticker, []);
+      }
+      stockMap.get(report.ticker)!.push(report);
+    });
+    
+    stockMap.forEach((stockReports, ticker) => {
+      const stockName = TICKER_NAMES[ticker] || ticker;
+      const validStockReports = stockReports.filter(r => 
+        r.target_price && r.target_price > 0 && stockPrices[r.ticker]
+      );
+      
+      let stockAchievementRate = 0;
+      let stockAvgReturn = 0;
+      
+      if (validStockReports.length > 0) {
+        const achievedStockCount = validStockReports.filter(r => {
+          const currentPrice = stockPrices[r.ticker]?.currentPrice;
+          return currentPrice && currentPrice >= (r.target_price || 0);
+        }).length;
+        
+        stockAchievementRate = (achievedStockCount / validStockReports.length) * 100;
+        
+        const stockReturns = validStockReports.map(r => {
+          const currentPrice = stockPrices[r.ticker]?.currentPrice;
+          const targetPrice = r.target_price;
+          if (currentPrice && targetPrice) {
+            return ((currentPrice - targetPrice) / targetPrice) * 100;
+          }
+          return 0;
+        });
+        
+        stockAvgReturn = stockReturns.reduce((sum, ret) => sum + ret, 0) / stockReturns.length;
+      }
+      
+      const latestReport = [...stockReports].sort((a, b) => b.published_at.localeCompare(a.published_at))[0];
+      
+      stockPerformances.push({
+        ticker,
+        stockName,
+        reports: stockReports,
+        totalReports: stockReports.length,
+        achievementRate: Math.round(stockAchievementRate * 10) / 10,
+        avgReturn: Math.round(stockAvgReturn * 10) / 10,
+        validReports: validStockReports.length,
+        latestReport
+      });
+    });
+    
+    // 종목별 성과를 적중률 순으로 정렬
+    stockPerformances.sort((a, b) => b.achievementRate - a.achievementRate);
     
     analystStats.push({
       analyst,
@@ -106,7 +177,8 @@ function calculateAnalystStats(reports: Report[]): AnalystStats[] {
       stockCount,
       achievementRate: Math.round(achievementRate * 10) / 10,
       avgReturn: Math.round(avgReturn * 10) / 10,
-      validReports: validReports.length
+      validReports: validReports.length,
+      stockPerformances
     });
   });
   
@@ -223,7 +295,7 @@ export default function AnalystPage() {
   const [search, setSearch] = useState('');
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [analystSort, setAnalystSort] = useState<'achievement' | 'reports' | 'return'>('achievement');
+  const [analystSort, setAnalystSort] = useState<'achievement' | 'reports' | 'return'>('reports');
   const [expandedAnalyst, setExpandedAnalyst] = useState<string | null>(null);
   const q = search.toLowerCase();
 
@@ -266,17 +338,32 @@ export default function AnalystPage() {
       .sort((a, b) => b.reports.length - a.reports.length);
   }, [q]);
 
-  // 종목별 그룹
+  // 종목별 그룹 (최근 2주 리포트 수 많은 순 정렬)
   const tickerGroups = useMemo(() => {
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+    
     return Object.entries(data)
       .map(([ticker, reports]) => {
         const name = TICKER_NAMES[ticker] || ticker;
         const sorted = [...reports].sort((a, b) => b.published_at.localeCompare(a.published_at));
         const firms = [...new Set(reports.map(r => r.firm))];
-        return { ticker, name, reports: sorted, firms, latest: sorted[0] };
+        
+        // 최근 2주 내 리포트 수 계산
+        const recentReports = reports.filter(r => new Date(r.published_at) >= twoWeeksAgo);
+        const recentReportCount = recentReports.length;
+        
+        return { 
+          ticker, 
+          name, 
+          reports: sorted, 
+          firms, 
+          latest: sorted[0],
+          recentReportCount 
+        };
       })
       .filter(g => !q || g.name.toLowerCase().includes(q) || g.firms.some(f => f.toLowerCase().includes(q)))
-      .sort((a, b) => b.reports.length - a.reports.length);
+      .sort((a, b) => b.recentReportCount - a.recentReportCount || b.reports.length - a.reports.length);
   }, [q]);
 
   // 애널리스트별 통계
@@ -300,9 +387,8 @@ export default function AnalystPage() {
 
   const tabs = [
     { id: 'latest', label: '🔥 최신 리포트' },
-    { id: 'analyst', label: '👤 애널리스트별' },
     { id: 'stock', label: '📈 종목별' },
-    { id: 'firm', label: '🏢 증권사별' },
+    { id: 'analyst', label: '👤 애널리스트별' },
   ];
 
   const [expandedFirm, setExpandedFirm] = useState<string | null>(null);

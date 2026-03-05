@@ -300,6 +300,7 @@ function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) 
 
 export default function StockAnalystTab({ code }: StockAnalystTabProps) {
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   const data = reportsData as Record<string, Report[]>;
   const reports = data[code] || [];
@@ -316,62 +317,253 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
     [reports]
   );
 
+  // 컨센서스 계산
+  const consensus = useMemo(() => {
+    if (reports.length === 0) return null;
+    
+    const opinions = reports.reduce((acc, report) => {
+      acc[report.opinion] = (acc[report.opinion] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    const total = reports.length;
+    const buyCount = opinions.BUY || 0;
+    const holdCount = opinions.HOLD || 0;
+    const sellCount = opinions.SELL || 0;
+
+    let dominantOpinion = 'HOLD';
+    if (buyCount > holdCount && buyCount > sellCount) dominantOpinion = 'BUY';
+    else if (sellCount > buyCount && sellCount > holdCount) dominantOpinion = 'SELL';
+
+    return {
+      opinion: dominantOpinion,
+      buyCount,
+      holdCount,
+      sellCount,
+      total,
+      text: `${total}명 중 ${buyCount}명 매수`
+    };
+  }, [reports]);
+
+  // 평균 목표가 및 업사이드 계산
+  const targetPriceStats = useMemo(() => {
+    const validReports = reports.filter(r => r.target_price && r.target_price > 0);
+    if (validReports.length === 0 || currentPrice === 0) return null;
+
+    const targetPrices = validReports.map(r => r.target_price!);
+    const avgTarget = targetPrices.reduce((sum, price) => sum + price, 0) / targetPrices.length;
+    const minTarget = Math.min(...targetPrices);
+    const maxTarget = Math.max(...targetPrices);
+    
+    const upside = ((avgTarget - currentPrice) / currentPrice) * 100;
+    
+    return {
+      avgTarget,
+      minTarget,
+      maxTarget,
+      upside,
+      upsideColor: upside >= 20 ? 'text-green-600 bg-green-50' : 
+                   upside <= -10 ? 'text-red-600 bg-red-50' : 
+                   'text-gray-600 bg-gray-50'
+    };
+  }, [reports, currentPrice]);
+
+  // 최근 변화 (30일 내 목표가 변화)
+  const recentChanges = useMemo(() => {
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    // 간단화: 최근 30일 내 리포트 중 BUY와 SELL 개수로 상향/하향 판단
+    const recentReports = reports.filter(r => new Date(r.published_at) >= thirtyDaysAgo);
+    const upgrades = recentReports.filter(r => r.opinion === 'BUY').length;
+    const downgrades = recentReports.filter(r => r.opinion === 'SELL').length;
+    
+    return { upgrades, downgrades };
+  }, [reports]);
+
+  if (reports.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] p-12 text-center">
+          <div className="text-4xl mb-4">📊</div>
+          <h3 className="text-lg font-bold text-[#191f28] mb-2">리포트 없음</h3>
+          <p className="text-[#8b95a1]">이 종목에 대한 애널리스트 리포트가 없습니다</p>
+        </div>
+      </div>
+    );
+  }
+
+  const latestReport = sortedReports[0];
+
   return (
     <div className="space-y-6">
-      <StockAnalystChart
-        code={code}
-        signals={reports.map(r => ({
-          date: r.published_at,
-          signal: r.opinion,
-          target_price: r.target_price,
-          firm: r.firm,
-          analyst: r.analyst,
-          title: r.title,
-        }))}
-        currentPrice={currentPrice}
-      />
-
-      <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] overflow-hidden">
-        <div className="p-6 border-b border-[#e8e8e8]">
-          <h4 className="font-bold text-[#191f28]">애널리스트 리포트</h4>
+      {/* 컨센서스 요약 카드 */}
+      <div className="bg-white rounded-2xl shadow-sm border border-[#e8e8e8] p-6">
+        <div className="flex items-start justify-between mb-6">
+          <div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">애널리스트 컨센서스</h3>
+            <p className="text-sm text-[#8b95a1]">전문가들은 이 종목을 어떻게 보고 있을까요?</p>
+          </div>
         </div>
 
-        {sortedReports.length === 0 ? (
-          <div className="p-12 text-center">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">리포트 없음</h3>
-            <p className="text-[#8b95a1]">이 종목에 대한 애널리스트 리포트가 없습니다</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* 컨센서스 뱃지 */}
+          <div className="space-y-4">
+            {consensus && (
+              <div className="flex items-center gap-4">
+                <div className={`px-6 py-3 rounded-2xl font-bold text-lg ${
+                  consensus.opinion === 'BUY' ? 'bg-green-100 text-green-700' :
+                  consensus.opinion === 'SELL' ? 'bg-red-100 text-red-700' :
+                  'bg-yellow-100 text-yellow-700'
+                }`}>
+                  {consensus.opinion}
+                </div>
+                <div className="text-[#191f28] font-medium">
+                  {consensus.text}
+                </div>
+              </div>
+            )}
+
+            {/* 업사이드/다운사이드 */}
+            {targetPriceStats && (
+              <div className="flex items-center gap-3">
+                <div className={`px-4 py-2 rounded-xl font-bold text-xl ${targetPriceStats.upsideColor}`}>
+                  {targetPriceStats.upside >= 0 ? '+' : ''}{targetPriceStats.upside.toFixed(1)}%
+                </div>
+                <div className="text-sm text-[#8b95a1]">
+                  평균 목표가 vs 현재가
+                </div>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-[#f8f9fa]">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">리포트</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#f0f0f0]">
-                {sortedReports.map((report, index) => (
-                  <tr key={index} className="hover:bg-[#f8f9fa] transition-colors cursor-pointer" onClick={() => setSelectedReport(report)}>
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{formatDate(report.published_at)}</td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
-                      <div>{report.analyst || '-'}</div>
-                      <div className="text-xs text-[#8b95a1]">{report.firm}</div>
-                    </td>
-                    <td className="px-4 py-4"><OpinionBadge opinion={report.opinion} /></td>
-                    <td className="px-4 py-4 text-sm max-w-md">
-                      <div className="text-[#191f28] font-medium truncate hover:text-[#3182f6] transition-colors">{report.title}</div>
-                      {report.summary && <div className="text-xs text-[#8b95a1] mt-0.5 truncate">{report.summary}</div>}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-[#191f28] font-medium whitespace-nowrap">{formatTargetPrice(report.target_price, code)}</td>
+
+          {/* 최신 리포트 */}
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="text-sm font-medium text-[#8b95a1] mb-2">최신 리포트</h4>
+            <div 
+              className="cursor-pointer"
+              onClick={() => setSelectedReport(latestReport)}
+            >
+              <p className="text-sm font-medium text-[#191f28] hover:text-blue-600 transition-colors mb-1">
+                {latestReport.title}
+              </p>
+              <div className="flex items-center gap-2 text-xs text-[#8b95a1]">
+                <span>{latestReport.analyst || '-'}</span>
+                <span>·</span>
+                <span>{latestReport.firm}</span>
+                <span>·</span>
+                <span>{formatDate(latestReport.published_at)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 목표가 범위 */}
+        {targetPriceStats && (
+          <div className="mt-6 p-4 bg-gray-50 rounded-xl">
+            <h4 className="text-sm font-medium text-[#8b95a1] mb-3">목표가 범위</h4>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-[#8b95a1]">최저</span>
+                <span className="font-medium text-[#191f28]">{formatTargetPrice(targetPriceStats.minTarget, code)}</span>
+              </div>
+              <div className="relative h-2 bg-gray-200 rounded-full">
+                {/* 현재가 위치 표시 */}
+                <div 
+                  className="absolute top-0 w-1 h-2 bg-blue-600 rounded-full"
+                  style={{
+                    left: `${Math.min(100, Math.max(0, 
+                      ((currentPrice - targetPriceStats.minTarget) / 
+                       (targetPriceStats.maxTarget - targetPriceStats.minTarget)) * 100
+                    ))}%`
+                  }}
+                />
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-full opacity-60" />
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-[#8b95a1]">최고</span>
+                <span className="font-medium text-[#191f28]">{formatTargetPrice(targetPriceStats.maxTarget, code)}</span>
+              </div>
+              <div className="text-center text-xs text-[#8b95a1] mt-2">
+                <span className="inline-flex items-center gap-1">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full" />
+                  현재가 {formatTargetPrice(currentPrice, code)}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 최근 변화 */}
+        <div className="mt-4 flex items-center gap-4">
+          <h4 className="text-sm font-medium text-[#8b95a1]">최근 30일 변화:</h4>
+          <div className="flex items-center gap-3">
+            {recentChanges.upgrades > 0 && (
+              <div className="flex items-center gap-1 text-green-600">
+                <span>↑</span>
+                <span className="text-sm font-medium">{recentChanges.upgrades}건 상향</span>
+              </div>
+            )}
+            {recentChanges.downgrades > 0 && (
+              <div className="flex items-center gap-1 text-red-600">
+                <span>↓</span>
+                <span className="text-sm font-medium">{recentChanges.downgrades}건 하향</span>
+              </div>
+            )}
+            {recentChanges.upgrades === 0 && recentChanges.downgrades === 0 && (
+              <span className="text-sm text-[#8b95a1]">변화 없음</span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* 증권사 상세 (아코디언) */}
+      <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8]">
+        <button
+          onClick={() => setShowDetails(!showDetails)}
+          className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+        >
+          <div>
+            <h4 className="font-bold text-[#191f28]">증권사별 상세 ({reports.length}건)</h4>
+            <p className="text-sm text-[#8b95a1] mt-1">애널리스트 리포트 전체 목록</p>
+          </div>
+          <span className={`text-[#8b95a1] transition-transform ${showDetails ? 'rotate-180' : ''}`}>
+            ▼
+          </span>
+        </button>
+        
+        {showDetails && (
+          <div className="border-t border-[#e8e8e8]">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-[#f8f9fa]">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-[#f0f0f0]">
+                  {sortedReports.map((report, index) => (
+                    <tr 
+                      key={index} 
+                      className="hover:bg-[#f8f9fa] transition-colors cursor-pointer" 
+                      onClick={() => setSelectedReport(report)}
+                    >
+                      <td className="px-4 py-4 text-sm text-[#191f28] font-medium">{report.firm}</td>
+                      <td className="px-4 py-4 text-sm text-[#191f28]">{report.analyst || '-'}</td>
+                      <td className="px-4 py-4 text-sm text-[#191f28] font-medium">
+                        {formatTargetPrice(report.target_price, code)}
+                      </td>
+                      <td className="px-4 py-4"><OpinionBadge opinion={report.opinion} /></td>
+                      <td className="px-4 py-4 text-sm text-[#8b95a1]">{formatDate(report.published_at)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
