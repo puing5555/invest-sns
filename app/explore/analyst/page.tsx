@@ -287,9 +287,6 @@ function getSectionIcon(title: string) {
   return iconMap[title] || '📄';
 }
 
-// 리포트 상세 모달 컴포넌트
-// ReportModal removed - now using ReportDetailModal component
-
 export default function AnalystPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [search, setSearch] = useState('');
@@ -297,6 +294,7 @@ export default function AnalystPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [analystSort, setAnalystSort] = useState<'achievement' | 'reports' | 'return'>('reports');
   const [expandedAnalyst, setExpandedAnalyst] = useState<string | null>(null);
+  const [expandedTicker, setExpandedTicker] = useState<string | null>(null);
   const q = search.toLowerCase();
 
   const openReportModal = (report: Report) => {
@@ -321,8 +319,6 @@ export default function AnalystPage() {
       !q || r.firm.toLowerCase().includes(q) || (TICKER_NAMES[r.ticker] || '').toLowerCase().includes(q) || r.title.toLowerCase().includes(q)
     ), [sortedReports, q]
   );
-
-  // 증권사별 그룹 (제거됨)
 
   // 종목별 그룹 (최근 2주 리포트 수 많은 순 정렬)
   const tickerGroups = useMemo(() => {
@@ -376,8 +372,6 @@ export default function AnalystPage() {
     { id: 'stock', label: '📈 종목별' },
     { id: 'analyst', label: '👤 애널리스트별' },
   ];
-
-  const [expandedTicker, setExpandedTicker] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
@@ -447,6 +441,58 @@ export default function AnalystPage() {
           </div>
         )}
 
+        {/* 📈 종목별 */}
+        {activeTab === 'stock' && (
+          <div className="space-y-2">
+            {tickerGroups.map(g => (
+              <div key={g.ticker} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <button
+                  onClick={() => setExpandedTicker(expandedTicker === g.ticker ? null : g.ticker)}
+                  className="w-full px-4 py-3 flex items-center justify-between"
+                >
+                  <div>
+                    <p className="font-medium text-gray-900 text-sm">{g.name}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      {g.reports.length}개 리포트 · {g.firms.join(', ')}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <OpinionBadge opinion={g.latest.opinion} />
+                    <span className="text-gray-400 text-sm">{expandedTicker === g.ticker ? '▲' : '▼'}</span>
+                  </div>
+                </button>
+                {expandedTicker === g.ticker && (
+                  <div className="border-t border-gray-100">
+                    {/* 목표가 차트 */}
+                    <div className="p-4">
+                      <TargetPriceChart reports={g.reports} stockName={g.name} />
+                    </div>
+                    
+                    {/* 리포트 목록 */}
+                    <div className="px-4 pb-3">
+                      <h4 className="font-medium text-gray-900 mb-3 text-sm">📄 리포트 목록</h4>
+                      {g.reports.slice(0, 20).map((r, i) => (
+                        <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-gray-800 truncate">{r.title}</p>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <span className="text-xs text-gray-500">{r.firm}</span>
+                              <span className="text-xs text-gray-400">{formatDate(r.published_at)}</span>
+                              <OpinionBadge opinion={r.opinion} />
+                              <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price, r.ticker)}</span>
+                            </div>
+                          </div>
+                          <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* 👤 애널리스트별 */}
         {activeTab === 'analyst' && (
           <div className="space-y-4">
@@ -454,16 +500,6 @@ export default function AnalystPage() {
             <div className="bg-white rounded-xl p-4 shadow-sm">
               <div className="flex gap-2 mb-3">
                 <span className="text-sm font-medium text-gray-700">정렬:</span>
-                <button
-                  onClick={() => setAnalystSort('reports')}
-                  className={`text-xs px-2 py-1 rounded-full ${
-                    analystSort === 'reports' 
-                      ? 'bg-blue-100 text-blue-700 font-medium' 
-                      : 'text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  리포트수순
-                </button>
                 <button
                   onClick={() => setAnalystSort('achievement')}
                   className={`text-xs px-2 py-1 rounded-full ${
@@ -473,6 +509,16 @@ export default function AnalystPage() {
                   }`}
                 >
                   적중률순
+                </button>
+                <button
+                  onClick={() => setAnalystSort('reports')}
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    analystSort === 'reports' 
+                      ? 'bg-blue-100 text-blue-700 font-medium' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  리포트수순
                 </button>
                 <button
                   onClick={() => setAnalystSort('return')}
@@ -485,13 +531,9 @@ export default function AnalystPage() {
                   수익률순
                 </button>
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-500">
-                <span className="font-medium">🤔 "이 애널리스트 말 믿어도 되나?"</span>
-                <span>•</span>
-                <span>적중률: 목표가 달성 비율</span>
-                <span>•</span>
-                <span>TipRanks 스타일 랭킹</span>
-              </div>
+              <p className="text-xs text-gray-500">
+                💡 적중률: 목표가 달성 비율 | 수익률: 목표가 대비 현재가 상승률 평균
+              </p>
             </div>
 
             {/* 애널리스트 카드 리스트 */}
@@ -508,42 +550,21 @@ export default function AnalystPage() {
                   >
                     <div className="flex items-center gap-3">
                       {/* 프로필 아이콘 */}
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center relative">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
                         <span className="text-lg font-bold text-blue-600">
                           {analyst.analyst.charAt(0)}
                         </span>
-                        {/* 랭킹 뱃지 */}
-                        {index < 3 && (
-                          <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center">
-                            <span className="text-xs font-bold text-white">
-                              {index + 1}
-                            </span>
-                          </div>
-                        )}
                       </div>
                       
                       <div className="text-left">
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-bold text-gray-900 text-sm">{analyst.analyst}</h3>
                           <span className="text-xs text-gray-500">#{index + 1}</span>
-                          {/* 톱 랭커 표시 */}
-                          {index === 0 && (
-                            <span className="text-xs bg-yellow-100 text-yellow-700 px-1.5 py-0.5 rounded-full font-medium">
-                              👑 TOP
-                            </span>
-                          )}
                         </div>
                         <p className="text-xs text-gray-600 mb-2">{analyst.firm}</p>
                         
                         {/* 성과 배지 */}
                         <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1 bg-red-50 px-2 py-1 rounded-full border border-red-200">
-                            <span className="text-xs text-red-700">📄</span>
-                            <span className="text-xs font-bold text-red-700">
-                              {analyst.reportCount}건
-                            </span>
-                          </div>
-
                           <div className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-full border border-green-200">
                             <span className="text-xs text-green-700">🎯</span>
                             <span className="text-xs font-bold text-green-700">
@@ -555,6 +576,13 @@ export default function AnalystPage() {
                             <span className="text-xs text-blue-700">📈</span>
                             <span className="text-xs font-bold text-blue-700">
                               {analyst.avgReturn >= 0 ? '+' : ''}{analyst.avgReturn}%
+                            </span>
+                          </div>
+                          
+                          <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-full border border-gray-200">
+                            <span className="text-xs text-gray-700">📄</span>
+                            <span className="text-xs font-bold text-gray-700">
+                              {analyst.reportCount}건
                             </span>
                           </div>
                         </div>
@@ -572,65 +600,20 @@ export default function AnalystPage() {
                     </div>
                   </button>
                   
-                  {/* 확장된 커버 종목 리스트 */}
+                  {/* 확장된 리포트 목록 */}
                   {expandedAnalyst === `${analyst.analyst}_${analyst.firm}` && (
                     <div className="border-t border-gray-100 px-4 pb-3">
                       <div className="py-3">
                         <h4 className="font-medium text-gray-900 mb-3 text-sm flex items-center gap-2">
-                          📈 커버 종목별 적중률 
+                          📊 최근 리포트 
                           <span className="text-xs text-gray-500">
-                            ({analyst.stockCount}개 종목)
-                          </span>
-                        </h4>
-                        
-                        {/* 종목별 성과 표시 */}
-                        <div className="space-y-2 mb-4">
-                          {analyst.stockPerformances.slice(0, 8).map((stock, i) => (
-                            <div key={stock.ticker} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                              <div className="flex items-center gap-3">
-                                <div className="text-sm font-medium text-gray-900">
-                                  {stock.stockName}
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <div className={`text-xs px-2 py-1 rounded-full font-medium ${
-                                    stock.achievementRate >= 70 ? 'bg-green-100 text-green-700' :
-                                    stock.achievementRate >= 50 ? 'bg-yellow-100 text-yellow-700' :
-                                    'bg-red-100 text-red-700'
-                                  }`}>
-                                    🎯 {stock.achievementRate}%
-                                  </div>
-                                  <div className={`text-xs px-2 py-1 rounded-full font-medium ${
-                                    stock.avgReturn >= 0 ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700'
-                                  }`}>
-                                    📊 {stock.avgReturn >= 0 ? '+' : ''}{stock.avgReturn}%
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="text-xs text-gray-500">
-                                {stock.totalReports}건 분석
-                              </div>
-                            </div>
-                          ))}
-                          {analyst.stockCount > 8 && (
-                            <div className="text-center py-2">
-                              <span className="text-xs text-gray-400">
-                                +{analyst.stockCount - 8}개 종목 더...
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* 최근 리포트 섹션 */}
-                        <h4 className="font-medium text-gray-900 mb-3 text-sm flex items-center gap-2">
-                          📄 최근 리포트 
-                          <span className="text-xs text-gray-500">
-                            (최신 5건)
+                            (총 {analyst.reportCount}건 중 최신 10건)
                           </span>
                         </h4>
                         
                         {[...analyst.reports]
                           .sort((a, b) => b.published_at.localeCompare(a.published_at))
-                          .slice(0, 5)
+                          .slice(0, 10)
                           .map((report, i) => (
                             <div 
                               key={i} 
@@ -683,60 +666,6 @@ export default function AnalystPage() {
                 </div>
               )}
             </div>
-          </div>
-        )}
-
-        {/* 증권사별 탭 제거됨 */}
-
-        {/* 📈 종목별 */}
-        {activeTab === 'stock' && (
-          <div className="space-y-2">
-            {tickerGroups.map(g => (
-              <div key={g.ticker} className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <button
-                  onClick={() => setExpandedTicker(expandedTicker === g.ticker ? null : g.ticker)}
-                  className="w-full px-4 py-3 flex items-center justify-between"
-                >
-                  <div>
-                    <p className="font-medium text-gray-900 text-sm">{g.name}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      {g.reports.length}개 리포트 · {g.firms.join(', ')}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <OpinionBadge opinion={g.latest.opinion} />
-                    <span className="text-gray-400 text-sm">{expandedTicker === g.ticker ? '▲' : '▼'}</span>
-                  </div>
-                </button>
-                {expandedTicker === g.ticker && (
-                  <div className="border-t border-gray-100">
-                    {/* 목표가 차트 */}
-                    <div className="p-4">
-                      <TargetPriceChart reports={g.reports} stockName={g.name} />
-                    </div>
-                    
-                    {/* 리포트 목록 */}
-                    <div className="px-4 pb-3">
-                      <h4 className="font-medium text-gray-900 mb-3 text-sm">📄 리포트 목록</h4>
-                      {g.reports.slice(0, 20).map((r, i) => (
-                        <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm text-gray-800 truncate">{r.title}</p>
-                            <div className="flex items-center gap-2 mt-0.5">
-                              <span className="text-xs text-gray-500">{r.firm}</span>
-                              <span className="text-xs text-gray-400">{formatDate(r.published_at)}</span>
-                              <OpinionBadge opinion={r.opinion} />
-                              <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price, r.ticker)}</span>
-                            </div>
-                          </div>
-                          <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
           </div>
         )}
       </div>
