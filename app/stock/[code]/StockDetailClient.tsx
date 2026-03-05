@@ -10,7 +10,7 @@ import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
 import { formatStockPrice, isKoreanStock } from '@/lib/currency';
-import SignalDetailModal from '@/components/SignalDetailModal';
+import ReportDetailModal from '@/components/ReportDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -962,9 +962,11 @@ function InfluencerTab({ code }: { code: string }) {
       </div>
 
       {/* 시그널 상세 모달 */}
-      <SignalDetailModal
-        signal={selectedSignal}
+      <ReportDetailModal
+        report={selectedSignal}
+        isOpen={!!selectedSignal}
         onClose={() => setSelectedSignal(null)}
+        type="signal"
       />
     </div>
   );
