@@ -4,7 +4,7 @@ import VotePoll from './VotePoll';
 
 interface DisclosureData {
   id: string;
-  grade: 'A등급' | 'B등급' | 'C등급';
+  grade: 'A등급' | 'B등급' | 'C등급' | 'D등급';
   companyName: string;
   marketCap: string;
   time: string;
@@ -38,9 +38,10 @@ interface DisclosureDetailCardProps {
 export default function DisclosureDetailCard({ data, onAnalysisClick }: DisclosureDetailCardProps) {
   const getGradeBadgeColor = (grade: string) => {
     switch (grade) {
-      case 'A등급': return '#ff4444';
-      case 'B등급': return '#ffaa00';
-      case 'C등급': return '#888';
+      case 'A등급': return '#ff4444';  // 빨강 - 즉시 행동
+      case 'B등급': return '#ffaa00';  // 주황 - 24시간 내 판단  
+      case 'C등급': return '#888';     // 회색 - 참고
+      case 'D등급': return '#ddd';     // 연한 회색 - 무시
       default: return '#888';
     }
   };
