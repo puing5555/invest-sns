@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { insertSignalReport, insertSignalVote } from '@/lib/supabase';
@@ -72,7 +72,7 @@ function OpinionBadge({ opinion }: { opinion: string }) {
     '매수': 'text-green-600 bg-green-50',
     '긍정': 'text-blue-600 bg-blue-50',
     '중립': 'text-yellow-600 bg-yellow-50',
-    '경계': 'text-orange-600 bg-orange-50',
+    '부정': 'text-orange-600 bg-orange-50',
     '매도': 'text-red-600 bg-red-50'
   };
   
@@ -182,7 +182,7 @@ export default function ReportDetailModal({ report, isOpen, onClose, type = 'rep
       case '매수': return 'text-green-600 bg-green-50';
       case '긍정': return 'text-blue-600 bg-blue-50';
       case '중립': return 'text-yellow-600 bg-yellow-50';
-      case '경계': return 'text-orange-600 bg-orange-50';
+      case '부정': return 'text-orange-600 bg-orange-50';
       case '매도': return 'text-red-600 bg-red-50';
       default: return 'text-gray-600 bg-gray-50';
     }

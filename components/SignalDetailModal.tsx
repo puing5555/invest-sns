@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { insertSignalReport, insertSignalVote, insertSignalMemo } from '@/lib/supabase';
@@ -59,7 +59,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
       case '매수': return 'text-green-600 bg-green-50';
       case '긍정': return 'text-blue-600 bg-blue-50';
       case '중립': return 'text-yellow-600 bg-yellow-50';
-      case '경계': return 'text-orange-600 bg-orange-50';
+      case '부정': return 'text-orange-600 bg-orange-50';
       case '매도': return 'text-red-600 bg-red-50';
       default: return 'text-gray-600 bg-gray-50';
     }

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 interface FeedCardProps {
   icon: string;
@@ -28,7 +28,7 @@ export default function FeedCard({
       case '매수': case 'BUY': return 'text-green-600 bg-green-50';
       case '긍정': case 'POSITIVE': return 'text-blue-600 bg-blue-50';
       case '중립': case 'NEUTRAL': return 'text-yellow-600 bg-yellow-50';
-      case '경계': case 'CONCERN': return 'text-orange-600 bg-orange-50';
+      case '부정': case 'CONCERN': return 'text-orange-600 bg-orange-50';
       case '매도': case 'SELL': return 'text-red-600 bg-red-50';
       default: return 'text-gray-600 bg-gray-50';
     }

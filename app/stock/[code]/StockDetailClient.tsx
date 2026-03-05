@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -614,7 +614,7 @@ function InfluencerTab({ code }: { code: string }) {
   ]);
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
-  const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '경계', '매도']);
+  const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '부정', '매도']);
   const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
@@ -734,7 +734,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return 'text-blue-600 bg-blue-100';
       case '중립':
       case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
-      case '경계':
+      case '부정':
       case 'CONCERN': return 'text-orange-600 bg-orange-100';
       case '매도':
       case 'SELL': return 'text-red-600 bg-red-100';
@@ -750,7 +750,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return '🔵';
       case '중립':
       case 'NEUTRAL': return '🟡';
-      case '경계':
+      case '부정':
       case 'CONCERN': return '🟠';
       case '매도':
       case 'SELL': return '🔴';

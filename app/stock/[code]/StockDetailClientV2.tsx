@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -543,7 +543,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return 'text-green-600 bg-green-100';
       case '중립':
       case 'NEUTRAL': return 'text-yellow-600 bg-yellow-100';
-      case '경계':
+      case '부정':
       case 'CONCERN': return 'text-orange-600 bg-orange-100';
       case '매도':
       case 'SELL': return 'text-red-600 bg-red-100';
@@ -559,7 +559,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return '🟢';
       case '중립':
       case 'NEUTRAL': return '🟡';
-      case '경계':
+      case '부정':
       case 'CONCERN': return '🟠';
       case '매도':
       case 'SELL': return '🔴';
@@ -575,7 +575,7 @@ function InfluencerTab({ code }: { code: string }) {
       case 'POSITIVE': return '#10B981'; // green-500
       case '중립':
       case 'NEUTRAL': return '#F59E0B'; // yellow-500
-      case '경계':
+      case '부정':
       case 'CONCERN': return '#F97316'; // orange-500
       case '매도':
       case 'SELL': return '#EF4444'; // red-500
@@ -761,7 +761,7 @@ function InfluencerTab({ code }: { code: string }) {
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-blue-500 rounded-full"></span>매수</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-full"></span>긍정</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-yellow-500 rounded-full"></span>중립</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-orange-500 rounded-full"></span>경계</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 bg-orange-500 rounded-full"></span>부정</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 bg-red-500 rounded-full"></span>매도</span>
             </div>
             <div className="mt-2 text-gray-600">
@@ -916,7 +916,7 @@ function AnalystTab({ code }: { code: string }) {
       case '매수': return 'text-blue-600 bg-blue-100';
       case '긍정': return 'text-green-600 bg-green-100';
       case '중립': return 'text-yellow-600 bg-yellow-100';
-      case '경계': return 'text-orange-600 bg-orange-100';
+      case '부정': return 'text-orange-600 bg-orange-100';
       case '매도': return 'text-red-600 bg-red-100';
       default: return 'text-gray-600 bg-gray-100';
     }
@@ -927,7 +927,7 @@ function AnalystTab({ code }: { code: string }) {
       case '매수': return '🔵';
       case '긍정': return '🟢';
       case '중립': return '🟡';
-      case '경계': return '🟠';
+      case '부정': return '🟠';
       case '매도': return '🔴';
       default: return '⚪';
     }

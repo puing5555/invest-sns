@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+﻿import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -79,13 +79,13 @@ ${issueDescription}
 1. 분석근거 부족: 자막을 바탕으로 최소 20자 이상의 구체적인 분석근거 작성
 2. 인용문 부족: 자막에서 정확한 핵심 발언을 15자 이상 인용
 3. 신뢰도 누락: 1-100 점수로 신뢰도 평가
-4. 시그널 타입은 반드시 한글 5단계만 사용: 매수/긍정/중립/경계/매도
+4. 시그널 타입은 반드시 한글 5단계만 사용: 매수/긍정/중립/부정/매도
 
 **개선안을 다음 JSON 형식으로 제공해 주세요:**
 {
   "stock": "종목명",
   "ticker": "티커 또는 null",
-  "signal": "매수|긍정|중립|경계|매도",
+  "signal": "매수|긍정|중립|부정|매도",
   "quote": "정확한 인용문 (15자 이상)",
   "timestamp": "MM:SS",
   "analysis_reasoning": "구체적인 분석근거 (20자 이상)",

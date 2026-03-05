@@ -1,7 +1,7 @@
-export interface CallRecord {
+﻿export interface CallRecord {
   stock: string;
   date: string;
-  direction: string; // V9: 매수, 긍정, 중립, 경계, 매도
+  direction: string; // V9: 매수, 긍정, 중립, 부정, 매도
   callPrice: number;
   currentPrice: number;
   returnRate: number;
@@ -36,7 +36,7 @@ export const V9_SIGNAL_COLORS = {
   '매수': 'bg-red-600 text-white',
   '긍정': 'bg-green-600 text-white', 
   '중립': 'bg-gray-500 text-white',
-  '경계': 'bg-yellow-600 text-white',
+  '부정': 'bg-yellow-600 text-white',
   '매도': 'bg-red-800 text-white'
 };
 

@@ -1,4 +1,4 @@
-export interface FeedPost {
+﻿export interface FeedPost {
   id: string;
   type: 'signal' | 'news' | 'analysis';
   author: {
@@ -13,7 +13,7 @@ export interface FeedPost {
     text: string;
     signal?: {
       stock: string;
-      direction: string; // V9: 매수, 긍정, 중립, 경계, 매도
+      direction: string; // V9: 매수, 긍정, 중립, 부정, 매도
       confidence: 'high' | 'medium' | 'low';
       targetPrice?: number;
       currentPrice?: number;

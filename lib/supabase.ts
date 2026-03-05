@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+﻿import { createClient } from '@supabase/supabase-js'
 
 export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -10,7 +10,7 @@ export const signalMapping = {
   '매수': 'BUY',
   '긍정': 'POSITIVE',
   '중립': 'NEUTRAL',
-  '경계': 'CONCERN',
+  '부정': 'CONCERN',
   '매도': 'SELL'
 } as const;
 
@@ -18,7 +18,7 @@ export const reverseSignalMapping = {
   'BUY': '매수',
   'POSITIVE': '긍정',
   'NEUTRAL': '중립',
-  'CONCERN': '경계',
+  'CONCERN': '부정',
   'SELL': '매도'
 } as const;
 
@@ -34,7 +34,7 @@ export const getSignalColor = (signal: string) => {
     case '중립':
     case 'NEUTRAL': 
       return 'bg-yellow-100 text-[#eab308] border-yellow-200';
-    case '경계':
+    case '부정':
     case 'CONCERN': 
       return 'bg-orange-100 text-[#f97316] border-orange-200';
     case '매도':

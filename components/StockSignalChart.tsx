@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useMemo } from 'react';
 import stockPricesData from '@/data/stockPrices.json';
@@ -21,7 +21,7 @@ interface StockSignalChartProps {
   onSignalTypeToggle?: (type: string) => void;
 }
 
-const ALL_SIGNAL_TYPES = ['매수', '긍정', '중립', '경계', '매도'];
+const ALL_SIGNAL_TYPES = ['매수', '긍정', '중립', '부정', '매도'];
 
 export default function StockSignalChart({ code, signals, periodFilter, onSignalClick, activeSignalTypes, onSignalTypeToggle }: StockSignalChartProps) {
   const [hoveredSignal, setHoveredSignal] = useState<Signal | null>(null);
@@ -157,7 +157,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
       case '매수': return '#22c55e';
       case '긍정': return '#3182f6';
       case '중립': return '#eab308';
-      case '경계': return '#f97316';
+      case '부정': return '#f97316';
       case '매도': return '#ef4444';
       default: return '#8b95a1';
     }
@@ -168,7 +168,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
       case '매수': return '🟢';
       case '긍정': return '🔵';
       case '중립': return '🟡';
-      case '경계': return '🟠';
+      case '부정': return '🟠';
       case '매도': return '🔴';
       default: return '⚪';
     }

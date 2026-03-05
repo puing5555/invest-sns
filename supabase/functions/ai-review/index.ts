@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+﻿import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -116,7 +116,7 @@ ${aiReview}
 {
   "stock": "종목명",
   "ticker": "티커 또는 null",
-  "signal": "매수|긍정|중립|경계|매도",
+  "signal": "매수|긍정|중립|부정|매도",
   "quote": "정확한 인용문",
   "timestamp": "MM:SS",
   "analysis_reasoning": "수정된 분석근거"
