@@ -56,7 +56,7 @@ export default function RealTimeFeedTab() {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    fetch('/disclosure_seed.json')
+    fetch('/invest-sns/disclosure_seed.json')
       .then(r => r.json())
       .then(setData)
       .catch(() => {});
