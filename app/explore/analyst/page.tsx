@@ -2,8 +2,10 @@
 
 import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
+import stockPricesData from '@/data/stockPrices.json';
 import TargetPriceChart from '@/components/TargetPriceChart';
 import { isKoreanStock } from '@/lib/currency';
+import ReportDetailModal from '@/components/ReportDetailModal';
 
 const TICKER_NAMES: Record<string, string> = {
   '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
@@ -27,8 +29,89 @@ interface Report {
 }
 
 const data = reportsData as Record<string, Report[]>;
+const stockPrices = stockPricesData as Record<string, { currentPrice: number }>;
 
 const allReports: Report[] = Object.values(data).flat();
+
+// 애널리스트 분석 데이터 타입
+interface AnalystStats {
+  analyst: string;
+  firm: string;
+  reports: Report[];
+  reportCount: number;
+  stockCount: number;
+  achievementRate: number;
+  avgReturn: number;
+  validReports: number; // 목표가가 있는 리포트 수
+}
+
+// 애널리스트별 성과 계산 함수
+function calculateAnalystStats(reports: Report[]): AnalystStats[] {
+  const analystMap = new Map<string, Report[]>();
+  
+  // 애널리스트별로 리포트 그룹화
+  reports.forEach(report => {
+    if (!report.analyst) return;
+    const key = `${report.analyst}_${report.firm}`;
+    if (!analystMap.has(key)) {
+      analystMap.set(key, []);
+    }
+    analystMap.get(key)!.push(report);
+  });
+  
+  const analystStats: AnalystStats[] = [];
+  
+  analystMap.forEach((analystReports, key) => {
+    const [analyst, firm] = key.split('_');
+    
+    // 기본 통계
+    const reportCount = analystReports.length;
+    const stockCount = new Set(analystReports.map(r => r.ticker)).size;
+    
+    // 목표가가 있는 리포트만 필터링
+    const validReports = analystReports.filter(r => 
+      r.target_price && r.target_price > 0 && stockPrices[r.ticker]
+    );
+    
+    let achievementRate = 0;
+    let avgReturn = 0;
+    
+    if (validReports.length > 0) {
+      // 적중률 계산 (현재가 >= 목표가인 비율)
+      const achievedCount = validReports.filter(r => {
+        const currentPrice = stockPrices[r.ticker]?.currentPrice;
+        return currentPrice && currentPrice >= (r.target_price || 0);
+      }).length;
+      
+      achievementRate = (achievedCount / validReports.length) * 100;
+      
+      // 평균 수익률 계산
+      const returns = validReports.map(r => {
+        const currentPrice = stockPrices[r.ticker]?.currentPrice;
+        const targetPrice = r.target_price;
+        if (currentPrice && targetPrice) {
+          return ((currentPrice - targetPrice) / targetPrice) * 100;
+        }
+        return 0;
+      });
+      
+      avgReturn = returns.reduce((sum, ret) => sum + ret, 0) / returns.length;
+    }
+    
+    analystStats.push({
+      analyst,
+      firm,
+      reports: analystReports,
+      reportCount,
+      stockCount,
+      achievementRate: Math.round(achievementRate * 10) / 10,
+      avgReturn: Math.round(avgReturn * 10) / 10,
+      validReports: validReports.length
+    });
+  });
+  
+  return analystStats;
+}
 
 function OpinionBadge({ opinion }: { opinion: string }) {
   const styles = {
@@ -133,106 +216,15 @@ function getSectionIcon(title: string) {
 }
 
 // 리포트 상세 모달 컴포넌트
-interface ReportModalProps {
-  report: Report | null;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-function ReportModal({ report, isOpen, onClose }: ReportModalProps) {
-  if (!isOpen || !report) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
-        <div className="p-6">
-          {/* 헤더 */}
-          <div className="flex items-start justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900">리포트 상세</h2>
-            <button 
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-xl"
-            >
-              ✕
-            </button>
-          </div>
-
-          {/* 리포트 정보 */}
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-medium text-gray-900 mb-2">{report.title}</h3>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-sm font-medium text-blue-600">
-                  {TICKER_NAMES[report.ticker] || report.ticker}
-                </span>
-                <OpinionBadge opinion={report.opinion} />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="text-gray-500">증권사</span>
-                <p className="font-medium">{report.firm}</p>
-              </div>
-              <div>
-                <span className="text-gray-500">애널리스트</span>
-                <p className="font-medium">{report.analyst || '-'}</p>
-              </div>
-              <div>
-                <span className="text-gray-500">목표가</span>
-                <p className="font-medium">{formatPrice(report.target_price, report.ticker)}</p>
-              </div>
-              <div>
-                <span className="text-gray-500">투자의견</span>
-                <p className="font-medium">{report.opinion}</p>
-              </div>
-              <div className="col-span-2">
-                <span className="text-gray-500">발행일</span>
-                <p className="font-medium">{formatDate(report.published_at)}</p>
-              </div>
-            </div>
-
-            {/* AI 요약 */}
-            {report.summary && (
-              <div>
-                <span className="text-gray-500 text-sm">AI 한줄요약</span>
-                <p className="text-sm text-gray-700 mt-1 p-3 bg-blue-50 rounded-lg font-medium">
-                  {report.summary}
-                </p>
-              </div>
-            )}
-            {report.ai_detail && (
-              <div>
-                <span className="text-gray-500 text-sm">상세 분석</span>
-                <div className="mt-1">
-                  <AiDetailRenderer content={report.ai_detail} />
-                </div>
-              </div>
-            )}
-
-            {/* PDF 링크 */}
-            <div className="pt-4 border-t">
-              <a 
-                href={report.pdf_url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors"
-              >
-                📄 PDF 보고서 보기
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+// ReportModal removed - now using ReportDetailModal component
 
 export default function AnalystPage() {
   const [activeTab, setActiveTab] = useState('latest');
   const [search, setSearch] = useState('');
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [analystSort, setAnalystSort] = useState<'achievement' | 'reports' | 'return'>('achievement');
+  const [expandedAnalyst, setExpandedAnalyst] = useState<string | null>(null);
   const q = search.toLowerCase();
 
   const openReportModal = (report: Report) => {
@@ -286,6 +278,25 @@ export default function AnalystPage() {
       .filter(g => !q || g.name.toLowerCase().includes(q) || g.firms.some(f => f.toLowerCase().includes(q)))
       .sort((a, b) => b.reports.length - a.reports.length);
   }, [q]);
+
+  // 애널리스트별 통계
+  const analystStats = useMemo(() => {
+    const stats = calculateAnalystStats(allReports);
+    return stats
+      .filter(s => !q || s.analyst.toLowerCase().includes(q) || s.firm.toLowerCase().includes(q))
+      .sort((a, b) => {
+        switch (analystSort) {
+          case 'achievement':
+            return b.achievementRate - a.achievementRate;
+          case 'reports':
+            return b.reportCount - a.reportCount;
+          case 'return':
+            return b.avgReturn - a.avgReturn;
+          default:
+            return b.achievementRate - a.achievementRate;
+        }
+      });
+  }, [q, analystSort]);
 
   const tabs = [
     { id: 'latest', label: '🔥 최신 리포트' },
@@ -367,13 +378,177 @@ export default function AnalystPage() {
 
         {/* 👤 애널리스트별 */}
         {activeTab === 'analyst' && (
-          <div className="bg-white rounded-xl shadow-sm p-8 text-center">
-            <div className="text-4xl mb-4">👤</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">데이터 준비 중</h3>
-            <p className="text-[#8b95a1] text-sm leading-relaxed">
-              애널리스트별 분류 기능을 준비하고 있습니다.<br/>
-              현재 애널리스트 정보 수집 중이며, 곧 업데이트될 예정입니다.
-            </p>
+          <div className="space-y-4">
+            {/* 정렬 옵션 */}
+            <div className="bg-white rounded-xl p-4 shadow-sm">
+              <div className="flex gap-2 mb-3">
+                <span className="text-sm font-medium text-gray-700">정렬:</span>
+                <button
+                  onClick={() => setAnalystSort('achievement')}
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    analystSort === 'achievement' 
+                      ? 'bg-blue-100 text-blue-700 font-medium' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  적중률순
+                </button>
+                <button
+                  onClick={() => setAnalystSort('reports')}
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    analystSort === 'reports' 
+                      ? 'bg-blue-100 text-blue-700 font-medium' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  리포트수순
+                </button>
+                <button
+                  onClick={() => setAnalystSort('return')}
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    analystSort === 'return' 
+                      ? 'bg-blue-100 text-blue-700 font-medium' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  수익률순
+                </button>
+              </div>
+              <p className="text-xs text-gray-500">
+                💡 적중률: 목표가 달성 비율 | 수익률: 목표가 대비 현재가 상승률 평균
+              </p>
+            </div>
+
+            {/* 애널리스트 카드 리스트 */}
+            <div className="space-y-2">
+              {analystStats.map((analyst, index) => (
+                <div key={`${analyst.analyst}_${analyst.firm}`} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                  <button
+                    onClick={() => setExpandedAnalyst(
+                      expandedAnalyst === `${analyst.analyst}_${analyst.firm}` 
+                        ? null 
+                        : `${analyst.analyst}_${analyst.firm}`
+                    )}
+                    className="w-full px-4 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      {/* 프로필 아이콘 */}
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+                        <span className="text-lg font-bold text-blue-600">
+                          {analyst.analyst.charAt(0)}
+                        </span>
+                      </div>
+                      
+                      <div className="text-left">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-bold text-gray-900 text-sm">{analyst.analyst}</h3>
+                          <span className="text-xs text-gray-500">#{index + 1}</span>
+                        </div>
+                        <p className="text-xs text-gray-600 mb-2">{analyst.firm}</p>
+                        
+                        {/* 성과 배지 */}
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-full border border-green-200">
+                            <span className="text-xs text-green-700">🎯</span>
+                            <span className="text-xs font-bold text-green-700">
+                              {analyst.achievementRate}%
+                            </span>
+                          </div>
+                          
+                          <div className="flex items-center gap-1 bg-blue-50 px-2 py-1 rounded-full border border-blue-200">
+                            <span className="text-xs text-blue-700">📈</span>
+                            <span className="text-xs font-bold text-blue-700">
+                              {analyst.avgReturn >= 0 ? '+' : ''}{analyst.avgReturn}%
+                            </span>
+                          </div>
+                          
+                          <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-full border border-gray-200">
+                            <span className="text-xs text-gray-700">📄</span>
+                            <span className="text-xs font-bold text-gray-700">
+                              {analyst.reportCount}건
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-2">
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500">{analyst.stockCount}종목 커버</p>
+                        <p className="text-xs text-gray-400">유효분석 {analyst.validReports}건</p>
+                      </div>
+                      <span className="text-gray-400 text-sm">
+                        {expandedAnalyst === `${analyst.analyst}_${analyst.firm}` ? '▲' : '▼'}
+                      </span>
+                    </div>
+                  </button>
+                  
+                  {/* 확장된 리포트 목록 */}
+                  {expandedAnalyst === `${analyst.analyst}_${analyst.firm}` && (
+                    <div className="border-t border-gray-100 px-4 pb-3">
+                      <div className="py-3">
+                        <h4 className="font-medium text-gray-900 mb-3 text-sm flex items-center gap-2">
+                          📊 최근 리포트 
+                          <span className="text-xs text-gray-500">
+                            (총 {analyst.reportCount}건 중 최신 10건)
+                          </span>
+                        </h4>
+                        
+                        {[...analyst.reports]
+                          .sort((a, b) => b.published_at.localeCompare(a.published_at))
+                          .slice(0, 10)
+                          .map((report, i) => (
+                            <div 
+                              key={i} 
+                              className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0 cursor-pointer hover:bg-gray-50 px-2 rounded"
+                              onClick={() => openReportModal(report)}
+                            >
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm text-gray-800 truncate font-medium">{report.title}</p>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-xs text-blue-600 font-medium">
+                                    {TICKER_NAMES[report.ticker] || report.ticker}
+                                  </span>
+                                  <span className="text-xs text-gray-400">
+                                    {formatDate(report.published_at)}
+                                  </span>
+                                  <OpinionBadge opinion={report.opinion} />
+                                  <span className="text-xs text-gray-700">
+                                    목표 {formatPrice(report.target_price, report.ticker)}
+                                  </span>
+                                  {/* 현재가와 비교 표시 */}
+                                  {report.target_price && stockPrices[report.ticker] && (
+                                    <span className={`text-xs font-medium ${
+                                      stockPrices[report.ticker].currentPrice >= report.target_price
+                                        ? 'text-green-600' 
+                                        : 'text-red-600'
+                                    }`}>
+                                      {stockPrices[report.ticker].currentPrice >= report.target_price 
+                                        ? '✅ 달성' 
+                                        : '❌ 미달성'}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              <button className="ml-2 text-blue-600 hover:text-blue-800">
+                                📄
+                              </button>
+                            </div>
+                          ))
+                        }
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+              
+              {analystStats.length === 0 && (
+                <div className="text-center py-10">
+                  <div className="text-4xl mb-4">👤</div>
+                  <p className="text-gray-500 text-sm">검색 결과가 없습니다.</p>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -468,10 +643,11 @@ export default function AnalystPage() {
       </div>
 
       {/* 리포트 상세 모달 */}
-      <ReportModal 
+      <ReportDetailModal 
         report={selectedReport}
         isOpen={isModalOpen}
         onClose={closeReportModal}
+        type="report"
       />
     </div>
   );
