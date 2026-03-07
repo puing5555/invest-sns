@@ -63,10 +63,10 @@ def main():
         print("\n⏭️  Step 2/3: 검증 스킵")
 
     # Step 3: Deploy
-    print("\n🌐 Step 3/3: GitHub Pages 배포")
-    rc = run("npx gh-pages -d out --dotfiles")
+    print("\n🌐 Step 3/3: GitHub Pages 배포 (deploy.ps1 via worktree — 소스코드 보호)")
+    rc = run("powershell -ExecutionPolicy Bypass -File deploy.ps1")
     if rc != 0:
-        print("\n❌ 배포 실패!")
+        print("\n❌ 배포 실패! (소스코드는 master 브랜치에 안전하게 유지됩니다)")
         sys.exit(1)
 
     print("\n" + "="*60)

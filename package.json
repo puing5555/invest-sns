@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "invest-sns",
   "version": "0.1.0",
   "private": true,
@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && touch out/.nojekyll"
+    "deploy": "next build && powershell -ExecutionPolicy Bypass -File deploy.ps1",
+    "deploy-safe": "powershell -ExecutionPolicy Bypass -File deploy.ps1"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.78.0",
