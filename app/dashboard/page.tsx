@@ -171,7 +171,6 @@ const NowTab = () => (
             border: `1px solid ${colors.lightGray}`,
           }}>
             <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{s.name}</div>
-            <div style={{ fontSize: 12, color: colors.gray, marginTop: 2 }}>{s.code}</div>
             <div style={{ fontWeight: 700, fontSize: 15, color: colors.primary, marginTop: 8 }}>
               {typeof s.currentPrice === 'number' && s.currentPrice > 1000
                 ? s.currentPrice.toLocaleString()
@@ -198,7 +197,6 @@ const NowTab = () => (
             background: colors.bg, textAlign: 'center', flexShrink: 0,
           }}>
             <div style={{ fontWeight: 600, fontSize: 13, color: colors.primary }}>{s.name}</div>
-            <div style={{ fontSize: 12, color: colors.gray, marginTop: 2 }}>{s.code}</div>
             <div style={{
               fontSize: 14, fontWeight: 700, marginTop: 6,
               color: s.changePct >= 0 ? colors.red : colors.blue,
