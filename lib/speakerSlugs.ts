@@ -15,6 +15,7 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '박병창': 'park-byungchang',
   '박명성': 'park-myungsung',
   '달란트투자': 'dalant-invest',
+  'GODofIT': 'godofit',
   'syuka': 'syuka',
   '이영수': 'lee-youngsu',
   '이정윤': 'lee-jungyoon',

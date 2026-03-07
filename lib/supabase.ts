@@ -353,6 +353,50 @@ export async function getInfluencerProfileBySpeaker(speakerName: string) {
       }
     }
 
+    // 3) speakers에도 없으면 채널명으로 조회 (GODofIT 등 채널명=인플루언서명인 경우)
+    if (!signals || signals.length === 0) {
+      const { data: channelRow } = await supabase
+        .from('influencer_channels')
+        .select('id')
+        .eq('channel_name', speakerName)
+        .maybeSingle();
+
+      if (channelRow) {
+        const { data: videoRows } = await supabase
+          .from('influencer_videos')
+          .select('id')
+          .eq('channel_id', channelRow.id);
+
+        if (videoRows && videoRows.length > 0) {
+          const videoIds = videoRows.map((v: any) => v.id);
+          const { data: signals3, error: error3 } = await supabase
+            .from('influencer_signals')
+            .select(`
+              *,
+              influencer_videos (
+                title,
+                published_at,
+                video_id,
+                influencer_channels (
+                  channel_name,
+                  channel_handle
+                )
+              ),
+              speakers (
+                name
+              )
+            `)
+            .in('video_id', videoIds)
+            .order('created_at', { ascending: false });
+
+          if (!error3) {
+            signals = signals3;
+            error = null; // 채널 조회 성공 시 이전 에러 무시
+          }
+        }
+      }
+    }
+
     if (error) {
       console.error('Error fetching speaker signals:', error);
       return null;
