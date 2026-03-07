@@ -5,14 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
 const navItems = [
-  { icon: '🏠', label: '피드', href: '/' },
   { icon: '📊', label: '대시보드', href: '/dashboard' },
-  { icon: '💼', label: '보유종목', href: '/my-portfolio' },
-  { icon: '👀', label: '관심종목', href: '/my-watchlist' },
-  { icon: '⭐', label: '내 종목', href: '/my-stocks' },
+  { icon: '🏠', label: '피드', href: '/' },
   { icon: '🔍', label: '탐색', href: '/explore' },
+  { icon: '💼', label: '포트폴리오', href: '/my-portfolio' },
   { icon: '📅', label: '캘린더', href: '/calendar' },
-  { icon: '', label: '', href: '', isDivider: true },
   { icon: '🔔', label: '알림', href: '/notifications' },
   { icon: '📝', label: '메모', href: '/memo' },
   { icon: '👤', label: '프로필', href: '/profile' },

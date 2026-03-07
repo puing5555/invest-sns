@@ -1,0 +1,52 @@
+{
+  "date": "2026-03-07",
+  "score": 45.7,
+  "grade": "중립",
+  "components": {
+    "모멘텀": {
+      "raw": 11.3845,
+      "score": 86.7,
+      "weight": 0.1667,
+      "description": "코스피 vs 50일이평 괴리율"
+    },
+    "변동성": {
+      "raw": 1.4407,
+      "score": 0.0,
+      "weight": 0.1667,
+      "description": "KOSPI 실현변동성 vs 이평 (역방향)"
+    },
+    "안전자산": {
+      "raw": 38.0509,
+      "score": 98.2,
+      "weight": 0.1667,
+      "description": "코스피 vs 국채ETF 수익률 차이"
+    },
+    "정크본드": {
+      "raw": 5.799,
+      "score": 75.0,
+      "weight": 0.1667,
+      "description": "회사채 BBB- minus AA- 스프레드 (역방향)"
+    },
+    "외국인수급": {
+      "raw": -16.278,
+      "score": 0.0,
+      "weight": 0.1667,
+      "description": "EWY 5일 수익률 (외국인 프록시)"
+    },
+    "코스닥코스피": {
+      "raw": -10.4619,
+      "score": 14.4,
+      "weight": 0.1667,
+      "description": "코스닥/코스피 상대강도 60일 변화"
+    }
+  },
+  "available_count": 6,
+  "skipped": [
+    "주가강도(KRX)",
+    "시장폭(KRX)",
+    "풋/콜(KRX)",
+    "신용잔고(KOFIA)",
+    "고객예탁금(KOFIA)"
+  ],
+  "generated_at": "2026-03-07 14:55:20"
+}

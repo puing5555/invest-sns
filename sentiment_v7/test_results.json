@@ -1,0 +1,46 @@
+{
+  "1. 모멘텀 (코스피 vs 50일 이평)": {
+    "status": "OK",
+    "raw": 11.38446095671108
+  },
+  "2. 주가강도 (52주 신고/신저)": {
+    "status": "SKIP",
+    "error": "KRX API 세션 인증 필요 (LOGOUT 400)"
+  },
+  "3. 시장폭 (상승/하락 비율)": {
+    "status": "SKIP",
+    "error": "KRX API 세션 인증 필요 (LOGOUT 400)"
+  },
+  "4. 풋/콜 비율": {
+    "status": "SKIP",
+    "error": "KRX API 세션 인증 필요 (LOGOUT 400)"
+  },
+  "5. 변동성 (실현변동성 VKOSPI대체)": {
+    "status": "OK",
+    "raw": 1.4407395577233333
+  },
+  "6. 안전자산 수요 (코스피 vs 국채)": {
+    "status": "OK",
+    "raw": 38.37111147983414
+  },
+  "7. 정크본드 (AA- vs BBB- 스프레드)": {
+    "status": "OK",
+    "raw": 5.821
+  },
+  "8. 외국인 수급 (EWY 프록시)": {
+    "status": "OK",
+    "raw": -14.104643402579809
+  },
+  "9. 신용잔고": {
+    "status": "SKIP",
+    "error": "JavaScript 동적 로딩 (API 없음)"
+  },
+  "10. 고객예탁금": {
+    "status": "SKIP",
+    "error": "JavaScript 동적 로딩 (API 없음)"
+  },
+  "11. 코스닥/코스피 상대강도": {
+    "status": "OK",
+    "raw": -10.425229047156426
+  }
+}

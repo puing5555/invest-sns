@@ -1,0 +1,72 @@
+{
+  "date": "2026-03-07",
+  "score": 48.8,
+  "grade": "중립",
+  "components": {
+    "모멘텀": {
+      "raw": 11.3845,
+      "score": 86.7,
+      "weight": 0.1,
+      "description": "코스피 vs 50일이평 괴리율"
+    },
+    "주가강도": {
+      "raw": 0.0,
+      "score": 23.0,
+      "weight": 0.1,
+      "description": "KOSPI 상위20종목 52주 신고/신저 비율"
+    },
+    "시장폭": {
+      "raw": 90.0,
+      "score": 90.1,
+      "weight": 0.1,
+      "description": "KOSPI 상위20종목 MA200 위 비율"
+    },
+    "변동성": {
+      "raw": 1.4407,
+      "score": 0.0,
+      "weight": 0.1,
+      "description": "KOSPI 실현변동성 vs 이평 (역방향)"
+    },
+    "안전자산": {
+      "raw": 38.0509,
+      "score": 98.2,
+      "weight": 0.1,
+      "description": "코스피 vs 국채ETF 수익률 차이"
+    },
+    "정크본드": {
+      "raw": 5.799,
+      "score": 75.0,
+      "weight": 0.1,
+      "description": "회사채 BBB- minus AA- 스프레드 (역방향)"
+    },
+    "외국인수급": {
+      "raw": -16.278,
+      "score": 0.0,
+      "weight": 0.1,
+      "description": "EWY 5일 수익률 (외국인 프록시)"
+    },
+    "신용잔고": {
+      "raw": 336978.9031,
+      "score": 0.1,
+      "weight": 0.1,
+      "description": "신용거래융자 잔고 (KOFIA, 역방향)"
+    },
+    "고객예탁금": {
+      "raw": 1309004.0599,
+      "score": 100.0,
+      "weight": 0.1,
+      "description": "투자자예탁금 (KOFIA)"
+    },
+    "코스닥코스피": {
+      "raw": -10.4619,
+      "score": 14.4,
+      "weight": 0.1,
+      "description": "코스닥/코스피 상대강도 60일 변화"
+    }
+  },
+  "available_count": 10,
+  "skipped": [
+    "풋/콜 비율(KRX - API 세션 인증 필요)"
+  ],
+  "generated_at": "2026-03-07 15:30:40"
+}

@@ -1,0 +1,124 @@
+[15:56:55] === GODofIT 채널 시그널 분석 시작 [TEST MODE - 5개만] ===
+[15:56:55] V11 프롬프트 로드 완료 (31433 chars)
+[15:56:55] VTT 파일: 30개
+[15:56:55] TEST MODE: 5개만 처리
+[15:56:55] 기진행: 0개 완료
+[15:56:56] 채널 발견: 227ad970-4f05-4fea-9a94-90f9649ca714 (GODofIT)
+[15:56:56] 채널 ID: 227ad970-4f05-4fea-9a94-90f9649ca714
+[15:56:56] [1/5] 1NUkBQ9MQf8
+[15:56:56]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSaZYAzm9GgZknLoHrT"}
+[15:56:56]   API 호출 실패. 에러 목록에 추가.
+[15:57:01] [2/5] 1iuRuDfMLUE
+[15:57:02]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSays9tGF1gx3bqDKWo"}
+[15:57:02]   API 호출 실패. 에러 목록에 추가.
+[15:57:07] [3/5] 4wCO1fdl9iU
+[15:57:08]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSbQLZYRY4qBSLEdzb3"}
+[15:57:08]   API 호출 실패. 에러 목록에 추가.
+[15:57:13] [4/5] 8-hYd-8eojE
+[15:57:14]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSbpj1eFjLrPhUYNMB4"}
+[15:57:14]   API 호출 실패. 에러 목록에 추가.
+[15:57:19] [5/5] 8Nn3qerCt44
+[15:57:19]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoScG323WrHvwCt2biaP"}
+[15:57:19]   API 호출 실패. 에러 목록에 추가.
+[15:57:24] === TEST 완료 ===
+[15:57:24] 총 처리: 0개 / 5개
+[15:57:24] 총 시그널: 0개
+[15:57:24] 총 비용: $0.000
+[15:57:24] 오류: 5개
+[15:57:24] 오류 목록: ['1NUkBQ9MQf8', '1iuRuDfMLUE', '4wCO1fdl9iU', '8-hYd-8eojE', '8Nn3qerCt44']
+[15:57:51] === GODofIT 채널 시그널 분석 시작 [TEST MODE - 5개만] ===
+[15:57:51] V11 프롬프트 로드 완료 (31433 chars)
+[15:57:51] VTT 파일: 30개
+[15:57:51] TEST MODE: 5개만 처리
+[15:57:51] 기진행: 0개 완료
+[15:57:52] 채널 발견: 227ad970-4f05-4fea-9a94-90f9649ca714 (GODofIT)
+[15:57:52] 채널 ID: 227ad970-4f05-4fea-9a94-90f9649ca714
+[15:57:52] [1/5] 1NUkBQ9MQf8
+[15:57:52]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSehw4ZSEPzWayKEHJX"}
+[15:57:52]   API 호출 실패. 에러 목록에 추가.
+[15:57:57] [2/5] 1iuRuDfMLUE
+[15:57:58]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSf8NEeqpHgqYG8Mxub"}
+[15:57:58]   API 호출 실패. 에러 목록에 추가.
+[15:58:03] [3/5] 4wCO1fdl9iU
+[15:58:04]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSfYfUiu7oyyUcdm2yc"}
+[15:58:04]   API 호출 실패. 에러 목록에 추가.
+[15:58:09] [4/5] 8-hYd-8eojE
+[15:58:10]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSfy3S7HJHCQDsHtcbi"}
+[15:58:10]   API 호출 실패. 에러 목록에 추가.
+[15:58:11] === GODofIT 채널 시그널 분석 시작 [TEST MODE - 5개만] ===
+[15:58:11] V11 프롬프트 로드 완료 (31433 chars)
+[15:58:11] VTT 파일: 30개
+[15:58:11] TEST MODE: 5개만 처리
+[15:58:11] 기진행: 0개 완료
+[15:58:11] 채널 발견: 227ad970-4f05-4fea-9a94-90f9649ca714 (GODofIT)
+[15:58:11] 채널 ID: 227ad970-4f05-4fea-9a94-90f9649ca714
+[15:58:11] [1/5] 1NUkBQ9MQf8
+[15:58:12]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSg8LH1qTawTjrZiNwF"}
+[15:58:12]   API 호출 실패. 에러 목록에 추가.
+[15:58:15] [5/5] 8Nn3qerCt44
+[15:58:15]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSgPVbqdwYLuhoAAEYQ"}
+[15:58:15]   API 호출 실패. 에러 목록에 추가.
+[15:58:17] [2/5] 1iuRuDfMLUE
+[15:58:17]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSgYrAjHfn6CEPBWCp6"}
+[15:58:17]   API 호출 실패. 에러 목록에 추가.
+[15:58:20] === TEST 완료 ===
+[15:58:20] 총 처리: 0개 / 5개
+[15:58:20] 총 시그널: 0개
+[15:58:20] 총 비용: $0.000
+[15:58:20] 오류: 5개
+[15:58:20] 오류 목록: ['1NUkBQ9MQf8', '1iuRuDfMLUE', '4wCO1fdl9iU', '8-hYd-8eojE', '8Nn3qerCt44']
+[15:58:22] [3/5] 4wCO1fdl9iU
+[15:58:23]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSgy6BuvMv7YMaKFJAk"}
+[15:58:23]   API 호출 실패. 에러 목록에 추가.
+[15:58:28] [4/5] 8-hYd-8eojE
+[15:58:29]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoShQ6b3BAxFTXTsZzAK"}
+[15:58:29]   API 호출 실패. 에러 목록에 추가.
+[15:58:34] [5/5] 8Nn3qerCt44
+[15:58:35]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoShpZka2hXbMSB8XWcp"}
+[15:58:35]   API 호출 실패. 에러 목록에 추가.
+[15:58:40] === TEST 완료 ===
+[15:58:40] 총 처리: 0개 / 5개
+[15:58:40] 총 시그널: 0개
+[15:58:40] 총 비용: $0.000
+[15:58:40] 오류: 9개
+[15:58:40] 오류 목록: ['1NUkBQ9MQf8', '1iuRuDfMLUE', '4wCO1fdl9iU', '8-hYd-8eojE', '1NUkBQ9MQf8', '1iuRuDfMLUE', '4wCO1fdl9iU', '8-hYd-8eojE', '8Nn3qerCt44']
+[15:59:16] === GODofIT 채널 시그널 분석 시작 [TEST MODE - 5개만] ===
+[15:59:16] V11 프롬프트 로드 완료 (31433 chars)
+[15:59:16] VTT 파일: 30개
+[15:59:16] TEST MODE: 5개만 처리
+[15:59:16] 기진행: 0개 완료
+[15:59:16] 채널 발견: 227ad970-4f05-4fea-9a94-90f9649ca714 (GODofIT)
+[15:59:16] 채널 ID: 227ad970-4f05-4fea-9a94-90f9649ca714
+[15:59:16] [1/5] 1NUkBQ9MQf8
+[15:59:17]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSkwATqHfWJcSNtdgh2"}
+[15:59:17]   API 호출 실패. 에러 목록에 추가.
+[15:59:22] [2/5] 1iuRuDfMLUE
+[15:59:23]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSmMvEQCjWuBG4Wrap5"}
+[15:59:23]   API 호출 실패. 에러 목록에 추가.
+[15:59:28] [3/5] 4wCO1fdl9iU
+[15:59:28]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSmnNQ9e8u7Hxm6whku"}
+[15:59:28]   API 호출 실패. 에러 목록에 추가.
+[15:59:33] [4/5] 8-hYd-8eojE
+[15:59:34]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSnCmbUWqZFQ9GEUGSu"}
+[15:59:34]   API 호출 실패. 에러 목록에 추가.
+[15:59:39] [5/5] 8Nn3qerCt44
+[15:59:40]   HTTP 오류 401: {"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"},"request_id":"req_011CYoSndBnR8RL3XRyoKpdh"}
+[15:59:40]   API 호출 실패. 에러 목록에 추가.
+[15:59:45] === TEST 완료 ===
+[15:59:45] 총 처리: 0개 / 5개
+[15:59:45] 총 시그널: 0개
+[15:59:45] 총 비용: $0.000
+[15:59:45] 오류: 5개
+[15:59:45] 오류 목록: ['1NUkBQ9MQf8', '1iuRuDfMLUE', '4wCO1fdl9iU', '8-hYd-8eojE', '8Nn3qerCt44']
+[16:00:03] === GODofIT 채널 시그널 분석 시작 [TEST MODE - 5개만] ===
+[16:00:03] V11 프롬프트 로드 완료 (31433 chars)
+[16:00:03] VTT 파일: 30개
+[16:00:03] TEST MODE: 5개만 처리
+[16:00:03] 기진행: 0개 완료
+[16:00:04] 채널 발견: 227ad970-4f05-4fea-9a94-90f9649ca714 (GODofIT)
+[16:00:04] 채널 ID: 227ad970-4f05-4fea-9a94-90f9649ca714
+[16:00:04] [1/5] 1NUkBQ9MQf8
+[16:00:17]   → 시그널 0개 / 0개 INSERT | 비용 $0.2054 | 누적 $0.205
+[16:00:19] [2/5] 1iuRuDfMLUE
+[16:00:33]   → 시그널 0개 / 0개 INSERT | 비용 $0.1269 | 누적 $0.332
+[16:00:35] [3/5] 4wCO1fdl9iU
