@@ -5,16 +5,12 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
 const navItems = [
-  { icon: '🏠', label: '피드', href: '/' },
   { icon: '📊', label: '대시보드', href: '/dashboard' },
-  { icon: '💼', label: '보유종목', href: '/my-portfolio' },
-  { icon: '👀', label: '관심종목', href: '/my-watchlist' },
-  { icon: '⭐', label: '내 종목', href: '/my-stocks' },
+  { icon: '🏠', label: '피드', href: '/' },
   { icon: '🔍', label: '탐색', href: '/explore' },
   { icon: '📅', label: '캘린더', href: '/calendar' },
-  { icon: '', label: '', href: '', isDivider: true },
+  { icon: '💼', label: '포트폴리오', href: '/my-portfolio' },
   { icon: '🔔', label: '알림', href: '/notifications' },
-  { icon: '📝', label: '메모', href: '/memo' },
   { icon: '👤', label: '프로필', href: '/profile' },
 ];
 
@@ -36,15 +32,7 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
-        {navItems.map((item, index) => {
-          if (item.isDivider) {
-            return (
-              <div key={`divider-${index}`} className="my-4 px-3">
-                <hr className="border-[#e8e8e8]" />
-              </div>
-            );
-          }
-
+        {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
