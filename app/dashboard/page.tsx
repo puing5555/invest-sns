@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
 
 // ============ MARKET DATA TYPES ============
 interface MarketItem {
@@ -582,21 +580,7 @@ const MarketTab = () => (
 
 // ============ MAIN ============
 export default function DashboardPage() {
-  const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState('now');
-
-  useEffect(() => {
-    if (!authLoading && !user) { router.push('/login'); }
-  }, [user, authLoading, router]);
-
-  if (authLoading || !user) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-        <p style={{ color: colors.gray }}>로딩 중...</p>
-      </div>
-    );
-  }
 
   return (
     <div style={{
