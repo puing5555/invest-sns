@@ -1,17 +1,17 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
- * 세상학개론 V11.1 시그널 재분석 스크립트
- * 기존 pending 시그널 삭제 후 V11.1 프롬프트로 재분석
+ * ?몄긽?숆컻濡?V11.1 ?쒓렇???щ텇???ㅽ겕由쏀듃
+ * 湲곗〈 pending ?쒓렇????젣 ??V11.1 ?꾨＼?꾪듃濡??щ텇??
  */
 
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-// ====== 설정 ======
+// ====== ?ㅼ젙 ======
 const SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8';
-// openclaw.json에서 실제 API 키 읽기 (env는 구버전 키일 수 있음)
+// openclaw.json?먯꽌 ?ㅼ젣 API ???쎄린 (env??援щ쾭???ㅼ씪 ???덉쓬)
 function getAnthropicKey() {
   try {
     const oclawPath = path.join(process.env.USERPROFILE || process.env.HOME, '.openclaw', 'openclaw.json');
@@ -28,11 +28,11 @@ const DELAY_MS = 2500;
 const BATCH_REST_MS = 5000;
 const BATCH_SIZE = 20;
 
-// V11.1 프롬프트 로드
+// V11.1 ?꾨＼?꾪듃 濡쒕뱶
 const PROMPT_FILE = path.join(__dirname, '..', 'prompts', 'pipeline_v11.md');
 const SYSTEM_PROMPT = fs.readFileSync(PROMPT_FILE, 'utf-8');
 
-// ====== API 헬퍼 ======
+// ====== API ?ы띁 ======
 async function sbFetch(endpoint, options = {}) {
   const url = SUPABASE_URL + endpoint;
   const headers = {
@@ -50,7 +50,7 @@ async function sbFetch(endpoint, options = {}) {
 }
 
 async function claudeAnalyze(videoTitle, subtitleText) {
-  const userMessage = `영상 제목: ${videoTitle}\n\n자막:\n${subtitleText}`;
+  const userMessage = `?곸긽 ?쒕ぉ: ${videoTitle}\n\n?먮쭑:\n${subtitleText}`;
   
   const body = JSON.stringify({
     model: 'claude-sonnet-4-5',
@@ -78,14 +78,14 @@ async function claudeAnalyze(videoTitle, subtitleText) {
           const parsed = JSON.parse(data);
           if (parsed.error) return reject(new Error(parsed.error.message));
           const content = parsed.content[0].text;
-          // JSON 추출 - 마크다운 코드블록 우선, 그 다음 단순 JSON 매칭
+          // JSON 異붿텧 - 留덊겕?ㅼ슫 肄붾뱶釉붾줉 ?곗꽑, 洹??ㅼ쓬 ?⑥닚 JSON 留ㅼ묶
           let jsonStr = null;
-          // 1. ```json ... ``` 블록 추출
+          // 1. ```json ... ``` 釉붾줉 異붿텧
           const codeBlockMatch = content.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/);
           if (codeBlockMatch) {
             jsonStr = codeBlockMatch[1];
           } else {
-            // 2. 첫 번째 { 에서 시작하는 JSON 객체 추출 (depth counting)
+            // 2. 泥?踰덉㎏ { ?먯꽌 ?쒖옉?섎뒗 JSON 媛앹껜 異붿텧 (depth counting)
             const start = content.indexOf('{');
             if (start === -1) return reject(new Error('No JSON in response: ' + content.slice(0, 200)));
             let depth = 0;
@@ -125,24 +125,24 @@ function detectMarket(ticker) {
   return 'GLOBAL';
 }
 
-// ====== 메인 ======
+// ====== 硫붿씤 ======
 async function main() {
-  console.log('🔧 세상학개론 V11.1 시그널 재분석 시작\n');
+  console.log('?뵩 ?몄긽?숆컻濡?V11.1 ?쒓렇???щ텇???쒖옉\n');
   
-  // Step 1: 영상 목록 조회
-  console.log('📋 Step 1: 영상 목록 조회...');
+  // Step 1: ?곸긽 紐⑸줉 議고쉶
+  console.log('?뱥 Step 1: ?곸긽 紐⑸줉 議고쉶...');
   const videos = await sbFetch(
     `/rest/v1/influencer_videos?channel_id=eq.${CHANNEL_ID}&select=id,video_id,title,subtitle_text,has_subtitle&order=published_at.asc`,
     { headers: { 'Range': '0-199' } }
   );
-  console.log(`총 ${videos.length}개 영상 확인`);
+  console.log(`珥?${videos.length}媛??곸긽 ?뺤씤`);
   
   const videosWithSubtitle = videos.filter(v => v.subtitle_text);
   const videosNoSubtitle = videos.filter(v => !v.subtitle_text);
-  console.log(`자막 있음: ${videosWithSubtitle.length}개 / 없음: ${videosNoSubtitle.length}개`);
+  console.log(`?먮쭑 ?덉쓬: ${videosWithSubtitle.length}媛?/ ?놁쓬: ${videosNoSubtitle.length}媛?);
   
-  // Step 2: 기존 pending 시그널 조회
-  console.log('\n📊 Step 2: 기존 시그널 현황 조회...');
+  // Step 2: 湲곗〈 pending ?쒓렇??議고쉶
+  console.log('\n?뱤 Step 2: 湲곗〈 ?쒓렇???꾪솴 議고쉶...');
   const videoIds = videos.map(v => v.id).join(',');
   const existingSignals = await sbFetch(
     `/rest/v1/influencer_signals?video_id=in.(${videoIds})&select=id,video_id,stock,signal,review_status&order=created_at.asc`,
@@ -152,16 +152,16 @@ async function main() {
   const pendingSignals = existingSignals.filter(s => s.review_status !== 'rejected');
   const rejectedSignals = existingSignals.filter(s => s.review_status === 'rejected');
   
-  console.log(`기존 시그널: ${existingSignals.length}개 (pending: ${pendingSignals.length}, rejected: ${rejectedSignals.length})`);
+  console.log(`湲곗〈 ?쒓렇?? ${existingSignals.length}媛?(pending: ${pendingSignals.length}, rejected: ${rejectedSignals.length})`);
   
   const oldTypeCounts = {};
   existingSignals.forEach(s => {
     oldTypeCounts[s.signal] = (oldTypeCounts[s.signal] || 0) + 1;
   });
-  console.log('기존 분포:', JSON.stringify(oldTypeCounts));
+  console.log('湲곗〈 遺꾪룷:', JSON.stringify(oldTypeCounts));
   
-  // Step 3: 각 영상 V11.1 분석
-  console.log('\n🤖 Step 3: V11.1 분석 시작...');
+  // Step 3: 媛??곸긽 V11.1 遺꾩꽍
+  console.log('\n?쨼 Step 3: V11.1 遺꾩꽍 ?쒖옉...');
   const newSignals = [];
   const skipped = [];
   const errors = [];
@@ -170,9 +170,9 @@ async function main() {
     const video = videosWithSubtitle[i];
     const videoNum = i + 1;
     
-    // 20개마다 5초 휴식
+    // 20媛쒕쭏??5珥??댁떇
     if (i > 0 && i % BATCH_SIZE === 0) {
-      console.log(`  ⏸️  ${i}개 완료, 5초 휴식...`);
+      console.log(`  ?몌툘  ${i}媛??꾨즺, 5珥??댁떇...`);
       await sleep(BATCH_REST_MS);
     }
     
@@ -183,9 +183,9 @@ async function main() {
       const signals = result.signals || [];
       
       if (signals.length === 0) {
-        console.log(`    → 시그널 없음 (매크로/교육 영상)`);
+        console.log(`    ???쒓렇???놁쓬 (留ㅽ겕濡?援먯쑁 ?곸긽)`);
       } else {
-        console.log(`    → ${signals.length}개 시그널 추출`);
+        console.log(`    ??${signals.length}媛??쒓렇??異붿텧`);
         for (const sig of signals) {
           newSignals.push({
             video_id: video.id,
@@ -193,7 +193,7 @@ async function main() {
             stock: sig.stock,
             ticker: sig.ticker || null,
             market: detectMarket(sig.ticker),
-            mention_type: sig.signal_type === '매수' || sig.signal_type === '매도' ? '결론' : '논거',
+            mention_type: sig.signal_type === '留ㅼ닔' || sig.signal_type === '留ㅻ룄' ? '寃곕줎' : '?쇨굅',
             signal: sig.signal_type,
             confidence: confidenceToString(sig.confidence),
             timestamp: sig.timestamp || null,
@@ -205,41 +205,41 @@ async function main() {
         }
       }
     } catch (e) {
-      console.error(`    ❌ 오류: ${e.message}`);
+      console.error(`    ???ㅻ쪟: ${e.message}`);
       errors.push({ video: video.title, error: e.message });
     }
     
-    // 딜레이
+    // ?쒕젅??
     if (i < videosWithSubtitle.length - 1) {
       await sleep(DELAY_MS);
     }
   }
   
-  // 자막 없는 영상 기록
+  // ?먮쭑 ?녿뒗 ?곸긽 湲곕줉
   for (const v of videosNoSubtitle) {
     skipped.push(v.title);
   }
   
-  console.log(`\n✅ 분석 완료: ${newSignals.length}개 신규 시그널 추출`);
-  console.log(`⏭️  건너뜀: ${skipped.length}개 (자막 없음)`);
-  if (errors.length > 0) console.log(`❌ 오류: ${errors.length}개`);
+  console.log(`\n??遺꾩꽍 ?꾨즺: ${newSignals.length}媛??좉퇋 ?쒓렇??異붿텧`);
+  console.log(`??툘  嫄대꼫?: ${skipped.length}媛?(?먮쭑 ?놁쓬)`);
+  if (errors.length > 0) console.log(`???ㅻ쪟: ${errors.length}媛?);
   
-  // Step 4: DB 업데이트
-  console.log('\n💾 Step 4: DB 업데이트...');
+  // Step 4: DB ?낅뜲?댄듃
+  console.log('\n?뮶 Step 4: DB ?낅뜲?댄듃...');
   
-  // 기존 pending 시그널 DELETE (이미 없으면 skip)
+  // 湲곗〈 pending ?쒓렇??DELETE (?대? ?놁쑝硫?skip)
   if (pendingSignals.length > 0) {
     const pendingIds = pendingSignals.map(s => s.id).join(',');
     await sbFetch(
       `/rest/v1/influencer_signals?id=in.(${pendingIds})`,
       { method: 'DELETE', headers: { 'Prefer': 'return=minimal' } }
     );
-    console.log(`  🗑️  기존 pending 시그널 ${pendingSignals.length}개 삭제 완료`);
+    console.log(`  ?뿊截? 湲곗〈 pending ?쒓렇??${pendingSignals.length}媛???젣 ?꾨즺`);
   } else {
-    console.log(`  ℹ️  삭제할 pending 시그널 없음 (이미 삭제됨)`);
+    console.log(`  ?뱄툘  ??젣??pending ?쒓렇???놁쓬 (?대? ??젣??`);
   }
   
-  // 새 시그널 INSERT (배치)
+  // ???쒓렇??INSERT (諛곗튂)
   let insertedCount = 0;
   const INSERT_BATCH = 50;
   for (let i = 0; i < newSignals.length; i += INSERT_BATCH) {
@@ -253,26 +253,26 @@ async function main() {
       }
     );
     insertedCount += batch.length;
-    console.log(`  ✅ INSERT ${insertedCount}/${newSignals.length} 완료`);
+    console.log(`  ??INSERT ${insertedCount}/${newSignals.length} ?꾨즺`);
   }
   
-  // Step 5: 결과 집계
+  // Step 5: 寃곌낵 吏묎퀎
   const newTypeCounts = {};
   newSignals.forEach(s => {
     newTypeCounts[s.signal] = (newTypeCounts[s.signal] || 0) + 1;
   });
   
-  console.log('\n📈 최종 결과:');
-  console.log(`  기존: ${pendingSignals.length}개 → 신규: ${newSignals.length}개`);
-  console.log(`  기존 분포: ${JSON.stringify(oldTypeCounts)}`);
-  console.log(`  신규 분포: ${JSON.stringify(newTypeCounts)}`);
-  console.log(`  Rejected 유지: ${rejectedSignals.length}개`);
+  console.log('\n?뱢 理쒖쥌 寃곌낵:');
+  console.log(`  湲곗〈: ${pendingSignals.length}媛????좉퇋: ${newSignals.length}媛?);
+  console.log(`  湲곗〈 遺꾪룷: ${JSON.stringify(oldTypeCounts)}`);
+  console.log(`  ?좉퇋 遺꾪룷: ${JSON.stringify(newTypeCounts)}`);
+  console.log(`  Rejected ?좎?: ${rejectedSignals.length}媛?);
   if (errors.length > 0) {
-    console.log(`  오류 목록:`);
+    console.log(`  ?ㅻ쪟 紐⑸줉:`);
     errors.forEach(e => console.log(`    - ${e.video}: ${e.error}`));
   }
   
-  // 결과 저장
+  // 寃곌낵 ???
   const resultFile = path.join(__dirname, 'reanalyze_sesang_v11_result.json');
   fs.writeFileSync(resultFile, JSON.stringify({
     timestamp: new Date().toISOString(),
@@ -286,9 +286,10 @@ async function main() {
 }
 
 main().then(result => {
-  console.log('\n🎉 완료!');
+  console.log('\n?럦 ?꾨즺!');
   process.exit(0);
 }).catch(e => {
-  console.error('💥 치명적 오류:', e);
+  console.error('?뮙 移섎챸???ㅻ쪟:', e);
   process.exit(1);
 });
+
