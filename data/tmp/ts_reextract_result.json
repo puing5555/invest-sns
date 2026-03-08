@@ -1,0 +1,2773 @@
+{
+  "summary": {
+    "total": 394,
+    "success": 97,
+    "no_subtitle": 0,
+    "gpt_null": 297,
+    "duration_exceed": 0,
+    "error": 0,
+    "total_input_tokens": 1523570,
+    "total_output_tokens": 588,
+    "estimated_cost_usd": 0.2289
+  },
+  "details": [
+    {
+      "id": "184d0dbc-d19e-479f-9763-e572b5d1eafb",
+      "video_id": "5218b749-302f-4163-98d4-a0eda953369d",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "12:45"
+    },
+    {
+      "id": "7309fab0-9323-463f-aab0-321844655675",
+      "video_id": "499e7ca7-e7ba-48d6-97a2-aad155e1a5af",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "29a3cea6-0158-438b-b2c2-04edeebb0bd9",
+      "video_id": "38ce0ce0-ef71-46ec-85ab-1ded45c6aad1",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:23"
+    },
+    {
+      "id": "c8d0822a-7192-4894-9630-89561f62481e",
+      "video_id": "4e59b163-d1e1-41c0-ba3f-5953e2384096",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "4a5b026d-9060-40fd-9ae6-68b92c4480e5",
+      "video_id": "98d76d9b-a7c8-4de0-8435-1a885a9bab28",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8ecb977f-0bf5-49c9-95d9-d3fceaf242f7",
+      "video_id": "5f9776de-6056-4b8e-9179-1e34fc5ba534",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3422ea5f-11f2-4bd0-bd4e-4b186bbd578d",
+      "video_id": "fef2edc1-0515-4e46-839a-8b6644131303",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "08a2160e-542b-4d6d-9d4e-758fee8c5675",
+      "video_id": "afb35426-f388-4564-8232-0bf94add2ea6",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "03:12"
+    },
+    {
+      "id": "56eb55c0-22c2-4a2d-8fca-7381d02f67ff",
+      "video_id": "26024da8-0d0c-4db1-be2b-23af498c47fe",
+      "stock": "넷플릭스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "60dec2e6-c0e2-4de0-9030-15dc95508fbe",
+      "video_id": "e4cd12f5-ab3f-4540-885e-fec8ecdedd9a",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "79f51ef7-878c-4ed8-9e2e-a84638f270b9",
+      "video_id": "b07eac46-9f6a-424b-9e82-0af118e440c6",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "00:29"
+    },
+    {
+      "id": "03bf0119-854b-4287-99f8-973c24a58f00",
+      "video_id": "7bcdc128-70bc-479c-9d6e-01c99a789a7a",
+      "stock": "스템",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "22f86e5f-3fab-4ec0-8eba-94b727fe5c33",
+      "video_id": "9970ad31-cd10-4db9-a2af-141fd45dd422",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "fadc55f6-475f-4c45-b1e7-c2c957a21e90",
+      "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+      "stock": "하나마이크론",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c1c840e6-43b2-48a0-a08c-ee66bc6c12b3",
+      "video_id": "eeadcb2b-4523-4ec0-b5bc-1f7e46e3deee",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "00:05"
+    },
+    {
+      "id": "0bfb9b50-9b91-4d84-af14-859ba5b0ffdd",
+      "video_id": "b8416319-d4c8-4990-a777-3ad066d4201a",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "00ebef7e-18fb-4608-907d-6d5e63e592e1",
+      "video_id": "187ba9c8-4fad-4ca2-86d6-21bbee01e128",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "9f681ef7-4f6d-4ad9-aaf9-a10c23051993",
+      "video_id": "06ae3bdc-d42b-463c-997a-75fba57e042e",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6b52051b-376d-462c-be2d-ff48e7f90b48",
+      "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+      "stock": "SK하이닉스",
+      "status": "success",
+      "timestamp": "01:49"
+    },
+    {
+      "id": "5e277a8e-2064-4b3a-a7b1-d5ca386457ba",
+      "video_id": "41516750-f657-49ca-8b6c-57a8229ded27",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2686ff43-b399-4dd2-883b-08c480dd3f06",
+      "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a34ee2b4-6431-4aa1-aed1-df402815e0bf",
+      "video_id": "21a74ede-32f4-4600-8bf1-30320b1c7e4f",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "01:27"
+    },
+    {
+      "id": "f4c96586-2efe-4b83-9378-38e7e8d14831",
+      "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f05ea4d3-a19e-4459-94f1-c322855a2178",
+      "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+      "stock": "SK하이닉스",
+      "status": "success",
+      "timestamp": "00:19"
+    },
+    {
+      "id": "55f50944-f93f-4fb1-96fa-69d33a0f8e90",
+      "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e00c1579-4bba-475d-99bf-e975914da1fd",
+      "video_id": "283d58d0-063d-47ea-8872-c021f49e64c0",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f30b61d8-97ab-455d-85c0-5e08a641ebe3",
+      "video_id": "6327cd19-9ee4-4483-b3d3-1cccbbf23073",
+      "stock": "슈퍼마이크로컴퓨터",
+      "status": "success",
+      "timestamp": "03:02"
+    },
+    {
+      "id": "650269f8-cb30-4585-9ac9-380aedb7affd",
+      "video_id": "ea21e408-c5ac-4b75-9891-95371521f345",
+      "stock": "카카오",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "dadd9b24-fc12-48b1-9fcc-20d412adeae9",
+      "video_id": "3df2c39b-4ddf-4a4e-9f84-44e26065dce6",
+      "stock": "카카오",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f1b95942-ae0d-4139-8c12-77497585131f",
+      "video_id": "e0055607-263d-403b-b768-b91d84c7599e",
+      "stock": "네이버",
+      "status": "success",
+      "timestamp": "01:35"
+    },
+    {
+      "id": "b5c3fbbc-e5c0-48b4-a737-3593b62f453a",
+      "video_id": "1ca614cf-4d18-4cdf-b795-b746eeb209b5",
+      "stock": "LG전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "37a9ac45-1d32-4458-a263-6a760e0871b7",
+      "video_id": "33bed8cc-0c81-4eb1-a335-533411a2bff2",
+      "stock": "리커전",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "44c80f18-b78e-483f-ab33-8ad79832931b",
+      "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "204339d9-23f2-4912-ad93-4d386a4495f9",
+      "video_id": "e76edfab-ce52-45d8-bd94-67eb783ed8b0",
+      "stock": "퍼스트솔라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "20d681cc-d034-4bda-8626-8ac081dd369a",
+      "video_id": "f23d11b2-e73b-4487-ae6a-bb675e772947",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "164ae414-2b53-41ef-958e-3913562f2d2d",
+      "video_id": "96218d6d-0b4b-49a7-853e-5b4e51b780ca",
+      "stock": "처브",
+      "status": "success",
+      "timestamp": "00:14"
+    },
+    {
+      "id": "a9093327-639c-4cc3-9b34-52a8d01089ea",
+      "video_id": "e464764f-f769-4539-a78f-82a48a540f3b",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "7024c0ff-56ec-48b3-9bd0-a2be435e8a1c",
+      "video_id": "8c76f6eb-4255-47e0-8c49-0525da3c117a",
+      "stock": "마이크로스트래티지",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "328419c4-cec6-423d-97d7-7f858a6f8d0e",
+      "video_id": "ab923d87-60b4-40bb-b5d7-8a8ee5db4ba9",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "78f92023-c88e-4401-bdd5-fdf6cb468e3c",
+      "video_id": "5c45154a-b16a-4413-bf64-c86643cc68c8",
+      "stock": "애플",
+      "status": "success",
+      "timestamp": "00:34"
+    },
+    {
+      "id": "0fb2fa49-997e-4b50-9a04-ac187da04ac5",
+      "video_id": "fa5c63bd-606c-4fff-bc6b-4746f64fdcbb",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "03:10"
+    },
+    {
+      "id": "139de5dd-925d-4786-94a4-46dfc65a8bc0",
+      "video_id": "8cdd91e7-6a6f-4727-bc33-78f297c6039d",
+      "stock": "버크셔 해서웨이",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "1c0a186c-3485-45b6-b01a-41ecb3145006",
+      "video_id": "d0564837-db2b-4fc9-98b0-da5e9bebcfaa",
+      "stock": "골드만삭스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2349bfb0-df63-428c-bfe3-d3b378939b41",
+      "video_id": "b86ea04e-7a5e-4d11-b3bc-483cddc54c28",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e53c08ac-f8ef-4b32-b967-3f0eba2b647b",
+      "video_id": "175511a7-0c98-4b6a-9da6-fcfee01c5d49",
+      "stock": "나스닥",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c8ac6e7b-ca6c-444b-a629-3d14ffc0c830",
+      "video_id": "33d1cb70-7e31-4b3d-baf3-d499deb0ebd9",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "261532a2-5bc6-45de-abb6-c88ae6dfa89a",
+      "video_id": "e368d454-ff5e-4171-99d1-ac6962a22418",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "01:11"
+    },
+    {
+      "id": "2e5939bc-7ebf-4198-bda4-0b0bce4b47f7",
+      "video_id": "ae577a9a-c92d-4933-934a-8316e852ec52",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:22"
+    },
+    {
+      "id": "b33e9c79-8585-4ec4-97cf-103ed14059d1",
+      "video_id": "33d1cb70-7e31-4b3d-baf3-d499deb0ebd9",
+      "stock": "TSMC",
+      "status": "success",
+      "timestamp": "12:26"
+    },
+    {
+      "id": "33e925e2-e834-4b74-89f4-fd1e6135a015",
+      "video_id": "22b42ef8-b20b-4b90-ac91-2791b74eeed9",
+      "stock": "인텔",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "379c967e-5880-4f9f-9bbb-de6707678f82",
+      "video_id": "93ea8a5a-d66e-42b2-b051-190612abb170",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3a2bb51a-ec52-4028-90ec-2f95c4640465",
+      "video_id": "abb68ca1-0a7f-4524-a7aa-3b2d16eff61f",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3a94f8ad-0de0-4f4d-9a7b-2273bde9abe4",
+      "video_id": "bf88d77c-8a1d-486e-8758-149599efa210",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f0267c2a-2578-4fa3-ad56-c0b2bd8b558c",
+      "video_id": "70309891-d4d7-42bb-831c-e367cd6d9cd8",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c2fc4a09-ac4d-4d92-ae8f-9ed6651d8479",
+      "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+      "stock": "TSMC",
+      "status": "success",
+      "timestamp": "00:19"
+    },
+    {
+      "id": "3f95260c-e9c6-4208-905f-3f508048fc02",
+      "video_id": "59ae252a-ff97-4672-9616-259bbbf02b16",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3c74e437-de39-4053-9741-8daefacf515f",
+      "video_id": "d2c4f551-b6e9-4399-b043-e467f1f57004",
+      "stock": "뉴먼트",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d358c322-4518-41a3-9c5a-f53de3030c17",
+      "video_id": "43abb187-6ff0-4405-b15b-4663de89746b",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "00:19"
+    },
+    {
+      "id": "3e1c48d5-3dfa-4769-a7ed-c8d4185f3531",
+      "video_id": "f7c18429-44e0-4c76-bb80-3df8b59ffa44",
+      "stock": "심텍",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3cfa6d2e-27d1-49ff-ab42-babdbcf97c52",
+      "video_id": "9275a6dc-2dbb-4cfa-81c8-386dbd0084bc",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:11"
+    },
+    {
+      "id": "5f181940-c403-4f5e-8917-6f71d67f3a88",
+      "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+      "stock": "가온칩스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b78915fa-dcb7-4dd2-bff6-4d59b7adf53c",
+      "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "02:54"
+    },
+    {
+      "id": "461cf8a8-777c-47ce-a3fa-38341e8b6054",
+      "video_id": "37fb73f3-5e81-4772-88a5-a213d7cddef9",
+      "stock": "퀄컴",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ace9dc7c-4747-4680-af31-9f8d2b8e6a7e",
+      "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3394026e-08a4-4eba-b4ef-f3e295b4f3a7",
+      "video_id": "f92eece3-444f-4661-8116-4bcae7aa6091",
+      "stock": "TSMC",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5115e97d-ffbf-4725-8c7f-e2b51717bff5",
+      "video_id": "b0a020e9-e657-4556-bdb0-b40686ef88ea",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "86ebf240-8a00-4c7d-a36f-56a39936189d",
+      "video_id": "eeadcb2b-4523-4ec0-b5bc-1f7e46e3deee",
+      "stock": "TSMC",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "554bdb1f-d006-4244-a4f1-5426bfe072f8",
+      "video_id": "f7c18429-44e0-4c76-bb80-3df8b59ffa44",
+      "stock": "솔브레인",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ffe2b65a-cc72-40bd-a92c-b5f78c986e69",
+      "video_id": "0d494926-53db-4458-a73f-dce7e0ba56c1",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "615334cf-65ac-4087-b7b1-743835966408",
+      "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "593728e5-348a-4b89-bf56-c358c12a2861",
+      "video_id": "0d494926-53db-4458-a73f-dce7e0ba56c1",
+      "stock": "오라클",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "58b50e81-c0d1-46a8-9b0f-8161d86f55e7",
+      "video_id": "3c17b562-8aac-459f-95f5-4d7fdecf4917",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ce0b0b57-190e-4a50-9ba1-f3179df4aaa4",
+      "video_id": "060f3f2f-1d91-4eab-9846-87c66a058da5",
+      "stock": "메타",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e12e6284-a6bd-4c1c-9895-cfc5037dab49",
+      "video_id": "c85f46e3-202a-4152-83c9-8bb0bbb61ee1",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "34d211fb-0e5b-4cd1-b075-88e064d2553a",
+      "video_id": "3a90458e-5649-4786-8656-5da63463f40c",
+      "stock": "태성",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "80576759-9e95-4c7d-99b3-4a0c653b10ed",
+      "video_id": "3a90458e-5649-4786-8656-5da63463f40c",
+      "stock": "뉴프렉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6bf70394-0ad7-47d7-a9b3-e085b421c593",
+      "video_id": "19e61366-222b-4a08-86d1-0a8febfcf395",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5b2624d4-7445-4f09-821f-dc832a296597",
+      "video_id": "18405bec-d5fc-451f-ad18-9ccd7a539057",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "02:05"
+    },
+    {
+      "id": "65d46857-f86f-4df9-89ab-600f7e35ffed",
+      "video_id": "abb68ca1-0a7f-4524-a7aa-3b2d16eff61f",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6efbc432-ec40-4c23-b46e-286cbd44819e",
+      "video_id": "b7232fc5-f217-4438-af36-83de4543dbd9",
+      "stock": "SK하이닉스",
+      "status": "success",
+      "timestamp": "00:07"
+    },
+    {
+      "id": "be971bf2-008a-42b4-bb2c-5a6608a88d7b",
+      "video_id": "f8aec442-9ca0-4bc9-986a-8306bbfcfa24",
+      "stock": "케이씨텍",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "84111b13-6479-4934-aadc-c2fdbaca136c",
+      "video_id": "f8aec442-9ca0-4bc9-986a-8306bbfcfa24",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "346aa435-3eed-4cab-85f0-678ba2c5f803",
+      "video_id": "1396e06d-d7c2-412e-97cf-9f836f2f9843",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e9b1ed52-b9a7-48fb-a8bd-a46ba5b6e188",
+      "video_id": "1396e06d-d7c2-412e-97cf-9f836f2f9843",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "721b39ab-9f90-4f59-9f82-467993122e21",
+      "video_id": "c3b18194-38bc-4b25-98ab-d95d1e8dfbfe",
+      "stock": "어펌",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "728e051f-452d-451e-be20-8c737c4ad97d",
+      "video_id": "91d82818-b993-4130-908c-d8bb3e3ce97b",
+      "stock": "미코",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "769b7ab8-990d-401c-b6de-4680aa903cb8",
+      "video_id": "adce77b1-8659-41a9-802c-79948347722f",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8ab12b81-95ec-4f04-afcc-eef7292a2519",
+      "video_id": "3a846f8a-b95b-4e1e-90e8-312ff831c6ff",
+      "stock": "티에스이",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6abf888a-8cb4-4e9a-ad34-a54bcb2d736b",
+      "video_id": "e4e7dc24-2c40-4b37-abb5-d7a233ff689a",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "795daef6-b4ef-4818-8945-6413e0ef7e2f",
+      "video_id": "06ae3bdc-d42b-463c-997a-75fba57e042e",
+      "stock": "코카콜라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "7879a2c6-70bb-41f2-9172-a4fa028409e9",
+      "video_id": "de114ec2-8c0a-4a74-99dd-52059ca2976f",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c486a167-2cb6-417e-b214-7f177916f207",
+      "video_id": "e4e7dc24-2c40-4b37-abb5-d7a233ff689a",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "18098536-53e0-495e-bd11-705a28fee1ec",
+      "video_id": "9dd63145-3f18-4f89-9c00-052ca7b82733",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c85efde5-82e3-4333-861b-ce80c1c7b787",
+      "video_id": "c2015995-6c49-48d4-b539-0f71f946a40c",
+      "stock": "하나머티리얼스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "7c2f55ee-87a3-48f6-85e0-18f7cb89a13d",
+      "video_id": "7751879c-5750-4080-a3f6-54b5b8bb9db6",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "7cc29af3-8b7a-4e42-b169-f387456a02bc",
+      "video_id": "1ca614cf-4d18-4cdf-b795-b746eeb209b5",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "7833238b-48ee-42c3-b90f-4ad5c33dd908",
+      "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+      "stock": "두산테스나",
+      "status": "success",
+      "timestamp": "02:35"
+    },
+    {
+      "id": "b7f216a0-fd81-469a-af0e-f1b4363053b2",
+      "video_id": "69606752-f7b7-469b-aee8-ba73acefdc91",
+      "stock": "베일리조트",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "69a1a017-add0-46f4-8782-fe17c2325114",
+      "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+      "stock": "케이던스 디자인",
+      "status": "success",
+      "timestamp": "01:06"
+    },
+    {
+      "id": "77e777ab-2840-4b7d-a624-adb698236bc0",
+      "video_id": "c2015995-6c49-48d4-b539-0f71f946a40c",
+      "stock": "KNJ",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "81367d06-3cac-4a6a-bed0-4e817dcc94d1",
+      "video_id": "377499d3-cf20-4a7e-be09-cc11547c0e9f",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "01:11"
+    },
+    {
+      "id": "87b2a41a-57a7-45d0-bb65-f9c303c6d0db",
+      "video_id": "59db2d82-10df-4384-b2cc-7a6631cd962c",
+      "stock": "넷플릭스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "058b633c-69ae-4a49-a5d8-e59f77fc9a7d",
+      "video_id": "e9c2888e-a2ea-4ef3-a86f-3418b95f6ad9",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ad8e0369-059e-4286-993c-c3adf2d66238",
+      "video_id": "5e3a5af0-546d-46b5-8814-0416ad2b76ca",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "02:32"
+    },
+    {
+      "id": "8cf3fff4-32d7-444c-84c6-00b733ba0f18",
+      "video_id": "7f24db03-1c50-4191-80cc-6ca95702d6de",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "1093382d-04a2-4899-9843-43d519d42eb2",
+      "video_id": "13ca5e8f-2309-4e99-a77b-2ecbe2e8aa4b",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e0744fc2-adb1-4686-9bed-58365c7ba383",
+      "video_id": "b0724020-817f-4b09-9ff7-8fdda0af8160",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "00:22"
+    },
+    {
+      "id": "cfdbcdb6-3827-47f7-8b57-7bc1896b0b81",
+      "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+      "stock": "구글",
+      "status": "success",
+      "timestamp": "01:23"
+    },
+    {
+      "id": "69418bca-2585-4fc5-8c3f-8a31a620b87f",
+      "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+      "stock": "시놉시스",
+      "status": "success",
+      "timestamp": "01:06"
+    },
+    {
+      "id": "43333ce0-748d-4ae4-9c27-18619b0dfe93",
+      "video_id": "c2015995-6c49-48d4-b539-0f71f946a40c",
+      "stock": "동진세미켐",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d14f0d88-c473-4034-ba8b-6bd7a294d310",
+      "video_id": "22f73ebc-dcb1-4800-bb95-0af07f6082e2",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "9d6242d2-6bd4-4c25-b779-106874c7030e",
+      "video_id": "a1e49e80-41ae-4449-bd08-83e62c838a92",
+      "stock": "크리스피 크림",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "cbbed4aa-755d-43dd-9366-48f92bcb3d5b",
+      "video_id": "519561b5-2a66-4b51-9b44-c4b857058f6d",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3cf7b603-e069-419a-a163-7e71829648bb",
+      "video_id": "c2015995-6c49-48d4-b539-0f71f946a40c",
+      "stock": "솔브레인",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "08751e43-ce2b-4e8a-9d87-373033cbc71b",
+      "video_id": "7737dbab-6647-44db-aaa7-324df56eccf8",
+      "stock": "페이팔",
+      "status": "success",
+      "timestamp": "00:18"
+    },
+    {
+      "id": "a1227470-9621-4878-aaff-ca702e3a80ff",
+      "video_id": "1c5a88bd-8cd6-4559-9857-46e079a446b4",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e81f1637-904d-4ea0-a3bd-575ce9036741",
+      "video_id": "c2015995-6c49-48d4-b539-0f71f946a40c",
+      "stock": "한솔케미칼",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c382621f-6592-4064-ba52-7fa3d17d9658",
+      "video_id": "9e3f2bec-52e4-447e-b553-a75b44d30537",
+      "stock": "마이크로스트래티지",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a83c5e41-4635-426f-91f6-8431774e86cd",
+      "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a2e76bab-544a-4058-b9d9-6b8c40e2a327",
+      "video_id": "f2064035-6d7d-4890-9588-82eb39a1f7c4",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:57"
+    },
+    {
+      "id": "bac043ec-5eb9-4e3b-8c48-8672a489e5ac",
+      "video_id": "c2015995-6c49-48d4-b539-0f71f946a40c",
+      "stock": "TCK",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ddb27da5-94bb-4a2d-b47c-e31a01f0af4a",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "원익IPS",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "a778e641-a354-4f0e-b69f-4eac306db1cb",
+      "video_id": "377499d3-cf20-4a7e-be09-cc11547c0e9f",
+      "stock": "마이크로소프트",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ab84e110-0cab-42c6-becf-6077eeeb37a5",
+      "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5",
+      "stock": "파마리서치",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "abc03312-d2ea-4489-b8c2-baee6885ed22",
+      "video_id": "91d82818-b993-4130-908c-d8bb3e3ce97b",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5d9a3c4b-c4c0-437f-8922-7f0c2f7c93ed",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "주성엔지니어링",
+      "status": "success",
+      "timestamp": "03:03"
+    },
+    {
+      "id": "ff7aa057-8800-4fe9-b71e-c490091ecbad",
+      "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ae23b2fe-ea9c-4508-a783-b46200a51cf4",
+      "video_id": "85652a07-1ab7-4bd2-a122-90df083ca101",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2c9c5d6e-b02e-4b6c-a3cb-76ddc8ec882c",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "아비코전자",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "b5f32b15-5216-4b57-9141-606de50063fd",
+      "video_id": "93ea8a5a-d66e-42b2-b051-190612abb170",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "00:10"
+    },
+    {
+      "id": "b727da8a-e6f8-42aa-816b-e593a33840f6",
+      "video_id": "32fa5e6a-1fd7-4148-aa41-d21becef0e28",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b7abc26b-e161-4f38-bd4a-f219059b2a49",
+      "video_id": "b192af4d-8f46-444b-9863-44ce55225b1a",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "01:25"
+    },
+    {
+      "id": "74206ffd-7cef-437c-b14c-91585966209e",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "DNF",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "eb236fb1-417a-44d6-b783-4a5bac68fc78",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "심텍",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "ba60edc2-48d2-4e4b-a658-6371cf0f72eb",
+      "video_id": "8495556c-8d00-4b14-bea8-d646c64ddd9a",
+      "stock": "앱솔릭스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "bea958a6-0d36-48ea-a2c8-68ec679aceaa",
+      "video_id": "6a577b9a-1da5-41cd-81e9-3352b609fe4d",
+      "stock": "제너럴일렉트릭",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3ffc2575-e114-4c3d-9c0f-241ff8d81d25",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "레이크머티리얼즈",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "1ae1ba89-8ab3-491b-b06a-94821b31f2e6",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "대덕전자",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "c042245d-e5bb-4785-ae21-2041b6d2f138",
+      "video_id": "8b9ecbcc-982f-4491-8c6c-54f120e11e0e",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d4308152-5b35-4377-9daf-0c4601384064",
+      "video_id": "db3fc81e-dee7-49c9-b7b1-d34884a0365e",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "00:02"
+    },
+    {
+      "id": "d3de57c5-79de-4e46-8810-369947cacd19",
+      "video_id": "06ae3bdc-d42b-463c-997a-75fba57e042e",
+      "stock": "JP모건",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "dc5bd2b5-4bd8-40a5-8d0f-376696c105b4",
+      "video_id": "d2962ed5-415f-43ee-bb4e-cd685e9d92e4",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "01:55"
+    },
+    {
+      "id": "92a3a753-9fc9-4205-9f80-58edc1d49d52",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "유진테크",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "a24bec77-5adf-4941-b509-7808f8d6c0e4",
+      "video_id": "c4175afe-13b6-48ec-9d78-00721a288b23",
+      "stock": "TLB",
+      "status": "success",
+      "timestamp": "03:06"
+    },
+    {
+      "id": "db815844-33d4-4f24-b2b8-e72d41baac52",
+      "video_id": "d400188d-0f98-49b1-90fc-049041c18e98",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e24d65fb-8cab-4f81-a103-a1b16198fd9d",
+      "video_id": "3e854983-a986-4fc3-bd28-c4e8f084a62d",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e86fe610-2c0d-4a62-81d7-948c409cc52c",
+      "video_id": "37fb73f3-5e81-4772-88a5-a213d7cddef9",
+      "stock": "시놉시스",
+      "status": "success",
+      "timestamp": "02:11"
+    },
+    {
+      "id": "0a553b66-dacb-4601-a5e1-89e1e1f241a2",
+      "video_id": "80cea929-9c36-4c46-bd98-38f9db2a553f",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ea47cb41-0adc-477f-a229-7c3d86aaa768",
+      "video_id": "f561d76c-25c9-47a8-b5af-700732d3f8a7",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ed951661-696d-4c78-8533-e2477f59901c",
+      "video_id": "e45881f4-d6f6-45d9-9abd-169092afdd46",
+      "stock": "컨스텔레이션 브랜즈",
+      "status": "success",
+      "timestamp": "00:22"
+    },
+    {
+      "id": "eeb7aac9-0899-4e97-aa30-69e96e074fd6",
+      "video_id": "4354bec2-c0b7-42bc-b4a7-7e9012181db0",
+      "stock": "AMD",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ed39346e-ed1b-4b75-a22e-79e818cdf647",
+      "video_id": "01c3b3f8-ad50-498a-8ef1-e8aac9cdff47",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f6100433-8826-4293-8af9-2e463d44328a",
+      "video_id": "656a4c2e-08b5-461d-9046-a0521e334ce0",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "05:21"
+    },
+    {
+      "id": "f9b0b477-a8e7-4e16-90be-f79e807f1fba",
+      "video_id": "6a577b9a-1da5-41cd-81e9-3352b609fe4d",
+      "stock": "코인베이스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e0c2bbf3-c9d6-4628-9d5a-049862a5ac6b",
+      "video_id": "047df037-15e8-45ed-95a1-52202d8d15b9",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f9c2e5ea-ad3c-466a-be8c-b691c87ea31b",
+      "video_id": "03253ca4-afeb-47f4-a1bd-680f1d887e7f",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "fad12257-8577-4d63-9a25-e815620ea949",
+      "video_id": "0df8006c-fa61-4491-a7b5-fd8949e69f57",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "844663db-356b-4ee0-997f-35954b9437ce",
+      "video_id": "fef2edc1-0515-4e46-839a-8b6644131303",
+      "stock": "기아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "783d76d6-3b99-49ff-9978-05033c6ac551",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "동진쎄미켐",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "89741ee9-3e7b-45b3-afad-8530609e5aac",
+      "video_id": "c3b18194-38bc-4b25-98ab-d95d1e8dfbfe",
+      "stock": "JP모건",
+      "status": "success",
+      "timestamp": "00:24"
+    },
+    {
+      "id": "fde0d400-0701-4f1c-b1ec-5f35baace1a7",
+      "video_id": "bf88d77c-8a1d-486e-8758-149599efa210",
+      "stock": "AMD",
+      "status": "success",
+      "timestamp": "02:34"
+    },
+    {
+      "id": "d1d2ff32-9af3-4e3b-8ae4-a3ddc9b81a45",
+      "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "71d02525-987f-4993-9d48-bfeef0423b0b",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "나노신소재",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f9e49da7-d962-48d9-bd94-0e2c56c713e6",
+      "video_id": "7412997b-a9d6-4081-8e7f-3059ba53e981",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e7c43627-be0f-471f-9e1c-bba5b41aebd1",
+      "video_id": "554b9bca-c0a3-4d0c-8076-d4c229fc0a6d",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:04"
+    },
+    {
+      "id": "f27be37f-2504-4349-8c59-8de79d2a3fe0",
+      "video_id": "ecdadb37-6dd0-4348-82b4-bd21f6c7dad3",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "02:07"
+    },
+    {
+      "id": "54f01454-e21b-4c20-b256-936956b5605c",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "대주전자재료",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e45f0a1a-707e-466d-9843-bfe57468ba7d",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "유니셈",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5a436e37-dafc-4936-bdcd-758674f0f5e1",
+      "video_id": "d0564837-db2b-4fc9-98b0-da5e9bebcfaa",
+      "stock": "뱅크오브아메리카",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b38ec63b-c9ce-408c-b4e8-d8a97d793515",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "SKC",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "03098e99-4b0c-4da5-bdeb-5a313c344bff",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "제우스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "28ddad41-5001-44fa-89c1-d8fad48d96fb",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "동화기업",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2d5b53a0-aad4-4836-98be-fa0d85942561",
+      "video_id": "06092c6e-05f2-4f8b-a224-5cac6dba2930",
+      "stock": "천보",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b71fda28-c56e-4646-b3f0-d7ace9192e4c",
+      "video_id": "081736ac-7200-4041-a831-29e31997220b",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "138b6ac5-aa4c-443d-a802-4c52260c691e",
+      "video_id": "cdaa5197-b823-49b8-b945-ddd385c73e4b",
+      "stock": "ARM홀딩스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "051d0487-cefa-42f9-b0db-2f91fd67cf87",
+      "video_id": "8418fb82-9c48-4dd5-8260-0e12a316f904",
+      "stock": "두산테스나",
+      "status": "success",
+      "timestamp": "03:40"
+    },
+    {
+      "id": "604d6d39-d334-42d7-88f8-cd0ff46de393",
+      "video_id": "e117e5d2-2296-422c-82a5-b40b3df7f6d2",
+      "stock": "엠투아이",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5f46fd4f-ab25-404a-b599-86200db5c65f",
+      "video_id": "e117e5d2-2296-422c-82a5-b40b3df7f6d2",
+      "stock": "코인테크",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "1470aae4-e764-472d-9610-374ec910c725",
+      "video_id": "cdaa5197-b823-49b8-b945-ddd385c73e4b",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "4a7ae072-e800-4650-ba7e-34bd8beb670f",
+      "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "62aff156-9006-4a74-a5bb-93e3006d695e",
+      "video_id": "75ded159-122f-45d0-b790-eb6b44a878fb",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ef8135d7-a0fd-451a-9823-9e85c1af55a8",
+      "video_id": "fe53e48a-c89e-4958-8361-3907943ff3b2",
+      "stock": "솔루스첨단소재",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c0695623-c6cf-4f96-9c37-eb4a9b292c9a",
+      "video_id": "c551bfde-1370-4b24-94d7-60d0f69a2f5b",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "228890ef-dee8-4590-baca-73deef47f4ab",
+      "video_id": "6fe3ac0c-b14a-4139-9a8f-394a7128665e",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "02:16"
+    },
+    {
+      "id": "bcc4ba4e-4415-4eb2-bf2a-fee7afb93267",
+      "video_id": "67a78357-8dfe-4f87-beff-869b8679759d",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2b5fb510-fa54-44b2-bdc4-e27e6a109ba2",
+      "video_id": "fe53e48a-c89e-4958-8361-3907943ff3b2",
+      "stock": "포스코케미칼",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5d0a397d-bac7-438d-b846-cdcf0bcc5c0e",
+      "video_id": "eca59256-08a2-4a17-8427-004785a370d5",
+      "stock": "네이버",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "27e91ae0-545f-4880-9c17-b5c74deed171",
+      "video_id": "75a3e88b-0b4b-4d8b-861b-51d86ce7c258",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "02:49"
+    },
+    {
+      "id": "2c667222-8d3e-4a03-8505-80ed37bc1f36",
+      "video_id": "0d3971b7-28bf-4473-8641-12398d035cc4",
+      "stock": "컨스텔레이션 브랜즈",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "0a0091eb-da28-4c90-9a7a-6fc245cee650",
+      "video_id": "a1ca7979-3639-4148-9b71-f94c65238fb6",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "942e17e3-8345-4ec1-85db-1d5b1c83d777",
+      "video_id": "2d3a5c2c-66b7-44ee-a8ec-5834fd9b020e",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "48b6b875-6af4-4914-8e93-b63456ec4547",
+      "video_id": "2d3a5c2c-66b7-44ee-a8ec-5834fd9b020e",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "43f7b582-5097-49b7-8719-f3dfbccf3844",
+      "video_id": "69606752-f7b7-469b-aee8-ba73acefdc91",
+      "stock": "하이아트호텔",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f8f16e7d-c3b9-42f8-8752-f3d44ee49a34",
+      "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "41638fcc-600a-487f-a0e9-9577ddfd69c2",
+      "video_id": "2d3a5c2c-66b7-44ee-a8ec-5834fd9b020e",
+      "stock": "브로드컴",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f2fce50a-eb2e-4ce4-8f51-78066ed18a8b",
+      "video_id": "2d3a5c2c-66b7-44ee-a8ec-5834fd9b020e",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5e7f1ea6-55f1-4313-a889-4f05197cd98c",
+      "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+      "stock": "오라클",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "06e10f57-5ec0-4564-bb09-6977ec35b6a7",
+      "video_id": "3f467ce0-9a6c-42a2-9007-f6d2a3f852da",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b98b0999-4f5d-4260-9582-c51cc76c88bd",
+      "video_id": "d1f52ddf-01aa-4dc9-bd7d-096fca78b745",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e0a814d6-3ee0-4698-a810-663002f8b8ae",
+      "video_id": "d1f52ddf-01aa-4dc9-bd7d-096fca78b745",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "53e6935a-c9a9-49bb-bb6c-a710605e41bd",
+      "video_id": "deda9d5c-c5f9-47a1-94f7-bc95b70beca1",
+      "stock": "PSK",
+      "status": "success",
+      "timestamp": "03:37"
+    },
+    {
+      "id": "b20552c0-21dc-4d51-ba57-2d2c915c24b5",
+      "video_id": "deda9d5c-c5f9-47a1-94f7-bc95b70beca1",
+      "stock": "테스",
+      "status": "success",
+      "timestamp": "03:27"
+    },
+    {
+      "id": "707e2a07-bbcd-433f-ae3d-f738a82c438a",
+      "video_id": "5d753d07-a4f8-47e5-af61-2caffbfcf29f",
+      "stock": "PSK",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c56a4b2d-bf22-425a-80ec-6ca3439e4ae3",
+      "video_id": "eeadcb2b-4523-4ec0-b5bc-1f7e46e3deee",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b647c9b7-7aa8-42db-9649-1337d5d51dc8",
+      "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "00:12"
+    },
+    {
+      "id": "3e7ef6b9-bd37-4b7e-bbf1-112ec9b449e3",
+      "video_id": "c5e09aff-28cc-4eec-bd3f-95ed099d77fd",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "00:17"
+    },
+    {
+      "id": "53008b15-a438-4f9a-8dd2-98e247f641b9",
+      "video_id": "5de08e26-058d-4f44-be7b-f8f995a0fdce",
+      "stock": "심텍",
+      "status": "success",
+      "timestamp": "03:01"
+    },
+    {
+      "id": "2fee6153-ec12-4b8c-b3be-823926910dfb",
+      "video_id": "59ae252a-ff97-4672-9616-259bbbf02b16",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a1505487-b8ad-48f0-ba9a-d05dde7e6e69",
+      "video_id": "02e54d26-e556-453f-88ce-cf4d5e07cf38",
+      "stock": "ISC",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f4c1482f-f53f-407b-a516-bf4f2c900b77",
+      "video_id": "02e54d26-e556-453f-88ce-cf4d5e07cf38",
+      "stock": "넥스팅",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "9c2f0f22-facf-42fc-bc50-04328f8876fc",
+      "video_id": "0d494926-53db-4458-a73f-dce7e0ba56c1",
+      "stock": "브로드컴",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c2230cc0-4030-4a29-9e89-e354806ffca4",
+      "video_id": "0d494926-53db-4458-a73f-dce7e0ba56c1",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c6b01884-7b83-40bd-9788-0d41a63d4681",
+      "video_id": "89a54df5-12f9-4003-8f1e-db1e780a19d9",
+      "stock": "이수페타시스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "cac2c300-cd81-4f7e-a8f1-cf621d5a80aa",
+      "video_id": "82b124b1-fa9a-4443-be0f-00b6a66df288",
+      "stock": "SK하이닉스",
+      "status": "success",
+      "timestamp": "01:21"
+    },
+    {
+      "id": "d016401d-d0d2-44d3-b093-55d420e316a7",
+      "video_id": "89a54df5-12f9-4003-8f1e-db1e780a19d9",
+      "stock": "심텍",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "4ada0476-7506-442d-be12-8d1ab37e6f07",
+      "video_id": "cf48c4f6-7cb9-442b-b79a-2a90d24db3f1",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "02:35"
+    },
+    {
+      "id": "2deb64ad-fabc-4140-93b6-154315c364c8",
+      "video_id": "cdaa5197-b823-49b8-b945-ddd385c73e4b",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "69ffed40-907c-4f6c-b626-79229cf2329e",
+      "video_id": "ecdadb37-6dd0-4348-82b4-bd21f6c7dad3",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "52fa0f86-ed22-409c-9924-20e1d955d3cc",
+      "video_id": "f11267ec-0836-4002-a90b-3afe602a58df",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "00:02"
+    },
+    {
+      "id": "71252d6b-d57c-4fef-a640-db4d5893c17a",
+      "video_id": "5b0fc074-0a47-46fe-a046-638e72056f6b",
+      "stock": "메타",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "70fbc8fb-0471-4aea-859d-9c3e4ad9eaaf",
+      "video_id": "64ce4bcc-8d4f-4563-8798-4d2bafff6360",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "00:28"
+    },
+    {
+      "id": "d4d4ee0f-049a-42e2-890e-9e06f52b7a47",
+      "video_id": "79b2aaac-41bd-4ef6-b54a-b30e0dd0ed87",
+      "stock": "하나마이크론",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ddbac091-9d18-4293-b515-3534230f5a25",
+      "video_id": "79b2aaac-41bd-4ef6-b54a-b30e0dd0ed87",
+      "stock": "미코",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e38bc470-4ffd-4d87-bd67-00b726d56e23",
+      "video_id": "b0cdbc85-b566-4db1-9745-b736a8c83c68",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e4dd0e56-5910-47d8-b507-e9c728a5e8e9",
+      "video_id": "a36a34b1-8a30-4d95-b754-36d45c51db46",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:57"
+    },
+    {
+      "id": "b2853e6a-fb89-4810-a8ca-02375f9d4712",
+      "video_id": "82f79e9c-8e9b-4815-8deb-69df2cb18091",
+      "stock": "필롭틱스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "83ddf62e-c693-4b9b-800e-ef65cef1c735",
+      "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+      "stock": "엠코테크놀로지",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "81e3bc36-6ddc-40b4-84d0-eee9752d2177",
+      "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+      "stock": "퀄컴",
+      "status": "success",
+      "timestamp": "00:14"
+    },
+    {
+      "id": "8e65751a-d321-4738-a228-7c99003aa62b",
+      "video_id": "e9c2888e-a2ea-4ef3-a86f-3418b95f6ad9",
+      "stock": "메타",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "aa7a5cfe-7469-49d6-ba0b-8f65d471b395",
+      "video_id": "82f79e9c-8e9b-4815-8deb-69df2cb18091",
+      "stock": "HB테크놀로지",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ce2f42b7-645a-4e6c-bdb6-10f9eb3e5aec",
+      "video_id": "ecdadb37-6dd0-4348-82b4-bd21f6c7dad3",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "60723ec6-b22a-4668-aa90-687540a23830",
+      "video_id": "1b69ce70-0e8c-4c21-b2f9-707cdc43ed0b",
+      "stock": "마이크로소프트",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "0c304701-7788-4853-87a9-15740f717dd8",
+      "video_id": "82f79e9c-8e9b-4815-8deb-69df2cb18091",
+      "stock": "야스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d30ce2c1-e20f-4da5-b7d4-03b5190d93ba",
+      "video_id": "0d3971b7-28bf-4473-8641-12398d035cc4",
+      "stock": "크리스퍼 테라퓨틱스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5663cf93-950e-4e8c-88a1-e7656e4ad8e9",
+      "video_id": "1b69ce70-0e8c-4c21-b2f9-707cdc43ed0b",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e3cc951c-101d-4feb-b611-cf6704fdab9d",
+      "video_id": "060f3f2f-1d91-4eab-9846-87c66a058da5",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:02"
+    },
+    {
+      "id": "9eb9c4cc-3472-4e99-ba29-438aa1e0a914",
+      "video_id": "78e7047d-ac04-4687-b16e-3292be6db9e9",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "84a8d34b-15ac-4b95-91b3-79f33935b7e1",
+      "video_id": "563f6941-53f2-4931-8d99-07c14f0bc381",
+      "stock": "엠투아이",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "9a5bc854-4118-445b-ad4b-ce12f699fb43",
+      "video_id": "6327cd19-9ee4-4483-b3d3-1cccbbf23073",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "0b515590-5be8-4452-99d5-22dea940a163",
+      "video_id": "060f3f2f-1d91-4eab-9846-87c66a058da5",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "32b06bca-4dbd-40a5-9e63-08f7c2c8c854",
+      "video_id": "fa63d50b-3610-49d0-aa78-c33c9420789b",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "45ed6d66-c154-46b1-8754-095a6e41f5e7",
+      "video_id": "fa63d50b-3610-49d0-aa78-c33c9420789b",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "00:19"
+    },
+    {
+      "id": "2d7a50a6-1dfa-404e-b9f9-accbe2298cc6",
+      "video_id": "f6b446a0-7981-4ce8-a167-0800ad573c91",
+      "stock": "TSMC",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "bfdb3601-cbce-49f9-84d7-cfe1c99c6560",
+      "video_id": "563f6941-53f2-4931-8d99-07c14f0bc381",
+      "stock": "고영",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f888541d-2e53-4579-bd12-4a9327149826",
+      "video_id": "563f6941-53f2-4931-8d99-07c14f0bc381",
+      "stock": "제우스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a2e5ba0a-d4db-4710-a002-39492f3a3604",
+      "video_id": "563f6941-53f2-4931-8d99-07c14f0bc381",
+      "stock": "SPG",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "987390e2-0515-4283-967c-f8301998157d",
+      "video_id": "2ccec2a1-fc57-49e8-baca-a67d2c045d71",
+      "stock": "TIGER 미국 필라델피아 나스닥 반도체 ETF",
+      "status": "success",
+      "timestamp": "12:39"
+    },
+    {
+      "id": "ad397d46-154f-44ec-ab44-725c0b460022",
+      "video_id": "2ccec2a1-fc57-49e8-baca-a67d2c045d71",
+      "stock": "TIGER 미국 필라델피아 AI 반도체 나스닥 ETF",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f75c0677-4fe8-45ab-8953-403dcfb16ded",
+      "video_id": "dbec531a-69eb-48a9-a6fd-5cb7182e1326",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2c9b045d-3cc3-4e20-8ae9-445b1949afac",
+      "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5",
+      "stock": "KB금융",
+      "status": "success",
+      "timestamp": "02:50"
+    },
+    {
+      "id": "f8500822-e423-474b-adb5-665749a12859",
+      "video_id": "dbec531a-69eb-48a9-a6fd-5cb7182e1326",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "fdc9ca48-9d98-42a1-b68e-cc62af14da3c",
+      "video_id": "711df523-f21b-4195-90ce-c772817c0029",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "03:58"
+    },
+    {
+      "id": "de266fc4-64ae-4d14-9c58-559b05f9544e",
+      "video_id": "dbec531a-69eb-48a9-a6fd-5cb7182e1326",
+      "stock": "알파벳",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "80d1e904-857b-47d7-a1ce-d60c71128b07",
+      "video_id": "b5e3a15b-3dce-4b13-8000-ef09b0f6fe60",
+      "stock": "넷플릭스",
+      "status": "success",
+      "timestamp": "37:57"
+    },
+    {
+      "id": "aebb902a-4ff6-498d-961c-0067bb5ac756",
+      "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5",
+      "stock": "현대로템",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8034fb0c-8be6-431f-b0f8-25c1c8547131",
+      "video_id": "aaf27cd7-f0de-4bc3-b4c1-ff87abe31ddf",
+      "stock": "HFR",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "950cda65-5ef7-4123-aabe-1dc0338d7811",
+      "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e158f873-2de8-47f4-b979-970d9ade6d6b",
+      "video_id": "11038e24-e5eb-4fb1-8ac1-a3330873f4b2",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "563377b5-56cc-4b3e-ae40-b0f1a62ccbd0",
+      "video_id": "66666228-bf3a-4b1d-b616-d43885ba2a08",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8f506dde-682f-4f78-a71c-86a42b820de9",
+      "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6cd0fb46-a658-4e10-b032-ee73563d715d",
+      "video_id": "b86ea04e-7a5e-4d11-b3bc-483cddc54c28",
+      "stock": "SK하이닉스",
+      "status": "success",
+      "timestamp": "02:20"
+    },
+    {
+      "id": "8ffedca5-be48-4cd7-8edc-a44f7553f113",
+      "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5a37aebe-99e3-4d5d-af7c-411349e1d537",
+      "video_id": "232b21ae-4d55-43e3-b955-1257cb6aeb96",
+      "stock": "원익IPS",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "9e13a1a4-f131-4a1c-82df-d1e5384e466c",
+      "video_id": "232b21ae-4d55-43e3-b955-1257cb6aeb96",
+      "stock": "PSK",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "af7eb78c-459f-4664-be5f-e0cc31511b4d",
+      "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c5226235-0973-4c3e-91cf-86a31618509d",
+      "video_id": "232b21ae-4d55-43e3-b955-1257cb6aeb96",
+      "stock": "두산테스나",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "514e8ab2-9945-4cf8-b1c6-2e2c57551c2f",
+      "video_id": "232b21ae-4d55-43e3-b955-1257cb6aeb96",
+      "stock": "코미코",
+      "status": "success",
+      "timestamp": "06:20"
+    },
+    {
+      "id": "e7b638f9-679e-4c3c-8dbc-2b59edbc072e",
+      "video_id": "1b69ce70-0e8c-4c21-b2f9-707cdc43ed0b",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8c1588c1-90f6-4ba9-b9b5-2acc1cd5a656",
+      "video_id": "a7fe1479-f26d-48ca-854f-0842f37113e2",
+      "stock": "삼성전기",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e764d786-c77a-4b3d-ae08-1838b2355c86",
+      "video_id": "8f49bbf2-a07d-4cf4-9ed6-80b09f3adb3b",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "05a764d8-bfa3-47cb-be6e-d5a5b902b939",
+      "video_id": "a7fe1479-f26d-48ca-854f-0842f37113e2",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "05d49eb9-acff-4387-8963-550787103669",
+      "video_id": "41516750-f657-49ca-8b6c-57a8229ded27",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e39ed051-9fdb-4201-81be-f8f87d5a9039",
+      "video_id": "912a3808-8336-45f8-8201-9ba2ffae95e5",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e8ce469b-0fae-4433-a4f7-9ea5d36c270d",
+      "video_id": "9970ad31-cd10-4db9-a2af-141fd45dd422",
+      "stock": "기아",
+      "status": "success",
+      "timestamp": "12:30"
+    },
+    {
+      "id": "ea583763-a694-4bf4-940a-398e5a5f1c1f",
+      "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+      "stock": "두산테스나",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "31aa128a-6151-4683-b4d0-494dfa99faf9",
+      "video_id": "a7fe1479-f26d-48ca-854f-0842f37113e2",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f009e951-e3eb-4084-8f53-a5f485868186",
+      "video_id": "10043dbd-213e-488b-8bfe-a06743558456",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "03:50"
+    },
+    {
+      "id": "eeb36701-7f98-4fc4-9db8-abedf323667f",
+      "video_id": "e76edfab-ce52-45d8-bd94-67eb783ed8b0",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "88a34cff-ae74-4375-8393-f81ca6552b62",
+      "video_id": "79e8893c-c1c0-4adc-b846-017c1998d81f",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ec5aa495-05d8-4e4a-82dd-e5b7d10269c1",
+      "video_id": "f0909fa5-d520-4455-b80c-94aac37b3da4",
+      "stock": "LG이노텍",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "9d61fe6e-c05c-4262-9767-b0c53ce7f61c",
+      "video_id": "9daa3302-c6f4-45f5-a398-01a9f65f14aa",
+      "stock": "브로드컴",
+      "status": "success",
+      "timestamp": "03:36"
+    },
+    {
+      "id": "0bdeba8a-0763-416a-80d2-afe60489251e",
+      "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+      "stock": "동진쎄미켐",
+      "status": "success",
+      "timestamp": "00:22"
+    },
+    {
+      "id": "b85ebd58-762f-4d9a-98e8-cf1807927aec",
+      "video_id": "f0909fa5-d520-4455-b80c-94aac37b3da4",
+      "stock": "PSK",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "2caddd5d-e324-49ac-a160-24865e521c4e",
+      "video_id": "93a387e4-a21e-44b6-adcc-310948c12cb5",
+      "stock": "한화에어로스페이스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "fa12c37c-1799-47a3-b377-0cf37e286d0b",
+      "video_id": "bb3b14a5-6506-4e7b-9ee6-6e626c8a84c2",
+      "stock": "에이디텍",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "58bc051d-20cb-40bd-ba2e-e172fc223ab6",
+      "video_id": "eca59256-08a2-4a17-8427-004785a370d5",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a095b09e-246b-474d-962a-9fa0002e9afc",
+      "video_id": "123e784a-a3cb-4c1e-9313-78bde403663f",
+      "stock": "삼성전기",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "09cecd10-0cc7-4125-81d2-864872db2f97",
+      "video_id": "fed2e151-add8-4e03-8d30-b6667d0042da",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "97ee7fe6-94f5-4702-8427-bbb2e5ed38de",
+      "video_id": "2e2c07ef-1403-42ba-b89c-13c586886381",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "663d6874-18f4-49f6-9a55-68b1677b03d9",
+      "video_id": "e38fd5aa-2d74-48e7-b24c-25f4a7ea7c14",
+      "stock": "테스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b3e520f8-e29c-4024-9517-e53193d77e75",
+      "video_id": "e38fd5aa-2d74-48e7-b24c-25f4a7ea7c14",
+      "stock": "KCTech",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "22956f5a-2289-42ff-894b-cba4ca782702",
+      "video_id": "c1eeec77-5388-48e4-b2ac-d9e57883dc49",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "029b47d0-ee99-4d31-bb84-07fce020659e",
+      "video_id": "bb123c6b-c7f5-4a8e-945d-11db1bb6ed45",
+      "stock": "아이온큐",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ed45f9fa-7953-4038-a0d3-ae654d942c47",
+      "video_id": "3e3a4ffc-db30-48f7-8919-e114098945d2",
+      "stock": "TSMC",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ee3264a0-8570-4b34-abd3-c36700e7868d",
+      "video_id": "98a76d69-6bb2-4d93-8168-4b063da57812",
+      "stock": "삼성SDI",
+      "status": "success",
+      "timestamp": "02:34"
+    },
+    {
+      "id": "7c27122b-90c7-402b-a960-d7d75c430cab",
+      "video_id": "3e3a4ffc-db30-48f7-8919-e114098945d2",
+      "stock": "리노공업",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3caa2658-9cab-42af-9ed3-f9ed265f6356",
+      "video_id": "98a76d69-6bb2-4d93-8168-4b063da57812",
+      "stock": "삼성SDI",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3066dac4-43a6-48be-a5a9-f1c1e9654d0f",
+      "video_id": "3e3a4ffc-db30-48f7-8919-e114098945d2",
+      "stock": "심텍",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "37b20712-9a29-4573-b6a9-9febb5f5b9cc",
+      "video_id": "64ce4bcc-8d4f-4563-8798-4d2bafff6360",
+      "stock": "인텔",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "42acc925-7c59-49bc-8e9e-0b2668b0407d",
+      "video_id": "4fa4a681-9f0e-4fdc-a611-48ee2b072865",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "12:45"
+    },
+    {
+      "id": "c938fbba-cf04-4904-a295-a607b78b640e",
+      "video_id": "51767b89-2066-40e6-97dd-9d3eef2b59c2",
+      "stock": "몽고디비",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "801abd94-0ce5-4366-8156-01b78b3e51a8",
+      "video_id": "3a17ad46-d367-423e-8029-3260e401c0ca",
+      "stock": "현대차",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e4f83de3-148e-46d4-b348-cc1b6cecabe9",
+      "video_id": "822b101a-0bcd-4691-b1c4-8609d1a1aff6",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e11ea0c6-f62d-4d54-b9cf-26540e442204",
+      "video_id": "ce08c817-a311-4001-8eff-ea26a43c20ed",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "02:01"
+    },
+    {
+      "id": "c0759d36-dcba-412d-b46d-fcc464eb5d23",
+      "video_id": "12b9dc31-c8fe-45b6-9243-25320d1f095e",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d40c55ca-34d0-4669-9713-48dc3614c52e",
+      "video_id": "49080e45-d0a4-46bd-8305-084bdb319e65",
+      "stock": "카카오뱅크",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d31cd7a6-8485-490d-a48b-652cee387cd4",
+      "video_id": "44933662-1a45-44d2-ad61-512e2ab61b99",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ab5565c8-f87d-491d-ac1d-1e27eb133af7",
+      "video_id": "69606752-f7b7-469b-aee8-ba73acefdc91",
+      "stock": "MSCI",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3724c377-fe6b-48f0-b147-74a9d74fa884",
+      "video_id": "13ca5e8f-2309-4e99-a77b-2ecbe2e8aa4b",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f266ec71-a29d-4130-aa1d-432b9a61611d",
+      "video_id": "13ca5e8f-2309-4e99-a77b-2ecbe2e8aa4b",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "12cf2efb-ae2e-4f42-97fc-cddcfed11334",
+      "video_id": "7737dbab-6647-44db-aaa7-324df56eccf8",
+      "stock": "구글",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "bac46ce1-22cf-44d5-914c-b97a0d199de6",
+      "video_id": "5de08e26-058d-4f44-be7b-f8f995a0fdce",
+      "stock": "이노텍",
+      "status": "success",
+      "timestamp": "03:05"
+    },
+    {
+      "id": "0d6e525d-bb46-4929-919c-1ac7c77f31bb",
+      "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b0ac0bb8-68e1-47d4-ac30-10fb1234ec45",
+      "video_id": "77dc943b-c4a4-42b2-b3b1-38171772f2a9",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8322b271-551b-43be-9bcb-f62bae91cb66",
+      "video_id": "d96e7b47-0771-4401-bf34-02d5d50639a1",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "14c248e4-15ed-4cb6-a83b-ff225bf9fafb",
+      "video_id": "c85f46e3-202a-4152-83c9-8bb0bbb61ee1",
+      "stock": "인텔",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "1c1d8c01-1083-46c2-be56-f1fa30651faa",
+      "video_id": "ea21e408-c5ac-4b75-9891-95371521f345",
+      "stock": "네이버",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "917a30ec-4914-4e05-ba93-740165a4394d",
+      "video_id": "91d82818-b993-4130-908c-d8bb3e3ce97b",
+      "stock": "하나마이크론",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "cfa14a5a-07c5-41c5-a814-07ecc74f7f2f",
+      "video_id": "db471d9e-8357-4e5c-8a54-cb3fddb9b6c4",
+      "stock": "솔브레인",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d196b652-744e-4aea-b2a8-4fe28ce92fa4",
+      "video_id": "75a261ce-0981-49d4-bbc1-f3e7639468f2",
+      "stock": "버크셔 해서웨이",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "44704919-eb81-4752-8fc3-19cf0801959c",
+      "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e6bda9a9-62fa-4558-9c0c-6ceed3fba705",
+      "video_id": "a1d4e814-e6a7-4960-9817-6f3d57019fde",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "00:02"
+    },
+    {
+      "id": "b03e8192-df19-4891-bceb-81454aacd013",
+      "video_id": "17cfbd09-7f0a-4608-b26c-f1b45442e557",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "10d62044-a137-4ccb-a74a-70e79b77d7e7",
+      "video_id": "39af56aa-81ac-4227-9235-d6387844bf48",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "1222535e-b86f-4097-b24b-6ed4be196019",
+      "video_id": "90642423-4c58-43a7-9614-be7bc0e8507b",
+      "stock": "브로드컴",
+      "status": "success",
+      "timestamp": "00:06"
+    },
+    {
+      "id": "36b85714-3d5d-48c2-a8b3-09b70e784be6",
+      "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+      "stock": "한미반도체",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "166e50e2-360e-4068-9105-e10cf586f845",
+      "video_id": "59db2d82-10df-4384-b2cc-7a6631cd962c",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "16d17ecf-efc6-4afa-92f7-2d2511c819d0",
+      "video_id": "2c9c23e3-3d32-466f-b25c-2f0250d8de0b",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "23326b0f-838c-4825-ab54-14a5e5a62012",
+      "video_id": "ce08c817-a311-4001-8eff-ea26a43c20ed",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "27b56f86-1c60-4f28-83a4-16467e5f22d4",
+      "video_id": "bbb001a4-4a64-4b30-b81f-568f990e97ee",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "25019939-7755-4fbb-91c2-3d3df1f157b4",
+      "video_id": "a7ebb65a-5c0b-43ef-90ca-19b82a826956",
+      "stock": "고려아연",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8844d00f-3ec0-485e-a0d0-7de1b3d17f80",
+      "video_id": "54883b37-46ff-4fe5-becb-f8f3a5bc8647",
+      "stock": "마이크로소프트",
+      "status": "success",
+      "timestamp": "02:07"
+    },
+    {
+      "id": "37c811dd-498b-499e-9014-43fe943b8104",
+      "video_id": "3a17ad46-d367-423e-8029-3260e401c0ca",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "389a3a64-66b4-4b0f-9cc2-06fe5fdf39a9",
+      "video_id": "f7c18429-44e0-4c76-bb80-3df8b59ffa44",
+      "stock": "유진테크",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3a064846-bf7c-457c-b8a7-843756bf2839",
+      "video_id": "375da29f-6a13-49aa-959e-70999fda3078",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "3950fe64-8942-4ffe-a1b0-2469864f3f64",
+      "video_id": "547976d2-2c8a-40c8-a452-82d311af26fe",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "42dace27-ef94-49cf-98af-76a96f2cba49",
+      "video_id": "077debb2-d635-4512-ad40-70b84070d5e2",
+      "stock": "카카오뱅크",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6389b61f-9c18-4e40-a97a-872b14915ed4",
+      "video_id": "37fb73f3-5e81-4772-88a5-a213d7cddef9",
+      "stock": "램버스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "46e4953a-88db-4aaf-bd32-dfa9d3c8d2ab",
+      "video_id": "c85f46e3-202a-4152-83c9-8bb0bbb61ee1",
+      "stock": "퀄컴",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "4b728f9c-f588-469e-a31d-f920b8aca6d3",
+      "video_id": "03a2af36-934f-43ac-847e-d98d9400d57a",
+      "stock": "LG에너지솔루션",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "4be62512-acf7-409a-83bf-e8948e05e98c",
+      "video_id": "375da29f-6a13-49aa-959e-70999fda3078",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "565f90cb-9faf-4332-a263-3ad4c7a466cb",
+      "video_id": "3df2c39b-4ddf-4a4e-9f84-44e26065dce6",
+      "stock": "셀트리온",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "588b4e17-ea8f-4072-9674-7afd0a7f2f72",
+      "video_id": "6d486431-e5b1-4cb6-98ad-ccf250254388",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5a567d56-8ec2-4686-ab7d-b759ab74f500",
+      "video_id": "abb68ca1-0a7f-4524-a7aa-3b2d16eff61f",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5f747510-e7c5-4c72-97ad-5f3af498f948",
+      "video_id": "15c39830-aff7-4f2c-a00a-4f663385af9f",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "5d698e13-0c75-43d6-bcca-147edf60bf2c",
+      "video_id": "35c0cc83-295c-4dea-81f0-0add488f77b2",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "02:14"
+    },
+    {
+      "id": "6fe48927-088c-4000-a40a-cd90cb75746a",
+      "video_id": "340306ed-f514-4e28-9b29-24733e04dae1",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "70a3fff6-e899-4c28-bb98-4396ce48f0a9",
+      "video_id": "7bcdc128-70bc-479c-9d6e-01c99a789a7a",
+      "stock": "엔페이즈 에너지",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "6f0575ff-7b87-4e32-9ef2-565f046c65d7",
+      "video_id": "480aca45-271e-4018-85e1-56327da7529b",
+      "stock": "풀 코퍼레이션",
+      "status": "success",
+      "timestamp": "00:28"
+    },
+    {
+      "id": "7832fd96-e36f-4190-8529-f981893cf656",
+      "video_id": "a9960100-c406-41aa-8491-fb7031d13b0d",
+      "stock": "AMD",
+      "status": "success",
+      "timestamp": "00:11"
+    },
+    {
+      "id": "7aef7261-3715-4c2d-8fbd-5cb7e7d9185a",
+      "video_id": "f7c18429-44e0-4c76-bb80-3df8b59ffa44",
+      "stock": "동진쎄미켐",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a77ba3bc-7841-4da8-a7f1-6ecc835a88ff",
+      "video_id": "02cc2933-297d-403f-9338-b01d3680500f",
+      "stock": "LG에너지솔루션",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "829d66f4-8f8e-4428-a188-8d7c807638b5",
+      "video_id": "21ef25b1-44fd-469a-9361-328513c59b30",
+      "stock": "ARM홀딩스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "8372cb1f-0f56-433d-b855-3fe01d2ce7fc",
+      "video_id": "86a754a2-abf2-4f40-9c61-9297a89380b1",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "86da3d18-b7e7-4374-a8b2-2c9298839232",
+      "video_id": "ea21e408-c5ac-4b75-9891-95371521f345",
+      "stock": "SK가스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "87f74afb-6fe9-4525-a288-3f06fad7b06c",
+      "video_id": "d8eb5b50-db78-446d-acfb-b14420eedc0a",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a8db861f-ab2b-42bb-b06b-a9faecc3979b",
+      "video_id": "bbb001a4-4a64-4b30-b81f-568f990e97ee",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ab46eb80-1ecc-44f6-94e2-68034d98b5f0",
+      "video_id": "e76edfab-ce52-45d8-bd94-67eb783ed8b0",
+      "stock": "GE버노바",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "abcb352f-7a32-4671-8d73-778809c499ee",
+      "video_id": "30bf6b0a-5ee6-4e0a-8f38-c1de7cebe44b",
+      "stock": "마이크로소프트",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b2fe810e-29dd-45be-bf94-965dc9ad7abe",
+      "video_id": "37fb73f3-5e81-4772-88a5-a213d7cddef9",
+      "stock": "케이던스 디자인",
+      "status": "success",
+      "timestamp": "02:00"
+    },
+    {
+      "id": "b8e671f7-981b-4738-8c9d-6bed3a74e276",
+      "video_id": "7670db59-3188-40e5-8e90-d7154b2cac7a",
+      "stock": "팔란티어",
+      "status": "success",
+      "timestamp": "03:11"
+    },
+    {
+      "id": "ba3a350e-41fa-4ebd-83d8-76a0c9c1c573",
+      "video_id": "4e59b163-d1e1-41c0-ba3f-5953e2384096",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "bac53753-ce06-4f0e-ab83-db041db85b8d",
+      "video_id": "4b595d39-7b89-450b-8f0e-4e7e2b4a0f50",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c27b5f29-4b05-4343-85b3-2979c7f8ae1f",
+      "video_id": "ce4fbb6d-426e-4f8d-b885-7441fadd0627",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "c3b339ff-95be-4150-85a4-75485bc6195c",
+      "video_id": "6588b57b-3aeb-4564-8a47-7b463041b55a",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d05d72fa-b68f-40c5-86e2-47e2b1ada0c2",
+      "video_id": "e5375198-0257-4641-a600-d2ee3e6cb114",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "d68b5330-9833-41ef-9094-ba63837bfab4",
+      "video_id": "9a74f556-8562-485b-aff3-5fa053da4538",
+      "stock": "네이버",
+      "status": "success",
+      "timestamp": "00:18"
+    },
+    {
+      "id": "d659f07e-d0a8-4262-99e9-c7458a91370a",
+      "video_id": "163a2cb1-4a6b-4032-950a-04ff6be71f13",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "00:19"
+    },
+    {
+      "id": "e41b4033-0426-41a1-b0bc-408e6d0e58b3",
+      "video_id": "2f816718-f897-439b-9313-5445b418879c",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e5f8573f-72f0-4c24-bf08-69010ea10941",
+      "video_id": "e284ee64-d2f0-471f-a5cb-6a5cd16e57c0",
+      "stock": "ARM홀딩스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e83ddcec-7e88-4b9d-8fbb-e7867e422b4e",
+      "video_id": "b5dba2de-6886-41bf-92c0-3df833c5e437",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e65dc190-b899-453b-a581-47df8c11ea05",
+      "video_id": "c551bfde-1370-4b24-94d7-60d0f69a2f5b",
+      "stock": "테슬라",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f1bb4730-070d-443f-96f9-7d3b1f6ca6e8",
+      "video_id": "5e3a5af0-546d-46b5-8814-0416ad2b76ca",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "ed6d545f-6793-4f75-9afd-8cb15a0e53f8",
+      "video_id": "37fb73f3-5e81-4772-88a5-a213d7cddef9",
+      "stock": "ARM홀딩스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "eca52658-f131-43be-be24-c3a562fa2b44",
+      "video_id": "22c1c93d-5325-4f54-b46e-17d82a6dc1bc",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f0e89897-6d2c-446d-9222-a01855d27bf4",
+      "video_id": "fa0e6020-8485-43e1-81c4-aacd1891d534",
+      "stock": "SK하이닉스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f3af1ba7-75cb-47bf-843f-6bac54606a41",
+      "video_id": "a9960100-c406-41aa-8491-fb7031d13b0d",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f9c72f1c-3df7-46f1-821c-3490afe07bd1",
+      "video_id": "2eafa800-31e3-47dc-8d21-7bf353f380da",
+      "stock": "네이버",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "fc366143-76a6-4d8c-93f7-ca30f41a461e",
+      "video_id": "d2aeab79-ae1c-40ee-bef0-ffd47dea705e",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "00:02"
+    },
+    {
+      "id": "fae714c0-56fe-460e-8ac0-5b24a8f7915e",
+      "video_id": "75a261ce-0981-49d4-bbc1-f3e7639468f2",
+      "stock": "옥시덴탈 페트롤리엄",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "68b5b9a0-450b-42a2-954a-87af2d3d40c7",
+      "video_id": "69641510-829c-4ead-a6ff-af85b04a76f9",
+      "stock": "페이팔",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "e2a0f747-4af8-4948-b248-9a10326a01b7",
+      "video_id": "a83a633b-27e6-42b0-a252-001c9ee2b252",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "00:22"
+    },
+    {
+      "id": "57c78b4e-4c0c-482f-bbb2-6d00424e5e57",
+      "video_id": "49080e45-d0a4-46bd-8305-084bdb319e65",
+      "stock": "LG화학",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "0430bfb2-3554-44fe-9b46-28cb9cc0292f",
+      "video_id": "8cdd91e7-6a6f-4727-bc33-78f297c6039d",
+      "stock": "애플",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "527bd07f-4452-4ff6-9300-6fc1613a25c7",
+      "video_id": "2007adf3-b27a-4823-bdea-8181fa6575c6",
+      "stock": "엔비디아",
+      "status": "success",
+      "timestamp": "02:06"
+    },
+    {
+      "id": "973963c0-50a9-4745-916a-b1cee56fe1bd",
+      "video_id": "403e0eae-931a-452f-998f-433f91803b7a",
+      "stock": "삼성전자",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "b4bf9db5-3d8c-46c9-9a21-0736b81fb935",
+      "video_id": "d8eb5b50-db78-446d-acfb-b14420eedc0a",
+      "stock": "팔란티어",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "4ac70a2d-a550-4940-aed0-cd9cbf8e0042",
+      "video_id": "1b599c30-8807-43ab-910b-6b3256788eb9",
+      "stock": "코인베이스",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "55274017-b071-488e-83b6-891321a64057",
+      "video_id": "d8f8940c-9ccb-44d6-92b7-0182db493d38",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "02:31"
+    },
+    {
+      "id": "7fd547b8-8b4f-4e02-9011-8e11a1d115e2",
+      "video_id": "ea2f0363-c3b4-475f-aa7f-4f824607d03b",
+      "stock": "카카오",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a0339c4b-09f4-49b3-b285-d1cbbeb21245",
+      "video_id": "02cc2933-297d-403f-9338-b01d3680500f",
+      "stock": "테슬라",
+      "status": "success",
+      "timestamp": "12:24"
+    },
+    {
+      "id": "a986e63e-3d7d-4631-b4ec-823a4385a706",
+      "video_id": "776b38b9-9e05-474d-9bf9-6cdd24f55b98",
+      "stock": "AMD",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "a2fff166-ad5a-4845-b9c0-002ceb506893",
+      "video_id": "d72b985f-5a13-45de-9c61-139bfcc6bda4",
+      "stock": "엔비디아",
+      "status": "gpt_null",
+      "timestamp": null
+    },
+    {
+      "id": "f4d29867-5c75-47de-a106-c79de74c9649",
+      "video_id": "cfb461f4-0116-41a0-9cbc-2f06999571c9",
+      "stock": "삼성전자",
+      "status": "success",
+      "timestamp": "02:01"
+    }
+  ]
+}
