@@ -1,9 +1,9 @@
-const { createClient } = require('@supabase/supabase-js');
+﻿const { createClient } = require('@supabase/supabase-js');
 const Anthropic = require('@anthropic-ai/sdk');
 const fs = require('fs').promises;
 const path = require('path');
 
-// 환경 설정
+// ?섍꼍 ?ㅼ젙
 const SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMDYxMTAsImV4cCI6MjA4NzU4MjExMH0.qcqFIvYRiixwu609Wjj9H3HxscU8vNpo9nS_KQ3f00A';
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
@@ -11,26 +11,26 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
-// 텔레그램 로깅 함수
+// ?붾젅洹몃옩 濡쒓퉭 ?⑥닔
 async function logToTelegram(message) {
     try {
-        // OpenClaw 메시지 도구 사용을 위해 별도로 구현하지 않고 콘솔 로깅
+        // OpenClaw 硫붿떆吏 ?꾧뎄 ?ъ슜???꾪빐 蹂꾨룄濡?援ы쁽?섏? ?딄퀬 肄섏넄 濡쒓퉭
         console.log(`[TELEGRAM LOG] ${message}`);
     } catch (error) {
         console.error('Telegram logging failed:', error);
     }
 }
 
-// 딜레이 함수
+// ?쒕젅???⑥닔
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-// 1단계: Haiku 검증
+// 1?④퀎: Haiku 寃利?
 async function verifyWithHaiku(signals, batchSize = 10) {
     const results = [];
     const total = signals.length;
     
     console.log(`Starting Haiku verification for ${total} signals...`);
-    await logToTelegram(`🔍 Haiku 검증 시작: ${total}개 시그널`);
+    await logToTelegram(`?뵇 Haiku 寃利??쒖옉: ${total}媛??쒓렇??);
     
     for (let i = 0; i < signals.length; i += batchSize) {
         const batch = signals.slice(i, i + batchSize);
@@ -38,17 +38,17 @@ async function verifyWithHaiku(signals, batchSize = 10) {
         
         const batchPromises = batch.map(async (signal) => {
             try {
-                const prompt = `다음 시그널의 품질을 검증하세요.
+                const prompt = `?ㅼ쓬 ?쒓렇?먯쓽 ?덉쭏??寃利앺븯?몄슂.
 
-영상 제목: ${signal.video_title || 'N/A'}
-시그널 종목: ${signal.stock} (${signal.ticker})
-시그널 타입: ${signal.signal}
-핵심 발언: ${signal.key_quote}
-근거: ${signal.reasoning}
+?곸긽 ?쒕ぉ: ${signal.video_title || 'N/A'}
+?쒓렇??醫낅ぉ: ${signal.stock} (${signal.ticker})
+?쒓렇????? ${signal.signal}
+?듭떖 諛쒖뼵: ${signal.key_quote}
+洹쇨굅: ${signal.reasoning}
 confidence: ${signal.confidence}
 
-판정: 정상/의심/불량. JSON으로만:
-{"verdict": "정상", "reason": "한줄"}`;
+?먯젙: ?뺤긽/?섏떖/遺덈웾. JSON?쇰줈留?
+{"verdict": "?뺤긽", "reason": "?쒖쨪"}`;
 
                 const response = await anthropic.messages.create({
                     model: 'claude-3-haiku-20240307',
@@ -62,13 +62,13 @@ confidence: ${signal.confidence}
                 try {
                     verdict = JSON.parse(content);
                 } catch (parseError) {
-                    // JSON 파싱 실패 시 텍스트에서 추출 시도
-                    if (content.includes('의심')) {
-                        verdict = { verdict: '의심', reason: 'JSON 파싱 실패, 텍스트 추출' };
-                    } else if (content.includes('불량')) {
-                        verdict = { verdict: '불량', reason: 'JSON 파싱 실패, 텍스트 추출' };
+                    // JSON ?뚯떛 ?ㅽ뙣 ???띿뒪?몄뿉??異붿텧 ?쒕룄
+                    if (content.includes('?섏떖')) {
+                        verdict = { verdict: '?섏떖', reason: 'JSON ?뚯떛 ?ㅽ뙣, ?띿뒪??異붿텧' };
+                    } else if (content.includes('遺덈웾')) {
+                        verdict = { verdict: '遺덈웾', reason: 'JSON ?뚯떛 ?ㅽ뙣, ?띿뒪??異붿텧' };
                     } else {
-                        verdict = { verdict: '정상', reason: 'JSON 파싱 실패, 기본값' };
+                        verdict = { verdict: '?뺤긽', reason: 'JSON ?뚯떛 ?ㅽ뙣, 湲곕낯媛? };
                     }
                 }
                 
@@ -81,18 +81,18 @@ confidence: ${signal.confidence}
             } catch (error) {
                 console.error(`Error processing signal ${signal.id}:`, error);
                 
-                // 429 에러 처리
+                // 429 ?먮윭 泥섎━
                 if (error.status === 429) {
                     console.log('Rate limited, waiting 30 seconds...');
                     await delay(30000);
-                    // 재시도
+                    // ?ъ떆??
                     return await verifyWithHaiku([signal], 1);
                 }
                 
                 return {
                     ...signal,
-                    haiku_verdict: '의심',
-                    haiku_reason: `API 오류: ${error.message}`
+                    haiku_verdict: '?섏떖',
+                    haiku_reason: `API ?ㅻ쪟: ${error.message}`
                 };
             }
         });
@@ -100,23 +100,23 @@ confidence: ${signal.confidence}
         const batchResults = await Promise.all(batchPromises);
         results.push(...batchResults);
         
-        // 배치 완료 후 딜레이
+        // 諛곗튂 ?꾨즺 ???쒕젅??
         await delay(500);
         
-        // 100건마다 텔레그램 로깅
+        // 100嫄대쭏???붾젅洹몃옩 濡쒓퉭
         if ((i + batchSize) % 100 === 0 || i + batchSize >= total) {
             const processed = Math.min(i + batchSize, total);
-            const suspicious = results.filter(r => r.haiku_verdict === '의심').length;
-            const defective = results.filter(r => r.haiku_verdict === '불량').length;
+            const suspicious = results.filter(r => r.haiku_verdict === '?섏떖').length;
+            const defective = results.filter(r => r.haiku_verdict === '遺덈웾').length;
             
-            await logToTelegram(`📊 진행상황 ${processed}/${total} | 의심: ${suspicious} | 불량: ${defective}`);
+            await logToTelegram(`?뱤 吏꾪뻾?곹솴 ${processed}/${total} | ?섏떖: ${suspicious} | 遺덈웾: ${defective}`);
         }
     }
     
     return results;
 }
 
-// 2단계: Sonnet 재검증
+// 2?④퀎: Sonnet ?ш?利?
 async function reverifyWithSonnet(suspiciousSignals) {
     const results = [];
     const total = suspiciousSignals.length;
@@ -127,29 +127,29 @@ async function reverifyWithSonnet(suspiciousSignals) {
     }
     
     console.log(`Starting Sonnet reverification for ${total} suspicious signals...`);
-    await logToTelegram(`🔬 Sonnet 재검증 시작: ${total}개 의심/불량 시그널`);
+    await logToTelegram(`?뵮 Sonnet ?ш?利??쒖옉: ${total}媛??섏떖/遺덈웾 ?쒓렇??);
     
     for (let i = 0; i < suspiciousSignals.length; i++) {
         const signal = suspiciousSignals[i];
         console.log(`Reverifying signal ${i + 1}/${total}: ${signal.id}`);
         
         try {
-            const prompt = `다음 시그널의 품질을 엄격하게 재검증하세요.
+            const prompt = `?ㅼ쓬 ?쒓렇?먯쓽 ?덉쭏???꾧꺽?섍쾶 ?ш?利앺븯?몄슂.
 
-영상 제목: ${signal.video_title || 'N/A'}
-시그널 종목: ${signal.stock} (${signal.ticker})
-시그널 타입: ${signal.signal}
-핵심 발언: ${signal.key_quote}
-근거: ${signal.reasoning}
+?곸긽 ?쒕ぉ: ${signal.video_title || 'N/A'}
+?쒓렇??醫낅ぉ: ${signal.stock} (${signal.ticker})
+?쒓렇????? ${signal.signal}
+?듭떖 諛쒖뼵: ${signal.key_quote}
+洹쇨굅: ${signal.reasoning}
 confidence: ${signal.confidence}
 
-1차 판정: ${signal.haiku_verdict} (${signal.haiku_reason})
+1李??먯젙: ${signal.haiku_verdict} (${signal.haiku_reason})
 
-최종 판정을 내려주세요. 정상/불량만 구분하며, JSON으로만:
-{"verdict": "정상", "reason": "상세한 근거"}`;
+理쒖쥌 ?먯젙???대젮二쇱꽭?? ?뺤긽/遺덈웾留?援щ텇?섎ŉ, JSON?쇰줈留?
+{"verdict": "?뺤긽", "reason": "?곸꽭??洹쇨굅"}`;
 
             const response = await anthropic.messages.create({
-                model: 'claude-sonnet-4-20250514',
+                model: 'claude-sonnet-4-6',
                 max_tokens: 200,
                 messages: [{ role: 'user', content: prompt }]
             });
@@ -160,11 +160,11 @@ confidence: ${signal.confidence}
             try {
                 verdict = JSON.parse(content);
             } catch (parseError) {
-                // JSON 파싱 실패 시 텍스트에서 추출
-                if (content.includes('불량')) {
-                    verdict = { verdict: '불량', reason: 'JSON 파싱 실패, 텍스트 추출' };
+                // JSON ?뚯떛 ?ㅽ뙣 ???띿뒪?몄뿉??異붿텧
+                if (content.includes('遺덈웾')) {
+                    verdict = { verdict: '遺덈웾', reason: 'JSON ?뚯떛 ?ㅽ뙣, ?띿뒪??異붿텧' };
                 } else {
-                    verdict = { verdict: '정상', reason: 'JSON 파싱 실패, 기본값' };
+                    verdict = { verdict: '?뺤긽', reason: 'JSON ?뚯떛 ?ㅽ뙣, 湲곕낯媛? };
                 }
             }
             
@@ -178,36 +178,36 @@ confidence: ${signal.confidence}
         } catch (error) {
             console.error(`Error reverifying signal ${signal.id}:`, error);
             
-            // 429 에러 처리
+            // 429 ?먮윭 泥섎━
             if (error.status === 429) {
                 console.log('Rate limited, waiting 30 seconds...');
                 await delay(30000);
-                i--; // 현재 인덱스 다시 시도
+                i--; // ?꾩옱 ?몃뜳???ㅼ떆 ?쒕룄
                 continue;
             }
             
             results.push({
                 ...signal,
-                sonnet_verdict: '불량',
-                sonnet_reason: `API 오류: ${error.message}`,
-                final_verdict: '불량'
+                sonnet_verdict: '遺덈웾',
+                sonnet_reason: `API ?ㅻ쪟: ${error.message}`,
+                final_verdict: '遺덈웾'
             });
         }
         
-        // 각 요청마다 딜레이
+        // 媛??붿껌留덈떎 ?쒕젅??
         await delay(1000);
     }
     
     return results;
 }
 
-// 메인 함수
+// 硫붿씤 ?⑥닔
 async function main() {
     try {
-        console.log('🚀 Starting Signal Quality Audit...');
+        console.log('?? Starting Signal Quality Audit...');
         
-        // 1. 데이터 가져오기
-        console.log('📊 Fetching signals from database...');
+        // 1. ?곗씠??媛?몄삤湲?
+        console.log('?뱤 Fetching signals from database...');
         const { data: signals, error } = await supabase
             .from('influencer_signals')
             .select(`
@@ -224,53 +224,53 @@ async function main() {
             throw new Error('No signals found in database');
         }
         
-        // 비디오 제목 플래튼
+        // 鍮꾨뵒???쒕ぉ ?뚮옒??
         const flattenedSignals = signals.map(signal => ({
             ...signal,
             video_title: signal.influencer_videos?.title || 'N/A'
         }));
         
         console.log(`Found ${flattenedSignals.length} signals`);
-        await logToTelegram(`📊 총 ${flattenedSignals.length}개 시그널 발견, 검증 시작`);
+        await logToTelegram(`?뱤 珥?${flattenedSignals.length}媛??쒓렇??諛쒓껄, 寃利??쒖옉`);
         
-        // 2. 1단계: Haiku 검증
+        // 2. 1?④퀎: Haiku 寃利?
         const haikuResults = await verifyWithHaiku(flattenedSignals);
         
-        // 의심/불량 시그널 추출
+        // ?섏떖/遺덈웾 ?쒓렇??異붿텧
         const suspiciousSignals = haikuResults.filter(s => 
-            s.haiku_verdict === '의심' || s.haiku_verdict === '불량'
+            s.haiku_verdict === '?섏떖' || s.haiku_verdict === '遺덈웾'
         );
         
         console.log(`Haiku found ${suspiciousSignals.length} suspicious signals`);
         
-        // 3. 2단계: Sonnet 재검증
+        // 3. 2?④퀎: Sonnet ?ш?利?
         const sonnetResults = await reverifyWithSonnet(suspiciousSignals);
         
-        // 4. 최종 결과 합치기
+        // 4. 理쒖쥌 寃곌낵 ?⑹튂湲?
         const finalResults = haikuResults.map(haikuResult => {
             const sonnetResult = sonnetResults.find(s => s.id === haikuResult.id);
             return sonnetResult || {
                 ...haikuResult,
-                final_verdict: haikuResult.haiku_verdict === '정상' ? '정상' : haikuResult.haiku_verdict
+                final_verdict: haikuResult.haiku_verdict === '?뺤긽' ? '?뺤긽' : haikuResult.haiku_verdict
             };
         });
         
-        // 5. 결과 통계
+        // 5. 寃곌낵 ?듦퀎
         const stats = {
             total: finalResults.length,
-            normal: finalResults.filter(s => s.final_verdict === '정상').length,
-            defective: finalResults.filter(s => s.final_verdict === '불량').length,
-            haiku_suspicious: haikuResults.filter(s => s.haiku_verdict === '의심').length,
-            haiku_defective: haikuResults.filter(s => s.haiku_verdict === '불량').length,
+            normal: finalResults.filter(s => s.final_verdict === '?뺤긽').length,
+            defective: finalResults.filter(s => s.final_verdict === '遺덈웾').length,
+            haiku_suspicious: haikuResults.filter(s => s.haiku_verdict === '?섏떖').length,
+            haiku_defective: haikuResults.filter(s => s.haiku_verdict === '遺덈웾').length,
             sonnet_reverified: sonnetResults.length
         };
         
-        console.log('📊 Final Statistics:', stats);
+        console.log('?뱤 Final Statistics:', stats);
         
-        // 6. data 폴더 생성
+        // 6. data ?대뜑 ?앹꽦
         await fs.mkdir('data', { recursive: true });
         
-        // 7. JSON 결과 저장
+        // 7. JSON 寃곌낵 ???
         const auditResult = {
             timestamp: new Date().toISOString(),
             statistics: stats,
@@ -283,8 +283,8 @@ async function main() {
             'utf8'
         );
         
-        // 8. 불량 시그널 마크다운 리포트 생성
-        const defectiveSignals = finalResults.filter(s => s.final_verdict === '불량');
+        // 8. 遺덈웾 ?쒓렇??留덊겕?ㅼ슫 由ы룷???앹꽦
+        const defectiveSignals = finalResults.filter(s => s.final_verdict === '遺덈웾');
         
         let markdownReport = `# Signal Quality Audit - Defects Report\n\n`;
         markdownReport += `Generated: ${new Date().toLocaleString()}\n\n`;
@@ -312,37 +312,37 @@ async function main() {
                 markdownReport += `\n---\n\n`;
             });
         } else {
-            markdownReport += `## No Defective Signals Found! 🎉\n\n`;
+            markdownReport += `## No Defective Signals Found! ?럦\n\n`;
         }
         
         await fs.writeFile('data/signal_defects.md', markdownReport, 'utf8');
         
-        // 9. 최종 로그
-        await logToTelegram(`✅ 검증 완료! 총 ${stats.total}개 중 불량 ${stats.defective}개 (${(stats.defective/stats.total*100).toFixed(1)}%)`);
+        // 9. 理쒖쥌 濡쒓렇
+        await logToTelegram(`??寃利??꾨즺! 珥?${stats.total}媛?以?遺덈웾 ${stats.defective}媛?(${(stats.defective/stats.total*100).toFixed(1)}%)`);
         
-        console.log('✅ Signal Quality Audit completed successfully!');
-        console.log(`📁 Results saved to:`);
+        console.log('??Signal Quality Audit completed successfully!');
+        console.log(`?뱚 Results saved to:`);
         console.log(`   - data/signal_quality_full_audit.json`);
         console.log(`   - data/signal_defects.md`);
         
         return stats;
         
     } catch (error) {
-        console.error('❌ Audit failed:', error);
-        await logToTelegram(`❌ 검증 실패: ${error.message}`);
+        console.error('??Audit failed:', error);
+        await logToTelegram(`??寃利??ㅽ뙣: ${error.message}`);
         throw error;
     }
 }
 
-// 실행
+// ?ㅽ뻾
 if (require.main === module) {
     main()
         .then(stats => {
-            console.log('🎉 Audit completed with statistics:', stats);
+            console.log('?럦 Audit completed with statistics:', stats);
             process.exit(0);
         })
         .catch(error => {
-            console.error('💥 Fatal error:', error);
+            console.error('?뮙 Fatal error:', error);
             process.exit(1);
         });
 }

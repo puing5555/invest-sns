@@ -230,7 +230,7 @@ def step3_extract_signals(subtitles, videos_dict):
 
         try:
             response = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-6",
                 max_tokens=4096,
                 system=PROMPT,
                 messages=[{"role": "user", "content": user_msg}]
@@ -472,4 +472,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 

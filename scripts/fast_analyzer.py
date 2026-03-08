@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-fast_analyzer.py - 고속 병렬 시그널 분석기
-- asyncio + aiohttp로 3~5개 동시 처리
-- claude-sonnet-4-20250514 사용 (haiku 대비 빠르고 정확)
-- rate limit 자동 감지 → 동시성 자동 조절
-- 목표: 100개 영상 1~2시간 내 완료
+fast_analyzer.py - 怨좎냽 蹂묐젹 ?쒓렇??遺꾩꽍湲?
+- asyncio + aiohttp濡?3~5媛??숈떆 泥섎━
+- claude-sonnet-4-6 ?ъ슜 (haiku ?鍮?鍮좊Ⅴ怨??뺥솗)
+- rate limit ?먮룞 媛먯? ???숈떆???먮룞 議곗젅
+- 紐⑺몴: 100媛??곸긽 1~2?쒓컙 ???꾨즺
 """
 
 import os
@@ -21,26 +21,26 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent.parent / '.env.local')
 
-# 설정
+# ?ㅼ젙
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '')
 SUPABASE_URL = os.getenv('NEXT_PUBLIC_SUPABASE_URL', '')
 API_URL = "https://api.anthropic.com/v1/messages"
-MODEL = "claude-sonnet-4-20250514"  # 빠르고 정확
-MAX_CONCURRENT = 3  # 시작 동시성 (rate limit시 자동 감소)
+MODEL = "claude-sonnet-4-6"  # 鍮좊Ⅴ怨??뺥솗
+MAX_CONCURRENT = 3  # ?쒖옉 ?숈떆??(rate limit???먮룞 媛먯냼)
 MIN_CONCURRENT = 1
-DELAY_BETWEEN = 1.0  # 요청 간 최소 간격 (초)
+DELAY_BETWEEN = 1.0  # ?붿껌 媛?理쒖냼 媛꾧꺽 (珥?
 MAX_RETRIES = 2
 
-# 멀티 게스트 채널 설정
+# 硫??寃뚯뒪??梨꾨꼸 ?ㅼ젙
 MULTI_GUEST_CHANNELS = {
     'https://www.youtube.com/@3protv',
     'https://www.youtube.com/@3ProTV',
-    '삼프로TV',
+    '?쇳봽濡쏷V',
 }
 
 def extract_guest_from_title(title: str) -> List[str]:
-    """영상 제목에서 게스트명 추출 (삼프로TV 등 멀티 게스트 채널용)
-    패턴: "... | 김장열 유니스토리자산운용", "... | 홍선애, 박명석, 이재규"
+    """?곸긽 ?쒕ぉ?먯꽌 寃뚯뒪?몃챸 異붿텧 (?쇳봽濡쏷V ??硫??寃뚯뒪??梨꾨꼸??
+    ?⑦꽩: "... | 源?μ뿴 ?좊땲?ㅽ넗由ъ옄?곗슫??, "... | ?띿꽑?? 諛뺣챸?? ?댁옱洹?
     """
     if '|' not in title:
         return []
@@ -48,7 +48,7 @@ def extract_guest_from_title(title: str) -> List[str]:
     parts = [p.strip() for p in after_pipe.split(',')]
     names = []
     for part in parts:
-        match = re.match(r'([가-힣]{2,3})', part.strip())
+        match = re.match(r'([媛-??{2,3})', part.strip())
         if match:
             names.append(match.group(1))
     return names
@@ -68,28 +68,28 @@ class FastAnalyzer:
         self.stats = {'processed': 0, 'skipped': 0, 'errors': 0, 'signals': 0}
         self.results = []
         
-        # 검증 모듈
+        # 寃利?紐⑤뱢
         try:
             from signal_validator import SignalValidator
             self.validator = SignalValidator()
         except ImportError:
             self.validator = None
         
-        # 프롬프트 로드
+        # ?꾨＼?꾪듃 濡쒕뱶
         if prompt_path:
             with open(prompt_path, 'r', encoding='utf-8') as f:
                 self.prompt_template = f.read()
         else:
-            # 기본 프롬프트 경로
+            # 湲곕낯 ?꾨＼?꾪듃 寃쎈줈
             default = Path(__file__).parent.parent / 'prompts' / 'pipeline_v10.md'
             if default.exists():
                 with open(default, 'r', encoding='utf-8') as f:
                     self.prompt_template = f.read()
             else:
-                raise FileNotFoundError(f"프롬프트 파일 없음: {default}")
+                raise FileNotFoundError(f"?꾨＼?꾪듃 ?뚯씪 ?놁쓬: {default}")
     
     def load_subtitle(self, subtitle_file: str) -> str:
-        """자막 파일에서 텍스트 추출"""
+        """?먮쭑 ?뚯씪?먯꽌 ?띿뒪??異붿텧"""
         with open(subtitle_file, 'r', encoding='utf-8') as f:
             segments = json.load(f)
         if not isinstance(segments, list):
@@ -97,35 +97,35 @@ class FastAnalyzer:
         return " ".join(s.get('text', '') for s in segments if isinstance(s, dict)).strip()
     
     def create_prompt(self, channel_url: str, video_title: str, video_id: str, subtitle: str) -> str:
-        """분석 프롬프트 생성 — 토큰 절약을 위해 자막 최대 8000자"""
+        """遺꾩꽍 ?꾨＼?꾪듃 ?앹꽦 ???좏겙 ?덉빟???꾪빐 ?먮쭑 理쒕? 8000??""
         subtitle_trimmed = subtitle[:8000] if len(subtitle) > 8000 else subtitle
         
         prompt = self.prompt_template.replace('{CHANNEL_URL}', channel_url)
         
-        # 멀티 게스트 채널: 제목에서 게스트명 추출하여 힌트 제공
+        # 硫??寃뚯뒪??梨꾨꼸: ?쒕ぉ?먯꽌 寃뚯뒪?몃챸 異붿텧?섏뿬 ?뚰듃 ?쒓났
         speaker_hint = ""
         is_multi_guest = any(ch in channel_url for ch in MULTI_GUEST_CHANNELS)
         if is_multi_guest:
             guests = extract_guest_from_title(video_title)
             if guests:
-                speaker_hint = f"\n⚠️ 이 영상의 출연자(speaker): {', '.join(guests)}\n시그널의 화자를 위 출연자명으로 정확히 구분해주세요.\n"
+                speaker_hint = f"\n?좑툘 ???곸긽??異쒖뿰??speaker): {', '.join(guests)}\n?쒓렇?먯쓽 ?붿옄瑜???異쒖뿰?먮챸?쇰줈 ?뺥솗??援щ텇?댁＜?몄슂.\n"
         
         prompt += f"""
 
-=== 분석 대상 영상 ===
-제목: {video_title}
+=== 遺꾩꽍 ????곸긽 ===
+?쒕ぉ: {video_title}
 URL: https://www.youtube.com/watch?v={video_id}
 {speaker_hint}
-=== 자막 내용 ===
+=== ?먮쭑 ?댁슜 ===
 {subtitle_trimmed}
 
-=== 분석 지시사항 ===
-위 영상의 자막을 분석하고 JSON 형태로 시그널을 추출해주세요.
+=== 遺꾩꽍 吏?쒖궗??===
+???곸긽???먮쭑??遺꾩꽍?섍퀬 JSON ?뺥깭濡??쒓렇?먯쓣 異붿텧?댁＜?몄슂.
 """
         return prompt
     
     def parse_response(self, text: str) -> Dict:
-        """응답 파싱"""
+        """?묐떟 ?뚯떛"""
         try:
             if '```json' in text:
                 start = text.find('```json') + 7
@@ -141,7 +141,7 @@ URL: https://www.youtube.com/watch?v={video_id}
     
     async def analyze_one(self, session: aiohttp.ClientSession, video_id: str, 
                           subtitle_file: str, channel_url: str, video_title: str) -> Dict:
-        """단일 영상 분석 (세마포어로 동시성 제어)"""
+        """?⑥씪 ?곸긽 遺꾩꽍 (?몃쭏?ъ뼱濡??숈떆???쒖뼱)"""
         async with self.semaphore:
             subtitle = self.load_subtitle(subtitle_file)
             if len(subtitle) < 100:
@@ -161,7 +161,7 @@ URL: https://www.youtube.com/watch?v={video_id}
                     async with session.post(API_URL, json=payload, headers=self.headers, 
                                           timeout=aiohttp.ClientTimeout(total=180)) as resp:
                         if resp.status == 429:
-                            # Rate limited — 감속
+                            # Rate limited ??媛먯냽
                             retry_after = int(resp.headers.get('retry-after', '30'))
                             print(f"  [429] Rate limited, waiting {retry_after}s, reducing concurrency")
                             self.rate_limited = True
@@ -184,7 +184,7 @@ URL: https://www.youtube.com/watch?v={video_id}
                             result = self.parse_response(text)
                             signals = result.get('signals', [])
                             
-                            # 품질 검증
+                            # ?덉쭏 寃利?
                             if self.validator:
                                 validated = []
                                 for sig in signals:
@@ -197,24 +197,24 @@ URL: https://www.youtube.com/watch?v={video_id}
                                         self.stats['rejected'] += 1
                                 signals = validated
                             
-                            # 멀티 게스트 채널: 시그널에 speaker 정보 추가
+                            # 硫??寃뚯뒪??梨꾨꼸: ?쒓렇?먯뿉 speaker ?뺣낫 異붽?
                             is_multi = any(ch in channel_url for ch in MULTI_GUEST_CHANNELS)
                             if is_multi:
                                 guests = extract_guest_from_title(video_title)
                                 if guests:
                                     for sig in signals:
                                         if 'speaker' not in sig or not sig.get('speaker'):
-                                            sig['speaker'] = guests[0]  # 기본: 첫 번째 게스트
+                                            sig['speaker'] = guests[0]  # 湲곕낯: 泥?踰덉㎏ 寃뚯뒪??
                             
                             self.stats['processed'] += 1
                             self.stats['signals'] += len(signals)
                             
-                            # Rate limit 해제 시 복구
+                            # Rate limit ?댁젣 ??蹂듦뎄
                             if self.rate_limited and self.current_concurrency < MAX_CONCURRENT:
                                 self.current_concurrency = min(MAX_CONCURRENT, self.current_concurrency + 1)
                                 self.semaphore = asyncio.Semaphore(self.current_concurrency)
                             
-                            print(f"  ✓ {video_id[:12]}... → {len(signals)}개 시그널")
+                            print(f"  ??{video_id[:12]}... ??{len(signals)}媛??쒓렇??)
                             await asyncio.sleep(DELAY_BETWEEN)
                             return {
                                 'video_id': video_id,
@@ -237,10 +237,10 @@ URL: https://www.youtube.com/watch?v={video_id}
             return {'video_id': video_id, 'status': 'error', 'reason': 'max_retries'}
     
     async def run_batch(self, videos: List[Dict], channel_url: str, output_file: str):
-        """배치 분석 실행"""
+        """諛곗튂 遺꾩꽍 ?ㅽ뻾"""
         print(f"\n{'='*60}")
-        print(f"고속 병렬 분석기 시작")
-        print(f"대상: {len(videos)}개 영상, 동시성: {MAX_CONCURRENT}, 모델: {MODEL}")
+        print(f"怨좎냽 蹂묐젹 遺꾩꽍湲??쒖옉")
+        print(f"??? {len(videos)}媛??곸긽, ?숈떆?? {MAX_CONCURRENT}, 紐⑤뜽: {MODEL}")
         print(f"{'='*60}\n")
         
         start_time = time.time()
@@ -254,12 +254,12 @@ URL: https://www.youtube.com/watch?v={video_id}
                 )
                 tasks.append(task)
             
-            # 모든 태스크 실행 (세마포어가 동시성 제어)
+            # 紐⑤뱺 ?쒖뒪???ㅽ뻾 (?몃쭏?ъ뼱媛 ?숈떆???쒖뼱)
             self.results = await asyncio.gather(*tasks)
         
         elapsed = time.time() - start_time
         
-        # 결과 저장
+        # 寃곌낵 ???
         output = {
             'timestamp': datetime.now().isoformat(),
             'elapsed_seconds': round(elapsed, 1),
@@ -270,45 +270,45 @@ URL: https://www.youtube.com/watch?v={video_id}
             json.dump(output, f, ensure_ascii=False, indent=2)
         
         print(f"\n{'='*60}")
-        print(f"완료! {elapsed:.0f}초 ({elapsed/60:.1f}분)")
+        print(f"?꾨즺! {elapsed:.0f}珥?({elapsed/60:.1f}遺?")
         rejected = self.stats.get('rejected', 0)
-        print(f"처리: {self.stats['processed']}, 스킵: {self.stats['skipped']}, "
-              f"에러: {self.stats['errors']}, 시그널: {self.stats['signals']}, "
+        print(f"泥섎━: {self.stats['processed']}, ?ㅽ궢: {self.stats['skipped']}, "
+              f"?먮윭: {self.stats['errors']}, ?쒓렇?? {self.stats['signals']}, "
               f"reject: {rejected}")
         if self.validator:
             self.validator.print_stats()
-        print(f"결과: {output_file}")
+        print(f"寃곌낵: {output_file}")
         print(f"{'='*60}")
 
 
 async def main():
-    """CLI 실행"""
+    """CLI ?ㅽ뻾"""
     import argparse
-    parser = argparse.ArgumentParser(description='고속 병렬 시그널 분석기')
-    parser.add_argument('--subs-dir', required=True, help='자막 파일 디렉토리')
-    parser.add_argument('--channel-url', required=True, help='채널 URL')
-    parser.add_argument('--titles-file', help='영상 제목 파일 (video_id|||title)')
-    parser.add_argument('--output', default='fast_analysis_results.json', help='결과 파일')
-    parser.add_argument('--skip-ids', help='스킵할 video_id 목록 파일')
-    parser.add_argument('--concurrency', type=int, default=3, help='동시 처리 수')
-    parser.add_argument('--prompt', help='프롬프트 파일 경로')
+    parser = argparse.ArgumentParser(description='怨좎냽 蹂묐젹 ?쒓렇??遺꾩꽍湲?)
+    parser.add_argument('--subs-dir', required=True, help='?먮쭑 ?뚯씪 ?붾젆?좊━')
+    parser.add_argument('--channel-url', required=True, help='梨꾨꼸 URL')
+    parser.add_argument('--titles-file', help='?곸긽 ?쒕ぉ ?뚯씪 (video_id|||title)')
+    parser.add_argument('--output', default='fast_analysis_results.json', help='寃곌낵 ?뚯씪')
+    parser.add_argument('--skip-ids', help='?ㅽ궢??video_id 紐⑸줉 ?뚯씪')
+    parser.add_argument('--concurrency', type=int, default=3, help='?숈떆 泥섎━ ??)
+    parser.add_argument('--prompt', help='?꾨＼?꾪듃 ?뚯씪 寃쎈줈')
     args = parser.parse_args()
     
     global MAX_CONCURRENT
     MAX_CONCURRENT = args.concurrency
     
-    # 자막 파일 로드
+    # ?먮쭑 ?뚯씪 濡쒕뱶
     subs_files = glob.glob(os.path.join(args.subs_dir, '*.json'))
-    print(f"자막 파일: {len(subs_files)}개")
+    print(f"?먮쭑 ?뚯씪: {len(subs_files)}媛?)
     
-    # 스킵 ID 로드
+    # ?ㅽ궢 ID 濡쒕뱶
     skip_ids = set()
     if args.skip_ids and os.path.exists(args.skip_ids):
         with open(args.skip_ids, 'r') as f:
             skip_ids = set(line.strip() for line in f if line.strip())
-        print(f"스킵 ID: {len(skip_ids)}개")
+        print(f"?ㅽ궢 ID: {len(skip_ids)}媛?)
     
-    # 제목 로드
+    # ?쒕ぉ 濡쒕뱶
     titles = {}
     if args.titles_file and os.path.exists(args.titles_file):
         for enc in ['utf-8', 'cp949', 'utf-16']:
@@ -322,24 +322,24 @@ async def main():
             except:
                 continue
     
-    # 영상 목록 구성 (titles 파일에 있는 것만 처리)
+    # ?곸긽 紐⑸줉 援ъ꽦 (titles ?뚯씪???덈뒗 寃껊쭔 泥섎━)
     videos = []
     for sf in subs_files:
         vid = os.path.splitext(os.path.basename(sf))[0]
         if vid not in skip_ids:
-            # titles 파일이 제공된 경우, 해당 파일에 있는 video_id만 처리
+            # titles ?뚯씪???쒓났??寃쎌슦, ?대떦 ?뚯씪???덈뒗 video_id留?泥섎━
             if titles and vid not in titles:
                 continue
             videos.append({
                 'video_id': vid,
                 'subtitle_file': sf,
-                'title': titles.get(vid, f'영상 {vid}')
+                'title': titles.get(vid, f'?곸긽 {vid}')
             })
     
-    print(f"분석 대상: {len(videos)}개")
+    print(f"遺꾩꽍 ??? {len(videos)}媛?)
     
     if not videos:
-        print("분석할 영상 없음!")
+        print("遺꾩꽍???곸긽 ?놁쓬!")
         return
     
     analyzer = FastAnalyzer(prompt_path=args.prompt)
@@ -348,3 +348,4 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+

@@ -103,7 +103,7 @@ JSON만 출력하고 다른 설명은 하지 마세요.
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 800,
         messages: [
           {

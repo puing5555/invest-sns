@@ -1,4 +1,4 @@
-"""
+﻿"""
 Pipeline V9.1 - Influencer Signal Analysis
 Reads subtitle files, analyzes with Claude, validates, inserts to Supabase.
 """
@@ -14,18 +14,18 @@ ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 SSL_CTX = ssl.create_default_context()
 
-VALID_SIGNALS = {"매수", "긍정", "중립", "경계", "매도"}
+VALID_SIGNALS = {"留ㅼ닔", "湲띿젙", "以묐┰", "寃쎄퀎", "留ㅻ룄"}
 VALID_MARKETS = {"KR", "US", "US_ADR", "CRYPTO", "CRYPTO_DEFI", "SECTOR", "INDEX", "ETF", "OTHER"}
-VALID_MENTION_TYPES = {"결론", "논거", "뉴스", "리포트", "교육", "티저", "보유", "컨센서스", "세무", "차익거래", "시나리오"}
+VALID_MENTION_TYPES = {"寃곕줎", "?쇨굅", "?댁뒪", "由ы룷??, "援먯쑁", "?곗?", "蹂댁쑀", "而⑥꽱?쒖뒪", "?몃Т", "李⑥씡嫄곕옒", "?쒕굹由ъ삤"}
 VALID_CONFIDENCE = {"very_high", "high", "medium", "low", "very_low"}
 
 # Channel mapping for sub files
 CHANNEL_MAP = {
-    "booread": {"name": "부읽남TV", "handle": "@buiknam_tv", "url": "https://www.youtube.com/@buiknam_tv"},
-    "booreadman": {"name": "부읽남TV", "handle": "@buiknam_tv", "url": "https://www.youtube.com/@buiknam_tv"},
-    "dalrant": {"name": "달란트투자", "handle": "@dalrant", "url": "https://www.youtube.com/@dalrant"},
-    "hyoseok": {"name": "이효석아카데미", "handle": "@hyoseok_academy", "url": "https://www.youtube.com/@hyoseok_academy"},
-    "syuka": {"name": "슈카월드", "handle": "@syukasworld", "url": "https://www.youtube.com/@syukasworld"},
+    "booread": {"name": "遺?쎈궓TV", "handle": "@buiknam_tv", "url": "https://www.youtube.com/@buiknam_tv"},
+    "booreadman": {"name": "遺?쎈궓TV", "handle": "@buiknam_tv", "url": "https://www.youtube.com/@buiknam_tv"},
+    "dalrant": {"name": "?щ??명닾??, "handle": "@dalrant", "url": "https://www.youtube.com/@dalrant"},
+    "hyoseok": {"name": "?댄슚?앹븘移대뜲誘?, "handle": "@hyoseok_academy", "url": "https://www.youtube.com/@hyoseok_academy"},
+    "syuka": {"name": "?덉뭅?붾뱶", "handle": "@syukasworld", "url": "https://www.youtube.com/@syukasworld"},
 }
 
 def supabase_request(method, table, data=None, params=""):
@@ -58,7 +58,7 @@ def call_claude(system_prompt, user_prompt, max_tokens=4096):
     """Call Claude API"""
     url = "https://api.anthropic.com/v1/messages"
     data = {
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-6",
         "max_tokens": max_tokens,
         "system": system_prompt,
         "messages": [{"role": "user", "content": user_prompt}],
@@ -90,59 +90,59 @@ def load_subtitle(filepath):
     return "\n".join(lines), d.get('video_id'), d.get('channel'), d.get('title', '')
 
 def build_analysis_prompt(transcript, channel_name, video_id):
-    return f"""아래 유튜브 영상의 자막을 분석해서 투자 시그널을 추출해줘.
+    return f"""?꾨옒 ?좏뒠釉??곸긽???먮쭑??遺꾩꽍?댁꽌 ?ъ옄 ?쒓렇?먯쓣 異붿텧?댁쨾.
 
-채널: {channel_name}
-영상 ID: {video_id}
+梨꾨꼸: {channel_name}
+?곸긽 ID: {video_id}
 
-## 규칙 요약
-- 시그널 5단계만 사용: 매수/긍정/중립/경계/매도
-- STRONG_BUY, BUY, SELL 등 영문 금지
-- 1영상 1종목 1발언자 = 시그널 1개
-- mention_type: 결론/논거/뉴스/리포트/교육/티저/보유/컨센서스/세무/차익거래/시나리오
+## 洹쒖튃 ?붿빟
+- ?쒓렇??5?④퀎留??ъ슜: 留ㅼ닔/湲띿젙/以묐┰/寃쎄퀎/留ㅻ룄
+- STRONG_BUY, BUY, SELL ???곷Ц 湲덉?
+- 1?곸긽 1醫낅ぉ 1諛쒖뼵??= ?쒓렇??1媛?
+- mention_type: 寃곕줎/?쇨굅/?댁뒪/由ы룷??援먯쑁/?곗?/蹂댁쑀/而⑥꽱?쒖뒪/?몃Т/李⑥씡嫄곕옒/?쒕굹由ъ삤
 - market: KR/US/US_ADR/CRYPTO/CRYPTO_DEFI/SECTOR/INDEX/ETF/OTHER
 - confidence: very_high/high/medium/low/very_low
-- 논거 종목은 최대 "긍정"까지. "매수" 금지
-- 리포트 전달(본인 의견 없음) = 중립
-- 전망(~이다/된다/보인다) = 긍정, 권유(~사라/담아라) = 매수
-- INDEX(코스피, S&P500 등) = 시그널 제외
-- 교육/설명형 = 시그널 제외
-- 조건부 발언 = confidence medium 이하
-- 유료 티저 = 시그널 생성 금지
-- 멤버십/회원전용 영상 = 분석 제외 (자막 추출 불가)
-- 스코프: 한국주식 + 미국주식 + 크립토만 (부동산/원자재/해외주식 제외)
-- 발언자 이름 정규화 필수
+- ?쇨굅 醫낅ぉ? 理쒕? "湲띿젙"源뚯?. "留ㅼ닔" 湲덉?
+- 由ы룷???꾨떖(蹂몄씤 ?섍껄 ?놁쓬) = 以묐┰
+- ?꾨쭩(~?대떎/?쒕떎/蹂댁씤?? = 湲띿젙, 沅뚯쑀(~?щ씪/?댁븘?? = 留ㅼ닔
+- INDEX(肄붿뒪?? S&P500 ?? = ?쒓렇???쒖쇅
+- 援먯쑁/?ㅻ챸??= ?쒓렇???쒖쇅
+- 議곌굔遺 諛쒖뼵 = confidence medium ?댄븯
+- ?좊즺 ?곗? = ?쒓렇???앹꽦 湲덉?
+- 硫ㅻ쾭???뚯썝?꾩슜 ?곸긽 = 遺꾩꽍 ?쒖쇅 (?먮쭑 異붿텧 遺덇?)
+- ?ㅼ퐫?? ?쒓뎅二쇱떇 + 誘멸뎅二쇱떇 + ?щ┰?좊쭔 (遺?숈궛/?먯옄???댁쇅二쇱떇 ?쒖쇅)
+- 諛쒖뼵???대쫫 ?뺢퇋???꾩닔
 
-## 출력 형식 (JSON)
-반드시 아래 형식의 JSON만 출력. 다른 텍스트 없이 JSON만.
+## 異쒕젰 ?뺤떇 (JSON)
+諛섎뱶???꾨옒 ?뺤떇??JSON留?異쒕젰. ?ㅻⅨ ?띿뒪???놁씠 JSON留?
 ```json
 {{
-  "video_summary": "영상 전체 내용 요약 (7-15줄, 구체적으로)",
+  "video_summary": "?곸긽 ?꾩껜 ?댁슜 ?붿빟 (7-15以? 援ъ껜?곸쑝濡?",
   "signals": [
     {{
-      "speaker": "발언자 이름",
-      "stock": "종목명",
-      "ticker": "종목코드 (모르면 null)",
+      "speaker": "諛쒖뼵???대쫫",
+      "stock": "醫낅ぉ紐?,
+      "ticker": "醫낅ぉ肄붾뱶 (紐⑤Ⅴ硫?null)",
       "market": "KR/US/...",
-      "mention_type": "결론/논거/...",
-      "signal": "매수/긍정/중립/경계/매도",
+      "mention_type": "寃곕줎/?쇨굅/...",
+      "signal": "留ㅼ닔/湲띿젙/以묐┰/寃쎄퀎/留ㅻ룄",
       "confidence": "high/medium/low/...",
       "timestamp": "12:34",
-      "key_quote": "핵심 발언 원문",
-      "reasoning": "분류 이유"
+      "key_quote": "?듭떖 諛쒖뼵 ?먮Ц",
+      "reasoning": "遺꾨쪟 ?댁쑀"
     }}
   ]
 }}
 ```
 
-시그널이 없으면 signals를 빈 배열로.
+?쒓렇?먯씠 ?놁쑝硫?signals瑜?鍮?諛곗뿴濡?
 
-## 자막
+## ?먮쭑
 {transcript[:15000]}
 """
 
-SYSTEM_PROMPT = """당신은 유튜브 투자 영상 분석 전문가입니다. 자막을 읽고 V9 파이프라인 규칙에 따라 투자 시그널을 추출합니다.
-반드시 순수 JSON만 출력하세요. 마크다운 코드블록(```)도 사용하지 마세요. 순수 JSON 텍스트만."""
+SYSTEM_PROMPT = """?뱀떊? ?좏뒠釉??ъ옄 ?곸긽 遺꾩꽍 ?꾨Ц媛?낅땲?? ?먮쭑???쎄퀬 V9 ?뚯씠?꾨씪??洹쒖튃???곕씪 ?ъ옄 ?쒓렇?먯쓣 異붿텧?⑸땲??
+諛섎뱶???쒖닔 JSON留?異쒕젰?섏꽭?? 留덊겕?ㅼ슫 肄붾뱶釉붾줉(```)???ъ슜?섏? 留덉꽭?? ?쒖닔 JSON ?띿뒪?몃쭔."""
 
 def validate_signals(result):
     """23-item cross validation. Returns list of issues."""
@@ -152,9 +152,9 @@ def validate_signals(result):
     for i, sig in enumerate(signals):
         prefix = f"Signal {i+1} ({sig.get('stock','?')})"
         
-        # 4. 5단계 외 등급
+        # 4. 5?④퀎 ???깃툒
         if sig.get("signal") not in VALID_SIGNALS:
-            issues.append(f"{prefix}: Invalid signal '{sig.get('signal')}' - must be 매수/긍정/중립/경계/매도")
+            issues.append(f"{prefix}: Invalid signal '{sig.get('signal')}' - must be 留ㅼ닔/湲띿젙/以묐┰/寃쎄퀎/留ㅻ룄")
         
         # market check
         if sig.get("market") not in VALID_MARKETS:
@@ -168,40 +168,40 @@ def validate_signals(result):
         if sig.get("confidence") not in VALID_CONFIDENCE:
             issues.append(f"{prefix}: Invalid confidence '{sig.get('confidence')}'")
         
-        # 1. 논거 vs 결론 - 논거는 최대 긍정
-        if sig.get("mention_type") == "논거" and sig.get("signal") == "매수":
-            issues.append(f"{prefix}: 논거 종목인데 매수로 분류됨 (최대 긍정)")
+        # 1. ?쇨굅 vs 寃곕줎 - ?쇨굅??理쒕? 湲띿젙
+        if sig.get("mention_type") == "?쇨굅" and sig.get("signal") == "留ㅼ닔":
+            issues.append(f"{prefix}: ?쇨굅 醫낅ぉ?몃뜲 留ㅼ닔濡?遺꾨쪟??(理쒕? 湲띿젙)")
         
-        # 3. 뉴스/리포트는 중립
-        if sig.get("mention_type") in ("뉴스", "리포트") and sig.get("signal") not in ("중립",):
-            issues.append(f"{prefix}: {sig.get('mention_type')}인데 signal={sig.get('signal')} (중립이어야 함)")
+        # 3. ?댁뒪/由ы룷?몃뒗 以묐┰
+        if sig.get("mention_type") in ("?댁뒪", "由ы룷??) and sig.get("signal") not in ("以묐┰",):
+            issues.append(f"{prefix}: {sig.get('mention_type')}?몃뜲 signal={sig.get('signal')} (以묐┰?댁뼱????")
         
-        # 8. INDEX 시그널 포함 여부
+        # 8. INDEX ?쒓렇???ы븿 ?щ?
         if sig.get("market") == "INDEX":
-            issues.append(f"{prefix}: INDEX(지수) 시그널은 제외해야 함")
+            issues.append(f"{prefix}: INDEX(吏?? ?쒓렇?먯? ?쒖쇅?댁빞 ??)
         
-        # 9. 교육 시그널 포함 여부
-        if sig.get("mention_type") == "교육":
-            issues.append(f"{prefix}: 교육 콘텐츠는 시그널에서 제외해야 함")
+        # 9. 援먯쑁 ?쒓렇???ы븿 ?щ?
+        if sig.get("mention_type") == "援먯쑁":
+            issues.append(f"{prefix}: 援먯쑁 肄섑뀗痢좊뒗 ?쒓렇?먯뿉???쒖쇅?댁빞 ??)
         
-        # 11. 티저 시그널
-        if sig.get("mention_type") == "티저" and sig.get("signal") != "중립":
-            issues.append(f"{prefix}: 티저는 중립이어야 함")
+        # 11. ?곗? ?쒓렇??
+        if sig.get("mention_type") == "?곗?" and sig.get("signal") != "以묐┰":
+            issues.append(f"{prefix}: ?곗???以묐┰?댁뼱????)
         
         # timestamp check
         if not sig.get("timestamp"):
-            issues.append(f"{prefix}: 타임스탬프 누락")
+            issues.append(f"{prefix}: ??꾩뒪?ы봽 ?꾨씫")
         
         # speaker check
         if not sig.get("speaker"):
-            issues.append(f"{prefix}: 발언자 누락")
+            issues.append(f"{prefix}: 諛쒖뼵???꾨씫")
     
-    # 5. 중복 체크 (같은 발언자 + 종목)
+    # 5. 以묐났 泥댄겕 (媛숈? 諛쒖뼵??+ 醫낅ぉ)
     seen = set()
     for sig in signals:
         key = (sig.get("speaker",""), sig.get("stock",""))
         if key in seen:
-            issues.append(f"중복: {key[0]} + {key[1]}")
+            issues.append(f"以묐났: {key[0]} + {key[1]}")
         seen.add(key)
     
     return issues
@@ -232,7 +232,7 @@ def get_or_create_video(video_id, title, channel_id, summary=""):
     
     new_vid = {
         "video_id": video_id,
-        "title": title or f"영상 {video_id}",
+        "title": title or f"?곸긽 {video_id}",
         "channel_id": channel_id,
         "has_subtitle": True,
         "subtitle_language": "ko",
@@ -410,7 +410,7 @@ def main():
                     has_issue = True
                 if sig.get("market") == "INDEX":
                     has_issue = True
-                if sig.get("mention_type") == "교육":
+                if sig.get("mention_type") == "援먯쑁":
                     has_issue = True
                 if not has_issue:
                     clean_signals.append(sig)
@@ -484,9 +484,9 @@ def main():
             if result:
                 inserted_count += 1
                 existing_signal_keys.add(dup_key)
-                print(f"  ✅ Inserted: {sig['stock']} | {sig['signal']} | {speaker_name}")
+                print(f"  ??Inserted: {sig['stock']} | {sig['signal']} | {speaker_name}")
             else:
-                print(f"  ❌ Failed: {sig['stock']} | {speaker_name}")
+                print(f"  ??Failed: {sig['stock']} | {speaker_name}")
     
     print(f"\n{'='*60}")
     print(f"FINAL REPORT")
@@ -498,3 +498,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

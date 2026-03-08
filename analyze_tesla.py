@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 
 import os
 import re
@@ -36,7 +36,7 @@ def extract_text_from_vtt(vtt_path):
         if capturing and line:
             clean_line = re.sub(r'<[^>]+>', '', line)
             clean_line = re.sub(r'align:start position:\d+%', '', clean_line) 
-            clean_line = clean_line.replace('?', '').replace('�', '').strip()
+            clean_line = clean_line.replace('?', '').replace('占?, '').strip()
             
             if clean_line and len(clean_line) > 3:
                 text_lines.append(clean_line)
@@ -44,7 +44,7 @@ def extract_text_from_vtt(vtt_path):
     return ' '.join(text_lines)
 
 def analyze_video(video_id, title):
-    # VTT 파일 찾기
+    # VTT ?뚯씪 李얘린
     subs_dir = Path(__file__).parent / 'subs'
     vtt_files = list(subs_dir.glob(f"wsaj_{video_id}*.ko.vtt"))
     
@@ -63,36 +63,36 @@ def analyze_video(video_id, title):
     }
     
     prompt = f"""
-YouTube 투자 영상 시그널 분석:
+YouTube ?ъ옄 ?곸긽 ?쒓렇??遺꾩꽍:
 
-## 중요 규칙
-1. 1영상 1종목 1시그널 (같은 종목 여러 언급시 가장 강한 시그널 1개만)
-2. 시그널 타입: 매수/긍정/중립/경계/매도 (한글만)
-3. timestamp: 0:00 금지, 실제 발언 시점
+## 以묒슂 洹쒖튃
+1. 1?곸긽 1醫낅ぉ 1?쒓렇??(媛숈? 醫낅ぉ ?щ윭 ?멸툒??媛??媛뺥븳 ?쒓렇??1媛쒕쭔)
+2. ?쒓렇????? 留ㅼ닔/湲띿젙/以묐┰/寃쎄퀎/留ㅻ룄 (?쒓?留?
+3. timestamp: 0:00 湲덉?, ?ㅼ젣 諛쒖뼵 ?쒖젏
 
-=== 영상 ===
-제목: {title}
-채널: 월가아재
+=== ?곸긽 ===
+?쒕ぉ: {title}
+梨꾨꼸: ?붽??꾩옱
 
-=== 자막 ===
+=== ?먮쭑 ===
 {subtitle_text[:5000]}
 
-JSON 응답:
+JSON ?묐떟:
 {{
   "signals": [
     {{
-      "stock": "종목명",
-      "ticker": "종목코드",
-      "signal_type": "매수|긍정|중립|경계|매도",
-      "key_quote": "핵심 발언 (15자 이상)",
-      "reasoning": "근거 (20자 이상)",
+      "stock": "醫낅ぉ紐?,
+      "ticker": "醫낅ぉ肄붾뱶",
+      "signal_type": "留ㅼ닔|湲띿젙|以묐┰|寃쎄퀎|留ㅻ룄",
+      "key_quote": "?듭떖 諛쒖뼵 (15???댁긽)",
+      "reasoning": "洹쇨굅 (20???댁긽)",
       "timestamp": "MM:SS",
       "confidence": 7
     }}
   ]
 }}
 
-⚠️ 같은 종목은 반드시 1개 시그널만!
+?좑툘 媛숈? 醫낅ぉ? 諛섎뱶??1媛??쒓렇?먮쭔!
 """
     
     try:
@@ -100,7 +100,7 @@ JSON 응답:
             "https://api.anthropic.com/v1/messages",
             headers=headers,
             json={
-                "model": "claude-sonnet-4-20250514",
+                "model": "claude-sonnet-4-6",
                 "max_tokens": 1000,
                 "messages": [{"role": "user", "content": prompt}]
             }
@@ -123,18 +123,18 @@ JSON 응답:
     except Exception as e:
         return {"error": str(e)}
 
-# 테슬라 관련 영상 2개 분석
+# ?뚯뒳??愿???곸긽 2媛?遺꾩꽍
 if __name__ == "__main__":
     
     tesla_videos = [
-        ("l9suWlP7U68", "테슬라 = AI 대장주?"),
-        ("_Ex0vR_1Ekg", "테슬라 목표가")
+        ("l9suWlP7U68", "?뚯뒳??= AI ??μ＜?"),
+        ("_Ex0vR_1Ekg", "?뚯뒳??紐⑺몴媛")
     ]
     
     results = []
     
     for video_id, title in tesla_videos:
-        print(f"\\n분석 중: {title}")
+        print(f"\\n遺꾩꽍 以? {title}")
         result = analyze_video(video_id, title)
         result['video_id'] = video_id
         result['video_title'] = title
@@ -142,10 +142,10 @@ if __name__ == "__main__":
         
         print(json.dumps(result, ensure_ascii=False, indent=2))
         
-        # 2초 딜레이
+        # 2珥??쒕젅??
         import time
         time.sleep(2)
     
-    # 결과 저장
+    # 寃곌낵 ???
     with open('tesla_analysis.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)

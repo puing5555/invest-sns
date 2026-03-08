@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-세상학개론 누락 영상 전체 파이프라인
-1. 자막 추출 (이미 있는 것 스킵)
-2. 메타데이터 가져오기 (yt-dlp)
+?몄긽?숆컻濡??꾨씫 ?곸긽 ?꾩껜 ?뚯씠?꾨씪??
+1. ?먮쭑 異붿텧 (?대? ?덈뒗 寃??ㅽ궢)
+2. 硫뷀??곗씠??媛?몄삤湲?(yt-dlp)
 3. DB INSERT (influencer_videos)
-4. 시그널 분석 (Claude Sonnet)
+4. ?쒓렇??遺꾩꽍 (Claude Sonnet)
 5. DB INSERT (influencer_signals)
 """
 
@@ -24,7 +24,7 @@ SUBS_DIR = r"C:\Users\Mario\work\subs\sesang101"
 SUPABASE_URL = os.getenv('NEXT_PUBLIC_SUPABASE_URL')
 SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_ROLE_KEY')
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-4-6"
 
 # All 78 video IDs
 ALL_IDS = [
@@ -54,11 +54,11 @@ EXCLUDE_IDS = {
 }
 
 INVEST_IDS = [v for v in ALL_IDS if v not in EXCLUDE_IDS]
-print(f"투자 영상: {len(INVEST_IDS)}개 (제외: {len(EXCLUDE_IDS)}개)")
+print(f"?ъ옄 ?곸긽: {len(INVEST_IDS)}媛?(?쒖쇅: {len(EXCLUDE_IDS)}媛?")
 
 # === STEP 1: Subtitle extraction ===
 def step1_subtitles():
-    """자막 추출 - 이미 있는 건 스킵"""
+    """?먮쭑 異붿텧 - ?대? ?덈뒗 嫄??ㅽ궢"""
     from youtube_transcript_api import YouTubeTranscriptApi
     from youtube_transcript_api.proxies import WebshareProxyConfig
     
@@ -72,11 +72,11 @@ def step1_subtitles():
     
     existing = {os.path.splitext(f)[0] for f in os.listdir(SUBS_DIR) if f.endswith('.json')}
     need = [v for v in INVEST_IDS if v not in existing]
-    print(f"\n=== STEP 1: 자막 추출 ===")
-    print(f"이미 있음: {len(INVEST_IDS) - len(need)}, 추출 필요: {len(need)}")
+    print(f"\n=== STEP 1: ?먮쭑 異붿텧 ===")
+    print(f"?대? ?덉쓬: {len(INVEST_IDS) - len(need)}, 異붿텧 ?꾩슂: {len(need)}")
     
     if not need:
-        print("모든 자막 있음, 스킵")
+        print("紐⑤뱺 ?먮쭑 ?덉쓬, ?ㅽ궢")
         return
     
     success, fail = 0, 0
@@ -98,18 +98,18 @@ def step1_subtitles():
         
         # Rate limiting
         if (i + 1) % 20 == 0 and i + 1 < len(need):
-            print("--- 20개 완료, 5분 휴식 ---")
+            print("--- 20媛??꾨즺, 5遺??댁떇 ---")
             time.sleep(300)
         else:
             time.sleep(random.uniform(2, 3))
     
-    print(f"자막 추출 완료: 성공 {success}, 실패 {fail}")
+    print(f"?먮쭑 異붿텧 ?꾨즺: ?깃났 {success}, ?ㅽ뙣 {fail}")
     return no_subs
 
 # === STEP 2: Metadata via yt-dlp ===
 def step2_metadata():
-    """yt-dlp로 메타데이터 가져오기"""
-    print(f"\n=== STEP 2: 메타데이터 ===")
+    """yt-dlp濡?硫뷀??곗씠??媛?몄삤湲?""
+    print(f"\n=== STEP 2: 硫뷀??곗씠??===")
     meta = {}
     errors = []
     
@@ -149,12 +149,12 @@ def step2_metadata():
     cache_file = os.path.join(SUBS_DIR, "_metadata.json")
     with open(cache_file, 'w', encoding='utf-8') as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
-    print(f"메타데이터 완료: {len(meta)}개 성공, {len(errors)}개 실패")
+    print(f"硫뷀??곗씠???꾨즺: {len(meta)}媛??깃났, {len(errors)}媛??ㅽ뙣")
     return meta, errors
 
 # === STEP 3: DB INSERT videos ===
 def step3_insert_videos(meta):
-    """Supabase에 영상 INSERT"""
+    """Supabase???곸긽 INSERT"""
     print(f"\n=== STEP 3: DB INSERT (videos) ===")
     import requests
     
@@ -170,7 +170,7 @@ def step3_insert_videos(meta):
     for vid in INVEST_IDS:
         m = meta.get(vid)
         if not m:
-            print(f"  {vid}: 메타데이터 없음, 스킵")
+            print(f"  {vid}: 硫뷀??곗씠???놁쓬, ?ㅽ궢")
             skipped += 1
             continue
         
@@ -205,20 +205,20 @@ def step3_insert_videos(meta):
         )
         if resp.status_code in (200, 201):
             inserted += 1
-            print(f"  ✓ {vid}: {m['title'][:30]}")
+            print(f"  ??{vid}: {m['title'][:30]}")
         elif resp.status_code == 409:
             skipped += 1
         else:
             errors.append((vid, resp.status_code, resp.text[:100]))
-            print(f"  ✗ {vid}: {resp.status_code} {resp.text[:80]}")
+            print(f"  ??{vid}: {resp.status_code} {resp.text[:80]}")
     
-    print(f"INSERT 완료: {inserted}개 성공, {skipped}개 스킵, {len(errors)}개 에러")
+    print(f"INSERT ?꾨즺: {inserted}媛??깃났, {skipped}媛??ㅽ궢, {len(errors)}媛??먮윭")
     return errors
 
 # === STEP 4 & 5: Analyze + Insert signals ===
 async def step4_5_analyze_and_insert():
-    """Claude Sonnet으로 분석 후 시그널 INSERT"""
-    print(f"\n=== STEP 4-5: 분석 + 시그널 INSERT ===")
+    """Claude Sonnet?쇰줈 遺꾩꽍 ???쒓렇??INSERT"""
+    print(f"\n=== STEP 4-5: 遺꾩꽍 + ?쒓렇??INSERT ===")
     
     # Load prompt
     prompt_file = Path(__file__).parent.parent / 'prompts' / 'pipeline_v10.md'
@@ -244,10 +244,10 @@ async def step4_5_analyze_and_insert():
                 continue
         except:
             continue
-        title = meta.get(vid, {}).get('title', f'영상 {vid}')
+        title = meta.get(vid, {}).get('title', f'?곸긽 {vid}')
         to_analyze.append({'video_id': vid, 'title': title, 'subtitle': subtitle})
     
-    print(f"분석 대상: {len(to_analyze)}개")
+    print(f"遺꾩꽍 ??? {len(to_analyze)}媛?)
     
     # Check which already have signals in DB
     import requests
@@ -267,10 +267,10 @@ async def step4_5_analyze_and_insert():
         existing_signal_vids = {r['video_id'] for r in resp.json()}
     
     to_analyze = [v for v in to_analyze if v['video_id'] not in existing_signal_vids]
-    print(f"이미 시그널 있는 영상 제외 후: {len(to_analyze)}개")
+    print(f"?대? ?쒓렇???덈뒗 ?곸긽 ?쒖쇅 ?? {len(to_analyze)}媛?)
     
     if not to_analyze:
-        print("분석할 영상 없음!")
+        print("遺꾩꽍???곸긽 ?놁쓬!")
         return 0, 0
     
     semaphore = asyncio.Semaphore(3)
@@ -285,15 +285,15 @@ async def step4_5_analyze_and_insert():
             
             prompt = prompt_template + f"""
 
-=== 분석 대상 영상 ===
-제목: {title}
+=== 遺꾩꽍 ????곸긽 ===
+?쒕ぉ: {title}
 URL: https://www.youtube.com/watch?v={vid}
 
-=== 자막 내용 ===
+=== ?먮쭑 ?댁슜 ===
 {subtitle}
 
-=== 분석 지시사항 ===
-위 영상의 자막을 분석하고 JSON 형태로 시그널을 추출해주세요.
+=== 遺꾩꽍 吏?쒖궗??===
+???곸긽???먮쭑??遺꾩꽍?섍퀬 JSON ?뺥깭濡??쒓렇?먯쓣 異붿텧?댁＜?몄슂.
 """
             
             headers = {
@@ -355,7 +355,7 @@ URL: https://www.youtube.com/watch?v={vid}
                             sig['title'] = title
                         
                         all_signals.extend(signals)
-                        print(f"  ✓ {vid} '{title[:25]}' → {len(signals)}개 시그널")
+                        print(f"  ??{vid} '{title[:25]}' ??{len(signals)}媛??쒓렇??)
                         await asyncio.sleep(1.0)
                         return
                         
@@ -367,17 +367,17 @@ URL: https://www.youtube.com/watch?v={vid}
                     await asyncio.sleep(5)
             
             stats['errors'] += 1
-            print(f"  ✗ {vid} 최종 실패")
+            print(f"  ??{vid} 理쒖쥌 ?ㅽ뙣")
     
     async with aiohttp.ClientSession() as session:
         tasks = [analyze_one(session, v) for v in to_analyze]
         await asyncio.gather(*tasks)
     
-    print(f"\n분석 완료: {stats['processed']}개 처리, {stats['signals']}개 시그널, {stats['errors']}개 에러")
+    print(f"\n遺꾩꽍 ?꾨즺: {stats['processed']}媛?泥섎━, {stats['signals']}媛??쒓렇?? {stats['errors']}媛??먮윭")
     
     # STEP 5: Insert signals
     if all_signals:
-        print(f"\n=== STEP 5: 시그널 INSERT ({len(all_signals)}개) ===")
+        print(f"\n=== STEP 5: ?쒓렇??INSERT ({len(all_signals)}媛? ===")
         import requests as req
         
         insert_headers = {
@@ -389,14 +389,14 @@ URL: https://www.youtube.com/watch?v={vid}
         
         # Map signal types
         SIGNAL_MAP = {
-            '매수': 'BUY', '긍정': 'POSITIVE', '중립': 'NEUTRAL',
-            '경계': 'CONCERN', '매도': 'SELL',
-            '강력매수': 'STRONG_BUY', '강력매도': 'STRONG_SELL'
+            '留ㅼ닔': 'BUY', '湲띿젙': 'POSITIVE', '以묐┰': 'NEUTRAL',
+            '寃쎄퀎': 'CONCERN', '留ㅻ룄': 'SELL',
+            '媛뺣젰留ㅼ닔': 'STRONG_BUY', '媛뺣젰留ㅻ룄': 'STRONG_SELL'
         }
         
         inserted = 0
         for sig in all_signals:
-            signal_type_kr = sig.get('signal_type', sig.get('signal', '중립'))
+            signal_type_kr = sig.get('signal_type', sig.get('signal', '以묐┰'))
             signal_type_en = SIGNAL_MAP.get(signal_type_kr, 'NEUTRAL')
             
             confidence = sig.get('confidence', 5)
@@ -427,22 +427,22 @@ URL: https://www.youtube.com/watch?v={vid}
             if r.status_code in (200, 201):
                 inserted += 1
             else:
-                print(f"  시그널 INSERT 에러: {r.status_code} {r.text[:80]}")
+                print(f"  ?쒓렇??INSERT ?먮윭: {r.status_code} {r.text[:80]}")
         
-        print(f"시그널 INSERT 완료: {inserted}/{len(all_signals)}")
+        print(f"?쒓렇??INSERT ?꾨즺: {inserted}/{len(all_signals)}")
     
     return stats['processed'], stats['signals']
 
 # === MAIN ===
 def main():
     print("=" * 60)
-    print("세상학개론 누락 영상 파이프라인 시작")
-    print(f"대상: {len(INVEST_IDS)}개 투자 영상")
+    print("?몄긽?숆컻濡??꾨씫 ?곸긽 ?뚯씠?꾨씪???쒖옉")
+    print(f"??? {len(INVEST_IDS)}媛??ъ옄 ?곸긽")
     print("=" * 60)
     
     # Step 1 - SKIP (already done, 55 have subs, 12 have no transcripts)
     no_subs = []
-    print("\n=== STEP 1: 자막 추출 (스킵 - 이미 완료) ===")
+    print("\n=== STEP 1: ?먮쭑 異붿텧 (?ㅽ궢 - ?대? ?꾨즺) ===")
     
     # Step 2
     meta, meta_errors = step2_metadata()
@@ -455,12 +455,13 @@ def main():
     
     # Summary
     print("\n" + "=" * 60)
-    print("파이프라인 완료!")
-    print(f"  투자 영상: {len(INVEST_IDS)}개")
-    print(f"  메타데이터 에러: {len(meta_errors)}개")
-    print(f"  분석 처리: {processed}개")
-    print(f"  총 시그널: {total_signals}개")
+    print("?뚯씠?꾨씪???꾨즺!")
+    print(f"  ?ъ옄 ?곸긽: {len(INVEST_IDS)}媛?)
+    print(f"  硫뷀??곗씠???먮윭: {len(meta_errors)}媛?)
+    print(f"  遺꾩꽍 泥섎━: {processed}媛?)
+    print(f"  珥??쒓렇?? {total_signals}媛?)
     print("=" * 60)
 
 if __name__ == '__main__':
     main()
+

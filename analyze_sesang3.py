@@ -1,4 +1,4 @@
-"""세상학개론 3개 영상 시그널 분석 및 DB INSERT"""
+﻿"""?몄긽?숆컻濡?3媛??곸긽 ?쒓렇??遺꾩꽍 諛?DB INSERT"""
 import sys, os, json, requests, time
 sys.stdout.reconfigure(encoding='utf-8')
 from dotenv import load_dotenv
@@ -16,20 +16,20 @@ with open('prompts/pipeline_v10.md', 'r', encoding='utf-8') as f:
 
 # Target videos
 TARGETS = [
-    {'video_id': 'Ke7gQMbIFLI', 'title': '트럼프의 선택에 시장이 패닉하는 이유, 우리도 패닉해야 하나요?'},
-    {'video_id': '4wCO1fdl9iU', 'title': '언제 터질지 모르는 버블에 올라타는 심리'},
-    {'video_id': '4cCGQFHrbK4', 'title': '제2의 팔란티어, 알고도 10배 못 먹는 이유'},
+    {'video_id': 'Ke7gQMbIFLI', 'title': '?몃읆?꾩쓽 ?좏깮???쒖옣???⑤땳?섎뒗 ?댁쑀, ?곕━???⑤땳?댁빞 ?섎굹??'},
+    {'video_id': '4wCO1fdl9iU', 'title': '?몄젣 ?곗쭏吏 紐⑤Ⅴ??踰꾨툝???щ씪????щ━'},
+    {'video_id': '4cCGQFHrbK4', 'title': '?????붾??곗뼱, ?뚭퀬??10諛?紐?癒밸뒗 ?댁쑀'},
 ]
 
 CHANNEL_URL = 'https://www.youtube.com/@sesang101'
 CHANNEL_ID = 'd68f8efd-64c8-4c07-9d34-e98c2954f4e1'
 
 def get_speaker_id():
-    """세상학개론 speaker_id"""
+    """?몄긽?숆컻濡?speaker_id"""
     return 'b9496a5f-06fa-47eb-bc2d-47060b095534'
 
 def get_subtitle(video_id):
-    """DB에서 자막 가져오기"""
+    """DB?먯꽌 ?먮쭑 媛?몄삤湲?""
     r = requests.get(f'{SUPABASE_URL}/rest/v1/influencer_videos?video_id=eq.{video_id}&select=id,subtitle_text', headers=SB_HEADERS)
     data = r.json()
     if data:
@@ -37,18 +37,18 @@ def get_subtitle(video_id):
     return None, ''
 
 def analyze_with_claude(video_title, video_id, subtitle):
-    """Claude Sonnet으로 시그널 분석"""
+    """Claude Sonnet?쇰줈 ?쒓렇??遺꾩꽍"""
     prompt = PROMPT_TEMPLATE + f"""
 
-=== 분석 대상 영상 ===
-채널: 세상학개론 (@sesang101)
-제목: {video_title}
+=== 遺꾩꽍 ????곸긽 ===
+梨꾨꼸: ?몄긽?숆컻濡?(@sesang101)
+?쒕ぉ: {video_title}
 URL: https://www.youtube.com/watch?v={video_id}
 
-=== 자막 내용 ===
+=== ?먮쭑 ?댁슜 ===
 {subtitle[:8000]}
 
-위 영상의 자막을 분석하고 시그널을 추출해주세요. JSON 형식으로만 응답하세요.
+???곸긽???먮쭑??遺꾩꽍?섍퀬 ?쒓렇?먯쓣 異붿텧?댁＜?몄슂. JSON ?뺤떇?쇰줈留??묐떟?섏꽭??
 """
     
     resp = requests.post(
@@ -59,7 +59,7 @@ URL: https://www.youtube.com/watch?v={video_id}
             'anthropic-version': '2023-06-01'
         },
         json={
-            'model': 'claude-sonnet-4-20250514',
+            'model': 'claude-sonnet-4-6',
             'max_tokens': 4096,
             'messages': [{'role': 'user', 'content': prompt}]
         },
@@ -88,8 +88,8 @@ URL: https://www.youtube.com/watch?v={video_id}
     return None
 
 def validate_signal(s):
-    """시그널 기본 검증"""
-    valid_types = ['매수', '긍정', '중립', '경계', '매도']
+    """?쒓렇??湲곕낯 寃利?""
+    valid_types = ['留ㅼ닔', '湲띿젙', '以묐┰', '寃쎄퀎', '留ㅻ룄']
     if s.get('signal_type') not in valid_types:
         return False, f"invalid signal_type: {s.get('signal_type')}"
     if not isinstance(s.get('confidence'), (int, float)) or not (1 <= s['confidence'] <= 10):
@@ -137,7 +137,7 @@ def main():
             s['_video_id'] = vid
             s['_title'] = title
             all_signals.append(s)
-            print(f"  ✅ {s['signal_type']} | {s.get('stock')} ({s.get('ticker')}) | conf:{s['confidence']} | {s['timestamp']}")
+            print(f"  ??{s['signal_type']} | {s.get('stock')} ({s.get('ticker')}) | conf:{s['confidence']} | {s['timestamp']}")
         
         time.sleep(2)  # rate limit
     
@@ -182,9 +182,10 @@ def main():
                 json=row
             )
             if r.status_code in (200, 201):
-                print(f"  ✅ Inserted: {s.get('stock')} ({s['signal_type']})")
+                print(f"  ??Inserted: {s.get('stock')} ({s['signal_type']})")
             else:
-                print(f"  ❌ Failed: {r.status_code} {r.text[:100]}")
+                print(f"  ??Failed: {r.status_code} {r.text[:100]}")
 
 if __name__ == '__main__':
     main()
+

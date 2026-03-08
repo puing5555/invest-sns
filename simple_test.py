@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-간단한 테스트: 하나의 시그널만으로 Claude API 테스트
+媛꾨떒???뚯뒪?? ?섎굹???쒓렇?먮쭔?쇰줈 Claude API ?뚯뒪??
 """
 import os
 import json
@@ -9,10 +9,10 @@ from dotenv import load_dotenv
 
 load_dotenv('.env.local')
 
-# API 설정
+# API ?ㅼ젙
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 
-# Claude API 설정
+# Claude API ?ㅼ젙
 CLAUDE_API_URL = "https://api.anthropic.com/v1/messages"
 CLAUDE_HEADERS = {
     'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ CLAUDE_HEADERS = {
 }
 
 def load_subtitle_text(video_id):
-    """자막 파일에서 텍스트 추출"""
+    """?먮쭑 ?뚯씪?먯꽌 ?띿뒪??異붿텧"""
     subtitle_path = f"../subs/sesang101/{video_id}.json"
     
     if not os.path.exists(subtitle_path):
@@ -32,9 +32,9 @@ def load_subtitle_text(video_id):
         with open(subtitle_path, 'r', encoding='utf-8') as f:
             subtitle_data = json.load(f)
         
-        # 자막 텍스트 합치기
+        # ?먮쭑 ?띿뒪???⑹튂湲?
         if isinstance(subtitle_data, list):
-            # 배열 형태의 자막
+            # 諛곗뿴 ?뺥깭???먮쭑
             texts = [entry.get('text', '') for entry in subtitle_data if entry.get('text')]
             return ' '.join(texts)
         else:
@@ -46,10 +46,10 @@ def load_subtitle_text(video_id):
         return None
 
 def test_claude_api():
-    """Claude API 테스트"""
+    """Claude API ?뚯뒪??""
     print("Testing Claude API...")
     
-    # 테스트용 자막 텍스트 로드
+    # ?뚯뒪?몄슜 ?먮쭑 ?띿뒪??濡쒕뱶
     video_id = "zre4X1a4QlY"
     subtitle_text = load_subtitle_text(video_id)
     
@@ -59,23 +59,23 @@ def test_claude_api():
     
     print(f"Loaded subtitle: {len(subtitle_text)} chars")
     
-    # Claude API 호출
-    stock = "비트코인"
-    signal = "매수"
+    # Claude API ?몄텧
+    stock = "鍮꾪듃肄붿씤"
+    signal = "留ㅼ닔"
     
-    prompt = f'''다음 자막에서 투자 시그널 "{stock}" ({signal})에 대한 정보를 정리해주세요.
+    prompt = f'''?ㅼ쓬 ?먮쭑?먯꽌 ?ъ옄 ?쒓렇??"{stock}" ({signal})??????뺣낫瑜??뺣━?댁＜?몄슂.
 
-1. key_quote: 발언자의 핵심 발언 1~2문장만 (자막 원문에서 직접 인용, 50자 이내)
-2. reasoning: 영상 전체 맥락에서 이 시그널이 나온 배경과 근거를 5~10줄로 상세 요약
+1. key_quote: 諛쒖뼵?먯쓽 ?듭떖 諛쒖뼵 1~2臾몄옣留?(?먮쭑 ?먮Ц?먯꽌 吏곸젒 ?몄슜, 50???대궡)
+2. reasoning: ?곸긽 ?꾩껜 留λ씫?먯꽌 ???쒓렇?먯씠 ?섏삩 諛곌꼍怨?洹쇨굅瑜?5~10以꾨줈 ?곸꽭 ?붿빟
 
-JSON 형식으로 응답:
+JSON ?뺤떇?쇰줈 ?묐떟:
 {{"key_quote": "...", "reasoning": "..."}}
 
-자막 내용:
+?먮쭑 ?댁슜:
 {subtitle_text[:3000]}'''
 
     payload = {
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 1000,
         "messages": [
             {
@@ -100,7 +100,7 @@ JSON 형식으로 응답:
         print("Claude API Response:")
         print(content)
         
-        # JSON 파싱 시도
+        # JSON ?뚯떛 ?쒕룄
         if content.startswith('```json'):
             content = content.replace('```json', '').replace('```', '').strip()
         

@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-세상학개론 시그널 수정 테스트 (처음 5개만)
+?몄긽?숆컻濡??쒓렇???섏젙 ?뚯뒪??(泥섏쓬 5媛쒕쭔)
 """
 import os
 import json
@@ -12,12 +12,12 @@ from dotenv import load_dotenv
 
 load_dotenv('.env.local')
 
-# API 설정
+# API ?ㅼ젙
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 SUPABASE_URL = os.getenv('NEXT_PUBLIC_SUPABASE_URL')
 SERVICE_ROLE_KEY = os.getenv('SUPABASE_SERVICE_ROLE_KEY')
 
-# Claude API 설정
+# Claude API ?ㅼ젙
 CLAUDE_API_URL = "https://api.anthropic.com/v1/messages"
 CLAUDE_HEADERS = {
     'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ CLAUDE_HEADERS = {
     'anthropic-version': '2023-06-01'
 }
 
-# Supabase 설정
+# Supabase ?ㅼ젙
 SUPABASE_HEADERS = {
     'apikey': SERVICE_ROLE_KEY,
     'Authorization': f'Bearer {SERVICE_ROLE_KEY}',
@@ -33,7 +33,7 @@ SUPABASE_HEADERS = {
 }
 
 def load_subtitle_text(video_id):
-    """자막 파일에서 텍스트 추출"""
+    """?먮쭑 ?뚯씪?먯꽌 ?띿뒪??異붿텧"""
     subtitle_path = f"../subs/sesang101/{video_id}.json"
     
     if not os.path.exists(subtitle_path):
@@ -44,13 +44,13 @@ def load_subtitle_text(video_id):
         with open(subtitle_path, 'r', encoding='utf-8') as f:
             subtitle_data = json.load(f)
         
-        # 자막 텍스트 합치기
+        # ?먮쭑 ?띿뒪???⑹튂湲?
         if isinstance(subtitle_data, list):
-            # 배열 형태의 자막
+            # 諛곗뿴 ?뺥깭???먮쭑
             texts = [entry.get('text', '') for entry in subtitle_data if entry.get('text')]
             return ' '.join(texts)
         elif 'entries' in subtitle_data:
-            # entries 키가 있는 경우
+            # entries ?ㅺ? ?덈뒗 寃쎌슦
             texts = [entry.get('text', '') for entry in subtitle_data['entries'] if entry.get('text')]
             return ' '.join(texts)
         else:
@@ -62,7 +62,7 @@ def load_subtitle_text(video_id):
         return None
 
 def get_youtube_video_id(video_id):
-    """influencer_videos에서 YouTube video_id 조회"""
+    """influencer_videos?먯꽌 YouTube video_id 議고쉶"""
     url = f"{SUPABASE_URL}/rest/v1/influencer_videos"
     params = {'id': f'eq.{video_id}', 'select': 'video_id'}
     
@@ -71,30 +71,30 @@ def get_youtube_video_id(video_id):
     if response.status_code == 200:
         data = response.json()
         if data:
-            return data[0].get('video_id')  # video_id가 바로 YouTube ID
+            return data[0].get('video_id')  # video_id媛 諛붾줈 YouTube ID
     
     return None
 
 def generate_improved_signal(subtitle_text, stock, signal):
-    """Claude API로 개선된 key_quote와 reasoning 생성"""
+    """Claude API濡?媛쒖꽑??key_quote? reasoning ?앹꽦"""
     
-    prompt = f'''다음 자막에서 투자 시그널 "{stock}" ({signal})에 대한 정보를 정리해주세요.
+    prompt = f'''?ㅼ쓬 ?먮쭑?먯꽌 ?ъ옄 ?쒓렇??"{stock}" ({signal})??????뺣낫瑜??뺣━?댁＜?몄슂.
 
-1. key_quote: 발언자의 핵심 발언 1~2문장만 (자막 원문에서 직접 인용, 50자 이내)
-2. reasoning: 영상 전체 맥락에서 이 시그널이 나온 배경과 근거를 5~10줄로 상세 요약
-   - 발언자의 핵심 주장
-   - 투자 근거와 논리  
-   - 언급된 수치나 데이터
-   - 결론과 전망
+1. key_quote: 諛쒖뼵?먯쓽 ?듭떖 諛쒖뼵 1~2臾몄옣留?(?먮쭑 ?먮Ц?먯꽌 吏곸젒 ?몄슜, 50???대궡)
+2. reasoning: ?곸긽 ?꾩껜 留λ씫?먯꽌 ???쒓렇?먯씠 ?섏삩 諛곌꼍怨?洹쇨굅瑜?5~10以꾨줈 ?곸꽭 ?붿빟
+   - 諛쒖뼵?먯쓽 ?듭떖 二쇱옣
+   - ?ъ옄 洹쇨굅? ?쇰━  
+   - ?멸툒???섏튂???곗씠??
+   - 寃곕줎怨??꾨쭩
 
-JSON 형식으로 응답:
+JSON ?뺤떇?쇰줈 ?묐떟:
 {{"key_quote": "...", "reasoning": "..."}}
 
-자막 내용:
+?먮쭑 ?댁슜:
 {subtitle_text[:6000]}'''
 
     payload = {
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 1000,
         "messages": [
             {
@@ -115,7 +115,7 @@ JSON 형식으로 응답:
         result = response.json()
         content = result['content'][0]['text']
         
-        # JSON 파싱
+        # JSON ?뚯떛
         if content.startswith('```json'):
             content = content.replace('```json', '').replace('```', '').strip()
         
@@ -129,11 +129,11 @@ JSON 형식으로 응답:
 def main():
     print("Testing Sesang101 signals improvement (first 5 signals)...")
     
-    # 수정이 필요한 시그널 로드
+    # ?섏젙???꾩슂???쒓렇??濡쒕뱶
     with open('sesang_signal_analysis.json', 'r', encoding='utf-8') as f:
         analysis = json.load(f)
     
-    need_fix_signals = analysis['need_fix_signals'][:5]  # 처음 5개만
+    need_fix_signals = analysis['need_fix_signals'][:5]  # 泥섏쓬 5媛쒕쭔
     print(f"Testing with {len(need_fix_signals)} signals")
     
     results = []
@@ -142,7 +142,7 @@ def main():
         try:
             print(f"\n{i+1}/5 Processing: {signal['stock']} ({signal['signal']})")
             
-            # YouTube video_id 조회
+            # YouTube video_id 議고쉶
             youtube_video_id = get_youtube_video_id(signal['video_id'])
             if not youtube_video_id:
                 print(f"  YouTube video_id not found")
@@ -150,7 +150,7 @@ def main():
             
             print(f"  YouTube ID: {youtube_video_id}")
             
-            # 자막 텍스트 로드
+            # ?먮쭑 ?띿뒪??濡쒕뱶
             subtitle_text = load_subtitle_text(youtube_video_id)
             if not subtitle_text:
                 print(f"  Subtitle not found")
@@ -158,7 +158,7 @@ def main():
             
             print(f"  Subtitle loaded: {len(subtitle_text)} chars")
             
-            # Claude API로 개선된 시그널 생성
+            # Claude API濡?媛쒖꽑???쒓렇???앹꽦
             improved = generate_improved_signal(subtitle_text, signal['stock'], signal['signal'])
             if not improved:
                 print(f"  Claude API failed")
@@ -178,13 +178,13 @@ def main():
                 'improved': improved
             })
             
-            # 2초 대기
+            # 2珥??湲?
             time.sleep(2)
             
         except Exception as e:
             print(f"  Error: {e}")
     
-    # 결과 저장
+    # 寃곌낵 ???
     with open('test_fix_results.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     

@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-세상학개론 시그널 key_quote/reasoning 수정 스크립트
-- 93개 시그널 중 82개 수정 필요
-- Claude API로 자막 기반 key_quote(짧은 인용), reasoning(긴 요약) 재생성
-- 5개씩 배치 처리, 요청 간 2초 대기
+?몄긽?숆컻濡??쒓렇??key_quote/reasoning ?섏젙 ?ㅽ겕由쏀듃
+- 93媛??쒓렇??以?82媛??섏젙 ?꾩슂
+- Claude API濡??먮쭑 湲곕컲 key_quote(吏㏃? ?몄슜), reasoning(湲??붿빟) ?ъ깮??
+- 5媛쒖뵫 諛곗튂 泥섎━, ?붿껌 媛?2珥??湲?
 """
 import os
 import json
@@ -15,13 +15,13 @@ from dotenv import load_dotenv
 
 load_dotenv('.env.local')
 
-# API 설정
+# API ?ㅼ젙
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 SUPABASE_URL = os.getenv('NEXT_PUBLIC_SUPABASE_URL')
 SERVICE_ROLE_KEY = os.getenv('SUPABASE_SERVICE_ROLE_KEY')
 SESANG_SPEAKER_ID = "b9496a5f-06fa-47eb-bc2d-47060b095534"
 
-# Claude API 설정
+# Claude API ?ㅼ젙
 CLAUDE_API_URL = "https://api.anthropic.com/v1/messages"
 CLAUDE_HEADERS = {
     'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ CLAUDE_HEADERS = {
     'anthropic-version': '2023-06-01'
 }
 
-# Supabase 설정
+# Supabase ?ㅼ젙
 SUPABASE_HEADERS = {
     'apikey': SERVICE_ROLE_KEY,
     'Authorization': f'Bearer {SERVICE_ROLE_KEY}',
@@ -37,7 +37,7 @@ SUPABASE_HEADERS = {
 }
 
 def load_subtitle_text(video_id):
-    """자막 파일에서 텍스트 추출"""
+    """?먮쭑 ?뚯씪?먯꽌 ?띿뒪??異붿텧"""
     subtitle_path = f"../subs/sesang101/{video_id}.json"
     
     if not os.path.exists(subtitle_path):
@@ -48,7 +48,7 @@ def load_subtitle_text(video_id):
         with open(subtitle_path, 'r', encoding='utf-8') as f:
             subtitle_data = json.load(f)
         
-        # 자막 텍스트 합치기
+        # ?먮쭑 ?띿뒪???⑹튂湲?
         if 'entries' in subtitle_data:
             texts = [entry.get('text', '') for entry in subtitle_data['entries'] if entry.get('text')]
             return ' '.join(texts)
@@ -61,7 +61,7 @@ def load_subtitle_text(video_id):
         return None
 
 def get_youtube_video_id(video_id):
-    """influencer_videos에서 YouTube video_id 조회"""
+    """influencer_videos?먯꽌 YouTube video_id 議고쉶"""
     url = f"{SUPABASE_URL}/rest/v1/influencer_videos"
     params = {'id': f'eq.{video_id}', 'select': 'youtube_video_id'}
     
@@ -75,25 +75,25 @@ def get_youtube_video_id(video_id):
     return None
 
 def generate_improved_signal(subtitle_text, stock, signal):
-    """Claude API로 개선된 key_quote와 reasoning 생성"""
+    """Claude API濡?媛쒖꽑??key_quote? reasoning ?앹꽦"""
     
-    prompt = f'''다음 자막에서 투자 시그널 "{stock}" ({signal})에 대한 정보를 정리해주세요.
+    prompt = f'''?ㅼ쓬 ?먮쭑?먯꽌 ?ъ옄 ?쒓렇??"{stock}" ({signal})??????뺣낫瑜??뺣━?댁＜?몄슂.
 
-1. key_quote: 발언자의 핵심 발언 1~2문장 (자막 원문에서 직접 인용)
-2. reasoning: 영상 전체 맥락에서 이 시그널이 나온 배경과 근거를 5~10줄로 상세히 요약
-   - 발언자의 핵심 주장
-   - 투자 근거와 논리
-   - 언급된 수치나 데이터
-   - 결론과 전망
+1. key_quote: 諛쒖뼵?먯쓽 ?듭떖 諛쒖뼵 1~2臾몄옣 (?먮쭑 ?먮Ц?먯꽌 吏곸젒 ?몄슜)
+2. reasoning: ?곸긽 ?꾩껜 留λ씫?먯꽌 ???쒓렇?먯씠 ?섏삩 諛곌꼍怨?洹쇨굅瑜?5~10以꾨줈 ?곸꽭???붿빟
+   - 諛쒖뼵?먯쓽 ?듭떖 二쇱옣
+   - ?ъ옄 洹쇨굅? ?쇰━
+   - ?멸툒???섏튂???곗씠??
+   - 寃곕줎怨??꾨쭩
 
-JSON으로 응답:
+JSON?쇰줈 ?묐떟:
 {{"key_quote": "...", "reasoning": "..."}}
 
-자막 내용:
-{subtitle_text[:8000]}...''' # 8000자 제한
+?먮쭑 ?댁슜:
+{subtitle_text[:8000]}...''' # 8000???쒗븳
 
     payload = {
-        "model": "claude-sonnet-4-20250514",
+        "model": "claude-sonnet-4-6",
         "max_tokens": 1000,
         "messages": [
             {
@@ -114,7 +114,7 @@ JSON으로 응답:
         result = response.json()
         content = result['content'][0]['text']
         
-        # JSON 파싱
+        # JSON ?뚯떛
         if content.startswith('```json'):
             content = content.replace('```json', '').replace('```', '').strip()
         
@@ -126,7 +126,7 @@ JSON으로 응답:
         return None
 
 def update_signal_in_supabase(signal_id, key_quote, reasoning):
-    """Supabase에서 시그널 업데이트"""
+    """Supabase?먯꽌 ?쒓렇???낅뜲?댄듃"""
     url = f"{SUPABASE_URL}/rest/v1/influencer_signals"
     params = {'id': f'eq.{signal_id}'}
     
@@ -147,14 +147,14 @@ def update_signal_in_supabase(signal_id, key_quote, reasoning):
 def main():
     print("Starting Sesang101 signals improvement...")
     
-    # 수정이 필요한 시그널 로드
+    # ?섏젙???꾩슂???쒓렇??濡쒕뱶
     with open('sesang_signal_analysis.json', 'r', encoding='utf-8') as f:
         analysis = json.load(f)
     
     need_fix_signals = analysis['need_fix_signals']
     print(f"Signals to fix: {len(need_fix_signals)}")
     
-    # 진행 상황 추적
+    # 吏꾪뻾 ?곹솴 異붿쟻
     processed = 0
     succeeded = 0
     failed = 0
@@ -173,28 +173,28 @@ def main():
                 
                 print(f"Processing: {stock} ({signal_type})")
                 
-                # YouTube video_id 조회
+                # YouTube video_id 議고쉶
                 youtube_video_id = get_youtube_video_id(video_id)
                 if not youtube_video_id:
                     print(f"  YouTube video_id not found for {video_id}")
                     failed += 1
                     continue
                 
-                # 자막 텍스트 로드
+                # ?먮쭑 ?띿뒪??濡쒕뱶
                 subtitle_text = load_subtitle_text(youtube_video_id)
                 if not subtitle_text:
                     print(f"  Subtitle not found for {youtube_video_id}")
                     failed += 1
                     continue
                 
-                # Claude API로 개선된 시그널 생성
+                # Claude API濡?媛쒖꽑???쒓렇???앹꽦
                 improved = generate_improved_signal(subtitle_text, stock, signal_type)
                 if not improved:
                     print(f"  Claude API failed for {stock}")
                     failed += 1
                     continue
                 
-                # Supabase 업데이트
+                # Supabase ?낅뜲?댄듃
                 if update_signal_in_supabase(signal_id, improved['key_quote'], improved['reasoning']):
                     print(f"  Updated: {stock}")
                     succeeded += 1
@@ -204,7 +204,7 @@ def main():
                 
                 processed += 1
                 
-                # 요청 간 2초 대기
+                # ?붿껌 媛?2珥??湲?
                 time.sleep(2)
                 
             except Exception as e:
@@ -213,7 +213,7 @@ def main():
         
         print(f"Batch completed. Processed: {processed}, Succeeded: {succeeded}, Failed: {failed}")
         
-        # 배치 간 추가 대기
+        # 諛곗튂 媛?異붽? ?湲?
         if i + batch_size < len(need_fix_signals):
             print("Waiting 5 seconds before next batch...")
             time.sleep(5)

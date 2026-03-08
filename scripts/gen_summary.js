@@ -1,4 +1,4 @@
-// Generate video summaries from transcript files using Claude API
+﻿// Generate video summaries from transcript files using Claude API
 const fs = require('fs');
 const path = require('path');
 
@@ -9,29 +9,29 @@ const VIDEOS = [
   {
     dbId: 'ffc64461-4859-4f38-898e-519b6ecaf2b2',
     transcriptFile: 'C:/Users/Mario/work/subs/booreadman_Xv-wNA91EPE_transcript.json',
-    title: '삼성전자 절대 팔지 마세요 [조진표 대표 2부]',
-    channel: '부읽남TV'
+    title: '?쇱꽦?꾩옄 ?덈? ?붿? 留덉꽭??[議곗쭊?????2遺]',
+    channel: '遺?쎈궓TV'
   },
   {
     dbId: 'cfc9e60f-5bae-45c5-8e57-8f624f79298c',
     transcriptFile: 'C:/Users/Mario/work/subs/hyoseok_fDZnPoK5lyc.json',
-    title: '반도체 다음 무섭게 치고나갈 충격적 4종목',
-    channel: '이효석아카데미'
+    title: '諛섎룄泥??ㅼ쓬 臾댁꽠寃?移섍퀬?섍컝 異⑷꺽??4醫낅ぉ',
+    channel: '?댄슚?앹븘移대뜲誘?
   },
   {
     dbId: '94ff3a67-01d6-49da-89ff-d461a810774c',
     transcriptFile: 'C:/Users/Mario/work/subs/hyoseok_tSXkj2Omz34.json',
-    title: '코스피 6000 돌파… 7,900 논리까지',
-    channel: '이효석아카데미'
+    title: '肄붿뒪??6000 ?뚰뙆??7,900 ?쇰━源뚯?',
+    channel: '?댄슚?앹븘移대뜲誘?
   },
 ];
 
 async function generateSummary(title, channel, transcript) {
   const charCount = transcript.length;
   let lineTarget;
-  if (charCount < 3000) lineTarget = '3-5줄';
-  else if (charCount < 10000) lineTarget = '7-10줄';
-  else lineTarget = '10-15줄';
+  if (charCount < 3000) lineTarget = '3-5以?;
+  else if (charCount < 10000) lineTarget = '7-10以?;
+  else lineTarget = '10-15以?;
 
   const resp = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -41,19 +41,19 @@ async function generateSummary(title, channel, transcript) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1024,
       messages: [{
         role: 'user',
-        content: `다음은 "${channel}" 채널의 "${title}" 영상 자막입니다.
+        content: `?ㅼ쓬? "${channel}" 梨꾨꼸??"${title}" ?곸긽 ?먮쭑?낅땲??
 
-이 영상의 핵심 내용을 ${lineTarget}로 요약해주세요.
-- 영상을 안 봐도 핵심을 파악할 수 있을 정도로 구체적으로
-- 주요 논점, 결론, 추천 종목, 시장 전망 등 포함
-- 한국어로 작성
-- 줄바꿈으로 구분
+???곸긽???듭떖 ?댁슜??${lineTarget}濡??붿빟?댁＜?몄슂.
+- ?곸긽????遊먮룄 ?듭떖???뚯븙?????덉쓣 ?뺣룄濡?援ъ껜?곸쑝濡?
+- 二쇱슂 ?쇱젏, 寃곕줎, 異붿쿇 醫낅ぉ, ?쒖옣 ?꾨쭩 ???ы븿
+- ?쒓뎅?대줈 ?묒꽦
+- 以꾨컮轅덉쑝濡?援щ텇
 
-자막:
+?먮쭑:
 ${transcript.slice(0, 15000)}`
       }],
     }),
@@ -94,3 +94,4 @@ async function main() {
 }
 
 main().catch(console.error);
+

@@ -1,4 +1,4 @@
-"""833개 시그널 2단계 품질 검증: Haiku → Sonnet"""
+﻿"""833媛??쒓렇??2?④퀎 ?덉쭏 寃利? Haiku ??Sonnet"""
 import os, json, time, requests
 from dotenv import load_dotenv
 
@@ -37,17 +37,17 @@ def call_claude(model, prompt):
     return None
 
 def validate_signal(title, sig, model):
-    prompt = f"""다음 시그널의 품질을 검증하세요.
+    prompt = f"""?ㅼ쓬 ?쒓렇?먯쓽 ?덉쭏??寃利앺븯?몄슂.
 
-영상 제목: {title}
-시그널 종목: {sig['stock']} ({sig.get('ticker','?')})
-시그널 타입: {sig.get('signal','?')}
-핵심 발언: {sig.get('key_quote','')}
-근거: {sig.get('reasoning','')}
+?곸긽 ?쒕ぉ: {title}
+?쒓렇??醫낅ぉ: {sig['stock']} ({sig.get('ticker','?')})
+?쒓렇????? {sig.get('signal','?')}
+?듭떖 諛쒖뼵: {sig.get('key_quote','')}
+洹쇨굅: {sig.get('reasoning','')}
 confidence: {sig.get('confidence','?')}
 
-판정: 정상/의심/불량. JSON으로만:
-{{"verdict": "정상", "reason": "한줄"}}"""
+?먯젙: ?뺤긽/?섏떖/遺덈웾. JSON?쇰줈留?
+{{"verdict": "?뺤긽", "reason": "?쒖쨪"}}"""
     
     text = call_claude(model, prompt)
     if not text:
@@ -70,7 +70,7 @@ def main():
     
     results = []
     haiku_model = "claude-3-haiku-20240307"
-    sonnet_model = "claude-sonnet-4-20250514"
+    sonnet_model = "claude-sonnet-4-6"
     
     # Phase 1: Haiku
     print("\n=== Phase 1: Haiku Validation ===")
@@ -93,16 +93,16 @@ def main():
         
         if (i+1) % 50 == 0:
             verdicts = [r['haiku_verdict'] for r in results]
-            print(f"  {i+1}/{len(signals)} | 정상:{verdicts.count('정상')} 의심:{verdicts.count('의심')} 불량:{verdicts.count('불량')} 에러:{verdicts.count('error')}")
+            print(f"  {i+1}/{len(signals)} | ?뺤긽:{verdicts.count('?뺤긽')} ?섏떖:{verdicts.count('?섏떖')} 遺덈웾:{verdicts.count('遺덈웾')} ?먮윭:{verdicts.count('error')}")
         
         time.sleep(2)
     
     # Phase 1 stats
     verdicts = [r['haiku_verdict'] for r in results]
-    print(f"\nPhase 1 결과: 정상:{verdicts.count('정상')} 의심:{verdicts.count('의심')} 불량:{verdicts.count('불량')}")
+    print(f"\nPhase 1 寃곌낵: ?뺤긽:{verdicts.count('?뺤긽')} ?섏떖:{verdicts.count('?섏떖')} 遺덈웾:{verdicts.count('遺덈웾')}")
     
-    # Phase 2: Sonnet for 의심/불량
-    need_sonnet = [r for r in results if r['haiku_verdict'] in ('의심', '불량')]
+    # Phase 2: Sonnet for ?섏떖/遺덈웾
+    need_sonnet = [r for r in results if r['haiku_verdict'] in ('?섏떖', '遺덈웾')]
     print(f"\n=== Phase 2: Sonnet Re-validation ({len(need_sonnet)} signals) ===")
     
     for i, entry in enumerate(need_sonnet):
@@ -126,32 +126,33 @@ def main():
         json.dump(results, f, ensure_ascii=False, indent=2)
     
     # Generate defects report
-    defects = [r for r in results if r['final_verdict'] in ('불량', '의심')]
+    defects = [r for r in results if r['final_verdict'] in ('遺덈웾', '?섏떖')]
     reportpath = os.path.join(os.path.dirname(__file__), '..', 'data', 'signal_defects.md')
     with open(reportpath, 'w', encoding='utf-8') as f:
-        f.write("# 시그널 불량 리스트\n\n")
+        f.write("# ?쒓렇??遺덈웾 由ъ뒪??n\n")
         final_verdicts = [r['final_verdict'] for r in results]
-        f.write(f"## 통계\n- 정상: {final_verdicts.count('정상')}\n- 의심: {final_verdicts.count('의심')}\n- 불량: {final_verdicts.count('불량')}\n- 에러: {final_verdicts.count('error')}\n\n")
-        f.write("## 불량 시그널\n\n")
+        f.write(f"## ?듦퀎\n- ?뺤긽: {final_verdicts.count('?뺤긽')}\n- ?섏떖: {final_verdicts.count('?섏떖')}\n- 遺덈웾: {final_verdicts.count('遺덈웾')}\n- ?먮윭: {final_verdicts.count('error')}\n\n")
+        f.write("## 遺덈웾 ?쒓렇??n\n")
         for r in defects:
-            if r['final_verdict'] == '불량':
+            if r['final_verdict'] == '遺덈웾':
                 f.write(f"### {r['stock']} ({r.get('ticker','?')})\n")
-                f.write(f"- ID: {r['id']}\n- 영상: {r['title']}\n- Haiku: {r['haiku_verdict']} ({r['haiku_reason']})\n")
+                f.write(f"- ID: {r['id']}\n- ?곸긽: {r['title']}\n- Haiku: {r['haiku_verdict']} ({r['haiku_reason']})\n")
                 if r['sonnet_verdict']:
                     f.write(f"- Sonnet: {r['sonnet_verdict']} ({r['sonnet_reason']})\n")
                 f.write("\n")
-        f.write("## 의심 시그널\n\n")
+        f.write("## ?섏떖 ?쒓렇??n\n")
         for r in defects:
-            if r['final_verdict'] == '의심':
+            if r['final_verdict'] == '?섏떖':
                 f.write(f"- **{r['stock']}** | {r['title'][:50]} | {r.get('sonnet_reason') or r['haiku_reason']}\n")
     
-    print(f"\n=== 완료 ===")
-    print(f"정상: {final_verdicts.count('정상')}")
-    print(f"의심: {final_verdicts.count('의심')}")
-    print(f"불량: {final_verdicts.count('불량')}")
-    print(f"에러: {final_verdicts.count('error')}")
-    print(f"결과: {outpath}")
-    print(f"리포트: {reportpath}")
+    print(f"\n=== ?꾨즺 ===")
+    print(f"?뺤긽: {final_verdicts.count('?뺤긽')}")
+    print(f"?섏떖: {final_verdicts.count('?섏떖')}")
+    print(f"遺덈웾: {final_verdicts.count('遺덈웾')}")
+    print(f"?먮윭: {final_verdicts.count('error')}")
+    print(f"寃곌낵: {outpath}")
+    print(f"由ы룷?? {reportpath}")
 
 if __name__ == '__main__':
     main()
+

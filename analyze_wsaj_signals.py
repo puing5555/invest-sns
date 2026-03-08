@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-월가아재(wsaj) VTT 자막 기반 시그널 분석 스크립트
-pipeline_v10 프롬프트 사용
+?붽??꾩옱(wsaj) VTT ?먮쭑 湲곕컲 ?쒓렇??遺꾩꽍 ?ㅽ겕由쏀듃
+pipeline_v10 ?꾨＼?꾪듃 ?ъ슜
 """
 
 import os
@@ -14,45 +14,45 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent / '.env.local')
 
-# API 설정
+# API ?ㅼ젙
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '')
 API_URL = "https://api.anthropic.com/v1/messages"
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-4-6"
 
 def load_prompt_template():
-    """pipeline_v10.md 프롬프트 로드"""
+    """pipeline_v10.md ?꾨＼?꾪듃 濡쒕뱶"""
     prompt_path = Path(__file__).parent / 'prompts' / 'pipeline_v10.md'
     with open(prompt_path, 'r', encoding='utf-8') as f:
         return f.read()
 
 def parse_vtt_file(vtt_path):
-    """VTT 파일에서 텍스트만 추출"""
+    """VTT ?뚯씪?먯꽌 ?띿뒪?몃쭔 異붿텧"""
     text_lines = []
     
     with open(vtt_path, 'r', encoding='utf-8', errors='ignore') as f:
         content = f.read()
     
-    # VTT 형식에서 타임스탬프와 텍스트 추출
-    # 00:00:00.480 --> 00:00:02.330 형태의 라인을 찾고 다음 라인들이 텍스트
+    # VTT ?뺤떇?먯꽌 ??꾩뒪?ы봽? ?띿뒪??異붿텧
+    # 00:00:00.480 --> 00:00:02.330 ?뺥깭???쇱씤??李얘퀬 ?ㅼ쓬 ?쇱씤?ㅼ씠 ?띿뒪??
     lines = content.split('\n')
     in_subtitle = False
     
     for line in lines:
         line = line.strip()
         
-        # 타임스탬프 라인 패턴
+        # ??꾩뒪?ы봽 ?쇱씤 ?⑦꽩
         if '-->' in line:
             in_subtitle = True
             continue
         
-        # 빈 라인이면 자막 블록 끝
+        # 鍮??쇱씤?대㈃ ?먮쭑 釉붾줉 ??
         if not line:
             in_subtitle = False
             continue
             
-        # 자막 텍스트 라인
+        # ?먮쭑 ?띿뒪???쇱씤
         if in_subtitle and line and not line.startswith('WEBVTT') and not line.startswith('Kind:') and not line.startswith('Language:'):
-            # HTML 태그 제거 및 정리
+            # HTML ?쒓렇 ?쒓굅 諛??뺣━
             clean_line = re.sub(r'<[^>]+>', '', line)
             clean_line = re.sub(r'align:start position:\d+%', '', clean_line)
             clean_line = clean_line.replace('?', '').strip()
@@ -62,24 +62,24 @@ def parse_vtt_file(vtt_path):
     return ' '.join(text_lines)
 
 def analyze_video_signal(video_id, video_title, subtitle_text):
-    """Claude API를 사용한 시그널 분석"""
+    """Claude API瑜??ъ슜???쒓렇??遺꾩꽍"""
     
     prompt_template = load_prompt_template()
     
-    # 프롬프트 구성
+    # ?꾨＼?꾪듃 援ъ꽦
     full_prompt = f"""
 {prompt_template}
 
-=== 분석 대상 영상 ===
-제목: {video_title}
-채널: 월가아재 (wsaj / Wall Street Ajae)
+=== 遺꾩꽍 ????곸긽 ===
+?쒕ぉ: {video_title}
+梨꾨꼸: ?붽??꾩옱 (wsaj / Wall Street Ajae)
 URL: https://www.youtube.com/watch?v={video_id}
 
-=== 자막 내용 ===
+=== ?먮쭑 ?댁슜 ===
 {subtitle_text[:8000]}
 
-=== 분석 지시사항 ===
-위 영상의 자막을 분석하고 정확히 아래 JSON 형태로 시그널을 추출해주세요.
+=== 遺꾩꽍 吏?쒖궗??===
+???곸긽???먮쭑??遺꾩꽍?섍퀬 ?뺥솗???꾨옒 JSON ?뺥깭濡??쒓렇?먯쓣 異붿텧?댁＜?몄슂.
 """
     
     headers = {
@@ -106,7 +106,7 @@ URL: https://www.youtube.com/watch?v={video_id}
         result = response.json()
         content = result['content'][0]['text']
         
-        # JSON 응답 파싱
+        # JSON ?묐떟 ?뚯떛
         try:
             if '```json' in content:
                 start = content.find('```json') + 7
@@ -117,22 +117,22 @@ URL: https://www.youtube.com/watch?v={video_id}
                 end = content.rfind('}') + 1
                 return json.loads(content[start:end])
         except json.JSONDecodeError as e:
-            print(f"JSON 파싱 에러: {e}")
-            print(f"응답 내용: {content}")
+            print(f"JSON ?뚯떛 ?먮윭: {e}")
+            print(f"?묐떟 ?댁슜: {content}")
             return {"error": "parse_failed", "raw": content[:500]}
             
     except Exception as e:
-        print(f"API 호출 에러: {e}")
+        print(f"API ?몄텧 ?먮윭: {e}")
         return {"error": "api_failed", "message": str(e)}
 
 def main():
-    """메인 실행"""
+    """硫붿씤 ?ㅽ뻾"""
     
-    # 이미 추출된 영상들
+    # ?대? 異붿텧???곸긽??
     videos = [
-        ("oDfnMrrRfl8", "Nvidia 밸류에이션"),
-        ("AQ2z2ZCBFa4", "Nvidia AI/메타버스/자율주행"),
-        ("5fhbkQ2Qidc", "가치평가 대가가 엔비디아 주식 안 판 이유")
+        ("oDfnMrrRfl8", "Nvidia 諛몃쪟?먯씠??),
+        ("AQ2z2ZCBFa4", "Nvidia AI/硫뷀?踰꾩뒪/?먯쑉二쇳뻾"),
+        ("5fhbkQ2Qidc", "媛移섑룊媛 ?媛媛 ?붾퉬?붿븘 二쇱떇 ?????댁쑀")
     ]
     
     subs_dir = Path(__file__).parent / 'subs'
@@ -141,7 +141,7 @@ def main():
     for video_id, title in videos:
         print(f"\n[ANALYZE] Processing: {title} ({video_id})")
         
-        # VTT 파일 찾기
+        # VTT ?뚯씪 李얘린
         vtt_files = list(subs_dir.glob(f"wsaj_{video_id}*.ko.vtt"))
         if not vtt_files:
             print(f"[ERROR] VTT file not found for {video_id}")
@@ -150,7 +150,7 @@ def main():
         vtt_file = vtt_files[0]
         print(f"[LOAD] Reading subtitle file for {video_id}")
         
-        # 자막 텍스트 추출
+        # ?먮쭑 ?띿뒪??異붿텧
         subtitle_text = parse_vtt_file(vtt_file)
         print(f"[INFO] Subtitle length: {len(subtitle_text)} characters")
         
@@ -158,22 +158,22 @@ def main():
             print(f"[SKIP] Subtitle too short")
             continue
         
-        # 시그널 분석
+        # ?쒓렇??遺꾩꽍
         print(f"[API] Analyzing signals...")
         result = analyze_video_signal(video_id, title, subtitle_text)
         
-        # 결과 저장
+        # 寃곌낵 ???
         result['video_id'] = video_id
         result['video_title'] = title
         results.append(result)
         
         print(f"[RESULT] {json.dumps(result, ensure_ascii=False, indent=2)}")
         
-        # 레이트 리밋 준수
+        # ?덉씠??由щ컠 以??
         print(f"[WAIT] Sleeping 2 seconds...")
         time.sleep(2)
     
-    # 최종 결과 저장
+    # 理쒖쥌 寃곌낵 ???
     output_file = Path(__file__).parent / 'wsaj_signals_analysis.json'
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)

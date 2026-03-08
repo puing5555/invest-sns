@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 import anthropic
 import json
@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv('.env.local')
 
 client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
-MODEL = "claude-sonnet-4-20250514"
+MODEL = "claude-sonnet-4-6"
 
 # Read prompts
 v10_8 = Path('prompts/pipeline_v10_backup.md').read_text(encoding='utf-8')
@@ -47,13 +47,13 @@ def run_extraction(prompt, subtitle_text, video_title):
         max_tokens=4096,
         messages=[{
             "role": "user",
-            "content": f"{prompt}\n\n---\n\n## 영상 제목: {video_title}\n\n## 자막:\n{subtitle_text}"
+            "content": f"{prompt}\n\n---\n\n## ?곸긽 ?쒕ぉ: {video_title}\n\n## ?먮쭑:\n{subtitle_text}"
         }]
     )
     return resp.content[0].text
 
 NON_STOCK_TICKERS = {'BTC', 'ETH', 'XRP', 'SOL', 'DOGE', 'ADA', 'DOT', 'AVAX', 'MATIC', 'LINK'}
-NON_STOCK_NAMES = ['비트코인', '이더리움', '리플', '솔라나', '도지코인', '금', '은', '원유', '달러', '엔화', '유로']
+NON_STOCK_NAMES = ['鍮꾪듃肄붿씤', '?대뜑由ъ?', '由ы뵆', '?붾씪??, '?꾩?肄붿씤', '湲?, '?', '?먯쑀', '?щ윭', '?뷀솕', '?좊줈']
 
 def analyze_response(raw_text):
     """Parse and analyze a response"""
@@ -138,41 +138,41 @@ total_ns_v9 = sum(r['v9']['non_stock'] for r in results)
 total_lq_v8 = sum(r['v8']['long_quote'] for r in results)
 total_lq_v9 = sum(r['v9']['long_quote'] for r in results)
 
-report = f"""# V10.8 vs V10.9 A/B 테스트 결과
+report = f"""# V10.8 vs V10.9 A/B ?뚯뒪??寃곌낵
 
-테스트 일시: 2026-03-04
-모델: {MODEL}
-테스트 자막: {len(selected)}개
+?뚯뒪???쇱떆: 2026-03-04
+紐⑤뜽: {MODEL}
+?뚯뒪???먮쭑: {len(selected)}媛?
 
-## 요약
+## ?붿빟
 
-| 항목 | V10.8 | V10.9 |
+| ??ぉ | V10.8 | V10.9 |
 |------|-------|-------|
-| 총 시그널 | {total_v8} | {total_v9} |
-| 비종목 포함 (암호화폐/원자재 등) | {total_ns_v8} | {total_ns_v9} |
-| key_quote 200자 초과 | {total_lq_v8} | {total_lq_v9} |
+| 珥??쒓렇??| {total_v8} | {total_v9} |
+| 鍮꾩쥌紐??ы븿 (?뷀샇?뷀룓/?먯옄???? | {total_ns_v8} | {total_ns_v9} |
+| key_quote 200??珥덇낵 | {total_lq_v8} | {total_lq_v9} |
 
-## V10.9 주요 변경사항 적용 여부
+## V10.9 二쇱슂 蹂寃쎌궗???곸슜 ?щ?
 
-### 1. 비종목 필터링 (암호화폐, 금, 원자재 등)
-- V10.8: {total_ns_v8}개 비종목 시그널 생성
-- V10.9: {total_ns_v9}개 비종목 시그널 생성
-- **{'✅ 개선됨' if total_ns_v9 < total_ns_v8 else '⚠️ 차이 없음' if total_ns_v9 == total_ns_v8 else '❌ 악화'}**
+### 1. 鍮꾩쥌紐??꾪꽣留?(?뷀샇?뷀룓, 湲? ?먯옄????
+- V10.8: {total_ns_v8}媛?鍮꾩쥌紐??쒓렇???앹꽦
+- V10.9: {total_ns_v9}媛?鍮꾩쥌紐??쒓렇???앹꽦
+- **{'??媛쒖꽑?? if total_ns_v9 < total_ns_v8 else '?좑툘 李⑥씠 ?놁쓬' if total_ns_v9 == total_ns_v8 else '???낇솕'}**
 
-### 2. key_quote 200자 제한
-- V10.8: {total_lq_v8}개 초과
-- V10.9: {total_lq_v9}개 초과
-- **{'✅ 개선됨' if total_lq_v9 < total_lq_v8 else '⚠️ 차이 없음' if total_lq_v9 == total_lq_v8 else '❌ 악화'}**
+### 2. key_quote 200???쒗븳
+- V10.8: {total_lq_v8}媛?珥덇낵
+- V10.9: {total_lq_v9}媛?珥덇낵
+- **{'??媛쒖꽑?? if total_lq_v9 < total_lq_v8 else '?좑툘 李⑥씠 ?놁쓬' if total_lq_v9 == total_lq_v8 else '???낇솕'}**
 
-### 3. confidence 4 이하 제외 (V10.9 신규)
+### 3. confidence 4 ?댄븯 ?쒖쇅 (V10.9 ?좉퇋)
 """
 
 for r in results:
     low_conf_v8 = len([s for s in r['v8']['signals'] if isinstance(s.get('confidence'), (int, float)) and s['confidence'] <= 4])
     low_conf_v9 = len([s for s in r['v9']['signals'] if isinstance(s.get('confidence'), (int, float)) and s['confidence'] <= 4])
-    report += f"- {r['file']}: V10.8={low_conf_v8}개 low-conf, V10.9={low_conf_v9}개 low-conf\n"
+    report += f"- {r['file']}: V10.8={low_conf_v8}媛?low-conf, V10.9={low_conf_v9}媛?low-conf\n"
 
-report += "\n### 4. 1영상 1종목 1시그널\n"
+report += "\n### 4. 1?곸긽 1醫낅ぉ 1?쒓렇??n"
 for r in results:
     for ver, key in [('V10.8', 'v8'), ('V10.9', 'v9')]:
         stocks = {}
@@ -181,7 +181,7 @@ for r in results:
             stocks[st] = stocks.get(st, 0) + 1
         dupes = {k: v for k, v in stocks.items() if v > 1}
         if dupes:
-            report += f"- ❌ {r['file']} ({ver}): 중복 - {dupes}\n"
+            report += f"- ??{r['file']} ({ver}): 以묐났 - {dupes}\n"
 
 report += "\n"
 
@@ -190,32 +190,32 @@ for i, r in enumerate(results):
     report += f"""
 ---
 
-## 자막 {i+1}: {r['file']}
+## ?먮쭑 {i+1}: {r['file']}
 
-### V10.8 결과 ({r['v8']['count']}개 시그널)
+### V10.8 寃곌낵 ({r['v8']['count']}媛??쒓렇??
 
 ```json
 {json.dumps(r['v8']['signals'], ensure_ascii=False, indent=2)}
 ```
 
-### V10.9 결과 ({r['v9']['count']}개 시그널)
+### V10.9 寃곌낵 ({r['v9']['count']}媛??쒓렇??
 
 ```json
 {json.dumps(r['v9']['signals'], ensure_ascii=False, indent=2)}
 ```
 
-### 차이점 분석
-- 시그널 수: V10.8={r['v8']['count']} vs V10.9={r['v9']['count']}
-- 비종목: V10.8={r['v8']['non_stock']} vs V10.9={r['v9']['non_stock']}
-- key_quote 200자 초과: V10.8={r['v8']['long_quote']} vs V10.9={r['v9']['long_quote']}
+### 李⑥씠??遺꾩꽍
+- ?쒓렇???? V10.8={r['v8']['count']} vs V10.9={r['v9']['count']}
+- 鍮꾩쥌紐? V10.8={r['v8']['non_stock']} vs V10.9={r['v9']['non_stock']}
+- key_quote 200??珥덇낵: V10.8={r['v8']['long_quote']} vs V10.9={r['v9']['long_quote']}
 
-### V10.8 API 원문 응답
+### V10.8 API ?먮Ц ?묐떟
 
 ```
 {r['v8_raw']}
 ```
 
-### V10.9 API 원문 응답
+### V10.9 API ?먮Ц ?묐떟
 
 ```
 {r['v9_raw']}
@@ -223,4 +223,5 @@ for i, r in enumerate(results):
 """
 
 Path('data/v10_ab_test_report.md').write_text(report, encoding='utf-8')
-print(f"\n✅ Report saved to data/v10_ab_test_report.md")
+print(f"\n??Report saved to data/v10_ab_test_report.md")
+

@@ -12,7 +12,7 @@ class PipelineConfig:
     
     # Anthropic API ?§Ï†ï
     ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-    ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
+    ANTHROPIC_MODEL = "claude-sonnet-4-6"
     
     # Webshare ?ÑÎ°ù???§Ï†ï
     WEBSHARE_PROXY_URL = os.getenv('WEBSHARE_PROXY_URL', '')

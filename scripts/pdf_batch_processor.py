@@ -1,10 +1,10 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-PDF 배치 처리 스크립트 - 애널리스트 리포트 AI 요약
-- 로컬 PDF에서 텍스트 추출
-- Claude Sonnet으로 한줄요약 + 상세요약 생성
-- Supabase analyst_reports 테이블 업데이트
+PDF 諛곗튂 泥섎━ ?ㅽ겕由쏀듃 - ?좊꼸由ъ뒪??由ы룷??AI ?붿빟
+- 濡쒖뺄 PDF?먯꽌 ?띿뒪??異붿텧
+- Claude Sonnet?쇰줈 ?쒖쨪?붿빟 + ?곸꽭?붿빟 ?앹꽦
+- Supabase analyst_reports ?뚯씠釉??낅뜲?댄듃
 """
 
 import os
@@ -20,13 +20,13 @@ import anthropic
 from dotenv import load_dotenv
 import functools
 
-# stdout 즉시 출력
+# stdout 利됱떆 異쒕젰
 print = functools.partial(print, flush=True)
 
-# .env.local 로드
+# .env.local 濡쒕뱶
 load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env.local")
 
-# 설정
+# ?ㅼ젙
 SUPABASE_URL = os.getenv("NEXT_PUBLIC_SUPABASE_URL", "https://arypzhotxflimroprmdk.supabase.co")
 SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
@@ -42,7 +42,7 @@ MAX_DELAY = 30
 
 
 def supabase_request(method, endpoint, data=None, params=None):
-    """Supabase REST API 직접 호출"""
+    """Supabase REST API 吏곸젒 ?몄텧"""
     url = f"{SUPABASE_URL}/rest/v1/{endpoint}"
     headers = {
         "apikey": SUPABASE_KEY,
@@ -58,19 +58,19 @@ def supabase_request(method, endpoint, data=None, params=None):
 
 
 def get_pending_reports() -> List[Dict]:
-    """ai_summary가 없는 리포트만 조회"""
+    """ai_summary媛 ?녿뒗 由ы룷?몃쭔 議고쉶"""
     reports = supabase_request("GET", "analyst_reports", params={
         "select": "id,title,firm,ticker,pdf_url,published_at",
         "ai_summary": "is.null",
         "pdf_url": "not.is.null",
         "order": "id.asc",
     })
-    print(f"미처리 리포트: {len(reports)}건")
+    print(f"誘몄쿂由?由ы룷?? {len(reports)}嫄?)
     return reports
 
 
 def load_progress() -> set:
-    """처리 완료 ID 로드"""
+    """泥섎━ ?꾨즺 ID 濡쒕뱶"""
     if PROGRESS_FILE.exists():
         with open(PROGRESS_FILE, 'r') as f:
             return set(json.load(f).get("done_ids", []))
@@ -78,13 +78,13 @@ def load_progress() -> set:
 
 
 def save_progress(done_ids: set):
-    """진행상황 저장"""
+    """吏꾪뻾?곹솴 ???""
     with open(PROGRESS_FILE, 'w') as f:
         json.dump({"done_ids": list(done_ids), "count": len(done_ids)}, f)
 
 
 def find_pdf_for_report(report: Dict) -> Optional[Path]:
-    """리포트에 해당하는 PDF 파일 찾기 - {ticker}_{firm}_{published_at}.pdf"""
+    """由ы룷?몄뿉 ?대떦?섎뒗 PDF ?뚯씪 李얘린 - {ticker}_{firm}_{published_at}.pdf"""
     ticker = report.get("ticker", "")
     firm = report.get("firm", "")
     pub_date = report.get("published_at", "")
@@ -94,7 +94,7 @@ def find_pdf_for_report(report: Dict) -> Optional[Path]:
         if candidate.exists():
             return candidate
     
-    # fallback: ticker+firm 부분매칭
+    # fallback: ticker+firm 遺遺꾨ℓ移?
     prefix = f"{ticker}_{firm}_"
     for pdf_file in PDF_DIR.glob("*.pdf"):
         if pdf_file.name.startswith(prefix):
@@ -104,29 +104,29 @@ def find_pdf_for_report(report: Dict) -> Optional[Path]:
 
 
 def extract_text(pdf_path: Path) -> Optional[str]:
-    """PDF에서 텍스트 추출"""
+    """PDF?먯꽌 ?띿뒪??異붿텧"""
     try:
         text = ""
         with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages[:30]:  # 최대 30페이지
+            for page in pdf.pages[:30]:  # 理쒕? 30?섏씠吏
                 t = page.extract_text()
                 if t:
                     text += t + "\n"
         text = text.strip()
         return text if len(text) >= 100 else None
     except Exception as e:
-        print(f"  텍스트 추출 실패: {e}")
+        print(f"  ?띿뒪??異붿텧 ?ㅽ뙣: {e}")
         return None
 
 
 def extract_analyst_name(text: str) -> Optional[str]:
-    """애널리스트명 추출"""
+    """?좊꼸由ъ뒪?몃챸 異붿텧"""
     lines = text.split('\n')[:20] + text.split('\n')[-20:]
     patterns = [
-        r'(?:애널리스트|분석가|Analyst)[:：\s]*([가-힣]{2,4})',
-        r'([가-힣]{2,4})[\s]*(?:애널리스트|분석가)',
-        r'(?:담당|작성)[:：\s]*([가-힣]{2,4})',
-        r'([가-힣]{2,4})[\s]*(?:선임연구원|연구원|책임연구원)',
+        r'(?:?좊꼸由ъ뒪??遺꾩꽍媛|Analyst)[:竊?s]*([媛-??{2,4})',
+        r'([媛-??{2,4})[\s]*(?:?좊꼸由ъ뒪??遺꾩꽍媛)',
+        r'(?:?대떦|?묒꽦)[:竊?s]*([媛-??{2,4})',
+        r'([媛-??{2,4})[\s]*(?:?좎엫?곌뎄???곌뎄??梨낆엫?곌뎄??',
     ]
     for line in lines:
         for pattern in patterns:
@@ -143,17 +143,17 @@ def generate_summary(client, text: str, firm: str, ticker: str, delay_state: dic
     for attempt in range(MAX_RETRIES):
         try:
             resp = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model="claude-sonnet-4-6",
                 max_tokens=1200,
                 timeout=60,
-                messages=[{"role": "user", "content": f"""다음 애널리스트 리포트를 분석해주세요.
+                messages=[{"role": "user", "content": f"""?ㅼ쓬 ?좊꼸由ъ뒪??由ы룷?몃? 遺꾩꽍?댁＜?몄슂.
 
-증권사: {firm} | 종목: {ticker}
+利앷텒?? {firm} | 醫낅ぉ: {ticker}
 
 {text[:6000]}
 
-다음 JSON 형식으로만 답변:
-{{"ai_summary": "한줄요약 50자이내, 구체적 투자포인트", "ai_detail": "상세요약 500자이상. 투자포인트/실적전망/밸류에이션/리스크/결론 구조. 구체적 수치 포함"}}"""}]
+?ㅼ쓬 JSON ?뺤떇?쇰줈留??듬?:
+{{"ai_summary": "?쒖쨪?붿빟 50?먯씠?? 援ъ껜???ъ옄?ъ씤??, "ai_detail": "?곸꽭?붿빟 500?먯씠?? ?ъ옄?ъ씤???ㅼ쟻?꾨쭩/諛몃쪟?먯씠??由ъ뒪??寃곕줎 援ъ“. 援ъ껜???섏튂 ?ы븿"}}"""}]
             )
             raw = resp.content[0].text.strip()
             delay_state["current"] = max(MIN_DELAY, delay_state["current"] - 0.5)
@@ -195,18 +195,18 @@ def generate_summary(client, text: str, firm: str, ticker: str, delay_state: dic
 
 
 def update_supabase(report_id: int, updates: Dict) -> bool:
-    """Supabase 업데이트"""
+    """Supabase ?낅뜲?댄듃"""
     try:
         supabase_request("PATCH", f"analyst_reports?id=eq.{report_id}", data=updates)
         return True
     except Exception as e:
-        print(f"  Supabase 업데이트 실패: {e}")
+        print(f"  Supabase ?낅뜲?댄듃 ?ㅽ뙣: {e}")
         return False
 
 
 def main():
     print("=" * 60)
-    print("PDF AI 요약 배치 처리 시작")
+    print("PDF AI ?붿빟 諛곗튂 泥섎━ ?쒖옉")
     print("=" * 60)
 
     if not ANTHROPIC_API_KEY:
@@ -218,19 +218,19 @@ def main():
 
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     
-    # 미처리 리포트 조회
+    # 誘몄쿂由?由ы룷??議고쉶
     reports = get_pending_reports()
     if not reports:
-        print("모든 리포트가 이미 처리됨!")
+        print("紐⑤뱺 由ы룷?멸? ?대? 泥섎━??")
         return
 
-    # 진행상황 로드 (중간 저장)
+    # 吏꾪뻾?곹솴 濡쒕뱶 (以묎컙 ???
     done_ids = load_progress()
-    print(f"이전 진행: {len(done_ids)}건 완료")
+    print(f"?댁쟾 吏꾪뻾: {len(done_ids)}嫄??꾨즺")
 
-    # PDF 파일 목록 캐시
+    # PDF ?뚯씪 紐⑸줉 罹먯떆
     pdf_files = {f.name: f for f in PDF_DIR.glob("*.pdf")}
-    print(f"로컬 PDF: {len(pdf_files)}개")
+    print(f"濡쒖뺄 PDF: {len(pdf_files)}媛?)
 
     success = 0
     skip = 0
@@ -245,30 +245,30 @@ def main():
 
         print(f"\n[{i+1}/{len(reports)}] ID={rid} | {report.get('firm','')} | {report.get('ticker','')}")
 
-        # PDF 찾기
+        # PDF 李얘린
         pdf_path = find_pdf_for_report(report)
         if not pdf_path:
-            print("  PDF 파일 없음 - 스킵")
+            print("  PDF ?뚯씪 ?놁쓬 - ?ㅽ궢")
             fail += 1
             continue
 
-        # 텍스트 추출
+        # ?띿뒪??異붿텧
         text = extract_text(pdf_path)
         if not text:
-            print("  텍스트 추출 실패 - 스킵")
+            print("  ?띿뒪??異붿텧 ?ㅽ뙣 - ?ㅽ궢")
             fail += 1
             continue
 
-        # 애널리스트명
+        # ?좊꼸由ъ뒪?몃챸
         analyst = extract_analyst_name(text)
 
-        # AI 요약
+        # AI ?붿빟
         result = generate_summary(client, text, report.get("firm", ""), report.get("ticker", ""), delay_state)
         if not result:
             fail += 1
             continue
 
-        # Supabase 업데이트 (ai_detail -> summary 컬럼에 저장)
+        # Supabase ?낅뜲?댄듃 (ai_detail -> summary 而щ읆?????
         updates = {}
         if result.get("ai_summary"):
             updates["ai_summary"] = result["ai_summary"]
@@ -284,30 +284,31 @@ def main():
         else:
             fail += 1
 
-        # 동적 딜레이
+        # ?숈쟻 ?쒕젅??
         time.sleep(delay_state["current"])
 
-        # 10개마다 중간저장
+        # 10媛쒕쭏??以묎컙???
         if success > 0 and success % 10 == 0:
             save_progress(done_ids)
             print(f"  [SAVE] {len(done_ids)} done, delay={delay_state['current']:.1f}s")
 
-        # 50개마다 휴식 + 중간저장
+        # 50媛쒕쭏???댁떇 + 以묎컙???
         if success > 0 and success % BATCH_SIZE == 0:
             save_progress(done_ids)
             print(f"\n{'='*40}")
-            print(f"중간 저장: {success}건 완료 / {fail}건 실패")
-            print(f"{BATCH_DELAY}초 휴식...")
+            print(f"以묎컙 ??? {success}嫄??꾨즺 / {fail}嫄??ㅽ뙣")
+            print(f"{BATCH_DELAY}珥??댁떇...")
             print(f"{'='*40}")
             time.sleep(BATCH_DELAY)
 
-    # 최종 저장
+    # 理쒖쥌 ???
     save_progress(done_ids)
     print(f"\n{'='*60}")
-    print(f"배치 처리 완료!")
-    print(f"성공: {success} | 실패: {fail} | 스킵: {skip}")
+    print(f"諛곗튂 泥섎━ ?꾨즺!")
+    print(f"?깃났: {success} | ?ㅽ뙣: {fail} | ?ㅽ궢: {skip}")
     print(f"{'='*60}")
 
 
 if __name__ == "__main__":
     main()
+

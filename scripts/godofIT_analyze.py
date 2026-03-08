@@ -25,7 +25,7 @@ LOG_FILE = r'C:\Users\Mario\work\invest-sns\pipeline\data\godofIT_log.txt'
 SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co'
 SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8'
 ANTHROPIC_KEY = os.environ.get('ANTHROPIC_API_KEY', 'YOUR_ANTHROPIC_API_KEY_HERE')
-MODEL = 'claude-sonnet-4-20250514'
+MODEL = 'claude-sonnet-4-6'
 
 CHANNEL_URL = 'https://www.youtube.com/@GODofIT'
 CHANNEL_NAME = 'GODofIT'
@@ -451,4 +451,5 @@ YouTube URL: https://www.youtube.com/watch?v={vid}
 
 if __name__ == '__main__':
     main()
+
 

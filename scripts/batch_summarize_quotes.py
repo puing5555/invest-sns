@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 sys.stdout.reconfigure(encoding='utf-8')
 import requests, json, time
 import anthropic
@@ -30,11 +30,11 @@ for i, s in enumerate(long):
     
     try:
         msg = client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-4-6",
             max_tokens=200,
             messages=[{
                 "role": "user",
-                "content": f"다음 투자 시그널의 key_quote를 핵심만 1~2문장(최대 200자)으로 요약해줘. 원문의 투자 판단과 근거를 반드시 포함해. 마크다운 볼드체 쓰지 마. 순수 텍스트만.\n\n종목: {stock}\n원문: {kq}"
+                "content": f"?ㅼ쓬 ?ъ옄 ?쒓렇?먯쓽 key_quote瑜??듭떖留?1~2臾몄옣(理쒕? 200???쇰줈 ?붿빟?댁쨾. ?먮Ц???ъ옄 ?먮떒怨?洹쇨굅瑜?諛섎뱶???ы븿?? 留덊겕?ㅼ슫 蹂쇰뱶泥??곗? 留? ?쒖닔 ?띿뒪?몃쭔.\n\n醫낅ぉ: {stock}\n?먮Ц: {kq}"
             }]
         )
         summary = msg.content[0].text.strip()
@@ -60,3 +60,4 @@ for i, s in enumerate(long):
         fail += 1
 
 print(f"\nDone! Success={success}, Fail={fail}")
+
