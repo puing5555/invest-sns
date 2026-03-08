@@ -1,8 +1,103 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
+
+// ============ MARKET DATA TYPES ============
+interface MarketItem {
+  price: number;
+  change: number;
+  changePct: number;
+}
+
+interface MarketData {
+  'S&P500': MarketItem | null;
+  'NASDAQ': MarketItem | null;
+  'KOSPI': MarketItem | null;
+  'KOSDAQ': MarketItem | null;
+  'USD/KRW': MarketItem | null;
+  updatedAt: string;
+}
+
+interface InvestorEntry {
+  individual: number;
+  institution: number;
+  foreign: number;
+}
+
+async function fetchYahooQuote(ticker: string): Promise<MarketItem | null> {
+  try {
+    const encoded = encodeURIComponent(ticker);
+    const res = await fetch(
+      `https://query1.finance.yahoo.com/v8/finance/chart/${encoded}?interval=1d&range=5d`,
+      { cache: 'no-store' }
+    );
+    if (!res.ok) return null;
+    const json = await res.json();
+    const meta = json?.chart?.result?.[0]?.meta;
+    if (!meta) return null;
+    const price = meta.regularMarketPrice ?? 0;
+    const prevClose = meta.previousClose ?? meta.chartPreviousClose ?? price;
+    const change = price - prevClose;
+    const changePct = prevClose !== 0 ? (change / prevClose) * 100 : 0;
+    return {
+      price: Math.round(price * 100) / 100,
+      change: Math.round(change * 100) / 100,
+      changePct: Math.round(changePct * 100) / 100,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function useMarketData() {
+  const [marketData, setMarketData] = useState<MarketData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [investorData, setInvestorData] = useState<Record<string, { investors?: InvestorEntry }> | null>(null);
+
+  const fetchAll = useCallback(async () => {
+    setLoading(true);
+    try {
+      const [sp500, nasdaq, kospi, kosdaq, usdkrw] = await Promise.all([
+        fetchYahooQuote('^GSPC'),
+        fetchYahooQuote('^IXIC'),
+        fetchYahooQuote('^KS11'),
+        fetchYahooQuote('^KQ11'),
+        fetchYahooQuote('USDKRW=X'),
+      ]);
+      setMarketData({
+        'S&P500': sp500,
+        'NASDAQ': nasdaq,
+        'KOSPI': kospi,
+        'KOSDAQ': kosdaq,
+        'USD/KRW': usdkrw,
+        updatedAt: new Date().toLocaleTimeString('ko-KR'),
+      });
+    } catch {
+      setMarketData(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchAll();
+    // 5분마다 갱신
+    const interval = setInterval(fetchAll, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [fetchAll]);
+
+  useEffect(() => {
+    // 수급 데이터 로드 (빌드 시 생성된 JSON)
+    fetch('/market-investors.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => setInvestorData(data))
+      .catch(() => setInvestorData(null));
+  }, []);
+
+  return { marketData, loading, investorData };
+}
 
 // ============ DUMMY DATA ============
 const dummyHoldings = [
@@ -132,107 +227,202 @@ const FilterPill = ({ label, active, onClick, icon }: { label: string; active: b
   </button>
 );
 
+// ============ MARKET ITEM DISPLAY HELPER ============
+const MarketQuote = ({
+  label,
+  item,
+  loading,
+  prefix = '',
+  decimals = 2,
+}: {
+  label: string;
+  item: MarketItem | null | undefined;
+  loading: boolean;
+  prefix?: string;
+  decimals?: number;
+}) => {
+  if (loading) {
+    return (
+      <span style={{ color: colors.gray, fontSize: 13 }}>
+        {label} <b>로딩중...</b>
+      </span>
+    );
+  }
+  if (!item) {
+    return (
+      <span style={{ color: colors.gray, fontSize: 13 }}>
+        {label} <b style={{ color: colors.gray }}>-</b>
+      </span>
+    );
+  }
+  const isUp = item.changePct >= 0;
+  const color = isUp ? colors.red : colors.blue;
+  const sign = isUp ? '+' : '';
+  const priceStr = item.price > 1000
+    ? `${prefix}${item.price.toLocaleString()}`
+    : `${prefix}${item.price.toFixed(decimals)}`;
+  return (
+    <span style={{ fontSize: 13 }}>
+      {label} <b style={{ color }}>{priceStr} {sign}{item.changePct.toFixed(2)}%</b>
+    </span>
+  );
+};
+
 // ============ TAB: 지금 ============
-// 순서: 오늘알림(없으면 숨김) → 보유종목(가로 카드) → 관심종목 → 시황
-const NowTab = () => (
-  <div>
-    {/* 오늘 알림 — 없으면 숨김 */}
-    {dummyAlerts.length > 0 && (
-      <Card>
-        <SectionHeader title="🔔 오늘 알림" action="전체 보기 →" />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-          {dummyAlerts.map((a, i) => (
-            <div key={i} style={{
-              display: 'flex', alignItems: 'flex-start', gap: 12,
-              padding: '12px 0',
-              borderBottom: i < dummyAlerts.length - 1 ? `1px solid ${colors.lightGray}` : 'none',
-              cursor: 'pointer',
-            }}>
-              <span style={{ fontSize: 20 }}>{a.icon}</span>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{a.title}</div>
-                <div style={{ fontSize: 13, color: colors.gray, marginTop: 2 }}>{a.desc}</div>
+// 순서: 오늘알림(없으면 숨김) → 보유종목(가로 카드) → 관심종목 → 시황(실데이터) → 수급
+const NowTab = () => {
+  const { marketData, loading, investorData } = useMarketData();
+
+  // 수급 데이터에서 최신 날짜 1개 추출
+  const latestInvestorDate = investorData
+    ? Object.keys(investorData)
+        .filter(d => investorData[d]?.investors)
+        .sort()
+        .at(-1)
+    : null;
+  const latestInvestor = latestInvestorDate ? investorData![latestInvestorDate].investors : null;
+
+  const fmtAmount = (v: number) => {
+    const abs = Math.abs(v);
+    const sign = v >= 0 ? '+' : '-';
+    if (abs >= 1_000_000_000_000) return `${sign}${(abs / 1_000_000_000_000).toFixed(1)}조`;
+    if (abs >= 100_000_000) return `${sign}${(abs / 100_000_000).toFixed(0)}억`;
+    return `${sign}${abs.toLocaleString()}`;
+  };
+
+  return (
+    <div>
+      {/* 오늘 알림 — 없으면 숨김 */}
+      {dummyAlerts.length > 0 && (
+        <Card>
+          <SectionHeader title="🔔 오늘 알림" action="전체 보기 →" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+            {dummyAlerts.map((a, i) => (
+              <div key={i} style={{
+                display: 'flex', alignItems: 'flex-start', gap: 12,
+                padding: '12px 0',
+                borderBottom: i < dummyAlerts.length - 1 ? `1px solid ${colors.lightGray}` : 'none',
+                cursor: 'pointer',
+              }}>
+                <span style={{ fontSize: 20 }}>{a.icon}</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{a.title}</div>
+                  <div style={{ fontSize: 13, color: colors.gray, marginTop: 2 }}>{a.desc}</div>
+                </div>
+                <span style={{ fontSize: 12, color: colors.gray, whiteSpace: 'nowrap' }}>{a.time}</span>
               </div>
-              <span style={{ fontSize: 12, color: colors.gray, whiteSpace: 'nowrap' }}>{a.time}</span>
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {/* 보유종목 — 가로 스크롤 카드 (종목명 / 현재가 / 수익률%) */}
+      <Card>
+        <SectionHeader title="🧳 보유종목" action="전체보기 →" />
+        <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
+          {dummyHoldings.map((s, i) => (
+            <div key={i} style={{
+              minWidth: 130, padding: '14px 16px', borderRadius: 12,
+              background: colors.bg, flexShrink: 0, textAlign: 'center',
+              border: `1px solid ${colors.lightGray}`,
+            }}>
+              <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{s.name}</div>
+              <div style={{ fontWeight: 700, fontSize: 15, color: colors.primary, marginTop: 8 }}>
+                {typeof s.currentPrice === 'number' && s.currentPrice > 1000
+                  ? s.currentPrice.toLocaleString()
+                  : s.currentPrice}
+              </div>
+              <div style={{
+                fontSize: 14, fontWeight: 700, marginTop: 4,
+                color: s.returnPct >= 0 ? colors.red : colors.blue,
+              }}>
+                {s.returnPct >= 0 ? '+' : ''}{s.returnPct.toFixed(2)}%
+              </div>
             </div>
           ))}
         </div>
       </Card>
-    )}
 
-    {/* 보유종목 — 가로 스크롤 카드 (종목명 / 현재가 / 수익률%) */}
-    <Card>
-      <SectionHeader title="🧳 보유종목" action="전체보기 →" />
-      <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
-        {dummyHoldings.map((s, i) => (
-          <div key={i} style={{
-            minWidth: 130, padding: '14px 16px', borderRadius: 12,
-            background: colors.bg, flexShrink: 0, textAlign: 'center',
-            border: `1px solid ${colors.lightGray}`,
-          }}>
-            <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{s.name}</div>
-            <div style={{ fontWeight: 700, fontSize: 15, color: colors.primary, marginTop: 8 }}>
-              {typeof s.currentPrice === 'number' && s.currentPrice > 1000
-                ? s.currentPrice.toLocaleString()
-                : s.currentPrice}
-            </div>
-            <div style={{
-              fontSize: 14, fontWeight: 700, marginTop: 4,
-              color: s.returnPct >= 0 ? colors.red : colors.blue,
+      {/* 관심종목 — 가로 스크롤 카드 */}
+      <Card>
+        <SectionHeader title="⭐ 관심종목" action="전체보기 →" />
+        <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
+          {dummyWatchlist.map((s, i) => (
+            <div key={i} style={{
+              minWidth: 120, padding: '12px 16px', borderRadius: 12,
+              background: colors.bg, textAlign: 'center', flexShrink: 0,
             }}>
-              {s.returnPct >= 0 ? '+' : ''}{s.returnPct.toFixed(2)}%
+              <div style={{ fontWeight: 600, fontSize: 13, color: colors.primary }}>{s.name}</div>
+              <div style={{
+                fontSize: 14, fontWeight: 700, marginTop: 6,
+                color: s.changePct >= 0 ? colors.red : colors.blue,
+              }}>
+                {s.changePct >= 0 ? '+' : ''}{s.changePct}%
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </Card>
+          ))}
+        </div>
+      </Card>
 
-    {/* 관심종목 — 가로 스크롤 카드 */}
-    <Card>
-      <SectionHeader title="⭐ 관심종목" action="전체보기 →" />
-      <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
-        {dummyWatchlist.map((s, i) => (
-          <div key={i} style={{
-            minWidth: 120, padding: '12px 16px', borderRadius: 12,
-            background: colors.bg, textAlign: 'center', flexShrink: 0,
-          }}>
-            <div style={{ fontWeight: 600, fontSize: 13, color: colors.primary }}>{s.name}</div>
-            <div style={{
-              fontSize: 14, fontWeight: 700, marginTop: 6,
-              color: s.changePct >= 0 ? colors.red : colors.blue,
-            }}>
-              {s.changePct >= 0 ? '+' : ''}{s.changePct}%
-            </div>
+      {/* 시황 — 실시간 데이터 (Yahoo Finance) */}
+      <Card>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: colors.primary }}>📊 시황</span>
+          <span style={{ fontSize: 11, color: colors.gray }}>
+            {loading ? '불러오는 중...' : marketData ? `${marketData.updatedAt} 기준` : '데이터 오류'}
+          </span>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>US</span>
+            <MarketQuote label="S&P500" item={marketData?.['S&P500']} loading={loading} decimals={0} />
+            <MarketQuote label="나스닥" item={marketData?.['NASDAQ']} loading={loading} decimals={0} />
           </div>
-        ))}
-      </div>
-    </Card>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>KR</span>
+            <MarketQuote label="코스피" item={marketData?.['KOSPI']} loading={loading} decimals={2} />
+            <MarketQuote label="코스닥" item={marketData?.['KOSDAQ']} loading={loading} decimals={2} />
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>FX</span>
+            <MarketQuote label="원/달러" item={marketData?.['USD/KRW']} loading={loading} decimals={0} />
+          </div>
+        </div>
+      </Card>
 
-    {/* 시황 */}
-    <Card>
-      <SectionHeader title="📊 시황" />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>US</span>
-          <span>S&P <b style={{ color: colors.red }}>5,782 +0.8%</b></span>
-          <span>나스닥 <b style={{ color: colors.red }}>18,432 +1.2%</b></span>
-          <span>다우 <b style={{ color: colors.red }}>42,890 +0.3%</b></span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>KR</span>
-          <span>코스피 <b style={{ color: colors.blue }}>2,578 -0.2%</b></span>
-          <span>코스닥 <b style={{ color: colors.red }}>752 +0.4%</b></span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>₿</span>
-          <span>BTC <b style={{ color: colors.red }}>$85,420 +1.2%</b></span>
-          <span>금 <b style={{ color: colors.red }}>$2,914 +0.3%</b></span>
-          <span>원/달러 <b style={{ color: colors.red }}>1,455 +0.1%</b></span>
-        </div>
-      </div>
-    </Card>
-  </div>
-);
+      {/* 수급 — pykrx_data.json 기반 */}
+      {latestInvestor && latestInvestorDate && (
+        <Card>
+          <SectionHeader title="💰 최근 수급 (KOSPI)" />
+          <div style={{ fontSize: 12, color: colors.gray, marginBottom: 10 }}>
+            📅 {latestInvestorDate} 기준
+          </div>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            {([
+              { label: '외국인', value: latestInvestor.foreign },
+              { label: '기관', value: latestInvestor.institution },
+              { label: '개인', value: latestInvestor.individual },
+            ] as { label: string; value: number }[]).map(({ label, value }) => (
+              <div key={label} style={{
+                flex: 1, minWidth: 90, padding: '12px 14px', borderRadius: 10,
+                background: colors.bg, textAlign: 'center',
+                border: `1px solid ${value >= 0 ? '#BBDEFB' : '#FFCDD2'}`,
+              }}>
+                <div style={{ fontSize: 12, color: colors.gray, marginBottom: 6 }}>{label}</div>
+                <div style={{
+                  fontSize: 14, fontWeight: 700,
+                  color: value >= 0 ? colors.red : colors.blue,
+                }}>
+                  {fmtAmount(value)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+    </div>
+  );
+};
 
 // ============ TAB: 뉴스 — 공시 AI분석 삭제, 뉴스 헤드라인만 ============
 const NewsTab = () => (
