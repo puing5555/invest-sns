@@ -141,13 +141,21 @@ def check_return_pct(project_root, slug):
     if null_pct < 30:
         return True, len(missing), total
 
-    # ── auto-fix: new_stock_handler 실행 ──
-    print(f"  ⛔ 수익률 누락 30% 초과 → 🔧 new_stock_handler 자동 실행...")
-    rc, out, err = run_script(project_root, ['scripts/new_stock_handler.py'], timeout=120)
+    # ── auto-fix: fix_missing_returns 실행 (더 포괄적인 수익률 복구) ──
+    print(f"  ⛔ 수익률 누락 30% 초과 → 🔧 fix_missing_returns 자동 실행...")
+    rc, out, err = run_script(project_root, ['scripts/fix_missing_returns.py'], timeout=300)
     if rc == 0:
-        print(f"  ✅ new_stock_handler 완료")
+        print(f"  ✅ fix_missing_returns 완료")
     else:
-        print(f"  ⚠️  new_stock_handler 실패: {err[:200]}")
+        print(f"  ⚠️  fix_missing_returns 실패: {err[:200]}")
+        # 폴백: new_stock_handler 시도
+        print(f"  🔧 new_stock_handler --fix-missing-returns 폴백 시도...")
+        rc, out, err = run_script(project_root,
+            ['scripts/new_stock_handler.py', '--fix-missing-returns'], timeout=120)
+        if rc == 0:
+            print(f"  ✅ new_stock_handler 완료")
+        else:
+            print(f"  ⚠️  new_stock_handler 실패: {err[:200]}")
 
     # 재체크
     prices2 = json.load(open(prices_path, encoding='utf-8'))

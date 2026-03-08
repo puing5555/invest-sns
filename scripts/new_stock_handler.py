@@ -247,6 +247,17 @@ class NewStockHandler:
 # CLI 직접 실행용
 if __name__ == "__main__":
     import sys
+
+    # --fix-missing-returns 모드: UUID 수익률 누락 일괄 복구
+    if '--fix-missing-returns' in sys.argv:
+        print("fix_missing_returns 모드 → scripts/fix_missing_returns.py 실행")
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / 'scripts' / 'fix_missing_returns.py')],
+            capture_output=False, text=True
+        )
+        sys.exit(result.returncode)
+
     # missing_price_stocks.json 처리 모드
     missing_file = PROJECT_ROOT / "data" / "tmp" / "missing_price_stocks.json"
     if missing_file.exists():
