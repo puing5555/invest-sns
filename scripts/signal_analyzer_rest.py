@@ -33,12 +33,20 @@ class SignalAnalyzer:
         # 기본 프롬프트에서 채널 URL 교체
         prompt = self.prompt_template.replace('{CHANNEL_URL}', channel_url)
         
-        # 영상 duration 경고 정보
+        # 영상 duration 경고 정보 + V11.3 플레이스홀더 치환
         duration_info = ""
         dur_secs = video_data.get('duration_seconds')
         if dur_secs:
             dur_secs = int(dur_secs)
-            duration_info = f"\n⚠️ 영상 길이: {dur_secs//60}분 {dur_secs%60:02d}초 ({dur_secs}초). 타임스탬프는 반드시 이 시간 이내여야 합니다."
+            dur_str = f"{dur_secs//60}분 {dur_secs%60:02d}초 ({dur_secs}초)"
+            duration_info = f"\n⚠️ 영상 길이: {dur_str}. 타임스탬프는 반드시 이 시간 이내여야 합니다."
+            # V11.3 프롬프트 플레이스홀더 치환
+            prompt = prompt.replace(
+                '{VIDEO_DURATION_INFO}',
+                f"이 영상은 {dur_str}입니다. 타임스탬프는 이 시간을 절대로 초과할 수 없습니다."
+            )
+        else:
+            prompt = prompt.replace('{VIDEO_DURATION_INFO}', '영상 길이 정보 없음')
 
         # 영상 정보 추가
         video_info = f"""
@@ -188,8 +196,12 @@ URL: {video_data['url']}
         
         # 시그널 타입 매핑 (한글/영문 -> DB 영문)
         signal_type_mapping = {
+            # V11.3 한글 5단계
             '매수': 'BUY', '긍정': 'POSITIVE', '중립': 'NEUTRAL',
-            '경계': 'CONCERN', '매도': 'SELL',
+            '부정': 'CONCERN', '매도': 'SELL',
+            # 구버전 호환
+            '경계': 'CONCERN',
+            # 영문 (레거시)
             'STRONG_BUY': 'STRONG_BUY', 'BUY': 'BUY', 'POSITIVE': 'POSITIVE',
             'HOLD': 'NEUTRAL', 'NEUTRAL': 'NEUTRAL', 'CONCERN': 'CONCERN',
             'SELL': 'SELL', 'STRONG_SELL': 'STRONG_SELL'
