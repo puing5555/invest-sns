@@ -8,24 +8,40 @@
   python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute
   python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute --limit 10
   python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute --skip-existing
+  python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute --skip-qa
 
 기능:
 1. yt-dlp로 채널 영상 목록 수집
 2. 제목 필터링 (투자 관련 영상만 선별)
-3. Webshare 프록시로 자막 추출
-4. Anthropic Claude로 시그널 분석 (V10 프롬프트)
-5. Supabase DB에 INSERT
-6. signal_prices.json 업데이트
+3. QA Gate 1 - 메타데이터 검증
+4. Webshare 프록시로 자막 추출
+5. Anthropic Claude로 시그널 분석 (V10 프롬프트)
+6. QA Gate 2 - 시그널 검증
+7. Supabase DB에 INSERT + QA Gate 3 (프론트엔드 검증)
 """
 
 import os
 import sys
 import argparse
 import json
+import re
 import time
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 import yt_dlp
+
+# 프로젝트 루트: scripts/ 기준으로 한 단계 위
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# QA 게이트 import (scripts/qa/ 모듈)
+_QA_AVAILABLE = False
+try:
+    from qa.gate1_metadata import run_gate1
+    from qa.gate2_signals import run_gate2
+    from qa.gate3_frontend import run_gate3
+    _QA_AVAILABLE = True
+except ImportError as _qa_err:
+    print(f"[WARNING] QA Gate 모듈 import 실패 (--skip-qa 강제 적용): {_qa_err}")
 
 # 모듈 import
 from title_filter import TitleFilter
@@ -33,6 +49,58 @@ from subtitle_extractor import SubtitleExtractor
 from signal_analyzer_rest import SignalAnalyzer
 from db_inserter_rest import DatabaseInserter
 from pipeline_config import PipelineConfig
+
+
+# ────────────────────────────────────────
+# 유틸
+# ────────────────────────────────────────
+
+def get_channel_slug(channel_url: str) -> str:
+    """채널 URL에서 슬러그 추출
+    https://www.youtube.com/@sesang101 → sesang101
+    """
+    m = re.search(r'@([^/?#]+)', channel_url)
+    if m:
+        return m.group(1).lower()
+    m = re.search(r'/c/([^/?#]+)', channel_url)
+    if m:
+        return m.group(1).lower()
+    m = re.search(r'/channel/([^/?#]+)', channel_url)
+    if m:
+        return m.group(1).lower()
+    # 최후 수단: URL 마지막 경로 세그먼트
+    return channel_url.rstrip('/').split('/')[-1].lower() or 'unknown'
+
+
+def normalize_videos_for_gate(videos: List[Dict], channel_name: str = '') -> List[Dict]:
+    """yt-dlp 영상 데이터를 gate1 형식으로 정규화
+    upload_date (YYYYMMDD) → published_at (YYYY-MM-DD)
+    """
+    normalized = []
+    for v in videos:
+        nv = dict(v)
+        # upload_date → published_at 변환
+        ud = v.get('upload_date', '')
+        if ud and len(ud) == 8 and 'published_at' not in v:
+            nv['published_at'] = f"{ud[:4]}-{ud[4:6]}-{ud[6:]}"
+        elif not nv.get('published_at'):
+            nv['published_at'] = ''
+        # channel_name 추가
+        if channel_name and not nv.get('channel_name'):
+            nv['channel_name'] = channel_name
+        normalized.append(nv)
+    return normalized
+
+
+def save_tmp_json(data: Any, slug: str, suffix: str) -> str:
+    """data/tmp/{slug}_{suffix}.json 에 저장 후 경로 반환"""
+    tmp_dir = os.path.join(PROJECT_ROOT, 'data', 'tmp')
+    os.makedirs(tmp_dir, exist_ok=True)
+    path = os.path.join(tmp_dir, f"{slug}_{suffix}.json")
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    return path
+
 
 class YouTubeChannelCollector:
     """유튜브 채널 영상 수집기"""
@@ -186,86 +254,187 @@ class AutoPipeline:
             'sample_skipped': skipped_videos[:5]   # 샘플 5개
         }
     
-    def run_execute(self, channel_url: str, limit: Optional[int] = None, 
-                   skip_existing: bool = False) -> Dict[str, Any]:
-        """실제 실행 - 전체 파이프라인 수행"""
+    def run_execute(self, channel_url: str, limit: Optional[int] = None,
+                   skip_existing: bool = False, skip_qa: bool = False) -> Dict[str, Any]:
+        """실제 실행 - 전체 7단계 파이프라인 수행"""
         print("=== EXECUTE 모드 ===")
         print("전체 파이프라인을 실행합니다.")
-        
+
+        # QA 사용 가능 여부
+        use_qa = _QA_AVAILABLE and not skip_qa
+        if skip_qa:
+            print("[INFO] QA Gate 건너뜀 (--skip-qa 옵션)")
+        elif not _QA_AVAILABLE:
+            print("[WARNING] QA Gate 모듈 없음 - QA 건너뜀")
+
+        total_steps = 7 if use_qa else 6
         start_time = time.time()
-        
+
+        # 채널 슬러그 추출 (QA용 식별자)
+        channel_slug = get_channel_slug(channel_url)
+
+        # QA 결과 추적
+        qa_results = {
+            'gate1': None,
+            'gate2': None,
+            'gate3': None,
+        }
+
         try:
-            # 1. 채널 정보 수집
-            print("\n[1/6] 채널 정보 수집...")
+            # ── Step 1: 채널 정보 수집 ─────────────────────────────────
+            print(f"\n[1/{total_steps}] 채널 정보 수집...")
             channel_info = self.collector.get_channel_info(channel_url)
             if not channel_info:
                 return {'error': '채널 정보 수집 실패'}
-            
             print(f"[OK] 채널: {channel_info['channel_title']} ({channel_info['name']})")
-            
-            # 2. 영상 목록 수집
-            print("\n[2/6] 영상 목록 수집...")
+
+            # ── Step 2: 영상 목록 수집 ────────────────────────────────
+            print(f"\n[2/{total_steps}] 영상 목록 수집...")
             videos = self.collector.get_video_list(channel_url, limit)
             if not videos:
                 return {'error': '영상 목록 수집 실패'}
-            
-            # 3. 제목 필터링
-            print("\n[3/6] 제목 필터링...")
+
+            # ── Step 3: 제목 필터링 [→ QA Gate 1] ────────────────────
+            print(f"\n[3/{total_steps}] 제목 필터링...")
             passed_videos, skipped_videos = self.filter.filter_videos(videos)
             self.filter.print_filter_results(passed_videos, skipped_videos)
-            
+
             if not passed_videos:
                 return {'error': '투자 관련 영상이 없습니다'}
-            
-            # 4. 자막 추출
-            print("\n[4/6] 자막 추출...")
+
+            if use_qa:
+                print(f"\n[3/{total_steps}] QA Gate 1: 메타데이터 검증...")
+
+                # 메타데이터 정규화 및 임시 저장
+                normalized_videos = normalize_videos_for_gate(
+                    passed_videos, channel_info.get('channel_title', channel_slug)
+                )
+                meta_path = save_tmp_json(normalized_videos, channel_slug, 'metadata')
+                print(f"[INFO] 메타데이터 저장: {meta_path}")
+
+                try:
+                    gate1_passed, gate1_filtered = run_gate1(
+                        normalized_videos,
+                        channel_slug,
+                        len(videos)  # total_original
+                    )
+                except Exception as e:
+                    print(f"[ERROR] QA Gate 1 실행 오류: {e}")
+                    gate1_passed, gate1_filtered = False, passed_videos
+
+                qa_results['gate1'] = gate1_passed
+
+                if not gate1_passed:
+                    print("[ERROR] QA Gate 1 실패 → 파이프라인 중단")
+                    return {'error': 'QA Gate 1 실패', 'qa_results': qa_results}
+
+                print(f"[OK] QA Gate 1 통과 → 검증된 영상: {len(gate1_filtered)}개")
+                passed_videos = gate1_filtered  # gate1이 걸러낸 결과 사용
+
+            # ── Step 4: 자막 추출 ────────────────────────────────────
+            print(f"\n[4/{total_steps}] 자막 추출...")
             videos_with_subtitles = self.extractor.extract_with_rate_limit(passed_videos)
-            
+
             # 자막 추출 성공한 것만 필터링
             successful_videos = [v for v in videos_with_subtitles if v.get('subtitle')]
             if not successful_videos:
                 return {'error': '자막 추출에 성공한 영상이 없습니다'}
-            
-            # 5. AI 분석
-            print("\n[5/6] AI 시그널 분석...")
+
+            # ── Step 5: AI 시그널 분석 ───────────────────────────────
+            print(f"\n[5/{total_steps}] AI 시그널 분석...")
             analysis_results = self.analyzer.analyze_videos_batch(channel_url, successful_videos)
-            
+
             # 분석 결과 저장 (중간 백업)
             backup_filename = f"scripts/pipeline_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
             self.analyzer.save_analysis_results(analysis_results, backup_filename)
-            
-            # 6. DB INSERT
-            print("\n[6/6] DB INSERT...")
+
+            # ── Step 6: QA Gate 2 (시그널 검증) ─────────────────────
+            if use_qa:
+                print(f"\n[6/{total_steps}] QA Gate 2: 시그널 검증...")
+
+                # 시그널 평탄화 (모든 result에서 signals 추출)
+                flat_signals = []
+                for res in analysis_results.get('results', []):
+                    flat_signals.extend(res.get('signals', []))
+
+                # 시그널 임시 저장
+                signals_path = save_tmp_json(flat_signals, channel_slug, 'signals')
+                print(f"[INFO] 시그널 저장: {signals_path} ({len(flat_signals)}개)")
+
+                try:
+                    gate2_passed = run_gate2(flat_signals, channel_slug)
+                except Exception as e:
+                    print(f"[ERROR] QA Gate 2 실행 오류: {e}")
+                    gate2_passed = False
+
+                qa_results['gate2'] = gate2_passed
+
+                if not gate2_passed:
+                    print("[ERROR] QA Gate 2 실패 → DB INSERT 차단")
+                    return {'error': 'QA Gate 2 실패', 'qa_results': qa_results}
+
+                print("[OK] QA Gate 2 통과 → DB INSERT 진행")
+
+            # ── Step 7: DB INSERT [→ QA Gate 3] ─────────────────────
+            db_step = 7 if use_qa else 6
+            print(f"\n[{db_step}/{total_steps}] DB INSERT...")
             db_stats = self.db_inserter.insert_analysis_results(
                 channel_info, analysis_results, skip_existing
             )
-            
-            # 7. signal_prices.json 업데이트 준비
+
+            # signal_prices.json 업데이트 준비
             price_update_stocks = self.db_inserter.update_signal_prices_json()
-            
-            # 실행 완료 요약
+
+            # QA Gate 3: 프론트엔드 검증
+            if use_qa:
+                print(f"\n[{db_step}/{total_steps}] QA Gate 3: 프론트엔드 검증...")
+                try:
+                    gate3_passed = run_gate3(
+                        slug=channel_slug,
+                        project_root=PROJECT_ROOT,
+                        check_deploy=False
+                    )
+                except Exception as e:
+                    print(f"[ERROR] QA Gate 3 실행 오류: {e}")
+                    gate3_passed = False
+
+                qa_results['gate3'] = gate3_passed
+
+                if not gate3_passed:
+                    print("[WARNING] QA Gate 3 실패 → 배포 차단 (DB INSERT는 완료)")
+                else:
+                    print("[OK] QA Gate 3 통과 → 배포 준비 완료")
+
+            # ── 실행 완료 요약 ────────────────────────────────────────
             end_time = time.time()
             execution_time = end_time - start_time
-            
+
             result = {
                 'channel_info': channel_info,
+                'channel_slug': channel_slug,
                 'execution_time_minutes': execution_time // 60,
                 'total_videos': len(videos),
                 'passed_videos': len(passed_videos),
                 'successful_subtitles': len(successful_videos),
                 'db_stats': db_stats,
                 'price_update_stocks_count': len(price_update_stocks),
-                'backup_file': backup_filename
+                'backup_file': backup_filename,
+                'qa_results': qa_results,
             }
-            
-            print(f"\n=== 파이프라인 완료 ===")
+
+            print(f"\n=== 파이프라인 완료 ({total_steps}단계) ===")
             print(f"총 실행 시간: {execution_time // 60:.1f}분")
             print(f"처리 영상: {db_stats['inserted_videos']}개")
             print(f"생성 시그널: {db_stats['inserted_signals']}개")
             print(f"백업 파일: {backup_filename}")
-            
+            if use_qa:
+                g1 = '✅' if qa_results['gate1'] else '❌'
+                g2 = '✅' if qa_results['gate2'] else '❌'
+                g3 = '✅' if qa_results['gate3'] else '❌' if qa_results['gate3'] is not None else '⏭'
+                print(f"QA Gate 1(메타): {g1}  Gate 2(시그널): {g2}  Gate 3(프론트): {g3}")
+
             return result
-            
+
         except Exception as e:
             print(f"[ERROR] 파이프라인 실행 중 에러: {e}")
             return {'error': str(e)}
@@ -274,14 +443,14 @@ class AutoPipeline:
 def main():
     """메인 함수"""
     parser = argparse.ArgumentParser(
-        description='투자 유튜버 채널 자동 분석 파이프라인',
+        description='투자 유튜버 채널 자동 분석 파이프라인 (7단계 QA Gate 통합)',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 사용 예시:
   # Dry run - 영상 목록과 필터링 결과만 확인
   python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --dry-run
 
-  # 실제 실행 - 전체 파이프라인 수행
+  # 실제 실행 - 전체 파이프라인 수행 (QA Gate 포함)
   python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute
 
   # 최대 10개 영상만 처리
@@ -289,11 +458,14 @@ def main():
 
   # DB에 이미 있는 영상 건너뛰기
   python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute --skip-existing
+
+  # QA Gate 건너뛰기 (긴급 시)
+  python scripts/auto_pipeline.py --channel https://www.youtube.com/@sesang101 --execute --skip-qa
         """
     )
     
     # 필수 인자
-    parser.add_argument('--channel', required=True, 
+    parser.add_argument('--channel', required=True,
                        help='유튜브 채널 URL (예: https://www.youtube.com/@sesang101)')
     
     # 모드 선택 (배타적)
@@ -308,6 +480,8 @@ def main():
                        help='최대 처리할 영상 수 (기본값: 제한 없음)')
     parser.add_argument('--skip-existing', action='store_true',
                        help='DB에 이미 있는 영상 건너뛰기')
+    parser.add_argument('--skip-qa', action='store_true',
+                       help='QA Gate 검증 건너뛰기 (긴급 시 사용, 기본값: 실행)')
     parser.add_argument('--prompt-version', default='V10',
                        help='사용할 프롬프트 버전 (기본값: V10)')
     
@@ -330,7 +504,10 @@ def main():
         if args.dry_run:
             result = pipeline.run_dry_run(args.channel, args.limit)
         else:
-            result = pipeline.run_execute(args.channel, args.limit, args.skip_existing)
+            result = pipeline.run_execute(
+                args.channel, args.limit, args.skip_existing,
+                skip_qa=args.skip_qa
+            )
         
         # 결과 확인
         if 'error' in result:
