@@ -170,11 +170,16 @@ class YouTubeChannelCollector:
                     if entry is None:
                         continue
                     
+                    # duration_seconds: yt-dlp는 'duration' 필드에 정수(초)를 줌
+                    _dur_raw = entry.get('duration')
+                    _dur_secs = int(_dur_raw) if _dur_raw and str(_dur_raw).isdigit() else None
+
                     video_data = {
                         'title': entry.get('title', 'No Title'),
                         'url': entry.get('url', entry.get('webpage_url', '')),
                         'video_id': entry.get('id', ''),
                         'duration': entry.get('duration_string', entry.get('duration', 'Unknown')),
+                        'duration_seconds': _dur_secs,
                         'view_count': entry.get('view_count', 0),
                         'upload_date': entry.get('upload_date', ''),
                         'thumbnail': entry.get('thumbnail', ''),

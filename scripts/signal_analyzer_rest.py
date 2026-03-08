@@ -33,6 +33,13 @@ class SignalAnalyzer:
         # 기본 프롬프트에서 채널 URL 교체
         prompt = self.prompt_template.replace('{CHANNEL_URL}', channel_url)
         
+        # 영상 duration 경고 정보
+        duration_info = ""
+        dur_secs = video_data.get('duration_seconds')
+        if dur_secs:
+            dur_secs = int(dur_secs)
+            duration_info = f"\n⚠️ 영상 길이: {dur_secs//60}분 {dur_secs%60:02d}초 ({dur_secs}초). 타임스탬프는 반드시 이 시간 이내여야 합니다."
+
         # 영상 정보 추가
         video_info = f"""
 === 분석 대상 영상 ===
@@ -42,7 +49,7 @@ URL: {video_data['url']}
 업로드: {video_data.get('upload_date', 'N/A')}
 
 === 자막 내용 ===
-{subtitle}
+{subtitle}{duration_info}
 
 === 분석 지시사항 ===
 위 영상의 자막을 V10.1 프롬프트 규칙에 따라 분석하고, JSON 형태로 시그널을 추출해주세요.

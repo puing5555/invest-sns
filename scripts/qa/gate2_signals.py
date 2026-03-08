@@ -182,6 +182,49 @@ def check_duplicate_stock_per_video(signals):
                 seen[vid].add(stock)
     return dupes
 
+def ts_to_secs(ts):
+    """타임스탬프 문자열을 초로 변환"""
+    if not ts or str(ts).strip() in ('', 'N/A', 'null', 'None'):
+        return None
+    try:
+        parts = list(map(int, str(ts).strip().split(':')))
+        if len(parts) == 3:
+            return parts[0] * 3600 + parts[1] * 60 + parts[2]
+        elif len(parts) == 2:
+            return parts[0] * 60 + parts[1]
+        else:
+            return parts[0]
+    except:
+        return None
+
+
+def check_timestamp_overflow(signals, video_durations):
+    """
+    Gate 2 추가 체크: timestamp > duration 경고
+    video_durations: {video_id(yt): duration_secs} 딕셔너리
+    """
+    if not video_durations:
+        return True  # 데이터 없으면 스킵
+    overflow_count = 0
+    for s in signals:
+        ts = s.get('timestamp')
+        video_id = s.get('video_id')  # YouTube video ID
+        ts_secs = ts_to_secs(ts)
+        dur = video_durations.get(video_id)
+        if ts_secs and dur and ts_secs > dur:
+            overflow_count += 1
+            print(f"  ⚠️  OVERFLOW: {s.get('stock')} ts={ts}({ts_secs}s) > dur={dur}s")
+    if overflow_count > 0:
+        pct = overflow_count / len(signals) * 100
+        print(f"  타임스탬프 초과: {overflow_count}/{len(signals)}건 ({pct:.1f}%)")
+        if pct > 20:
+            print(f"  ❌ 초과율 20% 초과 → Gate 2 FAIL")
+            return False
+        else:
+            print(f"  ⚠️  경고 (20% 미만이므로 계속 진행)")
+    return True
+
+
 def check_null_key_quotes(signals):
     """체크 5: key_quote null 비율 10%+ → 경고"""
     if not signals:
@@ -203,7 +246,7 @@ def check_signal_count_per_video(signals):
 # 메인
 # ────────────────────────────────────────
 
-def run_gate2(signals, channel):
+def run_gate2(signals, channel, video_durations=None):
     """Gate 2 실행. 반환: (passed: bool)"""
     print(f"\n{'='*60}")
     print(f"🔍 QA Gate 2 - 시그널 분석 검증")
@@ -295,6 +338,19 @@ def run_gate2(signals, channel):
                            f"평균 {avg:.2f}/영상")
     else:
         print(f"✅ [체크 6/7] 시그널 수 정상 범위")
+
+    # ── 체크 8: timestamp > duration (옵션) ──
+    if video_durations is not None:
+        print(f"\n🕐 [체크 8] 타임스탬프 초과 검사 중...")
+        overflow_ok = check_timestamp_overflow(signals, video_durations)
+        if not overflow_ok:
+            save_error_pattern(channel, 'gate2', 'timestamp_overflow',
+                               f"타임스탬프 초과율 20% 초과")
+            has_fatal = True
+        else:
+            print(f"✅ [체크 8] 타임스탬프 초과 체크 통과")
+    else:
+        print(f"\nℹ️  [체크 8] video_durations 없음 — 타임스탬프 초과 체크 스킵")
 
     # ── 결과 ──
     print(f"\n{'='*60}")
