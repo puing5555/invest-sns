@@ -72,9 +72,14 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - 시그널 타입: 매수/긍정/중립/부정/매도 (5단계만)
 - QA Gate 2: 타임스탬프 필수, 1영상 1종목 원칙, 비표준 신호 0
 
-## 6단계: DB 저장
+## 6단계: DB 저장 + 새 종목 처리
 - INSERT 전 중복 체크 (video_id 기준)
-- signal_prices.json 업데이트
+- **새 종목 자동 감지** (signal_prices.json에 없는 종목)
+- **자동 가격 수집** (Yahoo Finance / 네이버금융)
+- `data/signal_prices.json` 업데이트
+- `data/stock_tickers.json` 업데이트
+- ⚠️ **신규 ticker 추가 시 재빌드 필요** (정적 생성 구조)
+  → pipeline이 자동으로 rebuild_needed 플래그 반환
 
 ## 7단계: QA Gate 3 (프론트 검증)
 - 인플루언서 슬러그 페이지 존재 확인

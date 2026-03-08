@@ -385,6 +385,27 @@ class AutoPipeline:
             # signal_prices.json 업데이트 준비
             price_update_stocks = self.db_inserter.update_signal_prices_json()
 
+            # ── Step 6.5: 새 종목 가격 데이터 수집 ──────────────────
+            print("\n[6.5/7] 새 종목 가격 데이터 수집...")
+            try:
+                import sys as _sys
+                import os as _os
+                _scripts_dir = _os.path.dirname(_os.path.abspath(__file__))
+                if _scripts_dir not in _sys.path:
+                    _sys.path.insert(0, _scripts_dir)
+                from new_stock_handler import NewStockHandler
+                _handler = NewStockHandler()
+                stock_result = _handler.process_new_stocks(analysis_results)
+                if stock_result['new_stocks']:
+                    print(f"  새 종목 {len(stock_result['new_stocks'])}개 감지")
+                    print(f"  가격 수집 완료: {stock_result['prices_added']}개")
+                    if stock_result['rebuild_needed']:
+                        print(f"  ⚠  stock_tickers.json 업데이트됨 → 재빌드 필요")
+                else:
+                    print("  새 종목 없음 (기존 가격 데이터 모두 존재)")
+            except Exception as _e:
+                print(f"  [WARNING] 새 종목 처리 오류 (건너뜀): {_e}")
+
             # QA Gate 3: 프론트엔드 검증
             if use_qa:
                 print(f"\n[{db_step}/{total_steps}] QA Gate 3: 프론트엔드 검증...")
