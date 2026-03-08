@@ -225,6 +225,52 @@ def check_timestamp_overflow(signals, video_durations):
     return True
 
 
+def check_duplicate_key_quotes(signals):
+    """체크 NEW: 같은 영상에서 key_quote 80%+ 유사 시그널 중복 경고"""
+    from collections import defaultdict
+
+    def similarity(a, b):
+        """두 문자열의 문자 집합 자카드 유사도 (빠른 근사치)"""
+        if not a or not b:
+            return 0.0
+        a_chars = set(a.replace(' ', ''))
+        b_chars = set(b.replace(' ', ''))
+        if not a_chars or not b_chars:
+            return 0.0
+        inter = len(a_chars & b_chars)
+        union = len(a_chars | b_chars)
+        return inter / union if union else 0.0
+
+    # 영상별로 key_quote 묶기
+    vid_quotes = defaultdict(list)  # video_id → [(stock, key_quote), ...]
+    for s in signals:
+        vid = s.get('video_id', '')
+        kq = s.get('key_quote', '') or ''
+        stock = s.get('stock', '')
+        if vid and kq:
+            vid_quotes[vid].append((stock, kq))
+
+    duplicates = []
+    for vid, items in vid_quotes.items():
+        for i in range(len(items)):
+            for j in range(i + 1, len(items)):
+                stock_a, quote_a = items[i]
+                stock_b, quote_b = items[j]
+                if stock_a == stock_b:
+                    continue  # 같은 종목 중복은 체크 4에서 처리
+                sim = similarity(quote_a, quote_b)
+                if sim >= 0.8:
+                    duplicates.append({
+                        'video_id': vid,
+                        'stock_a': stock_a,
+                        'stock_b': stock_b,
+                        'similarity': round(sim, 2),
+                        'quote_a': quote_a[:60],
+                        'quote_b': quote_b[:60],
+                    })
+    return duplicates
+
+
 def check_null_key_quotes(signals):
     """체크 5: key_quote null 비율 10%+ → 경고"""
     if not signals:
@@ -313,6 +359,18 @@ def run_gate2(signals, channel, video_durations=None):
                            f"{len(unique_dupes)}건 중복")
     else:
         print(f"\n✅ [체크 4] 동일 영상 종목 중복 없음")
+
+    # ── 체크 4b: key_quote 중복 (80%+ 유사도) ──
+    dup_quotes = check_duplicate_key_quotes(signals)
+    if dup_quotes:
+        print(f"\n⚠️  [체크 4b] key_quote 중복 의심 — {len(dup_quotes)}쌍 (유사도 80%+)")
+        for d in dup_quotes[:5]:
+            print(f"   - '{d['stock_a']}' vs '{d['stock_b']}' (유사도 {d['similarity']:.0%})")
+            print(f"     \"{d['quote_a']}\"")
+        save_error_pattern(channel, 'gate2', 'duplicate_key_quote',
+                           f"{len(dup_quotes)}쌍 중복 key_quote (유사도 80%+)")
+    else:
+        print(f"\n✅ [체크 4b] key_quote 중복 없음")
 
     # ── 체크 5: key_quote null 비율 ──
     null_ratio = check_null_key_quotes(signals)
