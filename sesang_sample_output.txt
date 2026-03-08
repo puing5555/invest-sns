@@ -1,0 +1,51 @@
+총 긍정 시그널: 62개
+
+1. [비트코인] () [CRYPTO] @ None
+   영상: Stop Watching Bitcoin Halvings Anymore: How to Read Bit
+   key_quote: 미국이 전략적 비축 자산인 비트코인의 수요를 조절함으로써 시장을 좀 안정적으로 운전한다면 이전과 같은 광기어린 상승장이 좀 안 올 수도 있지 않을까 그런 상승장에 필연적으로 뒤따르는 가파른 폭락이 안 오게 될 수도 
+   reasoning: 미국이 비트코인을 전략적 비축 자산으로 삼으면 가격 변동성이 줄어들 것이라는 긍정적 전망 제시 / 비트코인을 장기적으로 보유하고 있다고 언급
+
+2. [도지코인] () [CRYPTO] @ None
+   영상: Stop Watching Bitcoin Halvings Anymore: How to Read Bit
+   key_quote: 도지 코인인데 지금 거기서 나온 수익을 이제 트럼프 정권의 수혜를 좀 볼만한 볼 수 있을 만한 것들로 이것저것 조금씩 좀 뿌려두고 있습니다
+   reasoning: 도지코인 투자로 수익을 얻었고, 트럼프 정권의 수혜를 볼 수 있는 자산에 재투자하고 있다고 언급
+
+3. [팔란티어] () [US] @ None
+   영상: Stop Watching Bitcoin Halvings Anymore: How to Read Bit
+   key_quote: 팔란티어 생각이 나는데 AI 내러티브가 이제 엔비디아 같은 칩 중심 회사에서 B2B AI 소프트웨어 활용 잘하는 회사로 좀 넘어가고 좀 특히 이제 팔란티어 방산 주다 보니까 요즘 같이 이제 전쟁이 많은 시기에 인기가
+   reasoning: 팔란티어가 AI 소프트웨어와 방산 분야에서 강세를 보이고 있어 긍정적으로 전망
+
+4. [이더리움] () [CRYPTO] @ N/A
+   영상: 폭등하는 써클, 내 코인은 언제 오를까? 트럼프가 준 두번째 기회
+   key_quote: 반면에 그 스테이블 코인이 작동하는 플랫폼 역할을 하는 이더리움은 오르지 못하고 정체되어 있는 모양세인데요.
+   reasoning: 이더리움이 스테이블 코인 플랫폼으로서 언급되고는 있으나, 발언자의 주된 관심사는 스테이블 코인 시장이므로 논거로 분류함.
+
+5. [비트코인] (BTC) [CRYPTO] @ N/A
+   영상: The final puzzle piece for an era where humans take ord
+   key_quote: 비트코인 가격이 7천만 원 정도였는데 공교롭게도 영상 업로드 직후부터 40% 정도 폭등을 하기 시작해서 전고점을 뚫고 1억 원을 넘겼다 | 비트코인의 탄생이 AI 인류를 지배하는 과정에서 꼭 필요한 단계가 아닐까 하
+   reasoning: 비트코인 가격 상승에 대한 긍정적 평가 / 비트코인이 AI 우위 사회에서 필요한 단계라고 긍정적으로 평가
+
+6. [이더리움] (ETH) [CRYPTO] @ N/A
+   영상: The final puzzle piece for an era where humans take ord
+   key_quote: 이더리움도 이더리움 etf 대한 기대감으로 잘 오르고 있고
+   reasoning: 이더리움 가격 상승에 대한 긍정적 평가
+
+7. [솔라나] (SOL) [CRYPTO] @ N/A
+   영상: The final puzzle piece for an era where humans take ord
+   key_quote: 솔라나 계열 민 코인 붐을 타고 오늘부로 BNB 제치고 시총 4위로 올라섰습니다
+   reasoning: 솔라나 가격 상승에 대한 긍정적 평가
+
+8. [AMD] (AMD) [US] @ N/A
+   영상: The final puzzle piece for an era where humans take ord
+   key_quote: 최근 이제 AMD 투자를 받은 AI 인프라 분야 비상장 스타트업에 투자를 하기도 했습니다
+   reasoning: AMD 관련 AI 스타트업에 투자한 것을 긍정적으로 언급
+
+9. [이더리움] () [CRYPTO] @ None
+   영상: A video to watch when you still don't know much about E
+   key_quote: 이더리움은 비트코인과 달리 효용성과 수익성이 내재되어 있는 그런 생산적인 자산이다 | 이더리움 위에서 움직이는 자산의 총량이 더 중요하다. 이더리움 위에서 움직이는 모든 활동은 이더를 수수료로 내야 하고 이 활동이 
+   reasoning: 이더리움의 다양한 활용도와 지속적인 성장 가능성을 긍정적으로 평가 / 이더리움 생태계 내 자산 활동량 증가에 따른 이더 수요 증가와 인플레이션 압력 완화를 긍정적으로 평가 / 이더
+
+10. [스테이블코인] () [CRYPTO] @ None
+   영상: A video to watch when you still don't know much about E
+   key_quote: 스테이블코인 전체 공급량도 8월에 7월 대비 17% 증가하면서 1조 4천억 달러에 도달했고, 이더리움 체인의 스테이블코인 공급량은 1,600억 달러가 넘고 계속 빠르게 올라가고 있다
+   reasoning: 이더리움 기반 스테이블코인 시장의 지속적 성장을 긍정적으로 평가

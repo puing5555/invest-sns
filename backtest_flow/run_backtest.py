@@ -158,9 +158,9 @@ def generate_report(all_flow, all_price, failed, s1, s2, s3):
         best_s = s1_summaries[best_consec]
         r10 = best_s.get("10일", {})
         lines.append(f"**최적 진입 일수: {best_consec}일**  "
-                     f"(10일 평균수익률 {best_s_val:+.2f}%, "
+                     f"(10일 평균수익률 {best_s1_val:+.2f}%, "
                      f"승률 {r10.get('승률','N/A')}%, "
-                     f"시그널수 {r10.get('시그널수','N/A')}건)".replace("best_s_val", str(round(best_s_val, 2))))
+                     f"시그널수 {r10.get('시그널수','N/A')}건)")
 
     # 상위 종목
     if best_consec and not s1.get(best_consec, pd.DataFrame()).empty:
