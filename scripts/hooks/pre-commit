@@ -1,0 +1,12 @@
+#!/bin/bash
+# API 키 유출 방지 pre-commit hook
+if grep -rn "sk-ant-api" --include="*.py" --include="*.js" --include="*.ts" .; then
+  echo "❌ Anthropic API 키 발견! 커밋 차단."
+  exit 1
+fi
+if grep -rn "SUPABASE_SERVICE_ROLE_KEY" --include="*.ts" --include="*.js" .; then
+  echo "❌ Supabase service key 발견! 커밋 차단."
+  exit 1
+fi
+echo "✅ API 키 스캔 통과"
+exit 0
