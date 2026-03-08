@@ -99,7 +99,7 @@ export default function MyStocksPage() {
             signal: s.signal, keyQuote: s.key_quote, reasoning: s.reasoning,
             confidence: s.confidence, channelName: ch,
             videoTitle: s.influencer_videos?.title,
-            videoUrl: vid ? `https://youtube.com/watch?v=${vid}` : undefined,
+            videoUrl: vid ? `https://www.youtube.com/watch?v=${vid}` : undefined,
             detailLink: s.ticker ? `/stock/${s.ticker}?tab=influencer` : undefined,
           });
         });

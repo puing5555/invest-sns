@@ -163,7 +163,11 @@ class NewStockHandler:
         self.signal_prices.update(new_prices)
         with open(SIGNAL_PRICES_FILE, "w", encoding="utf-8") as f:
             json.dump(self.signal_prices, f, ensure_ascii=False, indent=2)
-        print(f"    → signal_prices.json 저장 ({len(self.signal_prices)}개 총)")
+        # public/ 동기화
+        import shutil
+        public_path = PROJECT_ROOT / "public" / "signal_prices.json"
+        shutil.copy(SIGNAL_PRICES_FILE, public_path)
+        print(f"  signal_prices 동기화: data/ → public/ ({len(self.signal_prices)}개)")
 
     def update_stock_tickers(self, new_tickers: list):
         """stock_tickers.json에 새 ticker 추가 (중복 제거)"""

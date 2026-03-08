@@ -79,7 +79,7 @@ export default function InfluencerPage() {
           reasoning: s.reasoning,
           videoSummary: s.influencer_videos?.video_summary,
           videoUrl: s.influencer_videos?.video_id ? (() => {
-            const base = `https://youtube.com/watch?v=${s.influencer_videos.video_id}`;
+            const base = `https://www.youtube.com/watch?v=${s.influencer_videos.video_id}`;
             const ts = s.timestamp;
             if (!ts) return base;
             const parts = ts.split(':').map(Number);

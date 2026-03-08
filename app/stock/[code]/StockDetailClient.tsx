@@ -645,7 +645,7 @@ function InfluencerTab({ code }: { code: string }) {
           const videoUrl = (() => {
             const vid = signal.influencer_videos?.video_id;
             if (!vid) return '#';
-            let url = `https://youtube.com/watch?v=${vid}`;
+            let url = `https://www.youtube.com/watch?v=${vid}`;
             const ts = signal.timestamp;
             if (ts && ts !== 'N/A' && ts !== 'null') {
               const parts = ts.split(':').map(Number);
@@ -888,7 +888,7 @@ function InfluencerTab({ code }: { code: string }) {
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">인플루언서</th>
-                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1] whitespace-nowrap min-w-[60px]">신호</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
@@ -915,9 +915,9 @@ function InfluencerTab({ code }: { code: string }) {
                   <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
                     {signal.influencer}
                   </td>
-                  <td className="px-4 py-4">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">{getSignalEmoji(signal.signal)}</span>
+                  <td className="px-4 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-2 flex-nowrap">
+                      <span className="text-lg flex-shrink-0">{getSignalEmoji(signal.signal)}</span>
                       <span className={`px-2 py-1 rounded text-xs font-medium ${getLocalSignalColor(signal.signal)}`}>
                         {getSignalText(signal.signal)}
                       </span>

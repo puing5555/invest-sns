@@ -108,7 +108,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
       videoUrl: (() => {
         const vid = signal.influencer_videos?.video_id;
         if (!vid) return '#';
-        let url = `https://youtube.com/watch?v=${vid}`;
+        let url = `https://www.youtube.com/watch?v=${vid}`;
         const ts = signal.timestamp;
         if (ts && ts !== 'N/A' && ts !== 'null') {
           const parts = ts.split(':').map(Number);
@@ -204,12 +204,12 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
             <table className="w-full">
               <thead className="bg-[#f8f9fa]">
                 <tr>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-24">날짜</th>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-20">종목</th>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-16">신호</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-[12%]">날짜</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] w-[11%]">종목</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap min-w-[60px] w-[7%]">신호</th>
                   <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1]">핵심발언</th>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-20">수익률</th>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-16">링크</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-[8%]">수익률</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-[5%]">링크</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f0f0f0]">
@@ -235,12 +235,12 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       onClick={() => handleCardClick(signal)}
                     >
                       <td className="px-3 py-3 text-xs text-[#191f28] whitespace-nowrap">{date}</td>
-                      <td className="px-3 py-3 text-xs font-medium text-[#191f28] whitespace-nowrap max-w-[80px]">
-                        <div className="truncate" title={formatStockDisplay(signal.stock, signal.ticker)}>{formatStockShort(signal.stock, signal.ticker) || formatStockDisplay(signal.stock, signal.ticker)}</div>
+                      <td className="px-3 py-3 text-xs font-medium text-[#191f28] w-[11%]">
+                        <div className="break-words" title={formatStockDisplay(signal.stock, signal.ticker)}>{formatStockShort(signal.stock, signal.ticker) || formatStockDisplay(signal.stock, signal.ticker)}</div>
                       </td>
-                      <td className="px-3 py-3">
-                        <div className="flex items-center gap-1">
-                          <span className="text-base">{signalEmoji}</span>
+                      <td className="px-3 py-3 whitespace-nowrap">
+                        <div className="flex items-center gap-1 flex-nowrap">
+                          <span className="text-base flex-shrink-0">{signalEmoji}</span>
                           <span className="text-xs font-medium">{signal.signal}</span>
                         </div>
                       </td>
@@ -268,7 +268,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                         {videoId ? (
                           <a
                             href={(() => {
-                              let url = `https://youtube.com/watch?v=${videoId}`;
+                              let url = `https://www.youtube.com/watch?v=${videoId}`;
                               const ts = signal.timestamp;
                               if (ts && ts !== 'N/A' && ts !== 'null') {
                                 const parts = ts.split(':').map(Number);
