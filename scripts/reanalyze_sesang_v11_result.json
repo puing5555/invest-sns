@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-03-08T00:38:21.402Z",
+  "old": {
+    "total": 3,
+    "pending": 0,
+    "rejected": 3,
+    "distribution": {
+      "긍정": 2,
+      "부정": 1
+    }
+  },
+  "new": {
+    "total": 3,
+    "distribution": {
+      "매수": 2,
+      "긍정": 1
+    }
+  },
+  "skipped": 44,
+  "errors": []
+}
