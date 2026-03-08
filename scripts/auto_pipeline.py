@@ -26,7 +26,10 @@ import argparse
 import json
 import re
 import time
+import shutil
+import subprocess
 from datetime import datetime
+from pathlib import Path
 from typing import List, Dict, Any, Optional
 import yt_dlp
 
@@ -380,8 +383,9 @@ class AutoPipeline:
 
                 print("[OK] QA Gate 2 통과 → DB INSERT 진행")
 
-            # ── Step 7: DB INSERT [→ QA Gate 3] ─────────────────────
+            # ── Step 7: DB INSERT ─────────────────────────────────────
             db_step = 7 if use_qa else 6
+            total_steps = 10 if use_qa else 7
             print(f"\n[{db_step}/{total_steps}] DB INSERT...")
             db_stats = self.db_inserter.insert_analysis_results(
                 channel_info, analysis_results, skip_existing
@@ -390,8 +394,9 @@ class AutoPipeline:
             # signal_prices.json 업데이트 준비
             price_update_stocks = self.db_inserter.update_signal_prices_json()
 
-            # ── Step 6.5: 새 종목 가격 데이터 수집 ──────────────────
-            print("\n[6.5/7] 새 종목 가격 데이터 수집...")
+            # ── Step 8: 새 종목 가격 데이터 수집 ────────────────────
+            print(f"\n[8/{total_steps}] 새 종목 가격 데이터 수집...")
+            rebuild_needed = False
             try:
                 import sys as _sys
                 import os as _os
@@ -404,16 +409,43 @@ class AutoPipeline:
                 if stock_result['new_stocks']:
                     print(f"  새 종목 {len(stock_result['new_stocks'])}개 감지")
                     print(f"  가격 수집 완료: {stock_result['prices_added']}개")
-                    if stock_result['rebuild_needed']:
-                        print(f"  ⚠  stock_tickers.json 업데이트됨 → 재빌드 필요")
+                    if stock_result.get('rebuild_needed'):
+                        print(f"  stock_tickers.json 업데이트됨 → 재빌드 필요")
+                        rebuild_needed = True
                 else:
                     print("  새 종목 없음 (기존 가격 데이터 모두 존재)")
             except Exception as _e:
                 print(f"  [WARNING] 새 종목 처리 오류 (건너뜀): {_e}")
 
-            # QA Gate 3: 프론트엔드 검증
+            # ── Step 8.5: data/ → public/ 동기화 ─────────────────────
+            print(f"\n[8.5/{total_steps}] data/ → public/ 동기화...")
+            import shutil as _shutil
+            _prices_src = os.path.join(PROJECT_ROOT, 'data', 'signal_prices.json')
+            _prices_dst = os.path.join(PROJECT_ROOT, 'public', 'signal_prices.json')
+            if os.path.exists(_prices_src):
+                _shutil.copy2(_prices_src, _prices_dst)
+                print(f"  signal_prices.json 동기화 완료")
+
+            # ── Step 9: npm run build ─────────────────────────────────
+            print(f"\n[9/{total_steps}] 프론트엔드 빌드 (npm run build)...")
+            build_result = subprocess.run(
+                ['npm', 'run', 'build'],
+                cwd=PROJECT_ROOT,
+                capture_output=True, text=True, timeout=300,
+                encoding='utf-8', errors='replace'
+            )
+            if build_result.returncode != 0:
+                print(f"[ERROR] 빌드 실패:\n{build_result.stderr[-500:]}")
+                return {'error': 'npm run build 실패', 'qa_results': qa_results,
+                        'db_stats': db_stats}
+            # 빌드된 페이지 수 출력
+            out_dir = os.path.join(PROJECT_ROOT, 'out')
+            html_count = sum(1 for _ in Path(out_dir).rglob('*.html')) if os.path.isdir(out_dir) else 0
+            print(f"[OK] 빌드 완료 (HTML {html_count}개)")
+
+            # ── Step 10: QA Gate 3 (빌드 결과 검증) ──────────────────
             if use_qa:
-                print(f"\n[{db_step}/{total_steps}] QA Gate 3: 프론트엔드 검증...")
+                print(f"\n[10/{total_steps}] QA Gate 3: 프론트엔드 검증...")
                 try:
                     gate3_passed = run_gate3(
                         slug=channel_slug,
@@ -427,9 +459,48 @@ class AutoPipeline:
                 qa_results['gate3'] = gate3_passed
 
                 if not gate3_passed:
-                    print("[WARNING] QA Gate 3 실패 → 배포 차단 (DB INSERT는 완료)")
-                else:
-                    print("[OK] QA Gate 3 통과 → 배포 준비 완료")
+                    print("[ERROR] QA Gate 3 실패 → 배포 차단 (DB INSERT는 완료됨)")
+                    return {
+                        'error': 'QA Gate 3 실패 - 배포 차단',
+                        'db_stats': db_stats,
+                        'qa_results': qa_results,
+                    }
+                print("[OK] QA Gate 3 통과")
+
+            # ── Step 10: 배포 (git push gh-pages) ────────────────────
+            print(f"\n[{total_steps}/{total_steps}] 배포 (GitHub Pages)...")
+            deploy_dir = 'C:\\Users\\Mario\\invest-sns-deploy'
+            if os.path.isdir(deploy_dir):
+                try:
+                    # out/ → deploy 폴더 복사
+                    import shutil as _sh
+                    out_path = os.path.join(PROJECT_ROOT, 'out')
+                    for item in os.listdir(out_path):
+                        s = os.path.join(out_path, item)
+                        d = os.path.join(deploy_dir, item)
+                        if os.path.isdir(s):
+                            if os.path.exists(d):
+                                _sh.rmtree(d)
+                            _sh.copytree(s, d)
+                        else:
+                            _sh.copy2(s, d)
+                    # git add + commit + push
+                    ts = datetime.now().strftime('%Y-%m-%d %H:%M')
+                    deploy_cmds = [
+                        ['git', 'add', '-A'],
+                        ['git', 'commit', '-m', f'deploy: {channel_slug} 파이프라인 자동배포 ({ts})'],
+                        ['git', 'push', 'origin', 'gh-pages'],
+                    ]
+                    for cmd in deploy_cmds:
+                        r = subprocess.run(cmd, cwd=deploy_dir, capture_output=True,
+                                           text=True, timeout=60)
+                        if r.returncode != 0 and 'nothing to commit' not in r.stdout:
+                            print(f"  [WARNING] 배포 명령 실패: {' '.join(cmd)}: {r.stderr[:200]}")
+                    print("[OK] GitHub Pages 배포 완료")
+                except Exception as _de:
+                    print(f"  [WARNING] 배포 오류 (건너뜀): {_de}")
+            else:
+                print(f"  [WARNING] 배포 디렉토리 없음: {deploy_dir}")
 
             # ── 실행 완료 요약 ────────────────────────────────────────
             end_time = time.time()
@@ -450,14 +521,14 @@ class AutoPipeline:
 
             print(f"\n=== 파이프라인 완료 ({total_steps}단계) ===")
             print(f"총 실행 시간: {execution_time // 60:.1f}분")
-            print(f"처리 영상: {db_stats['inserted_videos']}개")
-            print(f"생성 시그널: {db_stats['inserted_signals']}개")
+            print(f"처리 영상: {db_stats.get('inserted_videos', '?')}개")
+            print(f"생성 시그널: {db_stats.get('inserted_signals', '?')}개")
             print(f"백업 파일: {backup_filename}")
-            if use_qa:
-                g1 = '✅' if qa_results['gate1'] else '❌'
-                g2 = '✅' if qa_results['gate2'] else '❌'
-                g3 = '✅' if qa_results['gate3'] else '❌' if qa_results['gate3'] is not None else '⏭'
-                print(f"QA Gate 1(메타): {g1}  Gate 2(시그널): {g2}  Gate 3(프론트): {g3}")
+            g1 = 'OK' if qa_results['gate1'] else ('SKIP' if qa_results['gate1'] is None else 'FAIL')
+            g2 = 'OK' if qa_results['gate2'] else ('SKIP' if qa_results['gate2'] is None else 'FAIL')
+            g3 = 'OK' if qa_results['gate3'] else ('SKIP' if qa_results['gate3'] is None else 'FAIL')
+            print(f"QA: Gate1(메타)={g1}  Gate2(시그널)={g2}  Gate3(프론트)={g3}")
+            print(f"빌드+배포: {'완료' if qa_results['gate3'] or not use_qa else '차단'}")
 
             return result
 
