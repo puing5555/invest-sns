@@ -204,12 +204,12 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
             <table className="w-full">
               <thead className="bg-[#f8f9fa]">
                 <tr>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">종목</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">신호</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">핵심발언</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">수익률</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">영상링크</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-24">날짜</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-20">종목</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-16">신호</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1]">핵심발언</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-20">수익률</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-16">링크</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f0f0f0]">
@@ -234,18 +234,20 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
                       onClick={() => handleCardClick(signal)}
                     >
-                      <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">{date}</td>
-                      <td className="px-4 py-4 text-sm font-medium text-[#191f28] whitespace-nowrap">{formatStockDisplay(signal.stock, signal.ticker)}</td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-2">
-                          <span className="text-lg">{signalEmoji}</span>
+                      <td className="px-3 py-3 text-xs text-[#191f28] whitespace-nowrap">{date}</td>
+                      <td className="px-3 py-3 text-xs font-medium text-[#191f28] whitespace-nowrap max-w-[80px]">
+                        <div className="truncate" title={formatStockDisplay(signal.stock, signal.ticker)}>{formatStockShort(signal.stock, signal.ticker) || formatStockDisplay(signal.stock, signal.ticker)}</div>
+                      </td>
+                      <td className="px-3 py-3">
+                        <div className="flex items-center gap-1">
+                          <span className="text-base">{signalEmoji}</span>
                           <span className="text-xs font-medium">{signal.signal}</span>
                         </div>
                       </td>
-                      <td className="px-4 py-4 text-sm text-[#191f28] max-w-xs">
-                        <div className="truncate" title={signal.key_quote}>{signal.key_quote || '-'}</div>
+                      <td className="px-3 py-3 text-xs text-[#191f28]">
+                        <div className="line-clamp-2" title={signal.key_quote}>{signal.key_quote || '-'}</div>
                       </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                      <td className="px-3 py-3 text-xs whitespace-nowrap">
                         {(() => {
                           if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
                           const pd = priceData[signal.id];
@@ -262,7 +264,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                           );
                         })()}
                       </td>
-                      <td className="px-4 py-4">
+                      <td className="px-3 py-3">
                         {videoId ? (
                           <a
                             href={(() => {
@@ -277,10 +279,10 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                             })()}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#3182f6] hover:text-[#2171e5] text-sm font-medium"
+                            className="text-[#3182f6] hover:text-[#2171e5] text-xs font-medium"
                             onClick={(e) => e.stopPropagation()}
                           >
-                            영상보기 →
+                            보기→
                           </a>
                         ) : '-'}
                       </td>
