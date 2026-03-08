@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
 import {
   getUserWatchlist,
   addToWatchlist,
@@ -115,18 +113,14 @@ function AddWatchlistModal({
 }
 
 export default function MyWatchlistPage() {
-  const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
   const [watchlist, setWatchlist] = useState<UserWatchlist[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   useEffect(() => {
-    if (authLoading) return;
-    if (!user) { router.push('/login'); return; }
     loadData();
-  }, [user, authLoading]);
+  }, []);
 
   const loadData = async () => {
     setLoading(true);
@@ -154,7 +148,7 @@ export default function MyWatchlistPage() {
     loadData();
   };
 
-  if (authLoading || loading) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-[#8b95a1]">로딩 중...</div>
