@@ -37,14 +37,18 @@ import yt_dlp
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # QA 게이트 import (scripts/qa/ 모듈)
-_QA_AVAILABLE = False
+# ⚠️ import 실패 시 조용히 스킵하지 않고 즉시 종료 — QA가 없으면 파이프라인 실행 불가
 try:
     from qa.gate1_metadata import run_gate1
     from qa.gate2_signals import run_gate2
     from qa.gate3_frontend import run_gate3
     _QA_AVAILABLE = True
 except ImportError as _qa_err:
-    print(f"[WARNING] QA Gate 모듈 import 실패 (--skip-qa 강제 적용): {_qa_err}")
+    print(f"[FATAL] QA Gate 모듈 import 실패 — 파이프라인 실행 불가: {_qa_err}")
+    print(f"[FATAL] scripts/ 디렉토리에서 실행하세요: python scripts/auto_pipeline.py ...")
+    print(f"[FATAL] --skip-qa 옵션을 명시적으로 지정한 경우에만 QA 우회 가능합니다.")
+    import sys as _sys
+    _sys.exit(1)
 
 # 모듈 import
 from title_filter import TitleFilter
@@ -268,12 +272,10 @@ class AutoPipeline:
         print("=== EXECUTE 모드 ===")
         print("전체 파이프라인을 실행합니다.")
 
-        # QA 사용 가능 여부
-        use_qa = _QA_AVAILABLE and not skip_qa
+        # QA 사용 여부 — import 실패 시 이미 exit(1)했으므로 _QA_AVAILABLE=True 보장
+        use_qa = not skip_qa
         if skip_qa:
-            print("[INFO] QA Gate 건너뜀 (--skip-qa 옵션)")
-        elif not _QA_AVAILABLE:
-            print("[WARNING] QA Gate 모듈 없음 - QA 건너뜀")
+            print("[INFO] QA Gate 건너뜀 (--skip-qa 옵션 명시적 지정)")
 
         total_steps = 7 if use_qa else 6
         start_time = time.time()
