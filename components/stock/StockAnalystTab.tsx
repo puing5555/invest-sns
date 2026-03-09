@@ -317,16 +317,30 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
     [reports]
   );
 
-  // 컨센서스 계산
+  // 최근 1개월 리포트
+  const recentReports = useMemo(() => {
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    const filtered = reports.filter(r => new Date(r.published_at) >= oneMonthAgo);
+    return filtered.length > 0 ? filtered : reports; // 1개월 내 없으면 전체 fallback
+  }, [reports]);
+
+  const isRecentOnly = useMemo(() => {
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+    return reports.some(r => new Date(r.published_at) >= oneMonthAgo);
+  }, [reports]);
+
+  // 컨센서스 계산 (최근 1개월 기준)
   const consensus = useMemo(() => {
-    if (reports.length === 0) return null;
+    if (recentReports.length === 0) return null;
     
-    const opinions = reports.reduce((acc, report) => {
+    const opinions = recentReports.reduce((acc, report) => {
       acc[report.opinion] = (acc[report.opinion] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
 
-    const total = reports.length;
+    const total = recentReports.length;
     const buyCount = opinions.BUY || 0;
     const holdCount = opinions.HOLD || 0;
     const sellCount = opinions.SELL || 0;
@@ -343,11 +357,11 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
       total,
       text: `${total}명 중 ${buyCount}명 매수`
     };
-  }, [reports]);
+  }, [recentReports]);
 
-  // 평균 목표가 및 업사이드 계산
+  // 평균 목표가 및 업사이드 계산 (최근 1개월 기준)
   const targetPriceStats = useMemo(() => {
-    const validReports = reports.filter(r => r.target_price && r.target_price > 0);
+    const validReports = recentReports.filter(r => r.target_price && r.target_price > 0);
     if (validReports.length === 0 || currentPrice === 0) return null;
 
     const targetPrices = validReports.map(r => r.target_price!);
@@ -366,20 +380,27 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
                    upside <= -10 ? 'text-red-600 bg-red-50' : 
                    'text-gray-600 bg-gray-50'
     };
-  }, [reports, currentPrice]);
+  }, [recentReports, currentPrice]);
 
   // 최근 변화 (30일 내 목표가 변화)
   const recentChanges = useMemo(() => {
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    
-    // 간단화: 최근 30일 내 리포트 중 BUY와 SELL 개수로 상향/하향 판단
-    const recentReports = reports.filter(r => new Date(r.published_at) >= thirtyDaysAgo);
     const upgrades = recentReports.filter(r => r.opinion === 'BUY').length;
     const downgrades = recentReports.filter(r => r.opinion === 'SELL').length;
-    
     return { upgrades, downgrades };
-  }, [reports]);
+  }, [recentReports]);
+
+  // 차트용 시그널 데이터
+  const chartSignals = useMemo(() =>
+    sortedReports.map(r => ({
+      date: r.published_at.slice(0, 10),
+      signal: r.opinion,
+      target_price: r.target_price,
+      firm: r.firm,
+      analyst: r.analyst,
+      title: r.title,
+    })),
+    [sortedReports]
+  );
 
   if (reports.length === 0) {
     return (
@@ -396,126 +417,98 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
   const latestReport = sortedReports[0];
 
   return (
-    <div className="space-y-6">
-      {/* 컨센서스 요약 카드 */}
-      <div className="bg-white rounded-2xl shadow-sm border border-[#e8e8e8] p-6">
-        <div className="flex items-start justify-between mb-6">
+    <div className="space-y-4">
+      {/* 컨센서스 요약 카드 - 컴팩트 */}
+      <div className="bg-white rounded-2xl shadow-sm border border-[#e8e8e8] p-4">
+        <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">애널리스트 컨센서스</h3>
-            <p className="text-sm text-[#8b95a1]">전문가들은 이 종목을 어떻게 보고 있을까요?</p>
+            <h3 className="text-base font-bold text-[#191f28]">애널리스트 컨센서스</h3>
+            <p className="text-xs text-[#8b95a1]">
+              {isRecentOnly ? '최근 1개월 리포트 기준' : '전체 리포트 기준 (1개월 내 없음)'}
+            </p>
+          </div>
+          {/* 최신 리포트 인라인 */}
+          <div
+            className="hidden md:block text-right cursor-pointer max-w-[200px]"
+            onClick={() => setSelectedReport(latestReport)}
+          >
+            <p className="text-xs font-medium text-[#191f28] hover:text-blue-600 transition-colors truncate">
+              {latestReport.title}
+            </p>
+            <p className="text-xs text-[#8b95a1] mt-0.5">
+              {latestReport.firm} · {formatDate(latestReport.published_at)}
+            </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* 컨센서스 뱃지 */}
-          <div className="space-y-4">
-            {consensus && (
-              <div className="flex items-center gap-4">
-                <div className={`px-6 py-3 rounded-2xl font-bold text-lg ${
-                  consensus.opinion === 'BUY' ? 'bg-green-100 text-green-700' :
-                  consensus.opinion === 'SELL' ? 'bg-red-100 text-red-700' :
-                  'bg-yellow-100 text-yellow-700'
-                }`}>
-                  {consensus.opinion}
-                </div>
-                <div className="text-[#191f28] font-medium">
-                  {consensus.text}
-                </div>
-              </div>
-            )}
-
-            {/* 업사이드/다운사이드 */}
-            {targetPriceStats && (
-              <div className="flex items-center gap-3">
-                <div className={`px-4 py-2 rounded-xl font-bold text-xl ${targetPriceStats.upsideColor}`}>
-                  {targetPriceStats.upside >= 0 ? '+' : ''}{targetPriceStats.upside.toFixed(1)}%
-                </div>
-                <div className="text-sm text-[#8b95a1]">
-                  평균 목표가 vs 현재가
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* 최신 리포트 */}
-          <div className="bg-gray-50 rounded-xl p-4">
-            <h4 className="text-sm font-medium text-[#8b95a1] mb-2">최신 리포트</h4>
-            <div 
-              className="cursor-pointer"
-              onClick={() => setSelectedReport(latestReport)}
-            >
-              <p className="text-sm font-medium text-[#191f28] hover:text-blue-600 transition-colors mb-1">
-                {latestReport.title}
-              </p>
-              <div className="flex items-center gap-2 text-xs text-[#8b95a1]">
-                <span>{latestReport.analyst || '-'}</span>
-                <span>·</span>
-                <span>{latestReport.firm}</span>
-                <span>·</span>
-                <span>{formatDate(latestReport.published_at)}</span>
-              </div>
+        {/* 핵심 지표 한 줄 */}
+        <div className="flex items-center gap-3 flex-wrap">
+          {consensus && (
+            <div className={`px-3 py-1.5 rounded-xl font-bold text-sm ${
+              consensus.opinion === 'BUY' ? 'bg-green-100 text-green-700' :
+              consensus.opinion === 'SELL' ? 'bg-red-100 text-red-700' :
+              'bg-yellow-100 text-yellow-700'
+            }`}>
+              {consensus.opinion}
             </div>
-          </div>
+          )}
+          {consensus && (
+            <span className="text-sm font-medium text-[#191f28]">{consensus.text}</span>
+          )}
+          {targetPriceStats && (
+            <>
+              <span className="text-[#d1d5db]">|</span>
+              <div className={`px-2.5 py-1 rounded-lg font-bold text-sm ${targetPriceStats.upsideColor}`}>
+                {targetPriceStats.upside >= 0 ? '+' : ''}{targetPriceStats.upside.toFixed(1)}%
+              </div>
+              <span className="text-xs text-[#8b95a1]">평균 목표가 vs 현재가</span>
+            </>
+          )}
         </div>
 
-        {/* 목표가 범위 */}
+        {/* 목표가 범위 바 */}
         {targetPriceStats && (
-          <div className="mt-6 p-4 bg-gray-50 rounded-xl">
-            <h4 className="text-sm font-medium text-[#8b95a1] mb-3">목표가 범위</h4>
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-[#8b95a1]">최저</span>
-                <span className="font-medium text-[#191f28]">{formatTargetPrice(targetPriceStats.minTarget, code)}</span>
-              </div>
-              <div className="relative h-2 bg-gray-200 rounded-full">
-                {/* 현재가 위치 표시 */}
-                <div 
-                  className="absolute top-0 w-1 h-2 bg-blue-600 rounded-full"
-                  style={{
-                    left: `${Math.min(100, Math.max(0, 
-                      ((currentPrice - targetPriceStats.minTarget) / 
-                       (targetPriceStats.maxTarget - targetPriceStats.minTarget)) * 100
-                    ))}%`
-                  }}
-                />
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-full opacity-60" />
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-[#8b95a1]">최고</span>
-                <span className="font-medium text-[#191f28]">{formatTargetPrice(targetPriceStats.maxTarget, code)}</span>
-              </div>
-              <div className="text-center text-xs text-[#8b95a1] mt-2">
-                <span className="inline-flex items-center gap-1">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full" />
-                  현재가 {formatTargetPrice(currentPrice, code)}
-                </span>
-              </div>
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-xs text-[#8b95a1] mb-1">
+              <span>최저 {formatTargetPrice(targetPriceStats.minTarget, code)}</span>
+              <span className="inline-flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+                현재가 {formatTargetPrice(currentPrice, code)}
+              </span>
+              <span>최고 {formatTargetPrice(targetPriceStats.maxTarget, code)}</span>
+            </div>
+            <div className="relative h-1.5 bg-gray-200 rounded-full">
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-full opacity-70" />
+              <div
+                className="absolute top-0 w-1 h-1.5 bg-blue-600 rounded-full"
+                style={{
+                  left: `${Math.min(100, Math.max(0,
+                    ((currentPrice - targetPriceStats.minTarget) /
+                     (targetPriceStats.maxTarget - targetPriceStats.minTarget)) * 100
+                  ))}%`
+                }}
+              />
             </div>
           </div>
         )}
 
         {/* 최근 변화 */}
-        <div className="mt-4 flex items-center gap-4">
-          <h4 className="text-sm font-medium text-[#8b95a1]">최근 30일 변화:</h4>
-          <div className="flex items-center gap-3">
-            {recentChanges.upgrades > 0 && (
-              <div className="flex items-center gap-1 text-green-600">
-                <span>↑</span>
-                <span className="text-sm font-medium">{recentChanges.upgrades}건 상향</span>
-              </div>
-            )}
-            {recentChanges.downgrades > 0 && (
-              <div className="flex items-center gap-1 text-red-600">
-                <span>↓</span>
-                <span className="text-sm font-medium">{recentChanges.downgrades}건 하향</span>
-              </div>
-            )}
-            {recentChanges.upgrades === 0 && recentChanges.downgrades === 0 && (
-              <span className="text-sm text-[#8b95a1]">변화 없음</span>
-            )}
-          </div>
+        <div className="mt-2.5 flex items-center gap-3 text-xs">
+          <span className="text-[#8b95a1]">최근 30일:</span>
+          {recentChanges.upgrades > 0 && (
+            <span className="text-green-600 font-medium">↑ {recentChanges.upgrades}건 매수</span>
+          )}
+          {recentChanges.downgrades > 0 && (
+            <span className="text-red-600 font-medium">↓ {recentChanges.downgrades}건 매도</span>
+          )}
+          {recentChanges.upgrades === 0 && recentChanges.downgrades === 0 && (
+            <span className="text-[#8b95a1]">변화 없음</span>
+          )}
         </div>
       </div>
+
+      {/* 주가 차트 */}
+      <StockAnalystChart code={code} signals={chartSignals} currentPrice={currentPrice} />
 
       {/* 증권사 상세 (아코디언) */}
       <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8]">
