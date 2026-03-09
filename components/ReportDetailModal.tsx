@@ -206,22 +206,19 @@ export default function ReportDetailModal({ report, isOpen, onClose, type = 'rep
     return report.videoUrl;
   };
 
-  // 하트(좋아요) 기능
+  // 하트(좋아요) 기능 — 낙관적 업데이트 (UI 항상 반응, DB 실패 silent 처리)
   const handleLike = async () => {
-    if (type === 'signal' && !report?.id) {
-      alert('시그널 ID가 없습니다.');
-      return;
-    }
+    const nextLiked = !liked;
+    setLiked(nextLiked);
+    setLikeCount(prev => nextLiked ? prev + 1 : prev - 1);
 
-    try {
-      if (type === 'signal') {
-        await insertSignalVote(report.id!, liked ? 'unlike' : 'like');
+    if (type === 'signal' && report?.id && nextLiked) {
+      // 좋아요 추가만 DB 저장 (unlike는 UI만)
+      try {
+        await insertSignalVote(report.id);
+      } catch (error) {
+        console.error('좋아요 DB 저장 실패 (무시됨):', error);
       }
-      setLiked(!liked);
-      setLikeCount(prev => liked ? prev - 1 : prev + 1);
-    } catch (error) {
-      console.error('좋아요 처리 중 오류:', error);
-      alert('좋아요 처리 중 오류가 발생했습니다.');
     }
   };
 
@@ -268,40 +265,40 @@ export default function ReportDetailModal({ report, isOpen, onClose, type = 'rep
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
         <div className="p-6">
-          {/* 헤더 */}
-          <div className="flex items-start justify-between mb-4">
-            <h2 className="text-lg font-bold text-gray-900">
-              {type === 'signal' ? '시그널 상세' : '리포트 상세'}
-            </h2>
-            <button 
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-xl"
-            >
-              ✕
-            </button>
-          </div>
+          {/* 헤더 — 우측에 좋아요 | 신고 | X */}
+          <div className="flex items-center justify-between mb-4">
+            <div /> {/* 좌측 비움 */}
+            <div className="flex items-center gap-1">
+              {/* 좋아요 */}
+              <button
+                onClick={handleLike}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  liked
+                    ? 'bg-red-50 text-red-600 border border-red-200'
+                    : 'bg-gray-50 text-gray-500 border border-gray-200 hover:bg-gray-100'
+                }`}
+              >
+                <span className="text-base">{liked ? '❤️' : '🤍'}</span>
+                {likeCount > 0 && <span>{likeCount}</span>}
+              </button>
 
-          {/* 하트/신고 버튼 */}
-          <div className="flex items-center gap-3 mb-4">
-            <button
-              onClick={handleLike}
-              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
-                liked 
-                  ? 'bg-red-50 text-red-600 border border-red-200' 
-                  : 'bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100'
-              }`}
-            >
-              <span className="text-lg">{liked ? '❤️' : '🤍'}</span>
-              <span className="text-sm font-medium">{likeCount}</span>
-            </button>
+              {/* 신고 */}
+              <button
+                onClick={() => setShowReportModal(true)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-gray-50 text-gray-500 border border-gray-200 hover:bg-gray-100 transition-colors"
+              >
+                <span className="text-base">🚨</span>
+                <span>신고</span>
+              </button>
 
-            <button
-              onClick={() => setShowReportModal(true)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 transition-colors"
-            >
-              <span className="text-lg">🚨</span>
-              <span className="text-sm font-medium">신고</span>
-            </button>
+              {/* 닫기 */}
+              <button
+                onClick={onClose}
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-50 text-gray-500 border border-gray-200 hover:bg-gray-100 transition-colors text-lg"
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
           {/* 컨텐츠 */}
