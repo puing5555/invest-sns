@@ -1,4 +1,4 @@
-"""Invidious API로 자막 추출"""
+﻿"""Invidious API로 자막 추출"""
 import sys, io, json, os, time, re
 import urllib.request, ssl
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', line_buffering=True)
@@ -82,28 +82,23 @@ def parse_json3(text):
     return segments
 
 def parse_vtt(text):
-    """VTT 파싱"""
+    """VTT 파싱 - subtitle_extractor.parse_vtt 위임"""
+    import sys, os
+    _scripts = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'scripts')
+    if _scripts not in sys.path:
+        sys.path.insert(0, _scripts)
+    from subtitle_extractor import parse_vtt as _pvtt
+    result = _pvtt(text, include_timestamps=True, is_content=True)
+    # 기존 반환 형식 유지: [{start, duration, text}, ...]
     segments = []
-    lines = text.split('\n')
-    i = 0
-    while i < len(lines):
-        line = lines[i].strip()
-        # 타임스탬프 라인: 00:00:01.000 --> 00:00:03.000
-        if '-->' in line:
-            parts = line.split('-->')
-            start = vtt_time_to_sec(parts[0].strip())
-            # 다음 줄들이 텍스트
-            texts = []
-            i += 1
-            while i < len(lines) and lines[i].strip() and '-->' not in lines[i]:
-                t = re.sub(r'<[^>]+>', '', lines[i].strip())
-                if t:
-                    texts.append(t)
-                i += 1
-            if texts:
-                segments.append({'start': start, 'duration': 0, 'text': ' '.join(texts)})
-            continue
-        i += 1
+    for line in result.split('
+'):
+        import re as _re
+        m = _re.match(r'\[(\d+:\d+:\d+)\] (.+)', line)
+        if m:
+            h, mi, s = m.group(1).split(':')
+            start = int(h)*3600 + int(mi)*60 + int(s)
+            segments.append({'start': start, 'duration': 0, 'text': m.group(2)})
     return segments if segments else None
 
 def parse_srv3(text):

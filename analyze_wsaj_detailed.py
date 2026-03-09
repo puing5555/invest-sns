@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 월가아재 기업해부학 나머지 9개 영상 시그널 분석 (개선 버전)
@@ -12,61 +12,26 @@ import glob
 import json
 import os
 from typing import List, Dict, Any, Tuple
-
-# UTF-8 출력 설정
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-
-def parse_vtt_with_timestamps(video_id: str) -> List[Tuple[str, str]]:
-    """VTT 파일을 파싱하여 타임스탬프와 텍스트 쌍 반환"""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
+from subtitle_extractor import parse_vtt  # 통합 VTT 파서
+def parse_vtt_with_timestamps(video_id: str):
+    """VTT 파일 파싱 - subtitle_extractor.parse_vtt 위임"""
+    import glob
     files = glob.glob(f'subs/wsaj_{video_id}_*.ko.vtt')
     if not files:
-        print(f"⚠️  VTT 파일을 찾을 수 없음: wsaj_{video_id}_*.ko.vtt")
         return []
-    
-    print(f"📂 파일 처리: {files[0]}")
-    
-    with open(files[0], 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # VTT 파싱 - 타임스탬프와 텍스트 매칭
+    result = parse_vtt(files[0], include_timestamps=True)
+    # 반환 형식: [(timestamp, text), ...] 로 변환
     entries = []
-    lines = content.split('\n')
-    
-    i = 0
-    while i < len(lines):
-        line = lines[i].strip()
-        
-        # 타임스탬프 패턴 찾기
-        if '-->' in line:
-            timestamp_match = re.search(r'(\d{2}:\d{2}:\d{2})', line)
-            if timestamp_match:
-                timestamp = timestamp_match.group(1)
-                
-                # 다음 몇 줄에서 텍스트 찾기
-                text_parts = []
-                j = i + 1
-                while j < len(lines) and j < i + 5:  # 최대 5줄까지 확인
-                    text_line = lines[j].strip()
-                    if text_line and not text_line.startswith('WEBVTT') and not '-->' in text_line:
-                        # HTML 태그 제거
-                        clean_text = re.sub(r'<[^>]+>', '', text_line)
-                        clean_text = re.sub(r'align:.*position:.*%', '', clean_text)
-                        clean_text = clean_text.strip()
-                        if clean_text and clean_text not in ['[음악]', ' ']:
-                            text_parts.append(clean_text)
-                    j += 1
-                
-                if text_parts:
-                    # 분:초 형식으로 변환 (HH:MM:SS -> MM:SS)
-                    time_parts = timestamp.split(':')
-                    if len(time_parts) >= 3:
-                        mm_ss = f"{time_parts[1]}:{time_parts[2]}"
-                        entries.append((mm_ss, ' '.join(text_parts)))
-        
-        i += 1
-    
+    for line in result.split('
+'):
+        import re as _re
+        m = _re.match(r'\[(\d+:\d+:\d+)\] (.+)', line)
+        if m:
+            entries.append((m.group(1), m.group(2)))
     return entries
-
 def analyze_video_signals(entries: List[Tuple[str, str]], video_id: str, video_title: str) -> Dict[str, Any]:
     """타임스탬프가 포함된 텍스트 분석으로 정확한 시그널 추출"""
     

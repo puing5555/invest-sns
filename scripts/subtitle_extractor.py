@@ -120,7 +120,7 @@ class SubtitleExtractor:
                             
                             # VTT 파일 파싱
                             if subtitle_file.endswith('.vtt'):
-                                subtitle_text = self.parse_vtt_content(content)
+                                subtitle_text = self.parse_vtt_content(content, include_timestamps=True)
                                 print(f"[OK] yt-dlp 자막 추출 성공: {len(subtitle_text)} 글자")
                                 
                                 # 임시 파일 정리
@@ -141,31 +141,110 @@ class SubtitleExtractor:
             print(f"[ERROR] yt-dlp 에러: {e}")
             return None
     
-    def parse_vtt_content(self, content: str) -> str:
-        """VTT 파일 내용을 텍스트로 파싱"""
+    def parse_vtt_content(self, content: str, include_timestamps: bool = True) -> str:
+        """
+        VTT 파일 내용을 텍스트로 파싱 (통합 파서 — 전 프로젝트 단일 사용)
+
+        Args:
+            content: VTT 파일 전체 내용 (문자열)
+            include_timestamps: True(기본) → "[HH:MM:SS] 발언" 포맷 유지
+                                False → 텍스트만 (공백으로 이어붙임)
+        Returns:
+            파싱된 자막 텍스트
+        """
         import re
-        
-        lines = content.split('\n')
-        subtitle_text = []
-        
-        for line in lines:
-            line = line.strip()
-            
-            # 시간 정보와 설정 라인 건너뛰기
-            if (line.startswith('WEBVTT') or 
-                '-->' in line or
-                line.startswith('NOTE') or
-                line.isdigit() or
-                not line):
-                continue
-            
-            # HTML 태그 제거
-            line = re.sub(r'<[^>]+>', '', line)
-            
-            if line:
-                subtitle_text.append(line)
-        
-        return ' '.join(subtitle_text)
+
+        if include_timestamps:
+            lines_out = []
+            current_ts = None
+            for line in content.split('\n'):
+                line = line.strip()
+                if not line or line.startswith('WEBVTT') or line.startswith('NOTE') \
+                        or line.startswith('Kind:') or line.startswith('Language:'):
+                    continue
+                # 타임코드 캡처: 00:05:30.000 --> 00:05:35.000
+                ts_match = re.match(r'(\d{1,2}:\d{2}:\d{2})\.\d+ -->', line)
+                if ts_match:
+                    current_ts = ts_match.group(1)
+                    continue
+                if re.match(r'^\d+$', line):
+                    continue
+                clean = re.sub(r'<[^>]+>', '', line).strip()
+                if clean:
+                    if current_ts:
+                        lines_out.append(f'[{current_ts}] {clean}')
+                        current_ts = None
+                    else:
+                        lines_out.append(clean)
+            # 연속 중복 제거
+            deduped = []
+            prev = None
+            for l in lines_out:
+                if l != prev:
+                    deduped.append(l)
+                prev = l
+            return '\n'.join(deduped[:4000])
+        else:
+            # 텍스트만 (레거시 호환)
+            lines = []
+            for line in content.split('\n'):
+                line = line.strip()
+                if not line or line.startswith('WEBVTT') or line.startswith('NOTE') \
+                        or line.startswith('Kind:') or line.startswith('Language:'):
+                    continue
+                if '-->' in line or re.match(r'^\d+$', line):
+                    continue
+                clean = re.sub(r'<[^>]+>', '', line).strip()
+                if clean:
+                    lines.append(clean)
+            deduped = []
+            prev = None
+            for l in lines:
+                if l != prev:
+                    deduped.append(l)
+                prev = l
+            return ' '.join(deduped[:3000])
+
+    def parse_vtt_file(self, vtt_path: str, include_timestamps: bool = True) -> str:
+        """
+        VTT 파일 경로로 직접 파싱 (파일 기반 인터페이스)
+
+        Args:
+            vtt_path: .vtt 파일 경로
+            include_timestamps: parse_vtt_content 동일
+        Returns:
+            파싱된 자막 텍스트
+        """
+        with open(vtt_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        return self.parse_vtt_content(content, include_timestamps=include_timestamps)
+
+
+# ── 모듈 레벨 헬퍼 (import해서 쓰는 다른 스크립트용) ──────────────────────
+_shared_extractor = None
+
+def parse_vtt(vtt_path_or_content: str, include_timestamps: bool = True,
+              is_content: bool = False) -> str:
+    """
+    전 프로젝트 공용 VTT 파서 (모듈 레벨 함수).
+
+    godofIT_analyze.py, analyze_wsaj_*.py, crawl_recent_videos.py 등
+    기존 스크립트들이 이 함수를 import해서 사용.
+
+    Args:
+        vtt_path_or_content: 파일 경로 또는 VTT 문자열
+        include_timestamps: 타임코드 포함 여부 (기본 True)
+        is_content: True이면 문자열 직접 파싱, False이면 파일 경로로 읽음
+    Returns:
+        파싱된 자막 텍스트
+    """
+    global _shared_extractor
+    if _shared_extractor is None:
+        _shared_extractor = SubtitleExtractor.__new__(SubtitleExtractor)
+    if is_content:
+        return _shared_extractor.parse_vtt_content(vtt_path_or_content, include_timestamps)
+    else:
+        return _shared_extractor.parse_vtt_file(vtt_path_or_content, include_timestamps)
     
     def extract_subtitle(self, url: str, retries: int = 3) -> Optional[str]:
         """

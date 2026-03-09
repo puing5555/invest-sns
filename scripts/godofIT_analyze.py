@@ -13,6 +13,7 @@ GODofIT 梨꾨꼸 ?쒓렇??遺꾩꽍 ?ㅽ겕由쏀듃
 """
 
 import os, sys, json, re, time, glob
+from subtitle_extractor import parse_vtt  # 통합 VTT 파서 (subtitle_extractor.py)
 from datetime import datetime
 
 # --- 寃쎈줈 ?ㅼ젙 ---
@@ -58,66 +59,8 @@ def load_prompt():
         return f.read()
 
 
-def parse_vtt(vtt_path, include_timestamps=True):
-    """
-    VTT 자막 파일 파싱
-    include_timestamps=True: 타임코드 포함 (시그널 분석용) - 기본값
-    include_timestamps=False: 텍스트만 (레거시)
-    """
-    with open(vtt_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    if include_timestamps:
-        # 타임코드 포함 버전: "[00:05:30] 발언내용" 형태
-        lines_out = []
-        current_ts = None
-        for line in content.split('\n'):
-            line = line.strip()
-            if not line or line.startswith('WEBVTT') or line.startswith('NOTE') or line.startswith('Kind:') or line.startswith('Language:'):
-                continue
-            # 타임코드 라인 캡처 (00:05:30.000 --> 00:05:35.000)
-            ts_match = re.match(r'(\d{2}:\d{2}:\d{2})\.\d+ -->', line)
-            if ts_match:
-                current_ts = ts_match.group(1)
-                continue
-            if re.match(r'^\d+$', line):
-                continue
-            clean = re.sub(r'<[^>]+>', '', line).strip()
-            if clean:
-                if current_ts:
-                    lines_out.append(f'[{current_ts}] {clean}')
-                    current_ts = None
-                else:
-                    lines_out.append(clean)
-        # 중복 제거
-        deduped = []
-        prev = None
-        for l in lines_out:
-            if l != prev:
-                deduped.append(l)
-            prev = l
-        return '\n'.join(deduped[:4000])
-    else:
-        # 기존 방식 (텍스트만)
-        lines = []
-        for line in content.split('\n'):
-            line = line.strip()
-            if not line or line.startswith('WEBVTT') or line.startswith('NOTE') or line.startswith('Kind:') or line.startswith('Language:'):
-                continue
-            if '-->' in line:
-                continue
-            if re.match(r'^\d+$', line):
-                continue
-            line = re.sub(r'<[^>]+>', '', line)
-            if line:
-                lines.append(line)
-        deduped = []
-        prev = None
-        for l in lines:
-            if l != prev:
-                deduped.append(l)
-            prev = l
-        return ' '.join(deduped[:3000])
+# parse_vtt: subtitle_extractor.parse_vtt 로 통합 (위 import 참조)
+# 기존 호출부는 parse_vtt(vtt_path, include_timestamps=True) 그대로 동작
 def get_video_id_from_filename(filename):
     """?뚯씪紐낆뿉??YouTube video_id 異붿텧
     ?⑦꽩1: AbcdXyz.ko.vtt -> AbcdXyz (11??ID)

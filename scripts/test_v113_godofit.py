@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 V11.3 정확도 테스트 스크립트 - Godofit 영상 (최대 20개)
@@ -17,6 +17,8 @@ import urllib.request
 import urllib.error
 from datetime import datetime
 from pathlib import Path
+# parse_vtt: subtitle_extractor 통합 파서로 위임
+from subtitle_extractor import parse_vtt  # 통합 VTT 파서
 
 # Windows 콘솔 UTF-8 강제 설정
 if sys.stdout.encoding != 'utf-8':
@@ -83,67 +85,6 @@ def get_api_keys():
 
 
 # === parse_vtt (타임코드 포함 버전) ===
-def parse_vtt(vtt_path, include_timestamps=True):
-    """
-    VTT 자막 파일 파싱
-    include_timestamps=True: 타임코드 포함 (시그널 분석용) - 기본값
-    include_timestamps=False: 텍스트만 (레거시)
-    """
-    with open(vtt_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    if include_timestamps:
-        lines_out = []
-        current_ts = None
-        for line in content.split('\n'):
-            line = line.strip()
-            if not line or line.startswith('WEBVTT') or line.startswith('NOTE') \
-                    or line.startswith('Kind:') or line.startswith('Language:'):
-                continue
-            ts_match = re.match(r'(\d{2}:\d{2}:\d{2})\.\d+ -->', line)
-            if ts_match:
-                current_ts = ts_match.group(1)
-                continue
-            if re.match(r'^\d+$', line):
-                continue
-            clean = re.sub(r'<[^>]+>', '', line).strip()
-            if clean:
-                if current_ts:
-                    lines_out.append(f'[{current_ts}] {clean}')
-                    current_ts = None
-                else:
-                    lines_out.append(clean)
-        deduped = []
-        prev = None
-        for l in lines_out:
-            if l != prev:
-                deduped.append(l)
-            prev = l
-        return '\n'.join(deduped[:4000])
-    else:
-        lines = []
-        for line in content.split('\n'):
-            line = line.strip()
-            if not line or line.startswith('WEBVTT') or line.startswith('NOTE') \
-                    or line.startswith('Kind:') or line.startswith('Language:'):
-                continue
-            if '-->' in line:
-                continue
-            if re.match(r'^\d+$', line):
-                continue
-            line = re.sub(r'<[^>]+>', '', line)
-            if line:
-                lines.append(line)
-        deduped = []
-        prev = None
-        for l in lines:
-            if l != prev:
-                deduped.append(l)
-            prev = l
-        return ' '.join(deduped[:3000])
-
-
-# === video_id 추출 ===
 def get_video_id_from_filename(filename):
     """파일명에서 YouTube video_id 추출
     wsaj_XXXXXXXXXXX_제목.ko.vtt -> XXXXXXXXXXX (wsaj_ 이후 11자)

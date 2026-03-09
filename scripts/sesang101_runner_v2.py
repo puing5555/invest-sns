@@ -108,7 +108,7 @@ URL: {url}
 """
     
     payload = {
-        'model': 'claude-3-haiku-20240307',
+        'model': config.ANTHROPIC_MODEL,  # pipeline_config.py 설정값 사용
         'max_tokens': 4000,
         'messages': [{'role': 'user', 'content': prompt}]
     }

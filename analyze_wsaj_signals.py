@@ -11,6 +11,9 @@ import requests
 import time
 from pathlib import Path
 from dotenv import load_dotenv
+import sys
+sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
+from subtitle_extractor import parse_vtt  # 통합 VTT 파서
 
 load_dotenv(Path(__file__).parent / '.env.local')
 
@@ -26,39 +29,8 @@ def load_prompt_template():
         return f.read()
 
 def parse_vtt_file(vtt_path):
-    """VTT ?뚯씪?먯꽌 ?띿뒪?몃쭔 異붿텧"""
-    text_lines = []
-    
-    with open(vtt_path, 'r', encoding='utf-8', errors='ignore') as f:
-        content = f.read()
-    
-    # VTT ?뺤떇?먯꽌 ??꾩뒪?ы봽? ?띿뒪??異붿텧
-    # 00:00:00.480 --> 00:00:02.330 ?뺥깭???쇱씤??李얘퀬 ?ㅼ쓬 ?쇱씤?ㅼ씠 ?띿뒪??
-    lines = content.split('\n')
-    in_subtitle = False
-    
-    for line in lines:
-        line = line.strip()
-        
-        # ??꾩뒪?ы봽 ?쇱씤 ?⑦꽩
-        if '-->' in line:
-            in_subtitle = True
-            continue
-        
-        # 鍮??쇱씤?대㈃ ?먮쭑 釉붾줉 ??
-        if not line:
-            in_subtitle = False
-            continue
-            
-        # ?먮쭑 ?띿뒪???쇱씤
-        if in_subtitle and line and not line.startswith('WEBVTT') and not line.startswith('Kind:') and not line.startswith('Language:'):
-            # HTML ?쒓렇 ?쒓굅 諛??뺣━
-            clean_line = re.sub(r'<[^>]+>', '', line)
-            clean_line = re.sub(r'align:start position:\d+%', '', clean_line)
-            clean_line = clean_line.replace('?', '').strip()
-            if clean_line and len(clean_line) > 2:
-                text_lines.append(clean_line)
-    
+    """VTT 파일 파싱 -- subtitle_extractor.parse_vtt 위임"""
+    return parse_vtt(vtt_path, include_timestamps=True)
     return ' '.join(text_lines)
 
 def analyze_video_signal(video_id, video_title, subtitle_text):

@@ -60,7 +60,7 @@ URL: {video_data['url']}
 {subtitle}{duration_info}
 
 === 분석 지시사항 ===
-위 영상의 자막을 V10.1 프롬프트 규칙에 따라 분석하고, JSON 형태로 시그널을 추출해주세요.
+위 영상의 자막을 V11.3 프롬프트 규칙에 따라 분석하고, JSON 형태로 시그널을 추출해주세요.
 """
         
         return prompt + "\n\n" + video_info
@@ -126,7 +126,7 @@ URL: {video_data['url']}
                 
                 # Anthropic API 호출
                 payload = {
-                    'model': 'claude-3-haiku-20240307',
+                    'model': self.config.ANTHROPIC_MODEL,  # pipeline_config.py 설정값 사용
                     'max_tokens': 4000,
                     'messages': [
                         {

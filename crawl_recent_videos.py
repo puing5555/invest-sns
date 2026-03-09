@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 작업 3: 최근 영상 크롤링 (2025-10~2026-02)
 - yt-dlp로 세상학개론 채널 최근 영상 목록 가져오기
@@ -7,6 +7,10 @@
 - fast_analyzer.py로 분석 후 Supabase INSERT
 """
 import os
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
+from subtitle_extractor import parse_vtt  # 통합 VTT 파서
 import json
 import subprocess
 import glob
@@ -142,40 +146,15 @@ def download_subtitle(video_id):
         return False
 
 def parse_vtt_to_json(vtt_content):
-    """VTT 내용을 JSON 형태로 파싱"""
+    """VTT 내용 파싱 - subtitle_extractor.parse_vtt 위임"""
+    from subtitle_extractor import parse_vtt as _pvtt
+    text = _pvtt(vtt_content, include_timestamps=False, is_content=True)
+    # 기존 반환 형식 유지: [{text, start, duration}, ...]
     entries = []
-    lines = vtt_content.split('\n')
-    
-    current_text = ""
-    current_start = 0
-    
-    for line in lines:
-        line = line.strip()
-        
-        # 타임스탬프 라인 (예: "00:00:01.000 --> 00:00:03.500")
-        if ' --> ' in line:
-            timestamps = line.split(' --> ')
-            if len(timestamps) == 2:
-                start_time = parse_timestamp(timestamps[0])
-                if start_time is not None:
-                    current_start = start_time
-        
-        # 텍스트 라인 (타임스탬프도 숫자도 아닌 것)
-        elif line and not line.startswith('WEBVTT') and not line.startswith('NOTE') and not line.isdigit():
-            # HTML 태그 제거
-            clean_text = line.replace('<c>', '').replace('</c>', '').strip()
-            if clean_text and clean_text not in ['&nbsp;', '']:
-                current_text = clean_text
-                
-                # 엔트리 추가
-                entries.append({
-                    'text': current_text,
-                    'start': current_start,
-                    'duration': 3.0  # 기본값
-                })
-    
+    for t in text.split(' '):
+        if t.strip():
+            entries.append({'text': t.strip(), 'start': 0, 'duration': 3.0})
     return entries
-
 def parse_timestamp(timestamp_str):
     """VTT 타임스탬프를 초로 변환"""
     try:
