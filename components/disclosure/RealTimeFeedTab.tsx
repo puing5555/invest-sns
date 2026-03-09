@@ -19,43 +19,40 @@ interface Disclosure {
   ai_score: number;
   source: string;
   created_at: string;
-  // AI 모달용 확장 필드 (있으면 사용, 없으면 ai_summary에서 생성)
+  // v6 AI 분석 필드
+  grade?: string;
   verdict?: string;
+  verdict_tone?: string;
   what?: string;
   so_what?: string;
-  now_what?: string;
+  now_what_holding?: string;
+  now_what_not_holding?: string;
+  risk?: string;
+  size_assessment?: string;
+  percentile?: string;
+  tags?: string[];
 }
 
 type GradeFilter = '전체' | 'A' | 'B' | 'C' | 'D';
-type TypeFilter = '전체' | '실적' | 'CB/BW' | '자사주' | '풍문' | '수주' | '증자' | '기타';
+type TypeFilter = '전체' | '실적' | 'CB' | '자사주' | '풍문' | '수주';
 type ImpactFilter = '전체' | '긍정' | '부정' | '중립';
 
-// importance → 등급 매핑
+// importance → 등급 매핑 (v6 grade 없을 때 폴백)
 const importanceToGrade: Record<string, string> = {
   high: 'A',
   medium: 'B',
   low: 'C',
 };
 
-// disclosure_type → 유형 필터 매핑 (v6 기준)
+// disclosure_type → 유형 필터 매핑
 const typeToFilter: Record<string, TypeFilter> = {
   '실적': '실적',
-  '전환사채': 'CB/BW',
+  '전환사채': 'CB',
   '자기주식': '자사주',
   '풍문': '풍문',
-  '수주': '수주',
   '대규모계약': '수주',
-  '단일판매공급': '수주',
-  '유상증자': '증자',
-  '무상증자': '증자',
-  // 기타 그룹
-  '합병분할': '기타',
-  '배당': '기타',
-  '감자': '기타',
-  '법적리스크': '기타',
-  '최대주주변경': '기타',
-  '상장폐지': '기타',
-  '기타': '기타',
+  '수주계약': '수주',
+  '수주': '수주',
 };
 
 const gradeColor: Record<string, string> = {
@@ -63,6 +60,25 @@ const gradeColor: Record<string, string> = {
   B: 'bg-orange-100 text-orange-700 border-orange-200',
   C: 'bg-yellow-100 text-yellow-700 border-yellow-200',
   D: 'bg-gray-100 text-gray-600 border-gray-200',
+};
+
+const gradeDesc: Record<string, string> = {
+  A: '즉시행동',
+  B: '24시간내',
+  C: '참고',
+  D: '무시',
+};
+
+const verdictToneColor: Record<string, string> = {
+  bullish: 'text-green-700',
+  bearish: 'text-red-700',
+  neutral: 'text-gray-600',
+};
+
+const verdictToneBg: Record<string, string> = {
+  bullish: 'bg-green-50 border-green-200',
+  bearish: 'bg-red-50 border-red-200',
+  neutral: 'bg-gray-50 border-gray-200',
 };
 
 const impactColor: Record<string, { bg: string; text: string; border: string }> = {
@@ -84,16 +100,47 @@ function ScoreBar({ score }: { score: number }) {
   );
 }
 
-// AI 분석 모달
-function AiModal({ disclosure, onClose }: { disclosure: Disclosure; onClose: () => void }) {
-  const grade = importanceToGrade[disclosure.importance] || 'C';
-  const ic = impactColor[disclosure.ai_impact] || impactColor['중립'];
+// 보유/미보유 탭
+function NowWhatTabs({ holding, notHolding }: { holding: string; notHolding: string }) {
+  const [tab, setTab] = useState<'holding' | 'not'>('holding');
+  return (
+    <div>
+      <div className="flex gap-1 mb-2">
+        <button
+          onClick={() => setTab('holding')}
+          className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            tab === 'holding' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-500'
+          }`}
+        >
+          📦 보유 중
+        </button>
+        <button
+          onClick={() => setTab('not')}
+          className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+            tab === 'not' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-500'
+          }`}
+        >
+          👀 미보유
+        </button>
+      </div>
+      <p className="text-sm text-gray-700 leading-relaxed">
+        {tab === 'holding' ? holding : notHolding}
+      </p>
+    </div>
+  );
+}
 
-  // verdict/what/so_what/now_what 필드 없으면 ai_summary에서 생성
-  const verdict = disclosure.verdict || disclosure.ai_impact || '중립';
-  const what = disclosure.what || disclosure.ai_summary || '공시 내용을 요약 중입니다.';
-  const soWhat = disclosure.so_what || disclosure.ai_impact_reason || '시장 영향을 분석 중입니다.';
-  const nowWhat = disclosure.now_what || '추가 공시 모니터링이 필요합니다.';
+// AI 분석 모달 (v6)
+function AiModal({ disclosure, onClose }: { disclosure: Disclosure; onClose: () => void }) {
+  // v6 grade 우선, 없으면 importance 폴백
+  const grade = disclosure.grade || importanceToGrade[disclosure.importance] || 'C';
+  const ic = impactColor[disclosure.ai_impact] || impactColor['중립'];
+  const tone = disclosure.verdict_tone || 'neutral';
+  const toneBg = verdictToneBg[tone] || verdictToneBg['neutral'];
+  const toneColor = verdictToneColor[tone] || verdictToneColor['neutral'];
+
+  // v6 필드 유무
+  const hasV6 = !!(disclosure.verdict && disclosure.what && disclosure.so_what);
 
   return (
     <div
@@ -115,9 +162,9 @@ function AiModal({ disclosure, onClose }: { disclosure: Disclosure; onClose: () 
 
         <div className="px-5 py-4 space-y-4">
           {/* 등급 + 감성 뱃지 */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className={`px-2.5 py-1 rounded-lg text-xs font-bold border ${gradeColor[grade] || gradeColor['C']}`}>
-              {grade}등급
+              {grade}등급 · {gradeDesc[grade] || '참고'}
             </span>
             <span className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${ic.bg} ${ic.text} ${ic.border}`}>
               {disclosure.ai_impact}
@@ -125,38 +172,106 @@ function AiModal({ disclosure, onClose }: { disclosure: Disclosure; onClose: () 
             <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded">{disclosure.disclosure_type}</span>
           </div>
 
-          {/* AI 평결 (verdict) */}
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100">
-            <p className="text-xs font-semibold text-blue-600 mb-1.5">🤖 AI 평결 (Verdict)</p>
-            <p className="text-sm font-medium text-gray-900">{verdict}</p>
-          </div>
+          {hasV6 ? (
+            <>
+              {/* v6: verdict */}
+              <div className={`rounded-xl p-4 border ${toneBg}`}>
+                <p className={`text-xs font-semibold mb-1.5 ${toneColor}`}>
+                  🤖 AI 평결 · {tone === 'bullish' ? '🟢 강세' : tone === 'bearish' ? '🔴 약세' : '⚪ 중립'}
+                </p>
+                <p className={`text-sm font-medium ${toneColor}`}>{disclosure.verdict}</p>
+              </div>
 
-          {/* What — 무슨 일이 있었나 */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
-              <span className="w-4 h-4 bg-blue-500 text-white rounded-full text-center text-xs leading-4">1</span>
-              What — 무슨 일인가
-            </p>
-            <p className="text-sm text-gray-700 leading-relaxed">{what}</p>
-          </div>
+              {/* v6: what */}
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
+                  <span className="w-4 h-4 bg-blue-500 text-white rounded-full text-center text-xs leading-4">1</span>
+                  What — 무슨 일인가
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">{disclosure.what}</p>
+              </div>
 
-          {/* So What — 왜 중요한가 */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
-              <span className="w-4 h-4 bg-purple-500 text-white rounded-full text-center text-xs leading-4">2</span>
-              So What — 왜 중요한가
-            </p>
-            <p className="text-sm text-gray-700 leading-relaxed">{soWhat}</p>
-          </div>
+              {/* v6: so_what */}
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
+                  <span className="w-4 h-4 bg-purple-500 text-white rounded-full text-center text-xs leading-4">2</span>
+                  So What — 숫자로 본 크기
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">{disclosure.so_what}</p>
+              </div>
 
-          {/* Now What — 어떻게 행동할까 */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
-              <span className="w-4 h-4 bg-green-500 text-white rounded-full text-center text-xs leading-4">3</span>
-              Now What — 어떻게 할까
-            </p>
-            <p className="text-sm text-gray-700 leading-relaxed">{nowWhat}</p>
-          </div>
+              {/* v6: now_what 탭 */}
+              {(disclosure.now_what_holding || disclosure.now_what_not_holding) && (
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1">
+                    <span className="w-4 h-4 bg-green-500 text-white rounded-full text-center text-xs leading-4">3</span>
+                    Now What — 어떻게 할까
+                  </p>
+                  <NowWhatTabs
+                    holding={disclosure.now_what_holding || '추가 정보 확인 필요.'}
+                    notHolding={disclosure.now_what_not_holding || '진입 시점 아님.'}
+                  />
+                </div>
+              )}
+
+              {/* v6: risk */}
+              {disclosure.risk && (
+                <div className="bg-orange-50 border border-orange-200 rounded-xl p-3">
+                  <p className="text-xs font-semibold text-orange-600 mb-1">⚠️ 핵심 리스크</p>
+                  <p className="text-sm text-orange-800">{disclosure.risk}</p>
+                </div>
+              )}
+
+              {/* v6: size_assessment + percentile */}
+              {(disclosure.size_assessment || disclosure.percentile) && (
+                <div className="flex items-center gap-3 text-xs text-gray-400">
+                  {disclosure.size_assessment && (
+                    <span className="bg-gray-50 px-2 py-1 rounded border border-gray-100">
+                      규모: {disclosure.size_assessment}
+                    </span>
+                  )}
+                  {disclosure.percentile && (
+                    <span className="bg-gray-50 px-2 py-1 rounded border border-gray-100">
+                      {disclosure.percentile}
+                    </span>
+                  )}
+                </div>
+              )}
+
+              {/* v6: tags */}
+              {disclosure.tags && disclosure.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {disclosure.tags.map((tag, i) => (
+                    <span key={i} className="text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full border border-indigo-100">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              {/* 하위 호환: v6 필드 없을 때 기존 방식 */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100">
+                <p className="text-xs font-semibold text-blue-600 mb-1.5">🤖 AI 평결 (Verdict)</p>
+                <p className="text-sm font-medium text-gray-900">{disclosure.ai_impact || '중립'}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
+                  <span className="w-4 h-4 bg-blue-500 text-white rounded-full text-center text-xs leading-4">1</span>
+                  What — 무슨 일인가
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">{disclosure.ai_summary}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-1.5 flex items-center gap-1">
+                  <span className="w-4 h-4 bg-purple-500 text-white rounded-full text-center text-xs leading-4">2</span>
+                  So What — 왜 중요한가
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">{disclosure.ai_impact_reason}</p>
+              </div>
+            </>
+          )}
 
           {/* Score */}
           <ScoreBar score={disclosure.ai_score} />
@@ -193,7 +308,8 @@ export default function RealTimeFeedTab() {
   }, []);
 
   const filtered = data.filter(d => {
-    const dGrade = importanceToGrade[d.importance] || 'C';
+    // v6 grade 우선, 없으면 importance 폴백
+    const dGrade = d.grade || importanceToGrade[d.importance] || 'C';
     if (grade !== '전체' && dGrade !== grade) return false;
     if (type !== '전체') {
       const dType = typeToFilter[d.disclosure_type];
@@ -204,7 +320,7 @@ export default function RealTimeFeedTab() {
   });
 
   const grades: GradeFilter[] = ['전체', 'A', 'B', 'C', 'D'];
-  const types: TypeFilter[] = ['전체', '실적', 'CB/BW', '자사주', '풍문', '수주', '증자', '기타'];
+  const types: TypeFilter[] = ['전체', '실적', 'CB', '자사주', '풍문', '수주'];
   const impacts: ImpactFilter[] = ['전체', '긍정', '부정', '중립'];
 
   return (
@@ -272,8 +388,10 @@ export default function RealTimeFeedTab() {
       {/* 카드 목록 */}
       <div className="space-y-3">
         {filtered.map(d => {
-          const dGrade = importanceToGrade[d.importance] || 'C';
+          const dGrade = d.grade || importanceToGrade[d.importance] || 'C';
           const ic = impactColor[d.ai_impact] || impactColor['중립'];
+          // 카드에는 verdict 있으면 우선 표시
+          const summaryText = d.verdict || d.ai_summary;
           return (
             <div
               key={d.id}
@@ -282,10 +400,13 @@ export default function RealTimeFeedTab() {
             >
               <div className="p-4">
                 {/* 뱃지 행 */}
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
                   <span className={`px-2 py-0.5 rounded text-xs font-bold border ${gradeColor[dGrade] || gradeColor['C']}`}>
                     {dGrade}
                   </span>
+                  {gradeDesc[dGrade] && (
+                    <span className="text-xs text-gray-400">{gradeDesc[dGrade]}</span>
+                  )}
                   <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border ${ic.bg} ${ic.text} ${ic.border}`}>
                     {d.ai_impact}
                   </span>
@@ -296,10 +417,27 @@ export default function RealTimeFeedTab() {
                 <h3 className="font-semibold text-gray-900 text-sm leading-snug">{d.report_nm}</h3>
                 <p className="text-xs text-gray-500 mt-1">{d.corp_name} · {d.rcept_dt}</p>
 
-                {/* 요약 (2줄) */}
-                <p className="text-sm text-gray-700 mt-2 leading-relaxed line-clamp-2">
-                  {d.ai_summary}
+                {/* 요약/verdict (2줄) */}
+                <p className={`text-sm mt-2 leading-relaxed line-clamp-2 ${
+                  d.verdict
+                    ? (d.verdict_tone === 'bullish' ? 'text-green-700 font-medium' :
+                       d.verdict_tone === 'bearish' ? 'text-red-700 font-medium' :
+                       'text-gray-700')
+                    : 'text-gray-700'
+                }`}>
+                  {summaryText}
                 </p>
+
+                {/* tags */}
+                {d.tags && d.tags.length > 0 && (
+                  <div className="flex gap-1 mt-2 flex-wrap">
+                    {d.tags.slice(0, 3).map((tag, i) => (
+                      <span key={i} className="text-xs text-indigo-500 bg-indigo-50 px-1.5 py-0.5 rounded">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 {/* 점수 바 */}
                 <ScoreBar score={d.ai_score} />

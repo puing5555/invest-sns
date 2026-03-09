@@ -2,6 +2,20 @@
 
 import { useState } from 'react';
 
+const gradeColor: Record<string, string> = {
+  A: 'bg-red-100 text-red-700 border-red-200',
+  B: 'bg-orange-100 text-orange-700 border-orange-200',
+  C: 'bg-yellow-100 text-yellow-700 border-yellow-200',
+  D: 'bg-gray-100 text-gray-600 border-gray-200',
+};
+
+const gradeDesc: Record<string, string> = {
+  A: '즉시행동',
+  B: '24시간내',
+  C: '참고',
+  D: '무시',
+};
+
 // Dummy data for highlights
 const dailyHighlights = {
   summary: {
@@ -29,6 +43,9 @@ const dailyHighlights = {
       amount: '23.5억',
       impact: '매출대비 14.77%',
       aiAnalysis: '과거 유사 공시 47건 분석 결과 D+3 평균 +8.2% 상승',
+      verdict: '23.5억 수주, 매출대비 14.77% — 상위 30% 규모. 즉시 호재.',
+      verdict_tone: 'bullish',
+      grade: 'A',
       priceChange: '+2.3%',
       sector: 'IT부품',
       time: '13:45'
@@ -40,6 +57,9 @@ const dailyHighlights = {
       amount: '50억',
       impact: '시가총액 대비 3.75%',
       aiAnalysis: '소형주 자사주 소각 D+5 평균 +6.3% 상승',
+      verdict: '시총 3.75% 소각 확정 — 전체 중 상위 24%. 주주환원 호재.',
+      verdict_tone: 'bullish',
+      grade: 'A',
       priceChange: '+1.8%',
       sector: '화학',
       time: '13:32'
@@ -51,6 +71,9 @@ const dailyHighlights = {
       amount: '-',
       impact: 'PBR 0.38',
       aiAnalysis: '예고 후 확정 공시 확률 36%, 주가 상승 확률 68%',
+      verdict: 'PBR 0.38 — 기업가치 제고 예고. 확정까지는 약한 시그널.',
+      verdict_tone: 'neutral',
+      grade: 'A',
       priceChange: '+0.9%',
       sector: '철강',
       time: '13:18'
@@ -64,6 +87,9 @@ const dailyHighlights = {
       amount: '-',
       impact: '인도 합작법인',
       aiAnalysis: '해명 후 실제 확정 발표 확률 36%',
+      verdict: '인도 합작법인 풍문 미확정 해명 — 11% 확정 가능성. 약한 시그널.',
+      verdict_tone: 'neutral',
+      grade: 'B',
       priceChange: '+0.5%',
       sector: '조선',
       time: '13:02'
@@ -75,6 +101,9 @@ const dailyHighlights = {
       amount: '6,000억',
       impact: '출자 규모',
       aiAnalysis: '기업활력법 관련 D+5 평균 +2.1% 상승',
+      verdict: '6,000억 사업재편 출자 — 규모 크나 실질 수익 개선 불확실.',
+      verdict_tone: 'neutral',
+      grade: 'B',
       priceChange: '-0.2%',
       sector: '화학',
       time: '12:55'
@@ -202,7 +231,10 @@ export default function HighlightsTab() {
             <div key={highlight.id} className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-lg transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className={`px-2 py-0.5 rounded text-xs font-bold border ${gradeColor[highlight.grade] || gradeColor['A']}`}>
+                      {highlight.grade} · {gradeDesc[highlight.grade]}
+                    </span>
                     <h4 className="font-semibold text-gray-900">{highlight.company}</h4>
                     <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{highlight.sector}</span>
                     <span className="text-sm text-gray-500">{highlight.time}</span>
@@ -223,6 +255,17 @@ export default function HighlightsTab() {
                 </div>
               </div>
               
+              {/* verdict (v6) */}
+              {highlight.verdict && (
+                <div className={`mb-3 p-3 rounded-lg border text-sm font-medium ${
+                  highlight.verdict_tone === 'bullish' ? 'bg-green-50 border-green-200 text-green-800' :
+                  highlight.verdict_tone === 'bearish' ? 'bg-red-50 border-red-200 text-red-800' :
+                  'bg-gray-50 border-gray-200 text-gray-700'
+                }`}>
+                  🤖 {highlight.verdict}
+                </div>
+              )}
+
               <div className="bg-red-50 p-3 rounded-lg">
                 <div className="flex items-start space-x-2">
                   <span className="text-red-600 font-medium text-sm">📊 AI 분석:</span>
@@ -246,7 +289,10 @@ export default function HighlightsTab() {
             <div key={highlight.id} className="bg-white rounded-xl border border-gray-200 p-5 hover:shadow-lg transition-shadow">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className={`px-2 py-0.5 rounded text-xs font-bold border ${gradeColor[highlight.grade] || gradeColor['B']}`}>
+                      {highlight.grade} · {gradeDesc[highlight.grade]}
+                    </span>
                     <h4 className="font-semibold text-gray-900">{highlight.company}</h4>
                     <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{highlight.sector}</span>
                     <span className="text-sm text-gray-500">{highlight.time}</span>
@@ -267,6 +313,17 @@ export default function HighlightsTab() {
                 </div>
               </div>
               
+              {/* verdict (v6) */}
+              {highlight.verdict && (
+                <div className={`mb-3 p-3 rounded-lg border text-sm font-medium ${
+                  highlight.verdict_tone === 'bullish' ? 'bg-green-50 border-green-200 text-green-800' :
+                  highlight.verdict_tone === 'bearish' ? 'bg-red-50 border-red-200 text-red-800' :
+                  'bg-gray-50 border-gray-200 text-gray-700'
+                }`}>
+                  🤖 {highlight.verdict}
+                </div>
+              )}
+
               <div className="bg-orange-50 p-3 rounded-lg">
                 <div className="flex items-start space-x-2">
                   <span className="text-orange-600 font-medium text-sm">📊 AI 분석:</span>

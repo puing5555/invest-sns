@@ -557,6 +557,7 @@ def main():
     parser.add_argument('--end',      default=None,            help='종료일 YYYYMMDD')
     parser.add_argument('--no-ai',    action='store_true',     help='AI 분석 없이 수집만')
     parser.add_argument('--backfill', action='store_true',     help='기존 verdict 없는 건 재분석')
+    parser.add_argument('--limit',    type=int, default=0,     help='AI 분석 최대 건수 (0=무제한)')
     args = parser.parse_args()
 
     # ── OpenAI 키 로드 ──
@@ -584,21 +585,30 @@ def main():
             return
 
         to_fill = [i for i, d in enumerate(existing) if needs_ai(d)]
+        if args.limit:
+            to_fill = to_fill[:args.limit]
         print(f"재분석 대상: {len(to_fill)}건")
 
         for idx, i in enumerate(to_fill):
             d = existing[i]
-            # sub_condition 없으면 분류
             if not d.get('sub_condition'):
                 d['sub_condition'] = classify_sub_condition(d)
             print(f"  [{idx+1}/{len(to_fill)}] {d['corp_name']} — {d['report_nm'][:40]}")
-            ai_result = analyze_with_ai(d, api_key)
-            if ai_result:
-                existing[i] = apply_ai_analysis(d, ai_result)
-                print(f"    → grade={existing[i].get('grade')} | {existing[i].get('verdict', '')[:40]}")
-            else:
-                print(f"    → 스킵")
-            time.sleep(1)  # rate limit 방지
+            try:
+                ai_result = analyze_with_ai(d, api_key)
+                if ai_result:
+                    existing[i] = apply_ai_analysis(d, ai_result)
+                    print(f"    → grade={existing[i].get('grade')} | {existing[i].get('verdict', '')[:40]}")
+                else:
+                    print(f"    → 스킵")
+            except Exception as e:
+                print(f"    → 예외: {e}")
+            # 10건마다 중간 저장
+            if (idx + 1) % 10 == 0:
+                with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
+                    json.dump(existing, f, ensure_ascii=False, indent=2)
+                print(f"  [중간저장] {idx+1}건 처리")
+            time.sleep(1.5)  # rate limit 방지
 
         with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
             json.dump(existing, f, ensure_ascii=False, indent=2)
@@ -630,17 +640,22 @@ def main():
 
     # ── 신규 항목 AI 분석 ──
     if api_key and added:
-        print(f"AI 분석 시작: {len(added)}건")
-        for idx, item in enumerate(added):
-            print(f"  [{idx+1}/{len(added)}] {item['corp_name']} — {item['report_nm'][:40]}")
-            ai_result = analyze_with_ai(item, api_key)
-            if ai_result:
-                added[idx] = apply_ai_analysis(item, ai_result)
-                print(f"    → grade={added[idx].get('grade')} | {added[idx].get('verdict', '')[:40]}")
-            else:
-                print(f"    → 스킵")
-            if idx < len(added) - 1:
-                time.sleep(1)  # rate limit 방지
+        limit_n = args.limit if args.limit else len(added)
+        targets = added[:limit_n]
+        print(f"AI 분석 시작: {len(targets)}건")
+        for idx, item in enumerate(targets):
+            print(f"  [{idx+1}/{len(targets)}] {item['corp_name']} — {item['report_nm'][:40]}")
+            try:
+                ai_result = analyze_with_ai(item, api_key)
+                if ai_result:
+                    added[idx] = apply_ai_analysis(item, ai_result)
+                    print(f"    → grade={added[idx].get('grade')} | {added[idx].get('verdict', '')[:40]}")
+                else:
+                    print(f"    → 스킵")
+            except Exception as e:
+                print(f"    → 예외: {e}")
+            if idx < len(targets) - 1:
+                time.sleep(1.5)  # rate limit 방지
 
     # 합치기: 새 것을 앞에, 날짜 내림차순
     merged = added + existing
