@@ -1,10 +1,10 @@
 {
-  "test_date": "2026-03-09T08:50:21.481039",
+  "test_date": "2026-03-09T09:25:10.434184",
   "model": "claude-sonnet-4-6",
   "prompt_version": "v11.3",
   "channel": "https://www.youtube.com/@GODofIT",
   "total_videos": 16,
-  "total_signals": 0,
+  "total_signals": 14,
   "total_ts_exceed": 0,
   "total_guest": 0,
   "total_etf": 0,
@@ -14,33 +14,64 @@
       "video_url": "https://www.youtube.com/watch?v=0pS0CTDgVmU",
       "title": "wsaj_0pS0CTDgVmU_[기업해부학] Amazon 아마존 3Q 2023 어닝콜! 클라우드 매출 하회했는데 주가는 왜 올랐을까？.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "아마존",
+          "signal": "",
+          "timestamp": "11:56",
+          "key_quote": "저는 개인적으로 광고 사업이야 말로 앞으로 아마존 전체의 성장을 끌어갈 그런 사업이라고 생각하고 있습니다. 아마존이 미래에 유튜브나 넷플릭스처럼 비디오랑 뮤직 스트리밍에 광고를 집어넣기 시작하면 굉장한 업사이드를 기대할 수 있다고 생각해 볼 수 있겠습니다.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "57NbdmLvy6I",
       "video_url": "https://www.youtube.com/watch?v=57NbdmLvy6I",
       "title": "wsaj_57NbdmLvy6I_[기업해부학] 비만 치료제로 유럽 시총 1위？!  헬스케어 시장을 이끄는 노보 노디스크 & 일라이 릴리 파헤치기!.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "노보 노디스크",
+          "signal": "",
+          "timestamp": "16:19",
+          "key_quote": "노보노 디스크의 성장성이 엄청난 거는 맞지만 여기서 보듯이 그런 성장성이 이미 주가에 사실 상당 부분 반영됐다고 보는게 맞기 때문에 어이 차트만 보고 덜썩 투자하시면 안 됩니다",
+          "speaker_name": null
+        },
+        {
+          "stock": "일라이 릴리",
+          "signal": "",
+          "timestamp": "16:32",
+          "key_quote": "일라이 릴리도 마찬가지로 밸류에이션이 급상승하면서 지금은 세계에서 가장 같이 있는 제약 회사로 거듭났습니다. 노보라 일라이 같은 경우는 앞으로도 엄청난 성장이 기대되는 시장에서 거의 독점적인 포지션을 갖고 갈 거잖아요",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "5fhbkQ2Qidc",
       "video_url": "https://www.youtube.com/watch?v=5fhbkQ2Qidc",
       "title": "wsaj_5fhbkQ2Qidc_[기업해부학] 가치평가의 대가가 엔비디아 주식을 전부 팔지 않은 이유？.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "엔비디아",
+          "signal": "",
+          "timestamp": "10:07",
+          "key_quote": "적정가치로 240달러 제시하셨다고 말씀드렸죠 아까 현재 가격보다 훨씬 낮기는 한데 그렇다고 해서 뭐 무조건 지금 낮던져라 이런 말은 아니에요. 지금 현재 주가가 말도 안 되게 고평가된 거 같잖아요. 그래도 신중하셔야 됩니다.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "7x3HE_uXttI",
@@ -51,29 +82,45 @@
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "AQ2z2ZCBFa4",
       "video_url": "https://www.youtube.com/watch?v=AQ2z2ZCBFa4",
       "title": "wsaj_AQ2z2ZCBFa4_[기업해부학] Nvidia, AI⧸메타버스⧸자율주행의 완벽 콜라보？ 혹은 내리막 직전의 롤러코스터？.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "엔비디아",
+          "signal": "",
+          "timestamp": "03:11",
+          "key_quote": "단순히 멀티플만으로 특정 주식이 싸다 비싸다를 판단해 볼 수는 없다고 생각합니다. 우선은 엔비디아가 어떤 사업을 하는 회사인지 그리고 각 사업이 어떤지 자세히 알아보고 거기다 더해서 재무분석을 통해서 재무적인 관점에서도 회사를 이해하려는 노력이 필요하다고 생각합니다.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "B17xc8zl3Z4",
       "video_url": "https://www.youtube.com/watch?v=B17xc8zl3Z4",
       "title": "[기업해부학] Meta 메타 3Q 2023 어닝콜 분석! 메타버스 버리고 AI버스 탑승하자!",
       "duration_seconds": 1311,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "메타",
+          "signal": "",
+          "timestamp": "14:42",
+          "key_quote": "정리해 보자면은 이 실적 자체는 탑 라인부터 바텀 라인까지 아주 잘 나왔는데도 이 성장성에 대해서 퀘 마크가 나오는 순간 투자자들 센티먼트 완전히 역전이 됐다 이 정도로 이번 실적은 정리를 해볼 수 있을 것 같아요",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "EbfuT0zGGjU",
@@ -84,95 +131,159 @@
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "OWkw56VyeUM",
       "video_url": "https://www.youtube.com/watch?v=OWkw56VyeUM",
       "title": "wsaj_OWkw56VyeUM_[기업해부학] 엔비디아 고점 논란, 가치평가의 대가가 엔비디아 보유주식을 판 이유.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "엔비디아",
+          "signal": "",
+          "timestamp": "01:43",
+          "key_quote": "다모다랑 교수님이 엔비디아가 고평가됐다 이렇게 주장을 하시면서 자기가 그동안 보유해오던 포지션의 절반 정도를 청산했다고 밝히셨더라고요. 블로그 포스팅을 자세히 읽어보면 꼭 그런 것만은 아니거든요.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "PzpU0H8iqQs",
       "video_url": "https://www.youtube.com/watch?v=PzpU0H8iqQs",
       "title": "[기업해부학] 주가 대폭락 찰스 슈왑, 실리콘밸리뱅크 2.0? 저가매수 찬스? 1부",
       "duration_seconds": 1837,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "찰스 슈왑",
+          "signal": "",
+          "timestamp": "30:04",
+          "key_quote": "문제가 결국 두 가지인 거예요. 매출은 감소하고, 그러는 와중에 조달 비용은 증가하고, 그러니까 이게 얘네 마진이 굉장히 많이 압박을 받게 되겠죠.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "_Ex0vR_1Ekg",
       "video_url": "https://www.youtube.com/watch?v=_Ex0vR_1Ekg",
       "title": "wsaj__Ex0vR_1Ekg_[기업해부학] 테슬라 목표가 xxx만원.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "테슬라",
+          "signal": "",
+          "timestamp": "20:08",
+          "key_quote": "현재 주가는 아주 고평가된 것으로 보이고 이 간극을 메우려면 EV 판매 뿐만이 아니라 FSD나 로보택시 그리고 에너지 사업 등에서 엄청난 추가적 매출이 와야 될 텐데 이를 뒷받침할 수 있는 숫자적 논리는 현재로서는 아주 빈약한 상태입니다",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "dPIjOdREB80",
       "video_url": "https://www.youtube.com/watch?v=dPIjOdREB80",
       "title": "[기업해부학] 주가 대폭락 찰스 슈왑, 실리콘밸리뱅크 2.0? 저가매수 찬스? 2부",
       "duration_seconds": 1144,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "찰스슈왑",
+          "signal": "",
+          "timestamp": "18:01",
+          "key_quote": "단기적인 관점에서는 철수 시합이 안 좋아 보이는 거는 확실한 것 같습니다. 1분기 실적을 확인을 해보니까 저희가 지난 영상부터 알아온 찰스 슈합에 두 가지 큰 우려 요소 이거는 사실 해결되고 있는 사인은 아직 하나도 보이지 않다고 보는게 맞을 것 같아요.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "l9suWlP7U68",
       "video_url": "https://www.youtube.com/watch?v=l9suWlP7U68",
       "title": "wsaj_l9suWlP7U68_[기업해부학] “테슬라 = AI 대장주” 가능할까？.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "테슬라",
+          "signal": "",
+          "timestamp": "24:52",
+          "key_quote": "정리해 보자면은 모건 스탠리가 제시하는 400 달러라는 목표 주가가 합당한지 아닌지 여기에 대한 판단을 해 보려면 도조, 자율주행 그리고 각종 소프트웨어 판매를 통해서 테슬라가 가져갈 수 있는 성장 스토리, 이거를 믿냐 마느냐로 판단을 할 수 있을 것 같고, 인풋 값들이 얼마나 현실적인지 요거에 대한 판단을 해 보시면 400달러를 갈 수 있다 없다 이거에 대한 여러분의 판단을 해 보실 수 있을 것 같습니다.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "liP35sqr9aU",
       "video_url": "https://www.youtube.com/watch?v=liP35sqr9aU",
       "title": "wsaj_liP35sqr9aU_[기업해부학] 엔비디아의 충격적인 실적 서프라이즈, 오는 3분기, 그 이후에도 이어질까？.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "엔비디아",
+          "signal": "",
+          "timestamp": "20:33",
+          "key_quote": "3분기만 좋을 것 같은게 아니라 좀 중기적으로 생각을 해봐도 엔비디아 실적은 계속 좋을 수 있을 것 같다. 하나하나 요소들을 까서 보니까 이게 될 수 있을 것 같아",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "oDfnMrrRfl8",
       "video_url": "https://www.youtube.com/watch?v=oDfnMrrRfl8",
       "title": "wsaj_oDfnMrrRfl8_[기업해부학] Nvidia 밸류에이션, 이대로 괜찮은 걸까？.ko.vtt",
       "duration_seconds": null,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "엔비디아",
+          "signal": "",
+          "timestamp": "23:04",
+          "key_quote": "엔비디아 주식이 유사기업 주식과 비교를 했을 때 싼지 비싼지 판단하는데 유용하게 쓰였으면 좋겠습니다. 멀티플 숫자만 놓고 보면은 엔비디아가 제일 비싸 보이는게 확실한데요, 월가 애널리스트 컨센서스 전망치를 뜯어보면 비싼 이유가 확실히 있긴 있는 것으로 보이기는 합니다.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "sade4GuojTg",
       "video_url": "https://www.youtube.com/watch?v=sade4GuojTg",
       "title": "[기업해부학] IPO 대박! Arm 투자를 위한 필수 체크포인트 총 정리!",
       "duration_seconds": 2311,
-      "signals": [],
+      "signals": [
+        {
+          "stock": "ARM",
+          "signal": "",
+          "timestamp": "27:46",
+          "key_quote": "가시적인 수치로 예상 가능한 리스크들이 긍정적인 내용보다는 조금 더 많다 이렇게 판단을 하는게 맞을 것 같습니다. 125배 PER는 확실히 비싸 보이는 감이 있기는 하죠. 암은 사실 들어가는 건 한 푼도 없고 IPO를 통해서 조달된 자금은 100% 소프트뱅크에 투자 회수에 쓰인다.",
+          "speaker_name": null
+        }
+      ],
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     },
     {
       "video_id": "tUv4-8BihrM",
@@ -183,7 +294,7 @@
       "ts_exceed_count": 0,
       "guest_count": 0,
       "etf_count": 0,
-      "error": "API 응답 없음"
+      "error": null
     }
   ]
 }
