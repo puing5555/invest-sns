@@ -109,6 +109,98 @@ def save_tmp_json(data: Any, slug: str, suffix: str) -> str:
     return path
 
 
+def _deploy_gh_pages(project_root: str, channel_slug: str) -> Optional[str]:
+    """
+    git worktree 방식으로 out/ → gh-pages 브랜치에 배포.
+    성공 시 None 반환, 실패 시 에러 메시지 반환.
+    """
+    import tempfile as _tempfile
+    import shutil as _sh
+
+    out_path = os.path.join(project_root, 'out')
+    if not os.path.isdir(out_path):
+        return f"out/ 디렉토리 없음 — 빌드가 먼저 완료되어야 합니다"
+
+    tmp_dir = _tempfile.mkdtemp(prefix='invest-sns-deploy-')
+    try:
+        # gh-pages 브랜치가 있으면 worktree add, 없으면 orphan 브랜치 생성
+        r = subprocess.run(
+            ['git', 'worktree', 'add', tmp_dir, 'gh-pages'],
+            cwd=project_root, capture_output=True, text=True, timeout=60
+        )
+        if r.returncode != 0:
+            # gh-pages 브랜치 없음 → orphan으로 생성
+            r2 = subprocess.run(
+                ['git', 'worktree', 'add', '--orphan', '-b', 'gh-pages', tmp_dir],
+                cwd=project_root, capture_output=True, text=True, timeout=60
+            )
+            if r2.returncode != 0:
+                return f"worktree 생성 실패: {r2.stderr[:300]}"
+
+        # 기존 파일 삭제 (.git 제외)
+        for item in os.listdir(tmp_dir):
+            if item == '.git':
+                continue
+            target = os.path.join(tmp_dir, item)
+            if os.path.isdir(target):
+                _sh.rmtree(target)
+            else:
+                os.remove(target)
+
+        # out/ 내용 복사
+        for item in os.listdir(out_path):
+            s = os.path.join(out_path, item)
+            d = os.path.join(tmp_dir, item)
+            if os.path.isdir(s):
+                _sh.copytree(s, d)
+            else:
+                _sh.copy2(s, d)
+
+        # .nojekyll 보장
+        nojekyll = os.path.join(tmp_dir, '.nojekyll')
+        if not os.path.exists(nojekyll):
+            open(nojekyll, 'w').close()
+
+        # git add + commit + push --force
+        ts = datetime.now().strftime('%Y-%m-%d %H:%M')
+        commit_msg = f'deploy: {channel_slug} 파이프라인 자동배포 ({ts})'
+
+        for cmd in [
+            ['git', 'add', '-A'],
+            ['git', 'commit', '-m', commit_msg],
+            ['git', 'push', 'origin', 'gh-pages', '--force'],
+        ]:
+            r = subprocess.run(cmd, cwd=tmp_dir, capture_output=True,
+                               text=True, timeout=120)
+            if r.returncode != 0:
+                # "nothing to commit"은 에러 아님
+                if 'nothing to commit' in r.stdout or 'nothing to commit' in r.stderr:
+                    print(f"  [INFO] 변경사항 없음 — 재배포 스킵")
+                    break
+                return f"'{' '.join(cmd)}' 실패: {r.stderr[:300]}"
+
+        return None  # 성공
+
+    except Exception as _e:
+        return str(_e)
+
+    finally:
+        # worktree 정리
+        try:
+            subprocess.run(
+                ['git', 'worktree', 'remove', tmp_dir, '--force'],
+                cwd=project_root, capture_output=True, timeout=30
+            )
+        except Exception:
+            pass
+        # 임시 폴더 잔여 정리
+        if os.path.isdir(tmp_dir):
+            try:
+                _sh.rmtree(tmp_dir, ignore_errors=True)
+            except Exception:
+                pass
+
+
 class YouTubeChannelCollector:
     """유튜브 채널 영상 수집기"""
     
@@ -469,40 +561,17 @@ class AutoPipeline:
                     }
                 print("[OK] QA Gate 3 통과")
 
-            # ── Step 10: 배포 (git push gh-pages) ────────────────────
+            # ── Step 10: 배포 (git worktree → gh-pages push) ────────
             print(f"\n[{total_steps}/{total_steps}] 배포 (GitHub Pages)...")
-            deploy_dir = 'C:\\Users\\Mario\\invest-sns-deploy'
-            if os.path.isdir(deploy_dir):
-                try:
-                    # out/ → deploy 폴더 복사
-                    import shutil as _sh
-                    out_path = os.path.join(PROJECT_ROOT, 'out')
-                    for item in os.listdir(out_path):
-                        s = os.path.join(out_path, item)
-                        d = os.path.join(deploy_dir, item)
-                        if os.path.isdir(s):
-                            if os.path.exists(d):
-                                _sh.rmtree(d)
-                            _sh.copytree(s, d)
-                        else:
-                            _sh.copy2(s, d)
-                    # git add + commit + push
-                    ts = datetime.now().strftime('%Y-%m-%d %H:%M')
-                    deploy_cmds = [
-                        ['git', 'add', '-A'],
-                        ['git', 'commit', '-m', f'deploy: {channel_slug} 파이프라인 자동배포 ({ts})'],
-                        ['git', 'push', 'origin', 'gh-pages'],
-                    ]
-                    for cmd in deploy_cmds:
-                        r = subprocess.run(cmd, cwd=deploy_dir, capture_output=True,
-                                           text=True, timeout=60)
-                        if r.returncode != 0 and 'nothing to commit' not in r.stdout:
-                            print(f"  [WARNING] 배포 명령 실패: {' '.join(cmd)}: {r.stderr[:200]}")
-                    print("[OK] GitHub Pages 배포 완료")
-                except Exception as _de:
-                    print(f"  [WARNING] 배포 오류 (건너뜀): {_de}")
-            else:
-                print(f"  [WARNING] 배포 디렉토리 없음: {deploy_dir}")
+            deploy_error = _deploy_gh_pages(PROJECT_ROOT, channel_slug)
+            if deploy_error:
+                print(f"⛔ 배포 실패: {deploy_error}")
+                return {
+                    'error': f'배포 실패: {deploy_error}',
+                    'db_stats': db_stats,
+                    'qa_results': qa_results,
+                }
+            print("[OK] GitHub Pages 배포 완료 → https://puing5555.github.io/invest-sns/")
 
             # ── 실행 완료 요약 ────────────────────────────────────────
             end_time = time.time()
