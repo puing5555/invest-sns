@@ -94,10 +94,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
   const isHost = !signal.channelName || !signal.influencer || signal.channelName === signal.influencer || signal.channelName.includes(signal.influencer) || signal.influencer.includes(signal.channelName);
 
   const handleLike = async () => {
-    if (!signal?.id) {
-      alert('시그널 ID가 없습니다.');
-      return;
-    }
+    if (!signal?.id) return;
 
     if (liked) {
       setLiked(false);
@@ -105,14 +102,16 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
       return;
     }
 
+    // 낙관적 업데이트: 즉시 UI 반영
+    setLiked(true);
+    setLikeCount(prev => prev + 1);
+    setShowMemoInput(true);
+
     try {
       await insertSignalVote(signal.id);
-      setLiked(true);
-      setLikeCount(prev => prev + 1);
-      setShowMemoInput(true);
     } catch (error) {
       console.error('좋아요 처리 중 오류:', error);
-      alert('좋아요 처리에 실패했습니다.');
+      // 에러 시 UI는 그대로 유지 (낙관적 업데이트)
     }
   };
 
@@ -203,7 +202,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                 onClick={handleReport}
                 className="text-[#8b95a1] hover:text-red-500 transition-colors text-xl px-3 py-2 rounded-lg"
               >
-                🚨
+                🚩
               </button>
               <button
                 onClick={onClose}
