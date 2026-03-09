@@ -7,14 +7,14 @@ import EarningsSeasonTab from '@/components/disclosure/EarningsSeasonTab';
 import DisclosureSearchTab from '@/components/disclosure/DisclosureSearchTab';
 
 const tabs = [
-  { id: 'realtime', label: '실시간 공시', icon: '📡' },
   { id: 'highlights', label: '오늘의 하이라이트', icon: '⭐' },
+  { id: 'realtime', label: '실시간 공시', icon: '📡' },
   { id: 'earnings', label: '실적 시즌', icon: '📊' },
   { id: 'search', label: '공시 DB', icon: '🔍' }
 ];
 
 export default function DisclosurePage() {
-  const [activeTab, setActiveTab] = useState('realtime');
+  const [activeTab, setActiveTab] = useState('highlights');
 
   return (
     <div className="min-h-screen bg-gray-50">
