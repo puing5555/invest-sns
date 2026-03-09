@@ -219,6 +219,99 @@ class SubtitleExtractor:
             content = f.read()
         return self.parse_vtt_content(content, include_timestamps=include_timestamps)
 
+    def extract_subtitle(self, url: str, retries: int = 3) -> Optional[str]:
+        """
+        자막 추출 (여러 방법 시도)
+
+        Args:
+            url: 유튜브 영상 URL
+            retries: 재시도 횟수
+
+        Returns:
+            자막 텍스트 또는 None
+        """
+        video_id = self.extract_video_id(url)
+        if not video_id:
+            print(f"[ERROR] 유효하지 않은 유튜브 URL: {url}")
+            return None
+
+        print(f"자막 추출 시작: {video_id}")
+
+        for attempt in range(retries):
+            try:
+                # 방법 1: youtube_transcript_api 시도
+                subtitle = self.extract_with_youtube_transcript_api(video_id)
+                if subtitle:
+                    return subtitle
+
+                print(f"youtube_transcript_api 실패, yt-dlp 시도...")
+
+                # 방법 2: yt-dlp 시도
+                subtitle = self.extract_with_yt_dlp(url)
+                if subtitle:
+                    return subtitle
+
+                if attempt < retries - 1:
+                    wait_time = (attempt + 1) * 5
+                    print(f"재시도 {attempt + 1}/{retries} ({wait_time}초 후)...")
+                    time.sleep(wait_time)
+
+            except Exception as e:
+                print(f"자막 추출 에러 (시도 {attempt + 1}): {e}")
+                if attempt < retries - 1:
+                    time.sleep(5)
+
+        print(f"[ERROR] 자막 추출 완전 실패: {video_id}")
+        return None
+
+    def extract_with_rate_limit(self, videos: list) -> list:
+        """
+        레이트리밋을 고려한 일괄 자막 추출
+
+        Args:
+            videos: 영상 정보 리스트
+
+        Returns:
+            자막이 추가된 영상 정보 리스트
+        """
+        results = []
+        batch_count = 0
+
+        for i, video in enumerate(videos):
+            print(f"\n진행: {i+1}/{len(videos)} - {video['title'][:50]}...")
+
+            # 자막 추출
+            subtitle = self.extract_subtitle(video['url'])
+
+            video_result = video.copy()
+            video_result['subtitle'] = subtitle
+            video_result['subtitle_success'] = subtitle is not None
+
+            results.append(video_result)
+
+            # 성공한 경우만 배치 카운트
+            if subtitle:
+                batch_count += 1
+
+            # 레이트리밋 적용
+            if i < len(videos) - 1:  # 마지막이 아닐 때만
+                # 일반 요청 간격
+                print(f"대기 중... ({self.config.RATE_LIMIT_REQUESTS}초)")
+                time.sleep(self.config.RATE_LIMIT_REQUESTS)
+
+                # 배치 휴식 (20개마다 5분)
+                if batch_count > 0 and batch_count % self.config.RATE_LIMIT_BATCH_SIZE == 0:
+                    print(f"배치 휴식: {self.config.RATE_LIMIT_BATCH_BREAK // 60}분...")
+                    time.sleep(self.config.RATE_LIMIT_BATCH_BREAK)
+
+        # 결과 요약
+        success_count = sum(1 for r in results if r['subtitle_success'])
+        print(f"\n=== 자막 추출 완료 ===")
+        print(f"성공: {success_count}/{len(videos)}개")
+        print(f"실패: {len(videos) - success_count}개")
+
+        return results
+
 
 # ── 모듈 레벨 헬퍼 (import해서 쓰는 다른 스크립트용) ──────────────────────
 _shared_extractor = None
@@ -245,96 +338,3 @@ def parse_vtt(vtt_path_or_content: str, include_timestamps: bool = True,
         return _shared_extractor.parse_vtt_content(vtt_path_or_content, include_timestamps)
     else:
         return _shared_extractor.parse_vtt_file(vtt_path_or_content, include_timestamps)
-    
-    def extract_subtitle(self, url: str, retries: int = 3) -> Optional[str]:
-        """
-        자막 추출 (여러 방법 시도)
-        
-        Args:
-            url: 유튜브 영상 URL
-            retries: 재시도 횟수
-        
-        Returns:
-            자막 텍스트 또는 None
-        """
-        video_id = self.extract_video_id(url)
-        if not video_id:
-            print(f"[ERROR] 유효하지 않은 유튜브 URL: {url}")
-            return None
-        
-        print(f"자막 추출 시작: {video_id}")
-        
-        for attempt in range(retries):
-            try:
-                # 방법 1: youtube_transcript_api 시도
-                subtitle = self.extract_with_youtube_transcript_api(video_id)
-                if subtitle:
-                    return subtitle
-                
-                print(f"youtube_transcript_api 실패, yt-dlp 시도...")
-                
-                # 방법 2: yt-dlp 시도
-                subtitle = self.extract_with_yt_dlp(url)
-                if subtitle:
-                    return subtitle
-                
-                if attempt < retries - 1:
-                    wait_time = (attempt + 1) * 5
-                    print(f"재시도 {attempt + 1}/{retries} ({wait_time}초 후)...")
-                    time.sleep(wait_time)
-                
-            except Exception as e:
-                print(f"자막 추출 에러 (시도 {attempt + 1}): {e}")
-                if attempt < retries - 1:
-                    time.sleep(5)
-        
-        print(f"[ERROR] 자막 추출 완전 실패: {video_id}")
-        return None
-    
-    def extract_with_rate_limit(self, videos: list) -> list:
-        """
-        레이트리밋을 고려한 일괄 자막 추출
-        
-        Args:
-            videos: 영상 정보 리스트
-        
-        Returns:
-            자막이 추가된 영상 정보 리스트
-        """
-        results = []
-        batch_count = 0
-        
-        for i, video in enumerate(videos):
-            print(f"\n진행: {i+1}/{len(videos)} - {video['title'][:50]}...")
-            
-            # 자막 추출
-            subtitle = self.extract_subtitle(video['url'])
-            
-            video_result = video.copy()
-            video_result['subtitle'] = subtitle
-            video_result['subtitle_success'] = subtitle is not None
-            
-            results.append(video_result)
-            
-            # 성공한 경우만 배치 카운트
-            if subtitle:
-                batch_count += 1
-            
-            # 레이트리밋 적용
-            if i < len(videos) - 1:  # 마지막이 아닐 때만
-                # 일반 요청 간격
-                print(f"대기 중... ({self.config.RATE_LIMIT_REQUESTS}초)")
-                time.sleep(self.config.RATE_LIMIT_REQUESTS)
-                
-                # 배치 휴식 (20개마다 5분)
-                if batch_count > 0 and batch_count % self.config.RATE_LIMIT_BATCH_SIZE == 0:
-                    print(f"배치 휴식: {self.config.RATE_LIMIT_BATCH_BREAK // 60}분...")
-                    time.sleep(self.config.RATE_LIMIT_BATCH_BREAK)
-        
-        # 결과 요약
-        success_count = sum(1 for r in results if r['subtitle_success'])
-        print(f"\n=== 자막 추출 완료 ===")
-        print(f"성공: {success_count}/{len(videos)}개")
-        print(f"실패: {len(videos) - success_count}개")
-        
-        return results

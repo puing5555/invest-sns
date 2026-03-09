@@ -110,13 +110,20 @@ def check_title_has_video_id(videos):
     return bad
 
 def check_date_concentration(videos):
-    """체크 2: 50%+ 영상이 같은 날짜 → 크롤링 날짜 사용 의심"""
+    """체크 2: 50%+ 영상이 같은 날짜 → 크롤링 날짜 사용 의심
+    빈 날짜는 제외하고 계산. 날짜가 없는 영상이 대부분이면 (None, 0) 반환.
+    """
     if not videos:
         return None, 0
     dates = {}
     for v in videos:
-        d = str(v.get('published_at', ''))[:10]
+        d = str(v.get('published_at', '') or '')[:10]
+        if not d:  # 빈 날짜 제외
+            continue
         dates[d] = dates.get(d, 0) + 1
+    if not dates:
+        # 날짜 정보가 전혀 없음 → 집중 여부 판단 불가, 스킵
+        return None, 0
     top_date, top_count = max(dates.items(), key=lambda x: x[1])
     ratio = top_count / len(videos)
     return top_date, ratio
@@ -202,7 +209,9 @@ def run_gate1(videos, channel, total_original=None):
 
     # ── 체크 2: 날짜 집중 ──
     top_date, ratio = check_date_concentration(videos)
-    if ratio >= 0.5:
+    if top_date is None:
+        print(f"\n⚠️  [체크 2] 날짜 정보 없음 — flat-playlist 수집 특성상 스킵 (비치명적)")
+    elif ratio >= 0.5:
         print(f"\n⛔ [체크 2] 날짜 집중 감지 — {top_date}에 {ratio*100:.1f}% 집중 (크롤링 날짜 의심)")
         save_error_pattern(channel, 'gate1', 'date_concentration',
                            f"{top_date}에 {ratio*100:.1f}% 집중")
