@@ -300,7 +300,7 @@ function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) 
 
 export default function StockAnalystTab({ code }: StockAnalystTabProps) {
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState(true);
 
   const data = reportsData as Record<string, Report[]>;
   const reports = data[code] || [];
@@ -517,7 +517,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
           className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
         >
           <div>
-            <h4 className="font-bold text-[#191f28]">증권사별 상세 ({reports.length}건)</h4>
+            <h4 className="font-bold text-[#191f28]">컨센서스 상세 ({reports.length}건)</h4>
             <p className="text-sm text-[#8b95a1] mt-1">애널리스트 리포트 전체 목록</p>
           </div>
           <span className={`text-[#8b95a1] transition-transform ${showDetails ? 'rotate-180' : ''}`}>
@@ -531,11 +531,11 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
               <table className="w-full">
                 <thead className="bg-[#f8f9fa]">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">증권사</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">애널리스트</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">목표가</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">투자의견</th>
-                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">날짜</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1] whitespace-nowrap">날짜</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1] whitespace-nowrap">애널리스트</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1] whitespace-nowrap">투자의견</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1] whitespace-nowrap">목표가</th>
+                    <th className="px-4 py-3 text-left text-sm font-medium text-[#8b95a1]">제목</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f0f0f0]">
@@ -545,13 +545,21 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
                       className="hover:bg-[#f8f9fa] transition-colors cursor-pointer" 
                       onClick={() => setSelectedReport(report)}
                     >
-                      <td className="px-4 py-4 text-sm text-[#191f28] font-medium">{report.firm}</td>
-                      <td className="px-4 py-4 text-sm text-[#191f28]">{report.analyst || '-'}</td>
-                      <td className="px-4 py-4 text-sm text-[#191f28] font-medium">
+                      <td className="px-4 py-4 text-sm text-[#8b95a1] whitespace-nowrap">{formatDate(report.published_at)}</td>
+                      <td className="px-4 py-4 text-sm text-[#191f28] whitespace-nowrap">
+                        <div>{report.analyst || '-'}</div>
+                        <div className="text-xs text-[#8b95a1]">{report.firm}</div>
+                      </td>
+                      <td className="px-4 py-4 whitespace-nowrap"><OpinionBadge opinion={report.opinion} /></td>
+                      <td className="px-4 py-4 text-sm text-[#191f28] font-medium whitespace-nowrap">
                         {formatTargetPrice(report.target_price, code)}
                       </td>
-                      <td className="px-4 py-4"><OpinionBadge opinion={report.opinion} /></td>
-                      <td className="px-4 py-4 text-sm text-[#8b95a1]">{formatDate(report.published_at)}</td>
+                      <td className="px-4 py-4 min-w-[200px]">
+                        <p className="text-sm text-[#191f28] font-medium leading-snug">{report.title}</p>
+                        {report.summary && (
+                          <p className="text-xs text-[#8b95a1] mt-1 leading-relaxed line-clamp-2">{report.summary}</p>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
