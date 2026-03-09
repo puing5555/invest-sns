@@ -5870,7 +5870,41 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 결의는 회사의 중요한 의사결정을 위한 회의를 알리는 공시입니다. 이는 주주들이 회사의 경영에 참여할 수 있는 기회를 제공합니다.",
+    "so_what": "주주총회는 일반적으로 기업의 경영 방향에 대한 중요한 사항을 논의합니다. 하지만 이 공시는 특별한 내용이 없으므로 큰 영향은 미치지 않을 것으로 보입니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 일정에 따라 의결권 행사 여부를 고려하세요.",
+    "now_what_not_holding": "미보유라면 특별한 행동이 필요하지 않습니다. 주주총회 결과를 지켜보세요.",
+    "risk": "특별한 리스크는 없음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": [
+      "주주총회",
+      "KOSDAQ",
+      "형식적"
+    ]
   },
   {
     "id": "20260309901441",
@@ -5889,7 +5923,37 @@
     "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "배당 공시로 긍정적 신호, 그러나 세부 조건 없음.",
+    "verdict_tone": "bullish",
+    "what": "현금 또는 현물로 주주에게 배당을 지급하기로 결정한 것입니다. 이는 주주에게 이익을 환원하는 긍정적인 신호입니다.",
+    "so_what": "배당 결정은 주주 환원 정책의 일환으로 긍정적이나, 세부 조건이 없으므로 신뢰도가 낮습니다. 배당 규모나 비율이 명시되지 않아 투자자에게 구체적인 정보가 부족합니다.",
+    "so_what_data": [
+      {
+        "label": "배당 결정",
+        "value": "현금ㆍ현물배당",
+        "assessment": "보통"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 배당금 지급 여부를 확인하고, 향후 배당 규모에 대한 추가 정보를 기다리세요.",
+    "now_what_not_holding": "미보유라면 배당 세부 조건이 발표될 때까지 관망하는 것이 좋습니다.",
+    "risk": "배당 세부 조건 미제공으로 불확실성 존재.",
+    "key_date": "2026-03-09",
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901432",
@@ -5908,7 +5972,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적이며 큰 영향 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 회사의 중요한 결정 사항을 논의하기 위한 회의입니다. 이 공시는 일반적으로 주가에 큰 영향을 미치지 않습니다.",
+    "so_what": "주주총회 소집은 일반적인 절차로, 특별한 내용이 없으면 주가에 미치는 영향은 제한적입니다. 과거 데이터에 따르면, 주주총회 관련 공시는 대체로 큰 변동성을 유발하지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집",
+        "value": "일반적",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 지속 보유해도 무방합니다.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자할 필요가 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001924",
@@ -5927,7 +6021,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용은 일반적이며 즉각적인 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 회사의 중요한 결정 사항을 논의하기 위한 회의를 알리는 공시입니다. 일반적으로 주주들에게 회의 일시와 장소, 안건 등을 안내합니다.",
+    "so_what": "주주총회는 주주들의 권리를 행사할 수 있는 기회를 제공하지만, 이 공시는 특별한 재무적 변화나 경영 리스크를 나타내지 않으므로 즉각적인 투자 판단에는 영향을 미치지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "해당없음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 일정에 따라 의결권 행사 여부를 고려하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 지켜보며 향후 투자 결정을 고려하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001922",
@@ -5946,7 +6060,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 추가 정보 필요.",
+    "verdict_tone": "neutral",
+    "what": "임원 및 주요 주주가 보유한 특정 증권에 대한 소유 상황을 보고하는 공시입니다. 이 정보는 주주 구조와 경영진의 지분 변동을 알 수 있게 해줍니다.",
+    "so_what": "현재로서는 공시의 구체적인 내용이 없기 때문에 투자 판단에 큰 영향을 미치지 않습니다. 하지만 임원 및 주요 주주의 지분 변동은 장기적으로 회사의 경영 안정성과 주가에 영향을 줄 수 있습니다.",
+    "so_what_data": [
+      {
+        "label": "임원 지분 변동",
+        "value": "정보 없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "주요주주 지분 변동",
+        "value": "정보 없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 이 공시의 구체적인 내용을 확인하고, 지분 변동이 있는지 살펴보세요.",
+    "now_what_not_holding": "미보유라면 이 공시가 주가에 미치는 영향을 판단하기 위해 추가 정보를 기다리는 것이 좋습니다.",
+    "risk": "임원 및 주요주주의 지분 변동이 불확실성으로 작용할 수 있음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001920",
@@ -5965,7 +6109,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적이며 큰 영향 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 회사의 정기적인 절차입니다. 이는 주주들이 회사의 중요한 사안에 대해 투표할 수 있는 기회를 제공합니다.",
+    "so_what": "주주총회 소집은 일반적인 기업 활동으로, 특별한 재무적 변화나 리스크를 동반하지 않습니다. 따라서 투자자에게 큰 영향을 미치지 않으며, 주의 깊게 볼 필요는 없습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "해당없음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치를 취할 필요는 없습니다. 주주총회 일정에 따라 참여 여부를 결정하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 지켜보세요. 향후 투자 결정에 참고할 수 있습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001918",
@@ -5984,7 +6148,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 대한 참고 서류입니다. 이는 주주가 의결권을 행사할 수 있도록 돕는 문서입니다.",
+    "so_what": "해당 공시는 구체적인 내용이 부족하여 투자 판단에 큰 영향을 미치지 않을 것으로 보입니다. 공시의 중요성이 낮아 즉각적인 반응이 필요하지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 현재로서는 특별한 조치를 취할 필요가 없습니다.",
+    "now_what_not_holding": "미보유라면 해당 공시로 인해 투자 결정을 내릴 필요는 없습니다.",
+    "risk": "공시 내용이 불명확하여 향후 정보 부족 리스크 존재.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001917",
@@ -6003,7 +6197,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각적 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 대한 참고 서류가 공시되었습니다. 이 공시는 주주가 의결권을 행사할 수 있도록 돕는 자료입니다.",
+    "so_what": "현재 공시의 내용이 구체적으로 어떤 영향을 미칠지 불명확합니다. 따라서 즉각적인 투자 결정에는 영향을 미치지 않을 것으로 보입니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 현재로서는 추가적인 정보가 필요하므로 관망하는 것이 좋습니다.",
+    "now_what_not_holding": "미보유라면 이 공시만으로는 투자 결정을 내리기 어려우므로 추가 정보를 기다리는 것이 바람직합니다.",
+    "risk": "공시 내용의 불명확성이 리스크.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001916",
@@ -6022,7 +6246,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 명확하지 않음, 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 대한 참고 서류입니다. 일반적으로 주주총회에서 의결권을 행사하기 위한 문서입니다.",
+    "so_what": "이 공시는 주주총회와 관련된 내용으로, 특별한 재무적 영향이 없으므로 즉각적인 행동은 필요하지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 계속 보유하세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 특별한 투자 기회를 제공하지 않으므로 투자하지 마세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001915",
@@ -6041,7 +6295,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용이 불명확하여 행동 불필요.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 대한 참고 서류입니다. 구체적인 내용이 없어 투자 결정에 큰 영향을 미치지 않습니다.",
+    "so_what": "해당 공시는 구체적인 수치나 영향력이 없으므로 무시해도 됩니다. 일반적으로 의결권 대리 행사 관련 공시는 주주총회와 관련이 있지만, 이 정보만으로는 투자 판단을 내리기 어렵습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 행동이 필요하지 않습니다. 공시 내용을 지속적으로 모니터링하세요.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자할 필요가 없습니다. 추후 공시 내용을 확인해 보세요.",
+    "risk": "의결권 행사 관련 불확실성.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901547",
@@ -6060,7 +6344,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 개최 공시, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 집중일 개최 사유를 신고한 공시입니다. 이는 주주총회 일정에 대한 정보로, 특별한 리스크나 기회가 없습니다.",
+    "so_what": "해당 공시는 특별한 재무적 영향이 없으며, 주주총회 일정에 대한 정보로 투자 판단에 큰 영향을 미치지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 개최일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 행동 필요 없음. 주주총회 결과를 확인하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 지켜보세요. 현재로서는 투자 판단에 큰 영향을 미치지 않습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "해당없음",
+    "tags": []
   },
   {
     "id": "20260309901536",
@@ -6072,14 +6386,48 @@
     "rcept_no": "20260309901536",
     "rcept_dt": "2026-03-09",
     "disclosure_type": "기타",
-    "importance": "low",
+    "importance": "high",
     "ai_summary": "DSC인베스트먼트 — 주식소각결정              ",
     "ai_impact": "긍정",
     "ai_impact_reason": "기타 유형 공시로 시장 긍정 영향 예상.",
-    "ai_score": 32,
+    "ai_score": 82,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "B",
+    "verdict": "주식 소각 결정, 주주환원 기대감 상승.",
+    "verdict_tone": "bullish",
+    "what": "주식 소각은 회사가 자사주를 매입하여 소각하는 것으로, 주주에게 긍정적인 신호입니다. 이는 주가 안정이나 주주환원을 목적으로 할 수 있습니다.",
+    "so_what": "주식 소각은 일반적으로 주가에 긍정적인 영향을 미치며, 주주환원 의지를 나타냅니다. 하지만 소각 확률이 48%이므로, 처분 가능성도 염두에 두어야 합니다.",
+    "so_what_data": [
+      {
+        "label": "소각 결정",
+        "value": "확정",
+        "assessment": "큰"
+      },
+      {
+        "label": "소각 확률",
+        "value": "48%",
+        "assessment": "보통"
+      },
+      {
+        "label": "주주환원 기대감",
+        "value": "상승",
+        "assessment": "큰"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 소각 결과를 주의 깊게 모니터링하고, 주가 반응을 살펴보세요. 긍정적인 반응이 있을 경우 추가 매수 고려할 수 있습니다.",
+    "now_what_not_holding": "미보유라면 소각 결정 이후 주가 움직임을 주의 깊게 살펴보세요. 긍정적인 반응이 나타난다면 매수 기회를 고려할 수 있습니다.",
+    "risk": "소각 후 처분 가능성으로 인한 주가 하락 리스크.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": [
+      "주식소각",
+      "주주환원",
+      "KOSDAQ"
+    ]
   },
   {
     "id": "20260309001911",
@@ -6098,7 +6446,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적 공시입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집공고는 주주들이 모여 회사의 주요 사안을 논의하는 자리입니다. 이는 기업의 일상적인 운영 절차 중 하나입니다.",
+    "so_what": "주주총회 소집은 일반적인 기업 운영의 일환으로 특별한 투자 신호가 아닙니다. 따라서, 이 공시는 투자 결정에 큰 영향을 미치지 않을 것으로 보입니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "해당없음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 보유를 지속하세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 투자 결정을 위한 정보가 아니므로 관망하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901531",
@@ -6117,7 +6485,32 @@
     "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "배당 결정, 긍정적 신호.",
+    "verdict_tone": "bullish",
+    "what": "배당은 주주에게 이익을 분배하는 것으로, 기업이 안정적인 수익을 내고 있다는 신호입니다. 현금 또는 현물로 배당이 이루어질 수 있습니다.",
+    "so_what": "배당 결정은 기업의 재무 건전성을 나타내며, 주가에 긍정적인 영향을 미칠 수 있습니다. 그러나 배당 규모에 대한 정보가 없어 구체적인 영향은 판단하기 어렵습니다.",
+    "so_what_data": [
+      {
+        "label": "배당 결정",
+        "value": "현금ㆍ현물배당",
+        "assessment": "보통"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 배당 수익을 기대할 수 있으므로 장기 보유를 고려하세요.",
+    "now_what_not_holding": "미보유라면 배당 결정이 긍정적 신호이므로, 진입을 고려해볼 수 있습니다.",
+    "risk": "배당 규모가 미비할 경우 주가에 미치는 영향이 제한적일 수 있음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "해당없음",
+    "percentile": "전체 N건 중 상위/하위 X%",
+    "tags": []
   },
   {
     "id": "20260309001910",
@@ -6129,14 +6522,44 @@
     "rcept_no": "20260309001910",
     "rcept_dt": "2026-03-09",
     "disclosure_type": "기타",
-    "importance": "low",
+    "importance": "medium",
     "ai_summary": "에코마케팅 — 주식등의대량보유상황보고서(일반)",
     "ai_impact": "중립",
     "ai_impact_reason": "기타 유형 공시로 시장 중립 영향 예상.",
-    "ai_score": 32,
+    "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "주식 대량 보유 보고서, 주목 필요.",
+    "verdict_tone": "neutral",
+    "what": "주식 대량 보유 상황 보고서는 특정 주체가 회사 주식을 많이 보유하고 있음을 알리는 공시입니다. 이는 주가에 영향을 줄 수 있는 정보입니다.",
+    "so_what": "대량 보유자는 보통 주가에 긍정적 또는 부정적 영향을 미칠 수 있습니다. 하지만 구체적인 수치는 없으므로 현재로서는 주목할 필요가 있습니다.",
+    "so_what_data": [
+      {
+        "label": "대량 보유자 수",
+        "value": "해당없음",
+        "assessment": "해당없음"
+      },
+      {
+        "label": "보유 비율",
+        "value": "해당없음",
+        "assessment": "해당없음"
+      },
+      {
+        "label": "주식 수",
+        "value": "해당없음",
+        "assessment": "해당없음"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 해당 대량 보유자의 의도와 시장 반응을 주의 깊게 살펴보세요.",
+    "now_what_not_holding": "미보유라면 대량 보유자에 대한 정보를 확인하고, 주가에 미칠 영향을 고려하여 투자 결정을 하세요.",
+    "risk": "대량 보유자의 매도 가능성.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "해당없음",
+    "tags": []
   },
   {
     "id": "20260309901349",
@@ -6155,7 +6578,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 회사의 정기적인 의사결정 과정입니다. 특별한 사유가 없으면 큰 영향은 없습니다.",
+    "so_what": "이번 주주총회 소집은 일반적인 절차로, 시장에 미치는 영향은 크지 않을 것으로 보입니다. 주주총회는 회사의 중요한 결정이 이루어지는 자리이지만, 특별한 안건이 없다면 주가에 큰 영향을 주지 않을 것입니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 안건이 없는 한 주주총회 결과를 기다리세요.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자 결정을 내릴 필요가 없습니다.",
+    "risk": "특별한 안건이 없으면 리스크는 낮음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901524",
@@ -6174,7 +6617,37 @@
     "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "배당 결정은 긍정적 신호이나, 구체적 수치 부족.",
+    "verdict_tone": "neutral",
+    "what": "세종텔레콤이 현금 또는 현물 배당을 결정했습니다. 배당은 주주에게 이익을 분배하는 것으로, 주가에 긍정적인 영향을 미칠 수 있습니다.",
+    "so_what": "배당 결정은 일반적으로 주가에 긍정적인 영향을 미치지만, 구체적인 배당금액이나 배당률이 없으므로 투자 판단에 필요한 정보가 부족합니다.",
+    "so_what_data": [
+      {
+        "label": "배당 결정",
+        "value": "현금/현물",
+        "assessment": "보통"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 배당금액 발표를 기다리며 추가 정보를 확인하세요.",
+    "now_what_not_holding": "미보유라면 배당금액이 발표된 후 투자 여부를 고려하세요.",
+    "risk": "배당금액 미제공으로 불확실성 존재.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001908",
@@ -6193,7 +6666,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "임원 및 주요주주가 보유한 특정 증권에 대한 보고서입니다. 이 정보는 주주구성 변화나 경영진의 주식 보유 현황을 알 수 있습니다.",
+    "so_what": "현재로서는 이 공시가 주가에 미치는 영향이 크지 않을 것으로 보입니다. 일반적으로 임원 및 주요주주의 보유 상황은 장기적인 신뢰도를 평가하는 데 도움이 됩니다.",
+    "so_what_data": [
+      {
+        "label": "임원 보유 비율",
+        "value": "해당없음",
+        "assessment": "해당없음"
+      },
+      {
+        "label": "주요주주 보유 비율",
+        "value": "해당없음",
+        "assessment": "해당없음"
+      },
+      {
+        "label": "공시 접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 추가적인 정보가 나올 때까지 기다리는 것이 좋습니다.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자 결정을 내릴 필요가 없습니다.",
+    "risk": "임원 및 주요주주 보유 변화가 주가에 미치는 영향.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001907",
@@ -6212,7 +6715,41 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 부재로 판단 불가.",
+    "verdict_tone": "neutral",
+    "what": "신탁계약 해지에 대한 보고서입니다. 구체적인 내용이 없어 투자 판단에 도움이 되지 않습니다.",
+    "so_what": "공시의 구체적인 내용이 없기 때문에 투자에 대한 영향력을 평가할 수 없습니다. 일반적으로 신탁계약 해지는 기업의 재무적 안정성에 영향을 미칠 수 있지만, 이 경우에는 추가 정보가 필요합니다.",
+    "so_what_data": [
+      {
+        "label": "신탁계약 해지",
+        "value": "정보 없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 추가 정보를 기다리며 관망하는 것이 좋습니다.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자 결정을 내리기 어렵습니다.",
+    "risk": "신탁계약 해지로 인한 불확실성.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "해당없음",
+    "tags": [
+      "신탁계약",
+      "해지",
+      "KOSDAQ"
+    ]
   },
   {
     "id": "20260309901528",
@@ -6231,7 +6768,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적 공시입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 회사의 중요한 의사결정을 위한 회의입니다. 이 공시는 주주들에게 회의 일정을 알리는 역할을 합니다.",
+    "so_what": "주주총회 소집은 일반적인 절차로, 특별한 의미가 없으며 주가에 큰 영향을 미치지 않을 가능성이 높습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 계속 보유하세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 특별한 투자 기회를 제공하지 않으므로 관심을 두지 마세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901514",
@@ -6250,7 +6807,47 @@
     "ai_score": 82,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "불명"
+    "sub_condition": "불명",
+    "grade": "B",
+    "verdict": "실적 쇼크 가능성 높음, 주의 필요.",
+    "verdict_tone": "bearish",
+    "what": "회사가 매출이나 손익 구조에 30% 이상의 변동이 발생했다고 공시했습니다. 이는 대규모 법인 기준으로도 상당한 변화입니다.",
+    "so_what": "실적 공시에서 쇼크가 46% 발생하는 경향이 있으며, 이는 서프라이즈보다 1.6배 많습니다. 나이스정보통신의 경우, 큰 변동이 예상되므로 주의가 필요합니다.",
+    "so_what_data": [
+      {
+        "label": "쇼크 발생 비율",
+        "value": "46%",
+        "assessment": "큰"
+      },
+      {
+        "label": "흑자전환 비율",
+        "value": "9.3%",
+        "assessment": "작음"
+      },
+      {
+        "label": "적자전환 비율",
+        "value": "14.9%",
+        "assessment": "작음"
+      },
+      {
+        "label": "영업익 0~10억 비율",
+        "value": "16%",
+        "assessment": "작음"
+      },
+      {
+        "label": "영업익 10~50억 비율",
+        "value": "38%",
+        "assessment": "보통"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 실적 발표 후 주가 변동을 주의 깊게 살펴보세요. 필요시 손절을 고려할 수 있습니다.",
+    "now_what_not_holding": "미보유라면 실적 발표 후 주가 반응을 지켜본 후 투자 결정을 내리는 것이 좋습니다. 불확실성이 크므로 신중하게 접근하세요.",
+    "risk": "실적 쇼크로 인한 주가 하락 위험.",
+    "key_date": null,
+    "size_assessment": "큼",
+    "percentile": "전체 21,545건 중 상위 46%",
+    "tags": []
   },
   {
     "id": "20260309001905",
@@ -6269,7 +6866,31 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "주식등의 대량 보유 상황 보고서는 대주주나 주요 주주가 보유 주식을 공개하는 문서입니다. 이 공시는 일반적으로 큰 영향을 미치지 않습니다.",
+    "so_what": "해당 공시는 대량 보유 상황을 보고하는 것으로, 일반적으로 주가에 큰 영향을 미치지 않습니다. 통계 데이터가 없어 구체적인 수치 분석은 불가능하지만, 대량 보유 보고서는 보통 시장의 관심을 덜 받습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치가 필요하지 않습니다. 주가에 큰 영향을 미치지 않을 것으로 예상됩니다.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자 결정을 내릴 필요가 없습니다. 다른 정보를 기다리는 것이 좋습니다.",
+    "risk": "주가에 미치는 영향이 미미할 가능성이 높음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": [
+      "대량보유",
+      "공시",
+      "형식적"
+    ]
   },
   {
     "id": "20260309001904",
@@ -6288,7 +6909,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집 공고, 무시.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 주주가 모여 회사의 중요한 결정을 논의하는 자리입니다. 이 공시는 일반적으로 투자자에게 큰 영향을 미치지 않습니다.",
+    "so_what": "주주총회 소집 공고는 일상적인 공시로, 특별한 변화나 이슈가 없으므로 투자 판단에 큰 영향을 주지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 결과를 확인하고, 특별한 변화가 없으면 계속 보유하세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 무시하고 다른 투자 기회를 찾아보세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 상위 0%",
+    "tags": []
   },
   {
     "id": "20260309001903",
@@ -6307,7 +6958,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "임원 및 주요 주주가 보유한 특정 증권에 대한 보고서입니다. 이 정보는 주주 구조와 경영진의 지분 변동을 알 수 있지만, 구체적인 내용이 없어 즉각적인 투자 판단에 도움이 되지 않습니다.",
+    "so_what": "현재 공시는 구체적인 내용이 부족하여 투자 판단에 큰 영향을 미치지 않습니다. 일반적으로 임원 및 주요 주주의 지분 변동은 장기적인 주가에 영향을 줄 수 있지만, 이 공시는 그 자체로는 특별한 신호를 주지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "kosdaq",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 추가적인 정보가 나올 때까지 기다리세요. 현재로서는 특별한 행동이 필요하지 않습니다.",
+    "now_what_not_holding": "미보유라면 이 공시는 무시해도 좋습니다. 다른 투자 기회를 모색하는 것이 좋습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001900",
@@ -6326,7 +7007,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 유형이 일반적이지 않음.",
+    "verdict_tone": "neutral",
+    "what": "이 공시는 의결권 대리 행사와 관련된 참고 서류입니다. 일반적으로 투자자에게 큰 영향을 미치지 않는 정보입니다.",
+    "so_what": "해당 공시는 특별한 재무적 영향이나 경영 변화가 없으므로, 투자자에게 큰 의미가 없습니다. KOSDAQ 시장에서의 일반적인 공시와 비교할 때, 이 공시는 주목할 필요가 없습니다.",
+    "so_what_data": [
+      {
+        "label": "의결권 대리 행사",
+        "value": "해당없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치를 취할 필요가 없습니다. 현재 주가에 큰 영향을 미치지 않을 것으로 보입니다.",
+    "now_what_not_holding": "미보유라면 이 공시로 인해 매수 결정을 내릴 필요는 없습니다. 주의 깊게 지켜보되, 현재로서는 무관심이 바람직합니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001899",
@@ -6345,7 +7056,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용이 불명확하여 즉각적인 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 관한 참고 서류로, 주주가 의결권을 위임하는 절차를 안내하는 문서입니다. 일반적으로 큰 영향을 미치지 않습니다.",
+    "so_what": "해당 공시는 일반적인 의결권 대리 행사에 관한 것으로, 특별한 내용이 없으므로 주가에 미치는 영향은 크지 않을 것으로 예상됩니다.",
+    "so_what_data": [
+      {
+        "label": "의결권 대리 행사",
+        "value": "해당없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 현재 상태를 유지하세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 특별한 투자 기회를 제공하지 않으므로 관망하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001898",
@@ -6357,14 +7098,44 @@
     "rcept_no": "20260309001898",
     "rcept_dt": "2026-03-09",
     "disclosure_type": "기타",
-    "importance": "low",
+    "importance": "high",
     "ai_summary": "지에프씨생명과학 — 주식등의대량보유상황보고서(약식)",
     "ai_impact": "중립",
     "ai_impact_reason": "기타 유형 공시로 시장 중립 영향 예상.",
-    "ai_score": 32,
+    "ai_score": 82,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "B",
+    "verdict": "즉시 행동 필요. 대량 보유 변동.",
+    "verdict_tone": "neutral",
+    "what": "대량 보유 상황 보고서는 주주가 보유 주식의 변동을 알리는 공시입니다. 이는 주식의 유통과 관련된 중요한 정보로, 주가에 영향을 미칠 수 있습니다.",
+    "so_what": "대량 보유 변동은 주가에 직접적인 영향을 미칠 수 있으며, 특히 주요 주주가 보유 비율을 늘리거나 줄이는 경우에는 시장의 반응이 클 수 있습니다. 이 공시는 KOSDAQ 시장에서 발생했으며, 대량 보유 변동이 주가에 미치는 영향은 주의 깊게 살펴봐야 합니다.",
+    "so_what_data": [
+      {
+        "label": "대량 보유 변동",
+        "value": "상세 수치 미제공",
+        "assessment": "해당없음"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "해당없음"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "해당없음"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 대량 보유 변동이 주가에 미치는 영향을 주의 깊게 모니터링해야 합니다. 필요시 추가 매도 또는 매수 결정을 고려하세요.",
+    "now_what_not_holding": "미보유라면 대량 보유 변동이 주가에 미칠 영향을 분석한 후, 투자 여부를 결정하세요. 특히 주요 주주가 보유 비율을 늘리는 경우 긍정적인 신호일 수 있습니다.",
+    "risk": "대량 보유 변동에 따른 주가 변동성.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901443",
@@ -6383,7 +7154,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적이며 큰 영향 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 주주들이 모여 회사의 중요한 사안을 논의하는 회의입니다. 이 공시는 주주총회를 열겠다는 결정이 내려졌음을 알리는 것입니다.",
+    "so_what": "주주총회 소집은 일반적인 기업 운영의 일환으로, 특별한 이슈가 없으면 큰 영향을 미치지 않습니다. 이 공시는 통상적인 절차로, 투자자에게 즉각적인 행동을 요구하지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 결과를 확인하고, 특별한 사항이 없다면 계속 보유하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 지켜보고, 특별한 변화가 없으면 투자할 필요는 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001893",
@@ -6402,7 +7203,41 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적이며 특별한 의미 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 회사의 정기적인 의사결정 과정입니다. 이는 주주들이 모여 중요한 사항을 논의하고 결정하는 자리입니다.",
+    "so_what": "주주총회 소집은 일반적인 절차로, 특별한 변화나 리스크를 나타내지 않습니다. 따라서 투자 결정에 큰 영향을 미치지 않을 것으로 보입니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "일반적 절차",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 계속 보유해도 무방합니다.",
+    "now_what_not_holding": "미보유라면 이 공시는 특별한 투자 기회를 제공하지 않으므로, 추가적인 정보가 필요합니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "해당없음",
+    "tags": [
+      "주주총회",
+      "KOSDAQ",
+      "형식적"
+    ]
   },
   {
     "id": "20260309901265",
@@ -6421,7 +7256,37 @@
     "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "배당 결정, 긍정적 신호.",
+    "verdict_tone": "bullish",
+    "what": "회사가 주주에게 현금이나 현물로 배당을 지급하기로 결정했습니다. 이는 주주 환원 정책의 일환으로 긍정적인 신호로 해석될 수 있습니다.",
+    "so_what": "배당은 주주에게 직접적인 이익을 제공하므로 긍정적으로 작용할 수 있습니다. 그러나 배당 규모에 대한 정보가 없어 구체적인 영향력은 판단하기 어렵습니다.",
+    "so_what_data": [
+      {
+        "label": "배당 결정",
+        "value": "현금 및 현물 배당",
+        "assessment": "보통"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "보통"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 배당 수익을 기대할 수 있으므로 장기 보유를 고려하세요.",
+    "now_what_not_holding": "미보유라면 배당 결정이 긍정적 신호이므로 관심을 가지고 주가 움직임을 지켜보세요.",
+    "risk": "배당 규모에 대한 정보 부족으로 불확실성 존재.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901415",
@@ -6440,7 +7305,37 @@
     "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "배당 공시, 추가 정보 필요.",
+    "verdict_tone": "neutral",
+    "what": "회사가 주주에게 배당금을 지급하기로 결정했습니다. 배당은 주주에게 이익을 분배하는 방법입니다.",
+    "so_what": "배당 결정은 주주에게 긍정적인 신호일 수 있지만, 구체적인 배당금 규모와 지급 방식이 없으므로 판단이 어렵습니다. 배당에 대한 통계 데이터는 없지만, 일반적으로 배당 공시는 주가에 긍정적인 영향을 미칠 수 있습니다.",
+    "so_what_data": [
+      {
+        "label": "배당 결정",
+        "value": "현금ㆍ현물배당",
+        "assessment": "보통"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 배당금 규모와 지급 방식에 대한 추가 정보를 기다리세요.",
+    "now_what_not_holding": "미보유라면 배당금 규모가 발표된 후 투자 여부를 결정하세요.",
+    "risk": "배당금 규모와 지급 방식이 불확실함.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001889",
@@ -6459,7 +7354,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 주주들이 모여 회사의 중요한 결정을 논의하는 자리입니다. 이는 일반적인 절차로 특별한 의미가 없습니다.",
+    "so_what": "주주총회 소집은 일반적인 기업 활동으로, 특별한 리스크나 기회를 제공하지 않습니다. 따라서 투자 결정에 큰 영향을 미치지 않을 것입니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "해당없음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치를 취할 필요가 없습니다. 주주총회 내용을 확인하고 필요 시 참여하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 지켜보세요. 특별한 변화가 없다면 투자 결정을 고려할 필요가 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901474",
@@ -6478,7 +7393,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 회사의 중요한 결정을 논의하기 위한 회의입니다. 일반적으로 투자자들에게 큰 영향을 미치지 않습니다.",
+    "so_what": "이번 공시는 특별한 내용이 없으며, 주주총회는 일반적으로 연례적으로 열리는 회의입니다. 따라서 투자자에게 즉각적인 영향을 미치지 않을 것으로 보입니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 결과를 확인하고, 특별한 변화가 없으면 보유를 지속하세요.",
+    "now_what_not_holding": "미보유라면 이번 공시는 큰 변화가 없으므로, 추가적인 정보가 필요할 때까지 관망하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001888",
@@ -6490,14 +7435,44 @@
     "rcept_no": "20260309001888",
     "rcept_dt": "2026-03-09",
     "disclosure_type": "기타",
-    "importance": "low",
+    "importance": "medium",
     "ai_summary": "대한광통신 — 주식등의대량보유상황보고서(일반)",
     "ai_impact": "중립",
     "ai_impact_reason": "기타 유형 공시로 시장 중립 영향 예상.",
-    "ai_score": 32,
+    "ai_score": 58,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "C",
+    "verdict": "주식 대량보유 보고서 제출, 주목 필요.",
+    "verdict_tone": "neutral",
+    "what": "주식 대량보유상황보고서는 특정 주체가 주식을 대량으로 보유하고 있음을 알리는 공시입니다. 이는 주가에 영향을 미칠 수 있는 중요한 정보입니다.",
+    "so_what": "대량 보유자는 주가에 긍정적 또는 부정적 영향을 미칠 수 있습니다. 그러나 해당 통계가 없으므로 구체적인 영향력은 판단하기 어렵습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 대량 보유자의 주식 보유 변화에 따라 주가 변동을 주의 깊게 살펴보세요.",
+    "now_what_not_holding": "미보유라면 대량 보유자의 주식 보유 현황을 확인하고, 주가에 미칠 영향을 고려해 투자 결정을 내리세요.",
+    "risk": "대량 보유자의 주식 처분 가능성.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001887",
@@ -6516,7 +7491,41 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집 공고는 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 회사가 주주들에게 회의를 알리는 것입니다. 이 공시는 주주들이 중요한 결정을 내릴 수 있도록 정보를 제공합니다.",
+    "so_what": "주주총회 소집은 일반적인 기업 활동으로, 특별한 변화나 리스크를 나타내지 않습니다. 따라서 투자 결정에 큰 영향을 미치지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 결과를 확인하고, 주요 결정 사항에 따라 추가 행동을 고려하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 지켜보고, 향후 투자 기회를 모색하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": [
+      "주주총회",
+      "공시",
+      "KOSDAQ"
+    ]
   },
   {
     "id": "20260309001886",
@@ -6535,7 +7544,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집 공고로 무시 가능.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 주주가 모여 회사의 중요한 결정을 논의하는 자리입니다. 이 공시는 일반적으로 주주들에게 사전 통지를 하는 것입니다.",
+    "so_what": "주주총회 소집 공고는 기업 운영에 있어 중요한 사항이지만, 일반적으로 투자자에게 즉각적인 영향을 미치지 않습니다. 따라서 이 공시는 무시해도 무방합니다.",
+    "so_what_data": [
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 추가적인 정보가 필요할 때까지 기다리세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 투자 결정을 위한 정보가 아니므로 주의할 필요 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901461",
@@ -6554,7 +7593,47 @@
     "ai_score": 82,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "불명"
+    "sub_condition": "불명",
+    "grade": "B",
+    "verdict": "실적 변동 30%, 쇼크 가능성 높음.",
+    "verdict_tone": "bearish",
+    "what": "알티캐스트의 매출이나 손익이 30% 이상 변동했습니다. 이는 회사의 재무 상태에 큰 영향을 미칠 수 있습니다.",
+    "so_what": "실적 공시에서 쇼크(-10%-)가 46%로 나타나고 있어, 알티캐스트의 실적 변동이 부정적일 가능성이 높습니다. 특히, 영업익이 0~10억 원인 경우가 16%로 간신히 흑자 상태에 있는 기업이 많습니다.",
+    "so_what_data": [
+      {
+        "label": "실적 변동",
+        "value": "30%",
+        "assessment": "큰"
+      },
+      {
+        "label": "쇼크 발생 비율",
+        "value": "46%",
+        "assessment": "큰"
+      },
+      {
+        "label": "간신히 흑자 기업 비율",
+        "value": "16%",
+        "assessment": "작음"
+      },
+      {
+        "label": "흑자전환 비율",
+        "value": "9.3%",
+        "assessment": "작음"
+      },
+      {
+        "label": "적자전환 비율",
+        "value": "14.9%",
+        "assessment": "작음"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 실적 발표 후 주가 반응을 주의 깊게 살펴보세요. 부정적 반응이 있을 경우 손절을 고려해야 합니다.",
+    "now_what_not_holding": "미보유라면 알티캐스트의 실적 발표 후 주가 흐름을 지켜보세요. 부정적인 실적이 예상된다면 매수는 피하는 것이 좋습니다.",
+    "risk": "실적 쇼크로 인한 주가 하락 위험.",
+    "key_date": null,
+    "size_assessment": "큼",
+    "percentile": "전체 21,545건 중 상위 46%",
+    "tags": []
   },
   {
     "id": "20260309001884",
@@ -6573,7 +7652,41 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 회사가 주주들에게 회의를 알리는 것입니다. 이는 일반적인 절차로, 특별한 의미가 없습니다.",
+    "so_what": "주주총회 소집은 일반적인 기업 운영의 일환으로, 특별한 재무적 영향이 없습니다. 따라서 주가에 미치는 영향은 크지 않을 것으로 예상됩니다.",
+    "so_what_data": [
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치가 필요하지 않습니다. 주주총회 결과를 확인하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과에 따라 투자 결정을 고려할 수 있습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": [
+      "주주총회",
+      "공시",
+      "KOSDAQ"
+    ]
   },
   {
     "id": "20260309901356",
@@ -6592,7 +7705,31 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 주주 권리 행사 기회.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집결의는 주주들이 모여 회사의 중요한 사항을 결정하는 회의입니다. 이 공시는 주주들에게 중요한 정보이지만, 일반적으로 큰 영향을 미치지 않습니다.",
+    "so_what": "주주총회 소집은 주주들에게 의사결정 참여 기회를 제공하지만, 시장에 미치는 영향은 제한적입니다. 해당 공시는 특별한 사항이 없으므로 큰 변화는 예상되지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 주주총회 일정에 따라 의결권 행사 여부를 검토하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 결과를 주시하며 투자 결정을 고려하세요.",
+    "risk": "주주총회에서의 결정이 향후 경영에 영향을 미칠 수 있음.",
+    "key_date": "2026-03-09",
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": [
+      "주주총회",
+      "소집결의",
+      "레뷰코퍼레이션"
+    ]
   },
   {
     "id": "20260309001881",
@@ -6611,7 +7748,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "임원 및 주요 주주가 소유한 특정 증권에 대한 보고서입니다. 이 공시는 일반적으로 주주 구조나 주요 주주 변동을 알리는 내용입니다.",
+    "so_what": "이 공시는 특정한 주주 변동이 없음을 나타내므로 큰 의미가 없습니다. 일반적으로 임원 및 주요 주주의 소유 변동은 기업의 경영 안정성에 영향을 미칠 수 있지만, 이 경우 특별한 변화가 없으므로 주의할 필요는 없습니다.",
+    "so_what_data": [
+      {
+        "label": "임원 보유 비율",
+        "value": "해당없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "주요주주 보유 비율",
+        "value": "해당없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "소유 변동 여부",
+        "value": "해당없음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 계속 보유해도 무방합니다.",
+    "now_what_not_holding": "미보유라면 이 공시는 특별한 투자 신호가 아니므로 매수할 필요는 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위 0%",
+    "tags": []
   },
   {
     "id": "20260309901469",
@@ -6630,7 +7797,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적이지만 주목할 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 회사의 정기적인 의사결정 과정입니다. 특별한 내용이 없다면 큰 의미는 없습니다.",
+    "so_what": "주주총회 소집은 일반적인 절차로, 특별한 사항이 없다면 주가에 큰 영향을 미치지 않을 것으로 예상됩니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 계속 보유해도 무방합니다.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자할 필요가 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001877",
@@ -6649,7 +7836,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용이 불명확하여 즉각적인 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 대한 참고 서류입니다. 이는 주주가 의결권을 위임할 때 사용하는 문서입니다.",
+    "so_what": "현재 공시는 의결권 행사와 관련된 내용으로, 투자 결정에 직접적인 영향을 미치지 않습니다. 공시의 구체적인 내용이 없으므로 주의가 필요합니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 행동이 필요하지 않습니다. 공시 내용을 주의 깊게 지켜보세요.",
+    "now_what_not_holding": "미보유라면 현재로서는 투자 결정을 내릴 필요가 없습니다. 공시 내용을 확인 후 판단하세요.",
+    "risk": "공시 내용의 불확실성.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001875",
@@ -6668,7 +7885,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "임원 및 주요 주주의 특정 증권 소유 상황을 보고하는 문서입니다. 일반적으로 기업의 내부자 거래와 관련된 정보를 포함합니다.",
+    "so_what": "해당 공시는 일반적으로 중요한 정보가 아니며, 투자 결정에 큰 영향을 미치지 않을 가능성이 높습니다. 특정 증권 소유 상황이 공개되더라도, 그 자체로는 주가에 큰 영향을 미치지 않는 경우가 많습니다.",
+    "so_what_data": [
+      {
+        "label": "임원 주식 보유 비율",
+        "value": "해당없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "주요주주 주식 보유 비율",
+        "value": "해당없음",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 내용의 중요도",
+        "value": "낮음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치를 취할 필요는 없습니다. 주가에 미치는 영향이 적을 것으로 예상됩니다.",
+    "now_what_not_holding": "미보유라면 이 공시는 무시해도 좋습니다. 다른 중요한 정보를 기다리는 것이 좋습니다.",
+    "risk": "내부자 거래 관련 리스크 존재.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": []
   },
   {
     "id": "20260309001872",
@@ -6687,7 +7934,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "무시할 공시입니다.",
+    "verdict_tone": "neutral",
+    "what": "주식등의 대량 보유 상황 보고서는 주주가 보유한 주식 수를 보고하는 문서입니다. 일반적으로 주식 보유 변동이 큰 경우에만 중요합니다.",
+    "so_what": "이번 공시는 특별한 내용이 없고, 대량 보유 변동이 없음을 의미할 수 있습니다. 따라서 투자 결정에 큰 영향을 미치지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 계속 보유해도 무방합니다.",
+    "now_what_not_holding": "미보유라면 이 공시는 투자 결정을 위한 정보가 아니므로 매수할 필요가 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위 0%",
+    "tags": []
   },
   {
     "id": "20260309001871",
@@ -6706,7 +7983,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 주주들이 모여 회사의 중요한 의사결정을 하는 자리입니다. 이는 일반적인 절차로 특별한 의미가 없습니다.",
+    "so_what": "주주총회 소집은 회사의 정상적인 운영 절차로, 투자자에게 큰 영향을 미치지 않습니다. 통계적으로 주주총회 소집 공고는 대다수 기업에서 발생하는 일상적인 이벤트입니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "일상적",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 현재 주식 보유를 유지하세요.",
+    "now_what_not_holding": "미보유라면 주주총회 소집 공고는 투자 결정을 위한 중요한 정보가 아니므로 관망하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001869",
@@ -6725,7 +8022,27 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집 공고로 무시할 만한 공시입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공고는 주주들이 모여 회사의 주요 사항을 논의하는 회의입니다. 이 공시는 일반적으로 투자자에게 큰 영향을 미치지 않습니다.",
+    "so_what": "이 공시는 특별한 내용이 없으므로 투자 결정에 큰 영향을 미치지 않습니다. 주주총회는 정기적으로 열리며, 일반적인 절차로 간주됩니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집 공고",
+        "value": "해당없음",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 행동이 필요하지 않습니다. 주주총회 결과를 지켜보세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 무시해도 좋습니다. 다른 투자 기회를 찾아보세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001866",
@@ -6744,7 +8061,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사에 대한 참고 서류가 제출되었습니다. 이는 주주가 의결권을 행사할 수 있도록 돕는 문서입니다.",
+    "so_what": "현재 공시 내용이 구체적이지 않아 투자 결정에 큰 영향을 미치지 않습니다. 의결권 행사와 관련된 정보는 주주에게 중요할 수 있지만, 일반 투자자에게는 즉각적인 행동을 요구하지 않습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 현재로서는 추가적인 정보가 필요하므로 지켜보세요.",
+    "now_what_not_holding": "미보유라면 현재 공시는 투자 결정을 위한 정보가 부족하므로 무시하세요.",
+    "risk": "의결권 행사 관련 정보 부족.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901229",
@@ -6763,7 +8110,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집은 일반적입니다.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집은 회사가 주주들에게 중요한 결정을 위해 모임을 알리는 것입니다. 이는 일반적인 절차로 특별한 의미가 없습니다.",
+    "so_what": "주주총회 소집 공시는 일반적으로 기업의 일상적인 운영에 해당하며, 특별한 변화나 리스크를 시사하지 않습니다. 따라서 주의 깊게 볼 필요는 없습니다.",
+    "so_what_data": [
+      {
+        "label": "주주총회 소집",
+        "value": "일상적",
+        "assessment": "형식적"
+      },
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 현재 상태를 유지하세요.",
+    "now_what_not_holding": "미보유라면 이 공시는 특별한 투자 신호가 아니므로 관망하세요.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "해당없음",
+    "percentile": "전체 0건 중 상위/하위 0%",
+    "tags": []
   },
   {
     "id": "20260309901387",
@@ -6782,7 +8159,41 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "주주총회 소집 공시, 특별한 의미 없음.",
+    "verdict_tone": "neutral",
+    "what": "주주총회 소집 공시는 회사의 중요한 결정 사항을 논의하기 위해 주주를 소집하는 것입니다. 그러나 이번 공시는 특별한 내용이 없어 주의할 필요가 없습니다.",
+    "so_what": "주주총회 소집은 일반적으로 기업 운영에 있어 필수적이나, 특별한 안건이 없으면 시장에 큰 영향을 미치지 않습니다. 따라서 이번 공시는 무시해도 무방합니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "KOSDAQ",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 변화가 없으므로 현재 보유를 유지하세요.",
+    "now_what_not_holding": "미보유라면 이번 공시는 특별한 투자 기회를 제공하지 않으므로 매수할 필요가 없습니다.",
+    "risk": "특별한 리스크 없음.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "해당없음",
+    "tags": [
+      "주주총회",
+      "KOSDAQ",
+      "형식적"
+    ]
   },
   {
     "id": "20260309001864",
@@ -6801,7 +8212,37 @@
     "ai_score": 32,
     "source": "dart",
     "created_at": "2026-03-09T09:00:00+07:00",
-    "sub_condition": "해당없음"
+    "sub_condition": "해당없음",
+    "grade": "D",
+    "verdict": "공시 내용 불명확, 즉각적인 행동 필요 없음.",
+    "verdict_tone": "neutral",
+    "what": "의결권 대리 행사와 관련된 서류가 제출되었습니다. 이는 주주가 의결권을 행사할 수 있도록 돕는 문서입니다.",
+    "so_what": "현재 공시는 특별한 재무적 영향이나 경영적 변화가 없으며, 주주에게 의결권 행사에 대한 정보를 제공하는 목적입니다. 따라서 즉각적인 투자 결정을 내릴 필요는 없습니다.",
+    "so_what_data": [
+      {
+        "label": "접수일",
+        "value": "2026-03-09",
+        "assessment": "형식적"
+      },
+      {
+        "label": "공시 유형",
+        "value": "기타",
+        "assessment": "형식적"
+      },
+      {
+        "label": "시장",
+        "value": "kosdaq",
+        "assessment": "형식적"
+      }
+    ],
+    "historical": null,
+    "now_what_holding": "보유 중이라면 특별한 조치를 취할 필요는 없습니다. 공시 내용을 주의 깊게 살펴보세요.",
+    "now_what_not_holding": "미보유라면 현재 공시는 투자 결정을 내릴 만한 정보가 부족합니다. 다른 정보를 기다리는 것이 좋습니다.",
+    "risk": "의결권 행사와 관련된 불확실성이 존재할 수 있습니다.",
+    "key_date": null,
+    "size_assessment": "형식적",
+    "percentile": "전체 0건 중 하위 0%",
+    "tags": []
   },
   {
     "id": "20260309001862",
