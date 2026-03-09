@@ -9,12 +9,37 @@ from youtube_transcript_api.formatters import TextFormatter
 import yt_dlp
 from pipeline_config import PipelineConfig
 
+# Webshare ProxyConfig — youtube_transcript_api 0.7+ 지원
+try:
+    from youtube_transcript_api.proxies import WebshareProxyConfig
+    _WEBSHARE_PROXY_AVAILABLE = True
+except ImportError:
+    _WEBSHARE_PROXY_AVAILABLE = False
+
 class SubtitleExtractor:
     def __init__(self):
         self.config = PipelineConfig()
         self.proxy_config = self.config.get_proxy_config()
         self.formatter = TextFormatter()
-        
+
+        # Webshare 자격증명 (.env.local 우선, 없으면 하드코딩 fallback)
+        self._webshare_user = os.getenv('WEBSHARE_USER', 'pvljrgkf')
+        self._webshare_pass = os.getenv('WEBSHARE_PASS', '0e0eqk9rbwzq')
+
+        # Webshare ProxyConfig API 초기화
+        self._webshare_api = None
+        if _WEBSHARE_PROXY_AVAILABLE and self._webshare_user and self._webshare_pass:
+            try:
+                self._webshare_api = YouTubeTranscriptApi(
+                    proxy_config=WebshareProxyConfig(
+                        proxy_username=self._webshare_user,
+                        proxy_password=self._webshare_pass,
+                    )
+                )
+                print("[INFO] Webshare ProxyConfig 초기화 완료")
+            except Exception as e:
+                print(f"[WARNING] Webshare ProxyConfig 초기화 실패: {e}")
+
         # yt-dlp 설정
         self.ydl_opts = {
             'writesubtitles': True,
@@ -93,6 +118,38 @@ class SubtitleExtractor:
             if 'HTTPS_PROXY' in os.environ:
                 del os.environ['HTTPS_PROXY']
     
+    def extract_with_webshare(self, video_id: str) -> Optional[str]:
+        """
+        Webshare ProxyConfig 방식으로 자막 추출 (방법 0 — 가장 먼저 시도).
+        youtube_transcript_api 0.7+ WebshareProxyConfig 사용.
+        """
+        if not self._webshare_api:
+            return None
+        try:
+            transcript = self._webshare_api.fetch(video_id, languages=['ko', 'en'])
+            segments = []
+            for s in transcript:
+                start_sec = getattr(s, 'start', None) or (s.get('start') if isinstance(s, dict) else None)
+                text = getattr(s, 'text', None) or (s.get('text') if isinstance(s, dict) else str(s))
+                if not text:
+                    continue
+                if start_sec is not None:
+                    h = int(start_sec // 3600)
+                    m = int((start_sec % 3600) // 60)
+                    sec = int(start_sec % 60)
+                    ts = f"{h:02d}:{m:02d}:{sec:02d}" if h > 0 else f"{m:02d}:{sec:02d}"
+                    segments.append(f"[{ts}] {text.strip()}")
+                else:
+                    segments.append(text.strip())
+            if not segments:
+                return None
+            result = '\n'.join(segments[:4000])
+            print(f"[OK] Webshare 자막 추출 성공: {len(result)}자 ({len(segments)}세그먼트)")
+            return result
+        except Exception as e:
+            print(f"[INFO] Webshare 자막 실패 ({video_id}): {type(e).__name__}: {str(e)[:100]}")
+            return None
+
     def extract_with_yt_dlp(self, url: str) -> Optional[str]:
         """yt-dlp로 자막 추출"""
         try:
@@ -239,7 +296,12 @@ class SubtitleExtractor:
 
         for attempt in range(retries):
             try:
-                # 방법 1: youtube_transcript_api 시도
+                # 방법 0: Webshare ProxyConfig (가장 먼저 시도 — 성공률 최고)
+                subtitle = self.extract_with_webshare(video_id)
+                if subtitle:
+                    return subtitle
+
+                # 방법 1: youtube_transcript_api (프록시 없이)
                 subtitle = self.extract_with_youtube_transcript_api(video_id)
                 if subtitle:
                     return subtitle
