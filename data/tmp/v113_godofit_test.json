@@ -1,0 +1,189 @@
+{
+  "test_date": "2026-03-09T08:50:21.481039",
+  "model": "claude-sonnet-4-6",
+  "prompt_version": "v11.3",
+  "channel": "https://www.youtube.com/@GODofIT",
+  "total_videos": 16,
+  "total_signals": 0,
+  "total_ts_exceed": 0,
+  "total_guest": 0,
+  "total_etf": 0,
+  "results": [
+    {
+      "video_id": "0pS0CTDgVmU",
+      "video_url": "https://www.youtube.com/watch?v=0pS0CTDgVmU",
+      "title": "wsaj_0pS0CTDgVmU_[기업해부학] Amazon 아마존 3Q 2023 어닝콜! 클라우드 매출 하회했는데 주가는 왜 올랐을까？.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "57NbdmLvy6I",
+      "video_url": "https://www.youtube.com/watch?v=57NbdmLvy6I",
+      "title": "wsaj_57NbdmLvy6I_[기업해부학] 비만 치료제로 유럽 시총 1위？!  헬스케어 시장을 이끄는 노보 노디스크 & 일라이 릴리 파헤치기!.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "5fhbkQ2Qidc",
+      "video_url": "https://www.youtube.com/watch?v=5fhbkQ2Qidc",
+      "title": "wsaj_5fhbkQ2Qidc_[기업해부학] 가치평가의 대가가 엔비디아 주식을 전부 팔지 않은 이유？.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "7x3HE_uXttI",
+      "video_url": "https://www.youtube.com/watch?v=7x3HE_uXttI",
+      "title": "wsaj_7x3HE_uXttI_[기업해부학] AI 투자자 시청 필수! AI 수혜주 파헤치기.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "AQ2z2ZCBFa4",
+      "video_url": "https://www.youtube.com/watch?v=AQ2z2ZCBFa4",
+      "title": "wsaj_AQ2z2ZCBFa4_[기업해부학] Nvidia, AI⧸메타버스⧸자율주행의 완벽 콜라보？ 혹은 내리막 직전의 롤러코스터？.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "B17xc8zl3Z4",
+      "video_url": "https://www.youtube.com/watch?v=B17xc8zl3Z4",
+      "title": "[기업해부학] Meta 메타 3Q 2023 어닝콜 분석! 메타버스 버리고 AI버스 탑승하자!",
+      "duration_seconds": 1311,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "EbfuT0zGGjU",
+      "video_url": "https://www.youtube.com/watch?v=EbfuT0zGGjU",
+      "title": "[기업해부학] IPO 공모주 투자, 놓치기 쉬운 3가지 핵심 포인트",
+      "duration_seconds": 1564,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "OWkw56VyeUM",
+      "video_url": "https://www.youtube.com/watch?v=OWkw56VyeUM",
+      "title": "wsaj_OWkw56VyeUM_[기업해부학] 엔비디아 고점 논란, 가치평가의 대가가 엔비디아 보유주식을 판 이유.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "PzpU0H8iqQs",
+      "video_url": "https://www.youtube.com/watch?v=PzpU0H8iqQs",
+      "title": "[기업해부학] 주가 대폭락 찰스 슈왑, 실리콘밸리뱅크 2.0? 저가매수 찬스? 1부",
+      "duration_seconds": 1837,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "_Ex0vR_1Ekg",
+      "video_url": "https://www.youtube.com/watch?v=_Ex0vR_1Ekg",
+      "title": "wsaj__Ex0vR_1Ekg_[기업해부학] 테슬라 목표가 xxx만원.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "dPIjOdREB80",
+      "video_url": "https://www.youtube.com/watch?v=dPIjOdREB80",
+      "title": "[기업해부학] 주가 대폭락 찰스 슈왑, 실리콘밸리뱅크 2.0? 저가매수 찬스? 2부",
+      "duration_seconds": 1144,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "l9suWlP7U68",
+      "video_url": "https://www.youtube.com/watch?v=l9suWlP7U68",
+      "title": "wsaj_l9suWlP7U68_[기업해부학] “테슬라 = AI 대장주” 가능할까？.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "liP35sqr9aU",
+      "video_url": "https://www.youtube.com/watch?v=liP35sqr9aU",
+      "title": "wsaj_liP35sqr9aU_[기업해부학] 엔비디아의 충격적인 실적 서프라이즈, 오는 3분기, 그 이후에도 이어질까？.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "oDfnMrrRfl8",
+      "video_url": "https://www.youtube.com/watch?v=oDfnMrrRfl8",
+      "title": "wsaj_oDfnMrrRfl8_[기업해부학] Nvidia 밸류에이션, 이대로 괜찮은 걸까？.ko.vtt",
+      "duration_seconds": null,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "sade4GuojTg",
+      "video_url": "https://www.youtube.com/watch?v=sade4GuojTg",
+      "title": "[기업해부학] IPO 대박! Arm 투자를 위한 필수 체크포인트 총 정리!",
+      "duration_seconds": 2311,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    },
+    {
+      "video_id": "tUv4-8BihrM",
+      "video_url": "https://www.youtube.com/watch?v=tUv4-8BihrM",
+      "title": "[기업해부학] AI 관련주, 더 오를까? 골드만삭스 리포트 해부!",
+      "duration_seconds": 1609,
+      "signals": [],
+      "ts_exceed_count": 0,
+      "guest_count": 0,
+      "etf_count": 0,
+      "error": "API 응답 없음"
+    }
+  ]
+}
