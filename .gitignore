@@ -37,3 +37,11 @@ next-env.d.ts
 
 secret_replace.txt
 fix_secrets.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Subtitle working files
+*.vtt
