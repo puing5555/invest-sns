@@ -272,6 +272,11 @@ URL: {video_data['url']}
             print(f"[ERROR] 데이터베이스 형식 변환 오류: {e}")
             return []
     
+    def analyze_videos_batch(self, channel_url: str, videos_with_subtitles: List[Dict[str, Any]],
+                           delay_seconds: int = 3) -> Dict[str, Any]:
+        """auto_pipeline.py 호환 alias"""
+        return self.batch_analyze_videos(channel_url, videos_with_subtitles, delay_seconds)
+
     def batch_analyze_videos(self, channel_url: str, videos_with_subtitles: List[Dict[str, Any]],
                            delay_seconds: int = 3) -> Dict[str, Any]:
         """

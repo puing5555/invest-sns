@@ -35,6 +35,17 @@ import argparse
 from datetime import datetime
 from collections import defaultdict
 
+# pipeline_config 접근 (모델 확인용)
+def _get_pipeline_model():
+    try:
+        _scripts = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if _scripts not in sys.path:
+            sys.path.insert(0, _scripts)
+        from pipeline_config import PipelineConfig
+        return PipelineConfig.ANTHROPIC_MODEL
+    except Exception:
+        return None
+
 # .env.local 로드
 def load_env():
     env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env.local')
@@ -288,6 +299,90 @@ def check_signal_count_per_video(signals):
     avg = len(signals) / max(len(per_video), 1)
     return avg, dict(per_video)
 
+
+# ── 신규 체크 함수들 ────────────────────────────────────────────────────────
+
+def check_pipeline_model():
+    """
+    체크 NEW-A: 파이프라인 모델이 Haiku인지 확인.
+    Haiku 사용 중이면 치명적 오류 (시그널 품질 저하).
+    반환: (is_ok: bool, model: str)
+    """
+    model = _get_pipeline_model()
+    if model is None:
+        return None, 'unknown'
+    bad_models = ['haiku', 'claude-3-haiku', 'claude-3-haiku-20240307']
+    is_bad = any(b in model.lower() for b in bad_models)
+    return not is_bad, model
+
+
+def check_signal_type_empty(signals):
+    """
+    체크 NEW-B: signal_type 빈값("") 또는 None 비율 → 1건이라도 있으면 치명적.
+    반환: (empty_list: list)
+    """
+    empty = []
+    for s in signals:
+        sig = s.get('signal') or s.get('signal_type') or ''
+        if not sig or not sig.strip():
+            empty.append({
+                'video_id': s.get('video_id', ''),
+                'stock': s.get('stock', ''),
+                'signal': repr(sig)
+            })
+    return empty
+
+
+def check_invalid_signal_type(signals):
+    """
+    체크 NEW-B2: 유효하지 않은 signal_type (영문, 경계 등).
+    반환: (invalid_list: list)
+    """
+    invalid = []
+    for s in signals:
+        sig = s.get('signal') or s.get('signal_type') or ''
+        if sig and sig not in VALID_SIGNALS:
+            invalid.append({
+                'video_id': s.get('video_id', ''),
+                'stock': s.get('stock', ''),
+                'signal': sig
+            })
+    return invalid
+
+
+def check_subtitle_has_timestamps(signals):
+    """
+    체크 NEW-C: 시그널에 포함된 key_quote에 타임코드 '[HH:MM:SS]' 형식이 있는지 확인.
+    자막이 타임코드를 포함하면 key_quote에도 시간 정보가 섞여 있거나,
+    timestamp 필드가 null이 아닌 구체적 값을 가져야 함.
+    proxy 체크: timestamp null 비율 + 분포로 VTT 타임코드 포함 여부 추정.
+    반환: (is_ok: bool, null_ts_ratio: float, detail: str)
+    """
+    if not signals:
+        return True, 0.0, '시그널 없음'
+    
+    ts_null_count = 0
+    ts_values = []
+    for s in signals:
+        ts = s.get('timestamp')
+        if ts is None or str(ts).strip() in ('', 'null', 'None'):
+            ts_null_count += 1
+        else:
+            ts_values.append(str(ts).strip())
+    
+    null_ratio = ts_null_count / len(signals)
+    
+    # null이 80%+ 이면 타임코드 없이 분석된 것으로 의심
+    if null_ratio >= 0.8:
+        return False, null_ratio, f"timestamp null {null_ratio*100:.1f}% — VTT 타임코드 미포함 의심"
+    
+    # 0:00 만 있고 다양한 값이 없으면 의심
+    non_zero = [t for t in ts_values if not ZERO_TIMESTAMP_PATTERNS.match(t)]
+    if ts_values and len(non_zero) / max(len(ts_values), 1) < 0.3:
+        return False, null_ratio, f"유효 타임스탬프 {len(non_zero)}/{len(ts_values)} — VTT 타임코드 미포함 의심"
+    
+    return True, null_ratio, f"정상 (null {null_ratio*100:.1f}%, 유효값 {len(non_zero)}개)"
+
 # ────────────────────────────────────────
 # 메인
 # ────────────────────────────────────────
@@ -301,20 +396,77 @@ def run_gate2(signals, channel, video_durations=None):
 
     has_fatal = False
 
+    # ── 체크 NEW-A: 파이프라인 모델 확인 (Haiku 금지) ──
+    model_ok, current_model = check_pipeline_model()
+    if model_ok is None:
+        print(f"\nℹ️  [체크 A] 파이프라인 모델 확인 불가 (pipeline_config 로드 실패)")
+    elif not model_ok:
+        print(f"\n⛔ [체크 A] 파이프라인 모델 오류 — '{current_model}' 감지!")
+        print(f"   Haiku 모델은 시그널 분석 품질이 Sonnet 대비 현저히 낮습니다.")
+        print(f"   pipeline_config.py의 ANTHROPIC_MODEL을 claude-sonnet-4-6 으로 수정하세요.")
+        save_error_pattern(channel, 'gate2', 'wrong_model',
+                           f"모델 '{current_model}' 사용 — Haiku 금지")
+        has_fatal = True
+    else:
+        print(f"\n✅ [체크 A] 파이프라인 모델 OK: '{current_model}'")
+
+    # ── 체크 NEW-B: signal_type 빈값 ──
+    empty_sigs = check_signal_type_empty(signals)
+    if empty_sigs:
+        print(f"\n⛔ [체크 B] signal_type 빈값/null {len(empty_sigs)}건 — DB INSERT 금지")
+        for e in empty_sigs[:5]:
+            print(f"   - {e['video_id']}: stock='{e['stock']}', signal={e['signal']}")
+        save_error_pattern(channel, 'gate2', 'empty_signal_type',
+                           f"빈값 {len(empty_sigs)}건: {[e['stock'] for e in empty_sigs[:5]]}")
+        has_fatal = True
+    else:
+        print(f"\n✅ [체크 B] signal_type 빈값 없음")
+
+    # ── 체크 NEW-B2: 유효하지 않은 signal_type ──
+    invalid_sigs = check_invalid_signal_type(signals)
+    if invalid_sigs:
+        print(f"\n⛔ [체크 B2] 유효하지 않은 signal_type {len(invalid_sigs)}건")
+        for inv in invalid_sigs[:5]:
+            print(f"   - {inv['stock']}: '{inv['signal']}' (허용: {sorted(VALID_SIGNALS)})")
+        save_error_pattern(channel, 'gate2', 'invalid_signal_type',
+                           f"유효하지 않은 signal_type {len(invalid_sigs)}건: "
+                           f"{list({i['signal'] for i in invalid_sigs})}")
+        has_fatal = True
+    else:
+        print(f"\n✅ [체크 B2] signal_type 전부 유효 ({sorted(VALID_SIGNALS)})")
+
+    # ── 체크 NEW-C: VTT 타임코드 포함 여부 ──
+    ts_ok, null_ratio, ts_detail = check_subtitle_has_timestamps(signals)
+    if not ts_ok:
+        print(f"\n⛔ [체크 C] VTT 타임코드 미포함 의심 — {ts_detail}")
+        print(f"   subtitle_extractor.py의 parse_vtt_content(include_timestamps=True) 확인 필요")
+        save_error_pattern(channel, 'gate2', 'no_vtt_timestamps', ts_detail)
+        has_fatal = True
+    else:
+        print(f"\n✅ [체크 C] VTT 타임코드 확인 OK — {ts_detail}")
+
     # ── 체크 1: 비종목 오추출 ──
     print(f"\n🔎 [체크 1] DB 미등록 종목 검사 중...")
     unknown, err = check_unknown_stocks(signals)
     unknown_new = [u for u in unknown if u['input_count'] >= 1]
-    if len(unknown_new) >= 3:
-        print(f"⚠️  [체크 1] 비종목 오추출 의심 — DB 3회 미만 종목 {len(unknown_new)}건")
+    if len(unknown_new) >= 5:
+        # 5건 이상이면 치명적 (오추출 가능성 높음)
+        print(f"\n⛔ [체크 1] 비종목 오추출 — DB 3회 미만 신규 종목 {len(unknown_new)}건 (5건 이상 → 중단)")
         for u in unknown_new[:10]:
             print(f"   - '{u['stock']}' (DB: {u['db_count']}회, 이번: {u['input_count']}건)")
         save_error_pattern(channel, 'gate2', 'unknown_stocks',
                            f"DB 3회 미만 종목 {len(unknown_new)}개: {[u['stock'] for u in unknown_new[:5]]}")
+        has_fatal = True
+    elif len(unknown_new) >= 1:
+        print(f"⚠️  [체크 1] 신규 종목 {len(unknown_new)}건 (5건 미만 → 경고만)")
+        for u in unknown_new[:5]:
+            print(f"   - '{u['stock']}' (DB: {u['db_count']}회, 이번: {u['input_count']}건)")
+        save_error_pattern(channel, 'gate2', 'unknown_stocks_warn',
+                           f"신규 종목 {len(unknown_new)}개: {[u['stock'] for u in unknown_new[:5]]}")
     elif err:
         print(f"ℹ️  [체크 1] DB 조회 실패, 스킵: {err}")
     else:
-        print(f"✅ [체크 1] 종목 검증 통과 (미등록 종목 {len(unknown_new)}건)")
+        print(f"✅ [체크 1] 종목 검증 통과 (미등록 종목 없음)")
 
     # ── 체크 2: 신호 분포 ──
     dist_info = check_signal_distribution(signals)

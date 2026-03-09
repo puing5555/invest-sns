@@ -236,8 +236,18 @@ def check_stock_pages(project_root, out_dir, slug):
             still_missing.append(ticker)
 
     if still_missing:
-        print(f"  ⚠️  종목 페이지 {len(still_missing)}개 out/에 없음 → 재빌드 필요")
-        # 재빌드는 Gate 3 마지막 단계에서 처리
+        print(f"  ⚠️  종목 페이지 {len(still_missing)}개 out/에 없음 → 재빌드 실행...")
+        # 자동 재빌드
+        rebuild_result = subprocess.run(
+            ['npm', 'run', 'build'],
+            cwd=project_root,
+            capture_output=True, text=True, timeout=300,
+            encoding='utf-8', errors='replace'
+        )
+        if rebuild_result.returncode != 0:
+            print(f"  ⛔ 재빌드 실패: {rebuild_result.stderr[-300:]}")
+            return False
+        print(f"  ✅ 재빌드 완료")
     return True  # tickers 추가됐으면 재빌드로 해결 가능 → FAIL 아님
 
 # ────────────────────────────────────────
@@ -469,7 +479,17 @@ def run_gate3(slug, project_root, check_deploy=False):
                            f"{remaining_yt}개 파일 잔존")
         has_fatal = True
     elif fixed_yt > 0:
-        print(f"✅ [체크 5] YouTube URL 자동 수정 완료")
+        print(f"  🔧 YouTube URL 수정됨 → 재빌드 필요 (수정 내용 반영)")
+        rebuild_r = subprocess.run(
+            ['npm', 'run', 'build'], cwd=os.path.abspath(
+                os.path.join(os.path.dirname(__file__), '..', '..')),
+            capture_output=True, text=True, timeout=300,
+            encoding='utf-8', errors='replace'
+        )
+        if rebuild_r.returncode == 0:
+            print(f"✅ [체크 5] YouTube URL 수정 + 재빌드 완료")
+        else:
+            print(f"⚠️  [체크 5] YouTube URL 수정됐지만 재빌드 실패: {rebuild_r.stderr[-200:]}")
     else:
         print(f"✅ [체크 5] YouTube URL 전부 www.youtube.com 정상")
 
