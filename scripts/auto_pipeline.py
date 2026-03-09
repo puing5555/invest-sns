@@ -212,7 +212,7 @@ class YouTubeChannelCollector:
             'quiet': True,
             'no_warnings': True,
             'extract_flat': True,  # 메타데이터만 추출
-            'playlistend': 50,     # 최대 50개 영상
+            # playlistend 기본값 없음 → --limit 옵션으로 제어
         }
         
         # 프록시 설정
