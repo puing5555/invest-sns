@@ -27,7 +27,7 @@ interface Disclosure {
 }
 
 type GradeFilter = '전체' | 'A' | 'B' | 'C' | 'D';
-type TypeFilter = '전체' | '실적' | 'CB' | '자사주' | '풍문' | '수주';
+type TypeFilter = '전체' | '실적' | 'CB/BW' | '자사주' | '풍문' | '수주' | '증자' | '기타';
 type ImpactFilter = '전체' | '긍정' | '부정' | '중립';
 
 // importance → 등급 매핑
@@ -37,14 +37,25 @@ const importanceToGrade: Record<string, string> = {
   low: 'C',
 };
 
-// disclosure_type → 유형 필터 매핑
+// disclosure_type → 유형 필터 매핑 (v6 기준)
 const typeToFilter: Record<string, TypeFilter> = {
   '실적': '실적',
-  '전환사채': 'CB',
+  '전환사채': 'CB/BW',
   '자기주식': '자사주',
   '풍문': '풍문',
+  '수주': '수주',
   '대규모계약': '수주',
-  '수주계약': '수주',
+  '단일판매공급': '수주',
+  '유상증자': '증자',
+  '무상증자': '증자',
+  // 기타 그룹
+  '합병분할': '기타',
+  '배당': '기타',
+  '감자': '기타',
+  '법적리스크': '기타',
+  '최대주주변경': '기타',
+  '상장폐지': '기타',
+  '기타': '기타',
 };
 
 const gradeColor: Record<string, string> = {
@@ -193,7 +204,7 @@ export default function RealTimeFeedTab() {
   });
 
   const grades: GradeFilter[] = ['전체', 'A', 'B', 'C', 'D'];
-  const types: TypeFilter[] = ['전체', '실적', 'CB', '자사주', '풍문', '수주'];
+  const types: TypeFilter[] = ['전체', '실적', 'CB/BW', '자사주', '풍문', '수주', '증자', '기타'];
   const impacts: ImpactFilter[] = ['전체', '긍정', '부정', '중립'];
 
   return (
