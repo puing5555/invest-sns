@@ -202,7 +202,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
                 onClick={handleReport}
                 className="text-[#8b95a1] hover:text-red-500 transition-colors text-xl px-3 py-2 rounded-lg"
               >
-                🚩
+                🚨
               </button>
               <button
                 onClick={onClose}

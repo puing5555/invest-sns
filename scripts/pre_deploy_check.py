@@ -526,7 +526,7 @@ def check_data_consistency(cr, signals, verbose):
         speaker_counts = Counter(s.get("speaker_id") for s in signals)
         speakers = supabase_get("speakers")
         speaker_names = {s["id"]: s.get("name", "?") for s in speakers}
-        detail = [f"{speaker_names.get(sid, sid[:8])}: {cnt}개" for sid, cnt in speaker_counts.most_common(10)]
+        detail = [f"{speaker_names.get(sid, (sid[:8] if sid else 'None'))}: {cnt}개" for sid, cnt in speaker_counts.most_common(10)]
         cr.add_pass(f"인플루언서별 시그널 (상위 {min(10, len(speaker_counts))}명)", detail if verbose else None)
 
 
