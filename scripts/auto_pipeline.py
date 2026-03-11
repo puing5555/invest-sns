@@ -201,6 +201,35 @@ def _deploy_gh_pages(project_root: str, channel_slug: str) -> Optional[str]:
                 pass
 
 
+def _get_signal_count(project_root: str) -> int:
+    """Supabase REST API로 influencer_signals 테이블 전체 카운트 조회"""
+    try:
+        import requests as _requests
+        env_path = os.path.join(project_root, '.env.local')
+        env_text = open(env_path, encoding='utf-8').read()
+        anon_key_m = re.search(r'NEXT_PUBLIC_SUPABASE_ANON_KEY=(.+)', env_text)
+        url_m = re.search(r'NEXT_PUBLIC_SUPABASE_URL=(.+)', env_text)
+        if not anon_key_m or not url_m:
+            return 0
+        anon_key = anon_key_m.group(1).strip()
+        supabase_url = url_m.group(1).strip()
+        r = _requests.get(
+            f'{supabase_url}/rest/v1/influencer_signals?select=id',
+            headers={
+                'apikey': anon_key,
+                'Authorization': f'Bearer {anon_key}',
+                'Prefer': 'count=exact',
+                'Range': '0-0'
+            },
+            timeout=10
+        )
+        cr = r.headers.get('content-range', '0/0')
+        total = cr.split('/')[-1] if '/' in cr else '0'
+        return int(total) if total.isdigit() else 0
+    except Exception:
+        return 0
+
+
 class YouTubeChannelCollector:
     """유튜브 채널 영상 수집기"""
     
@@ -359,17 +388,17 @@ class AutoPipeline:
         }
     
     def run_execute(self, channel_url: str, limit: Optional[int] = None,
-                   skip_existing: bool = False, skip_qa: bool = False) -> Dict[str, Any]:
-        """실제 실행 - 전체 7단계 파이프라인 수행"""
+                   skip_existing: bool = False, skip_qa: bool = False,
+                   batch_size: int = 30) -> Dict[str, Any]:
+        """실제 실행 - 전체 파이프라인 수행 (배치 처리)"""
         print("=== EXECUTE 모드 ===")
-        print("전체 파이프라인을 실행합니다.")
+        print(f"전체 파이프라인을 실행합니다. (배치 크기: {batch_size})")
 
         # QA 사용 여부 — import 실패 시 이미 exit(1)했으므로 _QA_AVAILABLE=True 보장
         use_qa = not skip_qa
         if skip_qa:
             print("[INFO] QA Gate 건너뜀 (--skip-qa 옵션 명시적 지정)")
 
-        total_steps = 7 if use_qa else 6
         start_time = time.time()
 
         # 채널 슬러그 추출 (QA용 식별자)
@@ -384,20 +413,20 @@ class AutoPipeline:
 
         try:
             # ── Step 1: 채널 정보 수집 ─────────────────────────────────
-            print(f"\n[1/{total_steps}] 채널 정보 수집...")
+            print(f"\n[1] 채널 정보 수집...")
             channel_info = self.collector.get_channel_info(channel_url)
             if not channel_info:
                 return {'error': '채널 정보 수집 실패'}
             print(f"[OK] 채널: {channel_info['channel_title']} ({channel_info['name']})")
 
-            # ── Step 2: 영상 목록 수집 ────────────────────────────────
-            print(f"\n[2/{total_steps}] 영상 목록 수집...")
+            # ── Step 2: 영상 목록 수집 (전체) ────────────────────────
+            print(f"\n[2] 영상 목록 수집...")
             videos = self.collector.get_video_list(channel_url, limit)
             if not videos:
                 return {'error': '영상 목록 수집 실패'}
 
             # ── Step 3: 제목 필터링 [→ QA Gate 1] ────────────────────
-            print(f"\n[3/{total_steps}] 제목 필터링...")
+            print(f"\n[3] 제목 필터링...")
             passed_videos, skipped_videos = self.filter.filter_videos(videos)
             self.filter.print_filter_results(passed_videos, skipped_videos)
 
@@ -405,7 +434,7 @@ class AutoPipeline:
                 return {'error': '투자 관련 영상이 없습니다'}
 
             if use_qa:
-                print(f"\n[3/{total_steps}] QA Gate 1: 메타데이터 검증...")
+                print(f"\n[QA Gate 1] 메타데이터 검증...")
 
                 # 메타데이터 정규화 및 임시 저장
                 normalized_videos = normalize_videos_for_gate(
@@ -433,63 +462,111 @@ class AutoPipeline:
                 print(f"[OK] QA Gate 1 통과 → 검증된 영상: {len(gate1_filtered)}개")
                 passed_videos = gate1_filtered  # gate1이 걸러낸 결과 사용
 
-            # ── Step 4: 자막 추출 ────────────────────────────────────
-            print(f"\n[4/{total_steps}] 자막 추출...")
-            videos_with_subtitles = self.extractor.extract_with_rate_limit(passed_videos)
+            # ── 배치 분할 처리 ────────────────────────────────────────
+            batches = [passed_videos[i:i+batch_size]
+                       for i in range(0, len(passed_videos), batch_size)]
+            print(f"\n[배치 처리] 총 {len(passed_videos)}개 영상 → {len(batches)}개 배치 (배치 크기: {batch_size})")
 
-            # 자막 추출 성공한 것만 필터링
-            successful_videos = [v for v in videos_with_subtitles if v.get('subtitle')]
-            if not successful_videos:
-                return {'error': '자막 추출에 성공한 영상이 없습니다'}
+            # 전체 누적 통계
+            all_db_stats = {'inserted_videos': 0, 'inserted_signals': 0, 'skipped_videos': 0}
+            last_analysis_results = None
+            backup_filename = None
+            successful_videos_total = []
 
-            # ── Step 5: AI 시그널 분석 ───────────────────────────────
-            print(f"\n[5/{total_steps}] AI 시그널 분석...")
-            analysis_results = self.analyzer.analyze_videos_batch(channel_url, successful_videos)
+            for batch_idx, batch_videos in enumerate(batches):
+                print(f"\n{'='*60}")
+                print(f"[배치 {batch_idx+1}/{len(batches)}] {len(batch_videos)}개 영상 처리 시작")
 
-            # 분석 결과 저장 (중간 백업)
-            backup_filename = f"scripts/pipeline_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-            self.analyzer.save_analysis_results(analysis_results, backup_filename)
+                # Supabase 카운트 확인 (배치 전)
+                before_count = _get_signal_count(PROJECT_ROOT)
+                print(f"  현재 시그널 수: {before_count}개")
 
-            # ── Step 6: QA Gate 2 (시그널 검증) ─────────────────────
-            if use_qa:
-                print(f"\n[6/{total_steps}] QA Gate 2: 시그널 검증...")
+                # ── Step 4: 자막 추출 ────────────────────────────────
+                print(f"\n  [Step 4] 자막 추출...")
+                videos_with_subtitles = self.extractor.extract_with_rate_limit(batch_videos)
+                successful_videos = [v for v in videos_with_subtitles if v.get('subtitle')]
+                successful_videos_total.extend(successful_videos)
+                print(f"  자막 추출 성공: {len(successful_videos)}/{len(batch_videos)}개")
 
-                # 시그널 평탄화 (모든 result에서 signals 추출)
-                flat_signals = []
-                for res in analysis_results.get('results', []):
-                    flat_signals.extend(res.get('signals', []))
+                if not successful_videos:
+                    print(f"  [SKIP] 자막 추출 성공한 영상 없음 → 다음 배치")
+                    if batch_idx < len(batches) - 1:
+                        print(f"  60초 대기...")
+                        time.sleep(60)
+                    continue
 
-                # 시그널 임시 저장
-                signals_path = save_tmp_json(flat_signals, channel_slug, 'signals')
-                print(f"[INFO] 시그널 저장: {signals_path} ({len(flat_signals)}개)")
+                # ── Step 5: AI 시그널 분석 ───────────────────────────
+                print(f"\n  [Step 5] AI 시그널 분석...")
+                analysis_results = self.analyzer.analyze_videos_batch(channel_url, successful_videos)
+                last_analysis_results = analysis_results
 
-                try:
-                    gate2_passed = run_gate2(flat_signals, channel_slug)
-                except Exception as e:
-                    print(f"[ERROR] QA Gate 2 실행 오류: {e}")
-                    gate2_passed = False
+                # 배치별 분석 결과 백업
+                batch_backup = f"scripts/pipeline_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}_batch{batch_idx+1}.json"
+                self.analyzer.save_analysis_results(analysis_results, batch_backup)
+                if backup_filename is None:
+                    backup_filename = batch_backup
 
-                qa_results['gate2'] = gate2_passed
+                # ── QA Gate 2 (시그널 검증) ───────────────────────────
+                if use_qa:
+                    print(f"\n  [QA Gate 2] 시그널 검증...")
 
-                if not gate2_passed:
-                    print("[ERROR] QA Gate 2 실패 → DB INSERT 차단")
-                    return {'error': 'QA Gate 2 실패', 'qa_results': qa_results}
+                    flat_signals = []
+                    for res in analysis_results.get('results', []):
+                        flat_signals.extend(res.get('signals', []))
 
-                print("[OK] QA Gate 2 통과 → DB INSERT 진행")
+                    signals_path = save_tmp_json(
+                        flat_signals, f"{channel_slug}_b{batch_idx+1}", 'signals'
+                    )
+                    print(f"  시그널 저장: {signals_path} ({len(flat_signals)}개)")
 
-            # ── Step 7: DB INSERT ─────────────────────────────────────
-            db_step = 7 if use_qa else 6
-            total_steps = 10 if use_qa else 7
-            print(f"\n[{db_step}/{total_steps}] DB INSERT...")
-            db_stats = self.db_inserter.insert_analysis_results(
-                channel_info, analysis_results, skip_existing
-            )
+                    try:
+                        gate2_passed = run_gate2(flat_signals, channel_slug)
+                    except Exception as e:
+                        print(f"  [ERROR] QA Gate 2 실행 오류: {e}")
+                        gate2_passed = False
+
+                    if not gate2_passed:
+                        print(f"  [ERROR] QA Gate 2 실패 → 배치 {batch_idx+1} DB INSERT 차단")
+                        qa_results['gate2'] = False
+                        if batch_idx < len(batches) - 1:
+                            print(f"  60초 대기...")
+                            time.sleep(60)
+                        continue
+
+                    qa_results['gate2'] = True
+                    print(f"  [OK] QA Gate 2 통과")
+
+                # ── Step 7: DB INSERT ────────────────────────────────
+                print(f"\n  [Step 7] DB INSERT...")
+                batch_db_stats = self.db_inserter.insert_analysis_results(
+                    channel_info, analysis_results, skip_existing
+                )
+
+                # 통계 누적
+                for key in ['inserted_videos', 'inserted_signals', 'skipped_videos']:
+                    all_db_stats[key] = all_db_stats.get(key, 0) + batch_db_stats.get(key, 0)
+
+                # Supabase 카운트 확인 (배치 후)
+                after_count = _get_signal_count(PROJECT_ROOT)
+                batch_inserted = after_count - before_count
+                print(f"  [배치 {batch_idx+1} 완료] INSERT: {batch_inserted}개 ({before_count} → {after_count})")
+
+                # 배치 사이 대기 (마지막 배치 제외)
+                if batch_idx < len(batches) - 1:
+                    print(f"\n  [대기] 레이트리밋 방지 60초 대기 중...")
+                    time.sleep(60)
+
+            print(f"\n{'='*60}")
+            print(f"[배치 처리 완료] 총 {all_db_stats.get('inserted_videos', 0)}개 영상, "
+                  f"{all_db_stats.get('inserted_signals', 0)}개 시그널 INSERT")
+
+            db_stats = all_db_stats
 
             # signal_prices.json 업데이트 준비
             price_update_stocks = self.db_inserter.update_signal_prices_json()
 
             # ── Step 8: 새 종목 가격 데이터 수집 ────────────────────
-            print(f"\n[8/{total_steps}] 새 종목 가격 데이터 수집...")
+            print(f"\n[Step 8] 새 종목 가격 데이터 수집...")
             rebuild_needed = False
             try:
                 import sys as _sys
@@ -499,20 +576,21 @@ class AutoPipeline:
                     _sys.path.insert(0, _scripts_dir)
                 from new_stock_handler import NewStockHandler
                 _handler = NewStockHandler()
-                stock_result = _handler.process_new_stocks(analysis_results)
-                if stock_result['new_stocks']:
-                    print(f"  새 종목 {len(stock_result['new_stocks'])}개 감지")
-                    print(f"  가격 수집 완료: {stock_result['prices_added']}개")
-                    if stock_result.get('rebuild_needed'):
-                        print(f"  stock_tickers.json 업데이트됨 → 재빌드 필요")
-                        rebuild_needed = True
-                else:
-                    print("  새 종목 없음 (기존 가격 데이터 모두 존재)")
+                if last_analysis_results:
+                    stock_result = _handler.process_new_stocks(last_analysis_results)
+                    if stock_result['new_stocks']:
+                        print(f"  새 종목 {len(stock_result['new_stocks'])}개 감지")
+                        print(f"  가격 수집 완료: {stock_result['prices_added']}개")
+                        if stock_result.get('rebuild_needed'):
+                            print(f"  stock_tickers.json 업데이트됨 → 재빌드 필요")
+                            rebuild_needed = True
+                    else:
+                        print("  새 종목 없음 (기존 가격 데이터 모두 존재)")
             except Exception as _e:
                 print(f"  [WARNING] 새 종목 처리 오류 (건너뜀): {_e}")
 
             # ── Step 8.5: data/ → public/ 동기화 ─────────────────────
-            print(f"\n[8.5/{total_steps}] data/ → public/ 동기화...")
+            print(f"\n[Step 8.5] data/ → public/ 동기화...")
             import shutil as _shutil
             _prices_src = os.path.join(PROJECT_ROOT, 'data', 'signal_prices.json')
             _prices_dst = os.path.join(PROJECT_ROOT, 'public', 'signal_prices.json')
@@ -521,7 +599,7 @@ class AutoPipeline:
                 print(f"  signal_prices.json 동기화 완료")
 
             # ── Step 9: npm run build ─────────────────────────────────
-            print(f"\n[9/{total_steps}] 프론트엔드 빌드 (npm run build)...")
+            print(f"\n[Step 9] 프론트엔드 빌드 (npm run build)...")
             build_result = subprocess.run(
                 ['npm', 'run', 'build'],
                 cwd=PROJECT_ROOT,
@@ -537,9 +615,9 @@ class AutoPipeline:
             html_count = sum(1 for _ in Path(out_dir).rglob('*.html')) if os.path.isdir(out_dir) else 0
             print(f"[OK] 빌드 완료 (HTML {html_count}개)")
 
-            # ── Step 10: QA Gate 3 (빌드 결과 검증) ──────────────────
+            # ── QA Gate 3 (빌드 결과 검증) ────────────────────────────
             if use_qa:
-                print(f"\n[10/{total_steps}] QA Gate 3: 프론트엔드 검증...")
+                print(f"\n[QA Gate 3] 프론트엔드 검증...")
                 try:
                     gate3_passed = run_gate3(
                         slug=channel_slug,
@@ -561,8 +639,8 @@ class AutoPipeline:
                     }
                 print("[OK] QA Gate 3 통과")
 
-            # ── Step 10: 배포 (git worktree → gh-pages push) ────────
-            print(f"\n[{total_steps}/{total_steps}] 배포 (GitHub Pages)...")
+            # ── 배포 (git worktree → gh-pages push) ──────────────────
+            print(f"\n[배포] GitHub Pages...")
             deploy_error = _deploy_gh_pages(PROJECT_ROOT, channel_slug)
             if deploy_error:
                 print(f"⛔ 배포 실패: {deploy_error}")
@@ -583,14 +661,14 @@ class AutoPipeline:
                 'execution_time_minutes': execution_time // 60,
                 'total_videos': len(videos),
                 'passed_videos': len(passed_videos),
-                'successful_subtitles': len(successful_videos),
+                'successful_subtitles': len(successful_videos_total),
                 'db_stats': db_stats,
                 'price_update_stocks_count': len(price_update_stocks),
                 'backup_file': backup_filename,
                 'qa_results': qa_results,
             }
 
-            print(f"\n=== 파이프라인 완료 ({total_steps}단계) ===")
+            print(f"\n=== 파이프라인 완료 ===")
             print(f"총 실행 시간: {execution_time // 60:.1f}분")
             print(f"처리 영상: {db_stats.get('inserted_videos', '?')}개")
             print(f"생성 시그널: {db_stats.get('inserted_signals', '?')}개")
@@ -650,6 +728,8 @@ def main():
                        help='DB에 이미 있는 영상 건너뛰기')
     parser.add_argument('--skip-qa', action='store_true',
                        help='QA Gate 검증 건너뛰기 (긴급 시 사용, 기본값: 실행)')
+    parser.add_argument('--batch-size', type=int, default=30,
+                       help='배치당 처리할 영상 수 (기본값: 30)')
     parser.add_argument('--prompt-version', default='V10',
                        help='사용할 프롬프트 버전 (기본값: V10)')
     
@@ -674,7 +754,8 @@ def main():
         else:
             result = pipeline.run_execute(
                 args.channel, args.limit, args.skip_existing,
-                skip_qa=args.skip_qa
+                skip_qa=args.skip_qa,
+                batch_size=args.batch_size
             )
         
         # 결과 확인

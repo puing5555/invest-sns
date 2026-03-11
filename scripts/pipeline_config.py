@@ -22,12 +22,12 @@ class PipelineConfig:
     RATE_LIMIT_REQUESTS = 3  # 요청 간 3초
     RATE_LIMIT_429_WAIT = 60  # 429 에러 시 60초 대기
     RATE_LIMIT_BATCH_BREAK = 5 * 60  # 20개마다 5분 휴식
-    RATE_LIMIT_BATCH_SIZE = 20
+    RATE_LIMIT_BATCH_SIZE = 30
     RATE_LIMIT_API_REQUESTS = 5  # API 요청 간 5초
     
     # 프롬프트 설정
     PROMPT_VERSION = "V11.3"
-    PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'prompts', 'pipeline_v11.3.md')
+    PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v11.3.md')
     
     # 시그널 타입 (한글 5단계)
     SIGNAL_TYPES = ["매수", "긍정", "중립", "경계", "매도"]
