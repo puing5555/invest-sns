@@ -217,9 +217,8 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
             {/* 영상 제목 + 날짜 한 줄 */}
             <div>
               <h2 className="text-lg font-bold text-[#191f28] leading-snug">
-                {signal.videoTitle || signal.quote?.slice(0, 40) + '...'}
+                {signal.influencer} · {formatDate(signal.date)}
               </h2>
-              <p className="text-sm text-[#8b95a1] mt-1">{formatDate(signal.date)}</p>
             </div>
 
             {/* 발언자 표시: influencer 필드에 이미 올바른 형태 */}

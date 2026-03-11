@@ -32,6 +32,8 @@ _scripts_dir = os.path.dirname(os.path.abspath(__file__))
 if _scripts_dir not in sys.path:
     sys.path.insert(0, _scripts_dir)
 
+from stock_normalizer import normalize_ticker, normalize_market as normalizer_market
+
 # ── 채널 설정 ──────────────────────────────────────────────────────────
 CHANNEL_HANDLE = '@corinpapa1106'
 CHANNEL_NAME = '코린이 아빠의 투자일기'
@@ -288,12 +290,17 @@ def insert_signal(video_uuid: str, signal_data: Dict) -> bool:
     if ts and not re.match(r'^\d{1,2}:\d{2}(:\d{2})?$', str(ts)):
         ts = ''
 
+    # ticker 정규화 적용
+    raw_ticker = signal_data.get('ticker', '')
+    normalized_ticker = normalize_ticker(raw_ticker)
+    market = normalizer_market(normalized_ticker) if normalized_ticker else _detect_market(signal_data)
+
     data = {
         'id': str(uuid.uuid4()),
         'video_id': video_uuid,
         'stock': stock,
-        'ticker': signal_data.get('ticker', ''),
-        'market': _detect_market(signal_data),
+        'ticker': normalized_ticker,
+        'market': market,
         'mention_type': '결론',
         'signal': signal_val,
         'confidence': _normalize_confidence(signal_data.get('confidence', 'medium')),

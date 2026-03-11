@@ -51,11 +51,7 @@ export default function SignalCard({
           &ldquo;{keyQuote || reasoning}&rdquo;
         </p>
       )}
-      {videoTitle && (
-        <p className="text-sm text-gray-500 mb-2 line-clamp-1">
-          📹 {videoTitle}
-        </p>
-      )}
+      {/* videoTitle 표시 제거 - 영어 제목이라 혼란 유발 */}
       <div className="flex items-center justify-between text-xs text-gray-400">
         <span>{date}</span>
       </div>
