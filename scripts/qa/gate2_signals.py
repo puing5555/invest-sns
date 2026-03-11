@@ -387,8 +387,16 @@ def check_subtitle_has_timestamps(signals):
 # 메인
 # ────────────────────────────────────────
 
-def run_gate2(signals, channel, video_durations=None):
-    """Gate 2 실행. 반환: (passed: bool)"""
+def run_gate2(signals, channel, video_durations=None, videos=None):
+    """
+    Gate 2 실행. 반환: (passed: bool)
+
+    Args:
+        signals: 시그널 리스트
+        channel: 채널 슬러그 (channel_slug 별칭도 허용)
+        video_durations: {video_id: duration_secs} (선택)
+        videos: 영상 정보 리스트 [{video_id, published_at, title}, ...] (선택)
+    """
     print(f"\n{'='*60}")
     print(f"🔍 QA Gate 2 - 시그널 분석 검증")
     print(f"   채널: {channel} | 시그널 수: {len(signals)}개")
@@ -548,6 +556,44 @@ def run_gate2(signals, channel, video_durations=None):
                            f"평균 {avg:.2f}/영상")
     else:
         print(f"✅ [체크 6/7] 시그널 수 정상 범위")
+
+    # ── 체크 9/10: published_at 검증 (videos 파라미터 있을 때) ──
+    if videos is not None:
+        TODAY = datetime.utcnow().strftime('%Y-%m-%d')
+        vid_count = len(videos)
+
+        # 체크 9: published_at NULL
+        null_pub = [v for v in videos if not v.get('published_at')]
+        if null_pub:
+            null_pct = len(null_pub) / max(vid_count, 1) * 100
+            if len(null_pub) > vid_count * 0.5:
+                print(f"\n⛔ [체크 9] published_at NULL 영상 {len(null_pub)}/{vid_count}건 ({null_pct:.1f}%) — 50% 초과 FAIL")
+                save_error_pattern(channel, 'gate2', 'PUBLISHED_AT_NULL',
+                                   f"published_at NULL {len(null_pub)}건 ({null_pct:.1f}%): "
+                                   f"{[v.get('video_id','') for v in null_pub[:3]]}")
+                has_fatal = True
+            else:
+                print(f"\n⚠️  [체크 9] published_at NULL {len(null_pub)}/{vid_count}건 ({null_pct:.1f}%) — 크롤링 날짜 사용 금지 (경고)")
+                save_error_pattern(channel, 'gate2', 'PUBLISHED_AT_NULL_WARN',
+                                   f"published_at NULL {len(null_pub)}건 ({null_pct:.1f}%): "
+                                   f"{[v.get('video_id','') for v in null_pub[:3]]}")
+        else:
+            print(f"\n✅ [체크 9] published_at NULL 없음 ({vid_count}건 모두 날짜 있음)")
+
+        # 체크 10: published_at = 오늘 날짜 (크롤링 날짜 오염 의심)
+        today_pub = [v for v in videos if (v.get('published_at') or '')[:10] == TODAY]
+        if today_pub:
+            print(f"\n⛔ [체크 10] published_at이 오늘 날짜({TODAY}) {len(today_pub)}건 — 크롤링 날짜 오염 의심 FAIL")
+            for v in today_pub[:3]:
+                print(f"   - {v.get('video_id', '')}: {v.get('title', '')[:40]}")
+            save_error_pattern(channel, 'gate2', 'PUBLISHED_AT_TODAY',
+                               f"published_at 오늘날짜 {len(today_pub)}건: "
+                               f"{[v.get('video_id','') for v in today_pub[:3]]}")
+            has_fatal = True
+        else:
+            print(f"\n✅ [체크 10] published_at 오늘 날짜 오염 없음")
+    else:
+        print(f"\nℹ️  [체크 9/10] videos 파라미터 없음 — published_at 검증 스킵")
 
     # ── 체크 8: timestamp > duration (옵션) ──
     if video_durations is not None:
