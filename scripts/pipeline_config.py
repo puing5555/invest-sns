@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # 환경변수 로드
-load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env.local'))
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env.local'), override=True)
 
 class PipelineConfig:
     # Supabase 설정
