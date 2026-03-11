@@ -158,7 +158,13 @@ for sid, info in signal_dates.items():
     date_str = info['date']
     
     price_at = price_cache.get((ticker, date_str))
+    # 코인 fallback: ETH-USD 없으면 ETH 시도 (하위 호환)
     current_price = existing.get(ticker, {}).get('current_price')
+    if not current_price:
+        # -USD 붙은 코인 ticker의 경우 기본 심볼로도 시도
+        base_ticker = ticker.replace('-USD', '')
+        if base_ticker != ticker:
+            current_price = existing.get(base_ticker, {}).get('current_price')
     
     if price_at and current_price:
         ret = round((current_price - price_at) / price_at * 100, 2)
