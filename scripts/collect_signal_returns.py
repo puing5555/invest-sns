@@ -47,15 +47,37 @@ for info in signal_dates.values():
 print(f"\n=== Step 2: Unique pairs: {len(unique_pairs)} ===", flush=True)
 
 # Classify tickers
-SKIP_TICKERS = {'BTC', 'ETH', 'SOL', 'DOGE', 'KLAY', 'KS11', 'SOXX', 'XLU', 'GLD'}
+# 코인은 yfinance에서 BTC-USD 형태로 가져올 수 있음
+CRYPTO_TICKERS = {
+    'BTC': 'BTC-USD',
+    'ETH': 'ETH-USD',
+    'XRP': 'XRP-USD',
+    'SOL': 'SOL-USD',
+    'DOGE': 'DOGE-USD',
+    'KLAY': 'KLAY-USD',
+    'CC': None,   # Canton - yfinance 미지원, 스킵
+    'CNTN': None, # Canton 별칭
+}
+
+# SKIP_TICKERS에서 코인 제거 (KS11, SOXX, XLU, GLD 같은 지수/ETF만 스킵)
+SKIP_TICKERS = {'KS11', 'SOXX', 'XLU', 'GLD', 'KRW'}
 
 def get_yf_ticker(ticker):
+    if not ticker:
+        return None
+    # 지수/ETF 스킵
     if ticker in SKIP_TICKERS:
         return None
-    if '.' in ticker:
-        return ticker
+    # 코인 매핑
+    if ticker in CRYPTO_TICKERS:
+        return CRYPTO_TICKERS[ticker]  # None이면 스킵
+    # 한국 6자리
     if ticker.isdigit():
         return f"{ticker}.KS"
+    # 이미 .xx 형태
+    if '.' in ticker:
+        return ticker
+    # 미국 주식 (NVDA, PLTR 등)
     return ticker
 
 # Group by yf_ticker to find min/max date range

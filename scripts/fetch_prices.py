@@ -10,7 +10,8 @@ from datetime import datetime
 
 COIN_MAP = {
     'BTC': 'bitcoin',
-    'ETH': 'ethereum', 
+    'ETH': 'ethereum',
+    'XRP': 'ripple',
     'SOL': 'solana',
     'DOGE': 'dogecoin',
     'KLAY': 'klay-token',
