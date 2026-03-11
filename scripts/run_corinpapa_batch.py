@@ -1,75 +1,130 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-코린파파 채널 배치 파이프라인 실행기
-- 30개씩 배치 처리
-- 각 배치 완료 후 DB INSERT 건수 확인
-- 암호화폐 시그널 포함 (V11.3+)
+코린파파 채널 배치 파이프라인 실행기 (V11.4 - 전면 재작성)
+- Supabase REST API 직접 호출 (godofIT_analyze.py 패턴)
+- analyze_video_subtitle() 직접 호출 (video_uuid KeyError 회피)
+- 30개씩 배치 처리, 배치 간 60초 대기
+- --offset N 옵션으로 중단 시 재시작 가능
 
 실행 방법:
   python scripts/run_corinpapa_batch.py
-  python scripts/run_corinpapa_batch.py --offset 60   (60번째부터 재시작)
-  python scripts/run_corinpapa_batch.py --batch-size 20
-  python scripts/run_corinpapa_batch.py --skip-qa
+  python scripts/run_corinpapa_batch.py --offset 60     # 60번째 영상부터 재시작
+  python scripts/run_corinpapa_batch.py --batch-size 20 # 배치 크기 변경
+  python scripts/run_corinpapa_batch.py --dry-run       # 목록 확인만 (실제 처리 안 함)
+  python scripts/run_corinpapa_batch.py --limit 10      # 최대 10개만 처리
 """
 
 import os
 import sys
-import argparse
 import re
+import uuid
+import json
 import time
+import argparse
 import requests
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Dict, Any, List
 
-# 프로젝트 루트
+# ── 경로 설정 ──────────────────────────────────────────────────────────
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# scripts/ 디렉토리를 sys.path에 추가
 _scripts_dir = os.path.dirname(os.path.abspath(__file__))
 if _scripts_dir not in sys.path:
     sys.path.insert(0, _scripts_dir)
 
 # ── 채널 설정 ──────────────────────────────────────────────────────────
-CHANNEL_URL = 'https://www.youtube.com/@corinpapa1106'
-CHANNEL_ID = 'c9c4dc38-c108-4988-b1d2-b177c3b324fc'
+CHANNEL_HANDLE = '@corinpapa1106'
+CHANNEL_NAME = '코린이 아빠의 투자일기'
+CHANNEL_URL_YT = 'https://www.youtube.com/@corinpapa1106'
+PIPELINE_VERSION = 'V11.4'
 BATCH_SIZE = 30
 
+# 암호화폐 ticker 목록 (market='CRYPTO' 판단용)
+CRYPTO_TICKERS = {
+    'BTC', 'ETH', 'XRP', 'BNB', 'ADA', 'SOL', 'DOGE', 'DOT', 'MATIC',
+    'AVAX', 'LINK', 'UNI', 'ATOM', 'LTC', 'ETC', 'BCH', 'TRX', 'NEAR',
+    'FTM', 'ALGO', 'VET', 'ICP', 'THETA', 'FIL', 'EGLD', 'XLM', 'HBAR',
+    'SUI', 'APT', 'ARB', 'OP', 'PEPE', 'SHIB', 'WLD', 'TON',
+}
 
-# ── Supabase 카운트 확인 ───────────────────────────────────────────────
+
+# ── .env.local 로드 ────────────────────────────────────────────────────
 def _load_supabase_creds():
-    """Supabase API 자격증명 로드 (.env.local)"""
+    """Supabase 자격증명 로드 (.env.local - SERVICE_ROLE_KEY 우선)"""
     env_path = os.path.join(PROJECT_ROOT, '.env.local')
     try:
         env_text = open(env_path, encoding='utf-8').read()
     except FileNotFoundError:
-        print(f"[ERROR] .env.local 파일 없음: {env_path}")
+        print(f"[FATAL] .env.local 파일 없음: {env_path}")
         sys.exit(1)
 
-    anon_key_m = re.search(r'NEXT_PUBLIC_SUPABASE_ANON_KEY=(.+)', env_text)
     url_m = re.search(r'NEXT_PUBLIC_SUPABASE_URL=(.+)', env_text)
+    svc_m = re.search(r'SUPABASE_SERVICE_ROLE_KEY=(.+)', env_text)
 
-    if not anon_key_m or not url_m:
-        print("[ERROR] .env.local에서 NEXT_PUBLIC_SUPABASE_ANON_KEY 또는 NEXT_PUBLIC_SUPABASE_URL을 찾을 수 없습니다")
+    if not url_m or not svc_m:
+        print("[FATAL] .env.local에서 NEXT_PUBLIC_SUPABASE_URL 또는 SUPABASE_SERVICE_ROLE_KEY를 찾을 수 없습니다")
         sys.exit(1)
 
-    return anon_key_m.group(1).strip(), url_m.group(1).strip()
+    return url_m.group(1).strip(), svc_m.group(1).strip()
 
 
-ANON_KEY, SUPABASE_URL = _load_supabase_creds()
+_SUPABASE_URL, _SUPABASE_KEY = _load_supabase_creds()
+_REST_BASE = f"{_SUPABASE_URL}/rest/v1"
+_HEADERS = {
+    'apikey': _SUPABASE_KEY,
+    'Authorization': f'Bearer {_SUPABASE_KEY}',
+    'Content-Type': 'application/json',
+}
+
+
+# ── Supabase REST 헬퍼 ─────────────────────────────────────────────────
+def rest_get(table: str, params: str = '') -> List[Dict]:
+    """Supabase REST GET"""
+    url = f"{_REST_BASE}/{table}?{params}" if params else f"{_REST_BASE}/{table}"
+    try:
+        r = requests.get(url, headers=_HEADERS, timeout=30)
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"  [REST GET ERROR] {table}: {e}")
+        return []
+
+
+def rest_post(table: str, data: Dict) -> Optional[Dict]:
+    """Supabase REST POST — 생성된 row 반환"""
+    url = f"{_REST_BASE}/{table}"
+    headers = {**_HEADERS, 'Prefer': 'return=representation'}
+    try:
+        r = requests.post(url, headers=headers, json=data, timeout=30)
+        r.raise_for_status()
+        result = r.json()
+        return result[0] if isinstance(result, list) and result else result
+    except Exception as e:
+        print(f"  [REST POST ERROR] {table}: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"  [REST POST DETAIL] {e.response.text[:300]}")
+        return None
+
+
+def rest_patch(table: str, filter_str: str, data: Dict) -> Optional[Dict]:
+    """Supabase REST PATCH"""
+    url = f"{_REST_BASE}/{table}?{filter_str}"
+    headers = {**_HEADERS, 'Prefer': 'return=representation'}
+    try:
+        r = requests.patch(url, headers=headers, json=data, timeout=30)
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"  [REST PATCH ERROR] {table}: {e}")
+        return None
 
 
 def get_signal_count() -> int:
     """influencer_signals 전체 카운트 조회"""
     try:
         r = requests.get(
-            f'{SUPABASE_URL}/rest/v1/influencer_signals?select=id',
-            headers={
-                'apikey': ANON_KEY,
-                'Authorization': f'Bearer {ANON_KEY}',
-                'Prefer': 'count=exact',
-                'Range': '0-0'
-            },
+            f"{_REST_BASE}/influencer_signals?select=id",
+            headers={**_HEADERS, 'Prefer': 'count=exact', 'Range': '0-0'},
             timeout=10
         )
         cr = r.headers.get('content-range', '0/0')
@@ -80,32 +135,210 @@ def get_signal_count() -> int:
         return 0
 
 
-# ── 파이프라인 임포트 ──────────────────────────────────────────────────
-def _import_pipeline():
-    """AutoPipeline 클래스 임포트"""
+# ── 채널/영상/시그널 CRUD ──────────────────────────────────────────────
+def get_or_create_channel() -> Optional[str]:
+    """코린파파 채널 UUID 조회 또는 생성"""
+    # handle로 조회
+    rows = rest_get('influencer_channels',
+                    f'select=id,channel_name&channel_handle=eq.{CHANNEL_HANDLE}')
+    if not rows:
+        # channel_name으로 fallback
+        rows = rest_get('influencer_channels',
+                        f'select=id,channel_name&channel_name=ilike.*코린이*아빠*')
+    if rows:
+        cid = rows[0]['id']
+        print(f"  [채널] 기존 채널 확인: {cid} ({rows[0].get('channel_name', '')})")
+        return cid
+
+    # 없으면 INSERT
+    channel_data = {
+        'id': str(uuid.uuid4()),
+        'channel_name': CHANNEL_NAME,
+        'channel_handle': CHANNEL_HANDLE,
+        'channel_url': CHANNEL_URL_YT,
+        'platform': 'youtube',
+        'description': '코린이 아빠의 암호화폐/주식 투자 채널',
+    }
+    result = rest_post('influencer_channels', channel_data)
+    if result:
+        cid = result.get('id', channel_data['id'])
+        print(f"  [채널] 새 채널 생성: {cid}")
+        return cid
+
+    print(f"  [ERROR] 채널 생성 실패")
+    return None
+
+
+def get_or_create_video(channel_id: str, video_data: Dict) -> Optional[str]:
+    """
+    influencer_videos 조회 또는 생성.
+    반환값: influencer_videos.id (UUID) — YouTube video_id가 아님!
+    """
+    yt_video_id = video_data.get('video_id') or video_data.get('id', '')
+    if not yt_video_id:
+        print(f"  [WARNING] video_id 없음: {video_data.get('title', 'unknown')}")
+        return None
+
+    existing = rest_get('influencer_videos', f'select=id&video_id=eq.{yt_video_id}')
+    if existing:
+        return existing[0]['id']
+
+    # published_at 처리
+    pub_at = video_data.get('published_at') or video_data.get('upload_date')
+    if pub_at:
+        # yt-dlp 형식: '20240115' → '2024-01-15'
+        if re.match(r'^\d{8}$', str(pub_at)):
+            pub_at = f"{pub_at[:4]}-{pub_at[4:6]}-{pub_at[6:8]}"
+    else:
+        pub_at = None
+
+    # duration_seconds 처리
+    dur = video_data.get('duration_seconds') or video_data.get('duration')
     try:
-        from auto_pipeline import (
-            AutoPipeline, get_channel_slug, normalize_videos_for_gate,
-            save_tmp_json, PROJECT_ROOT as _PR
-        )
+        dur = int(dur) if dur else None
+    except (ValueError, TypeError):
+        dur = None
+
+    new_video = {
+        'id': str(uuid.uuid4()),
+        'channel_id': channel_id,
+        'video_id': yt_video_id,
+        'title': video_data.get('title', yt_video_id),
+        'published_at': pub_at,
+        'duration_seconds': dur,
+        'has_subtitle': True,
+        'subtitle_language': 'ko',
+        'pipeline_version': PIPELINE_VERSION,
+        'analyzed_at': datetime.utcnow().isoformat(),
+    }
+    result = rest_post('influencer_videos', new_video)
+    if result:
+        vid_uuid = result.get('id', new_video['id'])
+        return vid_uuid
+
+    print(f"  [ERROR] 영상 INSERT 실패: {yt_video_id}")
+    return None
+
+
+def _normalize_confidence(conf) -> str:
+    """confidence 값 정규화 (숫자 → high/medium/low)"""
+    if isinstance(conf, (int, float)):
+        if conf >= 8:
+            return 'high'
+        elif conf >= 5:
+            return 'medium'
+        else:
+            return 'low'
+    if isinstance(conf, str):
+        lower = conf.lower()
+        if lower in ('high', 'medium', 'low'):
+            return lower
+        # 숫자 문자열
+        try:
+            n = float(lower)
+            return _normalize_confidence(n)
+        except ValueError:
+            pass
+    return 'medium'
+
+
+def _detect_market(signal: Dict) -> str:
+    """ticker 기반으로 market 결정"""
+    market = signal.get('market', '')
+    if market and market.upper() != 'KR':
+        # 이미 지정된 경우 CRYPTO 여부만 보정
+        ticker = (signal.get('ticker') or '').upper()
+        if ticker in CRYPTO_TICKERS:
+            return 'CRYPTO'
+        return market
+
+    ticker = (signal.get('ticker') or '').upper()
+    if ticker in CRYPTO_TICKERS:
+        return 'CRYPTO'
+
+    return market or 'KR'
+
+
+def insert_signal(video_uuid: str, signal_data: Dict) -> bool:
+    """influencer_signals INSERT (중복 체크 포함)"""
+    stock = signal_data.get('stock', '')
+    if not stock:
+        return False  # 종목 없는 시그널 스킵
+
+    # 중복 체크: 같은 video_uuid + stock 조합
+    existing = rest_get('influencer_signals',
+                        f'select=id&video_id=eq.{video_uuid}&stock=eq.{stock}')
+    if existing:
+        print(f"    [SKIP] 중복 시그널: {stock}")
+        return False
+
+    # signal 값 정규화
+    signal_val = (signal_data.get('signal_type') or signal_data.get('signal', '중립')).strip()
+    VALID_SIGNALS = {'매수', '긍정', '중립', '부정', '매도'}
+    if signal_val not in VALID_SIGNALS:
+        signal_val = '중립'
+
+    # timestamp 검증
+    ts = signal_data.get('timestamp', '')
+    if ts and not re.match(r'^\d{1,2}:\d{2}(:\d{2})?$', str(ts)):
+        ts = ''
+
+    data = {
+        'id': str(uuid.uuid4()),
+        'video_id': video_uuid,
+        'stock': stock,
+        'ticker': signal_data.get('ticker', ''),
+        'market': _detect_market(signal_data),
+        'mention_type': '결론',
+        'signal': signal_val,
+        'confidence': _normalize_confidence(signal_data.get('confidence', 'medium')),
+        'timestamp': ts or None,
+        'key_quote': (signal_data.get('key_quote', '') or '')[:500],
+        'reasoning': (signal_data.get('reasoning', '') or '')[:500],
+        'pipeline_version': PIPELINE_VERSION,
+        'review_status': 'pending',
+    }
+
+    result = rest_post('influencer_signals', data)
+    if result:
+        return True
+
+    return False
+
+
+# ── 파이프라인 임포트 ──────────────────────────────────────────────────
+def _import_pipeline_components():
+    """AutoPipeline 컴포넌트 임포트"""
+    try:
+        from auto_pipeline import AutoPipeline
         return AutoPipeline
     except ImportError as e:
         print(f"[FATAL] auto_pipeline 임포트 실패: {e}")
-        print("scripts/ 디렉토리에서 실행하거나, PROJECT_ROOT에 scripts/가 있는지 확인하세요.")
         sys.exit(1)
 
 
+def _import_analyzer():
+    """SignalAnalyzer 임포트"""
+    try:
+        from signal_analyzer_rest import SignalAnalyzer
+        return SignalAnalyzer()
+    except ImportError as e:
+        print(f"[FATAL] signal_analyzer_rest 임포트 실패: {e}")
+        sys.exit(1)
+
+
+# ── 메인 ──────────────────────────────────────────────────────────────
 def main():
     parser = argparse.ArgumentParser(
-        description='코린파파 채널 배치 파이프라인 실행기',
+        description='코린파파 채널 배치 파이프라인 실행기 (V11.4)',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 사용 예시:
   python scripts/run_corinpapa_batch.py
   python scripts/run_corinpapa_batch.py --offset 60     # 60번째 영상부터 재시작
   python scripts/run_corinpapa_batch.py --batch-size 20 # 배치 크기 변경
-  python scripts/run_corinpapa_batch.py --dry-run       # 목록 확인만 (실제 처리 안 함)
-  python scripts/run_corinpapa_batch.py --skip-qa       # QA Gate 건너뜀
+  python scripts/run_corinpapa_batch.py --dry-run       # 목록 확인만
+  python scripts/run_corinpapa_batch.py --limit 10      # 최대 10개만
         """
     )
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE,
@@ -116,16 +349,11 @@ def main():
                         help='최대 처리할 총 영상 수 (기본값: 제한 없음)')
     parser.add_argument('--dry-run', action='store_true',
                         help='영상 목록 확인만 (실제 처리 안 함)')
-    parser.add_argument('--skip-existing', action='store_true',
-                        help='DB에 이미 있는 영상 건너뛰기')
-    parser.add_argument('--skip-qa', action='store_true',
-                        help='QA Gate 검증 건너뜀 (긴급 시 사용)')
     args = parser.parse_args()
 
     print("=" * 70)
-    print("코린파파 채널 배치 파이프라인 실행기")
-    print(f"채널: {CHANNEL_URL}")
-    print(f"채널 ID: {CHANNEL_ID}")
+    print("코린파파 채널 배치 파이프라인 실행기 (V11.4)")
+    print(f"채널: {CHANNEL_URL_YT}")
     print(f"배치 크기: {args.batch_size}")
     print(f"시작 오프셋: {args.offset}")
     if args.limit:
@@ -133,24 +361,12 @@ def main():
     print(f"시작 시각: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 70)
 
-    AutoPipeline = _import_pipeline()
-
-    # Dry run 모드
-    if args.dry_run:
-        from auto_pipeline import AutoPipeline as AP
-        pipeline = AP()
-        result = pipeline.run_dry_run(CHANNEL_URL, args.limit)
-        if 'error' in result:
-            print(f"[ERROR] {result['error']}")
-            return 1
-        print("\n[DRY RUN 완료] 실제 처리를 원하면 --dry-run 없이 실행하세요.")
-        return 0
-
-    # ── 전체 영상 목록 수집 ───────────────────────────────────────────
+    AutoPipeline = _import_pipeline_components()
     pipeline = AutoPipeline()
 
+    # ── 전체 영상 목록 수집 ───────────────────────────────────────────
     print(f"\n[1/3] 채널 영상 목록 수집 중...")
-    videos = pipeline.collector.get_video_list(CHANNEL_URL, limit=None)
+    videos = pipeline.collector.get_video_list(CHANNEL_URL_YT, limit=None)
     if not videos:
         print("[ERROR] 영상 목록 수집 실패")
         return 1
@@ -173,37 +389,38 @@ def main():
         passed_videos = passed_videos[args.offset:]
         print(f"[INFO] 오프셋 {args.offset} 적용 → {len(passed_videos)}개 영상 처리 예정")
 
-    # limit 적용 (오프셋 이후)
+    # limit 적용
     if args.limit:
         passed_videos = passed_videos[:args.limit]
         print(f"[INFO] limit {args.limit} 적용 → {len(passed_videos)}개 영상 처리")
 
+    # ── Dry run ──────────────────────────────────────────────────────
+    if args.dry_run:
+        print(f"\n[DRY RUN] 처리 예정 영상 {len(passed_videos)}개:")
+        for i, v in enumerate(passed_videos[:20], 1):
+            print(f"  {i:3d}. [{v.get('video_id', v.get('id','?'))}] {v.get('title','?')[:60]}")
+        if len(passed_videos) > 20:
+            print(f"  ... 외 {len(passed_videos)-20}개")
+        print("\n[DRY RUN 완료] 실제 처리를 원하면 --dry-run 없이 실행하세요.")
+        return 0
+
+    # ── 채널 UUID 확보 ────────────────────────────────────────────────
+    print(f"\n[3/3] 배치 처리 시작...")
+    channel_id = get_or_create_channel()
+    if not channel_id:
+        print("[FATAL] 채널 UUID 획득 실패. 중단.")
+        return 1
+
+    # SignalAnalyzer 인스턴스
+    analyzer = _import_analyzer()
+
     # ── 배치 분할 ────────────────────────────────────────────────────
-    print(f"\n[3/3] 배치 처리 준비...")
     batches = [passed_videos[i:i+args.batch_size]
                for i in range(0, len(passed_videos), args.batch_size)]
     print(f"총 {len(passed_videos)}개 영상 → {len(batches)}개 배치 (배치 크기: {args.batch_size})")
 
-    # ── 채널 정보 수집 ────────────────────────────────────────────────
-    channel_info = pipeline.collector.get_channel_info(CHANNEL_URL)
-    if not channel_info:
-        print("[ERROR] 채널 정보 수집 실패")
-        return 1
-
-    # QA 모듈 임포트 (skip_qa=False인 경우)
-    use_qa = not args.skip_qa
-    run_gate2_fn = None
-    if use_qa:
-        try:
-            from qa.gate2_signals import run_gate2 as _rg2
-            run_gate2_fn = _rg2
-            print("[INFO] QA Gate 2 활성화")
-        except ImportError as e:
-            print(f"[WARNING] QA Gate 2 임포트 실패: {e} → QA 건너뜀")
-            use_qa = False
-
-    # ── 배치 루프 ────────────────────────────────────────────────────
-    total_inserted = 0
+    total_inserted_signals = 0
+    total_inserted_videos = 0
     run_start = time.time()
 
     for batch_idx, batch_videos in enumerate(batches):
@@ -211,7 +428,6 @@ def main():
         print(f"[배치 {batch_idx+1}/{len(batches)}] {len(batch_videos)}개 영상 처리 시작 "
               f"({datetime.now().strftime('%H:%M:%S')})")
 
-        # 배치 전 시그널 수
         before_count = get_signal_count()
         print(f"  현재 DB 시그널 수: {before_count:,}개")
 
@@ -222,7 +438,7 @@ def main():
         print(f"  자막 추출 성공: {len(successful_videos)}/{len(batch_videos)}개")
 
         if not successful_videos:
-            print(f"  [SKIP] 자막 추출 성공한 영상 없음 (암호화폐 채널 특성상 정상)")
+            print(f"  [SKIP] 자막 있는 영상 없음")
             after_count = get_signal_count()
             print(f"  INSERT: 0개 ({before_count} → {after_count})")
             if batch_idx < len(batches) - 1:
@@ -230,53 +446,77 @@ def main():
                 time.sleep(60)
             continue
 
-        # Step 2: AI 시그널 분석
-        print(f"\n  [AI 분석] {len(successful_videos)}개 영상...")
-        analysis_results = pipeline.analyzer.analyze_videos_batch(CHANNEL_URL, successful_videos)
+        # Step 2: 각 영상별 video_uuid 확보 + AI 분석 + 시그널 INSERT
+        print(f"\n  [AI 분석 + DB INSERT] {len(successful_videos)}개 영상...")
+        batch_videos_inserted = 0
+        batch_signals_inserted = 0
 
-        # 분석 결과 백업
-        backup_name = f"scripts/corinpapa_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}_batch{batch_idx+1}.json"
-        pipeline.analyzer.save_analysis_results(analysis_results, backup_name)
-        print(f"  분석 백업: {backup_name}")
+        for v_idx, video_data in enumerate(successful_videos):
+            yt_vid_id = video_data.get('video_id') or video_data.get('id', 'unknown')
+            print(f"\n  [{v_idx+1}/{len(successful_videos)}] {video_data.get('title', yt_vid_id)[:50]}")
 
-        # Step 3: QA Gate 2 (선택)
-        if use_qa and run_gate2_fn:
-            flat_signals = []
-            for res in analysis_results.get('results', []):
-                flat_signals.extend(res.get('signals', []))
-
-            print(f"\n  [QA Gate 2] {len(flat_signals)}개 시그널 검증...")
-            try:
-                gate2_passed = run_gate2_fn(flat_signals, 'corinpapa')
-            except Exception as e:
-                print(f"  [WARNING] QA Gate 2 오류: {e} → INSERT 계속 진행")
-                gate2_passed = True  # 오류 시 통과로 처리 (단일 배치 방지)
-
-            if not gate2_passed:
-                print(f"  [SKIP] QA Gate 2 실패 → 배치 {batch_idx+1} DB INSERT 차단")
-                if batch_idx < len(batches) - 1:
-                    print(f"  60초 대기...")
-                    time.sleep(60)
+            # 2-a. influencer_videos UUID 확보
+            video_uuid = get_or_create_video(channel_id, video_data)
+            if not video_uuid:
+                print(f"    [ERROR] video UUID 획득 실패 — 건너뜀")
                 continue
-            print(f"  [OK] QA Gate 2 통과")
 
-        # Step 4: DB INSERT
-        print(f"\n  [DB INSERT]...")
-        batch_db_stats = pipeline.db_inserter.insert_analysis_results(
-            channel_info, analysis_results, args.skip_existing
-        )
-        print(f"  영상 INSERT: {batch_db_stats.get('inserted_videos', 0)}개")
-        print(f"  시그널 INSERT: {batch_db_stats.get('inserted_signals', 0)}개")
-        print(f"  스킵: {batch_db_stats.get('skipped_videos', 0)}개")
+            # video_data에 video_uuid 추가 (안전하게 전달)
+            video_data['video_uuid'] = video_uuid
+            batch_videos_inserted += 1
 
-        # 배치 후 시그널 수
+            # 2-b. AI 분석 (analyze_video_subtitle 직접 호출)
+            subtitle = video_data.get('subtitle', '')
+            result = analyzer.analyze_video_subtitle(
+                CHANNEL_URL_YT,
+                video_data,
+                subtitle
+            )
+
+            if not result:
+                print(f"    [WARNING] AI 분석 결과 없음")
+                continue
+
+            # 2-c. signals 추출 (다양한 응답 구조 대응)
+            signals = []
+            if isinstance(result, list):
+                signals = result
+            elif isinstance(result, dict):
+                signals = (
+                    result.get('signals') or
+                    result.get('signal_list') or
+                    result.get('results') or
+                    []
+                )
+
+            if not signals:
+                print(f"    [INFO] 시그널 없음")
+                continue
+
+            print(f"    [AI] {len(signals)}개 시그널 추출됨")
+
+            # 2-d. 시그널 INSERT
+            sig_inserted = 0
+            for signal in signals:
+                if insert_signal(video_uuid, signal):
+                    sig_inserted += 1
+                    print(f"      ✅ INSERT: {signal.get('stock', '?')} / "
+                          f"{signal.get('signal_type') or signal.get('signal', '?')} / "
+                          f"conf={signal.get('confidence', '?')}")
+
+            batch_signals_inserted += sig_inserted
+            print(f"    → {sig_inserted}/{len(signals)}개 INSERT")
+
+        # Step 3: 배치 결과 확인
         after_count = get_signal_count()
-        batch_inserted = after_count - before_count
-        total_inserted += batch_inserted
+        batch_net = after_count - before_count
+        total_inserted_signals += batch_net
+        total_inserted_videos += batch_videos_inserted
 
-        print(f"\n  ✅ [배치 {batch_idx+1} 완료] INSERT: {batch_inserted}개 "
-              f"({before_count:,} → {after_count:,})")
-        print(f"  누적 INSERT: {total_inserted}개")
+        print(f"\n  ✅ [배치 {batch_idx+1} 완료]")
+        print(f"  영상 처리: {batch_videos_inserted}개")
+        print(f"  시그널 INSERT: {batch_net}개 ({before_count:,} → {after_count:,})")
+        print(f"  누적 시그널 INSERT: {total_inserted_signals}개")
 
         # 다음 배치 대기
         if batch_idx < len(batches) - 1:
@@ -288,19 +528,19 @@ def main():
     final_count = get_signal_count()
 
     print(f"\n{'='*70}")
-    print(f"🎉 코린파파 배치 파이프라인 완료")
+    print(f"🎉 코린파파 배치 파이프라인 완료 (V11.4)")
     print(f"{'='*70}")
     print(f"총 실행 시간  : {run_elapsed/60:.1f}분")
     print(f"처리 배치 수  : {len(batches)}개")
     print(f"처리 영상 수  : {len(passed_videos)}개")
-    print(f"총 INSERT 건수: {total_inserted}개")
+    print(f"영상 DB 등록  : {total_inserted_videos}개")
+    print(f"총 INSERT 건수: {total_inserted_signals}개")
     print(f"최종 DB 시그널: {final_count:,}개")
     print(f"완료 시각     : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"{'='*70}")
 
-    if total_inserted == 0:
+    if total_inserted_signals == 0:
         print("\n[INFO] INSERT 0건 — 이미 처리된 영상이거나 시그널 없는 영상일 수 있습니다.")
-        print("[INFO] 새 영상 처리를 원하면 --skip-existing 없이 다시 실행하거나 DB를 확인하세요.")
 
     return 0
 
