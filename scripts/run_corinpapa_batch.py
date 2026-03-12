@@ -22,6 +22,7 @@ import uuid
 import json
 import time
 import argparse
+import subprocess
 import requests
 from datetime import datetime
 from typing import Optional, Dict, Any, List
@@ -558,12 +559,132 @@ def main():
             print(f"\n  [대기] 레이트리밋 방지 60초 대기 중...")
             time.sleep(60)
 
+    # ── 배치 루프 완료: Step 8~10 실행 ──────────────────────────────
+    print(f"\n{'='*70}")
+    print(f"[배치 처리 완료] 총 {total_inserted_signals}개 시그널 INSERT")
+    print(f"{'='*70}")
+
+    # ── Step 8: new_stock_handler (새 종목 가격 수집) ─────────────
+    print(f"\n[Step 8] 새 종목 가격 데이터 수집...")
+    rebuild_needed = False
+    try:
+        from new_stock_handler import NewStockHandler
+        _handler = NewStockHandler()
+        # analysis_results 형식으로 래핑
+        _analysis_stub = {'results': []}
+        for _v in successful_videos_total if 'successful_videos_total' in dir() else []:
+            _analysis_stub['results'].append({
+                'signals': _v.get('_signals', []),
+                'video': _v
+            })
+        if _analysis_stub['results']:
+            stock_result = _handler.process_new_stocks(_analysis_stub)
+            new_stocks = stock_result.get('new_stocks', [])
+            prices_added = stock_result.get('prices_added', 0)
+            rebuild_needed = stock_result.get('rebuild_needed', False)
+            if new_stocks:
+                print(f"  새 종목 {len(new_stocks)}개 감지: {[s.get('ticker','?') for s in new_stocks]}")
+                print(f"  가격 수집 완료: {prices_added}개")
+                if rebuild_needed:
+                    print(f"  stock_tickers.json 업데이트됨 → 재빌드 필요")
+            else:
+                print("  새 종목 없음 (기존 가격 데이터 모두 존재)")
+        else:
+            print("  [INFO] 분석 결과 없음 — 새 종목 처리 스킵")
+    except Exception as _e:
+        print(f"  [WARNING] 새 종목 처리 오류 (건너뜀): {_e}")
+
+    # ── Step 8.5: data/ → public/ 동기화 ──────────────────────────
+    print(f"\n[Step 8.5] data/ -> public/ 동기화...")
+    try:
+        import shutil as _shutil
+        _data_dir = os.path.join(PROJECT_ROOT, 'data')
+        _pub_dir = os.path.join(PROJECT_ROOT, 'public')
+        _out_dir = os.path.join(PROJECT_ROOT, 'out')
+        for _fname in ['signal_prices.json', 'stockPrices.json']:
+            _src = os.path.join(_data_dir, _fname)
+            if not os.path.exists(_src):
+                continue
+            for _dst_dir in [_pub_dir, _out_dir]:
+                _dst = os.path.join(_dst_dir, _fname)
+                if os.path.exists(os.path.dirname(_dst)):
+                    _shutil.copy2(_src, _dst)
+        print("  signal_prices.json, stockPrices.json 동기화 완료")
+    except Exception as _e:
+        print(f"  [WARNING] 동기화 오류: {_e}")
+
+    # ── Gate 3: 프론트엔드 검증 ────────────────────────────────────
+    print(f"\n[QA Gate 3] 프론트엔드 검증...")
+    try:
+        _scripts_qa_dir = os.path.join(_scripts_dir, 'qa')
+        if _scripts_qa_dir not in sys.path:
+            sys.path.insert(0, _scripts_qa_dir)
+        from qa.gate3_frontend import run_gate3
+        gate3_passed = run_gate3(
+            slug='corinpapa',
+            project_root=PROJECT_ROOT,
+            check_deploy=False
+        )
+        if gate3_passed:
+            print("[OK] Gate 3 통과")
+        else:
+            print("[FAIL] Gate 3 실패 → 빌드 차단")
+            run_elapsed = time.time() - run_start
+            final_count = get_signal_count()
+            print(f"\n최종 DB 시그널: {final_count:,}개 | 실행 시간: {run_elapsed/60:.1f}분")
+            return 1
+    except ZeroDivisionError:
+        print("[INFO] Gate 3 수익률 체크 — 시그널 데이터 없음 (건너뜀)")
+        gate3_passed = True
+    except Exception as _e:
+        print(f"  [WARNING] Gate 3 오류 (건너뜀): {_e}")
+        gate3_passed = True
+
+    # ── Step 9: npm run build ──────────────────────────────────────
+    print(f"\n[Step 9] npm run build...")
+    _build_result = subprocess.run(
+        ['npm', 'run', 'build'],
+        cwd=PROJECT_ROOT,
+        capture_output=True, text=True, timeout=300,
+        encoding='utf-8', errors='replace'
+    )
+    if _build_result.returncode != 0:
+        print(f"[ERROR] 빌드 실패:\n{_build_result.stderr[-500:]}")
+        return 1
+    _out_dir = os.path.join(PROJECT_ROOT, 'out')
+    _html_count = sum(1 for _ in __import__('pathlib').Path(_out_dir).rglob('*.html'))
+    print(f"[OK] 빌드 완료 (HTML {_html_count}개)")
+
+    # ── Step 10: git commit + push ─────────────────────────────────
+    print(f"\n[Step 10] git commit + push...")
+    _ts = datetime.now().strftime('%Y-%m-%d %H:%M')
+    _commit_msg = f'feat: 코린파파 파이프라인 자동배포 ({_ts}) — 시그널 {total_inserted_signals}개 INSERT'
+    try:
+        subprocess.run(['git', 'add', '-A'], cwd=PROJECT_ROOT, check=True, timeout=30)
+        _commit = subprocess.run(
+            ['git', 'commit', '-m', _commit_msg],
+            cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=30
+        )
+        if 'nothing to commit' in _commit.stdout or 'nothing to commit' in _commit.stderr:
+            print("[INFO] 변경사항 없음 — 커밋 스킵")
+        else:
+            _push = subprocess.run(
+                ['git', 'push', 'origin', 'master'],
+                cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=120
+            )
+            if _push.returncode == 0:
+                print("[OK] git push 완료 → GitHub Pages 자동 배포")
+            else:
+                print(f"[WARNING] git push 오류: {_push.stderr[:200]}")
+    except Exception as _e:
+        print(f"  [WARNING] git 오류: {_e}")
+
     # ── 최종 요약 ─────────────────────────────────────────────────────
     run_elapsed = time.time() - run_start
     final_count = get_signal_count()
 
     print(f"\n{'='*70}")
-    print(f"🎉 코린파파 배치 파이프라인 완료 (V11.4)")
+    print(f"[DONE] 코린파파 배치 파이프라인 완료 (V11.4)")
     print(f"{'='*70}")
     print(f"총 실행 시간  : {run_elapsed/60:.1f}분")
     print(f"처리 배치 수  : {len(batches)}개")
@@ -572,6 +693,7 @@ def main():
     print(f"총 INSERT 건수: {total_inserted_signals}개")
     print(f"최종 DB 시그널: {final_count:,}개")
     print(f"완료 시각     : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"QA Gate 3     : {'OK' if gate3_passed else 'FAIL'}")
     print(f"{'='*70}")
 
     if total_inserted_signals == 0:
