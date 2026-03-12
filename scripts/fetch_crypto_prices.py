@@ -17,6 +17,7 @@ CRYPTO_TICKERS = {
 # yfinance 미지원 코인 → CoinGecko ID 매핑
 COINGECKO_TICKERS = {
     'CNTN-USD': ('canton-network', '캔톤코인'),
+    'PENGU-USD': ('pudgy-penguins', '퍼지펭귄'),
 }
 
 def fetch_coingecko(cg_id):

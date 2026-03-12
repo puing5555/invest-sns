@@ -3,6 +3,7 @@ const STOCK_NAME_MAP: Record<string, string> = {
   'CC': '캔톤네트워크',
   'BTC': '비트코인',
   'XRP': '리플',
+  'PENGU': '퍼지펭귄',
   'NVDA': '엔비디아',
   'TSLA': '테슬라',
   'TSM': 'TSMC',
