@@ -85,6 +85,7 @@ const getStockData = (code: string, dynamicName?: string) => {
     'GME': '게임스톱 (GME)', 'SOXX': 'SOXX ETF (SOXX)', 'MU': '마이크론 (MU)', 'KS11': '코스피 (KS11)',
     // 코인
     'BTC': '비트코인 (BTC)', 'ETH': '이더리움 (ETH)', 'SOL': '솔라나 (SOL)', 'DOGE': '도지코인 (DOGE)', 'KLAY': '클레이튼 (KLAY)',
+    'XRP': '리플 (XRP)', 'LINK': '체인링크 (LINK)', 'CNTN': '캔톤 (CC)', 'ARB': '아비트럼 (ARB)', 'ORBS': '오브스 (ORBS)',
   };
 
   // 한국 종목인지 확인 (숫자로만 이뤄진 코드)
