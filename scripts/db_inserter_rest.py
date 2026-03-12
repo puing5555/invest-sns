@@ -22,10 +22,10 @@ class DatabaseInserter:
         
         Args:
             channel_info: {
-                'url': str,
-                'name': str,
+                'url': str,           # channel_url에 매핑
+                'name': str,          # channel_name에 매핑 (channel_title 우선)
+                'channel_title': str, # channel_name 우선 사용
                 'subscriber_count': int,
-                'video_count': int,
                 'description': str
             }
         
@@ -33,11 +33,14 @@ class DatabaseInserter:
             channel_id (UUID)
         """
         try:
-            # 기존 채널 확인
+            # channel_url: 'url' 키 사용 (channel_info['url'] = channel_url)
+            channel_url = channel_info.get('url', '')
+
+            # 기존 채널 확인 — channel_url 컬럼으로 조회
             response = requests.get(
                 f"{self.base_url}/influencer_channels",
                 headers=self.headers,
-                params={'url': f'eq.{channel_info["url"]}', 'select': 'id'}
+                params={'channel_url': f'eq.{channel_url}', 'select': 'id'}
             )
             response.raise_for_status()
             
@@ -47,26 +50,42 @@ class DatabaseInserter:
                 print(f"[OK] 기존 채널 발견: {channel_id}")
                 return channel_id
             
-            # 새 채널 생성
+            # channel_name: channel_title > name 우선순위
+            channel_name = (
+                channel_info.get('channel_title') or
+                channel_info.get('name') or
+                'Unknown'
+            )
+
+            # channel_handle: URL에서 @handle 추출
+            import re as _re
+            handle_match = _re.search(r'@([^/?#]+)', channel_url)
+            channel_handle = handle_match.group(1) if handle_match else ''
+
+            # 새 채널 생성 — 실제 테이블 컬럼명 사용
             channel_data = {
                 'id': str(uuid.uuid4()),
-                'name': channel_info['name'],
-                'url': channel_info['url'],
+                'channel_name': channel_name,
+                'channel_handle': channel_handle,
+                'channel_url': channel_url,
+                'platform': 'youtube',
                 'description': channel_info.get('description', ''),
                 'subscriber_count': channel_info.get('subscriber_count', 0),
-                'video_count': channel_info.get('video_count', 0),
                 'created_at': datetime.now().isoformat(),
                 'updated_at': datetime.now().isoformat()
             }
             
+            insert_headers = dict(self.headers)
+            insert_headers['Content-Type'] = 'application/json; charset=utf-8'
+            
             response = requests.post(
                 f"{self.base_url}/influencer_channels",
-                headers=self.headers,
-                json=channel_data
+                headers=insert_headers,
+                data=json.dumps(channel_data, ensure_ascii=False).encode('utf-8')
             )
             response.raise_for_status()
             
-            print(f"[OK] 새 채널 생성: {channel_data['id']}")
+            print(f"[OK] 새 채널 생성: {channel_data['id']} ({channel_name})")
             return channel_data['id']
             
         except requests.exceptions.RequestException as e:

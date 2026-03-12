@@ -9,6 +9,24 @@ from youtube_transcript_api.formatters import TextFormatter
 import yt_dlp
 from pipeline_config import PipelineConfig
 
+# ── 멤버십 전용 영상 감지 ──────────────────────────────────────────────
+class MemberOnlyVideoError(Exception):
+    """유료 멤버십 전용 영상 — 자막 추출 불가, 재시도 없이 즉시 스킵"""
+    pass
+
+_MEMBER_ONLY_PATTERNS = [
+    "available to this channel's members",
+    "members-only",
+    "member-only",
+    "Join this channel",
+    "membership",
+    "MembersOnly",
+]
+
+def _is_member_only_error(err_msg: str) -> bool:
+    msg = str(err_msg).lower()
+    return any(p.lower() in msg for p in _MEMBER_ONLY_PATTERNS)
+
 # Webshare ProxyConfig — youtube_transcript_api 0.7+ 지원
 try:
     from youtube_transcript_api.proxies import WebshareProxyConfig
@@ -109,6 +127,8 @@ class SubtitleExtractor:
             return None
             
         except Exception as e:
+            if _is_member_only_error(str(e)):
+                raise MemberOnlyVideoError(f"멤버십 전용 영상: {video_id}")
             print(f"[ERROR] youtube_transcript_api 에러: {e}")
             return None
         finally:
@@ -147,6 +167,8 @@ class SubtitleExtractor:
             print(f"[OK] Webshare 자막 추출 성공: {len(result)}자 ({len(segments)}세그먼트)")
             return result
         except Exception as e:
+            if _is_member_only_error(str(e)):
+                raise MemberOnlyVideoError(f"멤버십 전용 영상 (Webshare): {video_id}")
             print(f"[INFO] Webshare 자막 실패 ({video_id}): {type(e).__name__}: {str(e)[:100]}")
             return None
 
@@ -195,6 +217,8 @@ class SubtitleExtractor:
                 return None
                 
         except Exception as e:
+            if _is_member_only_error(str(e)):
+                raise MemberOnlyVideoError(f"멤버십 전용 영상 (yt-dlp): {url}")
             print(f"[ERROR] yt-dlp 에러: {e}")
             return None
     
@@ -317,6 +341,11 @@ class SubtitleExtractor:
                     wait_time = (attempt + 1) * 5
                     print(f"재시도 {attempt + 1}/{retries} ({wait_time}초 후)...")
                     time.sleep(wait_time)
+
+            except MemberOnlyVideoError as e:
+                # 멤버십 전용 영상 — 재시도 없이 즉시 스킵
+                print(f"  [MEMBER-ONLY] 스킵: {video_id} — {e}")
+                return None
 
             except Exception as e:
                 print(f"자막 추출 에러 (시도 {attempt + 1}): {e}")

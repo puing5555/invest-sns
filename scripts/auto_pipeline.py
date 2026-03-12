@@ -406,6 +406,7 @@ class AutoPipeline:
 
         try:
             # Step A: 자막 추출
+            from subtitle_extractor import MemberOnlyVideoError
             subtitle = self.extractor.extract_subtitle(video['url'])
             if not subtitle:
                 print(f"  [SKIP] 자막 없음: {title_short}")
@@ -469,6 +470,10 @@ class AutoPipeline:
                 'analysis_result': analysis_result,
                 'video_data': video_with_sub,
             }
+        except MemberOnlyVideoError as e:
+            print(f"  [MEMBER-ONLY] 스킵: {title_short}")
+            return {'member_only': True, 'video_id': video_id}
+
         except Exception as e:
             print(f"  [ERROR] {title_short}: {e}")
             return None
@@ -582,6 +587,7 @@ class AutoPipeline:
 
                 parallel_results = []
                 failed_count = 0
+                member_only_count = 0
 
                 with ThreadPoolExecutor(max_workers=3) as executor:
                     future_map = {
@@ -592,19 +598,21 @@ class AutoPipeline:
                     }
                     for future in as_completed(future_map):
                         result = future.result()
-                        if result:
+                        if result and result.get('member_only'):
+                            member_only_count += 1
+                        elif result:
                             parallel_results.append(result)
                         else:
                             failed_count += 1
 
                 if not parallel_results:
-                    print(f"  [SKIP] 처리 성공한 영상 없음 → 다음 배치")
+                    print(f"  [SKIP] 처리 성공한 영상 없음 → 다음 배치 (멤버십 {member_only_count}개 스킵)")
                     if batch_idx < len(batches) - 1:
                         print(f"  60초 대기...")
                         time.sleep(60)
                     continue
 
-                print(f"  병렬 처리 완료: 성공 {len(parallel_results)}/{len(batch_videos)}개 (실패 {failed_count}개)")
+                print(f"  병렬 처리 완료: 성공 {len(parallel_results)}/{len(batch_videos)}개 (실패 {failed_count}개, 멤버십스킵 {member_only_count}개)")
 
                 # successful_videos 리스트 (이후 단계 호환용)
                 successful_videos = [r['video_data'] for r in parallel_results]
