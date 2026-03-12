@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
 import {
   getUserStocks,
   addUserStock,
@@ -200,7 +199,6 @@ function WatchlistModal({
 
 export default function MyPortfolioPage() {
   const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
 
   // 보유종목
   const [stocks, setStocks] = useState<UserStock[]>([]);
@@ -217,15 +215,13 @@ export default function MyPortfolioPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (authLoading) {
-      const timer = setTimeout(() => {
-        router.push('/login');
-      }, 3000);
-      return () => clearTimeout(timer);
+    if (authLoading) return;
+    if (!user) {
+      setLoading(false);
+      return;
     }
-    if (!user) { router.push('/login'); return; }
     loadData();
-  }, [user, authLoading, router]);
+  }, [user, authLoading]);
 
   const loadData = async () => {
     setLoading(true);
@@ -291,6 +287,32 @@ export default function MyPortfolioPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-[#8b95a1]">로딩 중...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center">
+        <div className="bg-white rounded-2xl shadow-sm p-10 max-w-sm w-full text-center">
+          <div className="text-5xl mb-4">📊</div>
+          <h2 className="text-xl font-bold text-[#191f28] mb-2">내 포트폴리오</h2>
+          <p className="text-[#8b95a1] mb-6 text-sm leading-relaxed">
+            보유종목과 관심종목을 관리하려면<br />로그인이 필요합니다.
+          </p>
+          <a
+            href="/login"
+            className="block w-full bg-[#3182f6] text-white py-3 rounded-xl font-semibold text-sm hover:bg-[#1b64da] transition-colors"
+          >
+            로그인하기
+          </a>
+          <a
+            href="/signup"
+            className="block w-full mt-2 bg-[#f4f4f4] text-[#191f28] py-3 rounded-xl font-semibold text-sm hover:bg-[#e8e8e8] transition-colors"
+          >
+            회원가입
+          </a>
+        </div>
       </div>
     );
   }
