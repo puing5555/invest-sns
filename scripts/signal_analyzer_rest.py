@@ -272,6 +272,39 @@ URL: {video_data['url']}
             print(f"[ERROR] 데이터베이스 형식 변환 오류: {e}")
             return []
     
+    def deduplicate_signals(self, signals: List[Dict[str, Any]], video_title: str = '') -> List[Dict[str, Any]]:
+        """같은 영상 내 동일 종목 중복 시그널 제거 — 더 강한 것(strength × confidence)만 남김"""
+        SIGNAL_STRENGTH = {
+            'STRONG_BUY': 6, 'BUY': 5, 'POSITIVE': 4,
+            'NEUTRAL': 3,
+            'CONCERN': 2, 'SELL': 1, 'STRONG_SELL': 0
+        }
+        
+        best: Dict[str, Dict] = {}  # stock_symbol → best signal
+        for sig in signals:
+            stock = sig.get('stock_symbol', '')
+            if not stock:
+                continue
+            strength = SIGNAL_STRENGTH.get(sig.get('signal_type', 'NEUTRAL'), 3)
+            conf = float(sig.get('confidence', 0.5))
+            score = strength * conf
+            
+            if stock not in best or score > best[stock]['_score']:
+                sig['_score'] = score
+                best[stock] = sig
+        
+        result = []
+        for sig in best.values():
+            sig.pop('_score', None)
+            result.append(sig)
+        
+        removed = len(signals) - len(result)
+        if removed > 0:
+            title_short = video_title[:40] if video_title else 'N/A'
+            print(f"  [DEDUP] {title_short}: 중복 {removed}개 제거 ({len(signals)} → {len(result)}개)")
+        
+        return result
+
     def analyze_videos_batch(self, channel_url: str, videos_with_subtitles: List[Dict[str, Any]],
                            delay_seconds: int = 3) -> Dict[str, Any]:
         """auto_pipeline.py 호환 alias"""
@@ -315,6 +348,9 @@ URL: {video_data['url']}
                         analysis_result, 
                         video_data['video_uuid']
                     )
+                    
+                    # 같은 영상 내 동일 종목 중복 제거 (더 강한 시그널만 남김)
+                    signals = self.deduplicate_signals(signals, video_data.get('title', ''))
                     
                     stats['success'] += 1
                     stats['signals_extracted'] += len(signals)

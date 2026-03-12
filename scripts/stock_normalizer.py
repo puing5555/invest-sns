@@ -65,6 +65,37 @@ CRYPTO_TICKERS = {
     'KLAY', 'SUI', 'APT', 'PEPE', 'SHIB',
 }
 
+# 미국 주요 ticker 화이트리스트 (상위 100개 + 유명 성장주)
+US_TICKERS = {
+    # 빅테크 / FAANG+
+    'AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'GOOG', 'META', 'TSLA',
+    'AVGO', 'ORCL', 'ADBE', 'CRM', 'INTC', 'AMD', 'QCOM', 'TXN',
+    'IBM', 'CSCO', 'INTU', 'NOW', 'SNOW', 'DDOG', 'ZS', 'CRWD',
+    # 금융
+    'JPM', 'BAC', 'GS', 'MS', 'WFC', 'C', 'AXP', 'BLK', 'SPGI',
+    'V', 'MA', 'PYPL', 'SQ', 'AFRM', 'HOOD', 'SOFI', 'CME', 'ICE',
+    # 헬스케어
+    'LLY', 'UNH', 'JNJ', 'ABBV', 'MRK', 'PFE', 'AMGN', 'GILD',
+    'ISRG', 'MDT', 'TMO', 'DHR', 'REGN', 'CI',
+    # 소비재 / 리테일
+    'WMT', 'COST', 'TGT', 'HD', 'LOW', 'SBUX', 'MCD',
+    'NKE', 'TJX', 'BKNG', 'ABNB', 'UBER', 'LYFT', 'DASH',
+    # 에너지 / 산업재
+    'XOM', 'CVX', 'EOG', 'SLB', 'GE', 'HON', 'CAT', 'DE', 'EMR',
+    'ETN', 'ROP', 'CTAS', 'UPS', 'LMT', 'RTX', 'BA', 'NEE', 'DUK', 'SO',
+    # 통신 / 미디어
+    'NFLX', 'DIS', 'CMCSA', 'T', 'VZ', 'TMUS',
+    # 기타 주목 종목
+    'PLTR', 'MSTR', 'COIN', 'MELI', 'SHOP', 'RBLX', 'ASML',
+    'BRK', 'PEP', 'KO', 'MO', 'PLD', 'CB', 'ACN', 'PNC', 'USB',
+    'BTBT', 'MARA', 'RIOT', 'CLSK', 'HUT', 'CIFR',
+    # ETF (주요)
+    'SPY', 'QQQ', 'IWM', 'DIA', 'VOO', 'VTI', 'ARKK', 'SOXL', 'TQQQ',
+    # 기타 자주 언급되는 미국 종목
+    'MSCI', 'MCO', 'NDAQ', 'CMG', 'PANW', 'NET', 'OKTA', 'TWLO',
+    'HIMS', 'IONQ', 'QUBT', 'RGTI', 'SMCI', 'ARM', 'ALAB',
+}
+
 
 def normalize_ticker(raw_ticker: str) -> str:
     """ticker 정규화. 매핑 없으면 원본 반환."""
@@ -84,7 +115,10 @@ def normalize_market(ticker: str) -> str:
         if suffix in ('KS', 'KQ'):
             return 'KR'
         return 'US'
-    return 'US'
+    # 미국 주요 ticker 화이트리스트로 US 자동 판별
+    if ticker in US_TICKERS:
+        return 'US'
+    return 'US'  # 기본값 유지 (영문 티커는 US로 간주)
 
 
 if __name__ == '__main__':
