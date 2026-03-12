@@ -19,7 +19,7 @@ COINGECKO_ID_MAP = {
     'DOGE': 'dogecoin',
     'XRP': 'ripple',
     'LINK': 'chainlink',
-    'CNTN': 'canton-network',
+    'CNTN': 'canton-network',  # CoinGecko ID: canton-network (ticker: CC)
 }
 
 BINANCE_SYMBOL_MAP = {

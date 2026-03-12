@@ -24,7 +24,18 @@ CRYPTO_TARGETS = [
     {'ticker': 'SOL',  'yf_symbol': 'SOL-USD'},
     {'ticker': 'DOGE', 'yf_symbol': 'DOGE-USD'},
     {'ticker': 'XRP',  'yf_symbol': 'XRP-USD'},
+    {'ticker': 'CNTN', 'yf_symbol': 'CNTN-USD'},
 ]
+
+# DB ticker -> signal_prices.json ticker 매핑
+TICKER_ALIAS = {
+    'CNTN-USD': 'CNTN',
+    'BTC-USD': 'BTC',
+    'ETH-USD': 'ETH',
+    'SOL-USD': 'SOL',
+    'DOGE-USD': 'DOGE',
+    'XRP-USD': 'XRP',
+}
 
 # 1. 로드
 with open(SIGNAL_PRICES, encoding='utf-8') as f:
@@ -66,7 +77,9 @@ for key, val in data.items():
         continue
     if not isinstance(val, dict):
         continue
-    ticker = val.get('ticker', '')
+    raw_ticker = val.get('ticker', '')
+    # DB에 CNTN-USD 등으로 저장된 것도 처리
+    ticker = TICKER_ALIAS.get(raw_ticker, raw_ticker)
     if ticker not in updated_prices:
         continue
     new_price = updated_prices[ticker]
