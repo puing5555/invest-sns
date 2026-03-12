@@ -9,6 +9,7 @@ import StockAnalystTab from '@/components/stock/StockAnalystTab';
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
+import cryptoNames from '@/data/cryptoNames.json';
 import { formatStockPrice, isKoreanStock } from '@/lib/currency';
 import ReportDetailModal from '@/components/ReportDetailModal';
 import { influencers } from '@/data/influencerData';
@@ -83,11 +84,10 @@ const getStockData = (code: string, dynamicName?: string) => {
     'RKLB': '로켓랩 (RKLB)', 'SQ': '스퀘어 (SQ)', 'RIOT': 'Riot Blockchain (RIOT)',
     'GBTC': '그레이스케일 비트코인 신탁 (GBTC)', 'COIN': '코인베이스 (COIN)', 'IREN': 'IREN (IREN)',
     'GME': '게임스톱 (GME)', 'SOXX': 'SOXX ETF (SOXX)', 'MU': '마이크론 (MU)', 'KS11': '코스피 (KS11)',
-    // 코인
-    'BTC': '비트코인 (BTC)', 'ETH': '이더리움 (ETH)', 'SOL': '솔라나 (SOL)', 'DOGE': '도지코인 (DOGE)', 'KLAY': '클레이튼 (KLAY)',
-    'XRP': '리플 (XRP)', 'LINK': '체인링크 (LINK)', 'CNTN': '캔톤 (CC)', 'ARB': '아비트럼 (ARB)', 'ORBS': '오브스 (ORBS)',
-    'PENGU': '퍼지펭귄 (PENGU)',
-    'UNI': '유니스왑 (UNI)',
+    // 코인 (data/cryptoNames.json에서 자동 생성 — 새 코인은 JSON만 수정)
+    ...Object.fromEntries(
+      Object.entries(cryptoNames as Record<string, string>).map(([k, v]) => [k, `${v} (${k})`])
+    ),
   };
 
   // 한국 종목인지 확인 (숫자로만 이뤄진 코드)

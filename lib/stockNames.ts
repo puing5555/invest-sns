@@ -1,10 +1,10 @@
-// 티커 → 한글 종목명 매핑 (DB에 한글 종목명이 없는 경우 사용)
+// 티커 → 한글 종목명 매핑 (단일 소스: data/cryptoNames.json)
+// 새 코인 추가 시 data/cryptoNames.json 만 수정하면 됩니다.
+import cryptoNames from '@/data/cryptoNames.json';
+
+// 해외주식 추가 매핑
 const STOCK_NAME_MAP: Record<string, string> = {
-  'CC': '캔톤네트워크',
-  'BTC': '비트코인',
-  'XRP': '리플',
-  'PENGU': '퍼지펭귄',
-  'UNI': '유니스왑',
+  ...(cryptoNames as Record<string, string>),
   'NVDA': '엔비디아',
   'TSLA': '테슬라',
   'TSM': 'TSMC',

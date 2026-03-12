@@ -8850,18 +8850,22 @@
     "ticker": "MARA"
   },
   "f56b4362-c518-4c44-a7c9-458add2e6664": {
-    "price_at_signal": 28.868000030517578,
-    "price_current": 29.21,
-    "return_pct": 1.18,
+    "price_at_signal": 747.573276,
+    "price_current": 146.63003,
+    "return_pct": -80.39,
     "signal_date": "2025-08-18",
-    "ticker": "ARB"
+    "ticker": "ARB",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "7fa60bda-818e-46c4-9d96-3d89f2811168": {
-    "price_at_signal": 28.854999542236328,
-    "price_current": 29.21,
-    "return_pct": 1.23,
+    "price_at_signal": 669.105057,
+    "price_current": 146.63003,
+    "return_pct": -78.09,
     "signal_date": "2025-08-16",
-    "ticker": "ARB"
+    "ticker": "ARB",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "0332062c-2bdf-4072-a330-e44f59ae4a0a": {
     "price_at_signal": 68.0,
@@ -9245,6 +9249,15 @@
     "ticker": "UNI",
     "market": "CRYPTO",
     "current_price": 5722.6746,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "coingecko"
+  },
+  "ARB": {
+    "name": "아비트럼",
+    "ticker": "ARB",
+    "market": "CRYPTO",
+    "current_price": 146.63003,
     "currency": "KRW",
     "last_updated": "2026-03-12",
     "source": "coingecko"
