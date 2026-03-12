@@ -5,5 +5,96 @@
     "check_name": "date_concentration",
     "detail": "에 100.0% 집중",
     "timestamp": "2026-03-09T14:44:35.611744"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "invalid_signal_type",
+    "detail": "유효하지 않은 signal_type 9건: ['POSITIVE', 'CONCERN', 'NEUTRAL']",
+    "timestamp": "2026-03-12T18:14:14.223246"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "no_vtt_timestamps",
+    "detail": "timestamp null 100.0% — VTT 타임코드 미포함 의심",
+    "timestamp": "2026-03-12T18:14:14.223709"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-12T18:14:14.224184"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "null_key_quote",
+    "detail": "key_quote null 100.0%",
+    "timestamp": "2026-03-12T18:14:14.224623"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "invalid_signal_type",
+    "detail": "유효하지 않은 signal_type 3건: ['POSITIVE', 'BUY']",
+    "timestamp": "2026-03-12T18:20:21.113223"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "no_vtt_timestamps",
+    "detail": "timestamp null 100.0% — VTT 타임코드 미포함 의심",
+    "timestamp": "2026-03-12T18:20:21.113826"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "null_key_quote",
+    "detail": "key_quote null 100.0%",
+    "timestamp": "2026-03-12T18:20:21.114310"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "invalid_signal_type",
+    "detail": "유효하지 않은 signal_type 2건: ['POSITIVE']",
+    "timestamp": "2026-03-12T18:25:59.621245"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "no_vtt_timestamps",
+    "detail": "timestamp null 100.0% — VTT 타임코드 미포함 의심",
+    "timestamp": "2026-03-12T18:25:59.621722"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "null_key_quote",
+    "detail": "key_quote null 100.0%",
+    "timestamp": "2026-03-12T18:25:59.622182"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "invalid_signal_type",
+    "detail": "유효하지 않은 signal_type 1건: ['BUY']",
+    "timestamp": "2026-03-12T18:33:35.601256"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "no_vtt_timestamps",
+    "detail": "timestamp null 100.0% — VTT 타임코드 미포함 의심",
+    "timestamp": "2026-03-12T18:33:35.601829"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "null_key_quote",
+    "detail": "key_quote null 100.0%",
+    "timestamp": "2026-03-12T18:33:35.602357"
   }
 ]
