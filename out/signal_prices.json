@@ -1328,9 +1328,9 @@
     "ticker": "036930"
   },
   "2bb7d896-a03c-4413-ac3e-9717c59b9090": {
-    "price_at_signal": 200500.0,
+    "price_at_signal": 199880.69,
     "price_current": 259000,
-    "return_pct": 29.18,
+    "return_pct": 29.58,
     "signal_date": "2026-02-22",
     "ticker": "042700"
   },
@@ -1678,14 +1678,14 @@
     "ticker": "005380"
   },
   "e11ea0c6-f62d-4d54-b9cf-26540e442204": {
-    "price_at_signal": 59493.6,
+    "price_at_signal": 59493.61,
     "price_current": 172200,
     "return_pct": 189.44,
     "signal_date": "2020-12-01",
     "ticker": "005930"
   },
   "23326b0f-838c-4825-ab54-14a5e5a62012": {
-    "price_at_signal": 94343.53,
+    "price_at_signal": 94343.52,
     "price_current": 849000,
     "return_pct": 799.9,
     "signal_date": "2020-12-01",
@@ -1727,9 +1727,9 @@
     "ticker": "NVDA"
   },
   "46e4953a-88db-4aaf-bd32-dfa9d3c8d2ab": {
-    "price_at_signal": 202.74,
+    "price_at_signal": 201.45,
     "price_current": 138.13,
-    "return_pct": -31.87,
+    "return_pct": -31.43,
     "signal_date": "2024-06-06",
     "ticker": "QCOM"
   },
@@ -1748,9 +1748,9 @@
     "ticker": "005930"
   },
   "3906eaf2-2f5d-4cc7-b222-b7292cfb28ac": {
-    "price_at_signal": 198.25,
+    "price_at_signal": 196.98,
     "price_current": 138.13,
-    "return_pct": -30.33,
+    "return_pct": -29.88,
     "signal_date": "2024-05-30",
     "ticker": "QCOM"
   },
@@ -1762,9 +1762,9 @@
     "ticker": "AMZN"
   },
   "c84d8705-85ea-4cb7-b91a-d9fb54db86ac": {
-    "price_at_signal": 311.69,
+    "price_at_signal": 311.47,
     "price_current": 303.56,
-    "return_pct": -2.61,
+    "return_pct": -2.54,
     "signal_date": "2026-02-23",
     "ticker": "GOOG"
   },
@@ -1832,9 +1832,9 @@
     "ticker": "267260"
   },
   "9ef8ca4d-9878-4fcf-9bd5-a7677819fa19": {
-    "price_at_signal": 260.99,
+    "price_at_signal": 260.64,
     "price_current": 324.87,
-    "return_pct": 24.48,
+    "return_pct": 24.64,
     "signal_date": "2024-09-25",
     "ticker": "CEG"
   },
@@ -1902,7 +1902,7 @@
     "ticker": "357780"
   },
   "af7eb78c-459f-4664-be5f-e0cc31511b4d": {
-    "price_at_signal": 168424.16,
+    "price_at_signal": 168424.14,
     "price_current": 849000,
     "return_pct": 404.08,
     "signal_date": "2024-04-23",
@@ -1951,9 +1951,9 @@
     "ticker": "NVDA"
   },
   "81e3bc36-6ddc-40b4-84d0-eee9752d2177": {
-    "price_at_signal": 155.55,
+    "price_at_signal": 154.56,
     "price_current": 138.13,
-    "return_pct": -11.2,
+    "return_pct": -10.63,
     "signal_date": "2024-04-23",
     "ticker": "QCOM"
   },
@@ -1972,11 +1972,11 @@
     "ticker": "000660"
   },
   "73a48f99-7f9c-430f-a9c2-80f21b268870": {
-    "price_at_signal": 449074.84,
-    "price_current": 2297000,
-    "return_pct": 411.5,
+    "price_at_signal": 326604.0,
+    "price_current": 871000,
+    "return_pct": 166.68,
     "signal_date": "2025-03-22",
-    "ticker": "298040"
+    "ticker": "267260"
   },
   "8ecb977f-0bf5-49c9-95d9-d3fceaf242f7": {
     "price_at_signal": 90.96,
@@ -2042,7 +2042,7 @@
     "ticker": "005930"
   },
   "853e8377-4036-46fd-819b-943799cdff6b": {
-    "price_at_signal": 83561.19,
+    "price_at_signal": 83561.2,
     "price_current": 137700,
     "return_pct": 64.79,
     "signal_date": "2024-07-05",
@@ -2231,9 +2231,9 @@
     "ticker": "TSLA"
   },
   "c24e2668-fd2a-4caa-9dfc-d58c9a46db38": {
-    "price_at_signal": 168.1,
+    "price_at_signal": 167.98,
     "price_current": 303.58,
-    "return_pct": 80.6,
+    "return_pct": 80.72,
     "signal_date": "2024-11-29",
     "ticker": "GOOGL"
   },
@@ -2273,7 +2273,7 @@
     "ticker": "005930"
   },
   "a50e66bf-a9a3-41e8-873e-c3fb29323400": {
-    "price_at_signal": 166250.62,
+    "price_at_signal": 166250.64,
     "price_current": 849000,
     "return_pct": 410.67,
     "signal_date": "2024-11-27",
@@ -2308,9 +2308,9 @@
     "ticker": "TSLA"
   },
   "1093382d-04a2-4899-9843-43d519d42eb2": {
-    "price_at_signal": 319.97,
+    "price_at_signal": 319.75,
     "price_current": 303.58,
-    "return_pct": -5.12,
+    "return_pct": -5.06,
     "signal_date": "2025-11-30",
     "ticker": "GOOGL"
   },
@@ -2427,9 +2427,9 @@
     "ticker": "CB"
   },
   "f8ae74c7-e482-46de-acb1-1598d95e5bfa": {
-    "price_at_signal": 60.4,
+    "price_at_signal": 60.11,
     "price_current": 53.68,
-    "return_pct": -11.12,
+    "return_pct": -10.7,
     "signal_date": "2024-06-01",
     "ticker": "OXY"
   },
@@ -2441,21 +2441,21 @@
     "ticker": "CVX"
   },
   "0ea626ad-7c12-4f06-81f0-1c783b5a1c59": {
-    "price_at_signal": 59.08,
+    "price_at_signal": 58.8,
     "price_current": 53.68,
-    "return_pct": -9.14,
+    "return_pct": -8.71,
     "signal_date": "2024-03-01",
     "ticker": "OXY"
   },
   "bcc4ba4e-4415-4eb2-bf2a-fee7afb93267": {
-    "price_at_signal": 264937.34,
+    "price_at_signal": 264937.38,
     "price_current": 849000,
     "return_pct": 220.45,
     "signal_date": "2025-07-26",
     "ticker": "000660"
   },
   "c3b339ff-95be-4150-85a4-75485bc6195c": {
-    "price_at_signal": 67069.27,
+    "price_at_signal": 67069.28,
     "price_current": 172200,
     "return_pct": 156.75,
     "signal_date": "2021-08-18",
@@ -2567,7 +2567,7 @@
     "ticker": "005930"
   },
   "25091243-8562-4d6d-a0a5-b88e626eee88": {
-    "price_at_signal": 160550.89,
+    "price_at_signal": 160550.91,
     "price_current": 849000,
     "return_pct": 428.8,
     "signal_date": "2024-09-15",
@@ -2616,9 +2616,9 @@
     "ticker": "OXY"
   },
   "b96216d8-d917-4f30-a40c-c34f5269a630": {
-    "price_at_signal": 231.94,
+    "price_at_signal": 231.78,
     "price_current": 303.58,
-    "return_pct": 30.89,
+    "return_pct": 30.98,
     "signal_date": "2025-09-04",
     "ticker": "GOOGL"
   },
@@ -2644,7 +2644,7 @@
     "ticker": "NVDA"
   },
   "79f51ef7-878c-4ed8-9e2e-a84638f270b9": {
-    "price_at_signal": 73249.22,
+    "price_at_signal": 73249.23,
     "price_current": 172200,
     "return_pct": 135.09,
     "signal_date": "2024-04-22",
@@ -2805,7 +2805,7 @@
     "ticker": "NVDA"
   },
   "0774fa3d-43b8-4ee4-bb90-0df97986d067": {
-    "price_at_signal": 162147.12,
+    "price_at_signal": 162147.14,
     "price_current": 849000,
     "return_pct": 423.6,
     "signal_date": "2024-03-07",
@@ -2826,14 +2826,14 @@
     "ticker": "TSM"
   },
   "c56a4b2d-bf22-425a-80ec-6ca3439e4ae3": {
-    "price_at_signal": 97919.08,
+    "price_at_signal": 97616.62,
     "price_current": 259000,
-    "return_pct": 164.5,
+    "return_pct": 165.32,
     "signal_date": "2024-03-07",
     "ticker": "042700"
   },
   "c1c840e6-43b2-48a0-a08c-ee66bc6c12b3": {
-    "price_at_signal": 69180.94,
+    "price_at_signal": 69180.95,
     "price_current": 172200,
     "return_pct": 148.91,
     "signal_date": "2024-03-07",
@@ -2980,7 +2980,7 @@
     "ticker": "TSLA"
   },
   "91c5e9f4-2401-41c2-afb2-f9934baff3ea": {
-    "price_at_signal": 53469.33,
+    "price_at_signal": 53469.32,
     "price_current": 172200,
     "return_pct": 222.05,
     "signal_date": "2025-05-03",
@@ -3008,9 +3008,9 @@
     "ticker": "PLTR"
   },
   "045cbeca-c197-4e7d-a676-a6919ddde69c": {
-    "price_at_signal": 76300.0,
+    "price_at_signal": 76064.32,
     "price_current": 259000,
-    "return_pct": 239.45,
+    "return_pct": 240.5,
     "signal_date": "2025-05-03",
     "ticker": "042700"
   },
@@ -3022,7 +3022,7 @@
     "ticker": "AAPL"
   },
   "b78915fa-dcb7-4dd2-bff6-4d59b7adf53c": {
-    "price_at_signal": 53469.33,
+    "price_at_signal": 53469.32,
     "price_current": 172200,
     "return_pct": 222.05,
     "signal_date": "2025-05-02",
@@ -3036,9 +3036,9 @@
     "ticker": "131970"
   },
   "fadc55f6-475f-4c45-b1e7-c2c957a21e90": {
-    "price_at_signal": 11010.0,
+    "price_at_signal": 10979.29,
     "price_current": 34050,
-    "return_pct": 209.26,
+    "return_pct": 210.13,
     "signal_date": "2025-05-02",
     "ticker": "067310"
   },
@@ -3057,7 +3057,7 @@
     "ticker": "317530"
   },
   "6cd0fb46-a658-4e10-b032-ee73563d715d": {
-    "price_at_signal": 195859.27,
+    "price_at_signal": 195859.28,
     "price_current": 849000,
     "return_pct": 333.47,
     "signal_date": "2025-04-01",
@@ -3078,9 +3078,9 @@
     "ticker": "005930"
   },
   "a50399f1-5665-4d6a-b35a-aabf81988da9": {
-    "price_at_signal": 200.01,
+    "price_at_signal": 198.73,
     "price_current": 138.13,
-    "return_pct": -30.94,
+    "return_pct": -30.5,
     "signal_date": "2024-06-07",
     "ticker": "QCOM"
   },
@@ -3099,16 +3099,16 @@
     "ticker": "AAPL"
   },
   "c486a167-2cb6-417e-b214-7f177916f207": {
-    "price_at_signal": 317.41,
+    "price_at_signal": 317.19,
     "price_current": 303.58,
-    "return_pct": -4.36,
+    "return_pct": -4.29,
     "signal_date": "2025-12-04",
     "ticker": "GOOGL"
   },
   "60dec2e6-c0e2-4de0-9030-15dc95508fbe": {
-    "price_at_signal": 343.69,
+    "price_at_signal": 343.45,
     "price_current": 303.58,
-    "return_pct": -11.67,
+    "return_pct": -11.61,
     "signal_date": "2026-02-02",
     "ticker": "GOOGL"
   },
@@ -3155,9 +3155,9 @@
     "ticker": "TSLA"
   },
   "d926f517-6a21-4229-a4ca-18f9f87e7bfc": {
-    "price_at_signal": 194.64,
+    "price_at_signal": 194.5,
     "price_current": 303.58,
-    "return_pct": 55.97,
+    "return_pct": 56.08,
     "signal_date": "2024-12-11",
     "ticker": "GOOGL"
   },
@@ -3169,9 +3169,9 @@
     "ticker": "TSLA"
   },
   "e7b638f9-679e-4c3c-8dbc-2b59edbc072e": {
-    "price_at_signal": 169.97,
+    "price_at_signal": 169.85,
     "price_current": 303.58,
-    "return_pct": 78.61,
+    "return_pct": 78.74,
     "signal_date": "2024-05-07",
     "ticker": "GOOGL"
   },
@@ -3211,7 +3211,7 @@
     "ticker": "005930"
   },
   "4205cdf0-d438-4caa-93dc-f257afddb14a": {
-    "price_at_signal": 200528.06,
+    "price_at_signal": 200528.09,
     "price_current": 849000,
     "return_pct": 323.38,
     "signal_date": "2025-02-26",
@@ -3393,9 +3393,9 @@
     "ticker": "PLTR"
   },
   "cf3f09c6-8e8b-40fa-be18-5f460a91aa5b": {
-    "price_at_signal": 331.25,
+    "price_at_signal": 331.02,
     "price_current": 303.58,
-    "return_pct": -8.35,
+    "return_pct": -8.29,
     "signal_date": "2026-02-05",
     "ticker": "GOOGL"
   },
@@ -3442,7 +3442,7 @@
     "ticker": "000660"
   },
   "887ed5fb-d957-4055-a0f4-67b64997c370": {
-    "price_at_signal": 145636.84,
+    "price_at_signal": 145636.83,
     "price_current": 501000,
     "return_pct": 244.01,
     "signal_date": "2020-12-02",
@@ -3526,7 +3526,7 @@
     "ticker": "005930"
   },
   "32b06bca-4dbd-40a5-9e63-08f7c2c8c854": {
-    "price_at_signal": 166250.62,
+    "price_at_signal": 166250.64,
     "price_current": 849000,
     "return_pct": 410.67,
     "signal_date": "2024-11-27",
@@ -3540,7 +3540,7 @@
     "ticker": "NVDA"
   },
   "a001b9cf-dd0b-4e1c-9102-15bcbc2638bc": {
-    "price_at_signal": 199909.17,
+    "price_at_signal": 199909.19,
     "price_current": 208000,
     "return_pct": 4.05,
     "signal_date": "2024-11-27",
@@ -3610,9 +3610,9 @@
     "ticker": "005930"
   },
   "f92ec4d9-6d30-40e0-a8e8-01a390c943a9": {
-    "price_at_signal": 98.62,
+    "price_at_signal": 98.56,
     "price_current": 303.58,
-    "return_pct": 207.81,
+    "return_pct": 208.03,
     "signal_date": "2023-02-08",
     "ticker": "GOOGL"
   },
@@ -3624,7 +3624,7 @@
     "ticker": "TSLA"
   },
   "370b6eb0-8c6f-4f15-a2d5-2899380f7971": {
-    "price_at_signal": 75237.41,
+    "price_at_signal": 75237.39,
     "price_current": 172200,
     "return_pct": 128.88,
     "signal_date": "2021-08-04",
@@ -3638,9 +3638,9 @@
     "ticker": "035420"
   },
   "2cea43ac-b304-48da-a5e1-9b5e5436671b": {
-    "price_at_signal": 148880.27,
+    "price_at_signal": 148671.92,
     "price_current": 47050,
-    "return_pct": -68.4,
+    "return_pct": -68.35,
     "signal_date": "2021-08-04",
     "ticker": "035720"
   },
@@ -3701,21 +3701,21 @@
     "ticker": "TSLA"
   },
   "08751e43-ce2b-4e8a-9d87-373033cbc71b": {
-    "price_at_signal": 86.74,
+    "price_at_signal": 86.48,
     "price_current": 46.38,
-    "return_pct": -46.53,
+    "return_pct": -46.37,
     "signal_date": "2024-11-26",
     "ticker": "PYPL"
   },
   "12cf2efb-ae2e-4f42-97fc-cddcfed11334": {
-    "price_at_signal": 168.27,
+    "price_at_signal": 168.15,
     "price_current": 303.58,
-    "return_pct": 80.42,
+    "return_pct": 80.54,
     "signal_date": "2024-11-26",
     "ticker": "GOOGL"
   },
   "b71fda28-c56e-4646-b3f0-d7ace9192e4c": {
-    "price_at_signal": 157667.44,
+    "price_at_signal": 157667.45,
     "price_current": 501000,
     "return_pct": 217.76,
     "signal_date": "2022-07-21",
@@ -3799,9 +3799,9 @@
     "ticker": "000660"
   },
   "05d49eb9-acff-4387-8963-550787103669": {
-    "price_at_signal": 146134.55,
+    "price_at_signal": 145683.16,
     "price_current": 259000,
-    "return_pct": 77.23,
+    "return_pct": 77.78,
     "signal_date": "2024-05-22",
     "ticker": "042700"
   },
@@ -3862,9 +3862,9 @@
     "ticker": "AAPL"
   },
   "f662594e-aed8-4fc6-8873-291333276505": {
-    "price_at_signal": 164.8,
+    "price_at_signal": 164.68,
     "price_current": 303.58,
-    "return_pct": 84.22,
+    "return_pct": 84.35,
     "signal_date": "2024-08-21",
     "ticker": "GOOGL"
   },
@@ -3911,9 +3911,9 @@
     "ticker": "CB"
   },
   "c88e03fd-28ac-4438-bac2-5d570b728b53": {
-    "price_at_signal": 45.53,
+    "price_at_signal": 45.31,
     "price_current": 53.68,
-    "return_pct": 17.91,
+    "return_pct": 18.47,
     "signal_date": "2025-03-04",
     "ticker": "OXY"
   },
@@ -3925,14 +3925,14 @@
     "ticker": "STZ"
   },
   "29035135-28c9-46bd-8115-8db276327d8f": {
-    "price_at_signal": 146.89,
+    "price_at_signal": 146.79,
     "price_current": 303.58,
-    "return_pct": 106.67,
+    "return_pct": 106.82,
     "signal_date": "2022-02-02",
     "ticker": "GOOGL"
   },
   "c57eafc5-7234-493e-9029-84ba4f13e69e": {
-    "price_at_signal": 201327.44,
+    "price_at_signal": 201327.42,
     "price_current": 849000,
     "return_pct": 321.7,
     "signal_date": "2025-05-27",
@@ -3967,9 +3967,9 @@
     "ticker": "035420"
   },
   "65441389-2517-4bae-9457-7a12b47068ba": {
-    "price_at_signal": 323.23,
+    "price_at_signal": 323.0,
     "price_current": 303.58,
-    "return_pct": -6.08,
+    "return_pct": -6.01,
     "signal_date": "2025-11-25",
     "ticker": "GOOGL"
   },
@@ -3995,7 +3995,7 @@
     "ticker": "005930"
   },
   "6efbc432-ec40-4c23-b46e-286cbd44819e": {
-    "price_at_signal": 169030.28,
+    "price_at_signal": 169030.27,
     "price_current": 849000,
     "return_pct": 402.28,
     "signal_date": "2024-03-08",
@@ -4086,9 +4086,9 @@
     "ticker": "AAPL"
   },
   "8987142a-9fe8-4131-980c-4b33db0a0f7b": {
-    "price_at_signal": 74.41,
+    "price_at_signal": 74.18,
     "price_current": 46.38,
-    "return_pct": -37.67,
+    "return_pct": -37.48,
     "signal_date": "2023-01-03",
     "ticker": "PYPL"
   },
@@ -4205,9 +4205,9 @@
     "ticker": "TSLA"
   },
   "2d3dcf29-4535-47bf-b56c-f31b76b6754f": {
-    "price_at_signal": 267684.78,
+    "price_at_signal": 266038.47,
     "price_current": 321500,
-    "return_pct": 20.1,
+    "return_pct": 20.85,
     "signal_date": "2021-08-19",
     "ticker": "005490"
   },
@@ -4233,7 +4233,7 @@
     "ticker": "NVDA"
   },
   "b98b0999-4f5d-4260-9582-c51cc76c88bd": {
-    "price_at_signal": 198058.52,
+    "price_at_signal": 198058.53,
     "price_current": 849000,
     "return_pct": 328.66,
     "signal_date": "2025-02-25",
@@ -4268,9 +4268,9 @@
     "ticker": "AVGO"
   },
   "cfdbcdb6-3827-47f7-8b57-7bc1896b0b81": {
-    "price_at_signal": 308.22,
+    "price_at_signal": 308.0,
     "price_current": 303.58,
-    "return_pct": -1.51,
+    "return_pct": -1.44,
     "signal_date": "2025-12-15",
     "ticker": "GOOGL"
   },
@@ -4331,9 +4331,9 @@
     "ticker": "207940"
   },
   "21a5d973-5c5c-44cf-ace2-cbe594b36180": {
-    "price_at_signal": 113494.86,
+    "price_at_signal": 113144.29,
     "price_current": 259000,
-    "return_pct": 128.2,
+    "return_pct": 128.91,
     "signal_date": "2024-03-27",
     "ticker": "042700"
   },
@@ -4373,9 +4373,9 @@
     "ticker": "COIN"
   },
   "f0267c2a-2578-4fa3-ad56-c0b2bd8b558c": {
-    "price_at_signal": 303.58,
+    "price_at_signal": 303.37,
     "price_current": 303.58,
-    "return_pct": 0.0,
+    "return_pct": 0.07,
     "signal_date": "2026-03-03",
     "ticker": "GOOGL"
   },
@@ -4485,7 +4485,7 @@
     "ticker": "MSFT"
   },
   "ecf00f6e-c880-49e7-9861-c3a83906e3be": {
-    "price_at_signal": 138941.12,
+    "price_at_signal": 138941.11,
     "price_current": 849000,
     "return_pct": 511.05,
     "signal_date": "2024-01-20",
@@ -4541,16 +4541,16 @@
     "ticker": "MU"
   },
   "1d119bd0-41dc-4b65-904f-f5ff0037b261": {
-    "price_at_signal": 26.37,
+    "price_at_signal": 26.22,
     "price_current": 49.97,
-    "return_pct": 89.53,
+    "return_pct": 90.6,
     "signal_date": "2023-05-22",
     "ticker": "BAC"
   },
   "a18c1cad-82bd-4604-b2a7-ac17680e1841": {
-    "price_at_signal": 46.28,
+    "price_at_signal": 46.6,
     "price_current": 110.5,
-    "return_pct": 138.79,
+    "return_pct": 137.12,
     "signal_date": "2023-05-22",
     "ticker": "EWBC"
   },
@@ -4576,9 +4576,9 @@
     "ticker": "GS"
   },
   "5a436e37-dafc-4936-bdcd-758674f0f5e1": {
-    "price_at_signal": 29.45,
+    "price_at_signal": 29.29,
     "price_current": 49.97,
-    "return_pct": 69.67,
+    "return_pct": 70.63,
     "signal_date": "2022-07-18",
     "ticker": "BAC"
   },
@@ -4611,9 +4611,9 @@
     "ticker": "AAPL"
   },
   "bac46ce1-22cf-44d5-914c-b97a0d199de6": {
-    "price_at_signal": 28677.98,
+    "price_at_signal": 28335.04,
     "price_current": 53700,
-    "return_pct": 87.25,
+    "return_pct": 89.52,
     "signal_date": "2022-03-03",
     "ticker": "053610"
   },
@@ -4730,21 +4730,21 @@
     "ticker": "NVDA"
   },
   "1c1d8c01-1083-46c2-be56-f1fa30651faa": {
-    "price_at_signal": 388308.06,
+    "price_at_signal": 388308.03,
     "price_current": 208000,
     "return_pct": -46.43,
     "signal_date": "2021-09-09",
     "ticker": "035420"
   },
   "650269f8-cb30-4585-9ac9-380aedb7affd": {
-    "price_at_signal": 127967.31,
+    "price_at_signal": 127788.26,
     "price_current": 47050,
-    "return_pct": -63.23,
+    "return_pct": -63.18,
     "signal_date": "2021-09-09",
     "ticker": "035720"
   },
   "86da3d18-b7e7-4374-a8b2-2c9298839232": {
-    "price_at_signal": 114499.32,
+    "price_at_signal": 114499.34,
     "price_current": 217500,
     "return_pct": 89.96,
     "signal_date": "2021-09-09",
@@ -4765,14 +4765,14 @@
     "ticker": "IONQ"
   },
   "1aed6d41-d42c-4c96-b337-e6281a0cf146": {
-    "price_at_signal": 73684.41,
+    "price_at_signal": 73684.4,
     "price_current": 172200,
     "return_pct": 133.7,
     "signal_date": "2024-03-20",
     "ticker": "005930"
   },
   "141a015c-7597-48bc-8d73-17c570ccf2d7": {
-    "price_at_signal": 153887.34,
+    "price_at_signal": 153887.38,
     "price_current": 849000,
     "return_pct": 451.7,
     "signal_date": "2024-03-20",
@@ -4807,7 +4807,7 @@
     "ticker": "PLTR"
   },
   "25019939-7755-4fbb-91c2-3d3df1f157b4": {
-    "price_at_signal": 490083.84,
+    "price_at_signal": 490083.88,
     "price_current": 1632000,
     "return_pct": 233.0,
     "signal_date": "2022-01-14",
@@ -4891,7 +4891,7 @@
     "ticker": "TSM"
   },
   "ff7aa057-8800-4fe9-b71e-c490091ecbad": {
-    "price_at_signal": 90174.62,
+    "price_at_signal": 90174.63,
     "price_current": 849000,
     "return_pct": 841.51,
     "signal_date": "2023-02-23",
@@ -4926,9 +4926,9 @@
     "ticker": "AAPL"
   },
   "c6341e40-1dea-4ed9-8256-c55b75fbef8b": {
-    "price_at_signal": 108.63,
+    "price_at_signal": 108.55,
     "price_current": 303.58,
-    "return_pct": 179.46,
+    "return_pct": 179.66,
     "signal_date": "2022-09-07",
     "ticker": "GOOGL"
   },
@@ -4961,9 +4961,9 @@
     "ticker": "TSLA"
   },
   "20d681cc-d034-4bda-8626-8ac081dd369a": {
-    "price_at_signal": 91.1,
+    "price_at_signal": 91.04,
     "price_current": 303.58,
-    "return_pct": 233.23,
+    "return_pct": 233.47,
     "signal_date": "2023-02-21",
     "ticker": "GOOGL"
   },
@@ -5122,16 +5122,16 @@
     "ticker": "105560"
   },
   "950cda65-5ef7-4123-aabe-1dc0338d7811": {
-    "price_at_signal": 58190.85,
+    "price_at_signal": 58190.86,
     "price_current": 172200,
     "return_pct": 195.92,
     "signal_date": "2023-02-23",
     "ticker": "005930"
   },
   "8322b271-551b-43be-9bcb-f62bae91cb66": {
-    "price_at_signal": 15546.28,
+    "price_at_signal": 15498.26,
     "price_current": 259000,
-    "return_pct": 1565.99,
+    "return_pct": 1571.16,
     "signal_date": "2023-02-23",
     "ticker": "042700"
   },
@@ -5164,16 +5164,16 @@
     "ticker": "000660"
   },
   "716b14ed-ea52-4565-bb9a-96224755a195": {
-    "price_at_signal": 70234.94,
+    "price_at_signal": 70234.95,
     "price_current": 172200,
     "return_pct": 145.18,
     "signal_date": "2024-02-20",
     "ticker": "005930"
   },
   "563377b5-56cc-4b3e-ae40-b0f1a62ccbd0": {
-    "price_at_signal": 331.25,
+    "price_at_signal": 331.02,
     "price_current": 303.58,
-    "return_pct": -8.35,
+    "return_pct": -8.29,
     "signal_date": "2026-02-05",
     "ticker": "GOOGL"
   },
@@ -5269,7 +5269,7 @@
     "ticker": "TSLA"
   },
   "5994ff62-87d3-46ac-9e8a-40c55d61bbb5": {
-    "price_at_signal": 71545.58,
+    "price_at_signal": 71545.57,
     "price_current": 172200,
     "return_pct": 140.69,
     "signal_date": "2024-08-29",
@@ -5283,7 +5283,7 @@
     "ticker": "TSM"
   },
   "88a34cff-ae74-4375-8393-f81ca6552b62": {
-    "price_at_signal": 167355.58,
+    "price_at_signal": 167355.56,
     "price_current": 849000,
     "return_pct": 407.3,
     "signal_date": "2024-08-29",
@@ -5423,7 +5423,7 @@
     "ticker": "TSLA"
   },
   "47b52499-c411-4ce0-8826-4427441eac91": {
-    "price_at_signal": 254416.62,
+    "price_at_signal": 254416.61,
     "price_current": 501000,
     "return_pct": 96.92,
     "signal_date": "2025-10-29",
@@ -5465,16 +5465,16 @@
     "ticker": "AMD"
   },
   "dc5bd2b5-4bd8-40a5-8d0f-376696c105b4": {
-    "price_at_signal": 81815.81,
+    "price_at_signal": 81815.8,
     "price_current": 172200,
     "return_pct": 110.47,
     "signal_date": "2024-04-02",
     "ticker": "005930"
   },
   "22956f5a-2289-42ff-894b-cba4ca782702": {
-    "price_at_signal": 276.23,
+    "price_at_signal": 276.04,
     "price_current": 303.58,
-    "return_pct": 9.9,
+    "return_pct": 9.98,
     "signal_date": "2025-11-16",
     "ticker": "GOOGL"
   },
@@ -5542,7 +5542,7 @@
     "ticker": "196490"
   },
   "0f44c851-1d36-47a8-bfde-6f23087c9510": {
-    "price_at_signal": 64181.91,
+    "price_at_signal": 64181.92,
     "price_current": 172200,
     "return_pct": 168.3,
     "signal_date": "2023-10-28",
@@ -5626,7 +5626,7 @@
     "ticker": "005930"
   },
   "16d17ecf-efc6-4afa-92f7-2d2511c819d0": {
-    "price_at_signal": 172582.33,
+    "price_at_signal": 172582.34,
     "price_current": 849000,
     "return_pct": 391.94,
     "signal_date": "2024-08-27",
@@ -5661,14 +5661,14 @@
     "ticker": "AMD"
   },
   "b0ac0bb8-68e1-47d4-ac30-10fb1234ec45": {
-    "price_at_signal": 72479.2,
+    "price_at_signal": 72479.19,
     "price_current": 172200,
     "return_pct": 137.59,
     "signal_date": "2024-06-04",
     "ticker": "005930"
   },
   "55f50944-f93f-4fb1-96fa-69d33a0f8e90": {
-    "price_at_signal": 190388.23,
+    "price_at_signal": 190388.2,
     "price_current": 849000,
     "return_pct": 345.93,
     "signal_date": "2024-06-04",
@@ -5689,16 +5689,16 @@
     "ticker": "AAPL"
   },
   "3337492a-e7b1-4414-b0be-bf39bbb8586c": {
-    "price_at_signal": 197.83,
+    "price_at_signal": 196.57,
     "price_current": 138.13,
-    "return_pct": -30.18,
+    "return_pct": -29.73,
     "signal_date": "2024-06-04",
     "ticker": "QCOM"
   },
   "0d6e525d-bb46-4929-919c-1ac7c77f31bb": {
-    "price_at_signal": 147424.27,
+    "price_at_signal": 146968.89,
     "price_current": 259000,
-    "return_pct": 75.68,
+    "return_pct": 76.23,
     "signal_date": "2024-06-04",
     "ticker": "042700"
   },
@@ -5745,16 +5745,16 @@
     "ticker": "000660"
   },
   "50cdb1fe-64f1-4d66-b855-ad09f458424f": {
-    "price_at_signal": 84887.87,
+    "price_at_signal": 84887.86,
     "price_current": 172200,
     "return_pct": 102.86,
     "signal_date": "2024-07-09",
     "ticker": "005930"
   },
   "c8ac6e7b-ca6c-444b-a629-3d14ffc0c830": {
-    "price_at_signal": 162801.62,
+    "price_at_signal": 162298.77,
     "price_current": 259000,
-    "return_pct": 59.09,
+    "return_pct": 59.58,
     "signal_date": "2024-07-09",
     "ticker": "042700"
   },
@@ -5808,16 +5808,16 @@
     "ticker": "005930"
   },
   "69ffed40-907c-4f6c-b626-79229cf2329e": {
-    "price_at_signal": 199449.66,
+    "price_at_signal": 199449.64,
     "price_current": 849000,
     "return_pct": 325.67,
     "signal_date": "2024-05-28",
     "ticker": "000660"
   },
   "ce2f42b7-645a-4e6c-bdb6-10f9eb3e5aec": {
-    "price_at_signal": 161710.33,
+    "price_at_signal": 161210.83,
     "price_current": 259000,
-    "return_pct": 60.16,
+    "return_pct": 60.66,
     "signal_date": "2024-05-28",
     "ticker": "042700"
   },
@@ -5843,9 +5843,9 @@
     "ticker": "195870"
   },
   "996268b9-bda3-4f42-b139-d3356d697e10": {
-    "price_at_signal": 48643.86,
+    "price_at_signal": 48493.61,
     "price_current": 259000,
-    "return_pct": 432.44,
+    "return_pct": 434.09,
     "signal_date": "2023-08-02",
     "ticker": "042700"
   },
@@ -5920,14 +5920,14 @@
     "ticker": "RMBS"
   },
   "461cf8a8-777c-47ce-a3fa-38341e8b6054": {
-    "price_at_signal": 140.02,
+    "price_at_signal": 139.13,
     "price_current": 138.13,
-    "return_pct": -1.35,
+    "return_pct": -0.72,
     "signal_date": "2024-01-30",
     "ticker": "QCOM"
   },
   "b5f32b15-5216-4b57-9141-606de50063fd": {
-    "price_at_signal": 64181.91,
+    "price_at_signal": 64181.92,
     "price_current": 172200,
     "return_pct": 168.3,
     "signal_date": "2023-10-27",
@@ -5955,14 +5955,14 @@
     "ticker": "NVDA"
   },
   "5471a1c6-47ab-4af2-bf0e-d250d65d8aaa": {
-    "price_at_signal": 116856.32,
+    "price_at_signal": 116856.34,
     "price_current": 849000,
     "return_pct": 626.53,
     "signal_date": "2023-08-30",
     "ticker": "000660"
   },
   "5525467d-5cf2-4835-8c72-ad9aeedee7d1": {
-    "price_at_signal": 63658.32,
+    "price_at_signal": 63658.31,
     "price_current": 172200,
     "return_pct": 170.51,
     "signal_date": "2023-08-30",
@@ -5976,16 +5976,16 @@
     "ticker": "ASML"
   },
   "abc03312-d2ea-4489-b8c2-baee6885ed22": {
-    "price_at_signal": 56397.25,
+    "price_at_signal": 56223.04,
     "price_current": 259000,
-    "return_pct": 359.24,
+    "return_pct": 360.67,
     "signal_date": "2023-08-30",
     "ticker": "042700"
   },
   "917a30ec-4914-4e05-ba93-740165a4394d": {
-    "price_at_signal": 17417.77,
+    "price_at_signal": 17369.19,
     "price_current": 34050,
-    "return_pct": 95.49,
+    "return_pct": 96.04,
     "signal_date": "2023-08-30",
     "ticker": "067310"
   },
@@ -6151,14 +6151,14 @@
     "ticker": "068270"
   },
   "dadd9b24-fc12-48b1-9fcc-20d412adeae9": {
-    "price_at_signal": 37450.0,
+    "price_at_signal": 37397.6,
     "price_current": 47050,
-    "return_pct": 25.63,
+    "return_pct": 25.81,
     "signal_date": "2025-05-21",
     "ticker": "035720"
   },
   "328419c4-cec6-423d-97d7-7f858a6f8d0e": {
-    "price_at_signal": 230610.19,
+    "price_at_signal": 230610.16,
     "price_current": 501000,
     "return_pct": 117.25,
     "signal_date": "2024-10-07",
@@ -6207,9 +6207,9 @@
     "ticker": "AAPL"
   },
   "4a7ae072-e800-4650-ba7e-34bd8beb670f": {
-    "price_at_signal": 188.69,
+    "price_at_signal": 188.56,
     "price_current": 303.58,
-    "return_pct": 60.89,
+    "return_pct": 61.0,
     "signal_date": "2025-01-02",
     "ticker": "GOOGL"
   },
@@ -6298,9 +6298,9 @@
     "ticker": "BIDU"
   },
   "0308bcad-81ff-4b79-a3bd-95eb5d87f96e": {
-    "price_at_signal": 18539.97,
+    "price_at_signal": 18539.18,
     "price_current": 45550,
-    "return_pct": 145.69,
+    "return_pct": 145.7,
     "signal_date": "2024-06-24",
     "ticker": "015760"
   },
@@ -6473,14 +6473,14 @@
     "ticker": "042700"
   },
   "84111b13-6479-4934-aadc-c2fdbaca136c": {
-    "price_at_signal": 97205.7,
+    "price_at_signal": 97205.69,
     "price_current": 849000,
     "return_pct": 773.41,
     "signal_date": "2021-08-20",
     "ticker": "000660"
   },
   "346aa435-3eed-4cab-85f0-678ba2c5f803": {
-    "price_at_signal": 91423.12,
+    "price_at_signal": 91423.14,
     "price_current": 849000,
     "return_pct": 828.65,
     "signal_date": "2022-06-27",
@@ -6508,7 +6508,7 @@
     "ticker": "036930"
   },
   "938e0386-4fea-491c-8647-a70590e2cbae": {
-    "price_at_signal": 131652.8,
+    "price_at_signal": 131652.78,
     "price_current": 362500,
     "return_pct": 175.35,
     "signal_date": "2022-12-22",
@@ -6550,7 +6550,7 @@
     "ticker": "066970"
   },
   "783d76d6-3b99-49ff-9978-05033c6ac551": {
-    "price_at_signal": 27854.41,
+    "price_at_signal": 27854.4,
     "price_current": 52900,
     "return_pct": 89.92,
     "signal_date": "2021-05-28",
@@ -6634,7 +6634,7 @@
     "ticker": "084370"
   },
   "b20552c0-21dc-4d51-ba57-2d2c915c24b5": {
-    "price_at_signal": 26997.91,
+    "price_at_signal": 26997.9,
     "price_current": 70300,
     "return_pct": 160.39,
     "signal_date": "2021-06-09",
@@ -6697,7 +6697,7 @@
     "ticker": "005930"
   },
   "e780fd04-17eb-4cc4-bb38-fa8533736ed9": {
-    "price_at_signal": 167974.83,
+    "price_at_signal": 167974.81,
     "price_current": 362500,
     "return_pct": 115.81,
     "signal_date": "2021-12-10",
@@ -6718,9 +6718,9 @@
     "ticker": "005930"
   },
   "de266fc4-64ae-4d14-9c58-559b05f9544e": {
-    "price_at_signal": 312.43,
+    "price_at_signal": 312.21,
     "price_current": 303.58,
-    "return_pct": -2.83,
+    "return_pct": -2.76,
     "signal_date": "2025-12-11",
     "ticker": "GOOGL"
   },
@@ -7095,9 +7095,9 @@
     "ticker": "SOXX"
   },
   "37a9ac45-1d32-4458-a263-6a760e0871b7": {
-    "price_at_signal": 12.59000015258789,
-    "price_current": 3.46,
-    "return_pct": -72.52,
+    "price_at_signal": 13.15,
+    "price_current": 3.54,
+    "return_pct": -73.08,
     "signal_date": "2024-02-19",
     "ticker": "RXRX"
   },
@@ -7109,228 +7109,228 @@
     "ticker": "BRK-B"
   },
   "3e1c48d5-3dfa-4769-a7ed-c8d4185f3531": {
-    "price_at_signal": 37900.0,
-    "price_current": 31750.0,
-    "return_pct": -16.23,
+    "price_at_signal": 37771.62,
+    "price_current": 51300,
+    "return_pct": 35.82,
     "signal_date": "2023-09-28",
-    "ticker": "222800.KS"
+    "ticker": "222800"
   },
   "554bdb1f-d006-4244-a4f1-5426bfe072f8": {
-    "price_at_signal": 27600.0,
-    "price_current": 61400.0,
-    "return_pct": 122.46,
+    "price_at_signal": 225365.67,
+    "price_current": 440500,
+    "return_pct": 95.46,
     "signal_date": "2023-09-28",
-    "ticker": "036830.KS"
+    "ticker": "357780"
   },
   "cac03a20-77bd-4328-a002-3cd12679993e": {
-    "price_at_signal": 11300.0,
+    "price_at_signal": 10855.62,
     "price_current": 52500.0,
-    "return_pct": 364.6,
+    "return_pct": 383.62,
     "signal_date": "2022-04-20",
-    "ticker": "089030.KS"
+    "ticker": "089030"
   },
   "87a5328c-d401-490f-b02b-0df2cd9f97c6": {
-    "price_at_signal": 21000.0,
+    "price_at_signal": 19657.77,
     "price_current": 20100.0,
-    "return_pct": -4.29,
+    "return_pct": 2.25,
     "signal_date": "2021-08-20",
-    "ticker": "030520.KS"
+    "ticker": "030520"
   },
   "be971bf2-008a-42b4-bb2c-5a6608a88d7b": {
-    "price_at_signal": 23900.0,
+    "price_at_signal": 22740.83,
     "price_current": 25400.0,
-    "return_pct": 6.28,
+    "return_pct": 11.69,
     "signal_date": "2021-08-20",
-    "ticker": "089010.KS"
+    "ticker": "089010"
   },
   "c85efde5-82e3-4333-861b-ce80c1c7b787": {
-    "price_at_signal": 40050.0,
+    "price_at_signal": 38677.94,
     "price_current": 53700.0,
-    "return_pct": 34.08,
+    "return_pct": 38.84,
     "signal_date": "2025-09-19",
-    "ticker": "166090.KS"
+    "ticker": "166090"
   },
   "d14f0d88-c473-4034-ba8b-6bd7a294d310": {
-    "price_at_signal": 246000.0,
-    "price_current": 553000.0,
-    "return_pct": 124.8,
+    "price_at_signal": 229676.53,
+    "price_current": 501000,
+    "return_pct": 118.13,
     "signal_date": "2024-10-09",
-    "ticker": "005380.KS"
+    "ticker": "005380"
   },
   "3cf7b603-e069-419a-a163-7e71829648bb": {
-    "price_at_signal": 43850.0,
-    "price_current": 61400.0,
-    "return_pct": 40.02,
+    "price_at_signal": 289500.0,
+    "price_current": 440500,
+    "return_pct": 52.16,
     "signal_date": "2025-09-19",
-    "ticker": "036830.KS"
+    "ticker": "357780"
   },
   "e81f1637-904d-4ea0-a3bd-575ce9036741": {
-    "price_at_signal": 204000.0,
+    "price_at_signal": 201500.0,
     "price_current": 310000.0,
-    "return_pct": 51.96,
+    "return_pct": 53.85,
     "signal_date": "2025-09-19",
-    "ticker": "014680.KS"
+    "ticker": "014680"
   },
   "d0638f82-59ab-432a-b607-3abfdce83470": {
-    "price_at_signal": 113.9010009765625,
-    "price_current": 177.885,
-    "return_pct": 56.18,
+    "price_at_signal": 106.41,
+    "price_current": 180.05,
+    "return_pct": 69.2,
     "signal_date": "2024-05-27",
     "ticker": "NVDA"
   },
   "41ae3546-1699-42a0-8640-419d65d5260c": {
-    "price_at_signal": 175.22000122070312,
-    "price_current": 396.73,
-    "return_pct": 126.42,
+    "price_at_signal": 175.79,
+    "price_current": 392.43,
+    "return_pct": 123.24,
     "signal_date": "2024-03-31",
     "ticker": "TSLA"
   },
   "10f381ca-e968-4966-9ee9-bfc207efe62b": {
-    "price_at_signal": 171.61000061035156,
-    "price_current": 192.44,
-    "return_pct": 12.14,
+    "price_at_signal": 166.36,
+    "price_current": 190.95,
+    "return_pct": 14.78,
     "signal_date": "2024-05-27",
     "ticker": "AMD"
   },
   "aa4e81d4-ba31-4f79-b047-ad83f3682cc8": {
-    "price_at_signal": 12162.423828125,
+    "price_at_signal": 12162.42,
     "price_current": 11960.0,
     "return_pct": -1.66,
     "signal_date": "2022-12-22",
-    "ticker": "034220.KS"
+    "ticker": "034220"
   },
   "2c9c5d6e-b02e-4b6c-a3cb-76ddc8ec882c": {
-    "price_at_signal": 10050.0,
+    "price_at_signal": 9903.22,
     "price_current": 8630.0,
-    "return_pct": -14.13,
+    "return_pct": -12.86,
     "signal_date": "2022-12-22",
-    "ticker": "036010.KS"
+    "ticker": "036010"
   },
   "74206ffd-7cef-437c-b14c-91585966209e": {
-    "price_at_signal": 7726.0400390625,
+    "price_at_signal": 7726.04,
     "price_current": 3895.0,
     "return_pct": -49.59,
     "signal_date": "2022-12-22",
-    "ticker": "217820.KS"
+    "ticker": "217820"
   },
   "bea958a6-0d36-48ea-a2c8-68ec679aceaa": {
-    "price_at_signal": 75.30726623535156,
-    "price_current": 323.11,
-    "return_pct": 329.06,
+    "price_at_signal": 73.53,
+    "price_current": 334.14,
+    "return_pct": 354.43,
     "signal_date": "2023-04-09",
     "ticker": "GE"
   },
   "3ffc2575-e114-4c3d-9c0f-241ff8d81d25": {
-    "price_at_signal": 4720.0,
+    "price_at_signal": 4689.24,
     "price_current": 16940.0,
-    "return_pct": 258.9,
+    "return_pct": 261.25,
     "signal_date": "2022-12-22",
-    "ticker": "281740.KS"
+    "ticker": "281740"
   },
   "1ae1ba89-8ab3-491b-b06a-94821b31f2e6": {
-    "price_at_signal": 20650.0,
+    "price_at_signal": 19532.23,
     "price_current": 66700.0,
-    "return_pct": 223.0,
+    "return_pct": 241.49,
     "signal_date": "2022-12-22",
-    "ticker": "353200.KS"
+    "ticker": "353200"
   },
   "a24bec77-5adf-4941-b509-7808f8d6c0e4": {
     "price_at_signal": 31150.0,
     "price_current": 18870.0,
     "return_pct": -39.42,
     "signal_date": "2022-12-22",
-    "ticker": "271940.KS"
+    "ticker": "271940"
   },
   "16650e6b-e956-4ad3-9f8a-2fa75d7be01b": {
-    "price_at_signal": 44366.3359375,
+    "price_at_signal": 44084.84,
     "price_current": 194000.0,
-    "return_pct": 337.27,
+    "return_pct": 340.06,
     "signal_date": "2021-05-28",
-    "ticker": "247540.KS"
+    "ticker": "247540"
   },
   "71d02525-987f-4993-9d48-bfeef0423b0b": {
-    "price_at_signal": 28300.0,
+    "price_at_signal": 27852.27,
     "price_current": 106700.0,
-    "return_pct": 277.03,
+    "return_pct": 283.09,
     "signal_date": "2021-05-28",
-    "ticker": "121600.KS"
+    "ticker": "121600"
   },
   "0f0f896d-15d3-4b33-992c-760be5ef63ac": {
-    "price_at_signal": 149000.0,
+    "price_at_signal": 148347.38,
     "price_current": 215500.0,
-    "return_pct": 44.63,
+    "return_pct": 45.27,
     "signal_date": "2021-05-28",
-    "ticker": "003670.KS"
+    "ticker": "003670"
   },
   "54f01454-e21b-4c20-b256-936956b5605c": {
-    "price_at_signal": 46400.0,
+    "price_at_signal": 46160.38,
     "price_current": 121100.0,
-    "return_pct": 160.99,
+    "return_pct": 162.35,
     "signal_date": "2021-05-28",
-    "ticker": "078600.KS"
+    "ticker": "078600"
   },
   "b38ec63b-c9ce-408c-b4e8-d8a97d793515": {
-    "price_at_signal": 130000.0,
+    "price_at_signal": 127650.93,
     "price_current": 103600.0,
-    "return_pct": -20.31,
+    "return_pct": -18.84,
     "signal_date": "2021-05-28",
-    "ticker": "011790.KS"
+    "ticker": "011790"
   },
   "03098e99-4b0c-4da5-bdeb-5a313c344bff": {
-    "price_at_signal": 9080.0,
+    "price_at_signal": 7976.37,
     "price_current": 6860.0,
-    "return_pct": -24.45,
+    "return_pct": -14.0,
     "signal_date": "2021-05-28",
-    "ticker": "079170.KS"
+    "ticker": "079170"
   },
   "28ddad41-5001-44fa-89c1-d8fad48d96fb": {
     "price_at_signal": 69600.0,
     "price_current": 13290.0,
     "return_pct": -80.91,
     "signal_date": "2021-05-28",
-    "ticker": "025900.KS"
+    "ticker": "025900"
   },
   "2d5b53a0-aad4-4836-98be-fa0d85942561": {
-    "price_at_signal": 169800.0,
+    "price_at_signal": 169302.14,
     "price_current": 69900.0,
-    "return_pct": -58.83,
+    "return_pct": -58.71,
     "signal_date": "2021-05-28",
-    "ticker": "278280.KS"
+    "ticker": "278280"
   },
   "1470aae4-e764-472d-9610-374ec910c725": {
-    "price_at_signal": 150000.0,
-    "price_current": 924000.0,
-    "return_pct": 516.0,
+    "price_at_signal": 140416.06,
+    "price_current": 849000,
+    "return_pct": 504.63,
     "signal_date": "2024-02-12",
-    "ticker": "000660.KS"
+    "ticker": "000660"
   },
   "ef8135d7-a0fd-451a-9823-9e85c1af55a8": {
-    "price_at_signal": 24037.2109375,
+    "price_at_signal": 23774.7,
     "price_current": 8380.0,
-    "return_pct": -65.14,
+    "return_pct": -64.75,
     "signal_date": "2021-05-26",
-    "ticker": "336370.KS"
+    "ticker": "336370"
   },
   "2b5fb510-fa54-44b2-bdc4-e27e6a109ba2": {
-    "price_at_signal": 149000.0,
+    "price_at_signal": 148347.38,
     "price_current": 215500.0,
-    "return_pct": 44.63,
+    "return_pct": 45.27,
     "signal_date": "2021-05-26",
-    "ticker": "003670.KS"
+    "ticker": "003670"
   },
   "24edb37b-1a2b-4aa8-89fa-8fac1848d329": {
-    "price_at_signal": 69800.0,
-    "price_current": 24100.0,
-    "return_pct": -65.47,
+    "price_at_signal": 67092.1,
+    "price_current": 22200,
+    "return_pct": -66.91,
     "signal_date": "2021-08-04",
-    "ticker": "323410.KS"
+    "ticker": "323410"
   },
   "53e6935a-c9a9-49bb-bb6c-a710605e41bd": {
-    "price_at_signal": 11350.0,
-    "price_current": 64000.0,
-    "return_pct": 463.88,
+    "price_at_signal": 4953.94,
+    "price_current": 2965.0,
+    "return_pct": -40.15,
     "signal_date": "2021-06-09",
-    "ticker": "031980.KS"
+    "ticker": "319400"
   },
   "707e2a07-bbcd-433f-ae3d-f738a82c438a": {
     "price_at_signal": 13050.0,
@@ -7340,46 +7340,46 @@
     "ticker": "031980.KS"
   },
   "a1505487-b8ad-48f0-ba9a-d05dde7e6e69": {
-    "price_at_signal": 7700.0,
+    "price_at_signal": 6159.17,
     "price_current": 4960.0,
-    "return_pct": -35.58,
+    "return_pct": -19.47,
     "signal_date": "2022-08-24",
-    "ticker": "095570.KS"
+    "ticker": "095570"
   },
   "f4c1482f-f53f-407b-a516-bf4f2c900b77": {
     "price_at_signal": 14250.0,
     "price_current": 3230.0,
     "return_pct": -77.33,
     "signal_date": "2022-08-24",
-    "ticker": "089140.KS"
+    "ticker": "089140"
   },
   "5da4e87b-af90-4acf-b92a-d84f04555394": {
-    "price_at_signal": 69.4520034790039,
-    "price_current": 177.885,
-    "return_pct": 156.13,
+    "price_at_signal": 72.57,
+    "price_current": 180.05,
+    "return_pct": 148.1,
     "signal_date": "2024-02-19",
     "ticker": "NVDA"
   },
   "c5067b51-f178-47e7-b2c3-14db0379dfa7": {
-    "price_at_signal": 31950.0,
+    "price_at_signal": 31710.1,
     "price_current": 25400.0,
-    "return_pct": -20.5,
+    "return_pct": -19.9,
     "signal_date": "2025-09-17",
-    "ticker": "089010.KS"
+    "ticker": "089010"
   },
   "c6b01884-7b83-40bd-9788-0d41a63d4681": {
-    "price_at_signal": 89000.0,
+    "price_at_signal": 88489.81,
     "price_current": 38650.0,
-    "return_pct": -56.57,
+    "return_pct": -56.32,
     "signal_date": "2025-09-17",
-    "ticker": "214430.KS"
+    "ticker": "214430"
   },
   "2deb64ad-fabc-4140-93b6-154315c364c8": {
-    "price_at_signal": 81000.0,
-    "price_current": 333500.0,
-    "return_pct": 311.73,
+    "price_at_signal": 77294.38,
+    "price_current": 259000,
+    "return_pct": 235.08,
     "signal_date": "2024-02-12",
-    "ticker": "042700.KS"
+    "ticker": "042700"
   },
   "17285631-1c81-47f5-a1a1-2b2be99228a5": {
     "price_at_signal": 11550.0,
@@ -7396,32 +7396,32 @@
     "ticker": "222800.KS"
   },
   "c82bc22a-93cf-45da-bef2-73665dda9c1a": {
-    "price_at_signal": 50600.0,
+    "price_at_signal": 44832.84,
     "price_current": 23850.0,
-    "return_pct": -52.87,
+    "return_pct": -46.8,
     "signal_date": "2021-12-10",
-    "ticker": "097520.KS"
+    "ticker": "097520"
   },
   "72495faf-f399-42ca-a2db-870ca2a2bbb0": {
-    "price_at_signal": 199200.0,
-    "price_current": 924000.0,
-    "return_pct": 363.86,
+    "price_at_signal": 218308.89,
+    "price_current": 849000,
+    "return_pct": 288.9,
     "signal_date": "2025-01-30",
-    "ticker": "000660.KS"
+    "ticker": "000660"
   },
   "af1e684b-02ad-4d42-8dab-16d95f80c374": {
-    "price_at_signal": 23200.0,
+    "price_at_signal": 23142.14,
     "price_current": 55200.0,
-    "return_pct": 137.93,
+    "return_pct": 138.53,
     "signal_date": "2021-12-10",
-    "ticker": "007810.KS"
+    "ticker": "007810"
   },
   "437148b7-0d8a-4827-99c7-0ac2b5cc1026": {
     "price_at_signal": 9490.0,
     "price_current": 9000.0,
     "return_pct": -5.16,
     "signal_date": "2021-12-10",
-    "ticker": "045970.KS"
+    "ticker": "045970"
   },
   "a2e5ba0a-d4db-4710-a002-39492f3a3604": {
     "price_at_signal": 145.55999755859375,
@@ -7431,46 +7431,46 @@
     "ticker": "SPG"
   },
   "fbc8e383-b2a4-4db5-8815-a79980231061": {
-    "price_at_signal": 287500.0,
+    "price_at_signal": 276448.09,
     "price_current": 270000.0,
-    "return_pct": -6.09,
+    "return_pct": -2.33,
     "signal_date": "2022-11-10",
-    "ticker": "011070.KS"
+    "ticker": "011070"
   },
   "7f84b8dc-e17b-4967-922e-4baf17ee570f": {
-    "price_at_signal": 49050.0,
+    "price_at_signal": 48251.89,
     "price_current": 8040.0,
-    "return_pct": -83.61,
+    "return_pct": -83.34,
     "signal_date": "2022-11-10",
-    "ticker": "243840.KS"
+    "ticker": "243840"
   },
   "9e13a1a4-f131-4a1c-82df-d1e5384e466c": {
-    "price_at_signal": 63700.0,
-    "price_current": 64000.0,
-    "return_pct": 0.47,
+    "price_at_signal": 39550.0,
+    "price_current": 32300.0,
+    "return_pct": -18.33,
     "signal_date": "2026-01-21",
-    "ticker": "031980.KS"
+    "ticker": "319660"
   },
   "514e8ab2-9945-4cf8-b1c6-2e2c57551c2f": {
     "price_at_signal": 98400.0,
     "price_current": 81000.0,
     "return_pct": -17.68,
     "signal_date": "2026-01-21",
-    "ticker": "183300.KS"
+    "ticker": "183300"
   },
   "00dd7faa-63ee-49b1-8327-44b5666cfe06": {
-    "price_at_signal": 18375.0,
-    "price_current": 333500.0,
-    "return_pct": 1714.97,
+    "price_at_signal": 17870.04,
+    "price_current": 259000,
+    "return_pct": 1349.35,
     "signal_date": "2022-02-02",
-    "ticker": "042700.KS"
+    "ticker": "042700"
   },
   "9c3a5880-dbb1-4ed7-878b-6282eb13db76": {
-    "price_at_signal": 105400.0,
-    "price_current": 202000.0,
-    "return_pct": 91.65,
+    "price_at_signal": 37718.3,
+    "price_current": 123500,
+    "return_pct": 227.43,
     "signal_date": "2022-02-02",
-    "ticker": "039030.KS"
+    "ticker": "240810"
   },
   "0c6bd584-8dd7-4319-b0d9-edeb3db52cda": {
     "price_at_signal": 8.039999961853027,
@@ -7480,142 +7480,142 @@
     "ticker": "BYDDY"
   },
   "ec5aa495-05d8-4e4a-82dd-e5b7d10269c1": {
-    "price_at_signal": 351500.0,
+    "price_at_signal": 339910.97,
     "price_current": 270000.0,
-    "return_pct": -23.19,
+    "return_pct": -20.57,
     "signal_date": "2022-02-02",
-    "ticker": "011070.KS"
+    "ticker": "011070"
   },
   "b85ebd58-762f-4d9a-98e8-cf1807927aec": {
-    "price_at_signal": 14600.0,
-    "price_current": 64000.0,
-    "return_pct": 338.36,
+    "price_at_signal": 20955.05,
+    "price_current": 32300.0,
+    "return_pct": 54.14,
     "signal_date": "2022-02-02",
-    "ticker": "031980.KS"
+    "ticker": "319660"
   },
   "b3e520f8-e29c-4024-9517-e53193d77e75": {
     "price_at_signal": 19675.0,
     "price_current": 29900.0,
     "return_pct": 51.97,
     "signal_date": "2022-04-06",
-    "ticker": "178320.KS"
+    "ticker": "178320"
   },
   "652bee09-c24b-4c67-8412-2ebcbf9bf0a0": {
-    "price_at_signal": 528000.0,
-    "price_current": 553000.0,
-    "return_pct": 4.73,
+    "price_at_signal": 525692.31,
+    "price_current": 501000,
+    "return_pct": -4.7,
     "signal_date": "2026-01-29",
-    "ticker": "005380.KS"
+    "ticker": "005380"
   },
   "c6792f14-7083-4030-8117-83b48c29eae4": {
     "price_at_signal": 377500.0,
-    "price_current": 353000.0,
-    "return_pct": -6.49,
+    "price_current": 327000,
+    "return_pct": -13.38,
     "signal_date": "2026-01-29",
-    "ticker": "352820.KS"
+    "ticker": "352820"
   },
   "ee3264a0-8570-4b34-abd3-c36700e7868d": {
     "price_at_signal": 388000.0,
-    "price_current": 410500.0,
-    "return_pct": 5.8,
+    "price_current": 351000,
+    "return_pct": -9.54,
     "signal_date": "2026-01-29",
-    "ticker": "006400.KS"
+    "ticker": "006400"
   },
   "1b62bb9e-1370-4ff2-910b-87f2a2999750": {
     "price_at_signal": 139500.0,
-    "price_current": 131600.0,
-    "return_pct": -5.66,
+    "price_current": 125400,
+    "return_pct": -10.11,
     "signal_date": "2026-01-29",
-    "ticker": "090430.KS"
+    "ticker": "090430"
   },
   "eb25c144-01ce-4cd0-a708-7f90586cd450": {
-    "price_at_signal": 528000.0,
-    "price_current": 553000.0,
-    "return_pct": 4.73,
+    "price_at_signal": 525692.31,
+    "price_current": 501000,
+    "return_pct": -4.7,
     "signal_date": "2026-01-29",
-    "ticker": "005380.KS"
+    "ticker": "005380"
   },
   "67d2ed9f-9a17-414a-a2f8-c5e2c74722cb": {
     "price_at_signal": 377500.0,
-    "price_current": 353000.0,
-    "return_pct": -6.49,
+    "price_current": 327000,
+    "return_pct": -13.38,
     "signal_date": "2026-01-29",
-    "ticker": "352820.KS"
+    "ticker": "352820"
   },
   "79a22e78-084f-4aba-8419-dccb7a7dd248": {
     "price_at_signal": 139500.0,
-    "price_current": 131600.0,
-    "return_pct": -5.66,
+    "price_current": 125400,
+    "return_pct": -10.11,
     "signal_date": "2026-01-29",
-    "ticker": "090430.KS"
+    "ticker": "090430"
   },
   "3caa2658-9cab-42af-9ed3-f9ed265f6356": {
     "price_at_signal": 388000.0,
-    "price_current": 410500.0,
-    "return_pct": 5.8,
+    "price_current": 351000,
+    "return_pct": -9.54,
     "signal_date": "2026-01-29",
-    "ticker": "006400.KS"
+    "ticker": "006400"
   },
   "42acc925-7c59-49bc-8e9e-0b2668b0407d": {
-    "price_at_signal": 28.510000228881836,
-    "price_current": 157.16,
-    "return_pct": 451.25,
+    "price_at_signal": 28.04,
+    "price_current": 147.22,
+    "return_pct": 425.04,
     "signal_date": "2020-12-22",
     "ticker": "PLTR"
   },
   "c5780f2b-ebde-40fd-9e27-84cc2c4b55ed": {
-    "price_at_signal": 27.239999771118164,
-    "price_current": 157.16,
-    "return_pct": 476.95,
+    "price_at_signal": 27.24,
+    "price_current": 147.22,
+    "return_pct": 440.46,
     "signal_date": "2020-12-14",
     "ticker": "PLTR"
   },
   "2d27b63b-1498-45fe-b6d8-417681763803": {
-    "price_at_signal": 216.6199951171875,
-    "price_current": 396.73,
-    "return_pct": 83.15,
+    "price_at_signal": 213.45,
+    "price_current": 392.43,
+    "return_pct": 83.85,
     "signal_date": "2020-12-22",
     "ticker": "TSLA"
   },
   "f7faeae5-b963-401f-863b-69c90b2a0deb": {
-    "price_at_signal": 528000.0,
-    "price_current": 553000.0,
-    "return_pct": 4.73,
+    "price_at_signal": 525692.31,
+    "price_current": 501000,
+    "return_pct": -4.7,
     "signal_date": "2026-01-29",
-    "ticker": "005380.KS"
+    "ticker": "005380"
   },
   "812c3bcd-9aa8-4883-946f-84baaa929b1f": {
     "price_at_signal": 276500.0,
     "price_current": 306000.0,
     "return_pct": 10.67,
     "signal_date": "2026-01-29",
-    "ticker": "278470.KS"
+    "ticker": "278470"
   },
   "8a8f6142-36a1-44b2-8f52-109b66b44fc7": {
     "price_at_signal": 377500.0,
-    "price_current": 353000.0,
-    "return_pct": -6.49,
+    "price_current": 327000,
+    "return_pct": -13.38,
     "signal_date": "2026-01-29",
-    "ticker": "352820.KS"
+    "ticker": "352820"
   },
   "31bb743e-db7b-4ba2-bf2a-5520263457de": {
     "price_at_signal": 388000.0,
-    "price_current": 410500.0,
-    "return_pct": 5.8,
+    "price_current": 351000,
+    "return_pct": -9.54,
     "signal_date": "2026-01-29",
-    "ticker": "006400.KS"
+    "ticker": "006400"
   },
   "61a0afe8-a74a-4e63-9467-d4f883d476cf": {
-    "price_at_signal": 193000.0,
-    "price_current": 188200.0,
-    "return_pct": -2.49,
+    "price_at_signal": 190100.0,
+    "price_current": 172200,
+    "return_pct": -9.42,
     "signal_date": "2026-02-22",
-    "ticker": "005930.KS"
+    "ticker": "005930"
   },
   "9fb5eb6a-caff-4dec-9692-b1bc7fbaa84c": {
-    "price_at_signal": 90.36299896240234,
-    "price_current": 177.885,
-    "return_pct": 96.86,
+    "price_at_signal": 90.31,
+    "price_current": 180.05,
+    "return_pct": 99.37,
     "signal_date": "2024-03-31",
     "ticker": "NVDA"
   },
@@ -7627,11 +7627,11 @@
     "ticker": "BRK-B"
   },
   "44704919-eb81-4752-8fc3-19cf0801959c": {
-    "price_at_signal": 67500.0,
-    "price_current": 188200.0,
-    "return_pct": 178.81,
+    "price_at_signal": 65230.96,
+    "price_current": 172200,
+    "return_pct": 163.99,
     "signal_date": "2023-09-28",
-    "ticker": "005930.KS"
+    "ticker": "005930"
   },
   "562724b4-bf57-45b7-9be7-f26ab42598c9": {
     "price_at_signal": 413.0,
@@ -7641,11 +7641,11 @@
     "ticker": "BRK-B"
   },
   "36b85714-3d5d-48c2-a8b3-09b70e784be6": {
-    "price_at_signal": 54200.0,
-    "price_current": 333500.0,
-    "return_pct": 515.31,
+    "price_at_signal": 51890.62,
+    "price_current": 259000,
+    "return_pct": 399.13,
     "signal_date": "2023-09-28",
-    "ticker": "042700.KS"
+    "ticker": "042700"
   },
   "16151c86-9980-466d-8040-5400c42ba896": {
     "price_at_signal": 290.19000244140625,
@@ -7655,18 +7655,18 @@
     "ticker": "BRK-B"
   },
   "2293b3af-9294-442a-9552-44304b671ac5": {
-    "price_at_signal": 90.36299896240234,
-    "price_current": 177.885,
-    "return_pct": 96.86,
+    "price_at_signal": 90.31,
+    "price_current": 180.05,
+    "return_pct": 99.37,
     "signal_date": "2024-03-30",
     "ticker": "NVDA"
   },
   "389a3a64-66b4-4b0f-9cc2-06fe5fdf39a9": {
-    "price_at_signal": 39200.0,
-    "price_current": 46700.0,
-    "return_pct": 19.13,
+    "price_at_signal": 38134.3,
+    "price_current": 129700,
+    "return_pct": 240.11,
     "signal_date": "2023-09-28",
-    "ticker": "084370.KS"
+    "ticker": "084370"
   },
   "6f948731-d81d-4921-8e70-d73a6f71b3d0": {
     "price_at_signal": 11.603333473205566,
@@ -7676,32 +7676,32 @@
     "ticker": "BYDDY"
   },
   "88780925-a7e4-44e5-96ac-ea29acb09d86": {
-    "price_at_signal": 67500.0,
-    "price_current": 188200.0,
-    "return_pct": 178.81,
+    "price_at_signal": 65230.96,
+    "price_current": 172200,
+    "return_pct": 163.99,
     "signal_date": "2023-09-28",
-    "ticker": "005930.KS"
+    "ticker": "005930"
   },
   "7aef7261-3715-4c2d-8fbd-5cb7e7d9185a": {
-    "price_at_signal": 33250.0,
-    "price_current": 37600.0,
-    "return_pct": 13.08,
+    "price_at_signal": 32652.38,
+    "price_current": 52900,
+    "return_pct": 62.01,
     "signal_date": "2023-09-28",
-    "ticker": "005290.KS"
+    "ticker": "005290"
   },
   "8372cb1f-0f56-433d-b855-3fe01d2ce7fc": {
-    "price_at_signal": 115400.0,
-    "price_current": 924000.0,
-    "return_pct": 700.69,
+    "price_at_signal": 112545.05,
+    "price_current": 849000,
+    "return_pct": 654.36,
     "signal_date": "2023-09-28",
-    "ticker": "000660.KS"
+    "ticker": "000660"
   },
   "88c38a8b-808e-4638-833d-cc34e9a568ab": {
-    "price_at_signal": 54500.0,
-    "price_current": 188200.0,
-    "return_pct": 245.32,
+    "price_at_signal": 53349.3,
+    "price_current": 172200,
+    "return_pct": 222.78,
     "signal_date": "2025-03-03",
-    "ticker": "005930.KS"
+    "ticker": "005930"
   },
   "b6f6bae5-3905-459c-8888-15a9b7143036": {
     "price_at_signal": 512.1500244140625,
@@ -7737,5 +7737,1246 @@
     "return_pct": 259.16,
     "signal_date": "2025-01-30",
     "ticker": "005930.KS"
+  },
+  "5f35b295-8e93-4026-99b0-64c8671d9c6c": {
+    "price_at_signal": 505000.0,
+    "price_current": 347500,
+    "return_pct": -31.19,
+    "signal_date": "2022-01-13",
+    "ticker": "373220"
+  },
+  "be863b24-d232-45ff-a6ec-7d5d79e77cfe": {
+    "price_at_signal": 66221.84,
+    "price_current": 71683.02,
+    "return_pct": 8.25,
+    "signal_date": "2026-02-12",
+    "ticker": "BTC"
+  },
+  "82112568-098e-4a06-92c3-c7a0568757fc": {
+    "price_at_signal": 72710.58,
+    "price_current": 70283.6641,
+    "return_pct": -3.34,
+    "signal_date": "2026-03-04",
+    "ticker": "BTC-USD"
+  },
+  "835c6b1a-be27-4c02-b5d8-46673cd9a91d": {
+    "price_at_signal": 175.85,
+    "price_current": 182.36,
+    "return_pct": 3.7,
+    "signal_date": "2026-02-27",
+    "ticker": "COIN"
+  },
+  "5223137f-c026-446d-b691-52a3df719cb5": {
+    "price_at_signal": 1992.19,
+    "price_current": 2050.5618,
+    "return_pct": 2.93,
+    "signal_date": "2026-02-17",
+    "ticker": "ETH-USD"
+  },
+  "bac043ec-5eb9-4e3b-8c48-8672a489e5ac": {
+    "price_at_signal": 156155.41,
+    "price_current": 119900.0,
+    "return_pct": -23.22,
+    "signal_date": "2025-09-19",
+    "ticker": "064760"
+  },
+  "b5954b5d-015e-45cf-9d4c-ae7381be56a1": {
+    "price_at_signal": 139.54,
+    "price_current": 147.22,
+    "return_pct": 5.5,
+    "signal_date": "2026-02-04",
+    "ticker": "PLTR"
+  },
+  "69397960-818e-49e7-96c4-7a8870934d9f": {
+    "price_at_signal": 169100.0,
+    "price_current": 172200,
+    "return_pct": 1.83,
+    "signal_date": "2026-02-04",
+    "ticker": "005930"
+  },
+  "1d31b507-2731-450a-ac99-6a70e892823e": {
+    "price_at_signal": 2143.5,
+    "price_current": 2050.5618,
+    "return_pct": -4.34,
+    "signal_date": "2026-02-04",
+    "ticker": "ETH-USD"
+  },
+  "61cc2654-8179-4814-8dd5-62ad25bc445a": {
+    "price_at_signal": 73019.7,
+    "price_current": 70283.6641,
+    "return_pct": -3.75,
+    "signal_date": "2026-02-04",
+    "ticker": "BTC-USD"
+  },
+  "f9b0b477-a8e7-4e16-90be-f79e807f1fba": {
+    "price_at_signal": 61.44,
+    "price_current": 182.36,
+    "return_pct": 196.81,
+    "signal_date": "2023-04-09",
+    "ticker": "COIN"
+  },
+  "3b38efe9-e2f0-4583-bd93-80f76c3f3540": {
+    "price_at_signal": 2267.96,
+    "price_current": 2050.5618,
+    "return_pct": -9.59,
+    "signal_date": "2026-02-01",
+    "ticker": "ETH-USD"
+  },
+  "9248a083-2d0c-44c4-b378-4bc86398550e": {
+    "price_at_signal": 241.15,
+    "price_current": 182.36,
+    "return_pct": -24.38,
+    "signal_date": "2026-01-17",
+    "ticker": "COIN"
+  },
+  "562a4dc2-527b-4f53-965d-095c7f941ae8": {
+    "price_at_signal": 91192.99,
+    "price_current": 70283.6641,
+    "return_pct": -22.93,
+    "signal_date": "2026-01-12",
+    "ticker": "BTC-USD"
+  },
+  "82d90c07-f546-4c52-8396-7f550ed42f9b": {
+    "price_at_signal": 3092.33,
+    "price_current": 2050.5618,
+    "return_pct": -33.69,
+    "signal_date": "2026-01-12",
+    "ticker": "ETH-USD"
+  },
+  "27638274-24d2-484a-9fe9-1fc4a06dac96": {
+    "price_at_signal": 139.14,
+    "price_current": 85.4676,
+    "return_pct": -38.57,
+    "signal_date": "2026-01-12",
+    "ticker": "SOL-USD"
+  },
+  "d7dae80b-3020-40e2-a20a-ae63c33d8378": {
+    "price_at_signal": 91413.49,
+    "price_current": 70283.6641,
+    "return_pct": -23.11,
+    "signal_date": "2026-01-04",
+    "ticker": "BTC-USD"
+  },
+  "9166d88d-bd1b-4fa2-ba11-6245093030ef": {
+    "price_at_signal": 3140.71,
+    "price_current": 2050.5618,
+    "return_pct": -34.71,
+    "signal_date": "2026-01-04",
+    "ticker": "ETH-USD"
+  },
+  "afe68996-4b3f-4203-b5f7-b1466c26bf91": {
+    "price_at_signal": 3125.92,
+    "price_current": 2050.5618,
+    "return_pct": -34.4,
+    "signal_date": "2026-01-03",
+    "ticker": "ETH-USD"
+  },
+  "25c6d388-8f38-458e-93c9-f1b1f758dc93": {
+    "price_at_signal": 89944.7,
+    "price_current": 70283.6641,
+    "return_pct": -21.86,
+    "signal_date": "2026-01-02",
+    "ticker": "BTC-USD"
+  },
+  "494e1e8e-92d4-41d9-93d8-a4a4ac2e704e": {
+    "price_at_signal": 87508.83,
+    "price_current": 70283.6641,
+    "return_pct": -19.68,
+    "signal_date": "2025-12-31",
+    "ticker": "BTC-USD"
+  },
+  "3d26c741-baab-4fe2-8585-43927309196a": {
+    "price_at_signal": 0.12,
+    "price_current": 0.09,
+    "return_pct": -23.27,
+    "signal_date": "2025-12-31",
+    "ticker": "DOGE"
+  },
+  "45a34714-5613-4850-98ca-89daed876df3": {
+    "price_at_signal": 87802.16,
+    "price_current": 70283.6641,
+    "return_pct": -19.95,
+    "signal_date": "2025-12-27",
+    "ticker": "BTC-USD"
+  },
+  "7da57fd1-e329-44f7-a0c5-9765f3bdb375": {
+    "price_at_signal": 2948.0,
+    "price_current": 2050.5618,
+    "return_pct": -30.44,
+    "signal_date": "2025-12-27",
+    "ticker": "ETH-USD"
+  },
+  "42d3cfae-e64a-41c6-b6ac-6ffaffdc86a5": {
+    "price_at_signal": 2925.75,
+    "price_current": 2050.5618,
+    "return_pct": -29.91,
+    "signal_date": "2025-12-26",
+    "ticker": "ETH-USD"
+  },
+  "8075e3d8-ced1-4964-8035-38f7978a4c66": {
+    "price_at_signal": 2945.59,
+    "price_current": 2050.5618,
+    "return_pct": -30.39,
+    "signal_date": "2025-12-24",
+    "ticker": "ETH-USD"
+  },
+  "dd8d266f-663a-4782-a6ef-a1ad86e21760": {
+    "price_at_signal": 158.71,
+    "price_current": 132.68,
+    "return_pct": -16.4,
+    "signal_date": "2025-12-24",
+    "ticker": "MSTR"
+  },
+  "84551bd3-5627-43de-aaa7-4b7deacb0b14": {
+    "price_at_signal": 87611.96,
+    "price_current": 70283.6641,
+    "return_pct": -19.78,
+    "signal_date": "2025-12-24",
+    "ticker": "BTC-USD"
+  },
+  "83891a78-2669-40c1-803f-c27e0e89a9a9": {
+    "price_at_signal": 314.46,
+    "price_current": 303.58,
+    "return_pct": -3.46,
+    "signal_date": "2025-12-01",
+    "ticker": "GOOGL"
+  },
+  "2b080fc9-1b7e-4efe-93f9-60a5444ee1ae": {
+    "price_at_signal": 86321.57,
+    "price_current": 70283.6641,
+    "return_pct": -18.58,
+    "signal_date": "2025-12-01",
+    "ticker": "BTC-USD"
+  },
+  "c9290201-3ea5-4b0d-9d7a-766d64cf5bf5": {
+    "price_at_signal": 90518.37,
+    "price_current": 70283.6641,
+    "return_pct": -22.35,
+    "signal_date": "2025-11-26",
+    "ticker": "BTC-USD"
+  },
+  "a5bd0af1-5229-4737-a431-a331568f31ca": {
+    "price_at_signal": 3027.81,
+    "price_current": 2050.5618,
+    "return_pct": -32.28,
+    "signal_date": "2025-11-26",
+    "ticker": "ETH-USD"
+  },
+  "f724083d-5426-4d67-9fc6-004a0938a399": {
+    "price_at_signal": 2801.68,
+    "price_current": 2050.5618,
+    "return_pct": -26.81,
+    "signal_date": "2025-11-23",
+    "ticker": "ETH-USD"
+  },
+  "13c17ec3-200d-41a1-b41b-e7daf49858ee": {
+    "price_at_signal": 2831.78,
+    "price_current": 2050.5618,
+    "return_pct": -27.59,
+    "signal_date": "2025-11-20",
+    "ticker": "ETH-USD"
+  },
+  "6fa791d9-0e1a-4704-8266-c36a690b9b5f": {
+    "price_at_signal": 86631.9,
+    "price_current": 70283.6641,
+    "return_pct": -18.87,
+    "signal_date": "2025-11-20",
+    "ticker": "BTC-USD"
+  },
+  "127c0888-2f2d-42af-9ea6-1c8b1b93c0b6": {
+    "price_at_signal": 3092.85,
+    "price_current": 2050.5618,
+    "return_pct": -33.7,
+    "signal_date": "2025-11-16",
+    "ticker": "ETH-USD"
+  },
+  "3388b7ad-1602-4e1f-afca-d07615e8c742": {
+    "price_at_signal": 3166.63,
+    "price_current": 2050.5618,
+    "return_pct": -35.24,
+    "signal_date": "2025-11-15",
+    "ticker": "ETH-USD"
+  },
+  "632c4165-2cca-485d-aeb8-9b8c40222be3": {
+    "price_at_signal": 3166.63,
+    "price_current": 2050.5618,
+    "return_pct": -35.24,
+    "signal_date": "2025-11-15",
+    "ticker": "ETH-USD"
+  },
+  "d4884e29-5729-40ba-a3af-3c1efd1ddd10": {
+    "price_at_signal": 3103.79,
+    "price_current": 2050.5618,
+    "return_pct": -33.93,
+    "signal_date": "2025-11-14",
+    "ticker": "ETH-USD"
+  },
+  "1d9e2561-5803-4e9f-871d-583b536fca8a": {
+    "price_at_signal": 3413.09,
+    "price_current": 2050.5618,
+    "return_pct": -39.92,
+    "signal_date": "2025-11-12",
+    "ticker": "ETH-USD"
+  },
+  "32577268-fd03-4e35-b163-f420b105054a": {
+    "price_at_signal": 193.79,
+    "price_current": 180.05,
+    "return_pct": -7.09,
+    "signal_date": "2025-11-12",
+    "ticker": "NVDA"
+  },
+  "9c4ea3f6-01a9-4845-9929-022cad01f639": {
+    "price_at_signal": 3582.62,
+    "price_current": 2050.5618,
+    "return_pct": -42.76,
+    "signal_date": "2025-11-09",
+    "ticker": "ETH-USD"
+  },
+  "6c733af3-217b-4e3b-97fb-4e74fc23dc13": {
+    "price_at_signal": 3400.38,
+    "price_current": 2050.5618,
+    "return_pct": -39.7,
+    "signal_date": "2025-11-08",
+    "ticker": "ETH-USD"
+  },
+  "db194a80-bac9-4bda-8742-ea2a0ee39c8c": {
+    "price_at_signal": 102282.12,
+    "price_current": 70283.6641,
+    "return_pct": -31.28,
+    "signal_date": "2025-11-08",
+    "ticker": "BTC-USD"
+  },
+  "8f26da89-98dc-4895-b3d3-1a98a4566bca": {
+    "price_at_signal": 3847.08,
+    "price_current": 2050.5618,
+    "return_pct": -46.7,
+    "signal_date": "2025-10-31",
+    "ticker": "ETH-USD"
+  },
+  "2d9a5661-b21c-4198-8288-cc01cd71d1ba": {
+    "price_at_signal": 3984.65,
+    "price_current": 2050.5618,
+    "return_pct": -48.54,
+    "signal_date": "2025-10-19",
+    "ticker": "ETH-USD"
+  },
+  "d42a2cd9-17ac-47e1-9c67-a4a966cc4013": {
+    "price_at_signal": 108666.71,
+    "price_current": 70283.6641,
+    "return_pct": -35.32,
+    "signal_date": "2025-10-19",
+    "ticker": "BTC-USD"
+  },
+  "6e94c24a-56f5-46fe-9a0b-1aa0b5b99234": {
+    "price_at_signal": 115169.77,
+    "price_current": 70283.6641,
+    "return_pct": -38.97,
+    "signal_date": "2025-10-12",
+    "ticker": "BTC-USD"
+  },
+  "e19e64a9-ab62-43b7-8217-b9969a60cd3b": {
+    "price_at_signal": 4164.43,
+    "price_current": 2050.5618,
+    "return_pct": -50.76,
+    "signal_date": "2025-10-12",
+    "ticker": "ETH-USD"
+  },
+  "4633d775-ee03-4d7c-bbc8-65d740b098ec": {
+    "price_at_signal": 4514.87,
+    "price_current": 2050.5618,
+    "return_pct": -54.58,
+    "signal_date": "2025-10-03",
+    "ticker": "ETH-USD"
+  },
+  "162f0f2c-fcdf-45e9-b67f-ebf48e3260bb": {
+    "price_at_signal": 4145.96,
+    "price_current": 2050.5618,
+    "return_pct": -50.54,
+    "signal_date": "2025-09-30",
+    "ticker": "ETH-USD"
+  },
+  "e4982269-74de-488c-ae7f-1bcc51e9d1d2": {
+    "price_at_signal": 4141.48,
+    "price_current": 2050.5618,
+    "return_pct": -50.49,
+    "signal_date": "2025-09-28",
+    "ticker": "ETH-USD"
+  },
+  "13d5e844-bdb4-4418-b6d9-ba68ae7d4641": {
+    "price_at_signal": 4035.89,
+    "price_current": 2050.5618,
+    "return_pct": -49.19,
+    "signal_date": "2025-09-26",
+    "ticker": "ETH-USD"
+  },
+  "7a8b7f80-7678-4c38-b2db-95bfd007938e": {
+    "price_at_signal": 205.35,
+    "price_current": 85.4676,
+    "return_pct": -58.38,
+    "signal_date": "2025-09-26",
+    "ticker": "SOL-USD"
+  },
+  "91a62f86-0b2c-4e28-a235-4bc8ba036794": {
+    "price_at_signal": 4306.99,
+    "price_current": 2050.5618,
+    "return_pct": -52.39,
+    "signal_date": "2025-09-05",
+    "ticker": "ETH-USD"
+  },
+  "5ec78ef3-3e32-4c02-91b6-3493982c5bbd": {
+    "price_at_signal": 4298.74,
+    "price_current": 2050.5618,
+    "return_pct": -52.3,
+    "signal_date": "2025-09-04",
+    "ticker": "ETH-USD"
+  },
+  "d4fe0bcd-1666-407e-ba6d-6838d37488b9": {
+    "price_at_signal": 112544.8,
+    "price_current": 70283.6641,
+    "return_pct": -37.55,
+    "signal_date": "2025-08-28",
+    "ticker": "BTC-USD"
+  },
+  "c3bfcdff-5080-422d-8056-8278f9c7dba7": {
+    "price_at_signal": 4507.18,
+    "price_current": 2050.5618,
+    "return_pct": -54.5,
+    "signal_date": "2025-08-28",
+    "ticker": "ETH-USD"
+  },
+  "1e7aac11-15cc-4d2d-9fc9-e0cf4187007a": {
+    "price_at_signal": 4503.39,
+    "price_current": 2050.5618,
+    "return_pct": -54.47,
+    "signal_date": "2025-08-27",
+    "ticker": "ETH-USD"
+  },
+  "062aaa95-e090-4203-ad0c-9e6e6352e60d": {
+    "price_at_signal": 202.92,
+    "price_current": 85.4676,
+    "return_pct": -57.88,
+    "signal_date": "2025-08-27",
+    "ticker": "SOL-USD"
+  },
+  "06e4ded3-d5ef-40d7-a60a-e4f5028c3d5e": {
+    "price_at_signal": 4600.43,
+    "price_current": 2050.5618,
+    "return_pct": -55.43,
+    "signal_date": "2025-08-26",
+    "ticker": "ETH-USD"
+  },
+  "cf4b2442-69c8-4083-836b-599e063579ed": {
+    "price_at_signal": 4372.99,
+    "price_current": 2050.5618,
+    "return_pct": -53.11,
+    "signal_date": "2025-08-25",
+    "ticker": "ETH-USD"
+  },
+  "496ee3d0-8b91-4622-a3bb-e89825d12688": {
+    "price_at_signal": 4779.65,
+    "price_current": 2050.5618,
+    "return_pct": -57.1,
+    "signal_date": "2025-08-24",
+    "ticker": "ETH-USD"
+  },
+  "945c75dc-3dee-4665-b835-4f4f96c59582": {
+    "price_at_signal": 4223.21,
+    "price_current": 2050.5618,
+    "return_pct": -51.45,
+    "signal_date": "2025-08-21",
+    "ticker": "ETH-USD"
+  },
+  "66973e52-7d55-4300-a088-8657514d5287": {
+    "price_at_signal": 4334.5,
+    "price_current": 2050.5618,
+    "return_pct": -52.69,
+    "signal_date": "2025-08-20",
+    "ticker": "ETH-USD"
+  },
+  "16dfb9e8-fa99-45c4-a416-4c5e7faae7df": {
+    "price_at_signal": 4073.46,
+    "price_current": 2050.5618,
+    "return_pct": -49.66,
+    "signal_date": "2025-08-19",
+    "ticker": "ETH-USD"
+  },
+  "b7f51333-64be-41bd-bfc9-953fdb744486": {
+    "price_at_signal": 4426.18,
+    "price_current": 2050.5618,
+    "return_pct": -53.67,
+    "signal_date": "2025-08-16",
+    "ticker": "ETH-USD"
+  },
+  "bf619d91-d49a-40c2-a335-118f98320dc4": {
+    "price_at_signal": 327.01,
+    "price_current": 182.36,
+    "return_pct": -44.23,
+    "signal_date": "2025-08-13",
+    "ticker": "COIN"
+  },
+  "c374bb34-c83d-4720-8472-299e77b9d42d": {
+    "price_at_signal": 116500.36,
+    "price_current": 70283.6641,
+    "return_pct": -39.67,
+    "signal_date": "2025-08-09",
+    "ticker": "BTC-USD"
+  },
+  "b0c38183-e479-4533-a188-0619b6dd5f63": {
+    "price_at_signal": 117496.9,
+    "price_current": 70283.6641,
+    "return_pct": -40.18,
+    "signal_date": "2025-08-07",
+    "ticker": "BTC-USD"
+  },
+  "bfe1182f-7daa-41d0-b480-30ef7a9f6718": {
+    "price_at_signal": 3914.33,
+    "price_current": 2050.5618,
+    "return_pct": -47.61,
+    "signal_date": "2025-08-07",
+    "ticker": "ETH-USD"
+  },
+  "b341e3b7-64fa-4c75-9e4f-3ad4052a2ebf": {
+    "price_at_signal": 3611.9,
+    "price_current": 2050.5618,
+    "return_pct": -43.23,
+    "signal_date": "2025-08-05",
+    "ticker": "ETH-USD"
+  },
+  "3e6ce0cb-71d4-4443-9c04-651863250ec4": {
+    "price_at_signal": 178.24,
+    "price_current": 180.05,
+    "return_pct": 1.02,
+    "signal_date": "2025-08-05",
+    "ticker": "NVDA"
+  },
+  "cfe5c4e1-2dd5-45e4-ba94-8423aefb383b": {
+    "price_at_signal": 173.27,
+    "price_current": 147.22,
+    "return_pct": -15.03,
+    "signal_date": "2025-08-05",
+    "ticker": "PLTR"
+  },
+  "4efba2fc-208b-4028-8d1e-ec49d8894d30": {
+    "price_at_signal": 3488.37,
+    "price_current": 2050.5618,
+    "return_pct": -41.22,
+    "signal_date": "2025-08-01",
+    "ticker": "ETH-USD"
+  },
+  "f3a2a469-89c2-43e8-b632-6a9f17db280a": {
+    "price_at_signal": 3808.2,
+    "price_current": 2050.5618,
+    "return_pct": -46.15,
+    "signal_date": "2025-07-30",
+    "ticker": "ETH-USD"
+  },
+  "c565e109-43f1-4f73-b1fb-8513761fb2fb": {
+    "price_at_signal": 3741.4,
+    "price_current": 2050.5618,
+    "return_pct": -45.19,
+    "signal_date": "2025-07-26",
+    "ticker": "ETH-USD"
+  },
+  "1b61d530-caba-424c-8e06-fef1d657c481": {
+    "price_at_signal": 3727.27,
+    "price_current": 2050.5618,
+    "return_pct": -44.98,
+    "signal_date": "2025-07-25",
+    "ticker": "ETH-USD"
+  },
+  "ea51ec9b-ca4e-4ae4-b87e-9122214eee77": {
+    "price_at_signal": 3763.37,
+    "price_current": 2050.5618,
+    "return_pct": -45.51,
+    "signal_date": "2025-07-21",
+    "ticker": "ETH-USD"
+  },
+  "2e6227e2-cdbb-4be6-8ea8-22e8af1f416b": {
+    "price_at_signal": 3759.47,
+    "price_current": 2050.5618,
+    "return_pct": -45.46,
+    "signal_date": "2025-07-20",
+    "ticker": "ETH-USD"
+  },
+  "26574a0d-e33f-4521-8a65-5900c49180a7": {
+    "price_at_signal": 3549.02,
+    "price_current": 2050.5618,
+    "return_pct": -42.22,
+    "signal_date": "2025-07-18",
+    "ticker": "ETH-USD"
+  },
+  "0df15543-9bdf-4541-8013-302c51b72b55": {
+    "price_at_signal": 293.94,
+    "price_current": 392.43,
+    "return_pct": 33.51,
+    "signal_date": "2025-07-07",
+    "ticker": "TSLA"
+  },
+  "91c5a0a8-218d-460e-b971-09109a0a3525": {
+    "price_at_signal": 2416.15,
+    "price_current": 2050.5618,
+    "return_pct": -15.13,
+    "signal_date": "2025-06-26",
+    "ticker": "ETH-USD"
+  },
+  "bf1cb30c-8f62-43c4-b21a-1d277fab9e6b": {
+    "price_at_signal": 139.06,
+    "price_current": 85.4676,
+    "return_pct": -38.54,
+    "signal_date": "2025-06-26",
+    "ticker": "SOL-USD"
+  },
+  "1e0bceb3-dad4-48fa-ab44-b29011ce866a": {
+    "price_at_signal": 106960.0,
+    "price_current": 70283.6641,
+    "return_pct": -34.29,
+    "signal_date": "2025-06-26",
+    "ticker": "BTC-USD"
+  },
+  "932ef834-e525-40a1-8aea-1b8f1f89f441": {
+    "price_at_signal": 105577.77,
+    "price_current": 70283.6641,
+    "return_pct": -33.43,
+    "signal_date": "2025-06-23",
+    "ticker": "BTC-USD"
+  },
+  "2e491360-7881-438f-a9fd-6ce118d70f0e": {
+    "price_at_signal": 2682.21,
+    "price_current": 2050.5618,
+    "return_pct": -23.55,
+    "signal_date": "2025-05-28",
+    "ticker": "ETH-USD"
+  },
+  "7777a4f8-ecf9-4112-873c-d4e1eeb81393": {
+    "price_at_signal": 172.19,
+    "price_current": 85.4676,
+    "return_pct": -50.36,
+    "signal_date": "2025-05-28",
+    "ticker": "SOL-USD"
+  },
+  "36ba3f18-63c2-48d9-92b2-c2ee1d388872": {
+    "price_at_signal": 122.29,
+    "price_current": 147.22,
+    "return_pct": 20.39,
+    "signal_date": "2025-05-22",
+    "ticker": "PLTR"
+  },
+  "c20cc014-aec3-4645-a7a0-aa4b4d2b309c": {
+    "price_at_signal": 343.82,
+    "price_current": 392.43,
+    "return_pct": 14.14,
+    "signal_date": "2025-05-20",
+    "ticker": "TSLA"
+  },
+  "aaffc9de-1354-4549-8c15-205703f9f07f": {
+    "price_at_signal": 102812.95,
+    "price_current": 70283.6641,
+    "return_pct": -31.64,
+    "signal_date": "2025-05-12",
+    "ticker": "BTC-USD"
+  },
+  "fa185984-7a63-4848-914f-814e8d060cff": {
+    "price_at_signal": 2345.51,
+    "price_current": 2050.5618,
+    "return_pct": -12.57,
+    "signal_date": "2025-05-09",
+    "ticker": "ETH-USD"
+  },
+  "3ef42dcd-5ab4-4440-96fb-89af07fdac6c": {
+    "price_at_signal": 102970.85,
+    "price_current": 70283.6641,
+    "return_pct": -31.74,
+    "signal_date": "2025-05-09",
+    "ticker": "BTC-USD"
+  },
+  "a02b24bf-e7f9-44e6-b078-dd77a4e9c277": {
+    "price_at_signal": 96910.07,
+    "price_current": 70283.6641,
+    "return_pct": -27.48,
+    "signal_date": "2025-05-02",
+    "ticker": "BTC-USD"
+  },
+  "4f422952-aa72-41c4-b1c8-996cf6d6f5bd": {
+    "price_at_signal": 1842.71,
+    "price_current": 2050.5618,
+    "return_pct": 11.28,
+    "signal_date": "2025-05-02",
+    "ticker": "ETH-USD"
+  },
+  "1165adbb-7972-41c4-b470-d442bc1d75f8": {
+    "price_at_signal": 287.21,
+    "price_current": 392.43,
+    "return_pct": 36.64,
+    "signal_date": "2025-05-02",
+    "ticker": "TSLA"
+  },
+  "20ec06c3-74ac-4ff0-842a-6133116aa78a": {
+    "price_at_signal": 124.28,
+    "price_current": 147.22,
+    "return_pct": 18.46,
+    "signal_date": "2025-05-02",
+    "ticker": "PLTR"
+  },
+  "7a1448f9-01af-4d54-9feb-cb6171f5d78e": {
+    "price_at_signal": 204.46,
+    "price_current": 263.75,
+    "return_pct": 29.0,
+    "signal_date": "2025-05-02",
+    "ticker": "AAPL"
+  },
+  "3daeeed3-28f2-41c8-8272-5802ae2b1d11": {
+    "price_at_signal": 107.78,
+    "price_current": 147.22,
+    "return_pct": 36.59,
+    "signal_date": "2025-04-24",
+    "ticker": "PLTR"
+  },
+  "8ebe1b35-b811-4ad4-972a-740bbaf77509": {
+    "price_at_signal": 237.97,
+    "price_current": 392.43,
+    "return_pct": 64.91,
+    "signal_date": "2025-04-22",
+    "ticker": "TSLA"
+  },
+  "14e0bcf6-8352-4d28-83dc-e8f455feab26": {
+    "price_at_signal": 87518.91,
+    "price_current": 70283.6641,
+    "return_pct": -19.69,
+    "signal_date": "2025-04-21",
+    "ticker": "BTC-USD"
+  },
+  "02d50e3e-8707-4656-90f4-0112561dc03b": {
+    "price_at_signal": 84542.39,
+    "price_current": 70283.6641,
+    "return_pct": -16.87,
+    "signal_date": "2025-04-14",
+    "ticker": "BTC-USD"
+  },
+  "9d13bfe4-e73b-4605-a232-0881ca9a8b9e": {
+    "price_at_signal": 82548.91,
+    "price_current": 70283.6641,
+    "return_pct": -14.86,
+    "signal_date": "2025-03-31",
+    "ticker": "BTC-USD"
+  },
+  "a77ba3bc-7841-4da8-a7f1-6ecc835a88ff": {
+    "price_at_signal": 505000.0,
+    "price_current": 347500,
+    "return_pct": -31.19,
+    "signal_date": "2020-12-22",
+    "ticker": "373220"
+  },
+  "XRP": {
+    "name": "XRP (리플)",
+    "ticker": "XRP",
+    "market": "CRYPTO",
+    "current_price": 1.3889,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "ae299f7a-39ad-4c76-b830-d0b86887b699": {
+    "price_at_signal": 1.41,
+    "price_current": 1.3829,
+    "return_pct": -1.67,
+    "signal_date": "2026-02-19",
+    "ticker": "XRP-USD"
+  },
+  "03a5496b-a5ed-4daa-8e55-cd689f989368": {
+    "price_at_signal": 1.47,
+    "price_current": 1.3829,
+    "return_pct": -6.21,
+    "signal_date": "2026-02-17",
+    "ticker": "XRP-USD"
+  },
+  "34dc5889-3abe-467e-b9df-40862f30ce1e": {
+    "price_at_signal": 1.51,
+    "price_current": 1.3829,
+    "return_pct": -8.45,
+    "signal_date": "2026-02-04",
+    "ticker": "XRP-USD"
+  },
+  "dfefbe2f-8baf-4325-9e8e-c42f75a361dc": {
+    "price_at_signal": 1.59,
+    "price_current": 1.3829,
+    "return_pct": -13.1,
+    "signal_date": "2026-02-01",
+    "ticker": "XRP-USD"
+  },
+  "d9429fa4-db60-49b5-8296-600d5910fd3b": {
+    "price_at_signal": 2.05,
+    "price_current": 1.3829,
+    "return_pct": -32.63,
+    "signal_date": "2026-01-12",
+    "ticker": "XRP-USD"
+  },
+  "024c7cf7-efce-4248-8af5-f9c2dbff3856": {
+    "price_at_signal": 2.02,
+    "price_current": 1.3829,
+    "return_pct": -31.45,
+    "signal_date": "2026-01-03",
+    "ticker": "XRP-USD"
+  },
+  "7f63fe41-e5b5-4092-9f1a-43edca69e031": {
+    "price_at_signal": 1.93,
+    "price_current": 1.3829,
+    "return_pct": -28.44,
+    "signal_date": "2025-12-20",
+    "ticker": "XRP-USD"
+  },
+  "eb6feecb-2f9d-4944-bea5-caded857724c": {
+    "price_at_signal": 2.03,
+    "price_current": 1.3829,
+    "return_pct": -31.91,
+    "signal_date": "2025-12-01",
+    "ticker": "XRP-USD"
+  },
+  "8a00b0fe-5d2e-4134-a858-72810bfa4051": {
+    "price_at_signal": 2.39,
+    "price_current": 1.3829,
+    "return_pct": -42.15,
+    "signal_date": "2025-10-19",
+    "ticker": "XRP-USD"
+  },
+  "da14bee8-a1fe-416c-b048-16d78a3ed5f2": {
+    "price_at_signal": 2.81,
+    "price_current": 1.3829,
+    "return_pct": -50.75,
+    "signal_date": "2025-09-27",
+    "ticker": "XRP-USD"
+  },
+  "911bdef3-114a-4f93-a564-ba2b25d8df7a": {
+    "price_at_signal": 2.97,
+    "price_current": 1.3829,
+    "return_pct": -53.39,
+    "signal_date": "2025-08-28",
+    "ticker": "XRP-USD"
+  },
+  "b7a50890-24a7-425a-afbc-bfbec65af01f": {
+    "price_at_signal": 2.97,
+    "price_current": 1.3829,
+    "return_pct": -53.38,
+    "signal_date": "2025-08-27",
+    "ticker": "XRP-USD"
+  },
+  "8067ce23-ae5d-4478-a14a-afc056894748": {
+    "price_at_signal": 3.23,
+    "price_current": 1.3829,
+    "return_pct": -57.16,
+    "signal_date": "2025-08-09",
+    "ticker": "XRP-USD"
+  },
+  "cd1bc7aa-bbf9-4b32-b49a-dfa11696f21c": {
+    "price_at_signal": 3.32,
+    "price_current": 1.3829,
+    "return_pct": -58.32,
+    "signal_date": "2025-08-07",
+    "ticker": "XRP-USD"
+  },
+  "be0365af-bdd1-4da4-865a-9d04ff33cfa4": {
+    "price_at_signal": 2.77,
+    "price_current": 1.3829,
+    "return_pct": -50.01,
+    "signal_date": "2025-08-02",
+    "ticker": "XRP-USD"
+  },
+  "8ac12dac-ab48-48fe-866f-9b88331ea045": {
+    "price_at_signal": 3.12,
+    "price_current": 1.3829,
+    "return_pct": -55.62,
+    "signal_date": "2025-07-28",
+    "ticker": "XRP-USD"
+  },
+  "278d1f91-ccaf-4f86-b124-95765650cdf2": {
+    "price_at_signal": 3.46,
+    "price_current": 1.3829,
+    "return_pct": -60.03,
+    "signal_date": "2025-07-20",
+    "ticker": "XRP-USD"
+  },
+  "49e14436-997e-42ee-a8ca-7020eb42c44e": {
+    "price_at_signal": 3.42,
+    "price_current": 1.3829,
+    "return_pct": -59.54,
+    "signal_date": "2025-07-18",
+    "ticker": "XRP-USD"
+  },
+  "ce14c67c-0f27-40ce-b0d9-692c463a2bf0": {
+    "price_at_signal": 3.42,
+    "price_current": 1.3829,
+    "return_pct": -59.54,
+    "signal_date": "2025-07-18",
+    "ticker": "XRP-USD"
+  },
+  "6c8c333d-ada4-43f0-8627-2480964b5696": {
+    "price_at_signal": 2.74,
+    "price_current": 1.3829,
+    "return_pct": -49.49,
+    "signal_date": "2025-07-12",
+    "ticker": "XRP-USD"
+  },
+  "e713e6c7-a316-4bcd-899a-5e65ffa1cd18": {
+    "price_at_signal": 2.11,
+    "price_current": 1.3829,
+    "return_pct": -34.33,
+    "signal_date": "2025-06-26",
+    "ticker": "XRP-USD"
+  },
+  "4bd480b2-66bc-4121-9f99-67fffc8497e6": {
+    "price_at_signal": 2.17,
+    "price_current": 1.3829,
+    "return_pct": -36.16,
+    "signal_date": "2025-06-23",
+    "ticker": "XRP-USD"
+  },
+  "8ceb97a0-a1a9-4261-87c9-de1e914d6631": {
+    "price_at_signal": 2.17,
+    "price_current": 1.3829,
+    "return_pct": -36.19,
+    "signal_date": "2025-06-15",
+    "ticker": "XRP-USD"
+  },
+  "d6c4f4f9-57d0-4e36-a50a-9be0764a6298": {
+    "price_at_signal": 2.34,
+    "price_current": 1.3829,
+    "return_pct": -41.02,
+    "signal_date": "2025-05-09",
+    "ticker": "XRP-USD"
+  },
+  "6ac670b8-87ee-49e5-8483-e4cb98834a18": {
+    "price_at_signal": 2.13,
+    "price_current": 1.3829,
+    "return_pct": -34.96,
+    "signal_date": "2025-05-07",
+    "ticker": "XRP-USD"
+  },
+  "97eca193-2607-47ba-8229-528b7dae79b3": {
+    "price_at_signal": 2.21,
+    "price_current": 1.3829,
+    "return_pct": -37.42,
+    "signal_date": "2025-05-02",
+    "ticker": "XRP-USD"
+  },
+  "a9581ca2-308a-4981-8739-576df943d8b9": {
+    "price_at_signal": 2.13,
+    "price_current": 1.3829,
+    "return_pct": -35.04,
+    "signal_date": "2025-04-04",
+    "ticker": "XRP-USD"
+  },
+  "1bbcacbc-7652-4e9d-ba53-84b81cadbde2": {
+    "price_at_signal": 2.09,
+    "price_current": 1.3829,
+    "return_pct": -33.83,
+    "signal_date": "2025-03-31",
+    "ticker": "XRP-USD"
+  },
+  "BTC-USD": {
+    "name": "비트코인",
+    "ticker": "BTC-USD",
+    "market": "CRYPTO",
+    "current_price": 70283.6641,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "ETH-USD": {
+    "name": "이더리움",
+    "ticker": "ETH-USD",
+    "market": "CRYPTO",
+    "current_price": 2050.5618,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "XRP-USD": {
+    "name": "리플",
+    "ticker": "XRP-USD",
+    "market": "CRYPTO",
+    "current_price": 1.3829,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "SOL-USD": {
+    "name": "솔라나",
+    "ticker": "SOL-USD",
+    "market": "CRYPTO",
+    "current_price": 85.4676,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "LINK-USD": {
+    "name": "체인링크",
+    "ticker": "LINK-USD",
+    "market": "CRYPTO",
+    "current_price": 8.9882,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "DOGE-USD": {
+    "name": "도지코인",
+    "ticker": "DOGE-USD",
+    "market": "CRYPTO",
+    "current_price": 0.0924,
+    "currency": "USD",
+    "last_updated": "2026-03-11"
+  },
+  "e3086055-67df-46d1-a53d-c8e304e3f01a": {
+    "price_at_signal": 8.71,
+    "price_current": 8.9882,
+    "return_pct": 3.21,
+    "signal_date": "2026-02-27",
+    "ticker": "LINK-USD"
+  },
+  "ba040831-e85c-40de-8751-a1a3983f2e61": {
+    "price_at_signal": 12.19,
+    "price_current": 8.9882,
+    "return_pct": -26.25,
+    "signal_date": "2025-12-31",
+    "ticker": "LINK-USD"
+  },
+  "3366da31-e218-4106-ad6e-7e656efead79": {
+    "price_at_signal": 22.65,
+    "price_current": 8.9882,
+    "return_pct": -60.32,
+    "signal_date": "2025-08-16",
+    "ticker": "LINK-USD"
+  },
+  "c1a350ad-04ba-43f2-9cfe-16def77f83e3": {
+    "price_at_signal": 25.76,
+    "price_current": 8.9882,
+    "return_pct": -65.11,
+    "signal_date": "2025-08-18",
+    "ticker": "LINK-USD"
+  },
+  "CNTN-USD": {
+    "name": "캔톤코인",
+    "ticker": "CNTN-USD",
+    "market": "CRYPTO",
+    "current_price": 0.147683,
+    "currency": "USD",
+    "last_updated": "2026-03-11",
+    "source": "coingecko"
+  },
+  "3b9fc879-9ee4-4798-9cfa-f59c331c43a6": {
+    "price_at_signal": 1.940000057220459,
+    "price_current": 1.63,
+    "return_pct": -15.98,
+    "signal_date": "2026-02-01",
+    "ticker": "BTBT"
+  },
+  "029b3107-caf0-4f12-93cd-b874610f019d": {
+    "price_at_signal": 2.319999933242798,
+    "price_current": 4.74,
+    "return_pct": 104.31,
+    "signal_date": "2025-12-20",
+    "ticker": "THAR"
+  },
+  "aa231f4e-c6d7-4d12-9544-943dee63d580": {
+    "price_at_signal": 2.369999885559082,
+    "price_current": 4.74,
+    "return_pct": 100.0,
+    "signal_date": "2025-12-03",
+    "ticker": "THAR"
+  },
+  "b2f2d91f-e1d4-4b02-9fc0-69e899aeb68b": {
+    "price_at_signal": 2.4100000858306885,
+    "price_current": 1.63,
+    "return_pct": -32.37,
+    "signal_date": "2025-11-15",
+    "ticker": "BTBT"
+  },
+  "0137e42b-9d4c-498f-9c3e-c36a16075a44": {
+    "price_at_signal": 3.140000104904175,
+    "price_current": 1.63,
+    "return_pct": -48.09,
+    "signal_date": "2025-11-08",
+    "ticker": "BTBT"
+  },
+  "8d95f02f-cc26-485e-a149-91deffcf93c7": {
+    "price_at_signal": 17.760000228881836,
+    "price_current": 8.55,
+    "return_pct": -51.86,
+    "signal_date": "2025-10-31",
+    "ticker": "MARA"
+  },
+  "cd0c78a3-0b5e-44a9-a5cd-396c758a9b41": {
+    "price_at_signal": 0.7099999785423279,
+    "price_current": 0.945,
+    "return_pct": 33.1,
+    "signal_date": "2025-09-27",
+    "ticker": "XPL"
+  },
+  "fd0a48b6-f1c6-44b8-abac-5bb752c854f7": {
+    "price_at_signal": 2.940000057220459,
+    "price_current": 1.63,
+    "return_pct": -44.56,
+    "signal_date": "2025-09-14",
+    "ticker": "BTBT"
+  },
+  "2e777197-39dc-4b25-8379-70adc6761d6b": {
+    "price_at_signal": 12.020000457763672,
+    "price_current": 0.8089,
+    "return_pct": -93.27,
+    "signal_date": "2025-09-14",
+    "ticker": "ORBS"
+  },
+  "d751d0e4-1575-42ab-a8b5-c5926c6a7bb6": {
+    "price_at_signal": 2.4800000190734863,
+    "price_current": 1.63,
+    "return_pct": -34.27,
+    "signal_date": "2025-09-05",
+    "ticker": "BTBT"
+  },
+  "4b194051-8676-437d-b3c8-3f361f4f384e": {
+    "price_at_signal": 2.759999990463257,
+    "price_current": 1.63,
+    "return_pct": -40.94,
+    "signal_date": "2025-08-21",
+    "ticker": "BTBT"
+  },
+  "197706b4-7595-4023-839a-c437cd508cea": {
+    "price_at_signal": 15.170000076293945,
+    "price_current": 8.55,
+    "return_pct": -43.64,
+    "signal_date": "2025-08-20",
+    "ticker": "MARA"
+  },
+  "f56b4362-c518-4c44-a7c9-458add2e6664": {
+    "price_at_signal": 28.868000030517578,
+    "price_current": 29.21,
+    "return_pct": 1.18,
+    "signal_date": "2025-08-18",
+    "ticker": "ARB"
+  },
+  "7fa60bda-818e-46c4-9d96-3d89f2811168": {
+    "price_at_signal": 28.854999542236328,
+    "price_current": 29.21,
+    "return_pct": 1.23,
+    "signal_date": "2025-08-16",
+    "ticker": "ARB"
+  },
+  "0332062c-2bdf-4072-a330-e44f59ae4a0a": {
+    "price_at_signal": 68.0,
+    "price_current": 37.19,
+    "return_pct": -45.31,
+    "signal_date": "2025-08-13",
+    "ticker": "BLSH"
+  },
+  "45e7965d-5b60-418f-b44b-e77683b2fd95": {
+    "price_at_signal": 22.34000015258789,
+    "price_current": 7.59,
+    "return_pct": -66.03,
+    "signal_date": "2025-08-10",
+    "ticker": "SBET"
+  },
+  "c38704e1-5100-4bc6-89c0-2d9c78728b5c": {
+    "price_at_signal": 3.119999885559082,
+    "price_current": 1.63,
+    "return_pct": -47.76,
+    "signal_date": "2025-08-05",
+    "ticker": "BTBT"
+  },
+  "8d5b1b34-bead-4264-9471-bfe3dfc5b06b": {
+    "price_at_signal": 2883.0,
+    "price_current": 2939.0,
+    "return_pct": 1.94,
+    "signal_date": "2025-08-02",
+    "ticker": "8473.T"
+  },
+  "60f0e382-1615-4704-8062-4a85cba2923c": {
+    "price_at_signal": 2.9100000858306885,
+    "price_current": 1.63,
+    "return_pct": -43.99,
+    "signal_date": "2025-08-01",
+    "ticker": "BTBT"
+  },
+  "a44b702e-9442-4432-a308-e44364a6a18a": {
+    "price_at_signal": 21.989999771118164,
+    "price_current": 7.59,
+    "return_pct": -65.48,
+    "signal_date": "2025-07-26",
+    "ticker": "SBET"
+  },
+  "37a3e040-4346-412c-8682-e4e72f698396": {
+    "price_at_signal": 3.1500000953674316,
+    "price_current": 1.63,
+    "return_pct": -48.25,
+    "signal_date": "2025-07-26",
+    "ticker": "BTBT"
+  },
+  "54903681-b155-4673-9773-711058d5f5e8": {
+    "price_at_signal": 2483.5,
+    "price_current": 2939.0,
+    "return_pct": 18.34,
+    "signal_date": "2025-06-26",
+    "ticker": "8473.T"
+  },
+  "98f182c9-69cf-49a0-92df-b2ef33b6bb05": {
+    "price_at_signal": 394000.0,
+    "price_current": 371000.0,
+    "return_pct": -5.84,
+    "signal_date": "2025-06-15",
+    "ticker": "007310.KS"
+  },
+  "b225acbb-1ee3-4951-96f3-d1e830aa51d6": {
+    "price_at_signal": 31250.0,
+    "price_current": 24700.0,
+    "return_pct": -20.96,
+    "signal_date": "2025-06-15",
+    "ticker": "008730.KS"
+  },
+  "909f41d6-a744-4022-92f8-4fb74b97de9a": {
+    "price_at_signal": 23550.0,
+    "price_current": 32050.0,
+    "return_pct": 36.09,
+    "signal_date": "2025-06-15",
+    "ticker": "028050.KS"
+  },
+  "6264504c-cc9a-4e25-bc83-37ac4ece2a2c": {
+    "price_at_signal": 201000.0,
+    "price_current": 347500.0,
+    "return_pct": 72.89,
+    "signal_date": "2025-06-15",
+    "ticker": "034730.KS"
+  },
+  "08067e50-feaf-49e4-a748-935a4761c71e": {
+    "price_at_signal": 54200.0,
+    "price_current": 47100.0,
+    "return_pct": -13.1,
+    "signal_date": "2025-06-15",
+    "ticker": "145990.KS"
+  },
+  "daa9af39-e440-4ee2-ab9b-2e5d469e6da8": {
+    "price_at_signal": 35.52000045776367,
+    "price_current": 12.38,
+    "return_pct": -65.15,
+    "signal_date": "2025-05-26",
+    "ticker": "SMR"
+  },
+  "dd6612e7-6f78-4c89-96de-8f50ca457846": {
+    "price_at_signal": 53.900001525878906,
+    "price_current": 62.76,
+    "return_pct": 16.44,
+    "signal_date": "2025-05-26",
+    "ticker": "OKLO"
+  },
+  "03fb10c5-763d-4b19-9b9f-fa28d2f0c916": {
+    "price_at_signal": 21.639999389648438,
+    "price_current": 12.38,
+    "return_pct": -42.79,
+    "signal_date": "2025-05-14",
+    "ticker": "SMR"
+  },
+  "35b55f8b-a9de-4918-a7c6-db28142a83d9": {
+    "price_at_signal": 32.029998779296875,
+    "price_current": 62.76,
+    "return_pct": 95.94,
+    "signal_date": "2025-05-14",
+    "ticker": "OKLO"
+  },
+  "e94f9459-ed22-4e28-ad4a-b004d5fc8079": {
+    "price_at_signal": 3.0,
+    "price_current": 1.63,
+    "return_pct": -45.67,
+    "signal_date": "2025-08-10",
+    "ticker": "BTBT"
   }
 }

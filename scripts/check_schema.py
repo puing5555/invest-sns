@@ -1,29 +1,31 @@
-import urllib.request, json, os
+# -*- coding: utf-8 -*-
+import sys, requests, json
+sys.stdout.reconfigure(encoding='utf-8')
 
 env = {}
-with open(os.path.join(os.path.dirname(__file__), '..', '.env.local'), 'r') as f:
+with open('.env.local') as f:
     for line in f:
         line = line.strip()
         if '=' in line and not line.startswith('#'):
             k, v = line.split('=', 1)
-            env[k] = v
+            env[k.strip()] = v.strip()
 
-URL = env['NEXT_PUBLIC_SUPABASE_URL']
-KEY = env['SUPABASE_SERVICE_ROLE_KEY']
-H = {'apikey': KEY, 'Authorization': f'Bearer {KEY}'}
+key = env.get('SUPABASE_SERVICE_ROLE_KEY', '')
+h = {'apikey': key, 'Authorization': 'Bearer ' + key}
+SUPA = 'https://arypzhotxflimroprmdk.supabase.co'
 
-# Check influencer_channels columns
-req = urllib.request.Request(f'{URL}/rest/v1/influencer_channels?select=*&limit=2', headers=H)
-resp = urllib.request.urlopen(req)
-data = json.loads(resp.read().decode())
+r = requests.get(f'{SUPA}/rest/v1/influencer_signals?limit=1&select=*', headers=h)
+data = r.json()
+print('Status:', r.status_code)
 if data:
-    print("influencer_channels columns:", list(data[0].keys()))
-    print("Sample:", json.dumps(data[0], ensure_ascii=False, indent=2))
+    print('Columns:', list(data[0].keys()))
 
-# Check speakers columns
-req2 = urllib.request.Request(f'{URL}/rest/v1/speakers?select=*&limit=3', headers=H)
-resp2 = urllib.request.urlopen(req2)
-data2 = json.loads(resp2.read().decode())
-if data2:
-    print("\nspeakers columns:", list(data2[0].keys()))
-    print("Sample:", json.dumps(data2[0], ensure_ascii=False, indent=2))
+# Join으로 코린이아빠 시그널 가져오기
+r2 = requests.get(
+    f'{SUPA}/rest/v1/influencer_signals?select=id,stock,ticker,signal,'
+    f'influencer_videos!inner(channel_id,influencer_channels!inner(channel_name))'
+    f'&influencer_videos.influencer_channels.channel_name=eq.코린이 아빠&limit=50',
+    headers=h
+)
+print('Join query status:', r2.status_code)
+print(r2.text[:500])
