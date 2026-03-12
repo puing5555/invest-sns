@@ -8766,88 +8766,112 @@
     "source": "coingecko"
   },
   "3b9fc879-9ee4-4798-9cfa-f59c331c43a6": {
-    "price_at_signal": 1.940000057220459,
+    "price_at_signal": 1.94,
     "price_current": 1.63,
     "return_pct": -15.98,
     "signal_date": "2026-02-01",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "029b3107-caf0-4f12-93cd-b874610f019d": {
-    "price_at_signal": 2.319999933242798,
+    "price_at_signal": 2.32,
     "price_current": 4.74,
     "return_pct": 104.31,
     "signal_date": "2025-12-20",
-    "ticker": "THAR"
+    "ticker": "THAR",
+    "market": "KR",
+    "currency": "USD"
   },
   "aa231f4e-c6d7-4d12-9544-943dee63d580": {
-    "price_at_signal": 2.369999885559082,
+    "price_at_signal": 2.49,
     "price_current": 4.74,
-    "return_pct": 100.0,
+    "return_pct": 90.36,
     "signal_date": "2025-12-03",
-    "ticker": "THAR"
+    "ticker": "THAR",
+    "market": "KR",
+    "currency": "USD"
   },
   "b2f2d91f-e1d4-4b02-9fc0-69e899aeb68b": {
-    "price_at_signal": 2.4100000858306885,
+    "price_at_signal": 2.41,
     "price_current": 1.63,
     "return_pct": -32.37,
     "signal_date": "2025-11-15",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "0137e42b-9d4c-498f-9c3e-c36a16075a44": {
-    "price_at_signal": 3.140000104904175,
+    "price_at_signal": 3.14,
     "price_current": 1.63,
     "return_pct": -48.09,
     "signal_date": "2025-11-08",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "8d95f02f-cc26-485e-a149-91deffcf93c7": {
-    "price_at_signal": 17.760000228881836,
+    "price_at_signal": 18.27,
     "price_current": 8.55,
-    "return_pct": -51.86,
+    "return_pct": -53.2,
     "signal_date": "2025-10-31",
-    "ticker": "MARA"
+    "ticker": "MARA",
+    "market": "KR",
+    "currency": "USD"
   },
   "cd0c78a3-0b5e-44a9-a5cd-396c758a9b41": {
-    "price_at_signal": 0.7099999785423279,
+    "price_at_signal": 0.71,
     "price_current": 0.945,
     "return_pct": 33.1,
     "signal_date": "2025-09-27",
-    "ticker": "XPL"
+    "ticker": "XPL",
+    "market": "KR",
+    "currency": "USD"
   },
   "fd0a48b6-f1c6-44b8-abac-5bb752c854f7": {
-    "price_at_signal": 2.940000057220459,
+    "price_at_signal": 2.94,
     "price_current": 1.63,
     "return_pct": -44.56,
     "signal_date": "2025-09-14",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "2e777197-39dc-4b25-8379-70adc6761d6b": {
-    "price_at_signal": 12.020000457763672,
-    "price_current": 0.8089,
-    "return_pct": -93.27,
+    "price_at_signal": 26.514519,
+    "price_current": 14.010564,
+    "return_pct": -47.16,
     "signal_date": "2025-09-14",
-    "ticker": "ORBS"
+    "ticker": "ORBS",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "d751d0e4-1575-42ab-a8b5-c5926c6a7bb6": {
-    "price_at_signal": 2.4800000190734863,
+    "price_at_signal": 2.51,
     "price_current": 1.63,
-    "return_pct": -34.27,
+    "return_pct": -35.06,
     "signal_date": "2025-09-05",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "4b194051-8676-437d-b3c8-3f361f4f384e": {
-    "price_at_signal": 2.759999990463257,
+    "price_at_signal": 2.72,
     "price_current": 1.63,
-    "return_pct": -40.94,
+    "return_pct": -40.07,
     "signal_date": "2025-08-21",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "197706b4-7595-4023-839a-c437cd508cea": {
-    "price_at_signal": 15.170000076293945,
+    "price_at_signal": 15.45,
     "price_current": 8.55,
-    "return_pct": -43.64,
+    "return_pct": -44.66,
     "signal_date": "2025-08-20",
-    "ticker": "MARA"
+    "ticker": "MARA",
+    "market": "KR",
+    "currency": "USD"
   },
   "f56b4362-c518-4c44-a7c9-458add2e6664": {
     "price_at_signal": 747.573276,
@@ -8872,126 +8896,162 @@
     "price_current": 37.19,
     "return_pct": -45.31,
     "signal_date": "2025-08-13",
-    "ticker": "BLSH"
+    "ticker": "BLSH",
+    "market": "KR",
+    "currency": "USD"
   },
   "45e7965d-5b60-418f-b44b-e77683b2fd95": {
-    "price_at_signal": 22.34000015258789,
+    "price_at_signal": 22.34,
     "price_current": 7.59,
     "return_pct": -66.03,
     "signal_date": "2025-08-10",
-    "ticker": "SBET"
+    "ticker": "SBET",
+    "market": "KR",
+    "currency": "USD"
   },
   "c38704e1-5100-4bc6-89c0-2d9c78728b5c": {
-    "price_at_signal": 3.119999885559082,
+    "price_at_signal": 3.15,
     "price_current": 1.63,
-    "return_pct": -47.76,
+    "return_pct": -48.25,
     "signal_date": "2025-08-05",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "8d5b1b34-bead-4264-9471-bfe3dfc5b06b": {
-    "price_at_signal": 2883.0,
-    "price_current": 2939.0,
-    "return_pct": 1.94,
+    "price_at_signal": 2909.0,
+    "price_current": 2886.0,
+    "return_pct": -0.79,
     "signal_date": "2025-08-02",
-    "ticker": "8473.T"
+    "ticker": "8473.T",
+    "market": "KR",
+    "currency": "JPY"
   },
   "60f0e382-1615-4704-8062-4a85cba2923c": {
-    "price_at_signal": 2.9100000858306885,
+    "price_at_signal": 2.72,
     "price_current": 1.63,
-    "return_pct": -43.99,
+    "return_pct": -40.07,
     "signal_date": "2025-08-01",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "a44b702e-9442-4432-a308-e44364a6a18a": {
-    "price_at_signal": 21.989999771118164,
+    "price_at_signal": 21.99,
     "price_current": 7.59,
     "return_pct": -65.48,
     "signal_date": "2025-07-26",
-    "ticker": "SBET"
+    "ticker": "SBET",
+    "market": "KR",
+    "currency": "USD"
   },
   "37a3e040-4346-412c-8682-e4e72f698396": {
-    "price_at_signal": 3.1500000953674316,
+    "price_at_signal": 3.15,
     "price_current": 1.63,
     "return_pct": -48.25,
     "signal_date": "2025-07-26",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "54903681-b155-4673-9773-711058d5f5e8": {
     "price_at_signal": 2483.5,
-    "price_current": 2939.0,
-    "return_pct": 18.34,
+    "price_current": 2886.0,
+    "return_pct": 16.21,
     "signal_date": "2025-06-26",
-    "ticker": "8473.T"
+    "ticker": "8473.T",
+    "market": "KR",
+    "currency": "JPY"
   },
   "98f182c9-69cf-49a0-92df-b2ef33b6bb05": {
     "price_at_signal": 394000.0,
-    "price_current": 371000.0,
-    "return_pct": -5.84,
+    "price_current": 370500.0,
+    "return_pct": -5.96,
     "signal_date": "2025-06-15",
-    "ticker": "007310.KS"
+    "ticker": "007310",
+    "market": "KR",
+    "currency": "KRW"
   },
   "b225acbb-1ee3-4951-96f3-d1e830aa51d6": {
     "price_at_signal": 31250.0,
-    "price_current": 24700.0,
-    "return_pct": -20.96,
+    "price_current": 24300.0,
+    "return_pct": -22.24,
     "signal_date": "2025-06-15",
-    "ticker": "008730.KS"
+    "ticker": "008730",
+    "market": "KR",
+    "currency": "KRW"
   },
   "909f41d6-a744-4022-92f8-4fb74b97de9a": {
     "price_at_signal": 23550.0,
-    "price_current": 32050.0,
-    "return_pct": 36.09,
+    "price_current": 31550.0,
+    "return_pct": 33.97,
     "signal_date": "2025-06-15",
-    "ticker": "028050.KS"
+    "ticker": "028050",
+    "market": "KR",
+    "currency": "KRW"
   },
   "6264504c-cc9a-4e25-bc83-37ac4ece2a2c": {
     "price_at_signal": 201000.0,
-    "price_current": 347500.0,
-    "return_pct": 72.89,
+    "price_current": 336500.0,
+    "return_pct": 67.41,
     "signal_date": "2025-06-15",
-    "ticker": "034730.KS"
+    "ticker": "034730",
+    "market": "KR",
+    "currency": "KRW"
   },
   "08067e50-feaf-49e4-a748-935a4761c71e": {
     "price_at_signal": 54200.0,
-    "price_current": 47100.0,
-    "return_pct": -13.1,
+    "price_current": 46950.0,
+    "return_pct": -13.38,
     "signal_date": "2025-06-15",
-    "ticker": "145990.KS"
+    "ticker": "145990",
+    "market": "KR",
+    "currency": "KRW"
   },
   "daa9af39-e440-4ee2-ab9b-2e5d469e6da8": {
-    "price_at_signal": 35.52000045776367,
+    "price_at_signal": 35.52,
     "price_current": 12.38,
     "return_pct": -65.15,
     "signal_date": "2025-05-26",
-    "ticker": "SMR"
+    "ticker": "SMR",
+    "market": "KR",
+    "currency": "USD"
   },
   "dd6612e7-6f78-4c89-96de-8f50ca457846": {
-    "price_at_signal": 53.900001525878906,
+    "price_at_signal": 53.9,
     "price_current": 62.76,
     "return_pct": 16.44,
     "signal_date": "2025-05-26",
-    "ticker": "OKLO"
+    "ticker": "OKLO",
+    "market": "KR",
+    "currency": "USD"
   },
   "03fb10c5-763d-4b19-9b9f-fa28d2f0c916": {
-    "price_at_signal": 21.639999389648438,
+    "price_at_signal": 22.94,
     "price_current": 12.38,
-    "return_pct": -42.79,
+    "return_pct": -46.03,
     "signal_date": "2025-05-14",
-    "ticker": "SMR"
+    "ticker": "SMR",
+    "market": "KR",
+    "currency": "USD"
   },
   "35b55f8b-a9de-4918-a7c6-db28142a83d9": {
-    "price_at_signal": 32.029998779296875,
+    "price_at_signal": 37.01,
     "price_current": 62.76,
-    "return_pct": 95.94,
+    "return_pct": 69.58,
     "signal_date": "2025-05-14",
-    "ticker": "OKLO"
+    "ticker": "OKLO",
+    "market": "KR",
+    "currency": "USD"
   },
   "e94f9459-ed22-4e28-ad4a-b004d5fc8079": {
     "price_at_signal": 3.0,
     "price_current": 1.63,
     "return_pct": -45.67,
     "signal_date": "2025-08-10",
-    "ticker": "BTBT"
+    "ticker": "BTBT",
+    "market": "KR",
+    "currency": "USD"
   },
   "c89b91ab-192c-4c5a-bf41-bfe5c3d2626a": {
     "ticker": "CNTN",
@@ -9261,5 +9321,194 @@
     "currency": "KRW",
     "last_updated": "2026-03-12",
     "source": "coingecko"
+  },
+  "OKLO": {
+    "name": "오클로",
+    "ticker": "OKLO",
+    "market": "KR",
+    "current_price": 62.76,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "SMR": {
+    "name": "뉴스케일 파워",
+    "ticker": "SMR",
+    "market": "KR",
+    "current_price": 12.38,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "145990": {
+    "name": "삼양사",
+    "ticker": "145990",
+    "market": "KR",
+    "current_price": 46950.0,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "034730": {
+    "name": "SK",
+    "ticker": "034730",
+    "market": "KR",
+    "current_price": 336500.0,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "028050": {
+    "name": "삼성E&A",
+    "ticker": "028050",
+    "market": "KR",
+    "current_price": 31550.0,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "008730": {
+    "name": "율촌화학",
+    "ticker": "008730",
+    "market": "KR",
+    "current_price": 24300.0,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "007310": {
+    "name": "오뚜기",
+    "ticker": "007310",
+    "market": "KR",
+    "current_price": 370500.0,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "8473.T": {
+    "name": "SBI홀딩스",
+    "ticker": "8473.T",
+    "market": "KR",
+    "current_price": 2886.0,
+    "currency": "JPY",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "XLM": {
+    "name": "스텔라루멘",
+    "ticker": "XLM",
+    "market": "CRYPTO",
+    "current_price": 233.121008,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "coingecko"
+  },
+  "0fff5ee2-f301-45c9-9ab5-ce46fe61aca9": {
+    "price_at_signal": 496.19462,
+    "price_current": 233.121008,
+    "return_pct": -53.02,
+    "signal_date": "2025-07-12",
+    "ticker": "XLM",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "SBET": {
+    "name": "샤프링크",
+    "ticker": "SBET",
+    "market": "KR",
+    "current_price": 7.59,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "BTBT": {
+    "name": "비트마인",
+    "ticker": "BTBT",
+    "market": "KR",
+    "current_price": 1.63,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "BLSH": {
+    "name": "블리시",
+    "ticker": "BLSH",
+    "market": "KR",
+    "current_price": 37.19,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "MARA": {
+    "name": "마라톤디지털",
+    "ticker": "MARA",
+    "market": "KR",
+    "current_price": 8.55,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "ORBS": {
+    "name": "오브스",
+    "ticker": "ORBS",
+    "market": "CRYPTO",
+    "current_price": 14.010564,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "coingecko"
+  },
+  "WLD": {
+    "name": "월드코인",
+    "ticker": "WLD",
+    "market": "CRYPTO",
+    "current_price": 516.834611,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "coingecko"
+  },
+  "1d9756e5-a557-415f-ae9f-1cc85df5476c": {
+    "price_at_signal": 2305.463578,
+    "price_current": 516.834611,
+    "return_pct": -77.58,
+    "signal_date": "2025-09-14",
+    "ticker": "WLD",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "XPL": {
+    "name": "플라즈마",
+    "ticker": "XPL",
+    "market": "KR",
+    "current_price": 0.945,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "THAR": {
+    "name": "타이윤",
+    "ticker": "THAR",
+    "market": "KR",
+    "current_price": 4.74,
+    "currency": "USD",
+    "last_updated": "2026-03-12",
+    "source": "yahoo"
+  },
+  "ADA": {
+    "name": "카르다노",
+    "ticker": "ADA",
+    "market": "CRYPTO",
+    "current_price": 384.325179,
+    "currency": "KRW",
+    "last_updated": "2026-03-12",
+    "source": "coingecko"
+  },
+  "53980319-b476-4d4e-a0e4-beff36175212": {
+    "price_at_signal": 505.251165,
+    "price_current": 384.325179,
+    "return_pct": -23.93,
+    "signal_date": "2025-12-31",
+    "ticker": "ADA",
+    "market": "CRYPTO",
+    "currency": "KRW"
   }
 }
