@@ -20,25 +20,8 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
   }
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f4f4f4]">
-        <div className="text-center">
-          <div className="text-4xl mb-3">📡</div>
-          <div className="text-[#8b95a1]">로딩 중...</div>
-        </div>
-      </div>
-    );
-  }
-
-  // 데모 모드: 인증 없이 접근 가능
-  // if (!user) {
-  //   if (typeof window !== 'undefined') {
-  //     window.location.href = '/invest-sns/login';
-  //   }
-  //   return null;
-  // }
+  // auth loading 중에도 레이아웃 바로 렌더 (공개 접근 허용)
+  // loading 블로킹 제거 — Supabase auth 응답 기다리지 않음
 
   return (
     <div className="flex min-h-screen w-full">
