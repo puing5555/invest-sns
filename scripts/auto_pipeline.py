@@ -28,6 +28,7 @@ import re
 import time
 import shutil
 import subprocess
+import concurrent.futures
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -387,6 +388,56 @@ class AutoPipeline:
             'sample_skipped': skipped_videos[:5]   # 샘플 5개
         }
     
+    def _process_single_video(self, video: Dict, channel_url: str, worker_id: int = 0) -> Optional[Dict]:
+        """단일 영상 자막 추출 + AI 분석 (병렬 워커용)"""
+        import random
+        # 워커 간 충돌 방지 초기 딜레이 (0~4초 랜덤)
+        if worker_id > 0:
+            time.sleep(random.uniform(1.0, worker_id * 2.0))
+
+        title_short = video.get('title', '')[:40]
+        video_id = video.get('video_id', '')
+
+        try:
+            # Step A: 자막 추출
+            subtitle = self.extractor.extract_subtitle(video['url'])
+            if not subtitle:
+                print(f"  [SKIP] 자막 없음: {title_short}")
+                return None
+
+            video_with_sub = video.copy()
+            video_with_sub['subtitle'] = subtitle
+            video_with_sub['subtitle_success'] = True
+
+            # Step B: AI 분석
+            analysis_result = self.analyzer.analyze_video_subtitle(
+                channel_url, video_with_sub, subtitle
+            )
+            if not analysis_result:
+                print(f"  [SKIP] 분석 실패: {title_short}")
+                return None
+
+            # Step C: DB 포맷 변환
+            signals = self.analyzer.convert_to_database_format(
+                analysis_result, video_with_sub['video_uuid']
+            )
+
+            # Step D: 중복 제거 (V11.5 dedup)
+            if hasattr(self.analyzer, 'deduplicate_signals'):
+                signals = self.analyzer.deduplicate_signals(signals, video.get('title', ''))
+
+            print(f"  [OK] {title_short}: {len(signals)}개 시그널")
+            return {
+                'video_id': video_id,
+                'video_uuid': video_with_sub['video_uuid'],
+                'signals': signals,
+                'analysis_result': analysis_result,
+                'video_data': video_with_sub,
+            }
+        except Exception as e:
+            print(f"  [ERROR] {title_short}: {e}")
+            return None
+
     def run_execute(self, channel_url: str, limit: Optional[int] = None,
                    skip_existing: bool = False, skip_qa: bool = False,
                    batch_size: int = 30) -> Dict[str, Any]:
@@ -481,28 +532,58 @@ class AutoPipeline:
                 before_count = _get_signal_count(PROJECT_ROOT)
                 print(f"  현재 시그널 수: {before_count}개")
 
-                # ── Step 4: 자막 추출 ────────────────────────────────
-                print(f"\n  [Step 4] 자막 추출...")
-                videos_with_subtitles = self.extractor.extract_with_rate_limit(batch_videos)
-                successful_videos = [v for v in videos_with_subtitles if v.get('subtitle')]
-                successful_videos_total.extend(successful_videos)
-                print(f"  자막 추출 성공: {len(successful_videos)}/{len(batch_videos)}개")
+                # ── Step 4+5: 자막 추출 + AI 분석 병렬 처리 (동시 3개) ──
+                print(f"\n  [Step 4+5] 자막 추출 + AI 분석 병렬 처리 (동시 3개)...")
+                from concurrent.futures import ThreadPoolExecutor, as_completed
 
-                if not successful_videos:
-                    print(f"  [SKIP] 자막 추출 성공한 영상 없음 → 다음 배치")
+                parallel_results = []
+                failed_count = 0
+
+                with ThreadPoolExecutor(max_workers=3) as executor:
+                    future_map = {
+                        executor.submit(self._process_single_video, video, channel_url, idx % 3): video
+                        for idx, video in enumerate(batch_videos)
+                    }
+                    for future in as_completed(future_map):
+                        result = future.result()
+                        if result:
+                            parallel_results.append(result)
+                        else:
+                            failed_count += 1
+
+                if not parallel_results:
+                    print(f"  [SKIP] 처리 성공한 영상 없음 → 다음 배치")
                     if batch_idx < len(batches) - 1:
                         print(f"  60초 대기...")
                         time.sleep(60)
                     continue
 
-                # ── Step 5: AI 시그널 분석 ───────────────────────────
-                print(f"\n  [Step 5] AI 시그널 분석...")
-                analysis_results = self.analyzer.analyze_videos_batch(channel_url, successful_videos)
+                print(f"  병렬 처리 완료: 성공 {len(parallel_results)}/{len(batch_videos)}개 (실패 {failed_count}개)")
+
+                # successful_videos 리스트 (이후 단계 호환용)
+                successful_videos = [r['video_data'] for r in parallel_results]
+                successful_videos_total.extend(successful_videos)
+
+                # analysis_results 형식으로 재구성 (QA Gate 2, DB INSERT 호환)
+                analysis_results = {
+                    'total': len(parallel_results),
+                    'success': len(parallel_results),
+                    'failed': failed_count,
+                    'signals_extracted': sum(len(r['signals']) for r in parallel_results),
+                    'results': parallel_results,
+                }
                 last_analysis_results = analysis_results
 
                 # 배치별 분석 결과 백업
                 batch_backup = f"scripts/pipeline_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}_batch{batch_idx+1}.json"
-                self.analyzer.save_analysis_results(analysis_results, batch_backup)
+                try:
+                    import json as _json
+                    backup_path = os.path.join(PROJECT_ROOT, batch_backup)
+                    with open(backup_path, 'w', encoding='utf-8') as _bf:
+                        _json.dump(analysis_results, _bf, ensure_ascii=False, indent=2)
+                    print(f"  백업: {batch_backup}")
+                except Exception as _be:
+                    print(f"  [WARNING] 백업 실패: {_be}")
                 if backup_filename is None:
                     backup_filename = batch_backup
 
