@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 const pageNames: { [key: string]: string } = {
   '/': '피드',
+  '/dashboard': '대시보드',
   '/signal': '시그널',
   '/disclosure': '공시',
   '/influencer': '인플루언서',
@@ -17,6 +18,9 @@ const pageNames: { [key: string]: string } = {
   '/guru': '투자 구루',
   '/premium': '프리미엄',
   '/profile': '프로필',
+  '/explore': '탐색',
+  '/my-portfolio': '포트폴리오',
+  '/calendar': '캘린더',
 };
 
 export default function Header() {
