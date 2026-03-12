@@ -10,8 +10,14 @@ import yt_dlp
 from pipeline_config import PipelineConfig
 
 # ── 멤버십 전용 영상 감지 ──────────────────────────────────────────────
+# 정상 경로: Step 2(get_video_list)에서 이미 필터링됨 → 여기까지 오면 안 됨
+# 방어 목적: Step 2를 우회한 개별 호출이나 edge case 대비용 예외
 class MemberOnlyVideoError(Exception):
-    """유료 멤버십 전용 영상 — 자막 추출 불가, 재시도 없이 즉시 스킵"""
+    """유료 멤버십 전용 영상 — 자막 추출 불가, 재시도 없이 즉시 스킵
+    
+    ⚠️ 정상 파이프라인에서는 Step 2(get_video_list)에서 이미 제외돼야 함.
+       이 예외가 자주 발생하면 Step 2 필터 로직을 점검할 것.
+    """
     pass
 
 _MEMBER_ONLY_PATTERNS = [

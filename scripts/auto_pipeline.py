@@ -295,10 +295,43 @@ class YouTubeChannelCollector:
                     return []
                 
                 videos = []
+                member_only_skipped = 0
+
+                # ── 멤버십 전용 영상 판단 기준 (Step 2 단계에서 즉시 제외) ──────────
+                _MEMBER_ONLY_AVAILABILITY = {'needs_auth', 'subscriber_only', 'premium_only'}
+                _MEMBER_ONLY_TITLE_PATTERNS = [
+                    '[members', '(members', 'members only', 'members-only',
+                    '[멤버십', '(멤버십', '멤버 전용', '[member',
+                ]
+
+                def _is_member_only_entry(entry: dict) -> bool:
+                    """yt-dlp flat entry가 멤버십 전용인지 판단"""
+                    # 1순위: availability 필드
+                    avail = str(entry.get('availability') or '').lower()
+                    if avail in _MEMBER_ONLY_AVAILABILITY:
+                        return True
+                    # 2순위: 제목 패턴
+                    title_lower = str(entry.get('title') or '').lower()
+                    if any(p in title_lower for p in _MEMBER_ONLY_TITLE_PATTERNS):
+                        return True
+                    # 3순위: channel_is_verified / is_member 등 플래그
+                    if entry.get('is_member') or entry.get('membership'):
+                        return True
+                    return False
+
                 for entry in playlist_info['entries']:
                     if entry is None:
                         continue
-                    
+
+                    # ── Step 2 멤버십 필터 ────────────────────────────────────────
+                    if _is_member_only_entry(entry):
+                        vid_id = entry.get('id', '?')
+                        title  = entry.get('title', '')[:40]
+                        avail  = entry.get('availability', 'N/A')
+                        print(f"  [MEMBER-SKIP] {vid_id} | avail={avail} | {title}")
+                        member_only_skipped += 1
+                        continue
+
                     # duration_seconds: yt-dlp는 'duration' 필드에 정수(초)를 줌
                     _dur_raw = entry.get('duration')
                     _dur_secs = int(_dur_raw) if _dur_raw and str(_dur_raw).isdigit() else None
@@ -320,8 +353,10 @@ class YouTubeChannelCollector:
                         video_data['url'] = f"https://www.youtube.com/watch?v={video_data['video_id']}"
                     
                     videos.append(video_data)
-                
-                print(f"[OK] 영상 목록 수집 완료: {len(videos)}개")
+
+                if member_only_skipped:
+                    print(f"  [MEMBER-ONLY] Step2 필터: {member_only_skipped}개 제외됨")
+                print(f"[OK] 영상 목록 수집 완료: {len(videos)}개 (멤버십 제외 후)")
                 return videos
                 
         except Exception as e:
