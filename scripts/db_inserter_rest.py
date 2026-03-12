@@ -314,6 +314,194 @@ class DatabaseInserter:
             print(f"[ERROR] 영상 상태 업데이트 실패: {e}")
             return False
 
+    def insert_analysis_results(self, channel_info: Dict[str, Any],
+                                analysis_results: Any,
+                                skip_existing: bool = False) -> Dict[str, int]:
+        """
+        auto_pipeline.py에서 호출: 분석 결과 배치를 DB에 INSERT
+        analysis_results 구조:
+          {'results': [{'video_id', 'video_uuid', 'signals', 'video_data', ...}, ...]}
+        video_uuid는 이미 _process_single_video에서 확보된 상태여야 함.
+        """
+        stats = {'inserted_videos': 0, 'inserted_signals': 0, 'skipped_videos': 0}
+
+        # analysis_results가 dict이면 results 리스트 추출
+        if isinstance(analysis_results, dict):
+            results_list = analysis_results.get('results', [])
+        else:
+            results_list = analysis_results  # 이미 리스트인 경우
+
+        for result in results_list:
+            video_uuid = result.get('video_uuid')
+            signals = result.get('signals', [])
+
+            if not video_uuid:
+                print(f"  [WARNING] video_uuid 없음 — 건너뜀: {result.get('video_id', '?')}")
+                stats['skipped_videos'] += 1
+                continue
+
+            # skip_existing: 이미 해당 video_uuid에 시그널이 있으면 스킵
+            if skip_existing:
+                try:
+                    chk = requests.get(
+                        f"{self.base_url}/influencer_signals",
+                        headers=self.headers,
+                        params={'video_id': f'eq.{video_uuid}', 'select': 'id', 'limit': '1'}
+                    )
+                    if chk.ok and chk.json():
+                        print(f"  [SKIP] 기존 시그널 존재: {video_uuid[:8]}...")
+                        stats['skipped_videos'] += 1
+                        continue
+                except Exception:
+                    pass
+
+            stats['inserted_videos'] += 1
+
+            # 시그널 INSERT (run_corinpapa_batch.py 패턴과 동일)
+            for signal in signals:
+                try:
+                    ok = self._insert_signal_for_video(video_uuid, signal)
+                    if ok:
+                        stats['inserted_signals'] += 1
+                except Exception as e:
+                    print(f"  [ERROR] 시그널 INSERT 실패: {e}")
+
+        print(f"[DB] 영상 {stats['inserted_videos']}개, 시그널 {stats['inserted_signals']}개 INSERT 완료")
+        return stats
+
+    def _insert_signal_for_video(self, video_uuid: str, signal: Dict[str, Any]) -> bool:
+        """단일 시그널 INSERT (influencer_signals 테이블, REST API)"""
+        stock = signal.get('stock') or signal.get('stock_symbol', '')
+        if not stock:
+            return False
+
+        signal_val = (signal.get('signal') or signal.get('signal_type') or
+                      signal.get('mention_type') or 'NEUTRAL')
+
+        # 한글 시그널 → 영문 변환 (DB 표준)
+        KO_TO_EN = {
+            '매수': 'BUY', '긍정': 'POSITIVE', '중립': 'NEUTRAL',
+            '경계': 'CONCERN', '부정': 'CONCERN', '매도': 'SELL'
+        }
+        signal_val = KO_TO_EN.get(signal_val, signal_val)
+
+        # 중복 확인
+        try:
+            chk = requests.get(
+                f"{self.base_url}/influencer_signals",
+                headers=self.headers,
+                params={
+                    'video_id': f'eq.{video_uuid}',
+                    'stock': f'eq.{stock}',
+                    'select': 'id'
+                }
+            )
+            if chk.ok and chk.json():
+                print(f"  [DUP] {stock} ({signal_val}) — 스킵")
+                return False
+        except Exception:
+            pass
+
+        # 발언자 처리
+        speaker_name = signal.get('speaker_name') or signal.get('speaker', '')
+        speaker_id = None
+        if speaker_name:
+            speaker_id = self._get_or_create_speaker(speaker_name)
+
+        data = {
+            'id': str(uuid.uuid4()),
+            'video_id': video_uuid,
+            'stock': stock,
+            'ticker': signal.get('ticker', ''),
+            'market': signal.get('market', 'OTHER'),
+            'signal': signal_val,
+            'mention_type': signal.get('mention_type', '결론'),
+            'confidence': signal.get('confidence', 'medium'),
+            'timestamp': signal.get('timestamp', signal.get('timestamp_start', '00:00')),
+            'key_quote': signal.get('key_quote', signal.get('reasoning', '')),
+            'reasoning': signal.get('reasoning', signal.get('key_quote', '')),
+            'created_at': datetime.now().isoformat(),
+        }
+        if speaker_id:
+            data['speaker_id'] = speaker_id
+
+        resp = requests.post(
+            f"{self.base_url}/influencer_signals",
+            headers={**self.headers, 'Prefer': 'return=minimal'},
+            json=data
+        )
+        if resp.ok:
+            print(f"  ✅ INSERT: {stock} / {signal_val}")
+            return True
+        else:
+            print(f"  [ERROR] INSERT 실패 {resp.status_code}: {resp.text[:200]}")
+            return False
+
+    def _get_or_create_speaker(self, speaker_name: str) -> Optional[str]:
+        """발언자 확인/생성 (influencer_speakers 테이블)"""
+        try:
+            resp = requests.get(
+                f"{self.base_url}/influencer_speakers",
+                headers=self.headers,
+                params={'name': f'eq.{speaker_name}', 'select': 'id'}
+            )
+            if resp.ok and resp.json():
+                return resp.json()[0]['id']
+            # 없으면 생성
+            new_id = str(uuid.uuid4())
+            cr = requests.post(
+                f"{self.base_url}/influencer_speakers",
+                headers={**self.headers, 'Prefer': 'return=minimal'},
+                json={'id': new_id, 'name': speaker_name,
+                      'created_at': datetime.now().isoformat()}
+            )
+            return new_id if cr.ok else None
+        except Exception:
+            return None
+
+    def update_signal_prices_json(self) -> list:
+        """
+        signal_prices.json 업데이트를 위한 데이터 수집 (REST API 버전)
+        auto_pipeline.py Step 7 이후 호출됨.
+        """
+        try:
+            print("\n=== signal_prices.json 업데이트 준비 ===")
+            resp = requests.get(
+                f"{self.base_url}/influencer_signals",
+                headers=self.headers,
+                params={'select': 'stock,ticker,market'}
+            )
+            resp.raise_for_status()
+
+            unique_stocks = {}
+            for sig in resp.json():
+                stock = sig.get('stock', '')
+                if stock and stock not in unique_stocks:
+                    unique_stocks[stock] = {
+                        'stock': stock,
+                        'ticker': sig.get('ticker', ''),
+                        'market': sig.get('market', 'OTHER')
+                    }
+
+            print(f"고유 종목 수: {len(unique_stocks)}개")
+            stocks_list = list(unique_stocks.values())
+
+            # 저장
+            import os as _os
+            import json as _json
+            out_path = _os.path.join(
+                _os.path.dirname(_os.path.abspath(__file__)),
+                'stocks_for_price_update.json'
+            )
+            with open(out_path, 'w', encoding='utf-8') as f:
+                _json.dump(stocks_list, f, ensure_ascii=False, indent=2)
+            print(f"[OK] 저장: {out_path}")
+            return stocks_list
+
+        except Exception as e:
+            print(f"[ERROR] update_signal_prices_json 실패: {e}")
+            return []
+
     def get_signal_stats(self) -> Dict[str, int]:
         """
         시그널 통계 조회

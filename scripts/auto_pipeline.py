@@ -388,8 +388,14 @@ class AutoPipeline:
             'sample_skipped': skipped_videos[:5]   # 샘플 5개
         }
     
-    def _process_single_video(self, video: Dict, channel_url: str, worker_id: int = 0) -> Optional[Dict]:
-        """단일 영상 자막 추출 + AI 분석 (병렬 워커용)"""
+    def _process_single_video(self, video: Dict, channel_url: str, worker_id: int = 0,
+                              channel_id: Optional[str] = None) -> Optional[Dict]:
+        """단일 영상 자막 추출 + AI 분석 (병렬 워커용)
+        
+        수정 (2026-03-12): channel_id 파라미터 추가.
+        자막 추출 후 DB에서 video_uuid를 먼저 확보한 뒤 AI 분석 진행.
+        (코린파파 배치와 동일한 패턴 — video_uuid KeyError 완전 해결)
+        """
         import random
         # 워커 간 충돌 방지 초기 딜레이 (0~4초 랜덤)
         if worker_id > 0:
@@ -409,6 +415,19 @@ class AutoPipeline:
             video_with_sub['subtitle'] = subtitle
             video_with_sub['subtitle_success'] = True
 
+            # Step A-2: video_uuid DB 확보 (channel_id가 있을 때만)
+            # channel_id가 없으면 video_id를 임시 키로 사용 (fallback)
+            if channel_id:
+                try:
+                    video_uuid = self.db_inserter.get_or_create_video(video_with_sub, channel_id)
+                    video_with_sub['video_uuid'] = video_uuid
+                except Exception as e:
+                    print(f"  [ERROR] video UUID 확보 실패 ({title_short}): {e}")
+                    return None
+            else:
+                # channel_id 없는 경우 — 임시 UUID (나중에 insert_analysis_results에서 재처리)
+                video_with_sub['video_uuid'] = video_with_sub.get('video_uuid', f'tmp-{video_id}')
+
             # Step B: AI 분석
             analysis_result = self.analyzer.analyze_video_subtitle(
                 channel_url, video_with_sub, subtitle
@@ -417,10 +436,26 @@ class AutoPipeline:
                 print(f"  [SKIP] 분석 실패: {title_short}")
                 return None
 
-            # Step C: DB 포맷 변환
-            signals = self.analyzer.convert_to_database_format(
-                analysis_result, video_with_sub['video_uuid']
-            )
+            # Step C: 시그널 추출 (다양한 응답 구조 대응 — run_corinpapa_batch 패턴)
+            if isinstance(analysis_result, list):
+                raw_signals = analysis_result
+            elif isinstance(analysis_result, dict):
+                raw_signals = (
+                    analysis_result.get('signals') or
+                    analysis_result.get('signal_list') or
+                    analysis_result.get('results') or
+                    []
+                )
+            else:
+                raw_signals = []
+
+            # convert_to_database_format은 video_uuid가 있을 때만 호출
+            if hasattr(self.analyzer, 'convert_to_database_format') and video_with_sub.get('video_uuid'):
+                signals = self.analyzer.convert_to_database_format(
+                    analysis_result, video_with_sub['video_uuid']
+                )
+            else:
+                signals = raw_signals
 
             # Step D: 중복 제거 (V11.5 dedup)
             if hasattr(self.analyzer, 'deduplicate_signals'):
@@ -524,6 +559,15 @@ class AutoPipeline:
             backup_filename = None
             successful_videos_total = []
 
+            # ── DB 채널 UUID 사전 확보 (video_uuid 확보에 필요) ──────
+            print(f"\n[채널 DB 등록] 채널 UUID 확보 중...")
+            try:
+                db_channel_id = self.db_inserter.get_or_create_channel(channel_info)
+                print(f"[OK] DB 채널 UUID: {db_channel_id}")
+            except Exception as _ce:
+                print(f"[WARNING] 채널 UUID 확보 실패: {_ce} — video_uuid는 배치 INSERT 시 재처리됩니다")
+                db_channel_id = None
+
             for batch_idx, batch_videos in enumerate(batches):
                 print(f"\n{'='*60}")
                 print(f"[배치 {batch_idx+1}/{len(batches)}] {len(batch_videos)}개 영상 처리 시작")
@@ -541,7 +585,9 @@ class AutoPipeline:
 
                 with ThreadPoolExecutor(max_workers=3) as executor:
                     future_map = {
-                        executor.submit(self._process_single_video, video, channel_url, idx % 3): video
+                        executor.submit(
+                            self._process_single_video, video, channel_url, idx % 3, db_channel_id
+                        ): video
                         for idx, video in enumerate(batch_videos)
                     }
                     for future in as_completed(future_map):
