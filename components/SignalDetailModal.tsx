@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { insertSignalReport, insertSignalVote, insertSignalMemo } from '@/lib/supabase';
+import { stockDetailUrl } from '@/lib/stockUtils';
 
 interface SignalDetail {
   id?: string;
@@ -281,7 +282,7 @@ export default function SignalDetailModal({ signal, onClose }: SignalDetailModal
             <div className="flex gap-3">
               {signal.ticker && (
                 <a
-                  href={`/invest-sns/stock/${signal.ticker}?tab=influencer`}
+                  href={`/invest-sns${stockDetailUrl(signal.ticker, 'influencer')}`}
                   className="flex-1 text-center bg-[#3182f6] hover:bg-[#1b64da] text-white font-medium py-3.5 rounded-xl transition-colors text-[15px]"
                 >
                   📊 차트보기

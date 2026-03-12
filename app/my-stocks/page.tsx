@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getLatestInfluencerSignals } from '@/lib/supabase';
 import { speakerToSlug } from '@/lib/speakerSlugs';
+import { stockDetailUrl } from '@/lib/stockUtils';
 import FeedCard from '@/components/FeedCard';
 import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
@@ -100,7 +101,7 @@ export default function MyStocksPage() {
             confidence: s.confidence, channelName: ch,
             videoTitle: s.influencer_videos?.title,
             videoUrl: vid ? `https://www.youtube.com/watch?v=${vid}` : undefined,
-            detailLink: s.ticker ? `/stock/${s.ticker}?tab=influencer` : undefined,
+            detailLink: s.ticker ? stockDetailUrl(s.ticker, 'influencer') : undefined,
           });
         });
       } catch (e) { console.error(e); }

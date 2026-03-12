@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { influencers } from '@/data/influencerData';
 import { getLatestInfluencerSignals, getInfluencerSignalsSampled, getSignalVoteCounts } from '@/lib/supabase';
 import { speakerToSlug } from '@/lib/speakerSlugs';
+import { stockDetailUrl } from '@/lib/stockUtils';
 import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
 
@@ -422,7 +423,7 @@ export default function InfluencerPage() {
               const speakerText = speakers.length <= 2
                 ? speakers.join(', ')
                 : `${speakers.slice(0, 2).join(', ')} 외 ${speakers.length - 2}명`;
-              const stockUrl = group.ticker ? `/stock/${group.ticker}?tab=influencer` : null;
+              const stockUrl = group.ticker ? stockDetailUrl(group.ticker, 'influencer') : null;
 
               const cardContent = (
                 <div className={`bg-white rounded-xl p-5 shadow-sm border border-gray-100 ${stockUrl ? 'cursor-pointer hover:shadow-lg hover:border-[#3182f6]/30 transition-all' : ''}`}>
