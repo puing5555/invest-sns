@@ -1,52 +1,68 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-stock_normalizer.py - 종목명/ticker 정규화 모듈
+stock_normalizer.py - 종목명/ticker 정규화 모듈 (v2)
 파이프라인에서 시그널 INSERT 전 자동 적용
+
+변경사항 (v2):
+  - BTC-USD → BTC 형식으로 통일 (CoinGecko API, signal_prices.json 키와 일치)
+  - 한글 종목명 → 표준 ticker (BTC, ETH, XRP, ...)
+  - 크립토 목록 확장
 
 사용법:
   from stock_normalizer import normalize_ticker, normalize_market
-  ticker = normalize_ticker('이더리움')  # → 'ETH-USD'
-  ticker = normalize_ticker('ETH')       # → 'ETH-USD'
-  market = normalize_market('ETH-USD')   # → 'CRYPTO'
+  ticker = normalize_ticker('이더리움')  # → 'ETH'
+  ticker = normalize_ticker('ETH')       # → 'ETH'
+  market = normalize_market('ETH')       # → 'CRYPTO'
 """
 
-# 한글 종목명 → yfinance ticker 매핑
-# BTC-USD, ETH-USD 형태로 yfinance에서 코인 조회 가능
+# 한글 종목명 / 별칭 → 표준 ticker 매핑
 TICKER_MAP = {
-    # 암호화폐
-    '비트코인': 'BTC-USD',
-    'BTC': 'BTC-USD',
-    '이더리움': 'ETH-USD',
-    'ETH': 'ETH-USD',
-    '리플': 'XRP-USD',
-    'XRP': 'XRP-USD',
-    '솔라나': 'SOL-USD',
-    'SOL': 'SOL-USD',
-    '캔톤코인': 'CNTN-USD',
-    'CC': 'CNTN-USD',
-    'CNTN': 'CNTN-USD',
-    '도지코인': 'DOGE-USD',
-    'DOGE': 'DOGE-USD',
-    '체인링크': 'LINK-USD',
-    'LINK': 'LINK-USD',
-    '에이다': 'ADA-USD',
-    'ADA': 'ADA-USD',
-    '아발란체': 'AVAX-USD',
-    'AVAX': 'AVAX-USD',
-    '폴리곤': 'MATIC-USD',
-    'MATIC': 'MATIC-USD',
-    # 비트마인
+    # 암호화폐 (한글 종목명)
+    '비트코인': 'BTC',
+    '이더리움': 'ETH',
+    '리플': 'XRP',
+    '솔라나': 'SOL',
+    '캔톤코인': 'CNTN',
+    '도지코인': 'DOGE',
+    '체인링크': 'LINK',
+    '에이다': 'ADA',
+    '아발란체': 'AVAX',
+    '폴리곤': 'MATIC',
+    '유니스왑': 'UNI',
+    '아비트럼': 'ARB',
+    '옵티미즘': 'OP',
+    '스텔라루멘': 'XLM',
+    '카르다노': 'ADA',
+    '오브스': 'ORBS',
+    '퍼지펭귄': 'PENGU',
+    '월드코인': 'WLD',
+    # 영문 별칭 → 표준 ticker (yfinance 형식 → 표준)
+    'BTC-USD': 'BTC',
+    'ETH-USD': 'ETH',
+    'XRP-USD': 'XRP',
+    'SOL-USD': 'SOL',
+    'CNTN-USD': 'CNTN',
+    'DOGE-USD': 'DOGE',
+    'LINK-USD': 'LINK',
+    'ADA-USD': 'ADA',
+    'AVAX-USD': 'AVAX',
+    'MATIC-USD': 'MATIC',
+    # CC는 CNTN과 같은 종목
+    'CC': 'CNTN',
+    # 미국 주식 별칭
     '비트마인': 'BTBT',
     'BMNR': 'BTBT',
-    # 한국 종목 (6자리 → .KS)
-    # 미국 종목 (이미 올바른 ticker면 그대로)
 }
 
-# 마켓 분류
+# 크립토 ticker 분류
 CRYPTO_TICKERS = {
-    'BTC-USD', 'ETH-USD', 'XRP-USD', 'SOL-USD', 'CNTN-USD',
-    'DOGE-USD', 'LINK-USD', 'ADA-USD', 'AVAX-USD', 'MATIC-USD',
+    'BTC', 'ETH', 'XRP', 'SOL', 'CNTN', 'CC',
+    'DOGE', 'LINK', 'ADA', 'AVAX', 'MATIC',
+    'UNI', 'ARB', 'OP', 'XLM', 'ORBS', 'PENGU',
+    'WLD', 'HBAR', 'TON', 'NEAR', 'FTM',
+    'ALGO', 'VET', 'ICP', 'FIL', 'ATOM',
+    'KLAY', 'SUI', 'APT', 'PEPE', 'SHIB',
 }
 
 
@@ -59,7 +75,7 @@ def normalize_ticker(raw_ticker: str) -> str:
 
 def normalize_market(ticker: str) -> str:
     """ticker 기반 market 분류."""
-    if ticker in CRYPTO_TICKERS or ticker.endswith('-USD'):
+    if ticker in CRYPTO_TICKERS:
         return 'CRYPTO'
     if ticker.isdigit():
         return 'KR'

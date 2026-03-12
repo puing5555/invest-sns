@@ -17,7 +17,16 @@ const V9_SIGNAL_COLORS: Record<string, string> = {
   '매도': 'bg-red-800 text-white'
 };
 
-const CRYPTO_TICKERS = new Set(['CC', 'BTC', 'ETH', 'XRP', 'SOL', 'DOGE', 'ADA', 'DOT', 'AVAX', 'MATIC', 'LINK', 'UNI', '비트코인', '이더리움', '리플']);
+// data/cryptoNames.json과 동기화 유지 — 새 코인 추가 시 여기도 추가
+const CRYPTO_TICKERS = new Set([
+  // 표준 ticker (BTC-USD 형식 제거됨 — stock_normalizer v2)
+  'BTC', 'ETH', 'XRP', 'SOL', 'DOGE', 'ADA', 'DOT', 'AVAX', 'MATIC',
+  'LINK', 'UNI', 'ARB', 'OP', 'XLM', 'ORBS', 'PENGU', 'WLD', 'KLAY',
+  'HBAR', 'TON', 'NEAR', 'ATOM', 'SUI', 'APT', 'PEPE', 'SHIB', 'CC', 'CNTN',
+  // 한글 종목명 (DB에 한글로 저장된 경우)
+  '비트코인', '이더리움', '리플', '솔라나', '도지코인', '에이다', '체인링크',
+  '유니스왑', '아비트럼', '스텔라루멘', '카르다노', '오브스', '퍼지펭귄', '월드코인',
+]);
 
 function classifySignal(signal: { stock: string; ticker?: string | null }): 'kr' | 'us' | 'crypto' {
   const t = signal.ticker || '';
