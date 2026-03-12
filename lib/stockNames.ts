@@ -4,6 +4,7 @@ const STOCK_NAME_MAP: Record<string, string> = {
   'BTC': '비트코인',
   'XRP': '리플',
   'PENGU': '퍼지펭귄',
+  'UNI': '유니스왑',
   'NVDA': '엔비디아',
   'TSLA': '테슬라',
   'TSM': 'TSMC',

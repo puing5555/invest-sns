@@ -87,6 +87,7 @@ const getStockData = (code: string, dynamicName?: string) => {
     'BTC': '비트코인 (BTC)', 'ETH': '이더리움 (ETH)', 'SOL': '솔라나 (SOL)', 'DOGE': '도지코인 (DOGE)', 'KLAY': '클레이튼 (KLAY)',
     'XRP': '리플 (XRP)', 'LINK': '체인링크 (LINK)', 'CNTN': '캔톤 (CC)', 'ARB': '아비트럼 (ARB)', 'ORBS': '오브스 (ORBS)',
     'PENGU': '퍼지펭귄 (PENGU)',
+    'UNI': '유니스왑 (UNI)',
   };
 
   // 한국 종목인지 확인 (숫자로만 이뤄진 코드)
