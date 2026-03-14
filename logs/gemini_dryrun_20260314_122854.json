@@ -1,0 +1,19 @@
+[
+  {
+    "video_id": "tmGEPeSYHFA",
+    "title": "Why the Korean Stock Market Is Rising | Ahn Yu-hwa's Economic Investment Theory",
+    "signals_count": 1,
+    "signals": [
+      {
+        "stock": "비트코인",
+        "ticker": "BTC",
+        "signal_type": "부정",
+        "key_quote": "요즘 비트코인 마이너스 22%. 제가 그런 사람보고 사지 말라고 했는데 왜 사세요?",
+        "reasoning": "발언자는 비트코인이 올해 들어 22% 하락한 사실을 언급하며 부정적인 시장 상황을 강조했습니다. 과거에도 비트코인 투자를 만류했던 경험을 상기시키며, 현재의 손실을 지적하고 투자에 대한 회의적인 시각을 드러냈습니다.",
+        "timestamp": "02:17",
+        "confidence": 7,
+        "speaker_name": "안유화"
+      }
+    ]
+  }
+]

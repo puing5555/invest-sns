@@ -1,0 +1,22 @@
+[16:22:15] === Gemini 파이프라인 시작 ===
+[16:22:15] 채널: https://www.youtube.com/@anyuhuatv
+[16:22:15] limit=10 | dry_run=True | skip_existing=True
+[16:22:15] 
+[Step 1] 채널 정보 수집...
+[16:22:16]   채널명: 안유화의 경제투자론 - 안경투
+[16:22:20] 
+[Step 4-7] Gemini 분석 시작 (10개 영상)...
+[16:22:20] 
+  [1/10] ztPwQOHkU88 | 지금 전쟁보다 무서운 건 돈의 이동입니다ㅣ안유화의 경제투자론
+[16:26:12]   → 시그널 없음 (스킵)
+[16:26:15] 
+  [2/10] xAPyYacaztM | "In just five years, hegemony will shift." Xi Jinp
+[16:32:35]   → 시그널 없음 (스킵)
+[16:32:38] 
+  [3/10] BoUYV9JF3Lc | It's not just jobs that are being lost! This is ho
+[16:35:50]   → 시그널 없음 (스킵)
+[16:35:53] 
+  [4/10] _Irvjp7mcj0 | In these times of heightened risk, these are the c
+[16:39:05]   → 시그널 없음 (스킵)
+[16:39:08] 
+  [5/10] B0qpQuIzjbA | All-out war in the Middle East! A comprehensive gu

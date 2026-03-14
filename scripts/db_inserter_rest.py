@@ -6,6 +6,16 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 from pipeline_config import PipelineConfig
 
+
+def _safe_int(val):
+    """값을 int로 변환. 변환 불가(None/문자열 등)이면 None 반환."""
+    if val is None:
+        return None
+    try:
+        return int(val)
+    except (TypeError, ValueError):
+        return None
+
 class DatabaseInserter:
     def __init__(self):
         self.config = PipelineConfig()
@@ -111,32 +121,41 @@ class DatabaseInserter:
             video_uuid (UUID)
         """
         try:
+            vid_id = video_info.get("video_id", "")
             # 기존 영상 확인
             response = requests.get(
                 f"{self.base_url}/influencer_videos",
                 headers=self.headers,
-                params={'video_id': f'eq.{video_info["video_id"]}', 'select': 'id'}
+                params={'video_id': f'eq.{vid_id}', 'select': 'id'}
             )
+            if not response.ok:
+                print(f"[ERROR] 영상 GET 실패 {response.status_code} (vid={vid_id}): {response.text[:300]}")
             response.raise_for_status()
-            
+
             data = response.json()
             if data:
                 video_uuid = data[0]['id']
                 print(f"[OK] 기존 영상 발견: {video_uuid}")
                 return video_uuid
             
-            # 새 영상 생성
+            # 새 영상 생성 (실제 DB 스키마: published_at, duration_seconds)
+            # upload_date (YYYYMMDD) → published_at (YYYY-MM-DD)
+            raw_date = video_info.get('upload_date', '') or video_info.get('published_at', '')
+            if raw_date and len(str(raw_date)) == 8 and str(raw_date).isdigit():
+                published_at = f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:]}T00:00:00+00:00"
+            elif raw_date:
+                published_at = str(raw_date)
+            else:
+                published_at = None
+
             video_data = {
                 'id': str(uuid.uuid4()),
                 'video_id': video_info['video_id'],
                 'channel_id': channel_id,
                 'title': video_info['title'],
-                'upload_date': video_info['upload_date'],
-                'duration': video_info.get('duration', 0),
-                'view_count': video_info.get('view_count', 0),
-                'description': video_info.get('description', ''),
+                'published_at': published_at,
+                'duration_seconds': _safe_int(video_info.get('duration_seconds') or video_info.get('duration')),
                 'created_at': datetime.now().isoformat(),
-                'updated_at': datetime.now().isoformat()
             }
             
             response = requests.post(
@@ -144,11 +163,13 @@ class DatabaseInserter:
                 headers=self.headers,
                 json=video_data
             )
+            if not response.ok:
+                print(f"[ERROR] 영상 INSERT 실패 {response.status_code}: {response.text[:300]}")
             response.raise_for_status()
-            
+
             print(f"[OK] 새 영상 생성: {video_data['id']}")
             return video_data['id']
-            
+
         except requests.exceptions.RequestException as e:
             print(f"[ERROR] 영상 생성/확인 실패: {e}")
             raise
@@ -305,20 +326,17 @@ class DatabaseInserter:
     def update_video_analysis_status(self, video_uuid: str, status: str) -> bool:
         """
         영상 분석 상태 업데이트
-        
-        Args:
-            video_uuid: 영상 UUID
-            status: 상태 ('pending', 'processing', 'completed', 'failed')
-        
-        Returns:
-            bool: 성공 여부
+        ⚠️ influencer_videos 테이블에는 analysis_status/updated_at 컬럼이 없음.
+        analyzed_at 컬럼만 사용 (completed 상태일 때만 업데이트).
         """
         try:
+            if status != 'completed':
+                return True  # pending/processing 은 DB 업데이트 불필요
+
             update_data = {
-                'analysis_status': status,
-                'updated_at': datetime.now().isoformat()
+                'analyzed_at': datetime.now().isoformat(),
             }
-            
+
             response = requests.patch(
                 f"{self.base_url}/influencer_videos",
                 headers=self.headers,
@@ -326,11 +344,10 @@ class DatabaseInserter:
                 json=update_data
             )
             response.raise_for_status()
-            
             return True
-            
+
         except requests.exceptions.RequestException as e:
-            print(f"[ERROR] 영상 상태 업데이트 실패: {e}")
+            print(f"[ERROR] 영상 상태 업데이트 실패 ({video_uuid[:8]}): {e}")
             return False
 
     def insert_analysis_results(self, channel_info: Dict[str, Any],
@@ -397,12 +414,20 @@ class DatabaseInserter:
         signal_val = (signal.get('signal') or signal.get('signal_type') or
                       signal.get('mention_type') or 'NEUTRAL')
 
-        # 한글 시그널 → 영문 변환 (DB 표준)
-        KO_TO_EN = {
-            '매수': 'BUY', '긍정': 'POSITIVE', '중립': 'NEUTRAL',
-            '경계': 'CONCERN', '부정': 'CONCERN', '매도': 'SELL'
+        # 영문 → 한글 변환 (DB check constraint: 한글 5단계만 허용)
+        EN_TO_KO = {
+            'BUY': '매수', 'STRONG_BUY': '매수',
+            'POSITIVE': '긍정',
+            'NEUTRAL': '중립', 'HOLD': '중립',
+            'CONCERN': '부정', 'NEGATIVE': '부정',
+            'SELL': '매도', 'STRONG_SELL': '매도',
         }
-        signal_val = KO_TO_EN.get(signal_val, signal_val)
+        signal_val = EN_TO_KO.get(signal_val.upper() if isinstance(signal_val, str) else signal_val,
+                                  signal_val)
+        # 여전히 영문이면 '중립' 폴백
+        VALID_KO = {'매수', '긍정', '중립', '부정', '매도'}
+        if signal_val not in VALID_KO:
+            signal_val = '중립'
 
         # 중복 확인
         try:
@@ -427,6 +452,24 @@ class DatabaseInserter:
         if speaker_name:
             speaker_id = self._get_or_create_speaker(speaker_name)
 
+        # confidence: DB는 문자열 허용값 ('low', 'medium', 'high', 'very_high')
+        raw_conf = signal.get('confidence', 'medium')
+        if isinstance(raw_conf, str) and raw_conf.lower() in ('low', 'medium', 'high', 'very_high', 'very_low'):
+            conf_val = raw_conf.lower()
+        elif isinstance(raw_conf, (int, float)):
+            # 숫자 → 문자열 변환 (1-10 스케일 또는 0-1 스케일 모두 처리)
+            num = float(raw_conf)
+            if num > 1.0:  # 1-10 스케일
+                if num >= 8: conf_val = 'high'
+                elif num >= 6: conf_val = 'medium'
+                else: conf_val = 'low'
+            else:  # 0-1 스케일
+                if num >= 0.8: conf_val = 'high'
+                elif num >= 0.5: conf_val = 'medium'
+                else: conf_val = 'low'
+        else:
+            conf_val = 'medium'
+
         data = {
             'id': str(uuid.uuid4()),
             'video_id': video_uuid,
@@ -435,7 +478,7 @@ class DatabaseInserter:
             'market': signal.get('market', 'OTHER'),
             'signal': signal_val,
             'mention_type': signal.get('mention_type', '결론'),
-            'confidence': signal.get('confidence', 'medium'),
+            'confidence': conf_val,
             'timestamp': signal.get('timestamp', signal.get('timestamp_start', '00:00')),
             'key_quote': signal.get('key_quote', signal.get('reasoning', '')),
             'reasoning': signal.get('reasoning', signal.get('key_quote', '')),
@@ -450,7 +493,7 @@ class DatabaseInserter:
             json=data
         )
         if resp.ok:
-            print(f"  ✅ INSERT: {stock} / {signal_val}")
+            print(f"  [OK] INSERT: {stock} / {signal_val}")
             return True
         else:
             print(f"  [ERROR] INSERT 실패 {resp.status_code}: {resp.text[:200]}")

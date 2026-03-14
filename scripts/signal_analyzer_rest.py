@@ -248,12 +248,17 @@ URL: {video_data['url']}
                     context = signal.get('context', signal.get('key_quote', ''))
                     speaker = signal.get('speaker_name', signal.get('speaker', ''))
                     
+                    # timestamp: MM:SS 형식 (Gate 2 + DB 호환)
+                    ts_str = f"{ts // 60}:{ts % 60:02d}" if ts else None
+
                     db_signal = {
                         'video_uuid': video_uuid,
                         'stock_symbol': stock_symbol,
                         'signal_type': signal_type,
                         'confidence': float(conf),
                         'reasoning': reasoning,
+                        'key_quote': context or reasoning,
+                        'timestamp': ts_str,
                         'timestamp_start': ts,
                         'timestamp_end': ts,
                         'context': context,

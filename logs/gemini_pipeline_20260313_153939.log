@@ -1,0 +1,43 @@
+[15:39:39] === Gemini 파이프라인 시작 ===
+[15:39:39] 채널: https://www.youtube.com/@anyuhuatv
+[15:39:39] limit=10 | dry_run=True | skip_existing=True
+[15:39:39] 
+[Step 1] 채널 정보 수집...
+[15:39:41]   채널명: 안유화의 경제투자론 - 안경투
+[15:39:45] 
+[Step 4-7] Gemini 분석 시작 (10개 영상)...
+[15:39:45] 
+  [1/10] ztPwQOHkU88 | 지금 전쟁보다 무서운 건 돈의 이동입니다ㅣ안유화의 경제투자론
+[15:40:07]   → 시그널 없음 (스킵)
+[15:40:10] 
+  [2/10] xAPyYacaztM | "In just five years, hegemony will shift." Xi Jinp
+[15:40:32]   → 시그널 없음 (스킵)
+[15:40:35] 
+  [3/10] BoUYV9JF3Lc | It's not just jobs that are being lost! This is ho
+[15:40:58]   → 시그널 없음 (스킵)
+[15:41:01] 
+  [4/10] _Irvjp7mcj0 | In these times of heightened risk, these are the c
+[15:41:23]   → 시그널 없음 (스킵)
+[15:41:26] 
+  [5/10] B0qpQuIzjbA | All-out war in the Middle East! A comprehensive gu
+[15:41:48]   → 시그널 없음 (스킵)
+[15:41:51] 
+  [6/10] tmGEPeSYHFA | Why the Korean Stock Market Is Rising | Ahn Yu-hwa
+[15:42:13]   → 시그널 없음 (스킵)
+[15:42:16] 
+  [7/10] msLDbF3l78M | The Real Reason Markets Panic Despite the Illegal 
+[15:42:38]   → 시그널 없음 (스킵)
+[15:42:41] 
+  [8/10] PJ4Htn9eBBc | 지나간 세계 흐름, 영상 하나로 복습하자 ㅣ 지정학 이슈 몰아보기
+[15:43:07]   → 시그널 없음 (스킵)
+[15:43:10] 
+  [9/10] N041ypJmPo0 | 흔들리는 금융 시장 속 단단한 투자자가 되려면?ㅣ 경제 이슈 몰아보기
+[15:43:32]   → 시그널 없음 (스킵)
+[15:43:35] 
+  [10/10] MGCY2lKEgnw | Transform Your Life in Just One Hour | Binge-watch
+[15:43:57]   → 시그널 없음 (스킵)
+[15:44:00] 
+============================================================
+[15:44:00] [완료] 총 10개 영상 분석, 0개 시그널 추출
+[15:44:00] 로그 파일: C:\Users\Mario\work\invest-sns\logs\gemini_pipeline_20260313_153939.log
+[15:44:00] 결과 저장: C:\Users\Mario\work\invest-sns\logs\gemini_dryrun_20260313_153939.json

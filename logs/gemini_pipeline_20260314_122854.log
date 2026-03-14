@@ -1,0 +1,30 @@
+[12:28:54] === Gemini 파이프라인 시작 ===
+[12:28:54] 채널: https://www.youtube.com/@anyuhuatv
+[12:28:54] limit=5 | offset=5 | dry_run=True | skip_existing=False
+[12:28:54] 
+[Step 1] 채널 정보 수집...
+[12:28:55]   채널명: 안유화의 경제투자론 - 안경투
+[12:28:58] 
+[Step 4-7] Gemini 분석 시작 (5개 영상)...
+[12:28:58] 
+  [1/5] tmGEPeSYHFA | Why the Korean Stock Market Is Rising | Ahn Yu-hwa
+[12:30:20]   → 1개 시그널 추출:
+[12:30:20]      부정 | 비트코인 (BTC) | conf=7 | ts=02:17
+[12:30:20]   [DRY-RUN] INSERT 스킵
+[12:30:25] 
+  [2/5] msLDbF3l78M | The Real Reason Markets Panic Despite the Illegal 
+[12:32:03]   → 시그널 없음 (스킵)
+[12:32:08] 
+  [3/5] PJ4Htn9eBBc | 지나간 세계 흐름, 영상 하나로 복습하자 ㅣ 지정학 이슈 몰아보기
+[12:32:08]   [SKIP] 영상 길이 249분 - 60분 초과 스킵
+[12:32:09] 
+  [4/5] N041ypJmPo0 | 흔들리는 금융 시장 속 단단한 투자자가 되려면?ㅣ 경제 이슈 몰아보기
+[12:32:09]   [SKIP] 영상 길이 217분 - 60분 초과 스킵
+[12:32:10] 
+  [5/5] MGCY2lKEgnw | Transform Your Life in Just One Hour | Binge-watch
+[12:47:30]   → 시그널 없음 (스킵)
+[12:47:35] 
+============================================================
+[12:47:35] [완료] 총 3개 영상 분석, 1개 시그널 추출
+[12:47:35] 로그 파일: C:\Users\Mario\work\invest-sns\logs\gemini_pipeline_20260314_122854.log
+[12:47:35] 결과 저장: C:\Users\Mario\work\invest-sns\logs\gemini_dryrun_20260314_122854.json

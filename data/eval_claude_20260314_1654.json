@@ -1,0 +1,1761 @@
+{
+  "results": [
+    {
+      "video_id": "IjYr0FrINis",
+      "title": "[속보효] 드디어 오늘 밤 AI의 운명이 결정될 것 같습니다",
+      "channel": "이효석아카데미",
+      "duration": 892,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal_type": "중립",
+          "key_quote": "엔비디아가 실적 발표했는데 주가가 5% 빠졌어요. 엔비디아는 지금 숙제를 다 풀어 놨고, 그 밑에 있는 애들이 잘해 줘야 되는 상황입니다. 장기적으로 보면 엔비디아는 그냥 박스권인 것 같아요.",
+          "reasoning": "발언자가 엔비디아 실적 악재(5% 하락)를 언급하고 장기적으로 박스권이라는 중립적 분석을 제시. 마이클 버리의 구매약정 급증(161억→952억 달러) 우려도 제시하지만, 직접적 매도 추천이나 하락 선언이 아닌 리스크 경고 수준. 오히려 엔비디아의 '숙제'가 하이닉스, TSMC, 삼성전자 등으로 흘러가고 있다는 분석만 제공.",
+          "timestamp": "02:30",
+          "confidence": 5,
+          "speaker_name": null
+        },
+        {
+          "stock": "클로드",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "클로드를 많이 쓰다 보니까 클로드는 이제 가장 높은 수준으로 30만 원짜리를 쓰고 있어요. 클로드는 완전히 와, 이게 재미난 AI보다 훨씬 더 좋은 그런 게 느껴지거든요.",
+          "reasoning": "발언자가 클로드(Anthropic의 AI)에 대해 긍정적 평가를 표현. ChatGPT보다 좋다는 호의적 의견을 제시하고 유료 구독(30만 원)을 직접 사용 중임을 언급. 다만 클로드는 비상장 기업(Anthropic 서비스)으로 ticker가 없어 투자 대상 아님. 교육/분석 목적으로만 긍정 평가.",
+          "timestamp": "04:55",
+          "confidence": 3,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal_type": "중립",
+          "key_quote": "엔비디아가 실적 발표했는데 주가가 5% 빠졌어요. 엔비디아는 지금 숙제를 다 풀어 놨어요. 그래서 그 밑에 있는 애들이 잘해 줘야 되는 상황",
+          "reasoning": "발언자는 엔비디아 실적 발표 후 주가 하락을 언급했으나, 직접적인 매수/매도 권유는 없음. 엔비디아가 기술 로드맵을 이미 공개했으므로 향후 성장은 공급망 파트너사(TSMC, SK하이닉스 등)에 달려있다는 중장기 분석만 제시. 현물 매매 지시 또는 포트폴리오 액션 없음.",
+          "timestamp": "0:31",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "클로드",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "클로드를 많이 쓰다가 아 이제 클로드는 이제 가장 높은 수준으로 이제 30만 원짜리 쓰고 있어요. 클로드를 쓰다 보니까 완전히 와 재미나이가 또 이게 재미난 아이보다 훨씬 더 또 좋은 그런게 느껴지거든요",
+          "reasoning": "발언자가 클로드 AI의 능력을 긍정적으로 평가하며 고급 구독 버전을 사용 중이고 경험상 ChatGPT보다 우수하다고 언급. 그러나 클로드는 비상장 기업 제품이므로 거래소 상장 종목이 아님. 단순 기술 평가만 이루어져 투자 시그널의 대상이 될 수 없음.",
+          "timestamp": "4:40",
+          "confidence": null,
+          "speaker_name": null
+        },
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal_type": "중립",
+          "key_quote": "비트코인은 여전히 극단적인 공포에 있습니다. 어 시장에 어제 좀 조정을 받긴 했지만 최근 이틀 동안은 어 계속 돈이 ETF에서 빠졌는데 요즘에 좀 들어오는 것도 있네요",
+          "reasoning": "발언자가 비트코인의 시장 심리와 자금 흐름(ETF 유출입)을 객관적으로 설명하고 있음. 극단적 공포 상태와 조정을 언급했으나, 구체적인 매수/매도 지시나 방향성 전망이 없음. 현물 시황 해석만 제시된 중립 분석.",
+          "timestamp": "2:14",
+          "confidence": 5,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "엔비디아",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "클로드",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "엔비디아",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "클로드",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "비트코인",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 3
+      }
+    },
+    {
+      "video_id": "x0TKvrIdIwI",
+      "title": "칠천피, 공포 vs 기대감? 엔비디아 실적 후 따라오는 반도체 쇼크, 미국 흔들렸다…우리 반도체 투톱은? | 박병창 교보증권 이사 [마켓 인사이드]",
+      "channel": "삼프로TV",
+      "duration": 2618,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자가 아침에 5% 정도 올랐어요. 메타하고 AMD의 공계약 MI 460의 삼성전자가 더 유리한 부분이 있죠",
+          "reasoning": "메타와 AMD의 AI 가속기 공동구매 공계약 발표로 삼성전자의 반도체 경쟁력이 주목받고 있음. 특히 고대역폭메모리(HBM) 수요 증가로 실적 개선 기대. 다만 발언자는 구체적 매수 권유 없이 상황 분석만 제공.",
+          "timestamp": "1:21",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK 하이닉스는 팔고 싶어도 분량이 없어요. 그래서 이제 삼성전자에 대한 기대감이 더 있는 그런 상황이었고요",
+          "reasoning": "엔비디아의 대규모 HBM 구매 발표(912억 달러 규모)로 SK하이닉스의 공급량 부족 문제가 주목됨. 이는 가격 인상과 이익률 개선으로 연결될 수 있음. 오후에 SK하이닉스가 급등(7.9%)하며 시장의 기대감 반영. 발언자는 긍정적 평가만 제공.",
+          "timestamp": "1:40",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal_type": "중립",
+          "key_quote": "엔비디아가 호실적 발표했는데 어제 아침 3% 시작할 때 타임을 하고 있었는데 결국 아 하루 지나고 나서 본장에서는 엔비디아가 급락해서 184달까지 떨어졌습니다",
+          "reasoning": "엔비디아는 실적 발표에도 불구하고 5.47% 급락. 월가에서 지적하는 우려 사항은 (1) 매출의 70% 이상이 7개 빅테크에 쏠림 (2) 매출의 90%가 데이터센터 의존 (3) 이익률 유지 우려. 발언자는 현상을 분석하며 새로운 모멘텀 필요성 제시. 직접적 매수/매도 권유 없음.",
+          "timestamp": "11:04",
+          "confidence": 5,
+          "speaker_name": null
+        },
+        {
+          "stock": "마이크론",
+          "ticker": "MU",
+          "signal_type": "중립",
+          "key_quote": "어제 마이크론이 또 3% 하락했어요. 웨턴 디지털도 빠지고 브로스컴도 빠지고 샌드스크는 뭐 3% 정도 올랐습니다",
+          "reasoning": "엔비디아 급락에 따른 필라델피아 반도체 지수(SOX) 3% 하락으로 반도체 섹터 전반이 동조 하락. 마이크론, 웨턴 디지털, 브로스컴 등 주요 메모리·칩 기업들이 함께 빠짐. 발언자는 시장 현황 보도만 제공.",
+          "timestamp": "16:55",
+          "confidence": 4,
+          "speaker_name": null
+        },
+        {
+          "stock": "LG전자",
+          "ticker": "066570",
+          "signal_type": "긍정",
+          "key_quote": "LG 전자 10% 올랐고요. LG 이노텍은 20% 가까이 올랐어요. 엔비디아가 보스턴 다이나믹스와 LG전자 등과 협력해서 피지컬 AI 확산의 속도를 내겠다",
+          "reasoning": "엔비디아의 컴퍼스 이벤트에서 보스턴 다이나믹스, LG전자와의 피지컬 AI 협력 발표로 LG전자 관심 재고조. 로봇 사업 전개의 기대감이 주가에 반영됨. 발언자는 긍정적 뉴스 전달만 하며 직접 투자 권유는 없음.",
+          "timestamp": "18:14",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "현대자동차",
+          "ticker": "005380",
+          "signal_type": "중립",
+          "key_quote": "로봇으로 현대차가 막 갔어요. 얘네도 가는데 다른 그룹주 왜 LC 얘네는 뭐 하는 거야? 이들도 이제 로봇으로 어저께 급등하는 그런 현상",
+          "reasoning": "현대자동차가 로봇 테마로 급등한 현상 언급. AI/로봇 시장 확대에 따른 관련 기업들의 상승장 형성. 발언자는 시장의 약세 종목 이동 현황을 설명하는 수준이며 매수 권유 없음.",
+          "timestamp": "18:28",
+          "confidence": 3,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK하이닉스가 어저께 급등하는 그런 모습을 나타냈습니다. 엔비디아가 그거 그러면 어디서 살겠냐? 그렇죠. SK 하이닉스다, 이거.",
+          "reasoning": "엔비디아의 HBM 수요 증가로 SK하이닉스가 최대 수혜 기업으로 평가됨. MBA 실적 발표에서 912억 달러 규모의 미지급 구매 약정이 공개되어 향후 수요 확실성 강화. 메모리 칩 수요 증가 사이클 진입으로 중장기 실적 개선 기대.",
+          "timestamp": "3:12",
+          "confidence": 8,
+          "speaker_name": null
+        },
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "아침에 삼성전자가 5% 정도 올랐어요. 삼성전자의 아침에 상대적으로... 메타하고 AMD의 공계약... MI 460의 삼성전세가 더 유리한 부분이 있죠.",
+          "reasoning": "AI 반도체 수요 증가로 메모리 가격 상승 기대. 메타·AMD 공동 프로젝트에서 삼성전자가 기술적 우위 있음. 오후에는 SK하이닉스에 밀렸지만 전반적 반도체 호황 사이클 수혜 확실. 중기적 성장성 양호.",
+          "timestamp": "1:21",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal_type": "중립",
+          "key_quote": "엔비디아가 호실적 발표했죠. 무려 5.47% 급락했습니다. 엔비디아가 호실적 발표하고... 급락해서 184달까지 떨어졌는데... 시장에서 엔비디아에 대한 기대는 실적이 아니라는 거예요.",
+          "reasoning": "호실적 발표에도 불구하고 5.47% 급락한 것은 시장이 이미 70% 이상 인프라 구축을 반영했다는 의미. 데이터센터 매출 90% 집중, 일부 기업 수요 쏠림 현상 발생. 새로운 모멘텀(신제품, 정책 변화)이 필요한 상황으로, 현재 주가는 현상 유지 수준이 아닌 추가 성장 기대를 포함하고 있음.",
+          "timestamp": "10:44",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "LG전자",
+          "ticker": "066570",
+          "signal_type": "긍정",
+          "key_quote": "L전자 10% 올랐고요. LG 이노텍은 20% 가까이 올랐어요. 엔비디아가... 보스턴 다이나믹스와 그리고 L전자 등과 협력해서 피지컬 AI 확산의 속도를 내겠다.",
+          "reasoning": "엔비디아의 피지컬 AI(로봇) 협력 사업 발표에 따라 LG전자가 파트너로 선정되어 긍정적 평가. 휴머노이드 로봇 시장 확대의 초기 수혜자로 인식. 현재 기술 협력 단계이나 향후 부품 수급 및 매출 확대 기대.",
+          "timestamp": "18:10",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "현대차",
+          "ticker": "005380",
+          "signal_type": "긍정",
+          "key_quote": "로봇으로 현대차가 막 갔어요. 얘네도 가는데 다른 그룹주 왜 LC 얘네는 뭐 하는 거야? 이들도 이제 로봇으로 어저께 급등하는 그런 현상이 나타났었거든요.",
+          "reasoning": "AI 로봇 산업 진출 공시에 따른 긍정적 시장 반응. 보스턴 다이나믹스와의 협력 확대로 휴머노이드 로봇 시장 진입 기대. 자동차 제조 경쟁력과 로봇 기술의 시너지 가능성 인식.",
+          "timestamp": "18:28",
+          "confidence": 6,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "엔비디아",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "마이크론",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "LG전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "현대자동차",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 6
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "엔비디아",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "LG전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "현대차",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 5
+      }
+    },
+    {
+      "video_id": "kFa9RxL4HnA",
+      "title": "\"젠슨황 폭탄 선언에 발칵\" 극비리에 삼성 찾은 엔비디아. HBM4 판도 180도 뒤집힌다 | 권영화 교수 1부",
+      "channel": "?",
+      "duration": 837,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성은 계속 올라갑니다. SK는 계속 떨어지고 그러면서 역전할 것 같아요",
+          "reasoning": "발언자가 삼성전자의 HBM 경쟁력 상승을 긍정적으로 평가하고 있습니다. SK하이닉스와의 공정 기술 격차(12나노 vs 최신 공정)로 인한 경쟁 우위를 분석하고 있으며, 향후 시장 점유율 역전 가능성을 제시했습니다. 다만 직접적인 매수 권유나 본인 매매 공개가 없어 긍정 시그널로 분류됩니다.",
+          "timestamp": "00:22",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "중립",
+          "key_quote": "SK하이닉스 같은 경우에는 12나노 공정이라고 요 공정 차이가 엄청나지 않습니까? SK는 계속 떨어지고",
+          "reasoning": "발언자가 SK하이닉스의 12나노 공정이 최신 기술과 차이가 크다는 점을 지적하면서 경쟁력 약화를 언급했습니다. 이는 산업 분석 차원의 객관적 설명으로, 투자 행동 권유나 명시적 전망 선언이 아닌 단순 상황 설명에 해당합니다.",
+          "timestamp": "00:15",
+          "confidence": 4,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성은 계속 올라갑니다. SK는 계속 떨어지고 그러면서 제가 보기에는 역전할 것 같아요",
+          "reasoning": "발언자가 삼성전자의 HBM 경쟁력이 SK하이닉스보다 우위에 있으며 향후 시장 지위가 역전될 것으로 전망하고 있습니다. 파운드리 공정 차이(삼성 5나노 vs SK하이닉스 12나노)로 인한 기술격차가 삼성에 유리하다는 분석입니다. 다만 직접적인 매수 권유가 아닌 산업 분석 의견이므로 긍정으로 분류됩니다.",
+          "timestamp": "0:22",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "부정",
+          "key_quote": "SK는 계속 떨어지고... 역전할 것 같아요",
+          "reasoning": "발언자가 SK하이닉스가 삼성전자에 비해 지속적으로 하락할 것으로 명시적으로 전망하고 있습니다. HBM4 시장에서 공정 기술 격차로 인한 경쟁력 약화를 지적하며, 향후 산업 내 위상 역전을 예측하고 있습니다. 확정적 하락 전망 선언으로 부정 시그널로 분류됩니다.",
+          "timestamp": "0:22",
+          "confidence": 6,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "부정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      }
+    },
+    {
+      "video_id": "5mvn3PfKf9Y",
+      "title": "[긴급속보]🚨현대가 2조에 인수한다 세계최초 SMR 착공 '이 기업'  다음달 안으로 5배는 더 터질겁니다 두산에너빌리티 두산중공업 한전기술 대한전선 오르비텍 급등주",
+      "channel": "달란트투자",
+      "duration": 1351,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "두산에너빌리티",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "두산에너빌리티는 세계최초 SMR 착공을 앞두고 있으며 미국의 SMR 착공을 앞두었습니다. SMR 쪽에서 가장 대장주격 종목으로 판단됩니다",
+          "reasoning": "발언자가 두산에너빌리티를 SMR 시장의 주도 종목으로 평가하고 있습니다. 미국 SMR 착공을 앞두고 있다는 긍정적 전망이 있으며, 세계적 SMR 기업들보다 빠른 진행 속도를 강조하고 있습니다. 다만 직접적인 매수 권유는 없고 분석 및 평가 의견만 제시되어 긍정으로 분류합니다.",
+          "timestamp": "08:46",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "현대자동차",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "현대차가 2조에 인수한다는 뉴스와 SMR 관련 비즈니스 진출에 대한 언급이 있습니다",
+          "reasoning": "발언자가 현대차의 2조 규모 인수와 SMR 관련 움직임을 언급하고 있으나, 이는 뉴스 소개 수준의 기술적 설명에 불과합니다. 현대차에 대한 직접적인 투자 의견이나 방향성 제시가 없어 단순 정보 전달로 판단됩니다.",
+          "timestamp": null,
+          "confidence": 3,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "두산에너빌리티",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "두산에너빌리티는 SMR 시장에서 세계최초 착공을 앞두고 있으며, 해외 원전 수출 기대감이 상당히 커지고 있는 시점입니다. 올해 2026년은 SMR의 실질적인 수주와 착공이 시작되는 원년입니다.",
+          "reasoning": "발언자가 두산에너빌리티를 SMR 시장의 핵심 플레이어로 지목하며 호의적 전망을 제시. 국내 SMR 특별법 통과로 인한 법적 기반 조성, 미국의 빅테크 기업들의 SMR 수요 급증, 2026년 착공 시작 등 구체적 실적 재료 언급. 다만 직접적인 매수 지시는 없고 업계 전망 제시 수준. 중장기 성장 동력 확보 가능성 높음.",
+          "timestamp": "08:46",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "두산중공업",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "두산중공업(현 두산에너빌리티)은 영상 제목에서 언급되었지만 자막에서 구체적 분석 없이 단순 언급만 있음.",
+          "reasoning": "영상 제목에 '두산중공업'이 명시되어 있으나, 실제 자막 내용에서는 '두산에너빌리티'로만 언급되고 있음. 사명이 이미 변경된 상태이고, 자막에서 두산중공업에 대한 직접적 투자 의견이 없음. 단순 종목 나열 수준.",
+          "timestamp": null,
+          "confidence": 5,
+          "speaker_name": null
+        },
+        {
+          "stock": "한전기술",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "영상 제목에 '한전기술'이 언급되어 있으나 자막에서는 구체적 언급 및 투자 의견이 없음.",
+          "reasoning": "발언자가 SMR 시장의 주요 수혜 기업들을 언급하는 과정에서 한전기술이 영상 제목에 포함되어 있으나, 실제 자막 텍스트에서는 직접적인 언급과 분석이 부재. 단순 제목 기반 포함.",
+          "timestamp": null,
+          "confidence": 5,
+          "speaker_name": null
+        },
+        {
+          "stock": "대한전선",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "영상 제목에 '대한전선'이 언급되어 있으나 자막에서는 구체적 언급 및 투자 의견이 없음.",
+          "reasoning": "영상 제목에 포함되었으나 자막 본문에서 직접적인 언급과 투자 의견 부재. SMR 관련 주요 수혜 기업으로 암시되었을 가능성이 있으나 구체적 근거 제시 없음.",
+          "timestamp": null,
+          "confidence": 5,
+          "speaker_name": null
+        },
+        {
+          "stock": "오르비텍",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "영상 제목에 '오르비텍'이 언급되어 있으나 자막에서는 구체적 언급 및 투자 의견이 없음.",
+          "reasoning": "영상 제목에 포함되었으나 자막 본문에서 직접적인 언급과 투자 의견 부재. SMR 관련 수혜 기업군으로 예상되나 구체적 분석 없음.",
+          "timestamp": null,
+          "confidence": 5,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "두산에너빌리티",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "현대자동차",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "두산에너빌리티",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "두산중공업",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "한전기술",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "대한전선",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "오르비텍",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 5
+      }
+    },
+    {
+      "video_id": "irK0YCnox78",
+      "title": "삼성·하이닉스 부담 구간? 장비주가 대안일까? ㅣ 김장열 유니스토리자산운용 본부장 [집중, 오늘의 주식]",
+      "channel": "삼프로TV",
+      "duration": 2572,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자가 19일 날 밸류업 공시를 한다... 배당 성향을 10% 포인트 더 높여야 되거나 전년 대비 10% 이상 배당이 증가되겠구나",
+          "reasoning": "정부의 새로운 배당 분리과세 정책이 발표되면서 삼성전자의 배당 정책 업데이트가 예상되고 있습니다. 현재 배당 성향 30% 수준에서 최소 10% 포인트 상향이 필요하여 배당액 증가가 거의 확실한 상황. 이러한 긍정적 배당 뉴스가 주가 상승을 견인한 것으로 판단되며, 실적 자체는 양호하나 투자 행동까지 권유되지는 않았습니다.",
+          "timestamp": "01:40",
+          "confidence": 7,
+          "speaker_name": "김장열"
+        },
+        {
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal_type": "긍정",
+          "key_quote": "엔비디아의 실적이 부합했다는 것, 그리고 GPM 75%를 유지했다는 것... HBM 코스트도 늘어났을 텐데 마진을 어떻게 유지했을까라는 생각도 들었는데 다행히 75% 유지됐어요",
+          "reasoning": "엔비디아가 예상치를 충족하는 실적을 발표했으며, GPU와 HBM의 결합 제품 비용이 증가했음에도 불구하고 75% 수준의 높은 마진율을 유지한 것은 긍정적. 이는 고객의 강한 수요(메타, 구글 등)와 제품의 프리미엄 가치를 반영한 결과. 다만 발언자는 단순 분석만 제공하고 매수 권유는 하지 않았습니다.",
+          "timestamp": "06:46",
+          "confidence": 6,
+          "speaker_name": "김장열"
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자가 19일 날 밸류업 공시를 한다. 배당 성향이 올라가지 않을까 이렇게 생각하는 거 같아요. 최소한 배당이 전년보다 10% 이상 증가되겠구나",
+          "reasoning": "정부의 새로운 배당 분리과세 혜택 규정이 발표되면서 삼성전자의 주주 환원 정책 업데이트 가능성 제시. 현재 배당성향 30% 수준에서 전년 대비 10% 이상 증가 가능성으로 주주 환원 개선 기대. 이는 긍정적 시장 반응의 배경으로 작용했을 것으로 분석. 다만 공시 내용 확정 전 단계로 조건부 성격.",
+          "timestamp": "00:40",
+          "confidence": 7,
+          "speaker_name": "김장열"
+        },
+        {
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal_type": "긍정",
+          "key_quote": "엔비디아가 GPU 마진율 75% 부합했어요. HBM 코스트가 늘어났을 텐데 마진을 어떻게 유지했을까라는 생각도 들었는데 다행히 75% 유지됐어요",
+          "reasoning": "엔비디아의 최신 실적에서 GPU 매출 총 이익률(GPM) 75%를 부합함으로써 마진율 유지 성공. HBM 등 원재료 비용 상승 속에서도 높은 마진율을 지속한 것은 제품 가격 책정력 강세를 의미. 고객사(메타, 구글 등)의 강한 AI 수요가 마진 유지에 기여. 다만 실적 가이던스는 예상 범위 내로 새로운 상승 모멘텀은 제한적.",
+          "timestamp": "06:13",
+          "confidence": 7,
+          "speaker_name": "김장열"
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "엔비디아",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "엔비디아",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      }
+    },
+    {
+      "video_id": "hxpOT8n_ICw",
+      "title": "'불장엔 증권사 주식!' 뭐가 베스트일까 | 고연수 하나증권 리서치센터 연구원 [더블 업]",
+      "channel": "삼프로TV",
+      "duration": 1172,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "NH투자증권",
+          "ticker": "005940",
+          "signal_type": "긍정",
+          "key_quote": "주주 환원을 놓고 봤었을 때 매력도가 제일 높은 증권사는 NH 투자 증권이",
+          "reasoning": "발언자가 NH투자증권을 주주 환원 측면에서 가장 매력적인 증권사로 평가했습니다. 증권업이 호조를 띤 상황에서 배당 등 주주 환원이 두드러진 종목으로 언급되었으나, 직접적 매수 권유는 없고 투자자 성향에 따른 선택지로 제시한 점에서 긍정 평가입니다. 증시 거래대금 증가에 따른 수혜가 예상되는 상황입니다.",
+          "timestamp": "06:45",
+          "confidence": 6,
+          "speaker_name": "고연수"
+        },
+        {
+          "stock": "증권주",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "증권주는 거의 다 편하게 가져가도 된다. 무조건 지금보다는 수익률이 더 나을 수 있다",
+          "reasoning": "발언자가 증권업종 전반에 대해 긍정적 전망을 제시했습니다. 코스피 연간 영업이익 588조원(전년 대비 95% 증가)과 거래대금 증가(27조원→65조원)에 따른 브로커리지 수수료 40% 이상 성장 기대, 투자평가 이익 증가 등을 근거로 제시했으나, 개별 종목 추천이 아닌 섹터 전반에 대한 호의적 분석입니다. 시그널 추출 불가(섹터명).",
+          "timestamp": null,
+          "confidence": null,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "NH투자증권",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "주주 환원을 놓고 봤었을 때 매력도가 제일 높은 증권사는 NH 투자 증권이",
+          "reasoning": "증권사 중에서 주주환원(배당, 자사주 소각 등) 정책이 가장 적극적인 기업으로 평가. 증시 호황에 따른 실적 성장과 함께 주주환원 확대 기대 가능. 투자자 성향 중 주주 환원 중시층에게 매력적인 선택지로 제시됨.",
+          "timestamp": "06:47",
+          "confidence": 7,
+          "speaker_name": "고연수"
+        },
+        {
+          "stock": "대형 증권사",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "중장기적으로 투자를 한다고 봤었을 때 기업의 이익 성장도 기대할 수 있는 좀 대형 증권사 위주로 봐야 된다",
+          "reasoning": "증권업 특성상 증시 호황 시 거래대금 증가에 따른 실적 성장 기대 가능. 대형 증권사는 브로커리지 수익뿐만 아니라 투자 평가 이익도 함께 성장 가능. 다만 '섹터명'으로 분류되어 개별 종목 투자 의견이 아니므로 중립으로 처리.",
+          "timestamp": "03:48",
+          "confidence": 5,
+          "speaker_name": "고연수"
+        },
+        {
+          "stock": "증권주 (섹터)",
+          "ticker": null,
+          "signal_type": "중립",
+          "key_quote": "저는 어 우선은 증권주는 거의 다 편하게 가져가도 된다. 무조건 지금보다는 수익률이 더 나을 수 있다라고 보고 있는데",
+          "reasoning": "증시 거래대금 증가(2월 기준 연간 추정 61조원)에 따른 브로커리지 수수료 수익 40% 이상 성장 기대. 5대 커버리지 증권사 모두 1조 3천억 원 이상 연간 추정치 수익 예상. 그러나 '증권주' 섹터 전체 언급으로 개별 종목 투자 의견이 아니므로 중립 처리.",
+          "timestamp": "06:27",
+          "confidence": 6,
+          "speaker_name": "고연수"
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "NH투자증권",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "증권주",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "NH투자증권",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "대형 증권사",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "증권주 (섹터)",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 3
+      }
+    },
+    {
+      "video_id": "bmXgryWXNrw",
+      "title": "하이닉스 없거나 추가 매수 고민하는 분들 제가 시원하게 바로 말씀드립니다 [Z1뉴스]",
+      "channel": "이효석아카데미",
+      "duration": 802,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK하이닉스는 메모리 사이클 회복 국면에서 좋은 구간이 이어지고 있으며, 장기 공급 계약 수요가 증가하고 있는 상황입니다",
+          "reasoning": "발언자는 SK하이닉스의 메모리 수급 불균형 개선과 가격 상승 전망을 긍정적으로 평가하고 있습니다. 2026년까지 3년간 수요가 공급을 앞지를 것으로 전망하며, 고객들의 장기 공급 계약 요구 증가가 강세를 뒷받침합니다. 다만 직접적 매수 권유 없이 분석만 제공하므로 긍정으로 분류됩니다.",
+          "timestamp": "01:20",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자도 이제 오르기 시작한 시점으로 보면 좋은 상황이며, 늦게 오르기 시작했으니까 삼성전자가 또 좋습니다",
+          "reasoning": "발언자는 삼성전자가 최근 상승을 시작했으며 향후 상승 가능성이 크다고 평가합니다. AI 데이터 센터 수요 증가로 메모리 및 HBM 시장 전망이 강세이며, 시티그룹의 목표가 상향(182조원→251조원, 38% 상향)이 근거입니다. 다만 직접 매수 권유가 아닌 분석 및 긍정적 평가 수준이므로 긍정으로 분류됩니다.",
+          "timestamp": "09:46",
+          "confidence": 7,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK하이닉스는 메모리 부족 현상이 3년 동안 지속될 것이고, 2026년 설비 투자를 앞당겨 3분기에는 본격적인 웨이퍼 생산까지 가능할 것이라고 전망하고 있습니다",
+          "reasoning": "메모리 칩 수급 불균형 심화로 향후 3년간 수요가 공급을 초과할 것으로 예상. SK하이닉스의 공격적 설비 투자로 공급 확대 가능. 다만 현재까지 주가 상승이 크게 이루어졌으므로 추가 매수보다는 지분 유지 권장.",
+          "timestamp": "01:25",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자는 아직도 좋은 구간이 이어지고 있으며, 시티 은행이 목표가를 200조에서 251조원으로 상향했고 영업이익 전망을 182조원에서 251조원으로 38% 상향했습니다",
+          "reasoning": "AI 데이터 센터 수요 증가로 메모리 칩 가격 상승 전망. 특히 DDR5 가격이 내년 상반기에만 30% 이상 상승할 것으로 예상. 시티의 대폭적인 실적 상향은 메모리 사이클 회복의 강도를 시사. 다만 이미 3~4배 상승했으므로 분할 매수 전략 권장.",
+          "timestamp": "08:54",
+          "confidence": 7,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      }
+    },
+    {
+      "video_id": "nwuAhWEoAng",
+      "title": "코스피 더 올라갈 겁니다, 다만 현금 이만큼은 꼭 갖고 계세요 [조진표 대표 1부]",
+      "channel": "부읽남TV",
+      "duration": 1169,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자는 2027년에 벌어드릴 이익이 332조원이 될 거라는 근거로 노무라 증권에서 목표 주가를 29만 원으로 상향했습니다",
+          "reasoning": "노무라 증권의 상향 목표주가는 2027년 삼성전자의 332조원 순이익 전망에 기반함. 이는 전 세계에서 가장 많이 버는 기업이 될 것이라는 의미. 현재 PER 9배 수준으로 저평가되어 있으며 반도체 사이클 회복과 AI 수요 증가가 실적 개선의 원동력. 다만 발언자는 현금 20~30% 보유를 권고하여 직접적인 매수 지시는 없음.",
+          "timestamp": "02:35",
+          "confidence": 6,
+          "speaker_name": "조진표"
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK하이닉스는 2027년에 225조원을 벌어들일 것이라는 근거로 노무라 증권에서 목표 주가를 156만 원으로 상향했습니다",
+          "reasoning": "노무라 증권의 목표주가 상향은 SK하이닉스의 2027년 225조원 순이익 예상에 근거. 현재 PER 6배 수준으로 저평가되어 있으며 반도체 실적 개선이 주요 상승 요인. 블랙록 등 기관이 대량 매수 중인 상황. 다만 발언자는 현금 일부 보유를 권고하고 있어 직접 매수 권유는 없음.",
+          "timestamp": "02:40",
+          "confidence": 6,
+          "speaker_name": "조진표"
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자는 2027년에 332조원의 이익을 벌어들일 것으로 예상되며, 전 세계에서 가장 돈을 많이 버는 기업이 될 것으로 보입니다",
+          "reasoning": "노무라 증권이 삼성전자의 목표주가를 29만 원으로 상향 조정했으며, 2027년 예상 이익 332조원은 엔비디아(260조원), 아람코(255조원), 애플(220조원) 등 세계 주요 기업들을 초과할 것으로 전망. PER 9배의 저평가 상태에서 기관 자금이 지속 유입 중. 다만 직접적인 매수 추천은 제시되지 않았으며, 호의적 전망 제시 수준.",
+          "timestamp": "2:30",
+          "confidence": 7,
+          "speaker_name": "조진표"
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK하이닉스는 2027년에 225조원의 이익을 벌어들일 것으로 예상되며, 목표주가가 156만 원으로 상향 조정되었습니다",
+          "reasoning": "노무라 증권의 보수적 목표주가 상향 조정으로 강한 긍정 신호. 2027년 예상 이익 225조원으로 엔비디아, 아람코와 비슷한 수준의 글로벌 톱 클래스 수익성 달성 예상. PER 6배의 저평가 상태에서 반도체 경기 회복 및 AI 수요 증가로 긍정적 전망. 다만 직접 매수 권유는 없고 목표주가 제시 수준.",
+          "timestamp": "2:35",
+          "confidence": 7,
+          "speaker_name": "조진표"
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      }
+    },
+    {
+      "video_id": "tSXkj2Omz34",
+      "title": "[속보효] 코스피 6000 돌파… 7,900 논리까지 바로 공개합니다",
+      "channel": "이효석아카데미",
+      "duration": 1066,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자 영업 이익이 올해 168조 정도 나올 것 같고, 반도체 영업 이익 증가율이 두 배 이상 증가할 것으로 예상됩니다",
+          "reasoning": "영상에서 발언자는 삼성전자의 실적 개선을 데이터 기반으로 분석하고 있습니다. 반도체 사이클 회복으로 2026년 영업이익이 크게 증가할 전망을 제시했습니다. 다만 멀티플(P/E)이 9배 수준으로 매우 저평가되어 있다는 점을 지적하며, 글로벌 투자자들이 실적 증가를 무시하고 있다고 평가했습니다. 그러나 직접적인 매수 권유는 없고 분석만 제공하므로 긍정 시그널입니다.",
+          "timestamp": "05:01",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "하이닉스 영업 이익이 140조에서 170조 나올 거라고 생각하고 있습니다. 멀티플이 다섯 배 정도로 매우 저평가된 상태입니다",
+          "reasoning": "발언자는 SK하이닉스의 실적 개선을 긍정적으로 평가하며, 2026년 영업이익이 170조까지 증가할 수 있다고 분석했습니다. 현재 멀티플이 5배로 극도로 저평가되어 있다는 점을 강조했습니다. 반도체 수익성 향상으로 글로벌 톱 3 기업 진입 가능성까지 언급했으나, 직접적인 매수 권유 없이 분석 의견만 제시하므로 긍정 시그널입니다.",
+          "timestamp": "05:03",
+          "confidence": 6,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "삼성전자 영업 이익이 올해 168조 정도 나올 것 같다고 생각해요. 지금 삼성전자가 솔직히 마이크로소프트 알파벳 아마존의 실적과 비교해도 이런 구조로 가면 삼성전자가 매달권에 들 진입할 가능성이 있다",
+          "reasoning": "반도체 호황으로 삼성전자의 영업이익이 크게 증가하고 있으며, 이는 글로벌 IT 기업들과 경쟁 가능한 수준의 실적을 의미한다. 다만 현재 멀티플(PER)이 9배 수준으로 저평가되어 있어 밸류에이션 상승의 여지가 있다. 발언자는 실적 개선의 가능성을 제시하고 있으나 명시적인 매수 권유는 없다.",
+          "timestamp": "4:59",
+          "confidence": 6,
+          "speaker_name": null
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "하이닉스가 140조가 될 거 같다고 생각하고 있는데 지금 하이닉스 멀티플이 5배인데 글로벌 기업의 순위 1 2 3위 안에 들어갈 정도로 매달권 진입 가능성까지 점쳐지고 있는 그런 기업의 멀티플이 5배라는 것은 너무 싼데",
+          "reasoning": "SK하이닉스의 영업이익이 140조대로 증가할 것으로 예상되며, 글로벌 기업 상위권 실적 수준에 도달하는 것으로 분석된다. 그러나 현재 PER 5배의 저평가 상태로, 발언자는 이를 모순으로 지적하고 있다. 멀티플 확대 가능성을 암시하나, 명시적 매수 권유는 없다.",
+          "timestamp": "5:01",
+          "confidence": 6,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      }
+    },
+    {
+      "video_id": "Xv-wNA91EPE",
+      "title": "삼성전자 절대 팔지 마세요, 상상 못했던 일 벌어집니다 [조진표 대표 2부]",
+      "channel": "부읽남TV",
+      "duration": 1540,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "긍정",
+          "key_quote": "20만 원이 새로운 랠리의 시작점이 아닐까라고 말씀을 드리고 싶습니다. 올해 2026년이 글로벌 반도체 시장이 한 18% 성장을 할 거고요. 또 메모리 반도체는 34% 성장을 하면서 시장을 주도할 걸로 좀 보고 있거든요.",
+          "reasoning": "발언자는 삼성전자의 20만원대 가격을 긍정적으로 평가하며, 2026년 메모리 반도체 시장의 34% 성장과 AI 반도체 수요 확대로 인한 실적 개선을 예상하고 있습니다. HBM4 양산 성공, 파운드리 수율 개선(60~70%), 자사주 소각 및 주주환원 강화 등을 긍정 요소로 제시했습니다. 다만 직접적인 매수 권유 표현('사세요', '담으세요')은 없으므로 긍정 시그널입니다.",
+          "timestamp": "00:26",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK닉스가 40년 만에 삼성전자를 따라잡은 거죠. 올해 메모리 반도체 시장 같은 경우에 올해 전년 대비에서 30% 이상 성장을 할 거고요. 또 HBM 시장 같은 경우에 올해 거의 50%에 가까운 46% 정도의 성장을 할 수 있을 거다",
+          "reasoning": "발언자는 SK하이닉스의 HBM 시장 점유율(약 63%) 유지와 디램 시장 1위 달성을 역사적 성과로 평가하고 있습니다. 2026년 메모리 반도체 30% 이상, HBM 46% 성장 전망을 제시했으며, 노무라 증권의 목표주가 156만원을 언급하면서 긍정적 전망을 제시했습니다. 다만 '빠른 말'과 '안정적인 황소' 비유로 삼성과의 리스크 차이를 언급했으므로 직접적 매수 권유는 아닙니다.",
+          "timestamp": "07:23",
+          "confidence": 7,
+          "speaker_name": null
+        },
+        {
+          "stock": "원익IPS",
+          "ticker": "240810",
+          "signal_type": "중립",
+          "key_quote": "첫 번째 종목은 원익 IPS인 거 같아요. 삼성이 케펙스의 어떤 직접적인 수혜자이고 작년 같은 경우에 삼성 파운더리 쪽에서의 어떤 장비 매출 비중이 20% 달했었던 종목이거든요.",
+          "reasoning": "발언자는 원익IPS를 삼성전자의 설비투자 수혜주로 소개하며, 삼성 파운드리 장비 매출 비중 20% 달성을 언급했습니다. 그러나 이는 정보 제공 수준의 설명일 뿐 직접적 매수 권유가 없으므로 중립 시그널입니다. 낙수 효과에 대한 관점만 제시하고 있습니다.",
+          "timestamp": "19:23",
+          "confidence": 4,
+          "speaker_name": null
+        },
+        {
+          "stock": "주성엔지니어링",
+          "ticker": "036930",
+          "signal_type": "중립",
+          "key_quote": "두 번째 종목은 기술 옵션이 가장 풍부한 종목이에요. 종목 이름은 주성 엔지니어링이라고 하는 종목이거든요. 단기에 대한 어떤 실적의 변동성은 굉장히 유동적이지만 중자기적인 측면에 있어서의 굉장히 안정적인 실적을 통한 기술적인 옵션이 굉장히 많이 보유한 그런 기업",
+          "reasoning": "발언자는 주성엔지니어링을 HBM 전공정·후공정 수혜주로 소개하며 기술력을 긍정 평가했습니다. 그러나 '눌림목 오면 매수하는 전략도 나쁘지 않다'는 조건부 표현만 제시했을 뿐, 현시점 직접 매수 권유는 없으므로 중립 시그널입니다.",
+          "timestamp": "19:59",
+          "confidence": 4,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal_type": "매수",
+          "key_quote": "20만 원이 새로운 랠리의 시작점이 아닐까라고 말씀을 드리고 싶습니다. 올해 2026년이 글로벌 반도체 시장이 한 18% 성장을 할 거고요. 또 메모리 반도체는 34% 성장을 하면서 시장을 주도할 걸로 보고 있거든요.",
+          "reasoning": "삼성전자가 52주 최저가 5.2만 원에서 19.7만 원까지 상승하며 약 4배 오르고 있는 상황에서, 발언자는 20만 원을 새로운 상승의 출발점으로 보고 있습니다. 2026년 메모리 반도체 34% 성장 전망과 HBM4 세계 최초 양산 달성(2월 12일)으로 가격 인상 기대가 있습니다. 다만 최근 실적 전망이 급격히 상향되면서 주가가 실적을 못 따라가고 있어 추가 상승 여력이 있다고 평가합니다.",
+          "timestamp": "0:01",
+          "confidence": 8,
+          "speaker_name": "조진표"
+        },
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal_type": "긍정",
+          "key_quote": "SK이닉스가 엔비디아 쪽에서의 HBM 쪽에서의 점유율이 계속해서 떨어져 주고 있지 않아요. 올해 점유율이 뭐 60% 아래로 떨어질 줄 알았지만 적어도 63% 정도는 계속 유지할 것 같고요.",
+          "reasoning": "SK하이닉스는 2025년 HBM 시장에서 약 70% 점유율을 차지하며 시장을 주도하고 있으며, 2026년에도 63% 정도의 높은 점유율을 유지할 것으로 예상됩니다. 삼성전자 대비 HBM 경쟁에서 여전히 압도적 우위를 유지하고 있으며, 이는 강력한 현금 창출력으로 이어집니다. 노무라 증권의 2027년 목표주가 156만 원은 현재 94만 원 수준에서 65~70% 상승 여력을 제시합니다.",
+          "timestamp": "15:25",
+          "confidence": 7,
+          "speaker_name": "조진표"
+        },
+        {
+          "stock": "원익IPS",
+          "ticker": "240810",
+          "signal_type": "긍정",
+          "key_quote": "삼성이 케펙스의 어떤 직접적인 수혜자이고 작년 같은 경우에 삼성 파운드리 쪽에서의 어떤 장비 매출 비중이 20% 달했었던 종목이거든요. 삼성이 설비 투자를 늘릴 때 가장 어 먼저 발주가 나오는 종목이 원익 IPS고",
+          "reasoning": "원익IPS는 삼성전자의 파운드리 케펙스 직접 수혜자로서 작년 삼성 파운드리 장비 매출의 20%를 담당했습니다. 삼성의 대규모 반도체 투자 확대 시 가장 먼저 발주를 받는 선도 공급사이며, 향후 파운드리 증설과 미국 fab 투자 확대 시 추가 수혜 가능성이 높습니다. 소부장 중에서도 직접적인 기업 실적 개선이 예상되는 종목입니다.",
+          "timestamp": "19:39",
+          "confidence": 6,
+          "speaker_name": "조진표"
+        },
+        {
+          "stock": "주성엔지니어링",
+          "ticker": "036630",
+          "signal_type": "긍정",
+          "key_quote": "단기에 대한 어떤 실적의 변동성은 굉장히 유동적이지만 중자기적인 측면에 있어서의 굉장히 안정적인 실적을 통한 기술적인 옵션이 굉장히 많이 보유한 그런 기업이고 특히나 HBM 쪽에서의 전공정이라든지 후공정 쪽에서의 수혜를 가장 많이 볼 수 있는 그런 종목이기 때문에",
+          "reasoning": "주성엔지니어링은 HBM 전공정 및 후공정 장비에서 가장 많은 수혜를 기대할 수 있는 소부장 종목입니다. 단기 변동성이 있지만 중장기적으로는 안정적인 실적과 풍부한 기술 옵션을 보유하고 있습니다. 발언자는 HBM 수요 확대 시 눌림목을 활용한 매수 전략을 제시하고 있습니다.",
+          "timestamp": "20:13",
+          "confidence": 6,
+          "speaker_name": "조진표"
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "원익IPS",
+            "pred_type": "중립"
+          },
+          {
+            "stock": "주성엔지니어링",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 4
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "삼성전자",
+            "pred_type": "매수"
+          },
+          {
+            "stock": "SK하이닉스",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "원익IPS",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "주성엔지니어링",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 4
+      }
+    },
+    {
+      "video_id": "nm5zQxZSkbk",
+      "title": "스트래티지는 어떻게 비트코인을 계속 살 수 있을까?",
+      "channel": "슈카월드",
+      "duration": 2552,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal_type": "중립",
+          "key_quote": "비트코인 1억 원이 깨지면서 지금 1억 원 위로 올라왔습니다. 작년 10월 고점 12만 달러에서 고점 대비 거의 30% 넘게 하락을 하고 있는 모습을 보이고 있습니다.",
+          "reasoning": "발언자는 비트코인의 현재 가격 상황과 조정 현황을 객관적으로 설명하고 있습니다. 10월 10일 청산 사태 이후 4개월 이상 회복을 못하고 있는 상황을 분석하고 있으나, 직접적인 매수/매도 권유나 투자 행동 지시가 없습니다. 트럼프 당선과 연준 의장 지명 등 거시 변수에 따른 불확실성을 언급하고 있으나, 이는 교육적 설명 수준입니다.",
+          "timestamp": "0:47",
+          "confidence": 4,
+          "speaker_name": null
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal_type": "긍정",
+          "key_quote": "비트코인 1억 원이 깨지면서 지금 1억 원 위로 올라왔습니다. 작년 10월 고점 대비 거의 30% 넘게 하락을 하고 있는 그런 모습을 보이고 있습니다",
+          "reasoning": "발언자는 비트코인의 현재 가격 상황을 객관적으로 분석하고 있습니다. 작년 10월 12만 달러(1억 6천만 원대) 고점 대비 현재 30% 이상 하락한 상태를 언급하면서, 최근 토요일에 조정 중인 상황에서도 상승 움직임이 나타나고 있음을 지적합니다. 발언자가 비트코인에 대해 명시적 매수 권유를 하지는 않으나, 향후 파란(긍정적) 비트코인이 될 것으로 예상하는 호의적 전망을 제시하고 있습니다.",
+          "timestamp": "0:47",
+          "confidence": 6,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "비트코인",
+            "pred_type": "중립"
+          }
+        ],
+        "under": [],
+        "pred_count": 1
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "비트코인",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 1
+      }
+    },
+    {
+      "video_id": "f3XyT2v2WVc",
+      "title": "앞으로 정말 많이 오를 겁니다, '이 주식' 돈을 쓸어담는다 [김학주 교수 3부]",
+      "channel": "부읽남TV",
+      "duration": 1291,
+      "ground_truth": {
+        "code": "42703",
+        "details": null,
+        "hint": null,
+        "message": "column influencer_signals.signal_type does not exist"
+      },
+      "v115_signals": [
+        {
+          "stock": "CS테크놀로지",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "한국에서도 CS테크놀로지라고 있었어요. 걔네들이 이걸 지향하고 있는데 아직 주제가 우리나라는 제대로 해결이 안 돼서 본격화하고 있지 못하지만",
+          "reasoning": "원격 의료 기술을 통한 헬스케어 인프라 개선 방향을 추구하고 있는 기업으로 소개됨. AI 기반 실시간 건강 모니터링 및 원격 진료 시스템으로 의료 인력 대체를 통한 비용 절감 가능성 존재. 국내 규제 미해결이 현재 걸림돌이나 장기적으로 정부 관심 분야.",
+          "timestamp": "03:36",
+          "confidence": 5,
+          "speaker_name": "김학주"
+        },
+        {
+          "stock": "H파마",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "그니까 제가 창업한 회사가 하나 있거든요. H파마예요. 그러니까 그 업체가 이제 글로벌 그이 미생물 신약 기업이 될 수 있는 그런 데이터들을 갖고 있어요",
+          "reasoning": "장내 미생물 신약 개발 분야의 글로벌 경쟁력을 갖춘 기업으로 발언자(김학주 교수)가 직접 창업한 회사. 맞춤형 미생물 신약 개발으로 기존 미생물 신약의 약효 문제 해결 가능. AI 데이터 기반 맞춤형 치료제 개발 가능성이 높은 미래 성장 분야.",
+          "timestamp": "05:17",
+          "confidence": 6,
+          "speaker_name": "김학주"
+        }
+      ],
+      "v115_error": null,
+      "v12_signals": [
+        {
+          "stock": "H파마",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "H파마는 글로벌 미생물 신약 기업이 될 수 있는 데이터들을 갖고 있어요. 미생물 신약이 앞으로 정말 많이 오를 겁니다.",
+          "reasoning": "미생물 신약은 사람마다 다른 장내 미생물 환경에 맞춤형으로 개발 가능하며, 독성 없이 약효를 낼 수 있다는 점이 장점. 기존 FDA가 신약으로 인정하지 않았던 분야이지만 최근 주목받기 시작. H파마가 글로벌 경쟁력 있는 데이터를 보유하고 있다는 긍정적 평가.",
+          "timestamp": "5:17",
+          "confidence": 7,
+          "speaker_name": "김학주"
+        },
+        {
+          "stock": "CS테크놀로지",
+          "ticker": null,
+          "signal_type": "긍정",
+          "key_quote": "한국의 CS테크놀로지는 원격 의료를 지향하고 있으며, 원격 의료를 통해 병원의 행정 인력과 간호사를 대체하면서 비용을 절감할 수 있어 정부와 병원의 관심이 많다.",
+          "reasoning": "웨어러블 디바이스를 통한 실시간 건강 정보 수집과 AI 패턴 분석으로 환자가 쓰러지기 전에 병원 이송이 가능해짐. 정부의 건강보험 재정 고갈 문제 해결 수단으로 주목받고 있으며, 한국은 건강 데이터가 풍부해 경쟁력 있음. 다만 규제 해결이 본격화의 과제.",
+          "timestamp": "3:34",
+          "confidence": 6,
+          "speaker_name": null
+        }
+      ],
+      "v12_error": null,
+      "v115_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "CS테크놀로지",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "H파마",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      },
+      "v12_cmp": {
+        "correct": 0,
+        "total_gt": 0,
+        "accuracy": null,
+        "wrong": [],
+        "over": [
+          {
+            "stock": "H파마",
+            "pred_type": "긍정"
+          },
+          {
+            "stock": "CS테크놀로지",
+            "pred_type": "긍정"
+          }
+        ],
+        "under": [],
+        "pred_count": 2
+      }
+    }
+  ],
+  "v115_stats": {
+    "correct": 0,
+    "total_gt": 0,
+    "wrong": [],
+    "over": [
+      {
+        "stock": "엔비디아",
+        "pred_type": "중립",
+        "video": "IjYr0FrINis"
+      },
+      {
+        "stock": "클로드",
+        "pred_type": "긍정",
+        "video": "IjYr0FrINis"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "엔비디아",
+        "pred_type": "중립",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "마이크론",
+        "pred_type": "중립",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "LG전자",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "현대자동차",
+        "pred_type": "중립",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "kFa9RxL4HnA"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "중립",
+        "video": "kFa9RxL4HnA"
+      },
+      {
+        "stock": "두산에너빌리티",
+        "pred_type": "긍정",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "현대자동차",
+        "pred_type": "중립",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "irK0YCnox78"
+      },
+      {
+        "stock": "엔비디아",
+        "pred_type": "긍정",
+        "video": "irK0YCnox78"
+      },
+      {
+        "stock": "NH투자증권",
+        "pred_type": "긍정",
+        "video": "hxpOT8n_ICw"
+      },
+      {
+        "stock": "증권주",
+        "pred_type": "긍정",
+        "video": "hxpOT8n_ICw"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "bmXgryWXNrw"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "bmXgryWXNrw"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "nwuAhWEoAng"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "nwuAhWEoAng"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "tSXkj2Omz34"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "tSXkj2Omz34"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "원익IPS",
+        "pred_type": "중립",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "주성엔지니어링",
+        "pred_type": "중립",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "비트코인",
+        "pred_type": "중립",
+        "video": "nm5zQxZSkbk"
+      },
+      {
+        "stock": "CS테크놀로지",
+        "pred_type": "긍정",
+        "video": "f3XyT2v2WVc"
+      },
+      {
+        "stock": "H파마",
+        "pred_type": "긍정",
+        "video": "f3XyT2v2WVc"
+      }
+    ],
+    "under": [],
+    "errors": 0
+  },
+  "v12_stats": {
+    "correct": 0,
+    "total_gt": 0,
+    "wrong": [],
+    "over": [
+      {
+        "stock": "엔비디아",
+        "pred_type": "중립",
+        "video": "IjYr0FrINis"
+      },
+      {
+        "stock": "클로드",
+        "pred_type": "긍정",
+        "video": "IjYr0FrINis"
+      },
+      {
+        "stock": "비트코인",
+        "pred_type": "중립",
+        "video": "IjYr0FrINis"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "엔비디아",
+        "pred_type": "중립",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "LG전자",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "현대차",
+        "pred_type": "긍정",
+        "video": "x0TKvrIdIwI"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "kFa9RxL4HnA"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "부정",
+        "video": "kFa9RxL4HnA"
+      },
+      {
+        "stock": "두산에너빌리티",
+        "pred_type": "긍정",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "두산중공업",
+        "pred_type": "중립",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "한전기술",
+        "pred_type": "중립",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "대한전선",
+        "pred_type": "중립",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "오르비텍",
+        "pred_type": "중립",
+        "video": "5mvn3PfKf9Y"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "irK0YCnox78"
+      },
+      {
+        "stock": "엔비디아",
+        "pred_type": "긍정",
+        "video": "irK0YCnox78"
+      },
+      {
+        "stock": "NH투자증권",
+        "pred_type": "긍정",
+        "video": "hxpOT8n_ICw"
+      },
+      {
+        "stock": "대형 증권사",
+        "pred_type": "중립",
+        "video": "hxpOT8n_ICw"
+      },
+      {
+        "stock": "증권주 (섹터)",
+        "pred_type": "중립",
+        "video": "hxpOT8n_ICw"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "bmXgryWXNrw"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "bmXgryWXNrw"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "nwuAhWEoAng"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "nwuAhWEoAng"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "긍정",
+        "video": "tSXkj2Omz34"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "tSXkj2Omz34"
+      },
+      {
+        "stock": "삼성전자",
+        "pred_type": "매수",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "SK하이닉스",
+        "pred_type": "긍정",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "원익IPS",
+        "pred_type": "긍정",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "주성엔지니어링",
+        "pred_type": "긍정",
+        "video": "Xv-wNA91EPE"
+      },
+      {
+        "stock": "비트코인",
+        "pred_type": "긍정",
+        "video": "nm5zQxZSkbk"
+      },
+      {
+        "stock": "H파마",
+        "pred_type": "긍정",
+        "video": "f3XyT2v2WVc"
+      },
+      {
+        "stock": "CS테크놀로지",
+        "pred_type": "긍정",
+        "video": "f3XyT2v2WVc"
+      }
+    ],
+    "under": [],
+    "errors": 0
+  },
+  "diffs": [
+    {
+      "video": "IjYr0FrINis",
+      "stock": "비트코인",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "x0TKvrIdIwI",
+      "stock": "현대차",
+      "v115": null,
+      "v12": "긍정"
+    },
+    {
+      "video": "x0TKvrIdIwI",
+      "stock": "현대자동차",
+      "v115": "중립",
+      "v12": null
+    },
+    {
+      "video": "x0TKvrIdIwI",
+      "stock": "마이크론",
+      "v115": "중립",
+      "v12": null
+    },
+    {
+      "video": "kFa9RxL4HnA",
+      "stock": "SK하이닉스",
+      "v115": "중립",
+      "v12": "부정"
+    },
+    {
+      "video": "5mvn3PfKf9Y",
+      "stock": "오르비텍",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "5mvn3PfKf9Y",
+      "stock": "대한전선",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "5mvn3PfKf9Y",
+      "stock": "두산중공업",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "5mvn3PfKf9Y",
+      "stock": "현대자동차",
+      "v115": "중립",
+      "v12": null
+    },
+    {
+      "video": "5mvn3PfKf9Y",
+      "stock": "한전기술",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "hxpOT8n_ICw",
+      "stock": "증권주 (섹터)",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "hxpOT8n_ICw",
+      "stock": "증권주",
+      "v115": "긍정",
+      "v12": null
+    },
+    {
+      "video": "hxpOT8n_ICw",
+      "stock": "대형 증권사",
+      "v115": null,
+      "v12": "중립"
+    },
+    {
+      "video": "Xv-wNA91EPE",
+      "stock": "주성엔지니어링",
+      "v115": "중립",
+      "v12": "긍정"
+    },
+    {
+      "video": "Xv-wNA91EPE",
+      "stock": "원익IPS",
+      "v115": "중립",
+      "v12": "긍정"
+    },
+    {
+      "video": "Xv-wNA91EPE",
+      "stock": "삼성전자",
+      "v115": "긍정",
+      "v12": "매수"
+    },
+    {
+      "video": "nm5zQxZSkbk",
+      "stock": "비트코인",
+      "v115": "중립",
+      "v12": "긍정"
+    }
+  ],
+  "model": "claude-haiku-4-5-20251001"
+}

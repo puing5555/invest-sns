@@ -96,5 +96,61 @@
     "check_name": "null_key_quote",
     "detail": "key_quote null 100.0%",
     "timestamp": "2026-03-12T18:33:35.602357"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "invalid_signal_type",
+    "detail": "유효하지 않은 signal_type 13건: ['POSITIVE', 'BUY']",
+    "timestamp": "2026-03-12T20:14:39.194366"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "no_vtt_timestamps",
+    "detail": "timestamp null 100.0% — VTT 타임코드 미포함 의심",
+    "timestamp": "2026-03-12T20:14:39.194935"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-12T20:14:39.195470"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "null_key_quote",
+    "detail": "key_quote null 100.0%",
+    "timestamp": "2026-03-12T20:14:39.196018"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 13.00/영상",
+    "timestamp": "2026-03-12T20:14:39.196536"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-12T20:24:13.963625"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 13.00/영상",
+    "timestamp": "2026-03-12T20:24:13.964259"
+  },
+  {
+    "channel": "anyuhuatv",
+    "gate": "gate1",
+    "check_name": "low_pass_rate",
+    "detail": "통과율 0.9% (2/231)",
+    "timestamp": "2026-03-12T20:55:46.479672"
   }
 ]

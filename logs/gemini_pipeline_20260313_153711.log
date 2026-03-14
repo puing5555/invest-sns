@@ -1,0 +1,7 @@
+[15:37:11] === Gemini 파이프라인 시작 ===
+[15:37:11] 채널: https://www.youtube.com/@anyuhuatv
+[15:37:11] limit=10 | dry_run=True | skip_existing=True
+[15:37:11] 
+[Step 1] 채널 정보 수집...
+[15:37:13]   채널명: 안유화의 경제투자론 - 안경투
+[15:37:13] [INFO] 처리할 새 영상 없음

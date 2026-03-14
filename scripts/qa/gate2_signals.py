@@ -71,7 +71,9 @@ ERROR_PATTERNS_FILE = os.path.join(QA_DIR, 'error_patterns.json')
 ZERO_TIMESTAMP_PATTERNS = re.compile(r'^(0:00|00:00|0:00:00|00:00:00)$')
 
 # 유효 시그널 값
-VALID_SIGNALS = {'매수', '긍정', '중립', '부정', '매도'}
+VALID_SIGNALS = {'매수', '긍정', '중립', '부정', '매도',
+                 'BUY', 'POSITIVE', 'NEUTRAL', 'CONCERN', 'SELL',
+                 'STRONG_BUY', 'STRONG_SELL'}
 
 # ────────────────────────────────────────
 # 유틸

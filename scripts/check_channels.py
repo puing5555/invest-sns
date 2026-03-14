@@ -1,20 +1,16 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-import urllib.request, json
+import os, requests, json
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env.local'))
 
-SUPABASE_URL = 'https://arypzhotxflimroprmdk.supabase.co'
-SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyeXB6aG90eGZsaW1yb3BybWRrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MjAwNjExMCwiZXhwIjoyMDg3NTgyMTEwfQ.Q4ycJvyDqh-3ns3yk6JE4hB2gKAC39tgHE9ofSn0li8'
-
-def rest_get(path, params=''):
-    url = '{}/rest/v1/{}?{}'.format(SUPABASE_URL, path, params)
-    req = urllib.request.Request(url, headers={
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer {}'.format(SUPABASE_KEY)
-    })
-    with urllib.request.urlopen(req) as r:
-        return json.loads(r.read())
-
-channels = rest_get('influencer_channels', 'select=id,channel_name,channel_handle,channel_url&limit=50')
-print("총 채널: {}개".format(len(channels)))
+url = os.environ['NEXT_PUBLIC_SUPABASE_URL'] + '/rest/v1/influencer_channels?select=*&order=created_at.asc'
+headers = {
+    'apikey': os.environ['NEXT_PUBLIC_SUPABASE_ANON_KEY'],
+    'Authorization': 'Bearer ' + os.environ['NEXT_PUBLIC_SUPABASE_ANON_KEY'],
+    'Accept': 'application/json'
+}
+r = requests.get(url, headers=headers)
+channels = r.json()
+print(f'Total channels: {len(channels)}')
 for c in channels:
-    print(json.dumps(c, ensure_ascii=False))
+    print(json.dumps(c, ensure_ascii=False, indent=2))
+    print('---')

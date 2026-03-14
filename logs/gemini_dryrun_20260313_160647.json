@@ -1,0 +1,119 @@
+[
+  {
+    "video_id": "BoUYV9JF3Lc",
+    "title": "It's not just jobs that are being lost! This is how AI will ultimately unfold | Ahn Yu-hwa's Econ...",
+    "signals_count": 11,
+    "signals": [
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "부정",
+        "key_quote": "앞으로는 오픈 AI의 모든 제품을 안 쓰겠다",
+        "reasoning": "발언자는 오픈AI의 모든 제품을 사용하지 않겠다고 명확히 밝혔습니다. 이는 해당 기업의 기술이나 서비스에 대한 부정적인 입장을 나타내며, 투자 관점에서도 부정적인 신호로 해석될 수 있습니다.",
+        "timestamp": "00:44",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "부정",
+        "key_quote": "오픈 AI의 챗GPT 샘 올트먼이 하는 거는 앞으로 참여를 안 하겠다",
+        "reasoning": "발언자는 오픈AI의 챗GPT와 샘 올트먼의 활동에 대해 향후 참여하지 않겠다고 명확히 밝혔습니다. 이는 해당 기업의 사업 방향이나 기술에 대한 부정적인 입장을 시사하며, 투자 관점에서도 부정적인 신호로 해석됩니다.",
+        "timestamp": "00:47",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "팔란티어",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "팔란티어 애네는 시가총액 천억 달러 넘어가지만 비상장임에도 거의 900억 달러 달러까지 온 기업이 안두릴 같은 방산 AI 기업이 있습니다",
+        "reasoning": "발언자는 팔란티어와 안두릴을 언급하며 이들 기업의 높은 기업 가치를 설명하고 있습니다. 특히 비상장 기업인 안두릴의 높은 가치를 언급하며 AI 기술을 활용한 방산 기업의 성장 가능성을 시사하고 있습니다. 이는 긍정적인 투자 관점을 보여줍니다.",
+        "timestamp": "05:32",
+        "confidence": 6,
+        "speaker_name": null
+      },
+      {
+        "stock": "안두릴",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "팔란티어 애네는 시가총액 천억 달러 넘어가지만 비상장임에도 거의 900억 달러 달러까지 온 기업이 안두릴 같은 방산 AI 기업이 있습니다",
+        "reasoning": "발언자는 팔란티어와 안두릴을 언급하며 이들 기업의 높은 기업 가치를 설명하고 있습니다. 특히 비상장 기업인 안두릴의 높은 가치를 언급하며 AI 기술을 활용한 방산 기업의 성장 가능성을 시사하고 있습니다. 이는 긍정적인 투자 관점을 보여줍니다.",
+        "timestamp": "05:32",
+        "confidence": 6,
+        "speaker_name": null
+      },
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "중립",
+        "key_quote": "적극적 군사영역 진출 노선을 잡은 대표적인게 오픈 시죠",
+        "reasoning": "발언자는 오픈AI가 군사 영역에 적극적으로 진출하는 노선을 잡았다고 설명하고 있습니다. 이는 기업의 사업 방향에 대한 설명일 뿐, 직접적인 투자 권유나 평가가 아니므로 중립으로 분류합니다.",
+        "timestamp": "11:46",
+        "confidence": 5,
+        "speaker_name": null
+      },
+      {
+        "stock": "엔트로픽",
+        "ticker": null,
+        "signal_type": "부정",
+        "key_quote": "군사적 활용은 X",
+        "reasoning": "발언자는 엔트로픽의 경우 군사적 활용을 하지 않는다고 명확히 선을 긋고 있습니다. 이는 해당 기업의 윤리적 경영 방침을 강조하는 것으로, 투자 관점에서는 군사 분야와의 연관성을 배제하는 긍정적 요소로 볼 수도 있으나, 직접적인 투자 추천이 아니므로 부정적인 뉘앙스로 해석하여 '부정'으로 분류합니다.",
+        "timestamp": "12:18",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "중립",
+        "key_quote": "앞으로는 군사용, 군사 활용은 앞으로도 제한하겠다 절대 못 쓰게 하겠다",
+        "reasoning": "발언자는 오픈AI의 군사적 활용을 제한하겠다고 언급하고 있습니다. 이는 기업의 윤리적 경영 방침을 강조하는 것으로, 투자 시그널로 직접 연결하기는 어렵습니다. 따라서 중립으로 분류합니다.",
+        "timestamp": "12:19",
+        "confidence": 5,
+        "speaker_name": null
+      },
+      {
+        "stock": "팔란티어",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "투자자 입장에서",
+        "reasoning": "발언자는 투자자의 입장에서 한국 기업들이 AI를 어떻게 활용해야 할지에 대한 질문을 던지며, 팔란티어와 같은 기업에 이미 많은 투자가 이루어지고 있음을 언급합니다. 이는 해당 기업의 투자 매력도를 간접적으로 시사하는 긍정적인 신호로 볼 수 있습니다.",
+        "timestamp": "13:00",
+        "confidence": 6,
+        "speaker_name": null
+      },
+      {
+        "stock": "안두릴",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "안두릴 같은 기업들이 나중에 상장하면 여러분들이 지속적으로 팔로우업을 해서 우리가 올라갈 수 있는지를 계속 체크해야 되고",
+        "reasoning": "발언자는 안두릴과 같은 비상장 기업이 상장할 경우 지속적인 팔로우업을 통해 성장 가능성을 체크해야 한다고 말합니다. 이는 해당 기업의 미래 성장 가능성에 대한 긍정적인 전망을 내포하고 있습니다.",
+        "timestamp": "14:38",
+        "confidence": 6,
+        "speaker_name": null
+      },
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "오픈 AI, 엔트로픽 가운데서 당신은 어느 기업에 투자하시겠습니까?",
+        "reasoning": "발언자는 오픈AI와 엔트로픽을 비교하며 투자자에게 어느 기업에 투자할 것인지 질문합니다. 이는 두 기업 모두 투자 대상이 될 수 있음을 시사하며, 특히 오픈AI에 대한 긍정적인 뉘앙스를 내포하고 있다고 볼 수 있습니다.",
+        "timestamp": "14:49",
+        "confidence": 6,
+        "speaker_name": null
+      },
+      {
+        "stock": "엔트로픽",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "아니면 엔트로픽의 장기 노선에 투자하시겠습니까?",
+        "reasoning": "발언자는 오픈AI와 엔트로픽을 비교하며 투자자에게 어느 기업에 투자할 것인지 질문합니다. 이는 두 기업 모두 투자 대상이 될 수 있음을 시사하며, 엔트로픽의 장기적인 노선에 대한 투자 가능성을 언급하는 긍정적인 신호입니다.",
+        "timestamp": "15:09",
+        "confidence": 6,
+        "speaker_name": null
+      }
+    ]
+  }
+]

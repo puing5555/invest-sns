@@ -1,0 +1,156 @@
+[
+  {
+    "video_id": "BoUYV9JF3Lc",
+    "title": "It's not just jobs that are being lost! This is how AI will ultimately unfold | Ahn Yu-hwa's Econ...",
+    "signals_count": 12,
+    "signals": [
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "부정",
+        "key_quote": "앞으로는 오픈 AI의 모든 제품을 안 쓰겠다",
+        "reasoning": "발언자는 오픈AI의 모든 제품을 사용하지 않겠다고 명확히 밝혔습니다. 이는 해당 기업의 기술이나 서비스에 대한 부정적인 입장을 나타내며, 투자 관점에서도 부정적인 신호로 해석될 수 있습니다.",
+        "timestamp": "00:44",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "부정",
+        "key_quote": "오픈 AI의 챗GPT 샘 올트먼이 하는 거는 앞으로 참여를 안 하겠다",
+        "reasoning": "발언자는 오픈AI의 챗GPT와 샘 올트먼의 활동에 대해 향후 참여하지 않겠다고 명확히 밝혔습니다. 이는 해당 기업의 사업 방향이나 기술에 대한 부정적인 입장을 시사하며, 투자 관점에서도 부정적인 신호로 볼 수 있습니다.",
+        "timestamp": "00:47",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "팔란티어",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "팔란티어 애네는 시가총액 천억 달러 넘어가지만 비상장임에도 거의 900억 달러 달러까지 온 기업이 안두릴 같은 방산 AI 기업이 있습니다",
+        "reasoning": "발언자는 팔란티어와 안두릴 같은 방산 AI 기업을 언급하며, 이들 기업이 높은 가치를 인정받고 있음을 설명합니다. 특히 팔란티어의 높은 시가총액과 안두릴의 성장성을 언급하는 맥락에서, 이러한 기업들에 대한 긍정적인 전망을 내비치고 있어 투자 관점에서 매수 신호로 해석될 수 있습니다.",
+        "timestamp": "05:32",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "안두릴",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "팔란티어 애네는 시가총액 천억 달러 넘어가지만 비상장임에도 거의 900억 달러 달러까지 온 기업이 안두릴 같은 방산 AI 기업이 있습니다",
+        "reasoning": "발언자는 팔란티어와 안두릴 같은 방산 AI 기업을 언급하며, 이들 기업이 높은 가치를 인정받고 있음을 설명합니다. 특히 안두릴의 비상장임에도 높은 기업 가치를 언급하는 맥락에서, 해당 기업의 성장성과 잠재력에 대한 긍정적인 전망을 시사하며 투자 관점에서 매수 신호로 해석될 수 있습니다.",
+        "timestamp": "05:32",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "AI",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "21세기의 군사 패권은 AI 패권입니다",
+        "reasoning": "발언자는 21세기 군사 패권의 핵심이 AI 패권이라고 명확히 언급하며, AI 기술의 중요성과 미래 가치를 강조하고 있습니다. 이는 AI 산업 전반에 대한 긍정적인 전망을 나타내며, 투자 관점에서 AI 관련 기업에 대한 매수 신호로 해석될 수 있습니다.",
+        "timestamp": "10:07",
+        "confidence": 8,
+        "speaker_name": null
+      },
+      {
+        "stock": "AI",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "앞으로 AI 기술은 이제는 동맹국들 중심으로 특히 군사적이라고 규명한 나라에는 수술을 불가능하게 만들 거예요",
+        "reasoning": "발언자는 AI 기술이 동맹국 중심으로 발전하고 있으며, 군사적 활용에 있어 중요한 역할을 할 것이라고 설명합니다. 이는 AI 기술의 중요성과 미래 성장성을 강조하는 발언으로, 투자 관점에서 긍정적인 신호로 해석될 수 있습니다.",
+        "timestamp": "09:47",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "AI",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "그래서 AI 강국이 돼야 되고 우리는 AI 표준을 어떻게 가져가야 되고 AI 안보를 어떻게 구축해야 되나가 우리 정책 당국자들이 빨리 답을 해야 되는 주제로 떠올랐고요",
+        "reasoning": "발언자는 한국이 AI 강국이 되어야 하며, AI 표준과 안보 구축에 대한 정책적 대응이 시급하다고 강조합니다. 이는 AI 산업의 중요성과 국가적 지원 필요성을 시사하며, 투자 관점에서 AI 관련 기업에 대한 긍정적인 전망을 나타냅니다.",
+        "timestamp": "10:21",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "AI",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "우리 기업들의 입장에서 는 여러분들이 하시는 모든 산업 섹터를 다 AI로 재구성하고 재편입해야 됩니다",
+        "reasoning": "발언자는 모든 산업 분야에서 AI를 활용하여 재구성하고 재편입해야 한다고 강조합니다. 이는 AI 기술의 광범위한 적용 가능성과 중요성을 시사하며, AI 관련 기업들의 성장 잠재력을 높게 평가하는 발언으로 투자 관점에서 매수 신호로 해석될 수 있습니다.",
+        "timestamp": "13:48",
+        "confidence": 8,
+        "speaker_name": null
+      },
+      {
+        "stock": "AI",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "그래서 그 역량을 만들어낸 기업과 만들어내지 않는 기업은 같은 산업에서 지위가 달라질 거예요",
+        "reasoning": "발언자는 AI 역량을 갖춘 기업과 그렇지 못한 기업 간의 지위 차이가 발생할 것이라고 전망합니다. 이는 AI 기술 도입 및 활용이 기업 경쟁력에 미치는 중요성을 강조하는 것으로, AI 관련 기업에 대한 투자 관점에서 긍정적인 신호로 해석될 수 있습니다.",
+        "timestamp": "14:04",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "오픈AI",
+        "ticker": null,
+        "signal_type": "긍정",
+        "key_quote": "오픈 AI는 신중한 노선",
+        "reasoning": "발언자는 오픈AI의 노선을 '신중한 노선'이라고 표현하며, 군사적 활용에 대해 제한적인 입장을 취하고 있음을 언급합니다. 이는 오픈AI의 사업 방향에 대한 긍정적인 평가로 볼 수 있으며, 투자 관점에서도 긍정적인 신호로 해석될 수 있습니다.",
+        "timestamp": "12:14",
+        "confidence": 6,
+        "speaker_name": null
+      },
+      {
+        "stock": "엔트로픽",
+        "ticker": null,
+        "signal_type": "부정",
+        "key_quote": "엔트로픽 같은 경우에는 아니다",
+        "reasoning": "발언자는 엔트로픽의 경우 군사적 활용에 대해 부정적인 입장을 취하고 있음을 명확히 밝히고 있습니다. 이는 해당 기업의 사업 방향에 대한 부정적인 평가로 볼 수 있으며, 투자 관점에서도 부정적인 신호로 해석될 수 있습니다.",
+        "timestamp": "12:16",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "AI",
+        "ticker": null,
+        "signal_type": "매수",
+        "key_quote": "AI는 최우선 원칙으로 해야 되고 규제, 리스크를 해지해야 된다",
+        "reasoning": "발언자는 AI 개발 및 활용에 있어 안전과 규제를 최우선으로 해야 한다고 강조합니다. 이는 AI 기술의 책임감 있는 발전을 촉구하는 것으로, 장기적으로 AI 산업의 건전한 성장을 도모하는 긍정적인 관점으로 해석될 수 있습니다.",
+        "timestamp": "12:25",
+        "confidence": 7,
+        "speaker_name": null
+      }
+    ]
+  },
+  {
+    "video_id": "B0qpQuIzjbA",
+    "title": "All-out war in the Middle East! A comprehensive guide to assets that will survive market turmoil ...",
+    "signals_count": 2,
+    "signals": [
+      {
+        "stock": "비트코인",
+        "ticker": "BTC",
+        "signal_type": "매수",
+        "key_quote": "그래서 앞서 말한 대로 유동성이 민감하지만 비트테크처럼 기술 정책 혜택을 받는 주식이기도 해요. 그래서 이더리움은 안드로이드처럼 이런 앱입니다. 앱 개념이에요. 얘네는 네트워크 사용성과 생태계 활성화 잘 가가는 자산이에요. 그래서 이더리움은...",
+        "reasoning": "발언자는 비트코인과 이더리움을 기술 정책 수혜를 받는 성장주이자, 네트워크 사용성과 생태계 활성화가 잘 되는 자산으로 언급하며 매수 관점에서 긍정적으로 평가하고 있습니다. 이는 투자자들이 위험 자산으로 분류되는 암호화폐에 투자하는 이유를 설명하는 맥락에서 나온 발언으로, 암호화폐의 성장 가능성을 높게 보고 있음을 시사합니다.",
+        "timestamp": "21:00",
+        "confidence": 7,
+        "speaker_name": null
+      },
+      {
+        "stock": "이더리움",
+        "ticker": "ETH",
+        "signal_type": "매수",
+        "key_quote": "그래서 디지털 원유, 인터넷 운영체제 이런 별명으로 불리기도 하지만 또 베타를 가진 하이 리스크, 하이 리턴 자산이다. 이렇게 보시면 됩니다. 그래서 이더리움은 안드로이드처럼 이런 앱입니다. 앱 개념이에요. 얘네는 네트워크 사용성과 생태계 활성화 잘 가가는 자산이에요.",
+        "reasoning": "발언자는 이더리움을 하이 리스크, 하이 리턴 자산으로 정의하며, 네트워크 사용성과 생태계 활성화가 잘 되는 자산으로 평가하고 있습니다. 이는 이더리움의 성장 잠재력을 긍정적으로 보고 있으며, 투자자들이 관심을 가질 만한 요소로 작용할 수 있습니다.",
+        "timestamp": "21:03",
+        "confidence": 7,
+        "speaker_name": null
+      }
+    ]
+  }
+]

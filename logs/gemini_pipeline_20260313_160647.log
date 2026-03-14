@@ -1,0 +1,55 @@
+[16:06:47] === Gemini 파이프라인 시작 ===
+[16:06:47] 채널: https://www.youtube.com/@anyuhuatv
+[16:06:47] limit=10 | dry_run=True | skip_existing=True
+[16:06:47] 
+[Step 1] 채널 정보 수집...
+[16:06:48]   채널명: 안유화의 경제투자론 - 안경투
+[16:06:53] 
+[Step 4-7] Gemini 분석 시작 (10개 영상)...
+[16:06:53] 
+  [1/10] ztPwQOHkU88 | 지금 전쟁보다 무서운 건 돈의 이동입니다ㅣ안유화의 경제투자론
+[16:07:23]   → 시그널 없음 (스킵)
+[16:07:26] 
+  [2/10] xAPyYacaztM | "In just five years, hegemony will shift." Xi Jinp
+[16:08:53]   → 시그널 없음 (스킵)
+[16:08:56] 
+  [3/10] BoUYV9JF3Lc | It's not just jobs that are being lost! This is ho
+[16:09:19]   → 11개 시그널 추출:
+[16:09:19]      부정 | 오픈AI (None) | conf=7 | ts=00:44
+[16:09:19]      부정 | 오픈AI (None) | conf=7 | ts=00:47
+[16:09:19]      긍정 | 팔란티어 (None) | conf=6 | ts=05:32
+[16:09:19]      긍정 | 안두릴 (None) | conf=6 | ts=05:32
+[16:09:19]      중립 | 오픈AI (None) | conf=5 | ts=11:46
+[16:09:19]      부정 | 엔트로픽 (None) | conf=7 | ts=12:18
+[16:09:19]      중립 | 오픈AI (None) | conf=5 | ts=12:19
+[16:09:19]      긍정 | 팔란티어 (None) | conf=6 | ts=13:00
+[16:09:19]      긍정 | 안두릴 (None) | conf=6 | ts=14:38
+[16:09:19]      긍정 | 오픈AI (None) | conf=6 | ts=14:49
+[16:09:19]      긍정 | 엔트로픽 (None) | conf=6 | ts=15:09
+[16:09:19]   [DRY-RUN] INSERT 스킵
+[16:09:22] 
+  [4/10] _Irvjp7mcj0 | In these times of heightened risk, these are the c
+[16:09:56]   → 시그널 없음 (스킵)
+[16:09:59] 
+  [5/10] B0qpQuIzjbA | All-out war in the Middle East! A comprehensive gu
+[16:10:36]   → 시그널 없음 (스킵)
+[16:10:39] 
+  [6/10] tmGEPeSYHFA | Why the Korean Stock Market Is Rising | Ahn Yu-hwa
+[16:11:26]   → 시그널 없음 (스킵)
+[16:11:29] 
+  [7/10] msLDbF3l78M | The Real Reason Markets Panic Despite the Illegal 
+[16:12:30]   → 시그널 없음 (스킵)
+[16:12:33] 
+  [8/10] PJ4Htn9eBBc | 지나간 세계 흐름, 영상 하나로 복습하자 ㅣ 지정학 이슈 몰아보기
+[16:13:10]   → 시그널 없음 (스킵)
+[16:13:13] 
+  [9/10] N041ypJmPo0 | 흔들리는 금융 시장 속 단단한 투자자가 되려면?ㅣ 경제 이슈 몰아보기
+[16:14:54]   → 시그널 없음 (스킵)
+[16:14:57] 
+  [10/10] MGCY2lKEgnw | Transform Your Life in Just One Hour | Binge-watch
+[16:18:58]   → 시그널 없음 (스킵)
+[16:19:01] 
+============================================================
+[16:19:01] [완료] 총 10개 영상 분석, 11개 시그널 추출
+[16:19:01] 로그 파일: C:\Users\Mario\work\invest-sns\logs\gemini_pipeline_20260313_160647.log
+[16:19:01] 결과 저장: C:\Users\Mario\work\invest-sns\logs\gemini_dryrun_20260313_160647.json

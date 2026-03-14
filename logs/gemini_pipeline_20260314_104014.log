@@ -1,0 +1,46 @@
+[10:40:14] === Gemini 파이프라인 시작 ===
+[10:40:14] 채널: https://www.youtube.com/@anyuhuatv
+[10:40:14] limit=10 | dry_run=True | skip_existing=False
+[10:40:14] 
+[Step 1] 채널 정보 수집...
+[10:40:15]   채널명: 안유화의 경제투자론 - 안경투
+[10:40:18] 
+[Step 4-7] Gemini 분석 시작 (10개 영상)...
+[10:40:18] 
+  [1/10] ztPwQOHkU88 | 지금 전쟁보다 무서운 건 돈의 이동입니다ㅣ안유화의 경제투자론
+[10:41:37]   → 시그널 없음 (스킵)
+[10:41:42] 
+  [2/10] xAPyYacaztM | "In just five years, hegemony will shift." Xi Jinp
+[10:42:51]   → 시그널 없음 (스킵)
+[10:42:56] 
+  [3/10] BoUYV9JF3Lc | It's not just jobs that are being lost! This is ho
+[10:44:55]   → 9개 시그널 추출:
+[10:44:55]      중립 | 엔트로픽 (null) | conf=5 | ts=00:16
+[10:44:55]      중립 | 오픈AI (null) | conf=5 | ts=00:44
+[10:44:55]      중립 | 오픈AI (null) | conf=6 | ts=01:34
+[10:44:55]      중립 | 스페이스X (null) | conf=5 | ts=02:21
+[10:44:55]      긍정 | 팔란티어 (PLTR) | conf=7 | ts=05:31
+[10:44:55]      긍정 | 안두릴 (null) | conf=7 | ts=05:39
+[10:44:55]      중립 | 오픈AI (null) | conf=6 | ts=11:46
+[10:44:55]      중립 | 엔트로픽 (null) | conf=6 | ts=12:13
+[10:44:55]      긍정 | 팔란티어 (PLTR) | conf=7 | ts=14:28
+[10:44:55]   [DRY-RUN] INSERT 스킵
+[10:45:00] 
+  [4/10] _Irvjp7mcj0 | In these times of heightened risk, these are the c
+[10:48:04]   → 1개 시그널 추출:
+[10:48:04]      부정 | 삼성전자 (005930) | conf=8 | ts=10:54
+[10:48:04]   [DRY-RUN] INSERT 스킵
+[10:48:09] 
+  [5/10] B0qpQuIzjbA | All-out war in the Middle East! A comprehensive gu
+[10:52:38]   → 1개 시그널 추출:
+[10:52:38]      부정 | 삼성전자 (005930) | conf=8 | ts=12:13
+[10:52:38]   [DRY-RUN] INSERT 스킵
+[10:52:43] 
+  [6/10] tmGEPeSYHFA | Why the Korean Stock Market Is Rising | Ahn Yu-hwa
+[10:54:10]   → 3개 시그널 추출:
+[10:54:10]      부정 | 비트코인 (BTC) | conf=8 | ts=02:16
+[10:54:10]      긍정 | 삼성전자 (005930) | conf=8 | ts=03:49
+[10:54:10]      긍정 | SK하이닉스 (000660) | conf=8 | ts=03:49
+[10:54:10]   [DRY-RUN] INSERT 스킵
+[10:54:15] 
+  [7/10] msLDbF3l78M | The Real Reason Markets Panic Despite the Illegal 

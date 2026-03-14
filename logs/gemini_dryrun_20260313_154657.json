@@ -1,0 +1,19 @@
+[
+  {
+    "video_id": "BoUYV9JF3Lc",
+    "title": "It's not just jobs that are being lost! This is how AI will ultimately unfold | Ahn Yu-hwa's Econ...",
+    "signals_count": 1,
+    "signals": [
+      {
+        "stock": "팔란티어",
+        "ticker": "PLTR",
+        "signal_type": "긍정",
+        "key_quote": "투자자의 입장에서는 국방 AI 섹터를 주목해야겠죠? 여기 팔란티어 같은 기업들이 이미 많이 지금 투자하고 있고요.",
+        "reasoning": "발언자는 AI 기술이 현대 전쟁의 핵심이 되고 있으며, 생성형 AI 기업들이 막대한 R&D 비용을 충당하기 위해 국방 예산에 의존하게 될 것이라고 설명합니다. 이러한 맥락에서 팔란티어를 국방 AI 섹터의 대장주로 언급하며, 투자자들이 이 분야에 주목해야 한다고 강조합니다. 이는 팔란티어의 성장 가능성과 투자 매력을 긍정적으로 평가하는 것으로 해석됩니다.",
+        "timestamp": "14:28",
+        "confidence": 7,
+        "speaker_name": null
+      }
+    ]
+  }
+]
