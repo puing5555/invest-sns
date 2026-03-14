@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 // ============ TYPES ============
 interface MarketItem {
@@ -319,87 +319,130 @@ const FilterPill = ({ label, active, onClick, icon }: { label: string; active: b
 );
 
 // ============ HEATMAP SECTION ============
+// TradingView Stock Heatmap 위젯 (공식 embed-widget-stock-heatmap.js)
+const HEATMAP_CONFIGS = {
+  sp500: {
+    label: 'S&P500',
+    exchanges: [],
+    dataSource: 'SPX500',
+    grouping: 'sector',
+    blockSize: 'market_cap_basic',
+    blockColor: 'change',
+    locale: 'en',
+    colorTheme: 'light',
+    hasTopBar: false,
+    isDataSetEnabled: false,
+    isZoomEnabled: true,
+    hasSymbolTooltip: true,
+    isMonoSize: false,
+    width: '100%',
+    height: 500,
+  },
+  kospi: {
+    label: '코스피',
+    exchanges: ['KRX'],
+    dataSource: 'KRX',
+    grouping: 'sector',
+    blockSize: 'market_cap_basic',
+    blockColor: 'change',
+    locale: 'ko',
+    colorTheme: 'light',
+    hasTopBar: false,
+    isDataSetEnabled: false,
+    isZoomEnabled: true,
+    hasSymbolTooltip: true,
+    isMonoSize: false,
+    width: '100%',
+    height: 500,
+  },
+  crypto: {
+    label: '크립토',
+    exchanges: [],
+    dataSource: 'Crypto',
+    grouping: 'no_group',
+    blockSize: 'market_cap_calc',
+    blockColor: 'change',
+    locale: 'en',
+    colorTheme: 'light',
+    hasTopBar: false,
+    isDataSetEnabled: false,
+    isZoomEnabled: true,
+    hasSymbolTooltip: true,
+    isMonoSize: false,
+    width: '100%',
+    height: 500,
+  },
+} as const;
+
+type HeatmapKey = keyof typeof HEATMAP_CONFIGS;
+
+// 실제 위젯 렌더: 탭 전환 시 스크립트 재주입
+const TradingViewHeatmap = ({ config }: { config: typeof HEATMAP_CONFIGS[HeatmapKey] }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    // 이전 위젯 제거
+    containerRef.current.innerHTML = '';
+
+    const widgetDiv = document.createElement('div');
+    widgetDiv.className = 'tradingview-widget-container__widget';
+    widgetDiv.style.cssText = 'height:calc(100% - 32px);width:100%';
+    containerRef.current.appendChild(widgetDiv);
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js';
+    script.async = true;
+    script.innerHTML = JSON.stringify(config);
+    containerRef.current.appendChild(script);
+
+    return () => {
+      if (containerRef.current) containerRef.current.innerHTML = '';
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.dataSource]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="tradingview-widget-container"
+      style={{ height: 500, width: '100%' }}
+    />
+  );
+};
+
 const HeatmapSection = () => {
-  const [activeMap, setActiveMap] = useState<'sp500' | 'kospi' | 'crypto'>('sp500');
-
-  const maps = {
-    sp500: {
-      label: 'S&P500',
-      src: 'https://www.tradingview.com/widgetembed/?hideideas=1&domain=tr&symbol=SP:SPX&interval=D&hidetoptoolbar=1&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=8&timezone=Etc%2FUTC&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=&utm_medium=widget&utm_campaign=chart&utm_term=SP:SPX#%7B%22page-uri%22%3A%22__NHTTP__%22%7D',
-    },
-    kospi: {
-      label: '코스피',
-      src: 'https://www.tradingview.com/widgetembed/?hideideas=1&domain=tr&symbol=KRX:KOSPI&interval=D&hidetoptoolbar=1&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=8&timezone=Asia%2FSeoul&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=ko',
-    },
-    crypto: {
-      label: '크립토',
-      src: 'https://www.tradingview.com/widgetembed/?hideideas=1&domain=tr&symbol=BINANCE:BTCUSDT&interval=D&hidetoptoolbar=1&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=8&timezone=Etc%2FUTC&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en',
-    },
-  };
-
-  // TradingView 히트맵 위젯 (공식 embed)
-  const heatmapWidgets: Record<string, string> = {
-    sp500: `<div class="tradingview-widget-container" style="height:400px;width:100%">
-  <iframe scrolling="no" allowtransparency="true" allowfullscreen="true" frameborder="0"
-    src="https://www.tradingview.com/widgetembed/?locale=en&symbol=SP%3ASPX&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&saveimage=0&theme=light&style=8&timezone=Etc%2FUTC&withdateranges=0&width=100%25&height=400#%7B%7D"
-    style="box-sizing: border-box; height: 400px; width: 100%;"></iframe>
-</div>`,
-    kospi: `KRX:KOSPI`,
-    crypto: `BINANCE:BTCUSDT`,
-  };
+  const [activeMap, setActiveMap] = useState<HeatmapKey>('sp500');
 
   return (
     <Card style={{ padding: '20px 24px' }}>
       <SectionHeader title="🗺️ 히트맵" />
+
       {/* 탭 */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-        {(['sp500', 'kospi', 'crypto'] as const).map(k => (
+        {(Object.keys(HEATMAP_CONFIGS) as HeatmapKey[]).map(k => (
           <button
             key={k}
             onClick={() => setActiveMap(k)}
             style={{
-              padding: '6px 14px', borderRadius: 8, fontSize: 13, fontWeight: 600,
+              padding: '6px 16px', borderRadius: 8, fontSize: 13, fontWeight: 600,
               background: activeMap === k ? colors.accent : colors.bg,
               color: activeMap === k ? '#fff' : colors.gray,
               border: `1px solid ${activeMap === k ? colors.accent : colors.lightGray}`,
-              cursor: 'pointer',
+              cursor: 'pointer', transition: 'all 0.15s',
             }}
           >
-            {k === 'sp500' ? 'S&P500' : k === 'kospi' ? '코스피' : '크립토'}
+            {HEATMAP_CONFIGS[k].label}
           </button>
         ))}
       </div>
 
-      {/* TradingView 히트맵 iframe */}
-      <div style={{ borderRadius: 12, overflow: 'hidden', background: '#f8f9fa' }}>
-        {activeMap === 'sp500' && (
-          <iframe
-            scrolling="no"
-            allowTransparency={true}
-            frameBorder={0}
-            src="https://www.tradingview.com/widgetembed/?locale=en&symbol=SP%3ASPX&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&theme=light&style=8&timezone=Etc%2FUTC&width=100%25&height=380"
-            style={{ width: '100%', height: 380, border: 'none' }}
-          />
-        )}
-        {activeMap === 'kospi' && (
-          <iframe
-            scrolling="no"
-            allowTransparency={true}
-            frameBorder={0}
-            src="https://www.tradingview.com/widgetembed/?locale=ko&symbol=KRX%3AKOSPI&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&theme=light&style=8&timezone=Asia%2FSeoul&width=100%25&height=380"
-            style={{ width: '100%', height: 380, border: 'none' }}
-          />
-        )}
-        {activeMap === 'crypto' && (
-          <iframe
-            scrolling="no"
-            allowTransparency={true}
-            frameBorder={0}
-            src="https://www.tradingview.com/widgetembed/?locale=en&symbol=BINANCE%3ABTCUSDT&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&theme=light&style=8&timezone=Etc%2FUTC&width=100%25&height=380"
-            style={{ width: '100%', height: 380, border: 'none' }}
-          />
-        )}
+      {/* 위젯 */}
+      <div style={{ borderRadius: 12, overflow: 'hidden', minHeight: 500 }}>
+        <TradingViewHeatmap config={HEATMAP_CONFIGS[activeMap]} />
       </div>
+
       <div style={{ fontSize: 11, color: colors.gray, textAlign: 'right', marginTop: 6 }}>
         Powered by TradingView
       </div>
