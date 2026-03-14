@@ -340,8 +340,8 @@ const HEATMAP_CONFIGS = {
   },
   kospi: {
     label: '코스피',
-    exchanges: ['KRX'],
-    dataSource: 'KRX',
+    exchanges: [],
+    dataSource: 'KOSPI',
     grouping: 'sector',
     blockSize: 'market_cap_basic',
     blockColor: 'change',
@@ -439,7 +439,7 @@ const HeatmapSection = () => {
       </div>
 
       {/* 위젯 */}
-      <div style={{ borderRadius: 12, overflow: 'hidden', minHeight: 500 }}>
+      <div style={{ borderRadius: 12, overflow: 'hidden', height: 500 }}>
         <TradingViewHeatmap config={HEATMAP_CONFIGS[activeMap]} />
       </div>
 
