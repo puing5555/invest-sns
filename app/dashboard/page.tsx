@@ -257,9 +257,9 @@ const MarketMiniCard = ({
 const TabBar = ({ active, setActive }: { active: string; setActive: (t: string) => void }) => {
   const tabs = [
     { id: 'now',    label: '지금' },
-    { id: 'news',   label: '뉴스' },
     { id: 'live',   label: 'LIVE', dot: true },
-    { id: 'market', label: '시장' },
+    { id: 'news',   label: '뉴스' },
+    { id: 'signal', label: '시그널' },
   ];
   return (
     <div style={{ display: 'flex', gap: 0, borderBottom: `2px solid ${colors.lightGray}`, marginBottom: 24 }}>
@@ -721,14 +721,173 @@ const LiveTab = () => {
   );
 };
 
-// ============ TAB: 시장 ============
-const MarketTab = () => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 400 }}>
-    <div style={{ fontSize: 48, marginBottom: 16 }}>📊</div>
-    <div style={{ fontSize: 18, fontWeight: 700, color: colors.primary, marginBottom: 8 }}>시장 탭 준비 중</div>
-    <div style={{ fontSize: 14, color: colors.gray, textAlign: 'center', lineHeight: 1.6 }}>
-      Fear &amp; Greed 게이지 · 섹터별 등락<br />
-      외국인/기관 수급 · 유튜버 전체 컨센서스
+// ============ TAB: 시그널 ============
+const signalTypeStyle: Record<string, { bg: string; color: string; label: string }> = {
+  매수:   { bg: '#FEE2E2', color: '#DC2626', label: '매수' },
+  매도:   { bg: '#DBEAFE', color: '#2563EB', label: '매도' },
+  긍정:   { bg: '#D1FAE5', color: '#059669', label: '긍정' },
+  부정:   { bg: '#F3F4F6', color: '#6B7280', label: '부정' },
+  중립:   { bg: '#FEF3C7', color: '#D97706', label: '중립' },
+  저평가: { bg: '#EDE9FE', color: '#7C3AED', label: '저평가' },
+};
+
+const dummySignals = [
+  {
+    id: 1,
+    source: '인플루언서',
+    author: '이효석',
+    avatar: '이',
+    time: '07:15',
+    quote: '"엔비디아 지금 당장 사야해"',
+    stock: '엔비디아',
+    ticker: 'NVDA',
+    signal: '매수',
+    link: 'https://www.youtube.com/watch?v=dummylink1',
+    linkType: '영상',
+    linkIcon: '🎬',
+  },
+  {
+    id: 2,
+    source: '구루',
+    author: '워런 버핏',
+    avatar: '버',
+    time: '06:30',
+    quote: '"지금 당장 현금 비중 늘려라"',
+    stock: '시장 전체',
+    ticker: null,
+    signal: '매도',
+    link: 'https://twitter.com/WarrenBuffett',
+    linkType: 'X',
+    linkIcon: '𝕏',
+  },
+  {
+    id: 3,
+    source: 'AI',
+    author: '알고리즘',
+    avatar: '🤖',
+    time: '06:00',
+    quote: '삼성전자 PBR 0.89 — 역대 최저',
+    stock: '삼성전자',
+    ticker: '005930',
+    signal: '저평가',
+    link: '#chart',
+    linkType: '차트',
+    linkIcon: '📈',
+  },
+  {
+    id: 4,
+    source: '인플루언서',
+    author: '코린이아빠',
+    avatar: '코',
+    time: '05:45',
+    quote: '"SK하이닉스 실적 보고 확신 생겼다"',
+    stock: 'SK하이닉스',
+    ticker: '000660',
+    signal: '매수',
+    link: 'https://www.youtube.com/watch?v=dummylink4',
+    linkType: '영상',
+    linkIcon: '🎬',
+  },
+  {
+    id: 5,
+    source: '공시',
+    author: '공시',
+    avatar: '📢',
+    time: '05:00',
+    quote: '대표이사 주식 50만주 매도',
+    stock: '카카오',
+    ticker: '035720',
+    signal: '매도',
+    link: 'https://dart.fss.or.kr',
+    linkType: '공시',
+    linkIcon: '📋',
+  },
+];
+
+const sourceStyle: Record<string, { bg: string; color: string }> = {
+  인플루언서: { bg: '#DBEAFE', color: '#1E40AF' },
+  구루:       { bg: '#FEF3C7', color: '#92400E' },
+  AI:         { bg: '#EDE9FE', color: '#6D28D9' },
+  공시:       { bg: '#D1FAE5', color: '#065F46' },
+};
+
+const SignalTab = () => (
+  <div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {dummySignals.map(s => {
+        const sig = signalTypeStyle[s.signal] || signalTypeStyle['중립'];
+        const src = sourceStyle[s.source] || { bg: '#F3F4F6', color: '#374151' };
+        const isEmoji = s.avatar.length <= 2 && /\p{Emoji}/u.test(s.avatar);
+        return (
+          <div key={s.id} style={{
+            background: colors.card, borderRadius: 16, padding: '16px 18px',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+            borderLeft: `4px solid ${sig.color}`,
+          }}>
+            {/* 헤더 */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+              <div style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: isEmoji ? '#F3F4F6' : colors.accent,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: isEmoji ? 18 : 14, fontWeight: 700,
+                color: isEmoji ? undefined : '#fff', flexShrink: 0,
+              }}>
+                {s.avatar}
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{s.author}</span>
+                  <span style={{
+                    padding: '2px 7px', borderRadius: 4, fontSize: 11, fontWeight: 600,
+                    background: src.bg, color: src.color,
+                  }}>{s.source}</span>
+                </div>
+                <span style={{ fontSize: 12, color: colors.gray }}>{s.time}</span>
+              </div>
+              {/* 시그널 배지 */}
+              <span style={{
+                padding: '5px 12px', borderRadius: 20, fontSize: 13, fontWeight: 700,
+                background: sig.bg, color: sig.color,
+              }}>{sig.label}</span>
+            </div>
+
+            {/* 인용 */}
+            <div style={{
+              fontSize: 14, color: '#374151', lineHeight: 1.55, marginBottom: 10,
+              fontStyle: s.quote.startsWith('"') ? 'italic' : 'normal',
+            }}>
+              {s.quote}
+            </div>
+
+            {/* 종목 + 링크 */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{
+                  padding: '3px 10px', borderRadius: 6, fontSize: 12, fontWeight: 700,
+                  background: sig.bg, color: sig.color,
+                }}>
+                  {s.stock}{s.ticker ? ` (${s.ticker})` : ''}
+                </span>
+              </div>
+              <a
+                href={s.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 4,
+                  padding: '6px 12px', borderRadius: 8, fontSize: 12, fontWeight: 600,
+                  background: colors.bg, color: colors.accent,
+                  border: `1px solid ${colors.lightGray}`,
+                  textDecoration: 'none',
+                }}
+              >
+                {s.linkIcon} {s.linkType}
+              </a>
+            </div>
+          </div>
+        );
+      })}
     </div>
   </div>
 );
@@ -751,9 +910,9 @@ export default function DashboardPage() {
       <TabBar active={activeTab} setActive={setActiveTab} />
 
       {activeTab === 'now'    && <NowTab />}
-      {activeTab === 'news'   && <NewsTab />}
       {activeTab === 'live'   && <LiveTab />}
-      {activeTab === 'market' && <MarketTab />}
+      {activeTab === 'news'   && <NewsTab />}
+      {activeTab === 'signal' && <SignalTab />}
     </div>
   );
 }
