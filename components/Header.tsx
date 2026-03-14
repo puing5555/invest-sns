@@ -27,9 +27,5 @@ export default function Header() {
   const pathname = usePathname();
   const currentPageName = pageNames[pathname] || '페이지';
 
-  return (
-    <div className="sticky top-0 z-10 bg-white border-b border-[#e8e8e8] px-6 py-4">
-      <h1 className="text-xl font-bold text-[#191f28]">{currentPageName}</h1>
-    </div>
-  );
+  return null;
 }
