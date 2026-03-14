@@ -2,19 +2,26 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-// ============ MARKET DATA TYPES ============
+// ============ TYPES ============
 interface MarketItem {
   price: number;
   change: number;
   changePct: number;
+  sparkline?: number[]; // 미니차트용
 }
 
-interface MarketData {
-  'S&P500': MarketItem | null;
-  'NASDAQ': MarketItem | null;
-  'KOSPI': MarketItem | null;
-  'KOSDAQ': MarketItem | null;
-  'USD/KRW': MarketItem | null;
+interface ExtendedMarketData {
+  // 한국장
+  KOSPI: MarketItem | null;
+  KOSDAQ: MarketItem | null;
+  // 미국 선물
+  SP_FUTURES: MarketItem | null;
+  NQ_FUTURES: MarketItem | null;
+  DOW_FUTURES: MarketItem | null;
+  VIX: MarketItem | null;
+  // 크립토
+  BTC: MarketItem | null;
+  ETH: MarketItem | null;
   updatedAt: string;
 }
 
@@ -24,56 +31,69 @@ interface InvestorEntry {
   foreign: number;
 }
 
-async function fetchYahooQuote(ticker: string): Promise<MarketItem | null> {
+// ============ DATA FETCH ============
+async function fetchYahooChart(ticker: string): Promise<MarketItem | null> {
   try {
     const encoded = encodeURIComponent(ticker);
     const res = await fetch(
-      `https://query1.finance.yahoo.com/v8/finance/chart/${encoded}?interval=1d&range=5d`,
+      `https://query1.finance.yahoo.com/v8/finance/chart/${encoded}?interval=5m&range=1d`,
       { cache: 'no-store' }
     );
     if (!res.ok) return null;
     const json = await res.json();
-    const meta = json?.chart?.result?.[0]?.meta;
-    if (!meta) return null;
+    const result = json?.chart?.result?.[0];
+    if (!result) return null;
+    const meta = result.meta;
+    const closes = result.indicators?.quote?.[0]?.close ?? [];
+    const filtered = closes.filter((v: number | null) => v !== null && v !== undefined) as number[];
+
     const price = meta.regularMarketPrice ?? 0;
     const prevClose = meta.previousClose ?? meta.chartPreviousClose ?? price;
     const change = price - prevClose;
     const changePct = prevClose !== 0 ? (change / prevClose) * 100 : 0;
+
     return {
       price: Math.round(price * 100) / 100,
       change: Math.round(change * 100) / 100,
       changePct: Math.round(changePct * 100) / 100,
+      sparkline: filtered.slice(-30), // 최근 30포인트
     };
   } catch {
     return null;
   }
 }
 
-function useMarketData() {
-  const [marketData, setMarketData] = useState<MarketData | null>(null);
+function useExtendedMarketData() {
+  const [data, setData] = useState<ExtendedMarketData | null>(null);
   const [loading, setLoading] = useState(true);
   const [investorData, setInvestorData] = useState<Record<string, { investors?: InvestorEntry }> | null>(null);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [sp500, nasdaq, kospi, kosdaq, usdkrw] = await Promise.all([
-        fetchYahooQuote('^GSPC'),
-        fetchYahooQuote('^IXIC'),
-        fetchYahooQuote('^KS11'),
-        fetchYahooQuote('^KQ11'),
-        fetchYahooQuote('USDKRW=X'),
+      const [kospi, kosdaq, spFut, nqFut, dowFut, vix, btc, eth] = await Promise.all([
+        fetchYahooChart('^KS11'),
+        fetchYahooChart('^KQ11'),
+        fetchYahooChart('ES=F'),
+        fetchYahooChart('NQ=F'),
+        fetchYahooChart('YM=F'),
+        fetchYahooChart('^VIX'),
+        fetchYahooChart('BTC-USD'),
+        fetchYahooChart('ETH-USD'),
       ]);
-      setMarketData({
-        'S&P500': sp500,
-        'NASDAQ': nasdaq,
-        'KOSPI': kospi,
-        'KOSDAQ': kosdaq,
-        'USD/KRW': usdkrw,
+      setData({
+        KOSPI: kospi,
+        KOSDAQ: kosdaq,
+        SP_FUTURES: spFut,
+        NQ_FUTURES: nqFut,
+        DOW_FUTURES: dowFut,
+        VIX: vix,
+        BTC: btc,
+        ETH: eth,
         updatedAt: new Date().toLocaleTimeString('ko-KR'),
       });
     } catch {
-      setMarketData(null);
+      setData(null);
     } finally {
       setLoading(false);
     }
@@ -81,20 +101,18 @@ function useMarketData() {
 
   useEffect(() => {
     fetchAll();
-    // 5분마다 갱신
     const interval = setInterval(fetchAll, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, [fetchAll]);
 
   useEffect(() => {
-    // 수급 데이터 로드 (빌드 시 생성된 JSON)
     fetch('/market-investors.json')
       .then(r => r.ok ? r.json() : null)
-      .then(data => setInvestorData(data))
+      .then(d => setInvestorData(d))
       .catch(() => setInvestorData(null));
   }, []);
 
-  return { marketData, loading, investorData };
+  return { data, loading, investorData };
 }
 
 // ============ DUMMY DATA ============
@@ -129,16 +147,9 @@ const dummyNews = [
 ];
 
 const dummyVideos = [
-  { id: 1, channel: '이효석아카데미', time: '오늘 07:30', title: '반도체 사이클 2차 랠리 시작된다', category: '한국주식', summary: '필라델피아 반도체 지수가 3일 연속 상승하며 2차 랠리 신호를 보이고 있다. HBM 수요가 예상보다 강하고, SK하이닉스와 삼성전자의 실적 서프라이즈 가능성이 높다. 미국 AI 인프라 투자가 가속화되면서 메모리 수요는 하반기까지 이어질 전망.', stocks: ['SK하이닉스', '삼성전자', 'ASML'], hasSignal: true },
-  { id: 2, channel: '월가아재', time: '오늘 06:00', title: '미국 고용지표 쇼크, 연준 피벗 앞당겨질까', category: '미국주식', summary: '비농업 고용이 컨센서스 대비 크게 하회하며 경기 둔화 우려가 부각됐다. 연준의 6월 금리인하 가능성이 70%까지 상승. 기술주 중심으로 반등 가능성 높으나, 경기침체 시그널과 구분해야 한다.', stocks: ['SPY', 'QQQ', 'TLT'], hasSignal: true },
-  { id: 3, channel: '삼프로TV', time: '오늘 08:00', title: '[마감시황] 외국인 반도체 폭풍매수, 코스피 2600 돌파', category: '한국주식', summary: '외국인이 삼성전자와 SK하이닉스를 중심으로 4거래일 연속 순매수. 코스피가 2600선을 돌파하며 3개월 만에 최고치를 기록. 기관은 차익실현 매도세를 보이고 있으나 외국인 수급이 압도적.', stocks: ['삼성전자', 'SK하이닉스'], hasSignal: true },
-  { id: 4, channel: '코인데스크코리아', time: '오늘 07:00', title: '비트코인 $85K 돌파, ETF 자금 유입 역대급', category: '크립토', summary: '비트코인 현물 ETF에 하루 $1.2B 유입되며 역대 최고 기록. 기관 투자자들의 본격적인 진입 신호로 해석. 이더리움도 $3,200 돌파하며 알트코인 랠리 기대감 상승.', stocks: ['BTC', 'ETH'], hasSignal: false },
-  { id: 5, channel: '슈카월드', time: '오늘 09:00', title: '미국이 금리를 안 내리는 진짜 이유', category: '미국주식', summary: '미국 경제가 여전히 강한 고용과 소비를 보이고 있어 연준이 금리 인하를 서두르지 않는 배경을 분석. 인플레이션의 구조적 변화와 재정적자 문제까지 함께 다루며 하반기 전망을 제시.', stocks: [], hasSignal: false },
-  { id: 6, channel: '소수몽키', time: '오늘 06:30', title: '테슬라 이번에는 진짜 바닥일까? FSD 12.5 분석', category: '미국주식', summary: '테슬라 FSD 12.5 업데이트가 완전자율주행에 한 걸음 더 다가갔다는 평가. 중국 시장 매출 반등과 사이버트럭 생산 정상화도 긍정적. 다만 밸류에이션 논란은 여전.', stocks: ['TSLA'], hasSignal: true },
-  { id: 7, channel: 'GODofIT', time: '오늘 08:30', title: '엔비디아 실적 프리뷰: 이번에도 서프라이즈?', category: '미국주식', summary: '엔비디아 다음 주 실적 발표를 앞두고 주요 체크포인트 분석. 데이터센터 매출 YoY +200% 예상, H200/B100 전환 사이클, 중국 수출 규제 영향까지 종합 정리.', stocks: ['NVDA', 'AMD', 'AVGO'], hasSignal: true },
-  { id: 8, channel: '세상학개론', time: '어제 22:00', title: '2024년에 반드시 사야 할 한국 배당주 TOP 5', category: '한국주식', summary: '고배당 + 성장성을 겸비한 한국 배당주 5개를 선정. 배당수익률 5% 이상이면서 실적 성장이 확인된 종목 위주로 분석. KT&G, 하나금융, SK텔레콤 등이 포함.', stocks: ['KT&G', '하나금융', 'SK텔레콤', '삼성화재', '맥쿼리인프라'], hasSignal: true },
-  { id: 9, channel: '이효석아카데미', time: '어제 20:00', title: '비트코인 10만불 간다? 반감기 후 시나리오', category: '크립토', summary: '비트코인 반감기 이후 역사적 패턴을 분석하며 $100K 시나리오를 제시. 기관 ETF 자금 유입, 스테이블코인 시가총액 증가, 온체인 데이터 모두 긍정적 신호를 보이고 있다.', stocks: ['BTC'], hasSignal: false },
-  { id: 10, channel: '리치고TV', time: '어제 19:00', title: '초보자가 절대 사면 안되는 ETF 3가지', category: '미국주식', summary: '레버리지 ETF, 인버스 ETF, 테마형 ETF의 위험성을 구체적 사례와 함께 설명. 장기 보유 시 괴리율 문제와 비용 구조를 분석하며 초보자에게 적합한 대안 ETF도 제시.', stocks: [], hasSignal: false },
+  { id: 1, channel: '이효석아카데미', time: '오늘 07:30', title: '반도체 사이클 2차 랠리 시작된다', category: '한국주식', summary: '필라델피아 반도체 지수가 3일 연속 상승하며 2차 랠리 신호를 보이고 있다.', stocks: ['SK하이닉스', '삼성전자', 'ASML'], hasSignal: true },
+  { id: 2, channel: '월가아재', time: '오늘 06:00', title: '미국 고용지표 쇼크, 연준 피벗 앞당겨질까', category: '미국주식', summary: '비농업 고용이 컨센서스 대비 크게 하회하며 경기 둔화 우려가 부각됐다.', stocks: ['SPY', 'QQQ', 'TLT'], hasSignal: true },
+  { id: 3, channel: '삼프로TV', time: '오늘 08:00', title: '[마감시황] 외국인 반도체 폭풍매수, 코스피 2600 돌파', category: '한국주식', summary: '외국인이 삼성전자와 SK하이닉스를 중심으로 4거래일 연속 순매수.', stocks: ['삼성전자', 'SK하이닉스'], hasSignal: true },
 ];
 
 // ============ STYLES ============
@@ -158,6 +169,88 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   '한국주식': { bg: '#DBEAFE', text: '#1E40AF' },
   '미국주식': { bg: '#FEE2E2', text: '#991B1B' },
   '크립토':   { bg: '#FEF3C7', text: '#92400E' },
+};
+
+// ============ SPARKLINE SVG ============
+const Sparkline = ({ data, isUp, width = 120, height = 44 }: { data: number[]; isUp: boolean; width?: number; height?: number }) => {
+  if (!data || data.length < 2) return <div style={{ width, height }} />;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = max - min || 1;
+  const pts = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * width;
+    const y = height - ((v - min) / range) * (height - 4) - 2;
+    return `${x},${y}`;
+  });
+  const pathD = `M ${pts.join(' L ')}`;
+  const fillD = `M ${pts[0]} L ${pts.join(' L ')} L ${width},${height} L 0,${height} Z`;
+  const stroke = isUp ? '#EF4444' : '#3B82F6';
+  const fill = isUp ? 'rgba(239,68,68,0.1)' : 'rgba(59,130,246,0.1)';
+  return (
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ display: 'block' }}>
+      <path d={fillD} fill={fill} />
+      <path d={pathD} fill="none" stroke={stroke} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
+// ============ MARKET MINI CARD ============
+const MarketMiniCard = ({
+  label,
+  item,
+  loading,
+  prefix = '',
+  decimals = 2,
+}: {
+  label: string;
+  item: MarketItem | null | undefined;
+  loading: boolean;
+  prefix?: string;
+  decimals?: number;
+}) => {
+  const isUp = !item || item.changePct >= 0;
+  const upColor = '#EF4444';
+  const downColor = '#3B82F6';
+  const color = isUp ? upColor : downColor;
+  const sign = item && item.changePct >= 0 ? '+' : '';
+
+  return (
+    <div style={{
+      flex: '1 1 calc(50% - 8px)',
+      minWidth: 140,
+      background: colors.card,
+      borderRadius: 14,
+      padding: '14px 16px',
+      border: `1px solid ${colors.lightGray}`,
+      overflow: 'hidden',
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 2 }}>
+        <span style={{ fontSize: 13, fontWeight: 600, color: colors.primary }}>{label}</span>
+        {item && (
+          <span style={{ fontSize: 13, fontWeight: 700, color }}>
+            {isUp ? '↘' : '↘'} {sign}{item.changePct.toFixed(2)}%
+          </span>
+        )}
+      </div>
+      {loading ? (
+        <div style={{ fontSize: 12, color: colors.gray }}>로딩중...</div>
+      ) : item ? (
+        <>
+          <div style={{ fontSize: 16, fontWeight: 700, color: colors.primary, marginTop: 2 }}>
+            {prefix}{item.price > 1000 ? item.price.toLocaleString() : item.price.toFixed(decimals)}
+          </div>
+          <div style={{ fontSize: 12, color, marginTop: 1 }}>
+            {sign}{item.change > 1000 ? item.change.toLocaleString() : item.change.toFixed(decimals)}
+          </div>
+          <div style={{ marginTop: 8 }}>
+            <Sparkline data={item.sparkline ?? []} isUp={item.changePct >= 0} width={120} height={40} />
+          </div>
+        </>
+      ) : (
+        <div style={{ fontSize: 12, color: colors.gray }}>데이터 없음</div>
+      )}
+    </div>
+  );
 };
 
 // ============ COMPONENTS ============
@@ -225,72 +318,130 @@ const FilterPill = ({ label, active, onClick, icon }: { label: string; active: b
   </button>
 );
 
-// ============ MARKET ITEM DISPLAY HELPER ============
-const MarketQuote = ({
-  label,
-  item,
-  loading,
-  prefix = '',
-  decimals = 2,
-}: {
-  label: string;
-  item: MarketItem | null | undefined;
-  loading: boolean;
-  prefix?: string;
-  decimals?: number;
-}) => {
-  if (loading) {
-    return (
-      <span style={{ color: colors.gray, fontSize: 13 }}>
-        {label} <b>로딩중...</b>
-      </span>
-    );
-  }
-  if (!item) {
-    return (
-      <span style={{ color: colors.gray, fontSize: 13 }}>
-        {label} <b style={{ color: colors.gray }}>-</b>
-      </span>
-    );
-  }
-  const isUp = item.changePct >= 0;
-  const color = isUp ? colors.red : colors.blue;
-  const sign = isUp ? '+' : '';
-  const priceStr = item.price > 1000
-    ? `${prefix}${item.price.toLocaleString()}`
-    : `${prefix}${item.price.toFixed(decimals)}`;
+// ============ HEATMAP SECTION ============
+const HeatmapSection = () => {
+  const [activeMap, setActiveMap] = useState<'sp500' | 'kospi' | 'crypto'>('sp500');
+
+  const maps = {
+    sp500: {
+      label: 'S&P500',
+      src: 'https://www.tradingview.com/widgetembed/?hideideas=1&domain=tr&symbol=SP:SPX&interval=D&hidetoptoolbar=1&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=8&timezone=Etc%2FUTC&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en&utm_source=&utm_medium=widget&utm_campaign=chart&utm_term=SP:SPX#%7B%22page-uri%22%3A%22__NHTTP__%22%7D',
+    },
+    kospi: {
+      label: '코스피',
+      src: 'https://www.tradingview.com/widgetembed/?hideideas=1&domain=tr&symbol=KRX:KOSPI&interval=D&hidetoptoolbar=1&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=8&timezone=Asia%2FSeoul&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=ko',
+    },
+    crypto: {
+      label: '크립토',
+      src: 'https://www.tradingview.com/widgetembed/?hideideas=1&domain=tr&symbol=BINANCE:BTCUSDT&interval=D&hidetoptoolbar=1&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=8&timezone=Etc%2FUTC&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=en',
+    },
+  };
+
+  // TradingView 히트맵 위젯 (공식 embed)
+  const heatmapWidgets: Record<string, string> = {
+    sp500: `<div class="tradingview-widget-container" style="height:400px;width:100%">
+  <iframe scrolling="no" allowtransparency="true" allowfullscreen="true" frameborder="0"
+    src="https://www.tradingview.com/widgetembed/?locale=en&symbol=SP%3ASPX&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&saveimage=0&theme=light&style=8&timezone=Etc%2FUTC&withdateranges=0&width=100%25&height=400#%7B%7D"
+    style="box-sizing: border-box; height: 400px; width: 100%;"></iframe>
+</div>`,
+    kospi: `KRX:KOSPI`,
+    crypto: `BINANCE:BTCUSDT`,
+  };
+
   return (
-    <span style={{ fontSize: 13 }}>
-      {label} <b style={{ color }}>{priceStr} {sign}{item.changePct.toFixed(2)}%</b>
-    </span>
+    <Card style={{ padding: '20px 24px' }}>
+      <SectionHeader title="🗺️ 히트맵" />
+      {/* 탭 */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+        {(['sp500', 'kospi', 'crypto'] as const).map(k => (
+          <button
+            key={k}
+            onClick={() => setActiveMap(k)}
+            style={{
+              padding: '6px 14px', borderRadius: 8, fontSize: 13, fontWeight: 600,
+              background: activeMap === k ? colors.accent : colors.bg,
+              color: activeMap === k ? '#fff' : colors.gray,
+              border: `1px solid ${activeMap === k ? colors.accent : colors.lightGray}`,
+              cursor: 'pointer',
+            }}
+          >
+            {k === 'sp500' ? 'S&P500' : k === 'kospi' ? '코스피' : '크립토'}
+          </button>
+        ))}
+      </div>
+
+      {/* TradingView 히트맵 iframe */}
+      <div style={{ borderRadius: 12, overflow: 'hidden', background: '#f8f9fa' }}>
+        {activeMap === 'sp500' && (
+          <iframe
+            scrolling="no"
+            allowTransparency={true}
+            frameBorder={0}
+            src="https://www.tradingview.com/widgetembed/?locale=en&symbol=SP%3ASPX&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&theme=light&style=8&timezone=Etc%2FUTC&width=100%25&height=380"
+            style={{ width: '100%', height: 380, border: 'none' }}
+          />
+        )}
+        {activeMap === 'kospi' && (
+          <iframe
+            scrolling="no"
+            allowTransparency={true}
+            frameBorder={0}
+            src="https://www.tradingview.com/widgetembed/?locale=ko&symbol=KRX%3AKOSPI&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&theme=light&style=8&timezone=Asia%2FSeoul&width=100%25&height=380"
+            style={{ width: '100%', height: 380, border: 'none' }}
+          />
+        )}
+        {activeMap === 'crypto' && (
+          <iframe
+            scrolling="no"
+            allowTransparency={true}
+            frameBorder={0}
+            src="https://www.tradingview.com/widgetembed/?locale=en&symbol=BINANCE%3ABTCUSDT&interval=D&hidesidetoolbar=1&hidetoptoolbar=1&theme=light&style=8&timezone=Etc%2FUTC&width=100%25&height=380"
+            style={{ width: '100%', height: 380, border: 'none' }}
+          />
+        )}
+      </div>
+      <div style={{ fontSize: 11, color: colors.gray, textAlign: 'right', marginTop: 6 }}>
+        Powered by TradingView
+      </div>
+    </Card>
   );
 };
 
 // ============ TAB: 지금 ============
-// 순서: 오늘알림(없으면 숨김) → 보유종목(가로 카드) → 관심종목 → 시황(실데이터) → 수급
+// 순서: 1.보유종목 2.오늘알림 3.관심종목 4.시황 5.히트맵
 const NowTab = () => {
-  const { marketData, loading, investorData } = useMarketData();
-
-  // 수급 데이터에서 최신 날짜 1개 추출
-  const latestInvestorDate = investorData
-    ? Object.keys(investorData)
-        .filter(d => investorData[d]?.investors)
-        .sort()
-        .at(-1)
-    : null;
-  const latestInvestor = latestInvestorDate ? investorData![latestInvestorDate].investors : null;
-
-  const fmtAmount = (v: number) => {
-    const abs = Math.abs(v);
-    const sign = v >= 0 ? '+' : '-';
-    if (abs >= 1_000_000_000_000) return `${sign}${(abs / 1_000_000_000_000).toFixed(1)}조`;
-    if (abs >= 100_000_000) return `${sign}${(abs / 100_000_000).toFixed(0)}억`;
-    return `${sign}${abs.toLocaleString()}`;
-  };
+  const { data, loading } = useExtendedMarketData();
 
   return (
     <div>
-      {/* 오늘 알림 — 없으면 숨김 */}
+      {/* 1. 보유종목 */}
+      <Card>
+        <SectionHeader title="🧳 보유종목" action="전체보기 →" />
+        <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
+          {dummyHoldings.map((s, i) => (
+            <div key={i} style={{
+              minWidth: 130, padding: '14px 16px', borderRadius: 12,
+              background: colors.bg, flexShrink: 0, textAlign: 'center',
+              border: `1px solid ${colors.lightGray}`,
+            }}>
+              <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{s.name}</div>
+              <div style={{ fontWeight: 700, fontSize: 15, color: colors.primary, marginTop: 8 }}>
+                {s.currentPrice > 1000
+                  ? s.currentPrice.toLocaleString()
+                  : s.currentPrice}
+              </div>
+              <div style={{
+                fontSize: 14, fontWeight: 700, marginTop: 4,
+                color: s.returnPct >= 0 ? colors.red : colors.blue,
+              }}>
+                {s.returnPct >= 0 ? '+' : ''}{s.returnPct.toFixed(2)}%
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      {/* 2. 오늘 알림 */}
       {dummyAlerts.length > 0 && (
         <Card>
           <SectionHeader title="🔔 오늘 알림" action="전체 보기 →" />
@@ -314,34 +465,7 @@ const NowTab = () => {
         </Card>
       )}
 
-      {/* 보유종목 — 가로 스크롤 카드 (종목명 / 현재가 / 수익률%) */}
-      <Card>
-        <SectionHeader title="🧳 보유종목" action="전체보기 →" />
-        <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
-          {dummyHoldings.map((s, i) => (
-            <div key={i} style={{
-              minWidth: 130, padding: '14px 16px', borderRadius: 12,
-              background: colors.bg, flexShrink: 0, textAlign: 'center',
-              border: `1px solid ${colors.lightGray}`,
-            }}>
-              <div style={{ fontWeight: 700, fontSize: 14, color: colors.primary }}>{s.name}</div>
-              <div style={{ fontWeight: 700, fontSize: 15, color: colors.primary, marginTop: 8 }}>
-                {typeof s.currentPrice === 'number' && s.currentPrice > 1000
-                  ? s.currentPrice.toLocaleString()
-                  : s.currentPrice}
-              </div>
-              <div style={{
-                fontSize: 14, fontWeight: 700, marginTop: 4,
-                color: s.returnPct >= 0 ? colors.red : colors.blue,
-              }}>
-                {s.returnPct >= 0 ? '+' : ''}{s.returnPct.toFixed(2)}%
-              </div>
-            </div>
-          ))}
-        </div>
-      </Card>
-
-      {/* 관심종목 — 가로 스크롤 카드 */}
+      {/* 3. 관심종목 */}
       <Card>
         <SectionHeader title="⭐ 관심종목" action="전체보기 →" />
         <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4 }}>
@@ -362,67 +486,58 @@ const NowTab = () => {
         </div>
       </Card>
 
-      {/* 시황 — 실시간 데이터 (Yahoo Finance) */}
+      {/* 4. 시황 — 미니차트 카드 */}
       <Card>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
           <span style={{ fontSize: 16, fontWeight: 700, color: colors.primary }}>📊 시황</span>
-          <span style={{ fontSize: 11, color: colors.gray }}>
-            {loading ? '불러오는 중...' : marketData ? `${marketData.updatedAt} 기준` : '데이터 오류'}
-          </span>
+          {!loading && data && (
+            <span style={{ fontSize: 11, color: colors.gray }}>{data.updatedAt} 기준</span>
+          )}
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>US</span>
-            <MarketQuote label="S&P500" item={marketData?.['S&P500']} loading={loading} decimals={0} />
-            <MarketQuote label="나스닥" item={marketData?.['NASDAQ']} loading={loading} decimals={0} />
+
+        {/* 미국 선물 */}
+        <div style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: colors.gray, marginBottom: 10, letterSpacing: 0.5 }}>
+            🇺🇸 미국 선물
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>KR</span>
-            <MarketQuote label="코스피" item={marketData?.['KOSPI']} loading={loading} decimals={2} />
-            <MarketQuote label="코스닥" item={marketData?.['KOSDAQ']} loading={loading} decimals={2} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            <MarketMiniCard label="S&P 선물" item={data?.SP_FUTURES} loading={loading} decimals={0} />
+            <MarketMiniCard label="나스닥 선물" item={data?.NQ_FUTURES} loading={loading} decimals={0} />
+            <MarketMiniCard label="다우 선물" item={data?.DOW_FUTURES} loading={loading} decimals={0} />
+            <MarketMiniCard label="VIX" item={data?.VIX} loading={loading} decimals={2} />
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <span style={{ fontWeight: 700, fontSize: 13, color: colors.gray, width: 28 }}>FX</span>
-            <MarketQuote label="원/달러" item={marketData?.['USD/KRW']} loading={loading} decimals={0} />
+        </div>
+
+        {/* 한국 */}
+        <div style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: colors.gray, marginBottom: 10, letterSpacing: 0.5 }}>
+            🇰🇷 한국장
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            <MarketMiniCard label="코스피" item={data?.KOSPI} loading={loading} decimals={2} />
+            <MarketMiniCard label="코스닥" item={data?.KOSDAQ} loading={loading} decimals={2} />
+          </div>
+        </div>
+
+        {/* 크립토 */}
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: colors.gray, marginBottom: 10, letterSpacing: 0.5 }}>
+            ₿ 크립토
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            <MarketMiniCard label="비트코인" item={data?.BTC} loading={loading} decimals={0} prefix="$" />
+            <MarketMiniCard label="이더리움" item={data?.ETH} loading={loading} decimals={0} prefix="$" />
           </div>
         </div>
       </Card>
 
-      {/* 수급 — pykrx_data.json 기반 */}
-      {latestInvestor && latestInvestorDate && (
-        <Card>
-          <SectionHeader title="💰 최근 수급 (KOSPI)" />
-          <div style={{ fontSize: 12, color: colors.gray, marginBottom: 10 }}>
-            📅 {latestInvestorDate} 기준
-          </div>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            {([
-              { label: '외국인', value: latestInvestor.foreign },
-              { label: '기관', value: latestInvestor.institution },
-              { label: '개인', value: latestInvestor.individual },
-            ] as { label: string; value: number }[]).map(({ label, value }) => (
-              <div key={label} style={{
-                flex: 1, minWidth: 90, padding: '12px 14px', borderRadius: 10,
-                background: colors.bg, textAlign: 'center',
-                border: `1px solid ${value >= 0 ? '#BBDEFB' : '#FFCDD2'}`,
-              }}>
-                <div style={{ fontSize: 12, color: colors.gray, marginBottom: 6 }}>{label}</div>
-                <div style={{
-                  fontSize: 14, fontWeight: 700,
-                  color: value >= 0 ? colors.red : colors.blue,
-                }}>
-                  {fmtAmount(value)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      )}
+      {/* 5. 히트맵 */}
+      <HeatmapSection />
     </div>
   );
 };
 
-// ============ TAB: 뉴스 — 공시 AI분석 삭제, 뉴스 헤드라인만 ============
+// ============ TAB: 뉴스 ============
 const NewsTab = () => (
   <div>
     <Card>
@@ -450,11 +565,11 @@ const NewsTab = () => (
   </div>
 );
 
-// ============ TAB: LIVE — 카테고리: 전체/한국주식/미국주식/크립토 ============
+// ============ TAB: LIVE ============
 const LiveTab = () => {
-  const [filter, setFilter]     = useState('전체');
+  const [filter, setFilter] = useState('전체');
   const [catFilter, setCatFilter] = useState('전체');
-  const [expanded, setExpanded]  = useState<Record<number, boolean>>({});
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
 
   const categories = ['전체', '한국주식', '미국주식', '크립토'];
   const myStocks = [
@@ -482,10 +597,9 @@ const LiveTab = () => {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {filtered.map(v => {
-          const isExpanded  = expanded[v.id];
-          const catColor    = categoryColors[v.category] || { bg: '#F3F4F6', text: '#374151' };
-          const hasMyStock  = v.stocks.some(s => myStocks.includes(s));
-
+          const isExpanded = expanded[v.id];
+          const catColor = categoryColors[v.category] || { bg: '#F3F4F6', text: '#374151' };
+          const hasMyStock = v.stocks.some(s => myStocks.includes(s));
           return (
             <Card key={v.id} style={{
               border: hasMyStock ? `2px solid ${colors.accent}` : '1px solid #F3F4F6',
@@ -552,7 +666,6 @@ const LiveTab = () => {
                 <button style={{
                   padding: '6px 14px', borderRadius: 8, fontSize: 12, fontWeight: 600,
                   background: colors.red, color: '#fff', border: 'none', cursor: 'pointer',
-                  display: 'flex', alignItems: 'center', gap: 4,
                 }}>
                   🎬 영상 보기
                 </button>
@@ -572,8 +685,7 @@ const MarketTab = () => (
     <div style={{ fontSize: 18, fontWeight: 700, color: colors.primary, marginBottom: 8 }}>시장 탭 준비 중</div>
     <div style={{ fontSize: 14, color: colors.gray, textAlign: 'center', lineHeight: 1.6 }}>
       Fear &amp; Greed 게이지 · 섹터별 등락<br />
-      외국인/기관 수급 · 유튜버 전체 컨센서스<br />
-      <span style={{ fontSize: 12, marginTop: 8, display: 'inline-block' }}>곧 출시됩니다</span>
+      외국인/기관 수급 · 유튜버 전체 컨센서스
     </div>
   </div>
 );
