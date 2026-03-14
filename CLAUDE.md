@@ -16,6 +16,7 @@
 - scripts/ → 데이터 파이프라인, QA Gate
 - data/ → JSON 데이터 (시그널, 가격, 채널 목록)
 - docs/ → 아키텍처, ADR, 운영 매뉴얼
+- docs/RETURNS_SPEC.md — ⚠️ 수익률/날짜 처리 필수 규칙 (반드시 읽을 것)
 - .claude/skills/ → 워크플로우 (채널 추가, 배포 등)
 
 ## Rules (절대)
