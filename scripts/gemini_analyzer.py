@@ -16,6 +16,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env.local'), override=True)
 
+from google import genai
+from google.genai import types
+
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', '')
 GEMINI_MODEL = 'gemini-2.5-flash'
 GEMINI_API_URL = f'https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent'
@@ -285,7 +288,8 @@ def analyze_video_with_gemini(
     retry_delay: int = 10
 ) -> List[Dict[str, Any]]:
     """
-    Gemini 2.0 Flash로 YouTube 영상 직접 분석.
+    Gemini SDK로 YouTube 영상 직접 분석.
+    media_resolution=LOW + video/* mime_type으로 3~4배 속도 개선.
 
     Args:
         video_data: {video_id, title, url, duration, duration_seconds, upload_date, channel_url}
@@ -306,99 +310,92 @@ def analyze_video_with_gemini(
 
     prompt_text = build_gemini_prompt(video_data)
 
-    # response_schema로 JSON 구조 강제
-    response_schema = {
-        "type": "object",
-        "properties": {
-            "signals": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "stock": {"type": "string"},
-                        "ticker": {"type": "string"},
-                        "signal_type": {"type": "string"},
-                        "key_quote": {"type": "string"},
-                        "reasoning": {"type": "string"},
-                        "timestamp": {"type": "string"},
-                        "confidence": {"type": "integer"},
-                        "speaker_name": {"type": "string"}
-                    },
-                    "required": ["stock", "signal_type", "key_quote", "reasoning", "confidence"]
-                }
-            }
-        },
-        "required": ["signals"]
-    }
+    # 영상 구간 설정: 최대 10분 (600초)
+    dur_secs = video_data.get('duration_seconds') or video_data.get('duration')
+    try:
+        dur_secs = int(dur_secs)
+    except (TypeError, ValueError):
+        dur_secs = 600
+    end_sec = min(dur_secs, 600)
 
-    payload = {
-        "contents": [{
-            "parts": [
-                {
-                    "file_data": {
-                        "mime_type": "video/mp4",
-                        "file_uri": video_url
+    # response_schema
+    response_schema = types.Schema(
+        type=types.Type.OBJECT,
+        required=["signals"],
+        properties={
+            "signals": types.Schema(
+                type=types.Type.ARRAY,
+                items=types.Schema(
+                    type=types.Type.OBJECT,
+                    required=["stock", "signal_type", "key_quote", "reasoning", "confidence"],
+                    properties={
+                        "stock":        types.Schema(type=types.Type.STRING),
+                        "ticker":       types.Schema(type=types.Type.STRING),
+                        "signal_type":  types.Schema(type=types.Type.STRING),
+                        "key_quote":    types.Schema(type=types.Type.STRING),
+                        "reasoning":    types.Schema(type=types.Type.STRING),
+                        "timestamp":    types.Schema(type=types.Type.STRING),
+                        "confidence":   types.Schema(type=types.Type.INTEGER),
+                        "speaker_name": types.Schema(type=types.Type.STRING),
                     }
-                },
-                {
-                    "text": prompt_text
-                }
-            ]
-        }],
-        "generationConfig": {
-            "temperature": 0.1,
-            "maxOutputTokens": 8192,
-            "response_mime_type": "application/json",
-            "response_schema": response_schema,
+                )
+            )
         }
-    }
+    )
+
+    client = genai.Client(api_key=GEMINI_API_KEY)
+
+    contents = [
+        types.Part(
+            file_data=types.FileData(
+                mime_type="video/*",       # ← video/mp4 고정 대신 와일드카드
+                file_uri=video_url,
+            ),
+            video_metadata=types.VideoMetadata(
+                start_offset=f"0s",
+                end_offset=f"{end_sec}s",  # 최대 10분
+            ),
+        ),
+        types.Part(text=prompt_text),
+    ]
+
+    config = types.GenerateContentConfig(
+        temperature=0.1,
+        max_output_tokens=8192,
+        response_mime_type="application/json",
+        response_schema=response_schema,
+        media_resolution=types.MediaResolution.MEDIA_RESOLUTION_LOW,  # ← 핵심: 3x 빠름
+    )
 
     for attempt in range(1, retry + 1):
         try:
-            resp = requests.post(
-                GEMINI_API_URL,
-                params={'key': GEMINI_API_KEY},
-                headers={'Content-Type': 'application/json'},
-                json=payload,
-                timeout=300
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=contents,
+                config=config,
             )
 
-            if resp.status_code == 429:
-                wait = max(30, retry_delay * attempt * 2)
-                print(f"  [RATE LIMIT] 429 → {wait}초 대기 후 재시도 ({attempt}/{retry})")
-                time.sleep(wait)
-                continue
-
-            if resp.status_code != 200:
-                print(f"  [ERROR] Gemini API {resp.status_code}: {resp.text[:300]}")
-                if attempt < retry:
-                    time.sleep(retry_delay)
-                    continue
-                return []
-
-            data = resp.json()
-            candidates = data.get('candidates', [])
-            if not candidates:
-                print(f"  [WARN] 응답 없음 (video={video_id})")
-                return []
-
-            # finishReason 확인
-            finish_reason = candidates[0].get('finishReason', '')
-            if finish_reason in ('SAFETY', 'RECITATION'):
+            finish_reason = str(response.candidates[0].finish_reason) if response.candidates else ''
+            if 'SAFETY' in finish_reason or 'RECITATION' in finish_reason:
                 print(f"  [SKIP] Gemini 거부 (reason={finish_reason}): {video_id}")
                 return []
 
-            response_text = candidates[0].get('content', {}).get('parts', [{}])[0].get('text', '')
+            response_text = response.text or ''
             signals = parse_gemini_response(response_text, video_id)
             print(f"  [OK] {len(signals)}개 시그널 추출")
             return signals
 
-        except requests.exceptions.Timeout:
-            print(f"  [TIMEOUT] Gemini 타임아웃 (attempt={attempt}/{retry})")
-            if attempt < retry:
-                time.sleep(retry_delay)
         except Exception as e:
-            print(f"  [ERROR] Gemini 호출 실패 (attempt={attempt}/{retry}): {e}")
+            err_str = str(e)
+            if '429' in err_str or 'RESOURCE_EXHAUSTED' in err_str:
+                wait = max(30, retry_delay * attempt * 2)
+                print(f"  [RATE LIMIT] 429 → {wait}초 대기 후 재시도 ({attempt}/{retry})")
+                time.sleep(wait)
+                continue
+            if 'deadline' in err_str.lower() or 'timeout' in err_str.lower():
+                print(f"  [TIMEOUT] Gemini 타임아웃 (attempt={attempt}/{retry})")
+            else:
+                print(f"  [ERROR] Gemini 호출 실패 (attempt={attempt}/{retry}): {e}")
             if attempt < retry:
                 time.sleep(retry_delay)
 
