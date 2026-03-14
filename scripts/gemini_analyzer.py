@@ -20,7 +20,7 @@ GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', '')
 GEMINI_MODEL = 'gemini-2.5-flash'
 GEMINI_API_URL = f'https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent'
 
-PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v11.5.md')
+PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v12.md')
 
 VALID_SIGNALS = {'매수', '긍정', '중립', '부정', '매도'}
 SLASH_SIGNAL_MAP = {

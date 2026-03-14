@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # gemini_pipeline.py - Gemini 2.0 Flash 기반 투자 시그널 파이프라인
 """
@@ -17,7 +17,7 @@ yt-dlp 자막 추출 없이 Gemini 2.0 Flash로 YouTube URL 직접 분석.
 변경사항:
   - yt-dlp 자막 추출 제거
   - Gemini 2.0 Flash API로 YouTube URL 직접 분석
-  - V11.5 프롬프트 Gemini 최적화
+  - V12 프롬프트 Gemini 최적화
   - 시그널: 매수/긍정/중립/부정/매도 (슬래시 복수표기 자동 정규화)
   - 타임스탬프 Gemini가 직접 추출
   - GEMINI_API_KEY 환경변수 관리
@@ -54,7 +54,10 @@ LOG_DIR = os.path.join(PROJECT_ROOT, 'logs')
 def log(msg: str, logfile=None):
     ts = datetime.now().strftime('%H:%M:%S')
     line = f"[{ts}] {msg}"
-    print(line)
+    try:
+        print(line)
+    except UnicodeEncodeError:
+        print(line.encode('utf-8', errors='replace').decode('ascii', errors='replace'))
     if logfile:
         logfile.write(line + '\n')
         logfile.flush()
@@ -119,7 +122,7 @@ def get_video_list(channel_url: str, limit: Optional[int] = None) -> List[Dict]:
 
 def filter_videos(videos: List[Dict], skip_existing_ids: set = None) -> List[Dict]:
     """멤버십 영상 제외 + 기존 처리 영상 제외
-    Gemini 파이프라인은 제목 필터 우회 — Gemini가 직접 투자 관련성 판단하고 빈 시그널 반환
+    Gemini 파이프라인은 제목 필터 우회 - Gemini가 직접 투자 관련성 판단하고 빈 시그널 반환
     """
     skip_existing_ids = skip_existing_ids or set()
     # 멤버십 키워드만 명시적으로 제거
@@ -191,22 +194,25 @@ def get_channel_info(channel_url: str) -> Dict:
 def run_pipeline(
     channel_url: str,
     limit: Optional[int] = None,
+    offset: int = 0,
     dry_run: bool = False,
     skip_existing: bool = True,
 ):
     """메인 파이프라인 실행"""
+    import traceback as _tb
     os.makedirs(LOG_DIR, exist_ok=True)
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     log_path = os.path.join(LOG_DIR, f'gemini_pipeline_{timestamp}.log')
 
-    with open(log_path, 'w', encoding='utf-8') as logfile:
+    try:
+      with open(log_path, 'w', encoding='utf-8') as logfile:
         log(f"=== Gemini 파이프라인 시작 ===", logfile)
         log(f"채널: {channel_url}", logfile)
-        log(f"limit={limit} | dry_run={dry_run} | skip_existing={skip_existing}", logfile)
+        log(f"limit={limit} | offset={offset} | dry_run={dry_run} | skip_existing={skip_existing}", logfile)
 
         # API 키 확인
         if not GEMINI_API_KEY:
-            log("[FATAL] GEMINI_API_KEY 없음 — .env.local에 GEMINI_API_KEY=... 추가하세요", logfile)
+            log("[FATAL] GEMINI_API_KEY 없음 - .env.local에 GEMINI_API_KEY=... 추가하세요", logfile)
             return
 
         # DB 초기화
@@ -239,7 +245,9 @@ def run_pipeline(
             log(f"  기존 DB 영상: {len(existing_ids)}개 (스킵)", logfile)
 
         filtered = filter_videos(videos, skip_existing_ids=existing_ids)
-        # limit 적용 (필터 후 기준)
+        # offset + limit 적용 (필터 후 기준)
+        if offset:
+            filtered = filtered[offset:]
         if limit and len(filtered) > limit:
             filtered = filtered[:limit]
         if not filtered:
@@ -266,7 +274,7 @@ def run_pipeline(
                 except Exception:
                     dur = 0
                 if dur > 3600:
-                    log(f"  [SKIP] 영상 길이 {dur//60}분 — 60분 초과 스킵", logfile)
+                    log(f"  [SKIP] 영상 길이 {dur//60}분 - 60분 초과 스킵", logfile)
                     time.sleep(1)
                     continue
 
@@ -316,7 +324,7 @@ def run_pipeline(
             except Exception as loop_err:
                 import traceback
                 log(f"  [CRITICAL] 영상 {video.get('video_id','?')} 처리 중 예외: {loop_err}", logfile)
-                log(f"  {traceback.format_exc()}", logfile)
+                log(f"  {_tb.format_exc()}", logfile)
                 log(f"  → 다음 영상으로 계속 진행", logfile)
                 time.sleep(GEMINI_REQUEST_DELAY)
                 continue
@@ -340,12 +348,22 @@ def run_pipeline(
             'signals': total_signals,
             'inserted': total_inserted,
         }
+    except Exception as fatal:
+      err_msg = _tb.format_exc()
+      print(f"[FATAL] 파이프라인 최상위 예외:\n{err_msg}")
+      try:
+          with open(log_path, 'a', encoding='utf-8') as ef:
+              ef.write(f"\n[FATAL] {fatal}\n{err_msg}\n")
+      except Exception:
+          pass
+      return None
 
 
 def main():
     parser = argparse.ArgumentParser(description='Gemini 2.0 Flash 파이프라인')
     parser.add_argument('--channel', required=True, help='YouTube 채널 URL')
     parser.add_argument('--limit', type=int, default=None, help='처리할 영상 수')
+    parser.add_argument('--offset', type=int, default=0, help='시작 오프셋 (0-based)')
     parser.add_argument('--dry-run', action='store_true', help='DB INSERT 없이 분석만')
     parser.add_argument('--execute', action='store_true', help='실제 실행 (INSERT 포함)')
     parser.add_argument('--no-skip-existing', action='store_true', help='기존 영상도 재처리')
@@ -358,6 +376,7 @@ def main():
     run_pipeline(
         channel_url=args.channel,
         limit=args.limit,
+        offset=args.offset,
         dry_run=args.dry_run or not args.execute,
         skip_existing=not args.no_skip_existing,
     )
