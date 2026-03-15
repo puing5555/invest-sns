@@ -7,11 +7,17 @@ import { isKoreanStock } from '@/lib/currency';
 import ReportDetailModal from '@/components/ReportDetailModal';
 
 const TICKER_NAMES: Record<string, string> = {
-  '240810': '원익QnC', '284620': '카이', '298040': '효성중공업', '352820': '하이브', '403870': 'HPSP',
-  '090430': '아모레퍼시픽', '000660': 'SK하이닉스', '079160': 'CJ CGV', '005380': '현대자동차',
-  '005930': '삼성전자', '036930': '주성엔지니어링', '042700': '한미반도체', '006400': '삼성SDI',
-  '000720': '현대건설', '005940': 'NH투자증권', '016360': '삼성증권', '039490': '키움증권',
-  '051910': 'LG화학', '036570': '엔씨소프트', '071050': '한국금융지주',
+  '105560': 'KB금융', '240810': '원익QnC', '259960': '크래프톤', '284620': '카이', '298040': '효성중공업',
+  '352820': '하이브', '403870': 'HPSP', '051910': 'LG화학', '000720': '현대건설', '079160': 'CJ CGV',
+  '039490': '키움증권', '042700': '한미반도체', '005930': '삼성전자', '006400': '삼성SDI',
+  '016360': '삼성증권', '036930': '주성엔지니어링', '005380': '현대자동차', '005940': 'NH투자증권',
+  '090430': '아모레퍼시픽', '071050': '한국금융지주', '000660': 'SK하이닉스', '036570': '엔씨소프트',
+  '035420': 'NAVER', '055550': '신한지주', '068270': '셀트리온', '005490': 'POSCO홀딩스',
+  '012330': '현대모비스', '066570': 'LG전자', '028260': '삼성물산', '000270': '기아',
+  '096770': 'SK이노베이션', '003550': 'LG', '034730': 'SK', '032830': '삼성생명',
+  '011200': 'HMM', '018260': '삼성에스디에스', '009150': '삼성전기', '030200': 'KT',
+  '086790': '하나금융지주', '035720': '카카오', '004020': '현대제철', '003670': '포스코퓨처엠',
+  '010130': '고려아연', '011170': '롯데케미칼', '017670': 'SK텔레콤',
 };
 
 interface Report {
@@ -25,6 +31,12 @@ interface Report {
   pdf_url: string;
   summary?: string;
   ai_detail?: string;
+  price_at_signal?: number;
+  price_current?: number;
+  return_3m?: number | null;
+  return_6m?: number | null;
+  return_12m?: number | null;
+  target_achieved?: boolean;
 }
 
 const data = reportsData as Record<string, Report[]>;
@@ -53,6 +65,7 @@ interface AnalystStats {
   stockCount: number;
   achievementRate: number;
   avgReturn: number;
+  avgReturn12m: number; // 12개월 forward return 평균
   validReports: number; // 목표가가 있는 리포트 수
   stockPerformances: StockPerformance[]; // 종목별 성과
 }
@@ -87,16 +100,16 @@ function calculateAnalystStats(reports: Report[]): AnalystStats[] {
     
     let achievementRate = 0;
     let avgReturn = 0;
-    
+
     if (validReports.length > 0) {
       // 적중률 계산 (현재가 >= 목표가인 비율)
       const achievedCount = validReports.filter(r => {
         const currentPrice = stockPrices[r.ticker]?.currentPrice;
         return currentPrice && currentPrice >= (r.target_price || 0);
       }).length;
-      
+
       achievementRate = (achievedCount / validReports.length) * 100;
-      
+
       // 평균 수익률 계산
       const returns = validReports.map(r => {
         const currentPrice = stockPrices[r.ticker]?.currentPrice;
@@ -106,9 +119,15 @@ function calculateAnalystStats(reports: Report[]): AnalystStats[] {
         }
         return 0;
       });
-      
+
       avgReturn = returns.reduce((sum, ret) => sum + ret, 0) / returns.length;
     }
+
+    // 12개월 forward return 평균 계산
+    const reportsWithReturn12m = analystReports.filter(r => r.return_12m != null);
+    const avgReturn12m = reportsWithReturn12m.length > 0
+      ? reportsWithReturn12m.reduce((sum, r) => sum + (r.return_12m || 0), 0) / reportsWithReturn12m.length
+      : 0;
 
     // 종목별 성과 계산
     const stockPerformances: StockPerformance[] = [];
@@ -176,6 +195,7 @@ function calculateAnalystStats(reports: Report[]): AnalystStats[] {
       stockCount,
       achievementRate: Math.round(achievementRate * 10) / 10,
       avgReturn: Math.round(avgReturn * 10) / 10,
+      avgReturn12m: Math.round(avgReturn12m * 10) / 10,
       validReports: validReports.length,
       stockPerformances
     });
@@ -291,7 +311,7 @@ export default function AnalystPage() {
   const [search, setSearch] = useState('');
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [analystSort, setAnalystSort] = useState<'achievement' | 'reports' | 'return'>('reports');
+  const [analystSort, setAnalystSort] = useState<'achievement' | 'reports' | 'return' | 'return_12m'>('reports');
   const [expandedAnalyst, setExpandedAnalyst] = useState<string | null>(null);
   const [expandedTicker, setExpandedTicker] = useState<string | null>(null);
   const q = search.toLowerCase();
@@ -360,6 +380,8 @@ export default function AnalystPage() {
             return b.reportCount - a.reportCount;
           case 'return':
             return b.avgReturn - a.avgReturn;
+          case 'return_12m':
+            return b.avgReturn12m - a.avgReturn12m;
           default:
             return b.achievementRate - a.achievementRate;
         }
@@ -377,7 +399,7 @@ export default function AnalystPage() {
       {/* 헤더 */}
       <div className="bg-white border-b border-gray-100 px-4 py-4">
         <h1 className="text-xl font-bold text-gray-900">📊 애널리스트 리포트</h1>
-        <p className="text-sm text-gray-500 mt-1">20종목 · {allReports.length}개 리포트</p>
+        <p className="text-sm text-gray-500 mt-1">{Object.keys(data).length}종목 · {allReports.length.toLocaleString()}개 리포트</p>
       </div>
 
       {/* 검색 */}
@@ -410,7 +432,7 @@ export default function AnalystPage() {
         {/* 🔥 최신 리포트 */}
         {activeTab === 'latest' && (
           <div className="space-y-2">
-            {filteredReports.slice(0, 100).map((r, i) => (
+            {filteredReports.slice(0, 200).map((r, i) => (
               <div 
                 key={i} 
                 className="bg-white rounded-xl p-4 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
@@ -563,7 +585,7 @@ export default function AnalystPage() {
                         <div className="col-span-5">제목</div>
                       </div>
                       
-                      {g.reports.slice(0, 30).map((r, i) => (
+                      {g.reports.map((r, i) => (
                         <div 
                           key={i} 
                           className="grid grid-cols-12 gap-2 items-center py-3 border-b border-gray-50 last:border-0 cursor-pointer hover:bg-blue-50/50 rounded transition-colors"
@@ -638,16 +660,26 @@ export default function AnalystPage() {
                 <button
                   onClick={() => setAnalystSort('return')}
                   className={`text-xs px-2 py-1 rounded-full ${
-                    analystSort === 'return' 
-                      ? 'bg-blue-100 text-blue-700 font-medium' 
+                    analystSort === 'return'
+                      ? 'bg-blue-100 text-blue-700 font-medium'
                       : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
                   수익률순
                 </button>
+                <button
+                  onClick={() => setAnalystSort('return_12m')}
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    analystSort === 'return_12m'
+                      ? 'bg-blue-100 text-blue-700 font-medium'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  12개월 수익률순
+                </button>
               </div>
               <p className="text-xs text-gray-500">
-                💡 적중률: 목표가 달성 비율 | 수익률: 목표가 대비 현재가 상승률 평균
+                💡 적중률: 목표가 달성 비율 | 수익률: 목표가 대비 현재가 | 12개월 수익률: forward return 12M 평균
               </p>
             </div>
 
@@ -693,7 +725,19 @@ export default function AnalystPage() {
                               {analyst.avgReturn >= 0 ? '+' : ''}{analyst.avgReturn}%
                             </span>
                           </div>
-                          
+
+                          {analyst.avgReturn12m !== 0 && (
+                            <div className={`flex items-center gap-1 px-2 py-1 rounded-full border ${
+                              analyst.avgReturn12m >= 0 ? 'bg-purple-50 border-purple-200' : 'bg-red-50 border-red-200'
+                            }`}>
+                              <span className="text-xs">📅</span>
+                              <span className={`text-xs font-bold ${analyst.avgReturn12m >= 0 ? 'text-purple-700' : 'text-red-700'}`}>
+                                {analyst.avgReturn12m >= 0 ? '+' : ''}{analyst.avgReturn12m}%
+                              </span>
+                              <span className={`text-[10px] ${analyst.avgReturn12m >= 0 ? 'text-purple-500' : 'text-red-500'}`}>12M</span>
+                            </div>
+                          )}
+
                           <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-full border border-gray-200">
                             <span className="text-xs text-gray-700">📄</span>
                             <span className="text-xs font-bold text-gray-700">
