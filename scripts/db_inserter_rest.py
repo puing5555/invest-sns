@@ -1,4 +1,4 @@
-# db_inserter_rest.py - Supabase REST API 직접 호출 모듈
+﻿# db_inserter_rest.py - Supabase REST API 직접 호출 모듈
 import json
 import uuid
 import requests
@@ -46,7 +46,7 @@ class DatabaseInserter:
             # channel_url: 'url' 키 사용 (channel_info['url'] = channel_url)
             channel_url = channel_info.get('url', '')
 
-            # 기존 채널 확인 — channel_url 컬럼으로 조회
+            # 기존 채널 확인 - channel_url 컬럼으로 조회
             response = requests.get(
                 f"{self.base_url}/influencer_channels",
                 headers=self.headers,
@@ -72,7 +72,7 @@ class DatabaseInserter:
             handle_match = _re.search(r'@([^/?#]+)', channel_url)
             channel_handle = handle_match.group(1) if handle_match else ''
 
-            # 새 채널 생성 — 실제 테이블 컬럼명 사용
+            # 새 채널 생성 - 실제 테이블 컬럼명 사용
             channel_data = {
                 'id': str(uuid.uuid4()),
                 'channel_name': channel_name,
@@ -372,7 +372,7 @@ class DatabaseInserter:
             signals = result.get('signals', [])
 
             if not video_uuid:
-                print(f"  [WARNING] video_uuid 없음 — 건너뜀: {result.get('video_id', '?')}")
+                print(f"  [WARNING] video_uuid 없음 - 건너뜀: {result.get('video_id', '?')}")
                 stats['skipped_videos'] += 1
                 continue
 
@@ -441,7 +441,7 @@ class DatabaseInserter:
                 }
             )
             if chk.ok and chk.json():
-                print(f"  [DUP] {stock} ({signal_val}) — 스킵")
+                print(f"  [DUP] {stock} ({signal_val}) - 스킵")
                 return False
         except Exception:
             pass
@@ -563,6 +563,263 @@ class DatabaseInserter:
         except Exception as e:
             print(f"[ERROR] update_signal_prices_json 실패: {e}")
             return []
+
+    def calculate_returns_for_signals(self, signal_ids: List[str] = None) -> Dict[str, Any]:
+        """
+        수익률 자동 계산: yfinance로 시점가 조회 → return_pct 계산 → DB PATCH
+        
+        Args:
+            signal_ids: 특정 시그널 ID 목록. None이면 return_pct가 null인 전체 대상.
+        
+        Returns:
+            {'updated': int, 'skipped': int, 'errors': list}
+        """
+        import yfinance as yf
+        from datetime import timedelta
+        import time as _time
+
+        print("\n=== 수익률 자동 계산 시작 ===")
+        stats = {'updated': 0, 'skipped': 0, 'errors': []}
+
+        # 1) 대상 시그널 조회
+        if signal_ids:
+            # 특정 ID 목록
+            all_signals = []
+            for sid in signal_ids:
+                resp = requests.get(
+                    f"{self.base_url}/influencer_signals",
+                    headers=self.headers,
+                    params={
+                        'id': f'eq.{sid}',
+                        'select': 'id,stock,ticker,market,signal,created_at,influencer_videos(published_at)'
+                    }
+                )
+                if resp.ok and resp.json():
+                    all_signals.extend(resp.json())
+        else:
+            # return_pct가 null인 전체
+            all_signals = []
+            offset = 0
+            while True:
+                resp = requests.get(
+                    f"{self.base_url}/influencer_signals",
+                    headers=self.headers,
+                    params={
+                        'return_pct': 'is.null',
+                        'signal': 'neq.중립',
+                        'select': 'id,stock,ticker,market,signal,created_at,influencer_videos(published_at)',
+                        'limit': '100',
+                        'offset': str(offset)
+                    }
+                )
+                if not resp.ok or not resp.json():
+                    break
+                batch = resp.json()
+                all_signals.extend(batch)
+                if len(batch) < 100:
+                    break
+                offset += 100
+
+        print(f"대상 시그널: {len(all_signals)}개")
+        if not all_signals:
+            print("수익률 계산 대상 없음")
+            return stats
+
+        # 2) ticker별로 그룹핑
+        ticker_groups = {}
+        no_ticker = []
+        for sig in all_signals:
+            ticker = sig.get('ticker')
+            if not ticker:
+                no_ticker.append(sig)
+                stats['skipped'] += 1
+                continue
+            if ticker not in ticker_groups:
+                ticker_groups[ticker] = []
+            ticker_groups[ticker].append(sig)
+
+        if no_ticker:
+            print(f"  ticker 없는 시그널: {len(no_ticker)}개 (스킵)")
+
+        # 3) ticker별 가격 조회 + 수익률 계산
+        for ticker, signals in ticker_groups.items():
+            try:
+                # yfinance ticker 변환
+                yf_ticker = self._to_yfinance_ticker(ticker, signals[0].get('market', 'OTHER'))
+                
+                # 시그널 날짜 수집
+                signal_dates = {}
+                for sig in signals:
+                    vid = sig.get('influencer_videos') or {}
+                    pub_date = vid.get('published_at') or sig.get('created_at', '')
+                    if pub_date:
+                        signal_dates[sig['id']] = pub_date[:10]
+
+                if not signal_dates:
+                    for sig in signals:
+                        stats['errors'].append({'id': sig['id'], 'stock': sig.get('stock'), 'reason': 'no date'})
+                        stats['skipped'] += 1
+                    continue
+
+                # 날짜 범위 계산
+                all_dates = sorted(signal_dates.values())
+                start_date = all_dates[0]
+                
+                # yfinance 조회 (start부터 오늘까지)
+                stock = yf.Ticker(yf_ticker)
+                hist = stock.history(start=start_date, end=datetime.now().strftime('%Y-%m-%d'))
+                
+                if hist.empty:
+                    print(f"  [{yf_ticker}] 가격 데이터 없음 - {len(signals)}개 스킵")
+                    for sig in signals:
+                        stats['errors'].append({'id': sig['id'], 'stock': sig.get('stock'), 'ticker': ticker, 'reason': 'no yfinance data'})
+                        stats['skipped'] += 1
+                    continue
+
+                # NaN 행 제거
+                import math
+                hist = hist.dropna(subset=['Close'])
+                if hist.empty:
+                    print(f"  [{yf_ticker}] NaN 제거 후 데이터 없음 - {len(signals)}개 스킵")
+                    for sig in signals:
+                        stats['errors'].append({'id': sig['id'], 'stock': sig.get('stock'), 'ticker': ticker, 'reason': 'all NaN'})
+                        stats['skipped'] += 1
+                    continue
+
+                # 현재가 (마지막 종가)
+                current_price = round(float(hist['Close'].iloc[-1]), 2)
+                if math.isnan(current_price) or math.isinf(current_price):
+                    print(f"  [{yf_ticker}] 현재가 NaN/Inf - {len(signals)}개 스킵")
+                    for sig in signals:
+                        stats['errors'].append({'id': sig['id'], 'stock': sig.get('stock'), 'ticker': ticker, 'reason': 'NaN current price'})
+                        stats['skipped'] += 1
+                    continue
+
+                # 각 시그널별 시점가 계산
+                for sig in signals:
+                    sig_date = signal_dates.get(sig['id'])
+                    if not sig_date:
+                        stats['skipped'] += 1
+                        continue
+
+                    # 해당 날짜 또는 이전 가장 가까운 영업일 가격
+                    price_at = self._get_price_at_date(hist, sig_date)
+                    if price_at is None:
+                        stats['errors'].append({'id': sig['id'], 'stock': sig.get('stock'), 'reason': f'no price at {sig_date}'})
+                        stats['skipped'] += 1
+                        continue
+
+                    # 수익률 계산
+                    return_pct = round(((current_price - price_at) / price_at) * 100, 2)
+
+                    # DB UPDATE
+                    patch_resp = requests.patch(
+                        f"{self.base_url}/influencer_signals?id=eq.{sig['id']}",
+                        headers={**self.headers, 'Prefer': 'return=minimal'},
+                        json={
+                            'price_at_signal': price_at,
+                            'price_current': current_price,
+                            'return_pct': return_pct
+                        }
+                    )
+                    if patch_resp.ok:
+                        stats['updated'] += 1
+                        print(f"  [OK] {sig.get('stock')} ({ticker}): {price_at} → {current_price} = {return_pct:+.2f}%")
+                    else:
+                        stats['errors'].append({'id': sig['id'], 'reason': f'PATCH failed: {patch_resp.status_code}'})
+
+                # Rate limit: ticker 간 1초 대기
+                _time.sleep(1)
+
+            except Exception as e:
+                print(f"  [ERR] [{ticker}] 오류: {e}")
+                for sig in signals:
+                    stats['errors'].append({'id': sig['id'], 'stock': sig.get('stock'), 'ticker': ticker, 'reason': str(e)})
+                    stats['skipped'] += 1
+
+        print(f"\n=== 수익률 계산 완료 ===")
+        print(f"  업데이트: {stats['updated']}개")
+        print(f"  스킵: {stats['skipped']}개")
+        if stats['errors']:
+            print(f"  에러: {len(stats['errors'])}개")
+        return stats
+
+    def _to_yfinance_ticker(self, ticker: str, market: str = 'OTHER') -> str:
+        """ticker를 yfinance 형식으로 변환"""
+        import yfinance as yf
+        
+        # 크립토
+        CRYPTO = {'BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'KLAY', 'XLM', 
+                  'ORBS', 'WLD', 'PENGU', 'UNI', 'ARB', 'USDC', 'USDT'}
+        if ticker.upper() in CRYPTO:
+            return f"{ticker.upper()}-USD"
+        
+        # 지수
+        INDEX_MAP = {'IXIC': '^IXIC', 'KS11': '^KS11', 'GSPC': '^GSPC', 'DJI': '^DJI'}
+        if ticker.upper() in INDEX_MAP:
+            return INDEX_MAP[ticker.upper()]
+        
+        # 한국 종목 (6자리 숫자): .KS 시도 → 실패시 .KQ (코스닥)
+        if ticker.isdigit() and len(ticker) == 6:
+            # 먼저 .KS 시도
+            ks = f"{ticker}.KS"
+            try:
+                t = yf.Ticker(ks)
+                h = t.history(period='5d')
+                if not h.empty:
+                    return ks
+            except Exception:
+                pass
+            # .KQ 시도
+            return f"{ticker}.KQ"
+        
+        # 홍콩 (4자리 숫자)
+        if ticker.isdigit() and len(ticker) == 4:
+            return f"{ticker.zfill(4)}.HK"
+        
+        # 중국 A주 (시장 힌트로 판단)
+        if market in ('CN', 'CHINA') and ticker.isdigit() and len(ticker) == 6:
+            if ticker.startswith('6'):
+                return f"{ticker}.SS"
+            else:
+                return f"{ticker}.SZ"
+        
+        # US/기타: 그대로
+        return ticker
+
+    def _get_price_at_date(self, hist, date_str: str):
+        """히스토리 데이터에서 특정 날짜(또는 이전 가장 가까운 영업일)의 종가 반환"""
+        import pandas as pd
+        import math
+        try:
+            target = pd.Timestamp(date_str)
+            # tz-aware인 경우 처리
+            if hist.index.tz is not None:
+                target = target.tz_localize(hist.index.tz)
+            
+            def _safe_price(val):
+                v = round(float(val), 2)
+                if math.isnan(v) or math.isinf(v):
+                    return None
+                return v
+            
+            # 정확히 해당 날짜가 있으면
+            if target in hist.index:
+                return _safe_price(hist.loc[target, 'Close'])
+            
+            # 이전 가장 가까운 영업일
+            before = hist[hist.index <= target]
+            if not before.empty:
+                return _safe_price(before['Close'].iloc[-1])
+            
+            # 이후 가장 가까운 영업일 (시그널 날짜가 데이터 시작 전)
+            after = hist[hist.index >= target]
+            if not after.empty:
+                return _safe_price(after['Close'].iloc[0])
+            
+            return None
+        except Exception:
+            return None
 
     def get_signal_stats(self) -> Dict[str, int]:
         """

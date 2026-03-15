@@ -732,7 +732,16 @@ class AutoPipeline:
 
             db_stats = all_db_stats
 
-            # signal_prices.json 업데이트 준비
+            # ── Step 7.5: 수익률 자동 계산 (DB 직접) ─────────────
+            print(f"\n[Step 7.5] 수익률 자동 계산 (yfinance → DB)...")
+            try:
+                returns_result = self.db_inserter.calculate_returns_for_signals()
+                print(f"  수익률 계산: {returns_result.get('updated', 0)}개 업데이트, "
+                      f"{returns_result.get('skipped', 0)}개 스킵")
+            except Exception as _ret_err:
+                print(f"  [WARNING] 수익률 계산 오류 (건너뜀): {_ret_err}")
+
+            # signal_prices.json 업데이트 준비 (레거시 호환)
             price_update_stocks = self.db_inserter.update_signal_prices_json()
 
             # ── Step 8: 새 종목 가격 데이터 수집 ────────────────────
