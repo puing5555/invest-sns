@@ -444,10 +444,10 @@ export default function AnalystPage() {
         {activeTab === 'stock' && (
           <div className="space-y-2">
             {tickerGroups.map(g => {
-              // 컨센서스 계산 (최근 1개월)
-              const oneMonthAgo = new Date();
-              oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
-              const recentReports = g.reports.filter(r => new Date(r.published_at) >= oneMonthAgo);
+              // 컨센서스 계산 (최근 3개월)
+              const threeMonthsAgo = new Date();
+              threeMonthsAgo.setDate(threeMonthsAgo.getDate() - 90);
+              const recentReports = g.reports.filter(r => new Date(r.published_at) >= threeMonthsAgo);
               const recentWithTarget = recentReports.filter(r => r.target_price && r.target_price > 0);
               const buyCount = recentReports.filter(r => r.opinion === 'BUY').length;
               const holdCount = recentReports.filter(r => r.opinion === 'HOLD').length;
@@ -485,7 +485,7 @@ export default function AnalystPage() {
                       <div className="flex items-center justify-between mb-2">
                         <div>
                           <h4 className="font-bold text-gray-900 text-sm">애널리스트 컨센서스</h4>
-                          <p className="text-xs text-gray-500">최근 1개월 리포트 기준</p>
+                          <p className="text-xs text-gray-500">최근 3개월 리포트 기준</p>
                         </div>
                         {g.reports.length > 0 && (
                           <div className="text-right">
@@ -537,13 +537,13 @@ export default function AnalystPage() {
                                 />
                               </div>
                               <p className="text-xs text-gray-500 mt-1">
-                                최근 30일: ↑ {totalRecent}건 {buyCount > 0 ? `${buyCount}건 매수` : ''}
+                                최근 90일: ↑ {totalRecent}건 {buyCount > 0 ? `${buyCount}건 매수` : ''}
                               </p>
                             </div>
                           )}
                         </>
                       ) : (
-                        <p className="text-xs text-gray-400">최근 1개월 리포트 없음</p>
+                        <p className="text-xs text-gray-400">최근 3개월 리포트 없음</p>
                       )}
                     </div>
 
