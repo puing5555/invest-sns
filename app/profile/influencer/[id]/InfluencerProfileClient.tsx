@@ -229,7 +229,16 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                     >
                       <td className="px-3 py-3 text-xs text-[#191f28] whitespace-nowrap">{date}</td>
                       <td className="px-3 py-3 text-xs font-medium text-[#191f28] w-[11%]">
-                        <div className="break-words" title={formatStockDisplay(signal.stock, signal.ticker)}>{formatStockShort(signal.stock, signal.ticker) || formatStockDisplay(signal.stock, signal.ticker)}</div>
+                        {signal.ticker ? (
+                          <Link
+                            href={`/stock/${signal.ticker}`}
+                            className="text-[#3182f6] hover:underline break-words"
+                            title={formatStockDisplay(signal.stock, signal.ticker)}
+                            onClick={(e) => e.stopPropagation()}
+                          >{formatStockShort(signal.stock, signal.ticker) || formatStockDisplay(signal.stock, signal.ticker)}</Link>
+                        ) : (
+                          <div className="break-words" title={formatStockDisplay(signal.stock, signal.ticker)}>{formatStockShort(signal.stock, signal.ticker) || formatStockDisplay(signal.stock, signal.ticker)}</div>
+                        )}
                       </td>
                       <td className="px-3 py-3 whitespace-nowrap">
                         <div className="flex items-center gap-1 flex-nowrap">
