@@ -52,6 +52,7 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '신형관': 'shin-hyunggwan',
   '안유화': 'ahn-yuhwa',
   '안경투 (안유화의 경제금융투자 교실)': 'ahn-yuhwa',
+  '안경투 (안유화의 경제투자론)': 'ahn-yuhwa',
   '안희철': 'ahn-heechul',
   '양희창': 'yang-heechang',
   '엄민용': 'um-minyong',
