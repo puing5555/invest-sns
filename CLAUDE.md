@@ -31,7 +31,7 @@
 - `prompts/pipeline_v14.0.md` → 인플루언서 시그널 분석 프롬프트 (운영)
 - `docs/` → 아키텍처, 스펙 문서
   - `docs/RETURNS_SPEC.md` — ⚠️ 수익률/날짜 처리 필수 규칙
-- `.claude/skills/` → 워크플로우
+- `.claude/` → 자동화 시스템 (skills, hooks, tasks)
 
 ## 핵심 시스템
 
@@ -59,6 +59,31 @@
 9. 큰 작업(새 기능, 시스템 변경, 크롤링 확장 등) 시작 시 `.claude/tasks/`에 작업별 폴더 생성하고 plan/context/checklist 3개 문서 작성 필수
 10. 작업 계획은 승인 전 실행 금지
 11. 작업은 1~2단계 단위로 진행하고, 단계 완료 시 checklist 업데이트
+12. 프롬프트 수정 시 eval 69건 필수 실행, 정확도 비교 결과 보고
+13. 커밋 메시지 한글로, 변경 내용 구체적으로 (예: "수정" ✕ → "V14.0 운영 반영 + eval 73.9%" ○)
+14. 작업 완료 시 보고 필수: (1) 뭘 했는지 (2) 수정된 파일 (3) 판단 근거
+
+## .claude/ 자동화 시스템
+
+### skills/ (상황별 참조 문서)
+- `index.md` — 상황→skill 매핑 목차
+- `frontend.md` — Next.js/Tailwind 컨벤션, 시그널 색상, 레이아웃
+- `supabase.md` — DB 테이블 15개+ 스키마, RPC, Edge Function
+- `crawling.md` — 네이버 크롤러, yfinance 수익률, 프록시
+- `eval.md` — 69건 정답지, 3그룹 분석법, eval 프로세스
+- `prompt.md` — V14.0 핵심 규칙, 프롬프트 수정 절차
+- `analyst-report.md` — 리포트 데이터 구조, 종목 추가
+- `channel-add.md` — 인플루언서 채널 추가 7단계 파이프라인
+- `deploy.md` — 배포 체크리스트, gh-pages push
+
+### hooks/ (자동 트리거)
+- **PreToolUse**: 파일 경로 기반 관련 skill 자동 안내 (app/→frontend, scripts/crawl→crawling 등)
+- **PostToolUse**: .py 구문 검증 (py_compile) + .ts/.tsx 빌드 안내
+
+### tasks/ (작업 기억)
+- 큰 작업 시 작업별 폴더 생성 → plan/context/checklist 3개 문서
+- 템플릿: `.claude/tasks/_templates/`
+- 사용법: `.claude/tasks/README.md`
 
 ## Commands
 - `npm run build` → Static export (out/)
