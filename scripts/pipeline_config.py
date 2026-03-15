@@ -26,8 +26,8 @@ class PipelineConfig:
     RATE_LIMIT_API_REQUESTS = 5  # API 요청 간 5초
     
     # 프롬프트 설정
-    PROMPT_VERSION = "V11.4"
-    PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v11.4.md')
+    PROMPT_VERSION = "V14.0"
+    PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v14.0.md')
     
     # 시그널 타입 (한글 5단계)
     SIGNAL_TYPES = ["매수", "긍정", "중립", "경계", "매도"]

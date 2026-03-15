@@ -28,7 +28,7 @@
 - `data/` → JSON 데이터
   - `data/analyst_reports.json` → 애널리스트 리포트 (45종목, 3년치)
   - `data/stockPrices.json` → 종목 가격 (5년치)
-- `prompts/pipeline_v12.2.md` → 인플루언서 시그널 분석 프롬프트
+- `prompts/pipeline_v14.0.md` → 인플루언서 시그널 분석 프롬프트 (운영)
 - `docs/` → 아키텍처, 스펙 문서
   - `docs/RETURNS_SPEC.md` — ⚠️ 수익률/날짜 처리 필수 규칙
 - `.claude/skills/` → 워크플로우
@@ -38,7 +38,7 @@
 ### 1. 인플루언서 시그널 (기존)
 - 11개 채널, 1,133개 시그널, 70+ speakers
 - 파이프라인: step1_collect → step2_filter → step5_pipeline (자막추출→Claude분석→DB→수익률)
-- Eval 정확도: 55% (V12.2 프롬프트)
+- Eval 정확도: 73.9% (V14.0 프롬프트, 69건 기준)
 
 ### 2. 애널리스트 리포트 (신규)
 - 45종목, 3년치 네이버 리서치 크롤링
