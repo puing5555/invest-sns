@@ -83,13 +83,19 @@ function speakerToSlug(name) {
     slug: speakerToSlug(name)
   }));
 
-  const allSlugs = [...new Set(slugEntries.map(e => e.slug))].sort();
+  // slug → name 역매핑 (가장 짧은 이름 우선)
+  const slugToName = {};
+  slugEntries.forEach(({ name, slug }) => {
+    if (!slugToName[slug] || name.length < slugToName[slug].length) {
+      slugToName[slug] = name;
+    }
+  });
 
-  // 저장
+  // 저장: { slug: name } 형태 (역매핑 포함)
   const outPath = path.join(__dirname, '..', 'data', 'speaker_slugs.json');
-  fs.writeFileSync(outPath, JSON.stringify(allSlugs, null, 2), 'utf-8');
+  fs.writeFileSync(outPath, JSON.stringify(slugToName, null, 2), 'utf-8');
 
-  console.log(`[OK] data/speaker_slugs.json 생성: ${allSlugs.length}개 slug`);
+  console.log(`[OK] data/speaker_slugs.json 생성: ${Object.keys(slugToName).length}개 slug`);
 
   // 매핑 안 된 화자 리포트
   const unmapped = slugEntries.filter(e => !SPEAKER_SLUGS[e.name]);

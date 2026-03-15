@@ -107,8 +107,26 @@ export function speakerToSlug(name: string): string {
   return SPEAKER_SLUGS[name] || koreanToSlug(name);
 }
 
+// data/speaker_slugs.json: { slug: name } 역매핑 (채널명 포함)
+let _dynamicSlugMap: Record<string, string> | null = null;
+function getDynamicSlugMap(): Record<string, string> {
+  if (!_dynamicSlugMap) {
+    try {
+      _dynamicSlugMap = require('@/data/speaker_slugs.json');
+    } catch {
+      _dynamicSlugMap = {};
+    }
+  }
+  return _dynamicSlugMap!;
+}
+
 export function slugToSpeaker(slug: string): string | null {
-  return SLUG_TO_SPEAKER[slug] || null;
+  // 1) 하드코딩 매핑에서 찾기
+  if (SLUG_TO_SPEAKER[slug]) return SLUG_TO_SPEAKER[slug];
+  // 2) data/speaker_slugs.json 역매핑에서 찾기 (채널명 포함)
+  const dynamic = getDynamicSlugMap();
+  if (dynamic[slug]) return dynamic[slug];
+  return null;
 }
 
 export function getAllSpeakerSlugs(): string[] {
