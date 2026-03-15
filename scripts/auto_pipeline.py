@@ -112,7 +112,8 @@ def save_tmp_json(data: Any, slug: str, suffix: str) -> str:
 
 def _deploy_gh_pages(project_root: str, channel_slug: str) -> Optional[str]:
     """
-    git worktree 방식으로 out/ → gh-pages 브랜치에 배포.
+    orphan 커밋 방식으로 out/ → gh-pages 브랜치에 배포.
+    매번 히스토리 없는 깨끗한 커밋 1개만 push → 대용량 파일 히스토리 문제 원천 차단.
     성공 시 None 반환, 실패 시 에러 메시지 반환.
     """
     import tempfile as _tempfile
@@ -122,33 +123,23 @@ def _deploy_gh_pages(project_root: str, channel_slug: str) -> Optional[str]:
     if not os.path.isdir(out_path):
         return f"out/ 디렉토리 없음 — 빌드가 먼저 완료되어야 합니다"
 
+    # remote URL 가져오기
+    r = subprocess.run(
+        ['git', 'remote', 'get-url', 'origin'],
+        cwd=project_root, capture_output=True, text=True, timeout=10
+    )
+    if r.returncode != 0:
+        return f"git remote URL 조회 실패: {r.stderr[:200]}"
+    remote_url = r.stdout.strip()
+
     tmp_dir = _tempfile.mkdtemp(prefix='invest-sns-deploy-')
     try:
-        # gh-pages 브랜치가 있으면 worktree add, 없으면 orphan 브랜치 생성
-        r = subprocess.run(
-            ['git', 'worktree', 'add', tmp_dir, 'gh-pages'],
-            cwd=project_root, capture_output=True, text=True, timeout=60
-        )
-        if r.returncode != 0:
-            # gh-pages 브랜치 없음 → orphan으로 생성
-            r2 = subprocess.run(
-                ['git', 'worktree', 'add', '--orphan', '-b', 'gh-pages', tmp_dir],
-                cwd=project_root, capture_output=True, text=True, timeout=60
-            )
-            if r2.returncode != 0:
-                return f"worktree 생성 실패: {r2.stderr[:300]}"
+        # 1) 임시 디렉토리에 새 git repo 초기화 (orphan — 히스토리 없음)
+        subprocess.run(['git', 'init'], cwd=tmp_dir, capture_output=True, timeout=10)
+        subprocess.run(['git', 'checkout', '--orphan', 'gh-pages'],
+                       cwd=tmp_dir, capture_output=True, timeout=10)
 
-        # 기존 파일 삭제 (.git 제외)
-        for item in os.listdir(tmp_dir):
-            if item == '.git':
-                continue
-            target = os.path.join(tmp_dir, item)
-            if os.path.isdir(target):
-                _sh.rmtree(target)
-            else:
-                os.remove(target)
-
-        # out/ 내용 복사
+        # 2) out/ 내용 복사
         for item in os.listdir(out_path):
             s = os.path.join(out_path, item)
             d = os.path.join(tmp_dir, item)
@@ -157,44 +148,46 @@ def _deploy_gh_pages(project_root: str, channel_slug: str) -> Optional[str]:
             else:
                 _sh.copy2(s, d)
 
-        # .nojekyll 보장
+        # 3) .nojekyll 보장
         nojekyll = os.path.join(tmp_dir, '.nojekyll')
         if not os.path.exists(nojekyll):
             open(nojekyll, 'w').close()
 
-        # git add + commit + push --force
+        # 4) git add + commit
         ts = datetime.now().strftime('%Y-%m-%d %H:%M')
         commit_msg = f'deploy: {channel_slug} 파이프라인 자동배포 ({ts})'
 
-        for cmd in [
-            ['git', 'add', '-A'],
-            ['git', 'commit', '-m', commit_msg],
-            ['git', 'push', 'origin', 'gh-pages', '--force'],
-        ]:
-            r = subprocess.run(cmd, cwd=tmp_dir, capture_output=True,
-                               text=True, timeout=120)
-            if r.returncode != 0:
-                # "nothing to commit"은 에러 아님
-                if 'nothing to commit' in r.stdout or 'nothing to commit' in r.stderr:
-                    print(f"  [INFO] 변경사항 없음 — 재배포 스킵")
-                    break
-                return f"'{' '.join(cmd)}' 실패: {r.stderr[:300]}"
+        subprocess.run(['git', 'add', '-A'], cwd=tmp_dir, capture_output=True, timeout=60)
 
+        r = subprocess.run(
+            ['git', 'commit', '-m', commit_msg],
+            cwd=tmp_dir, capture_output=True, text=True, timeout=60
+        )
+        if r.returncode != 0:
+            if 'nothing to commit' in (r.stdout + r.stderr):
+                print(f"  [INFO] 변경사항 없음 — 재배포 스킵")
+                return None
+            return f"git commit 실패: {r.stderr[:300]}"
+
+        # 5) remote 추가 + push --force
+        subprocess.run(['git', 'remote', 'add', 'origin', remote_url],
+                       cwd=tmp_dir, capture_output=True, timeout=10)
+
+        r = subprocess.run(
+            ['git', 'push', 'origin', 'gh-pages', '--force'],
+            cwd=tmp_dir, capture_output=True, text=True, timeout=180
+        )
+        if r.returncode != 0:
+            return f"git push 실패: {r.stderr[:500]}"
+
+        print(f"  [OK] orphan 배포 완료 (히스토리 없는 깨끗한 커밋)")
         return None  # 성공
 
     except Exception as _e:
         return str(_e)
 
     finally:
-        # worktree 정리
-        try:
-            subprocess.run(
-                ['git', 'worktree', 'remove', tmp_dir, '--force'],
-                cwd=project_root, capture_output=True, timeout=30
-            )
-        except Exception:
-            pass
-        # 임시 폴더 잔여 정리
+        # 임시 폴더 정리
         if os.path.isdir(tmp_dir):
             try:
                 _sh.rmtree(tmp_dir, ignore_errors=True)
