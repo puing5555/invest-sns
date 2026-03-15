@@ -1,41 +1,8 @@
-# 애널리스트 리포트 시스템 운영
-
-## 데이터 수집 (크롤링)
-
-### 전체 크롤링 (처음부터)
-```bash
-node scripts/crawl-naver-research-v2.js
-```
-
-### 이어서 크롤링 (중단 후 재개)
-```bash
-node scripts/crawl-naver-research-v2.js --resume
-```
-
-### 크롤링 후 수익률 계산
-```bash
-pip install yfinance
-python scripts/calc_analyst_returns.py
-```
-
-### 결과 확인
-```bash
-# 총 건수, NULL 비율 확인
-python -c "
-import json
-d = json.load(open('data/analyst_reports.json'))
-total = sum(len(v) for v in d.values())
-null_tp = sum(1 for rs in d.values() for r in rs if not r.get('target_price'))
-null_ret = sum(1 for rs in d.values() for r in rs if r.get('return_12m') is None)
-print(f'종목: {len(d)}개, 리포트: {total}건')
-print(f'target_price NULL: {null_tp}건 ({null_tp/total*100:.1f}%)')
-print(f'return_12m NULL: {null_ret}건 ({null_ret/total*100:.1f}%)')
-"
-```
+# 애널리스트 리포트 시스템
 
 ## 데이터 구조
 
-### analyst_reports.json
+### analyst_reports.json (정적 데이터)
 ```json
 {
   "005930": [
@@ -50,7 +17,7 @@ print(f'return_12m NULL: {null_ret}건 ({null_ret/total*100:.1f}%)')
       "pdf_url": "https://stock.pstatic.net/...",
       "nid": "123456",
       "summary": "AI 한줄 요약",
-      "ai_detail": "## 투자포인트\n...\n## 실적전망\n...",
+      "ai_detail": "## 투자포인트\n...",
       "return_3m": 12.5,
       "return_6m": 25.3,
       "return_12m": 45.2,
@@ -62,23 +29,29 @@ print(f'return_12m NULL: {null_ret}건 ({null_ret/total*100:.1f}%)')
 }
 ```
 
-## 프론트엔드 구조
+## 프론트엔드 페이지
 
-### 페이지: app/explore/analyst/page.tsx
+### 탐색 페이지: `app/explore/analyst/page.tsx`
 - 3개 탭: 최신 리포트 / 종목별 / 애널리스트별
-- 종목별: 컨센서스 요약 (3개월) + 테이블 형식 리포트 목록
-- 리포트 클릭 → ReportDetailModal (AI 요약 + PDF 링크)
+- 종목별: 컨센서스 요약 (3개월) + 테이블 리포트 목록
+- 기본 정렬: 12개월 forward return
+- 리포트 클릭 → `ReportDetailModal` (AI 요약 + PDF)
 
-### 종목 페이지: app/stock/[code]/ → 애널리스트 탭
+### 종목 페이지: `app/stock/[code]/` → 애널리스트 탭
 - 컨센서스 카드 + 주가 vs 목표가 차트 + 리포트 목록
 
-## 종목 추가 시
-1. `scripts/crawl-naver-research-v2.js`의 `KR_TICKERS` 배열에 종목코드 추가
-2. `TICKER_NAMES`에 한글명 매핑 추가
-3. 크롤러 실행 (`--resume` 가능)
+## 종목 추가 절차
+
+1. `scripts/crawl-naver-research-v2.js`
+   - `KR_TICKERS` 배열에 종목코드 추가
+   - `TICKER_NAMES`에 한글명 매핑 추가
+2. 크롤러 실행 (→ `crawling.md` 참조)
+3. 수익률 계산: `python scripts/calc_analyst_returns.py`
 4. 프론트엔드 `app/explore/analyst/page.tsx`의 `TICKER_NAMES`에도 추가
+5. `npm run build` 확인
 
 ## 수익률 기준
 - 기본 정렬: 12개월 forward return
 - 보조: 3개월, 6개월, 목표가 적중률
 - 컨센서스: 최근 3개월 리포트 기준
+- 계산 방법 상세 → `crawling.md` 참조

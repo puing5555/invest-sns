@@ -7,28 +7,28 @@
     ↓
 [2. 메타데이터 수집] ← yt-dlp
     ↓
-[3. 메타데이터 검증] ← 자동 QA Gate 1 ⛔ 실패 시 중단+보고
+[3. QA Gate 1] ⛔ 실패 시 중단
     ↓
-[4. 자막 추출 + 시그널 분석] ← yt-dlp + V11.2
+[4. 자막 추출 + 시그널 분석] ← yt-dlp + V14.0
     ↓
-[5. 시그널 검증] ← 자동 QA Gate 2 ⛔ 실패 시 중단+보고
+[5. QA Gate 2] ⛔ 실패 시 중단
     ↓
 [6. DB 저장 + 수익률 계산]
     ↓
-[7. 프론트 검증] ← 자동 QA Gate 3 ⛔ 실패 시 배포 차단
+[7. QA Gate 3] ⛔ 실패 시 배포 차단
     ↓
 [배포]
 ```
 
 ## 실행 명령
 ```bash
-# 전체 자동 실행 (채널 URL만 넣으면 됨)
+# 전체 자동 실행
 python scripts/auto_pipeline.py --channel https://www.youtube.com/@채널핸들 --execute
 
 # QA 없이 실행 (긴급 시만)
 python scripts/auto_pipeline.py --channel URL --execute --skip-qa
 
-# 영상 목록 미리 확인 (dry-run)
+# 미리보기
 python scripts/auto_pipeline.py --channel URL --dry-run
 ```
 
@@ -39,47 +39,43 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - 영문만인 경우 경고 → 한글명 수동 확인
 
 ## 2단계: 메타데이터 수집
-수집 필드: video_id, title(실제 제목), published_at(업로드날짜), duration_seconds, view_count
+수집 필드: video_id, title, published_at, duration_seconds, view_count
 
 필터 제외:
-- 60초 미만 (Shorts)
-- 7200초 초과 (라이브 리플레이)
+- 60초 미만 (Shorts), 7200초 초과 (라이브)
 - 조회수 1000 미만
-- 일상/먹방/여행/브이로그/구독/이벤트/경품/광고/협찬
+- 키워드: 일상/먹방/여행/브이로그/구독/이벤트/광고/멤버십
 
 필터 통과 키워드:
-- 종목명, 매수/매도/포트폴리오/주가/실적/전망/분석/추천
-- 코스피/나스닥/S&P/비트코인
-- 긴급/속보/실적발표/어닝/컨콜
+- 종목명, 매수/매도/전망/분석/추천
+- 코스피/나스닥/비트코인
 
-## 3단계: QA Gate 1 (메타데이터 검증)
+## 3단계: QA Gate 1 (메타데이터)
 | 체크 | 조건 | 실패 시 |
 |------|------|---------|
-| 제목 검증 | YouTube ID 패턴 있으면 | ⛔ 중단 |
-| 날짜 검증 | 50%+ 같은 날짜면 | ⛔ 중단 |
-| 날짜 범위 | 미래 날짜 있으면 | ⛔ 중단 |
-| 채널명 | 영문 핸들만이면 | ⚠️ 경고 |
-| 중복 | DB에 이미 있으면 | ⚠️ 스킵 |
-| 필터 통과율 | 5% 미만이면 | ⚠️ 경고 |
+| 제목 검증 | YouTube ID 패턴 | ⛔ 중단 |
+| 날짜 검증 | 50%+ 같은 날짜 | ⛔ 중단 |
+| 날짜 범위 | 미래 날짜 존재 | ⛔ 중단 |
+| 채널명 | 영문 핸들만 | ⚠️ 경고 |
+| 중복 | DB에 이미 존재 | ⚠️ 스킵 |
 
-## 4단계: 자막 추출
+## 4단계: 자막 추출 + 시그널 분석
 - yt-dlp로 ko 자막 우선, 없으면 en
-- 자막 없는 영상 스킵 + 리포트 기록
-- 레이트 리밋: 20개 후 5분 휴식, 요청 간 2-3초 딜레이
+- **V14.0 프롬프트**로 Sonnet 분석 (→ `prompt.md` 참조)
+- 시그널 타입: **매수/긍정/중립/부정/매도** (5단계)
+- 레이트 리밋: 20개 후 5분 휴식
 
-## 5단계: 시그널 분석 + QA Gate 2
-- V11.2 프롬프트로 Sonnet 분석
-- 시그널 타입: 매수/긍정/중립/부정/매도 (5단계만)
-- QA Gate 2: 타임스탬프 필수, 1영상 1종목 원칙, 비표준 신호 0
+## 5단계: QA Gate 2 (시그널)
+- 타임스탬프 유효성
+- 1영상 1종목 1시그널 원칙
+- 비표준 시그널 타입 0건 확인
+- confidence 5~10 범위 확인
 
 ## 6단계: DB 저장 + 새 종목 처리
 - INSERT 전 중복 체크 (video_id 기준)
-- **새 종목 자동 감지** (signal_prices.json에 없는 종목)
-- **자동 가격 수집** (Yahoo Finance / 네이버금융)
-- `data/signal_prices.json` 업데이트
-- `data/stock_tickers.json` 업데이트
-- ⚠️ **신규 ticker 추가 시 재빌드 필요** (정적 생성 구조)
-  → pipeline이 자동으로 rebuild_needed 플래그 반환
+- 새 종목 자동 감지 → Yahoo Finance/네이버금융 가격 수집
+- `data/signal_prices.json`, `data/stock_tickers.json` 업데이트
+- ⚠️ 신규 ticker → 재빌드 필요 (정적 생성 구조)
 
 ## 7단계: QA Gate 3 (프론트 검증)
 - 인플루언서 슬러그 페이지 존재 확인
@@ -87,6 +83,6 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - 실패 시 배포 차단
 
 ## 주의사항
-- published_at = 영상 업로드 날짜 (크롤링 날짜 사용 금지)
-- channel_name = 실제 채널명 (핸들 사용 금지)
-- 시그널 재분석은 JAY 승인 필수
+- published_at = 영상 업로드 날짜 (**크롤링 날짜 사용 금지**)
+- channel_name = 실제 채널명 (**핸들 사용 금지**)
+- **시그널 재분석은 JAY 승인 필수**
