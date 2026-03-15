@@ -17,19 +17,19 @@ except:
 FILE_PATH=$(echo "$FILE_PATH" | tr '\\' '/')
 
 case "$FILE_PATH" in
-  */components/* | */app/*)
+  components/* | */components/* | app/* | */app/*)
     echo "skill-hint: frontend.md (UI 컨벤션, Tailwind, 레이아웃)"
     ;;
-  */scripts/crawl* | */scripts/calc_analyst*)
+  scripts/crawl* | */scripts/crawl* | scripts/calc_analyst* | */scripts/calc_analyst*)
     echo "skill-hint: crawling.md (크롤러, yfinance, 프록시)"
     ;;
-  */prompts/*)
+  prompts/* | */prompts/*)
     echo "skill-hint: prompt.md (시그널 규칙, 수정 절차)"
     ;;
-  */supabase/*)
+  supabase/* | */supabase/*)
     echo "skill-hint: supabase.md (DB 스키마, RPC, Edge Function)"
     ;;
-  */data/eval* | */scripts/eval*)
+  data/eval* | */data/eval* | scripts/eval* | */scripts/eval*)
     echo "skill-hint: eval.md (정답지, 3그룹 분석법)"
     ;;
 esac
