@@ -1,34 +1,12 @@
 import InfluencerProfileClient from './InfluencerProfileClient';
-import { getAllSpeakerSlugs, speakerToSlug } from '@/lib/speakerSlugs';
-import { createClient } from '@supabase/supabase-js';
+import speakerSlugs from '@/data/speaker_slugs.json';
 
 export default function InfluencerProfilePage({ params }: { params: { id: string } }) {
   return <InfluencerProfileClient id={params.id} />;
 }
 
-export async function generateStaticParams() {
-  // 매핑된 slug + DB의 모든 발언자 slug
-  const knownSlugs = getAllSpeakerSlugs();
-
-  try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    );
-    const { data } = await supabase
-      .from('speakers')
-      .select('name')
-      .limit(500);
-
-    if (data) {
-      const dbSpeakers = [...new Set(data.map((d: any) => d.name).filter(Boolean))];
-      const dbSlugs = dbSpeakers.map((name: string) => speakerToSlug(name));
-      const allSlugs = [...new Set([...knownSlugs, ...dbSlugs])];
-      return allSlugs.map(slug => ({ id: slug }));
-    }
-  } catch (e) {
-    console.error('Failed to fetch speakers from DB:', e);
-  }
-
-  return knownSlugs.map(slug => ({ id: slug }));
+export function generateStaticParams() {
+  // data/speaker_slugs.json에서 읽음 (빌드 전 node scripts/generate_speaker_slugs.js로 생성)
+  const slugs = speakerSlugs as string[];
+  return slugs.map(slug => ({ id: slug }));
 }
