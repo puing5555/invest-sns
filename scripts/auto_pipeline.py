@@ -444,6 +444,18 @@ class AutoPipeline:
             video_with_sub['subtitle'] = subtitle
             video_with_sub['subtitle_success'] = True
 
+            # upload_date가 비어있으면 yt-dlp로 개별 영상 메타데이터 보완
+            if not video_with_sub.get('upload_date') and not video_with_sub.get('published_at'):
+                try:
+                    with yt_dlp.YoutubeDL({'quiet': True, 'skip_download': True, 'no_warnings': True}) as ydl:
+                        meta = ydl.extract_info(video_with_sub['url'], download=False)
+                        ud = meta.get('upload_date', '')
+                        if ud and len(ud) == 8:
+                            video_with_sub['upload_date'] = ud
+                            video_with_sub['published_at'] = f"{ud[:4]}-{ud[4:6]}-{ud[6:]}"
+                except Exception:
+                    pass
+
             # Step A-2: video_uuid DB 확보 (channel_id가 있을 때만)
             # channel_id가 없으면 video_id를 임시 키로 사용 (fallback)
             if channel_id:

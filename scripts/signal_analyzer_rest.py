@@ -218,9 +218,10 @@ URL: {video_data['url']}
             
             for signal in signal_list:
                 try:
-                    # 종목 심볼
-                    stock_symbol = (signal.get('ticker') or signal.get('stock_symbol') 
-                                   or signal.get('stock', '')).upper()
+                    # 종목명 (한글) + ticker (영문) 분리
+                    stock_name = signal.get('stock', '')
+                    ticker_code = signal.get('ticker', '')
+                    stock_symbol = stock_name or ticker_code or signal.get('stock_symbol', '')
                     if not stock_symbol:
                         continue
                     
@@ -254,6 +255,9 @@ URL: {video_data['url']}
                     db_signal = {
                         'video_uuid': video_uuid,
                         'stock_symbol': stock_symbol,
+                        'stock': stock_name,
+                        'ticker': ticker_code,
+                        'market': signal.get('market', 'OTHER'),
                         'signal_type': signal_type,
                         'confidence': float(conf),
                         'reasoning': reasoning,
