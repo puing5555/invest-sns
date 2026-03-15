@@ -768,6 +768,95 @@ class AutoPipeline:
             except Exception as _e:
                 print(f"  [WARNING] 새 종목 처리 오류 (건너뜀): {_e}")
 
+            # ── Step 8.3: 기존 종목 차트 가격 갱신 ─────────────────
+            print(f"\n[Step 8.3] 기존 종목 차트 가격 갱신 (stockPrices.json)...")
+            try:
+                import yfinance as _yf
+                import time as _time2
+                _sp_path = os.path.join(PROJECT_ROOT, 'data', 'stockPrices.json')
+                with open(_sp_path, 'r', encoding='utf-8') as _f:
+                    _sp = json.load(_f)
+                
+                _updated = 0
+                _CRYPTO = {'BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'KLAY', 'XLM',
+                           'ORBS', 'WLD', 'PENGU', 'UNI', 'ARB', 'USDC', 'USDT'}
+                _INDEX_MAP = {'IXIC': '^IXIC', 'KS11': '^KS11', 'GSPC': '^GSPC'}
+                
+                for _ticker, _data in _sp.items():
+                    if not _data.get('prices'):
+                        continue
+                    # 마지막 날짜가 2일 이상 지났으면 갱신
+                    _last_date = _data['prices'][-1].get('date', '')
+                    if not _last_date:
+                        continue
+                    from datetime import datetime as _dt
+                    try:
+                        _days_old = (_dt.now() - _dt.strptime(_last_date, '%Y-%m-%d')).days
+                    except Exception:
+                        continue
+                    if _days_old < 2:
+                        continue
+                    
+                    # yfinance ticker 변환
+                    if _ticker.upper() in _CRYPTO:
+                        _yf_sym = f"{_ticker.upper()}-USD"
+                    elif _ticker.upper() in _INDEX_MAP:
+                        _yf_sym = _INDEX_MAP[_ticker.upper()]
+                    elif _ticker.isdigit() and len(_ticker) == 6:
+                        _yf_sym = f"{_ticker}.KS"
+                    elif _ticker.isdigit() and len(_ticker) == 4:
+                        _yf_sym = f"{_ticker.zfill(4)}.HK"
+                    else:
+                        _yf_sym = _ticker
+                    
+                    try:
+                        _hist = _yf.Ticker(_yf_sym).history(start=_last_date)
+                        if _hist.empty:
+                            continue
+                        _hist = _hist.dropna(subset=['Close'])
+                        if _hist.empty:
+                            continue
+                        
+                        # 새 데이터 추가 (기존 마지막 날짜 이후)
+                        _existing_dates = {p['date'] for p in _data['prices']}
+                        _new_count = 0
+                        for _date, _row in _hist.iterrows():
+                            _d = _date.strftime('%Y-%m-%d')
+                            if _d not in _existing_dates:
+                                import math as _math
+                                _close = float(_row['Close'])
+                                if _math.isnan(_close) or _math.isinf(_close):
+                                    continue
+                                _data['prices'].append({
+                                    'date': _d,
+                                    'close': round(_close, 2),
+                                    'volume': int(_row['Volume']) if not _math.isnan(_row['Volume']) else 0
+                                })
+                                _new_count += 1
+                        
+                        if _new_count > 0:
+                            _data['prices'].sort(key=lambda p: p['date'])
+                            _data['currentPrice'] = _data['prices'][-1]['close']
+                            if len(_data['prices']) >= 2:
+                                _prev = _data['prices'][-2]['close']
+                                _curr = _data['prices'][-1]['close']
+                                _data['change'] = round(_curr - _prev, 2)
+                                _data['changePercent'] = round((_curr - _prev) / _prev * 100, 2) if _prev else 0
+                            _updated += 1
+                        
+                        _time2.sleep(0.2)
+                    except Exception:
+                        continue
+                
+                if _updated > 0:
+                    with open(_sp_path, 'w', encoding='utf-8') as _f:
+                        json.dump(_sp, _f, ensure_ascii=False)
+                    print(f"  {_updated}개 종목 차트 갱신 완료")
+                else:
+                    print(f"  갱신 필요 종목 없음 (모두 최신)")
+            except Exception as _e:
+                print(f"  [WARNING] 차트 갱신 오류 (건너뜀): {_e}")
+
             # ── Step 8.5: data/ → public/ 동기화 ─────────────────────
             print(f"\n[Step 8.5] data/ → public/ 동기화...")
             import shutil as _shutil
@@ -776,6 +865,11 @@ class AutoPipeline:
             if os.path.exists(_prices_src):
                 _shutil.copy2(_prices_src, _prices_dst)
                 print(f"  signal_prices.json 동기화 완료")
+            _sp_src = os.path.join(PROJECT_ROOT, 'data', 'stockPrices.json')
+            _sp_dst = os.path.join(PROJECT_ROOT, 'public', 'stockPrices.json')
+            if os.path.exists(_sp_src):
+                _shutil.copy2(_sp_src, _sp_dst)
+                print(f"  stockPrices.json 동기화 완료")
 
             # ── Step 9: npm run build ─────────────────────────────────
             print(f"\n[Step 9] 프론트엔드 빌드 (npm run build)...")
