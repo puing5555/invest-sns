@@ -56,6 +56,9 @@
 6. 크롤링 날짜를 published_at으로 사용 금지
 7. 모델 변경 시 전체 파일 grep으로 구버전 제거
 8. 프론트엔드 수정 후 반드시 `npm run build` 성공 확인
+9. 큰 작업(새 기능, 시스템 변경, 크롤링 확장 등) 시작 시 `.claude/tasks/`에 작업별 폴더 생성하고 plan/context/checklist 3개 문서 작성 필수
+10. 작업 계획은 승인 전 실행 금지
+11. 작업은 1~2단계 단위로 진행하고, 단계 완료 시 checklist 업데이트
 
 ## Commands
 - `npm run build` → Static export (out/)
