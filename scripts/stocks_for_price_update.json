@@ -1,28 +1,13 @@
 [
   {
-    "stock": "아모레퍼시픽",
-    "ticker": "090430",
-    "market": "KR"
-  },
-  {
-    "stock": "펠로톤",
-    "ticker": "PTON",
-    "market": "US"
-  },
-  {
     "stock": "애플",
     "ticker": "AAPL",
     "market": "US"
   },
   {
-    "stock": "현대차",
-    "ticker": "005380",
-    "market": "KR"
-  },
-  {
-    "stock": "심텍",
-    "ticker": "",
-    "market": "KR"
+    "stock": "유틸리티 섹터 ETF",
+    "ticker": "XLU",
+    "market": "US"
   },
   {
     "stock": "아비코전자",
@@ -35,8 +20,13 @@
     "market": "KR"
   },
   {
-    "stock": "SK하이닉스",
-    "ticker": "000660",
+    "stock": "아모레퍼시픽",
+    "ticker": "090430",
+    "market": "KR"
+  },
+  {
+    "stock": "현대차",
+    "ticker": "005380",
     "market": "KR"
   },
   {
@@ -45,9 +35,39 @@
     "market": "KR"
   },
   {
+    "stock": "심텍",
+    "ticker": "",
+    "market": "KR"
+  },
+  {
+    "stock": "000660",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "테슬라",
     "ticker": "TSLA",
     "market": "US"
+  },
+  {
+    "stock": "042660",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "SK하이닉스",
+    "ticker": "000660",
+    "market": "KR"
+  },
+  {
+    "stock": "CRM",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "SPOT",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "효성중공업",
@@ -55,17 +75,27 @@
     "market": "KR"
   },
   {
-    "stock": "ASML",
-    "ticker": "ASML",
-    "market": "OTHER"
-  },
-  {
     "stock": "원익IPS",
     "ticker": "240810",
     "market": "KR"
   },
   {
-    "stock": "3606.HK",
+    "stock": "CRWD",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "GOOGL",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "이더리움",
+    "ticker": "ETH",
+    "market": "CRYPTO"
+  },
+  {
+    "stock": "AMZN",
     "ticker": "",
     "market": "OTHER"
   },
@@ -75,18 +105,33 @@
     "market": "KR"
   },
   {
-    "stock": "엔비디아",
-    "ticker": "NVDA",
-    "market": "US"
-  },
-  {
-    "stock": "삼성증권",
-    "ticker": "016360",
+    "stock": "NH투자증권",
+    "ticker": "005940",
     "market": "KR"
   },
   {
-    "stock": "NH투자증권",
-    "ticker": "005940",
+    "stock": "005930",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "EWY",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "NVDA",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "BTC",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "NC소프트",
+    "ticker": "036570",
     "market": "KR"
   },
   {
@@ -95,38 +140,33 @@
     "market": "KR"
   },
   {
-    "stock": "NC소프트",
-    "ticker": "036570",
-    "market": "KR"
-  },
-  {
-    "stock": "LG화학",
-    "ticker": "051910",
-    "market": "KR"
-  },
-  {
-    "stock": "아이덴",
-    "ticker": "284620",
+    "stock": "엔비디아",
+    "ticker": "NVDA",
     "market": "US"
   },
   {
-    "stock": "주성엔지니어링",
-    "ticker": "036930",
-    "market": "KR"
+    "stock": "리플",
+    "ticker": "XRP",
+    "market": "CRYPTO"
   },
   {
-    "stock": "구글",
-    "ticker": "GOOGL",
-    "market": "US"
+    "stock": "TJX",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "TEM",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "ABCL",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "마이크론",
     "ticker": "MU",
-    "market": "US"
-  },
-  {
-    "stock": "쉐브론",
-    "ticker": "CVX",
     "market": "US"
   },
   {
@@ -135,19 +175,19 @@
     "market": "US_ADR"
   },
   {
-    "stock": "팔란티어",
-    "ticker": "PLTR",
+    "stock": "구글",
+    "ticker": "GOOGL",
     "market": "US"
   },
   {
-    "stock": "LG에너지솔루션",
-    "ticker": "373220",
-    "market": "KR"
+    "stock": "알파벳",
+    "ticker": "GOOGL",
+    "market": "US"
   },
   {
-    "stock": "하나마이크론",
-    "ticker": "067310",
-    "market": "KR"
+    "stock": "AVGO",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "스템",
@@ -155,23 +195,63 @@
     "market": "US"
   },
   {
+    "stock": "팔란티어",
+    "ticker": "PLTR",
+    "market": "US"
+  },
+  {
+    "stock": "하나마이크론",
+    "ticker": "067310",
+    "market": "KR"
+  },
+  {
+    "stock": "솔라나",
+    "ticker": "SOL",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "비트코인",
     "ticker": "BTC",
     "market": "CRYPTO"
   },
   {
-    "stock": "HD현대일렉트릭",
-    "ticker": "267260",
-    "market": "KR"
+    "stock": "XLF",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
-    "stock": "한국금융지주",
-    "ticker": "071050",
-    "market": "KR"
+    "stock": "RSP",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "EWZ",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "CPNG",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "IRNE",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "IREN",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "테스",
     "ticker": "095610",
+    "market": "KR"
+  },
+  {
+    "stock": "HD현대일렉트릭",
+    "ticker": "267260",
     "market": "KR"
   },
   {
@@ -180,9 +260,14 @@
     "market": "KR"
   },
   {
-    "stock": "솔브레인",
-    "ticker": "357780",
-    "market": "KR"
+    "stock": "비트마인",
+    "ticker": "BTBT",
+    "market": "US"
+  },
+  {
+    "stock": "KOSPI",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "카카오",
@@ -190,9 +275,19 @@
     "market": "KR"
   },
   {
+    "stock": "RIO",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "LG전자",
     "ticker": "066570",
     "market": "KR"
+  },
+  {
+    "stock": "005380",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "퍼스트솔라",
@@ -200,9 +295,39 @@
     "market": "US"
   },
   {
+    "stock": "307950",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "TSLA",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "012330",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "OKLO",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "리커전",
     "ticker": "RXRX",
     "market": "US"
+  },
+  {
+    "stock": "마라톤디지털",
+    "ticker": "MARA",
+    "market": "US"
+  },
+  {
+    "stock": "PANW",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "마이크로스트래티지",
@@ -215,14 +340,34 @@
     "market": "KR"
   },
   {
+    "stock": "CVX",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "VLO",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "MPC",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "골드만삭스",
     "ticker": "GS",
     "market": "US"
   },
   {
-    "stock": "나스닥",
-    "ticker": "IXIC",
-    "market": "US"
+    "stock": "011170",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "051910",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "한미반도체",
@@ -230,24 +375,29 @@
     "market": "KR"
   },
   {
-    "stock": "노보 노디스크",
-    "ticker": "NVO",
+    "stock": "나스닥",
+    "ticker": "IXIC",
     "market": "US"
   },
   {
-    "stock": "슈퍼마이크로컴퓨터",
-    "ticker": "SMCI",
-    "market": "US"
+    "stock": "NKE",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
-    "stock": "네이버",
-    "ticker": "035420",
-    "market": "KR"
+    "stock": "RKLB",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "뉴먼트",
     "ticker": "NEM",
     "market": "US"
+  },
+  {
+    "stock": "JPM",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "옥시덴탈 페트롤리엄",
@@ -265,14 +415,54 @@
     "market": "KR"
   },
   {
-    "stock": "퀄컴",
-    "ticker": "QCOM",
-    "market": "US"
+    "stock": "BAC",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
-    "stock": "KB금융",
-    "ticker": "105560",
+    "stock": "SOFI",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "034020",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "298040",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "267260",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "207940",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "PLTR",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "솔브레인",
+    "ticker": "357780",
     "market": "KR"
+  },
+  {
+    "stock": "TSM",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "IXIC",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "오라클",
@@ -280,9 +470,14 @@
     "market": "US"
   },
   {
-    "stock": "브로드컴",
-    "ticker": "AVGO",
+    "stock": "메타",
+    "ticker": "META",
     "market": "US"
+  },
+  {
+    "stock": "FIGR",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "컨스텔레이션 브랜즈",
@@ -290,8 +485,8 @@
     "market": "US"
   },
   {
-    "stock": "메타",
-    "ticker": "META",
+    "stock": "브로드컴",
+    "ticker": "AVGO",
     "market": "US"
   },
   {
@@ -303,6 +498,16 @@
     "stock": "테크윙",
     "ticker": "089030",
     "market": "KR"
+  },
+  {
+    "stock": "ETH",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "EEM",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "태성",
@@ -320,14 +525,24 @@
     "market": "KR"
   },
   {
+    "stock": "주성엔지니어링",
+    "ticker": "036930",
+    "market": "KR"
+  },
+  {
     "stock": "원익홀딩스",
     "ticker": "030520",
     "market": "KR"
   },
   {
-    "stock": "케이씨텍",
-    "ticker": "089010",
+    "stock": "SBI홀딩스",
+    "ticker": "8473.T",
     "market": "KR"
+  },
+  {
+    "stock": "뉴스케일파워",
+    "ticker": "SMR",
+    "market": "US"
   },
   {
     "stock": "어펌",
@@ -335,19 +550,34 @@
     "market": "US"
   },
   {
-    "stock": "미코",
-    "ticker": "058470",
+    "stock": "케이씨텍",
+    "ticker": "089010",
     "market": "KR"
   },
   {
-    "stock": "심택",
+    "stock": "NFLX",
     "ticker": "",
-    "market": "KR"
+    "market": "OTHER"
+  },
+  {
+    "stock": "EXPE",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "SCHD",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "시놉시스",
     "ticker": "SNPS",
     "market": "US"
+  },
+  {
+    "stock": "심택",
+    "ticker": "",
+    "market": "KR"
   },
   {
     "stock": "티에스이",
@@ -358,6 +588,11 @@
     "stock": "인텍플러스",
     "ticker": "",
     "market": "KR"
+  },
+  {
+    "stock": "HOOD",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "하나머티리얼스",
@@ -375,19 +610,34 @@
     "market": "KR"
   },
   {
+    "stock": "RDDT",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "넷플릭스",
     "ticker": "NFLX",
     "market": "US"
   },
   {
-    "stock": "베일리조트",
-    "ticker": "MTN",
-    "market": "US"
+    "stock": "IONQ",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "백산",
     "ticker": "",
     "market": "KR"
+  },
+  {
+    "stock": "FLNC",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "BITF",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "디엔에프",
@@ -405,9 +655,14 @@
     "market": "US"
   },
   {
-    "stock": "크리스피 크림",
-    "ticker": "DNUT",
-    "market": "US"
+    "stock": "AMD",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "ASML",
+    "ticker": "ASML",
+    "market": "OTHER"
   },
   {
     "stock": "코인베이스",
@@ -415,14 +670,14 @@
     "market": "US"
   },
   {
-    "stock": "페이팔",
-    "ticker": "PYPL",
-    "market": "US"
+    "stock": "ISRG",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
-    "stock": "체인링크",
-    "ticker": "LINK",
-    "market": "CRYPTO"
+    "stock": "QS",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "한솔케미칼",
@@ -430,23 +685,18 @@
     "market": "KR"
   },
   {
-    "stock": "SK바이오팜",
-    "ticker": "326030",
-    "market": "KR"
+    "stock": "FIG",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
-    "stock": "리플",
-    "ticker": "XRP",
-    "market": "CRYPTO"
+    "stock": "JOBY",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "삼성디스플레이",
     "ticker": "",
-    "market": "KR"
-  },
-  {
-    "stock": "파마리서치",
-    "ticker": "214450",
     "market": "KR"
   },
   {
@@ -455,19 +705,19 @@
     "market": "KR"
   },
   {
-    "stock": "AMD",
-    "ticker": "AMD",
-    "market": "US"
-  },
-  {
     "stock": "삼성전기",
     "ticker": "009150",
     "market": "KR"
   },
   {
-    "stock": "앱솔릭스",
-    "ticker": "196490",
-    "market": "KR"
+    "stock": "INTC",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "OPEN",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "제너럴일렉트릭",
@@ -475,9 +725,14 @@
     "market": "US"
   },
   {
-    "stock": "마이크로소프트",
-    "ticker": "MSFT",
-    "market": "US"
+    "stock": "LEN",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "LG화학",
+    "ticker": "051910",
+    "market": "KR"
   },
   {
     "stock": "대덕전자",
@@ -485,9 +740,39 @@
     "market": "KR"
   },
   {
-    "stock": "JP모건",
-    "ticker": "JPM",
+    "stock": "삼성증권",
+    "ticker": "016360",
+    "market": "KR"
+  },
+  {
+    "stock": "아이덴",
+    "ticker": "284620",
     "market": "US"
+  },
+  {
+    "stock": "체인링크",
+    "ticker": "LINK",
+    "market": "CRYPTO"
+  },
+  {
+    "stock": "유니스왑",
+    "ticker": "UNI",
+    "market": "CRYPTO"
+  },
+  {
+    "stock": "UNH",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "CRCL",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "BSX",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "에코프로비엠",
@@ -495,14 +780,24 @@
     "market": "KR"
   },
   {
+    "stock": "BMNR",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "캔톤코인",
     "ticker": "CNTN",
     "market": "CRYPTO"
   },
   {
-    "stock": "기아",
-    "ticker": "000270",
-    "market": "KR"
+    "stock": "LLY",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "NVO",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "엘앤에프",
@@ -515,14 +810,14 @@
     "market": "KR"
   },
   {
-    "stock": "비트마인",
-    "ticker": "BTBT",
+    "stock": "JP모건",
+    "ticker": "JPM",
     "market": "US"
   },
   {
-    "stock": "포스코케미칼",
-    "ticker": "003670",
-    "market": "KR"
+    "stock": "ORBS ETF",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "나노신소재",
@@ -530,9 +825,24 @@
     "market": "KR"
   },
   {
+    "stock": "포스코케미칼",
+    "ticker": "003670",
+    "market": "KR"
+  },
+  {
+    "stock": "노보 노디스크",
+    "ticker": "NVO",
+    "market": "US"
+  },
+  {
     "stock": "대주전자재료",
     "ticker": "078600",
     "market": "KR"
+  },
+  {
+    "stock": "샤프링크",
+    "ticker": "SBET",
+    "market": "US"
   },
   {
     "stock": "유니셈",
@@ -540,23 +850,18 @@
     "market": "KR"
   },
   {
-    "stock": "플러그파워",
-    "ticker": "PLUG",
-    "market": "US"
-  },
-  {
     "stock": "신세계",
     "ticker": "004170",
     "market": "KR"
   },
   {
-    "stock": "제우스",
-    "ticker": "079170",
-    "market": "KR"
+    "stock": "GSPC",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
-    "stock": "동화기업",
-    "ticker": "025900",
+    "stock": "제우스",
+    "ticker": "079170",
     "market": "KR"
   },
   {
@@ -565,13 +870,38 @@
     "market": "US"
   },
   {
+    "stock": "안두릴",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "동화기업",
+    "ticker": "025900",
+    "market": "KR"
+  },
+  {
     "stock": "천보",
     "ticker": "278280",
     "market": "KR"
   },
   {
+    "stock": "피그마",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "META",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "프로텍",
     "ticker": "",
+    "market": "KR"
+  },
+  {
+    "stock": "한국금융지주",
+    "ticker": "071050",
     "market": "KR"
   },
   {
@@ -585,14 +915,19 @@
     "market": "KR"
   },
   {
+    "stock": "COST",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "마이크로소프트",
+    "ticker": "MSFT",
+    "market": "US"
+  },
+  {
     "stock": "이스트소프트",
     "ticker": "",
     "market": "KR"
-  },
-  {
-    "stock": "솔라나",
-    "ticker": "SOL",
-    "market": "CRYPTO"
   },
   {
     "stock": "원익QnC",
@@ -600,14 +935,19 @@
     "market": "KR"
   },
   {
-    "stock": "ARM홀딩스",
-    "ticker": "ARM",
-    "market": "US"
+    "stock": "AAPL",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "인텔",
     "ticker": "INTC",
     "market": "US"
+  },
+  {
+    "stock": "OXY",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "엠투아이",
@@ -620,19 +960,44 @@
     "market": "KR"
   },
   {
-    "stock": "이더리움",
-    "ticker": "ETH",
-    "market": "CRYPTO"
-  },
-  {
     "stock": "아마존",
     "ticker": "AMZN",
     "market": "US"
   },
   {
+    "stock": "LG에너지솔루션",
+    "ticker": "373220",
+    "market": "KR"
+  },
+  {
+    "stock": "028300",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "SMR",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "도지코인",
     "ticker": "DOGE",
     "market": "CRYPTO"
+  },
+  {
+    "stock": "NEE",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "XOM",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "TMDX",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "솔루스첨단소재",
@@ -645,9 +1010,9 @@
     "market": "CRYPTO"
   },
   {
-    "stock": "유틸리티 섹터 ETF",
-    "ticker": "XLU",
-    "market": "US"
+    "stock": "MSFT",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "카카오뱅크",
@@ -655,14 +1020,29 @@
     "market": "KR"
   },
   {
+    "stock": "BOTZ",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
+    "stock": "네이버",
+    "ticker": "035420",
+    "market": "KR"
+  },
+  {
+    "stock": "CRSP",
+    "ticker": "",
+    "market": "OTHER"
+  },
+  {
     "stock": "로체시스템즈",
     "ticker": "",
     "market": "KR"
   },
   {
-    "stock": "버크셔 해서웨이",
-    "ticker": "BRK.A",
-    "market": "US"
+    "stock": "188490",
+    "ticker": "",
+    "market": "OTHER"
   },
   {
     "stock": "FNS테크",
@@ -670,9 +1050,14 @@
     "market": "KR"
   },
   {
-    "stock": "이더질라",
-    "ticker": null,
+    "stock": "타이윤",
+    "ticker": "THAR",
     "market": "KR"
+  },
+  {
+    "stock": "퀄컴",
+    "ticker": "QCOM",
+    "market": "US"
   },
   {
     "stock": "반도체장비",
@@ -680,14 +1065,9 @@
     "market": "SECTOR"
   },
   {
-    "stock": "타이뮨",
-    "ticker": "THAR",
+    "stock": "이더질라",
+    "ticker": null,
     "market": "KR"
-  },
-  {
-    "stock": "블룸에너지",
-    "ticker": "BE",
-    "market": "US"
   },
   {
     "stock": "하이아트호텔",
@@ -695,18 +1075,33 @@
     "market": "US"
   },
   {
-    "stock": "타이윤",
-    "ticker": "THAR",
+    "stock": "KB금융",
+    "ticker": "105560",
     "market": "KR"
   },
   {
-    "stock": "알파벳",
-    "ticker": "GOOGL",
-    "market": "US"
+    "stock": "율촌화학",
+    "ticker": "008730",
+    "market": "KR"
+  },
+  {
+    "stock": "삼성E&A",
+    "ticker": "028050",
+    "market": "KR"
   },
   {
     "stock": "비트마이너",
     "ticker": null,
+    "market": "KR"
+  },
+  {
+    "stock": "펠로톤",
+    "ticker": "PTON",
+    "market": "US"
+  },
+  {
+    "stock": "SK",
+    "ticker": "034730",
     "market": "KR"
   },
   {
@@ -720,19 +1115,14 @@
     "market": "KR"
   },
   {
-    "stock": "GE버노바",
-    "ticker": "GEV",
+    "stock": "플러그파워",
+    "ticker": "PLUG",
     "market": "US"
   },
   {
     "stock": "이수페타시스",
     "ticker": "214430",
     "market": "KR"
-  },
-  {
-    "stock": "마라홀딩스",
-    "ticker": "MARA",
-    "market": "US"
   },
   {
     "stock": "플라즈마",
@@ -745,18 +1135,18 @@
     "market": "ETF"
   },
   {
-    "stock": "월드코인",
-    "ticker": "WLD",
-    "market": "CRYPTO"
+    "stock": "삼양사",
+    "ticker": "145990",
+    "market": "KR"
+  },
+  {
+    "stock": "블룸에너지",
+    "ticker": "BE",
+    "market": "US"
   },
   {
     "stock": "퍼지펭귄",
     "ticker": "PENGU",
-    "market": "CRYPTO"
-  },
-  {
-    "stock": "오브스",
-    "ticker": "ORBS",
     "market": "CRYPTO"
   },
   {
@@ -765,9 +1155,14 @@
     "market": "KR"
   },
   {
-    "stock": "마라톤디지털",
-    "ticker": "MARA",
+    "stock": "쉐브론",
+    "ticker": "CVX",
     "market": "US"
+  },
+  {
+    "stock": "미코",
+    "ticker": "",
+    "market": "KR"
   },
   {
     "stock": "SKC솔릭스",
@@ -780,24 +1175,9 @@
     "market": "KR"
   },
   {
-    "stock": "아비트럼",
-    "ticker": "ARB",
-    "market": "CRYPTO"
-  },
-  {
-    "stock": "포스코",
-    "ticker": "005490",
-    "market": "KR"
-  },
-  {
     "stock": "HB테크놀로지",
     "ticker": "",
     "market": "KR"
-  },
-  {
-    "stock": "유니스왑",
-    "ticker": "UNI",
-    "market": "CRYPTO"
   },
   {
     "stock": "야스",
@@ -815,14 +1195,9 @@
     "market": "KR"
   },
   {
-    "stock": "크리스퍼 테라퓨틱스",
-    "ticker": "CRSP",
-    "market": "US"
-  },
-  {
-    "stock": "샤프링크",
-    "ticker": "SBET",
-    "market": "US"
+    "stock": "기아",
+    "ticker": "000270",
+    "market": "KR"
   },
   {
     "stock": "우주일렉트로닉스",
@@ -835,19 +1210,39 @@
     "market": "KR"
   },
   {
+    "stock": "월드코인",
+    "ticker": "WLD",
+    "market": "CRYPTO"
+  },
+  {
+    "stock": "타이거 차이나 증권 ETF",
+    "ticker": "371450.KS",
+    "market": "ETF"
+  },
+  {
     "stock": "팀스",
     "ticker": "",
     "market": "KR"
   },
   {
-    "stock": "SBI홀딩스",
-    "ticker": "8473.T",
+    "stock": "지리자동차",
+    "ticker": "0175.HK",
+    "market": "OTHER"
+  },
+  {
+    "stock": "타이거차이나휴먼노이드로봇",
+    "ticker": "490490.KS",
+    "market": "ETF"
+  },
+  {
+    "stock": "현대자동차",
+    "ticker": "005380",
     "market": "KR"
   },
   {
-    "stock": "뱅크오브아메리카",
-    "ticker": "BAC",
-    "market": "US"
+    "stock": "뉴럴링크",
+    "ticker": null,
+    "market": "OTHER"
   },
   {
     "stock": "리노공업",
@@ -858,6 +1253,16 @@
     "stock": "고영",
     "ticker": "",
     "market": "KR"
+  },
+  {
+    "stock": "GE버노바",
+    "ticker": "GEV",
+    "market": "US"
+  },
+  {
+    "stock": "오브스",
+    "ticker": "ORBS",
+    "market": "CRYPTO"
   },
   {
     "stock": "케이던스 디자인",
@@ -875,48 +1280,28 @@
     "market": "ETF"
   },
   {
+    "stock": "비아디",
+    "ticker": "1211",
+    "market": "OTHER"
+  },
+  {
+    "stock": "타이거 차이나 전기차 솔렉티브",
+    "ticker": "371460.KS",
+    "market": "ETF"
+  },
+  {
+    "stock": "샤오미",
+    "ticker": "1810",
+    "market": "OTHER"
+  },
+  {
     "stock": "TIGER 미국 필라델피아 AI 반도체 나스닥 ETF",
     "ticker": "",
     "market": "ETF"
   },
   {
-    "stock": "오뚜기",
-    "ticker": "007310",
-    "market": "KR"
-  },
-  {
-    "stock": "율촌화학",
-    "ticker": "008730",
-    "market": "KR"
-  },
-  {
-    "stock": "삼성E&A",
-    "ticker": "028050",
-    "market": "KR"
-  },
-  {
-    "stock": "SK",
-    "ticker": "034730",
-    "market": "KR"
-  },
-  {
-    "stock": "삼양사",
-    "ticker": "145990",
-    "market": "KR"
-  },
-  {
-    "stock": "이스트 웨스트 뱅크",
-    "ticker": "EWBC",
-    "market": "US"
-  },
-  {
     "stock": "오클로",
     "ticker": "OKLO",
-    "market": "US"
-  },
-  {
-    "stock": "뉴스케일파워",
-    "ticker": "SMR",
     "market": "US"
   },
   {
@@ -925,18 +1310,33 @@
     "market": "US"
   },
   {
+    "stock": "아비트럼",
+    "ticker": "ARB",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "이노와이어리스",
     "ticker": "",
     "market": "KR"
   },
   {
-    "stock": "현대로템",
-    "ticker": "064350",
+    "stock": "LG이노텍",
+    "ticker": "011070",
     "market": "KR"
   },
   {
-    "stock": "LG이노텍",
-    "ticker": "011070",
+    "stock": "BYD",
+    "ticker": "1211.HK",
+    "market": "OTHER"
+  },
+  {
+    "stock": "HYBE",
+    "ticker": "352820",
+    "market": "KR"
+  },
+  {
+    "stock": "SK바이오팜",
+    "ticker": "326030",
     "market": "KR"
   },
   {
@@ -950,14 +1350,9 @@
     "market": "KR"
   },
   {
-    "stock": "이오테크닉스",
-    "ticker": "240810",
-    "market": "KR"
-  },
-  {
-    "stock": "한화에어로스페이스",
-    "ticker": "012450",
-    "market": "KR"
+    "stock": "로블록스",
+    "ticker": "RBLX",
+    "market": "US"
   },
   {
     "stock": "에이디텍",
@@ -965,144 +1360,34 @@
     "market": "KR"
   },
   {
-    "stock": "키움증권",
-    "ticker": "039490",
-    "market": "KR"
+    "stock": "푸야오글래스",
+    "ticker": "3606.HK",
+    "market": "OTHER"
   },
   {
-    "stock": "아이온큐",
-    "ticker": "IONQ",
-    "market": "US"
+    "stock": "CATL",
+    "ticker": "300750.SZ",
+    "market": "OTHER"
   },
   {
-    "stock": "에이피알",
-    "ticker": "278470",
-    "market": "KR"
-  },
-  {
-    "stock": "방산",
+    "stock": "화웨이",
     "ticker": null,
-    "market": "SECTOR"
+    "market": "OTHER"
   },
   {
-    "stock": "우주항공",
+    "stock": "두나무",
     "ticker": null,
-    "market": "SECTOR"
-  },
-  {
-    "stock": "화장품",
-    "ticker": null,
-    "market": "SECTOR"
-  },
-  {
-    "stock": "셀트리온",
-    "ticker": "068270",
     "market": "KR"
   },
   {
-    "stock": "이노텍",
-    "ticker": "053610",
+    "stock": "이오테크닉스",
+    "ticker": "240810",
     "market": "KR"
   },
   {
-    "stock": "일라이 릴리",
-    "ticker": "LLY",
-    "market": "US"
-  },
-  {
-    "stock": "해성DS",
-    "ticker": "195870",
-    "market": "KR"
-  },
-  {
-    "stock": "한전",
-    "ticker": "015760",
-    "market": "KR"
-  },
-  {
-    "stock": "알테오젠",
-    "ticker": "196170",
-    "market": "KR"
-  },
-  {
-    "stock": "넥스테라 에너지",
-    "ticker": "NEE",
-    "market": "US"
-  },
-  {
-    "stock": "치폴레",
-    "ticker": "CMG",
-    "market": "US"
-  },
-  {
-    "stock": "뉴스케일 파워",
-    "ticker": "SMR",
-    "market": "US"
-  },
-  {
-    "stock": "고려아연",
-    "ticker": "010130",
-    "market": "KR"
-  },
-  {
-    "stock": "블리시",
-    "ticker": "BLSH",
-    "market": "US"
-  },
-  {
-    "stock": "아리스타 네트웍스",
-    "ticker": "ANET",
-    "market": "US"
-  },
-  {
-    "stock": "루멘텀",
-    "ticker": "LITE",
-    "market": "US"
-  },
-  {
-    "stock": "애플로빈",
-    "ticker": "APPN",
-    "market": "US"
-  },
-  {
-    "stock": "램버스",
-    "ticker": "RMBS",
-    "market": "US"
-  },
-  {
-    "stock": "엔페이즈 에너지",
-    "ticker": "ENPH",
-    "market": "US"
-  },
-  {
-    "stock": "풀 코퍼레이션",
-    "ticker": "POOL",
-    "market": "US"
-  },
-  {
-    "stock": "버티브",
-    "ticker": "VRT",
-    "market": "US"
-  },
-  {
-    "stock": "SK가스",
-    "ticker": "018670",
-    "market": "KR"
-  },
-  {
-    "stock": "바이두",
-    "ticker": "BIDU",
-    "market": "US"
-  },
-  {
-    "stock": "컨스텔레이션 에너지",
-    "ticker": "CEG",
-    "market": "US"
-  },
-  {
-    "stock": "한화솔루션",
-    "ticker": "009830",
-    "market": "KR"
+    "stock": "비야디",
+    "ticker": "BYD",
+    "market": "OTHER"
   },
   {
     "stock": "알리바바",
@@ -1110,8 +1395,78 @@
     "market": "US"
   },
   {
-    "stock": "샤오미",
-    "ticker": "1810.HK",
+    "stock": "한화에어로스페이스",
+    "ticker": "012450",
+    "market": "KR"
+  },
+  {
+    "stock": "텐센트",
+    "ticker": "TCEHY",
+    "market": "US"
+  },
+  {
+    "stock": "타이거 차이나테크 탑 10 ETF",
+    "ticker": "396520.KS",
+    "market": "ETF"
+  },
+  {
+    "stock": "SMIC",
+    "ticker": "0981.HK",
+    "market": "OTHER"
+  },
+  {
+    "stock": "메이투안",
+    "ticker": "3690",
+    "market": "OTHER"
+  },
+  {
+    "stock": "레노버",
+    "ticker": "0992",
+    "market": "OTHER"
+  },
+  {
+    "stock": "USDT",
+    "ticker": "USDT",
+    "market": "CRYPTO"
+  },
+  {
+    "stock": "타이거차이나테크톱10",
+    "ticker": "396520.KS",
+    "market": "ETF"
+  },
+  {
+    "stock": "타이거차이나반도체팩세트",
+    "ticker": "438330.KS",
+    "market": "ETF"
+  },
+  {
+    "stock": "USDC",
+    "ticker": "USDC",
+    "market": "CRYPTO"
+  },
+  {
+    "stock": "키움증권",
+    "ticker": "039490",
+    "market": "KR"
+  },
+  {
+    "stock": "ARM홀딩스",
+    "ticker": "ARM",
+    "market": "US"
+  },
+  {
+    "stock": "아이온큐",
+    "ticker": "IONQ",
+    "market": "US"
+  },
+  {
+    "stock": "베일리조트",
+    "ticker": "MTN",
+    "market": "US"
+  },
+  {
+    "stock": "뱅크오브아메리카",
+    "ticker": "BAC",
     "market": "US"
   }
 ]

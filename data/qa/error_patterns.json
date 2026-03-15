@@ -152,5 +152,61 @@
     "check_name": "low_pass_rate",
     "detail": "통과율 0.9% (2/231)",
     "timestamp": "2026-03-12T20:55:46.479672"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T04:49:01.340516"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 68.00/영상",
+    "timestamp": "2026-03-16T04:49:01.341241"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T05:00:49.559323"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 66.00/영상",
+    "timestamp": "2026-03-16T05:00:49.560065"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T05:14:51.803513"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 54.00/영상",
+    "timestamp": "2026-03-16T05:14:51.804253"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T05:21:29.033947"
+  },
+  {
+    "channel": "%ec%9c%84%ec%a6%88%eb%8d%a4%ed%88%ac%ec%8a%a4",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 23.00/영상",
+    "timestamp": "2026-03-16T05:21:29.035038"
   }
 ]
