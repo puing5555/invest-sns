@@ -93,9 +93,10 @@ const getStockData = (code: string, dynamicName?: string) => {
   // 한국 종목인지 확인 (숫자로만 이뤄진 코드)
   const isKoreanStock = /^\d+$/.test(code);
   
-  // 동적 종목명이 있으면 우선 사용, 없으면 nameMap fallback
+  // 동적 종목명이 있으면 우선 사용, 없으면 nameMap fallback, 그 다음 stockPrices name
   // 해외/코인 종목은 "비트코인 (BTC)" 형식으로 표시
-  const baseName = dynamicName || nameMap[code] || code;
+  const priceData = (stockPricesData as any)[code];
+  const baseName = dynamicName || nameMap[code] || priceData?.name || code;
   // 공통 유틸 함수로 ticker 중복 방지
   const stockName = isKoreanStock ? baseName : formatStockDisplay(baseName, code);
 
