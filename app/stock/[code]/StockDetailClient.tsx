@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -618,7 +618,6 @@ function InfluencerTab({ code }: { code: string }) {
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [activeSignalTypes, setActiveSignalTypes] = useState(['매수', '긍정', '중립', '부정', '매도']);
-  const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
   const periodOptions = ['1개월', '6개월', '1년', '3년', '전체'];
@@ -631,13 +630,7 @@ function InfluencerTab({ code }: { code: string }) {
         
         const { getStockSignals, getSignalVoteCounts } = await import('@/lib/supabase');
         const videoSummaries = (await import('@/data/video_summaries.json')).default as Record<string, string>;
-        const [signals] = await Promise.all([
-          getStockSignals(code),
-          fetch('/invest-sns/signal_prices.json')
-            .then(r => r.ok ? r.json() : {})
-            .then(d => setPriceData(d))
-            .catch(() => {}),
-        ]);
+        const signals = await getStockSignals(code);
         
         // 데이터를 UI용 형태로 변환
         const transformedSignals = signals.map((signal: any) => {
@@ -681,6 +674,9 @@ function InfluencerTab({ code }: { code: string }) {
             timestamp: signal.timestamp,
             videoTitle: signal.influencer_videos?.title,
             channelName,
+            price_at_signal: signal.price_at_signal,
+            price_current: signal.price_current,
+            return_pct: signal.return_pct,
           };
         });
         
@@ -932,15 +928,14 @@ function InfluencerTab({ code }: { code: string }) {
                   <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
                     {(() => {
                       if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
-                      const pd = priceData[signal.signalId];
-                      if (!pd || pd.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
-                      const ret = pd.return_pct;
+                      if (signal.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
+                      const ret = signal.return_pct;
                       const isBullish = signal.signal === '매수' || signal.signal === '긍정';
                       const isGood = isBullish ? ret >= 0 : ret <= 0;
                       const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
                       const arrow = ret >= 0 ? '▲' : '▼';
                       return (
-                        <span className={color} title={`${formatStockPrice(pd.price_at_signal || 0, code)} → ${formatStockPrice(pd.price_current || 0, code)}`}>
+                        <span className={color} title={`${formatStockPrice(signal.price_at_signal || 0, code)} → ${formatStockPrice(signal.price_current || 0, code)}`}>
                           {arrow} {ret >= 0 ? '+' : ''}{ret}%
                         </span>
                       );

@@ -16,19 +16,12 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   const [loading, setLoading] = useState(true);
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [activeStock, setActiveStock] = useState<string>('전체');
-  const [priceData, setPriceData] = useState<Record<string, { price_at_signal: number; price_current: number; return_pct: number }>>({});
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      const [data] = await Promise.all([
-        getInfluencerProfileBySpeaker(speakerName),
-        fetch('/invest-sns/signal_prices.json')
-          .then(r => r.ok ? r.json() : {})
-          .then(d => setPriceData(d))
-          .catch(() => {}),
-      ]);
+      const data = await getInfluencerProfileBySpeaker(speakerName);
       setProfile(data);
 
       // 좋아요 카운트 가져오기
@@ -250,15 +243,14 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       <td className="px-3 py-3 text-xs whitespace-nowrap">
                         {(() => {
                           if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
-                          const pd = priceData[signal.id];
-                          if (!pd || pd.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
-                          const ret = pd.return_pct;
+                          if (signal.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
+                          const ret = signal.return_pct;
                           const isBullish = signal.signal === '매수' || signal.signal === '긍정';
                           const isGood = isBullish ? ret >= 0 : ret <= 0;
                           const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
                           const arrow = ret >= 0 ? '▲' : '▼';
                           return (
-                            <span className={`font-medium ${color}`} title={`시점가 ${formatStockPrice(pd.price_at_signal || 0, signal.stock)} → 현재 ${formatStockPrice(pd.price_current || 0, signal.stock)}`}>
+                            <span className={`font-medium ${color}`} title={`시점가 ${formatStockPrice(signal.price_at_signal || 0, signal.stock)} → 현재 ${formatStockPrice(signal.price_current || 0, signal.stock)}`}>
                               {arrow} {ret >= 0 ? '+' : ''}{ret}%
                             </span>
                           );
