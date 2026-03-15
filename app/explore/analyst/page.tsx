@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import reportsData from '@/data/analyst_reports.json';
 import stockPricesData from '@/data/stockPrices.json';
-import TargetPriceChart from '@/components/TargetPriceChart';
 import { isKoreanStock } from '@/lib/currency';
 import ReportDetailModal from '@/components/ReportDetailModal';
 
@@ -444,7 +443,25 @@ export default function AnalystPage() {
         {/* 📈 종목별 */}
         {activeTab === 'stock' && (
           <div className="space-y-2">
-            {tickerGroups.map(g => (
+            {tickerGroups.map(g => {
+              // 컨센서스 계산 (최근 1개월)
+              const oneMonthAgo = new Date();
+              oneMonthAgo.setDate(oneMonthAgo.getDate() - 30);
+              const recentReports = g.reports.filter(r => new Date(r.published_at) >= oneMonthAgo);
+              const recentWithTarget = recentReports.filter(r => r.target_price && r.target_price > 0);
+              const buyCount = recentReports.filter(r => r.opinion === 'BUY').length;
+              const holdCount = recentReports.filter(r => r.opinion === 'HOLD').length;
+              const sellCount = recentReports.filter(r => r.opinion === 'SELL').length;
+              const totalRecent = recentReports.length;
+              const consensusOpinion = buyCount >= totalRecent / 2 ? 'BUY' : holdCount >= totalRecent / 2 ? 'HOLD' : totalRecent > 0 ? 'BUY' : 'HOLD';
+              const targetPrices = recentWithTarget.map(r => r.target_price!);
+              const minTarget = targetPrices.length > 0 ? Math.min(...targetPrices) : null;
+              const maxTarget = targetPrices.length > 0 ? Math.max(...targetPrices) : null;
+              const avgTarget = targetPrices.length > 0 ? targetPrices.reduce((a, b) => a + b, 0) / targetPrices.length : null;
+              const currentPrice = stockPrices[g.ticker]?.currentPrice;
+              const upside = avgTarget && currentPrice ? ((avgTarget - currentPrice) / currentPrice * 100) : null;
+
+              return (
               <div key={g.ticker} className="bg-white rounded-xl shadow-sm overflow-hidden">
                 <button
                   onClick={() => setExpandedTicker(expandedTicker === g.ticker ? null : g.ticker)}
@@ -463,33 +480,131 @@ export default function AnalystPage() {
                 </button>
                 {expandedTicker === g.ticker && (
                   <div className="border-t border-gray-100">
-                    {/* 목표가 차트 */}
-                    <div className="p-4">
-                      <TargetPriceChart reports={g.reports} stockName={g.name} />
-                    </div>
-                    
-                    {/* 리포트 목록 */}
-                    <div className="px-4 pb-3">
-                      <h4 className="font-medium text-gray-900 mb-3 text-sm">📄 리포트 목록</h4>
-                      {g.reports.slice(0, 20).map((r, i) => (
-                        <div key={i} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm text-gray-800 truncate">{r.title}</p>
-                            <div className="flex items-center gap-2 mt-0.5">
-                              <span className="text-xs text-gray-500">{r.firm}</span>
-                              <span className="text-xs text-gray-400">{formatDate(r.published_at)}</span>
-                              <OpinionBadge opinion={r.opinion} />
-                              <span className="text-xs text-gray-700">목표 {formatPrice(r.target_price, r.ticker)}</span>
-                            </div>
+                    {/* 컨센서스 요약 카드 */}
+                    <div className="p-4 bg-gray-50 border-b border-gray-100">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <h4 className="font-bold text-gray-900 text-sm">애널리스트 컨센서스</h4>
+                          <p className="text-xs text-gray-500">최근 1개월 리포트 기준</p>
+                        </div>
+                        {g.reports.length > 0 && (
+                          <div className="text-right">
+                            <p className="text-xs text-gray-700 font-medium truncate max-w-[180px]">{g.reports[0].title}</p>
+                            <p className="text-xs text-gray-400">{g.reports[0].firm} · {formatDate(g.reports[0].published_at)}</p>
                           </div>
-                          <a href={r.pdf_url} target="_blank" rel="noopener noreferrer" className="ml-2">📄</a>
+                        )}
+                      </div>
+                      
+                      {totalRecent > 0 ? (
+                        <>
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                              consensusOpinion === 'BUY' ? 'bg-green-100 text-green-700' :
+                              consensusOpinion === 'SELL' ? 'bg-red-100 text-red-700' :
+                              'bg-yellow-100 text-yellow-700'
+                            }`}>{consensusOpinion}</span>
+                            <span className="text-sm text-gray-700 font-medium">
+                              {totalRecent}명 중 {buyCount}명 매수
+                              {holdCount > 0 && ` · ${holdCount}명 중립`}
+                              {sellCount > 0 && ` · ${sellCount}명 매도`}
+                            </span>
+                            {upside !== null && (
+                              <>
+                                <span className="text-gray-300">|</span>
+                                <span className={`text-sm font-bold ${upside >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                  {upside >= 0 ? '+' : ''}{upside.toFixed(1)}%
+                                </span>
+                                <span className="text-xs text-gray-500">평균 목표가 vs 현재가</span>
+                              </>
+                            )}
+                          </div>
+                          
+                          {/* 목표가 범위 바 */}
+                          {minTarget && maxTarget && currentPrice && (
+                            <div className="mb-2">
+                              <div className="flex justify-between text-xs text-gray-500 mb-1">
+                                <span>최저 {formatPrice(minTarget, g.ticker)}</span>
+                                <span>● 현재가 {formatPrice(currentPrice, g.ticker)}</span>
+                                <span>최고 {formatPrice(maxTarget, g.ticker)}</span>
+                              </div>
+                              <div className="relative h-2 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 rounded-full">
+                                {/* 현재가 위치 표시 */}
+                                <div 
+                                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-blue-600 rounded-full border-2 border-white shadow"
+                                  style={{ 
+                                    left: `${Math.max(0, Math.min(100, ((currentPrice - minTarget) / (maxTarget - minTarget)) * 100))}%` 
+                                  }}
+                                />
+                              </div>
+                              <p className="text-xs text-gray-500 mt-1">
+                                최근 30일: ↑ {totalRecent}건 {buyCount > 0 ? `${buyCount}건 매수` : ''}
+                              </p>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-xs text-gray-400">최근 1개월 리포트 없음</p>
+                      )}
+                    </div>
+
+                    {/* 컨센서스 상세 - 테이블 형태 리포트 목록 */}
+                    <div className="px-4 pb-3">
+                      <h4 className="font-medium text-gray-900 mt-3 mb-3 text-sm flex items-center gap-2">
+                        컨센서스 상세 ({g.reports.length}건)
+                        <span className="text-xs text-gray-400 font-normal">애널리스트 리포트 전체 목록</span>
+                      </h4>
+                      
+                      {/* 테이블 헤더 */}
+                      <div className="hidden sm:grid grid-cols-12 gap-2 text-xs text-gray-500 font-medium pb-2 border-b border-gray-200 mb-1">
+                        <div className="col-span-2">날짜</div>
+                        <div className="col-span-2">애널리스트</div>
+                        <div className="col-span-1 text-center">투자의견</div>
+                        <div className="col-span-2 text-center">목표가</div>
+                        <div className="col-span-5">제목</div>
+                      </div>
+                      
+                      {g.reports.slice(0, 30).map((r, i) => (
+                        <div 
+                          key={i} 
+                          className="grid grid-cols-12 gap-2 items-center py-3 border-b border-gray-50 last:border-0 cursor-pointer hover:bg-blue-50/50 rounded transition-colors"
+                          onClick={() => openReportModal(r)}
+                        >
+                          {/* 날짜 */}
+                          <div className="col-span-2 sm:col-span-2">
+                            <span className="text-xs text-gray-500">{formatDate(r.published_at)}</span>
+                          </div>
+                          
+                          {/* 애널리스트 + 증권사 */}
+                          <div className="col-span-3 sm:col-span-2">
+                            <p className="text-sm font-medium text-gray-900 truncate">{r.analyst || '-'}</p>
+                            <p className="text-xs text-gray-500 truncate">{r.firm}</p>
+                          </div>
+                          
+                          {/* 투자의견 */}
+                          <div className="col-span-2 sm:col-span-1 text-center">
+                            <OpinionBadge opinion={r.opinion} />
+                          </div>
+                          
+                          {/* 목표가 */}
+                          <div className="col-span-2 sm:col-span-2 text-center">
+                            <span className="text-sm font-bold text-gray-900">{formatPrice(r.target_price, r.ticker)}</span>
+                          </div>
+                          
+                          {/* 제목 + AI요약 */}
+                          <div className="col-span-12 sm:col-span-5 mt-1 sm:mt-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">{r.title}</p>
+                            {r.summary && (
+                              <p className="text-xs text-gray-500 truncate mt-0.5">{r.summary}</p>
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
