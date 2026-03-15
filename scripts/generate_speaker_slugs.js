@@ -52,17 +52,30 @@ function speakerToSlug(name) {
     env.SUPABASE_SERVICE_ROLE_KEY || env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
 
-  const { data, error } = await supabase
+  // 1) speakers 테이블에서 화자명
+  const { data: speakerData, error: speakerErr } = await supabase
     .from('speakers')
     .select('name')
     .limit(1000);
 
-  if (error) {
-    console.error('Supabase error:', error.message);
+  if (speakerErr) {
+    console.error('Supabase error (speakers):', speakerErr.message);
     process.exit(1);
   }
 
-  const names = [...new Set(data.map(d => d.name).filter(Boolean))].sort();
+  const speakerNames = speakerData.map(d => d.name).filter(Boolean);
+
+  // 2) speaker_id가 null인 시그널 → 채널명을 화자로 사용하는 케이스
+  //    프론트엔드가 channel_name으로 speakerToSlug() 호출하여 링크 생성
+  const { data: channelData } = await supabase
+    .from('influencer_channels')
+    .select('channel_name')
+    .limit(100);
+
+  const channelNames = (channelData || []).map(d => d.channel_name).filter(Boolean);
+
+  const names = [...new Set([...speakerNames, ...channelNames])].sort();
+  console.log(`[INFO] speakers: ${speakerNames.length}명, channels: ${channelNames.length}개`);
 
   // slug 목록 생성 (매핑 + 해시 모두 포함)
   const slugEntries = names.map(name => ({
