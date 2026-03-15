@@ -1,0 +1,554 @@
+[
+  {
+    "stock": "푸야오글래스",
+    "key_quote": "여러분은 27% 이미 벌었다. A주수 나의 이준이 할 때 무조건 싼 거 사는 거예요",
+    "video_title": "가치주 투자방법과 중국 대표기업",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "화웨이",
+    "key_quote": "화웨이가 중국 자동차 회사와 협업해서 테슬라 정도의 소프트웨어를 구축한다면 가격적으로 테슬라보다 훨씬 더 싸게 공급할 수 있는 장점이 있어 테슬라의 가장 강력한 경쟁 대상이 될 것",
+    "video_title": "테슬라 미중기술패권쟁의 희생양이 될것인가?",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "테슬라",
+    "key_quote": "테슬라 성공사례는 중국 지방정부 중심으로 이루어진 통제의 발전 정책이 굉장히 현실적으로 실사구시적으로 이루어지고 있다",
+    "video_title": "테슬라 미중기술패권쟁의 희생양이 될것인가?",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "로블록스",
+    "key_quote": "로블록스는 우리가 보통 메타버스를 얘기할 때 가장 대표 기업으로 보는 기업입니다",
+    "video_title": "[안유화쇼] 빅테크 기업이 직면한 어려움, 한국 대기업들이 놓치는 것은?｜안유화쇼 1화",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "삼성SDI",
+    "key_quote": "삼성sdi는 전고체 배터리 다시 말해서 전해질이 고체화를 통해서 안정성을 확보하는 그리고 굉장히 감소된 배터리 크기로 더 많은 배터리를 장착할 수 있게 지금 기술총격차를 벌려가고 있는 삼성입니다",
+    "video_title": "[안유화쇼] 한중 전기차 배터리 전쟁! 한국 기업들이 중국을 떠나는 이유는?｜안유화쇼 17화",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "단순기술분석"
+  },
+  {
+    "stock": "LG화학",
+    "key_quote": "lg화학이 리튬황 배터리를 통해서 기술에 있어서 초격차를 보여주고 있고요",
+    "video_title": "[안유화쇼] 한중 전기차 배터리 전쟁! 한국 기업들이 중국을 떠나는 이유는?｜안유화쇼 17화",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인 현물 etf 통과가 됐죠 따라서 지금 비트코인 가격이 엄청 많이 올랐습니다. 앞으로는 기관 투자가도 여기 들어올 수가 있게 됐다라는 거예요. 비트코인이 시대적 흐름이냐 이거예요. 저는 메타버스 시대라는 거는 100% 오게 돼 있어요.",
+    "video_title": "비트코인 2억 갈 수 있나? 진실은 이것이다.  #비트코인 #경제",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "이더리움",
+    "key_quote": "이더리움의 가치는 다시 결론 내리면... 이더리움은 석유다... 이더리움은 가장 큰 활용이 디파이입니다",
+    "video_title": "이더리움 vs 비트코인, 이더리움 향후 더 상승할 가능성은?ㅣ안유화의 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "아무것도 모를 때 암호화폐에 대해 관심 갖고 한번 투자해 보고 싶으면 비트코인 이더리움 이렇게 얘기를 했었거든요",
+    "video_title": "이더리움 vs 비트코인, 이더리움 향후 더 상승할 가능성은?ㅣ안유화의 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "여러분들이 아무것도 모르는 상황에서 한번 해보고 싶다 내에 공부를 하거나 연구를 안 했어요 근데 해보고 싶은 거예요 제가 그래서 여러분들한테 비트코인을 추천한 거예요",
+    "video_title": "솔라나 향후 우상향 가능성 ㅣ 안유화의 경제투자론 - 가상화폐",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인은 앞으로 전반적으로 올라가는 추세라는 건 많은 사람들이 아마 의심할 런지가 없고",
+    "video_title": "홍콩 ETF 승인 불러올 비트코인 폭등!! 중국의 투자 영향 ㅣ안유화의 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "엔비디아",
+    "key_quote": "장기로는 메타버스 세상도 오고 AI PC도 오고 이런 장기 비전을 봤을 때는 계속 갈 건데",
+    "video_title": "엔비디아 10% 폭락 !! 아직은 문제 없다, 하지만 이후 결국...ㅣ안유화의 경제투자론",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "리스크누락"
+  },
+  {
+    "stock": "HYBE",
+    "key_quote": "저는이 하이브를 좀 관심 있게 봤어요... 하이브라 회사가 갖고 있는이 시템 때문이었어요... 플랫폼 구조라고 볼 수가 있죠",
+    "video_title": "[하이브 - 민희진] 논란에서 보는 엔터산업의 문제점ㅣ안유화의 경제투자론",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "리스크누락"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인이 75만불 혹은 100만불 갈 수도 있다 그래서 100만불이 간다고 했을 때 비트코인 가치가 얼마냐",
+    "video_title": "'비트코인 대체 가능? 단점은? ' 드디어 비트코인 Q&A 시간 옴!!!ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "뷰유지(단순사례)"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인이 가격이라고 표현하지 말자, 비트코인을 환율로 봐야 한다. 달러가 앞으로 계속 가치가 떨어진다면 비트코인이 가격이 더 올라갈 수밖에 없다",
+    "video_title": "달러보다 더 가치 있는 가상자산 '비트코인' ㅣ 안유화의 경제투자론",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "CATL",
+    "key_quote": "닝더시 같은 경우는 이제는 미국이나 유럽에서 너무 제재하니까 해외 진출이 핵심이에요",
+    "video_title": "앞으로 더 오른다! 세계 1등 기업의 주가가 고작 3만원? ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "BYD",
+    "key_quote": "지금이 사라고 이야기하는게 아니에요... 제가 계산한 적정가격이 240위안인데 지금 200위안도 안됩니다 그래서 제가 요즘에 가장 많이 공부하는게예요",
+    "video_title": "앞으로 더 오른다! 세계 1등 기업의 주가가 고작 3만원? ㅣ안유화 경제투자론",
+    "v12_result": "매수",
+    "correct": "긍정",
+    "reason_cat": "종목불일치"
+  },
+  {
+    "stock": "엔비디아",
+    "key_quote": "엔비디아가 완전 칩에서 팍 최고봉으로 갔고",
+    "video_title": "삼성전자의 진짜 위기는 이것! 손절할까 말까? ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "테슬라",
+    "key_quote": "테슬라는 5년 전에 비해서 지금은 세배 넘게 올랐어요",
+    "video_title": "삼성전자의 진짜 위기는 이것! 손절할까 말까? ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "삼성전자",
+    "key_quote": "삼성전자 3만 원대 주식으로 갈 수도 있는 거죠 지금 5만 원 대지만",
+    "video_title": "삼성전자의 진짜 위기는 이것! 손절할까 말까? ㅣ안유화 경제투자론",
+    "v12_result": "부정",
+    "correct": "중립",
+    "reason_cat": "조건부누락"
+  },
+  {
+    "stock": "테슬라",
+    "key_quote": "테슬라 같은 이런 플랫폼 기업이에요 지금 일런 모스크가 하는게 뭐예요 플랫폼이에요",
+    "video_title": "트럼프가 오면 디지털 달러는 가고 비트코인이 기축통화 역할을 한다? ㅣ안유화 경제투자론",
+    "v12_result": "중립",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "삼성전자",
+    "key_quote": "삼성전자의 위기 반도체 해권 사업",
+    "video_title": "트럼프가 오면 디지털 달러는 가고 비트코인이 기축통화 역할을 한다? ㅣ안유화 경제투자론",
+    "v12_result": "중립",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인이 뭐 2억 간다 지금 7만 달러 넘었잖아요 거의 1억이 됩니다 제가 옛날에 10억 간다 자세히 부속해 드렸어요",
+    "video_title": "트럼프가 오면 디지털 달러는 가고 비트코인이 기축통화 역할을 한다? ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "매수",
+    "reason_cat": "뷰유지(스탠스동일)"
+  },
+  {
+    "stock": "테슬라",
+    "key_quote": "테슬라는 앞으로 표준으로 돈 버는 기업이 될 거예요",
+    "video_title": "내년 전기차 줄파산 예고! 한국 이렇게 안하면 망합니다! ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "현대자동차",
+    "key_quote": "현대자동차는 전체 직원이 12만 명이에요 그러니까 중국 하디의 개발자 수가 한국 현재 자동차의 전체 지원 수입니다",
+    "video_title": "내년 전기차 줄파산 예고! 한국 이렇게 안하면 망합니다! ㅣ안유화 경제투자론",
+    "v12_result": "부정",
+    "correct": "부정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "BYD",
+    "key_quote": "비아디는 자동차 한대당 매출 원가가 17,400원이 돼요이 차이가 보이죠 여기서 보면은 한국 자동차하부 비아디 자동차 원가 차이가 한 2,000달러 차이가나요",
+    "video_title": "내년 전기차 줄파산 예고! 한국 이렇게 안하면 망합니다! ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "매수",
+    "reason_cat": "시그널상향"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인이나 이더리움이나 또은 이제 쓸모를 입증한 코인들 같은 경우는 굉장히 큰 기회가 있을 거라고 생각하고요",
+    "video_title": "2025년 암호화폐 시장전망(액션스퀘어 장현국 대표) ㅣ안유화의 찾아가는 경제 EP. 03-1부",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "화자불일치"
+  },
+  {
+    "stock": "이더리움",
+    "key_quote": "비트코인이나 이더리움이나 또은 이제 쓸모를 입증한 코인들 같은 경우는 굉장히 큰 기회가 있을 거라고 생각하고요",
+    "video_title": "2025년 암호화폐 시장전망(액션스퀘어 장현국 대표) ㅣ안유화의 찾아가는 경제 EP. 03-1부",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "화자불일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "2025년에는 오를거다 이게 또 이분들이 두 번째 근거고요... 앞으로 긍정적으로 본다",
+    "video_title": "바로 20만달러 간다! 2025년 비트코인 전망 나왔다! ㅣ안유화 경제투자론",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "뷰유지(스탠스동일)"
+  },
+  {
+    "stock": "엔비디아",
+    "key_quote": "엔비디아가 지금 가격이 더 갈 수 있냐 아니면 지금 클라이막스냐. 시스코가 2000년에 지금의 엔비디아 역할 했어요. 그 이후로 계속 주가 지금까지 계속 다시는 성공한 적이 없어요 계속 떨어져 왔어요",
+    "video_title": "테슬라 주가 대폭락? 일론 머스크의 정치 행보가 불러온 일시적 위기인가, 구조적 변화인가?ㅣ안유화 경제투자론",
+    "v12_result": "부정",
+    "correct": "중립",
+    "reason_cat": "시그널하향(리스크언급)"
+  },
+  {
+    "stock": "테슬라",
+    "key_quote": "테슬라가 왜 떨어졌냐 여기에는 두 가지 원인이 있어요. 하나는 테슬라 자체가 지금 모델 새로 모델 안 나오고 있어요 지금 3년 넘게 안 나오고 있어요. 두 번째는 경쟁이 점점 심해지고 있어요",
+    "video_title": "테슬라 주가 대폭락? 일론 머스크의 정치 행보가 불러온 일시적 위기인가, 구조적 변화인가?ㅣ안유화 경제투자론",
+    "v12_result": "부정",
+    "correct": "중립",
+    "reason_cat": "시그널하향(리스크언급)"
+  },
+  {
+    "stock": "SMIC",
+    "key_quote": "SMIC인데 중국의 첨단 반도체 내제화 굉장히 오래된 숙원 사업으로 제가 알고 있습니다. AI가 발전을 하면 고객사가 확실하게 있다 보니까 아무래도 반도체 기업들, 중국의 반도체 기업들도 수혜를 볼 수 있지 않을까",
+    "video_title": "6 Companies Benefiting from DeepSeak: Is Now the Time to Invest? | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "메이투안",
+    "key_quote": "메이투안은 자체적으로 아직 공개하지 않은 AI LM 롱캣이라는 모델을 가지고 있는데 중국의 거의 모든 배달 음식 어플리케이션은 메이투안이 거의 과점 형태라고 알고 있어서 과점 형태를 성공한 기업들은 굉장히 매력적이거든요",
+    "video_title": "6 Companies Benefiting from DeepSeak: Is Now the Time to Invest? | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "레노버",
+    "key_quote": "레노버입니다. 기업은 이제 온디바이스 AI를 추구를 해서 노트북에 딥시크를 탑재했어요",
+    "video_title": "6 Companies Benefiting from DeepSeak: Is Now the Time to Invest? | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "샤오미",
+    "key_quote": "샤오미 같은 경우에는 아시겠지만 전기차를 팔겠다고 얘기를 하기 시작을 했죠. 상당히 높습니다.",
+    "video_title": "6 Companies Benefiting from DeepSeak: Is Now the Time to Invest? | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "알리바바",
+    "key_quote": "알리바바 같은 경우에는 자체 LM 모델을 가지고 있습니다. 알리바 역시 AI 전쟁에 뛰어들어서 이제 성과에 대한 것들을 이제 시장이 기다리고 있는 그런 상황",
+    "video_title": "6 Companies Benefiting from DeepSeak: Is Now the Time to Invest? | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "텐센트",
+    "key_quote": "10센트 같은 경우에는 위치 텐센트거다 보니까 AI 광고를 통해서 10센트도 돈을 벌 수 있지 않을까라고 생각을 하고 있고요",
+    "video_title": "6 Companies Benefiting from DeepSeak: Is Now the Time to Invest? | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비아디",
+    "key_quote": "비아디가 상당히 매력적인 구간으로 접어들었고 전 세계에서 수출 비중을 늘려고 있는 노력도 하고 있고 내수로 봤을 때도 비아디의 점유율이 압도적이다",
+    "video_title": "BYD vs 테슬라, 미래차 시장의 절대 강자?ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "타이거 차이나 전기차 솔렉티브",
+    "key_quote": "트렌드에 투자를 하고 싶으시다면 자율주행 전기차 핵심 부품 그다음 배터리까지 다 같이 포함하고 있는 타이거 차이나 전기차 솔렉티브 ETF를 한번 생각해 주시면 좋을 것 같습니다",
+    "video_title": "BYD vs 테슬라, 미래차 시장의 절대 강자?ㅣ안유화 경제투자론",
+    "v12_result": "매수",
+    "correct": "긍정",
+    "reason_cat": "시그널하향(제안수준)"
+  },
+  {
+    "stock": "USDC",
+    "key_quote": "USDC는 그런 기관들한테는 좀 더 선호될 수가 있습니다. 앞으로 얘네들은 점점 더 거래에 커질 겁니다",
+    "video_title": "스테이블코인 한국 상륙?! 원화 기반 코인이 온다?ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "USDT",
+    "key_quote": "USDT와 USDC 나아가서 지금 이재명 후보가 얘기할 원화 기반의 스테블 코인이 나온다고 했을 때 앞으로 얘네들은 점점 더 거래에 커질 겁니다",
+    "video_title": "스테이블코인 한국 상륙?! 원화 기반 코인이 온다?ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인을 왜 해야 되는지에 대해서 의고심이 생기는 거예요. 화폐의 개념을 정확하게 몰라서 그래요",
+    "video_title": "스테이블코인 한국 상륙?! 원화 기반 코인이 온다?ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "샤오미",
+    "key_quote": "샤오미는 단순히 가전 기업을 넘어서 스마트폰에서 전기차까지 IoT 생태계를 장악하고 있는 기업입니다. 8.6억 대 IoT 디바이스를 보유하고 있기 때문에 방대한 고객 데이터 확보를 통해서 다양한 AI 비즈니스로 확장을 기대하고 있습니다",
+    "video_title": "이제는 타이밍 문제다! 중국 테크, 지금 들어가야 하는 이유!ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "타이거 차이나테크 탑 10 ETF",
+    "key_quote": "이러한 변화를 가장 빠르고 또 효과적으로 투자로 연결할 수 있는 방법이 바로 타이거 차이나테크 탑 10 ETF입니다. 여러분의 포트폴리오에 타이거 차이나테크 탑 10 ETF를 꼭 한번 담아 보시면 좋을 것 같습니다",
+    "video_title": "이제는 타이밍 문제다! 중국 테크, 지금 들어가야 하는 이유!ㅣ안유화 경제투자론",
+    "v12_result": "매수",
+    "correct": "긍정",
+    "reason_cat": "시그널하향(제안수준)"
+  },
+  {
+    "stock": "SMIC",
+    "key_quote": "SMIC는 중국판 TSMC를 노리고 있는 중국 최대 반도체 위탁 생산 기업입니다. 반도체 고도화의 핵심인 선단 공정 분야에서는 중국에서 유일한 기업이라고 할 수가 있는데요. 미국의 강력한 제재에 맞서서 반도체 홀로서기를 위해서 정부 지원도 적극적으로 이루어지고 있고요",
+    "video_title": "이제는 타이밍 문제다! 중국 테크, 지금 들어가야 하는 이유!ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "텐센트",
+    "key_quote": "텐센트는 한 때는 알리바바와 글로벌 시가 총액 탑 10에 포함되어 있었던 중국의 대표적인 소셜 미디어 기업인데요. 올해 딥시크의 AI 모델과 협업을 해서 출시한 AI 챗봇 위안바오가 중국 애플 앱스토어 다운로드수 1위에 오르기도 했는데요. 자사 플랫폼에 AI를 적용해서 굉장히 빠르게 상업화를 시키고 있는 기업입니다",
+    "video_title": "이제는 타이밍 문제다! 중국 테크, 지금 들어가야 하는 이유!ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비야디",
+    "key_quote": "비야디는 전기차 판매량뿐만 아니라 매출로도 지난해 1,000억 달러를 돌파하면서 글로벌 대표 전기차 기업인 테슬라를 넘어섰습니다. 5분 충전으로 400km가 주행 가능한 신기술이나 모든 차종의 자율주행 시스템을 무료로 탑재하는 등 새로운 기술들을 선보이면서 전기차 생태계를 빠르게 장악하고 있는 기업입니다",
+    "video_title": "이제는 타이밍 문제다! 중국 테크, 지금 들어가야 하는 이유!ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "알리바바",
+    "key_quote": "알리바바는 중국판 아마존이라고 불리고 있죠. 전자상거래 외에도 클라우드나 핀테크, 물류, 엔터테인먼트 등 굉장히 다양한 산업에서 중국 내에서 굉장히 높은 지배력을 가지고 있는 기업입니다. AI 생태계의 수직 통합 플랫폼을 활용해서 중국의 AI 선두 주자로 자리매김을 하고 있는 기업입니다",
+    "video_title": "이제는 타이밍 문제다! 중국 테크, 지금 들어가야 하는 이유!ㅣ안유화 경제투자론",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "나의 첫 비트코인 시대를 열기를 바라고 나의 첫 비트코인으로 한번 어 써보는 경험까지 해 하시기를 바랍니다",
+    "video_title": "비트코인을 몰라도 괜찮은 시대 끝났다ㅣ안유화 경제투자론",
+    "v12_result": "매수",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "리플",
+    "key_quote": "XRP는 스테이블 코인의 기능과 CBDC 기능, 그리고 이런 자체 ODL 서비스 이거 지금 다 융합하려고 하거든요. 업사이드에 올라가는 테킹을 하는 투자자 차원에서는 XRP를 갖고 있는 것도 나쁘지 않다.",
+    "video_title": "Ripple Disappears?! Altcoin Conquest | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "네이버",
+    "key_quote": "네이버와 두나무가 지금 만약에 본격적으로 이게 현화되며 국내 상거래 비투브 거래 그리고 콘텐츠 생태계로 스테불 결제가 바로 들어갈 수가 있기 때문에 바로이 어 네트워이 형성이 됩니다",
+    "video_title": "Naver and Dunamu Merger! What's the Future Investment Strategy?! | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "비트코인은 하락할 때는 무조건 뭐라고 했죠? 빅셀이다. 그래서 어 한 번에 사지 말고 단계별로 이렇게 주변로 DCA 전략 어 전기평으로 느리게 느리게 단 규칙적으로 매입하는 전략이 장기 전략으로서 지금 가장 좋을 때다",
+    "video_title": "Naver and Dunamu Merger! What's the Future Investment Strategy?! | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "두나무",
+    "key_quote": "두나무와 이런 네이버의이 협력은 마치 글로벌 기업제 스트라이프하고 소피파이 전자산 거래 플랫폼이죠. 둘이 같이 어어 스테블 코 영역에서 협력하는 거 똑같은 개념입니다",
+    "video_title": "Naver and Dunamu Merger! What's the Future Investment Strategy?! | Ahn Yu-hwa's Economic Investme...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "뉴럴링크",
+    "key_quote": "뉴럴링크가 지금 100억 달러 시가 총액인데 브랜코는 14억 달러 밸류에이션인데 얘는 이미 물건을 만들어낸데 쟤는 지금 아직도 실험실인데",
+    "video_title": "The Reality of China's Top Big Tech Companies! On-Site Analysis of Alibaba, Geely, and Brainco | ...",
+    "v12_result": "부정",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "비트코인",
+    "key_quote": "제가 비트코인은 기초 통화가 될 수밖에 없다고 제가 얘기하는 이유 중에 하나고 올해는 기관들이 지금 어 200m 속도로 달려 들어온다고 보시면 돼요.",
+    "video_title": "A 50-Year Opportunity! Top 3 Megatrends for 2026 | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "엔비디아",
+    "key_quote": "사실은 이 질문 제가 많이 받았는데요. 길게 봤을 때는 버블이라 말하기 힘들어요. 왜냐면 이제 초입이거든요. 그럼 앞으로 커질 일밖에 없잖아.",
+    "video_title": "A 50-Year Opportunity! Top 3 Megatrends for 2026 | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "삼성전자",
+    "key_quote": "엔비디아부터 삼성전자 그리고 하이닉스까지 이미 많이 올랐는데요. 교수님 지금 AI 주가 과연 버블일까요?",
+    "video_title": "A 50-Year Opportunity! Top 3 Megatrends for 2026 | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "시그널하향(단순질문)"
+  },
+  {
+    "stock": "SK하이닉스",
+    "key_quote": "엔비디아부터 삼성전자 그리고 하이닉스까지 이미 많이 올랐는데요. 교수님 지금 AI 주가 과연 버블일까요?",
+    "video_title": "A 50-Year Opportunity! Top 3 Megatrends for 2026 | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "긍정",
+    "correct": "중립",
+    "reason_cat": "시그널하향(단순질문)"
+  },
+  {
+    "stock": "타이거 차이나 증권 ETF",
+    "key_quote": "그 기회를 테이킹하기 위해서 저희 타이거 ETF가 2월 초에 타이거 차이나 증권 ETF를 신규 상장하는데요. 중국 증시 회복 국면에서의 수혜를 좀 온전히 누릴 수 있는 ETF입니다.",
+    "video_title": "Investing in China in 2026! Which Industries Will Really Benefit? Part 1 | Ahn Yu-hwa's Economic ...",
+    "v12_result": "매수",
+    "correct": "중립",
+    "reason_cat": "단순사례인용"
+  },
+  {
+    "stock": "지리자동차",
+    "key_quote": "지리자동차가 이미 테슬라 현대 따라갈 수 없을 정도로 가장 먼저 갔다라는 걸 엄청 알게 됐죠",
+    "video_title": "The next Hyundai?! If you're looking for an opportunity, look no further. Ahn Yu-hwa's Economic I...",
+    "v12_result": "매수",
+    "correct": "매수",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "현대자동차",
+    "key_quote": "현대자동차가 앞으로 잘 간다는 보장은 없어요",
+    "video_title": "The next Hyundai?! If you're looking for an opportunity, look no further. Ahn Yu-hwa's Economic I...",
+    "v12_result": "중립",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "테슬라",
+    "key_quote": "테슬라가 전 세계 데이터를 다 가지고 있으니까 테슬라가 지금 학습액이 제일 좋고 제일 정확하다고 보면 돼요",
+    "video_title": "The next Hyundai?! If you're looking for an opportunity, look no further. Ahn Yu-hwa's Economic I...",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "타이거차이나휴먼노이드로봇",
+    "key_quote": "중국의 휴먼노이드 산업 밸류체인에 전반적으로 투자를 하는 타이거 차이나 휴먼노이드 로봇 ETF를 한번 소개해 드리고 싶습니다",
+    "video_title": "Investing in China in 2026! Which Industries Will Really Benefit? Part 2 | Ahn Yu-hwa's Economic ...",
+    "v12_result": "매수",
+    "correct": "중립",
+    "reason_cat": "시그널하향(단순질문)"
+  },
+  {
+    "stock": "타이거차이나테크톱10",
+    "key_quote": "알리바바, 샤오미, SMIC처럼 중국의 테크 혹은 반도체칩 기업들에 투자하고 있는 타이거 차이나 테크탑10 ETF를 한번 말씀드리고 싶습니다",
+    "video_title": "Investing in China in 2026! Which Industries Will Really Benefit? Part 2 | Ahn Yu-hwa's Economic ...",
+    "v12_result": "매수",
+    "correct": "긍정",
+    "reason_cat": "시그널하향(제안수준)"
+  },
+  {
+    "stock": "타이거차이나반도체팩세트",
+    "key_quote": "중국의 기술 자립 반도체 자립이라는 정책 방향과 잘 맞아 떨어지는 타이거 차이나 반도체 팩세트 ETF를 한번 말씀드리고 싶습니다",
+    "video_title": "Investing in China in 2026! Which Industries Will Really Benefit? Part 2 | Ahn Yu-hwa's Economic ...",
+    "v12_result": "매수",
+    "correct": "긍정",
+    "reason_cat": "시그널하향(제안수준)"
+  },
+  {
+    "stock": "한화에어로스페이스",
+    "key_quote": "하나 에러스페이스는 이미 어 수출 계약이 다 우리가 데이터로 숫자로 놨기 때문에 확인이 가능하고요. 또 납품이 실질적으로 연결되는 걸 가시성으로 다 확인할 수가 있습니다. 그래서 좋은 사업이냐 저는 좋은 사업이라고 봐요.",
+    "video_title": "Top 3 Promising Sectors with 10x Growth | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "한국금융지주",
+    "key_quote": "개인적으로는 한국 금융 지수가 굉장히 잘합니다. 굉장히 잘합니다.",
+    "video_title": "Top 3 Promising Sectors with 10x Growth | Ahn Yu-hwa's Economic Investment Theory",
+    "v12_result": "긍정",
+    "correct": "긍정",
+    "reason_cat": "맥락일치"
+  },
+  {
+    "stock": "삼성전자",
+    "key_quote": "특히 많이 올랐던 SK닉스와 삼성전자 얘네는 외국인이 가장 쉽게 가져가고 쉽게 주자하고 쉽게 빠져나가는 ATM기입니다",
+    "video_title": "In these times of heightened risk, these are the companies that will ultimately survive! Part 2 |...",
+    "v12_result": "부정",
+    "correct": "중립",
+    "reason_cat": "시그널하향(리스크언급)"
+  },
+  {
+    "stock": "SK하이닉스",
+    "key_quote": "특히 많이 올랐던 SK닉스와 삼성전자 얘네는 외국인이 가장 쉽게 가져가고 쉽게 주자하고 쉽게 빠져나가는 ATM기입니다",
+    "video_title": "In these times of heightened risk, these are the companies that will ultimately survive! Part 2 |...",
+    "v12_result": "부정",
+    "correct": "중립",
+    "reason_cat": "시그널하향(리스크언급)"
+  }
+]
