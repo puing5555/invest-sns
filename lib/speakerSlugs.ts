@@ -1,4 +1,4 @@
-// Speaker name ↔ English slug mapping
+// Speaker name ↔ English slug mapping (updated 2026-03-15)
 const SPEAKER_SLUGS: Record<string, string> = {
   '이효석': 'lee-hyoseok',
   '조진표': 'cho-jinpyo',
