@@ -78,6 +78,9 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '홍진채': 'hong-jinchae',
 };
 
+// data/speaker_slugs.json: { slug: name } 역매핑 (채널명 포함, 빌드 시 생성)
+import dynamicSlugMap from '@/data/speaker_slugs.json';
+
 // 한글 → hash 기반 slug (매핑에 없는 발언자 fallback용)
 function koreanToSlug(name: string): string {
   if (/^[a-zA-Z0-9_-]+$/.test(name)) return name.toLowerCase();
@@ -107,24 +110,11 @@ export function speakerToSlug(name: string): string {
   return SPEAKER_SLUGS[name] || koreanToSlug(name);
 }
 
-// data/speaker_slugs.json: { slug: name } 역매핑 (채널명 포함)
-let _dynamicSlugMap: Record<string, string> | null = null;
-function getDynamicSlugMap(): Record<string, string> {
-  if (!_dynamicSlugMap) {
-    try {
-      _dynamicSlugMap = require('@/data/speaker_slugs.json');
-    } catch {
-      _dynamicSlugMap = {};
-    }
-  }
-  return _dynamicSlugMap!;
-}
-
 export function slugToSpeaker(slug: string): string | null {
   // 1) 하드코딩 매핑에서 찾기
   if (SLUG_TO_SPEAKER[slug]) return SLUG_TO_SPEAKER[slug];
   // 2) data/speaker_slugs.json 역매핑에서 찾기 (채널명 포함)
-  const dynamic = getDynamicSlugMap();
+  const dynamic = dynamicSlugMap as Record<string, string>;
   if (dynamic[slug]) return dynamic[slug];
   return null;
 }
