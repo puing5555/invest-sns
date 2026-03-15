@@ -864,6 +864,23 @@ class AutoPipeline:
                 _shutil.copy2(_sp_src, _sp_dst)
                 print(f"  stockPrices.json 동기화 완료")
 
+            # ── Step 8.6: speaker_slugs.json 갱신 ──────────────────────
+            print(f"\n[Step 8.6] speaker_slugs.json 갱신...")
+            try:
+                slug_script = os.path.join(PROJECT_ROOT, 'scripts', 'generate_speaker_slugs.js')
+                slug_result = subprocess.run(
+                    ['node', slug_script],
+                    cwd=PROJECT_ROOT,
+                    capture_output=True, text=True, timeout=30,
+                    encoding='utf-8', errors='replace'
+                )
+                if slug_result.returncode == 0:
+                    print(slug_result.stdout.strip())
+                else:
+                    print(f"[WARNING] speaker_slugs.js 실패: {slug_result.stderr[:200]}")
+            except Exception as e:
+                print(f"[WARNING] speaker_slugs.js 실행 불가: {e}")
+
             # ── Step 9: npm run build ─────────────────────────────────
             print(f"\n[Step 9] 프론트엔드 빌드 (npm run build)...")
             build_result = subprocess.run(

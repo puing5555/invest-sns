@@ -394,8 +394,11 @@ class DatabaseInserter:
             stats['inserted_videos'] += 1
 
             # 시그널 INSERT (run_corinpapa_batch.py 패턴과 동일)
+            # channel_name 추출: speaker_name 폴백용
+            ch_name = channel_info.get('channel_title') or channel_info.get('name', '')
             for signal in signals:
                 try:
+                    signal['_channel_name'] = ch_name
                     ok = self._insert_signal_for_video(video_uuid, signal)
                     if ok:
                         stats['inserted_signals'] += 1
@@ -446,8 +449,10 @@ class DatabaseInserter:
         except Exception:
             pass
 
-        # 발언자 처리
+        # 발언자 처리: speaker_name 없으면 channel_name 폴백
         speaker_name = signal.get('speaker_name') or signal.get('speaker', '')
+        if not speaker_name:
+            speaker_name = signal.get('_channel_name', '')
         speaker_id = None
         if speaker_name:
             speaker_id = self._get_or_create_speaker(speaker_name)
@@ -500,10 +505,10 @@ class DatabaseInserter:
             return False
 
     def _get_or_create_speaker(self, speaker_name: str) -> Optional[str]:
-        """발언자 확인/생성 (influencer_speakers 테이블)"""
+        """발언자 확인/생성 (speakers 테이블)"""
         try:
             resp = requests.get(
-                f"{self.base_url}/influencer_speakers",
+                f"{self.base_url}/speakers",
                 headers=self.headers,
                 params={'name': f'eq.{speaker_name}', 'select': 'id'}
             )
@@ -512,7 +517,7 @@ class DatabaseInserter:
             # 없으면 생성
             new_id = str(uuid.uuid4())
             cr = requests.post(
-                f"{self.base_url}/influencer_speakers",
+                f"{self.base_url}/speakers",
                 headers={**self.headers, 'Prefer': 'return=minimal'},
                 json={'id': new_id, 'name': speaker_name,
                       'created_at': datetime.now().isoformat()}
