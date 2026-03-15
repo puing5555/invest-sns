@@ -89,12 +89,18 @@ function koreanToSlug(name: string): string {
   return `speaker-${Math.abs(hash).toString(36)}`;
 }
 
-// 역방향 매핑 (slug → speaker name)
+// 역방향 매핑 (slug → speaker name, 가장 짧은 정규 이름 우선)
 const SLUG_TO_SPEAKER: Record<string, string> = {};
 Object.entries(SPEAKER_SLUGS).forEach(([name, slug]) => {
-  SLUG_TO_SPEAKER[slug] = name;
+  if (!SLUG_TO_SPEAKER[slug] || name.length < SLUG_TO_SPEAKER[slug].length) {
+    SLUG_TO_SPEAKER[slug] = name;
+  }
   const hashSlug = koreanToSlug(name);
-  if (hashSlug !== slug) SLUG_TO_SPEAKER[hashSlug] = name;
+  if (hashSlug !== slug) {
+    if (!SLUG_TO_SPEAKER[hashSlug] || name.length < SLUG_TO_SPEAKER[hashSlug].length) {
+      SLUG_TO_SPEAKER[hashSlug] = name;
+    }
+  }
 });
 
 export function speakerToSlug(name: string): string {
