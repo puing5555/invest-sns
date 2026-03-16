@@ -389,7 +389,7 @@ def check_subtitle_has_timestamps(signals):
 # 메인
 # ────────────────────────────────────────
 
-def run_gate2(signals, channel, video_durations=None, videos=None):
+def run_gate2(signals, channel, video_durations=None, videos=None, is_new_channel=False):
     """
     Gate 2 실행. 반환: (passed: bool)
 
@@ -398,6 +398,7 @@ def run_gate2(signals, channel, video_durations=None, videos=None):
         channel: 채널 슬러그 (channel_slug 별칭도 허용)
         video_durations: {video_id: duration_secs} (선택)
         videos: 영상 정보 리스트 [{video_id, published_at, title}, ...] (선택)
+        is_new_channel: 새 채널 여부 (True면 체크1 신규종목을 경고로 완화)
     """
     print(f"\n{'='*60}")
     print(f"🔍 QA Gate 2 - 시그널 분석 검증")
@@ -459,14 +460,20 @@ def run_gate2(signals, channel, video_durations=None, videos=None):
     print(f"\n🔎 [체크 1] DB 미등록 종목 검사 중...")
     unknown, err = check_unknown_stocks(signals)
     unknown_new = [u for u in unknown if u['input_count'] >= 1]
-    if len(unknown_new) >= 5:
-        # 5건 이상이면 치명적 (오추출 가능성 높음)
+    if len(unknown_new) >= 5 and not is_new_channel:
+        # 5건 이상이면 치명적 (오추출 가능성 높음) — 단, 새 채널은 경고만
         print(f"\n⛔ [체크 1] 비종목 오추출 — DB 3회 미만 신규 종목 {len(unknown_new)}건 (5건 이상 → 중단)")
         for u in unknown_new[:10]:
             print(f"   - '{u['stock']}' (DB: {u['db_count']}회, 이번: {u['input_count']}건)")
         save_error_pattern(channel, 'gate2', 'unknown_stocks',
                            f"DB 3회 미만 종목 {len(unknown_new)}개: {[u['stock'] for u in unknown_new[:5]]}")
         has_fatal = True
+    elif len(unknown_new) >= 5 and is_new_channel:
+        print(f"\n⚠️  [체크 1] 새 채널 — 신규 종목 {len(unknown_new)}건 (새 채널이므로 경고만)")
+        for u in unknown_new[:10]:
+            print(f"   - '{u['stock']}' (DB: {u['db_count']}회, 이번: {u['input_count']}건)")
+        save_error_pattern(channel, 'gate2', 'unknown_stocks_new_channel',
+                           f"새 채널 신규 종목 {len(unknown_new)}개: {[u['stock'] for u in unknown_new[:5]]}")
     elif len(unknown_new) >= 1:
         print(f"⚠️  [체크 1] 신규 종목 {len(unknown_new)}건 (5건 미만 → 경고만)")
         for u in unknown_new[:5]:

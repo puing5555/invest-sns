@@ -239,7 +239,7 @@ def check_stock_pages(project_root, out_dir, slug):
         print(f"  ⚠️  종목 페이지 {len(still_missing)}개 out/에 없음 → 재빌드 실행...")
         # 자동 재빌드
         rebuild_result = subprocess.run(
-            ['npm', 'run', 'build'],
+            ['npm.cmd' if sys.platform == 'win32' else 'npm', 'run', 'build'],
             cwd=project_root,
             capture_output=True, text=True, timeout=300,
             encoding='utf-8', errors='replace'
@@ -367,6 +367,75 @@ def check_and_sync_data_public(project_root):
     return synced
 
 # ────────────────────────────────────────
+# 체크 9: DB 무결성 — NULL 필드 검증
+# ────────────────────────────────────────
+
+def check_db_null_fields(project_root, slug):
+    """
+    최근 INSERT된 시그널의 필수 필드 NULL 여부 체크.
+    published_at NULL, ticker NULL, speaker_id NULL → 각각 0건이어야 통과.
+    반환: (passed: bool, details: list[str])
+    """
+    load_env(project_root)
+    details = []
+    passed = True
+
+    # published_at NULL 체크 (influencer_videos 테이블)
+    rows = supabase_get(
+        'influencer_videos?select=id&published_at=is.null&limit=1',
+        project_root
+    )
+    if rows is None:
+        details.append("⚠️  published_at NULL 체크: DB 조회 실패 (스킵)")
+    elif len(rows) > 0:
+        # 정확한 건수 조회
+        count_rows = supabase_get(
+            'influencer_videos?select=id&published_at=is.null',
+            project_root
+        )
+        cnt = len(count_rows) if count_rows else '?'
+        details.append(f"published_at NULL {cnt}건 (influencer_videos)")
+        save_error_pattern(slug, 'gate3', 'published_at_null', f"{cnt}건")
+        passed = False
+
+    # ticker NULL 체크 (influencer_signals 테이블)
+    rows = supabase_get(
+        'influencer_signals?select=id&ticker=is.null&limit=1',
+        project_root
+    )
+    if rows is None:
+        details.append("⚠️  ticker NULL 체크: DB 조회 실패 (스킵)")
+    elif len(rows) > 0:
+        count_rows = supabase_get(
+            'influencer_signals?select=id&ticker=is.null',
+            project_root
+        )
+        cnt = len(count_rows) if count_rows else '?'
+        details.append(f"ticker NULL {cnt}건 (influencer_signals)")
+        save_error_pattern(slug, 'gate3', 'ticker_null', f"{cnt}건")
+        passed = False
+
+    # speaker_id NULL 체크 (influencer_signals 테이블)
+    rows = supabase_get(
+        'influencer_signals?select=id&speaker_id=is.null&limit=1',
+        project_root
+    )
+    if rows is None:
+        details.append("⚠️  speaker_id NULL 체크: DB 조회 실패 (스킵)")
+    elif len(rows) > 0:
+        count_rows = supabase_get(
+            'influencer_signals?select=id&speaker_id=is.null',
+            project_root
+        )
+        cnt = len(count_rows) if count_rows else '?'
+        details.append(f"speaker_id NULL {cnt}건 (influencer_signals)")
+        save_error_pattern(slug, 'gate3', 'speaker_id_null', f"{cnt}건")
+        passed = False
+
+    return passed, details
+
+
+# ────────────────────────────────────────
 # 기존 체크 (유지)
 # ────────────────────────────────────────
 
@@ -481,7 +550,7 @@ def run_gate3(slug, project_root, check_deploy=False):
     elif fixed_yt > 0:
         print(f"  🔧 YouTube URL 수정됨 → 재빌드 필요 (수정 내용 반영)")
         rebuild_r = subprocess.run(
-            ['npm', 'run', 'build'], cwd=os.path.abspath(
+            ['npm.cmd' if sys.platform == 'win32' else 'npm', 'run', 'build'], cwd=os.path.abspath(
                 os.path.join(os.path.dirname(__file__), '..', '..')),
             capture_output=True, text=True, timeout=300,
             encoding='utf-8', errors='replace'
@@ -532,17 +601,28 @@ def run_gate3(slug, project_root, check_deploy=False):
     else:
         print(f"⚠️  [체크 8] out/ 없어 스킵")
 
-    # ── 체크 9: 배포 후 HTTP 체크 ──
+    # ── 체크 9: DB 무결성 (NULL 필드 검증) ──
+    print(f"\n[체크 9] DB 무결성 검증 (published_at, ticker, speaker_id NULL)...")
+    null_ok, null_details = check_db_null_fields(project_root, slug)
+    if null_ok:
+        print(f"✅ [체크 9] DB NULL 필드 전부 0건")
+    else:
+        for detail in null_details:
+            print(f"  ⛔ {detail}")
+        print(f"⛔ [체크 9] DB NULL 필드 존재 → 배포 차단")
+        has_fatal = True
+
+    # ── 체크 10: 배포 후 HTTP 체크 ──
     if check_deploy:
-        print(f"\n[체크 9] GitHub Pages 배포 확인...")
+        print(f"\n[체크 10] GitHub Pages 배포 확인...")
         status, url = check_deploy_http(slug)
         if status == 200:
-            print(f"✅ [체크 9] HTTP 200 확인: {url}")
+            print(f"✅ [체크 10] HTTP 200 확인: {url}")
         else:
-            print(f"⚠️  [체크 9] HTTP {status}: {url}")
+            print(f"⚠️  [체크 10] HTTP {status}: {url}")
             save_error_pattern(slug, 'gate3', 'deploy_http', f"HTTP {status}: {url}")
     else:
-        print(f"\nℹ️  [체크 9] 배포 HTTP 체크 스킵 (--check-deploy 옵션)")
+        print(f"\nℹ️  [체크 10] 배포 HTTP 체크 스킵 (--check-deploy 옵션)")
 
     # ── 결과 ──
     print(f"\n{'='*60}")

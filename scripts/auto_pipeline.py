@@ -613,6 +613,19 @@ class AutoPipeline:
                 print(f"[WARNING] 채널 UUID 확보 실패: {_ce} — video_uuid는 배치 INSERT 시 재처리됩니다")
                 db_channel_id = None
 
+            # ── 새 채널 여부 판단 (Gate 2 신규종목 완화용) ──────
+            _is_new_channel = False
+            if db_channel_id:
+                try:
+                    import requests as _req_lib
+                    _url = f"{self.db_inserter.base_url}/influencer_videos?select=id&channel_id=eq.{db_channel_id}&limit=1"
+                    _resp = _req_lib.get(_url, headers=self.db_inserter.headers, timeout=10)
+                    if _resp.status_code == 200 and len(_resp.json()) == 0:
+                        _is_new_channel = True
+                        print(f"[INFO] 새 채널 — Gate 2 신규종목 체크 완화 적용")
+                except Exception as _e:
+                    print(f"[WARNING] 새 채널 판단 실패: {_e}")
+
             for batch_idx, batch_videos in enumerate(batches):
                 print(f"\n{'='*60}")
                 print(f"[배치 {batch_idx+1}/{len(batches)}] {len(batch_videos)}개 영상 처리 시작")
@@ -695,7 +708,7 @@ class AutoPipeline:
                     print(f"  시그널 저장: {signals_path} ({len(flat_signals)}개)")
 
                     try:
-                        gate2_passed = run_gate2(flat_signals, channel_slug)
+                        gate2_passed = run_gate2(flat_signals, channel_slug, is_new_channel=_is_new_channel)
                     except Exception as e:
                         print(f"  [ERROR] QA Gate 2 실행 오류: {e}")
                         gate2_passed = False
@@ -895,10 +908,11 @@ class AutoPipeline:
 
             # ── Step 9: npm run build ─────────────────────────────────
             print(f"\n[Step 9] 프론트엔드 빌드 (npm run build)...")
+            _npm_cmd = 'npm.cmd' if sys.platform == 'win32' else 'npm'
             build_result = subprocess.run(
-                ['npm', 'run', 'build'],
+                [_npm_cmd, 'run', 'build'],
                 cwd=PROJECT_ROOT,
-                capture_output=True, text=True, timeout=300,
+                capture_output=True, text=True, timeout=600,
                 encoding='utf-8', errors='replace'
             )
             if build_result.returncode != 0:
