@@ -324,15 +324,21 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
                 </span>
               </h1>
               <div className="flex items-center gap-4 mt-2">
-                <span className="text-3xl font-bold text-[#191f28]">
-                  {formatStockPrice(stockData.price, code)}
-                </span>
-                <span className={`text-lg font-medium ${
-                  stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
-                }`}>
-                  {isKoreanStock(code) ? `${stockData.change >= 0 ? '+' : ''}${stockData.change.toLocaleString()}원` : `${stockData.change >= 0 ? '+' : ''}$${stockData.change.toLocaleString()}`}
-                  ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
-                </span>
+                {stockData.price > 0 ? (
+                  <>
+                    <span className="text-3xl font-bold text-[#191f28]">
+                      {formatStockPrice(stockData.price, code)}
+                    </span>
+                    <span className={`text-lg font-medium ${
+                      stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
+                    }`}>
+                      {isKoreanStock(code) ? `${stockData.change >= 0 ? '+' : ''}${stockData.change.toLocaleString()}원` : `${stockData.change >= 0 ? '+' : ''}$${stockData.change.toLocaleString()}`}
+                      ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-xl text-[#8b95a1]">가격 정보 없음</span>
+                )}
               </div>
               
               {/* Coverage Stats */}

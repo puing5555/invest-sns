@@ -208,5 +208,180 @@
     "check_name": "too_many_signals",
     "detail": "평균 23.00/영상",
     "timestamp": "2026-03-16T05:21:29.035038"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "unknown_stocks",
+    "detail": "DB 3회 미만 종목 11개: ['AST 스페이스모바일', '메타플래닛', '스트레티지', 'MST', 'AST 스페이스 모바일']",
+    "timestamp": "2026-03-16T09:32:27.816736"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T09:32:27.817581"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 38.00/영상",
+    "timestamp": "2026-03-16T09:32:27.818294"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "unknown_stocks",
+    "detail": "DB 3회 미만 종목 12개: ['AST스페이스모바일', 'AST 스페이스모바일', '메타플래닛', 'STRC', '스트레티지']",
+    "timestamp": "2026-03-16T09:41:30.312086"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T09:41:30.313033"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 33.00/영상",
+    "timestamp": "2026-03-16T09:41:30.313785"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate1",
+    "check_name": "low_pass_rate",
+    "detail": "통과율 0.0% (0/64)",
+    "timestamp": "2026-03-16T09:47:54.645810"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate3",
+    "check_name": "profile_page_missing",
+    "detail": "누락: ['dd%eb%93%80%eb%94%9c']",
+    "timestamp": "2026-03-16T09:49:16.958964"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate3",
+    "check_name": "published_at_null",
+    "detail": "11건",
+    "timestamp": "2026-03-16T09:49:17.352946"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate3",
+    "check_name": "ticker_null",
+    "detail": "10건",
+    "timestamp": "2026-03-16T09:49:17.552502"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "unknown_stocks",
+    "detail": "DB 3회 미만 종목 14개: ['MST', '스트래티지', 'AST 스페이스모바일', '스트레티지', '크라켄 로보틱스']",
+    "timestamp": "2026-03-16T10:01:38.468982"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T10:01:38.469844"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 49.00/영상",
+    "timestamp": "2026-03-16T10:01:38.470596"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "unknown_stocks",
+    "detail": "DB 3회 미만 종목 12개: ['스트래티지', 'AST 스페이스모바일', '스마터 웹 컴퍼니', '메타플래닛', 'MSTY ETF']",
+    "timestamp": "2026-03-16T10:12:19.221044"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T10:12:19.221886"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 34.00/영상",
+    "timestamp": "2026-03-16T10:12:19.222642"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate3",
+    "check_name": "profile_page_missing",
+    "detail": "누락: ['dd%eb%93%80%eb%94%9c']",
+    "timestamp": "2026-03-16T10:13:50.046781"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate3",
+    "check_name": "published_at_null",
+    "detail": "11건",
+    "timestamp": "2026-03-16T10:13:50.427209"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate3",
+    "check_name": "ticker_null",
+    "detail": "10건",
+    "timestamp": "2026-03-16T10:13:50.898717"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 13개: ['MSTY', 'AST 스페이스모바일', 'AST 스페이스 모바일', 'MSTY ETF', 'AST SpaceMobile']",
+    "timestamp": "2026-03-16T10:22:35.156722"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T10:22:35.157701"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 39.00/영상",
+    "timestamp": "2026-03-16T10:22:35.158595"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 10개: ['MSTY', 'AST 스페이스모바일', 'Smarter Web Company', 'AST SpaceMobile', '스페이스엑스']",
+    "timestamp": "2026-03-16T10:30:12.924507"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-16T10:30:12.925536"
+  },
+  {
+    "channel": "dd%eb%93%80%eb%94%9c",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 38.00/영상",
+    "timestamp": "2026-03-16T10:30:12.926388"
   }
 ]
