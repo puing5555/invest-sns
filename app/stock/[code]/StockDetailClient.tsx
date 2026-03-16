@@ -63,6 +63,7 @@ const tabs = [
 ];
 
 import stockPricesData from '@/data/stockPrices.json';
+import signalPricesData from '@/data/signal_prices.json';
 
 // 종목 데이터 - 실제 Yahoo Finance 데이터 사용 (동적 종목명 지원)
 const getStockData = (code: string, dynamicName?: string) => {
@@ -112,6 +113,12 @@ const getStockData = (code: string, dynamicName?: string) => {
       change: realData.change,
       changePercent: realData.changePercent,
     };
+  }
+
+  // stockPrices.json에 없으면 signal_prices.json에서 폴백
+  const sigPrice = (signalPricesData as any)[code];
+  if (sigPrice?.price) {
+    return { name: stockName, price: sigPrice.price, change: 0, changePercent: 0 };
   }
 
   return { name: stockName, price: 0, change: 0, changePercent: 0 };
