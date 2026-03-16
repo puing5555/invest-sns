@@ -83,6 +83,24 @@ function getSectionIcon(title: string) {
   return iconMap[title] || '📄';
 }
 
+// 내용 없는 섹션 감지 패턴
+const EMPTY_SECTION_PATTERNS = [
+  /제시되지 않았습니다/,
+  /명시되지 않았습니다/,
+  /언급되지 않았습니다/,
+  /확인되지 않았습니다/,
+  /포함되어 있지 않/,
+  /구체적인.{0,20}없습니다/,
+  /직접적으로.{0,20}없습니다/,
+  /별도.{0,10}언급.{0,10}없/,
+  /본문에서.{0,20}않았습니다/,
+  /본 리포트에서.{0,20}않았습니다/,
+];
+
+function isSectionEmpty(content: string): boolean {
+  return EMPTY_SECTION_PATTERNS.some(pattern => pattern.test(content));
+}
+
 function AiDetailRenderer({ content }: { content: string }) {
   const sections = parseAiDetail(content);
   if (sections.length === 0) {
@@ -92,9 +110,19 @@ function AiDetailRenderer({ content }: { content: string }) {
       </div>
     );
   }
+
+  const validSections = sections.filter(s => !isSectionEmpty(s.content));
+  if (validSections.length === 0) {
+    return (
+      <div className="p-3 bg-gray-50 rounded-lg text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+        {content}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-3">
-      {sections.map((section, index) => (
+      {validSections.map((section, index) => (
         <div key={index} className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-200">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg">{getSectionIcon(section.title)}</span>
@@ -108,14 +136,17 @@ function AiDetailRenderer({ content }: { content: string }) {
 }
 
 const TICKER_NAMES: Record<string, string> = {
-  '005930': '삼성전자', '000660': 'SK하이닉스', '005380': '현대차', '006400': '삼성SDI',
-  '051910': 'LG화학', '035420': 'NAVER', '036570': '엔씨소프트', '005940': 'NH투자증권',
-  '009540': 'HD한국조선해양', '016360': '삼성증권', '036930': '주성엔지니어링',
-  '039490': '키움증권', '042700': '한미반도체', '071050': '한국금융지주', '079160': 'CJ CGV',
-  '084370': '유진테크', '086520': '에코프로', '090430': '아모레퍼시픽', '095610': '테스',
-  '240810': '원익IPS', '267260': 'HD현대일렉트릭', '284620': '카카오헬스케어',
-  '298040': '효성중공업', '352820': '하이브', '357780': '솔브레인', '399720': '가온칩스',
-  '403870': 'HPSP', '004170': '신세계', '000720': '현대건설', '095610': '테스',
+  '105560': 'KB금융', '240810': '원익QnC', '259960': '크래프톤', '284620': '카이', '298040': '효성중공업',
+  '352820': '하이브', '403870': 'HPSP', '051910': 'LG화학', '000720': '현대건설', '079160': 'CJ CGV',
+  '039490': '키움증권', '042700': '한미반도체', '005930': '삼성전자', '006400': '삼성SDI',
+  '016360': '삼성증권', '036930': '주성엔지니어링', '005380': '현대자동차', '005940': 'NH투자증권',
+  '090430': '아모레퍼시픽', '071050': '한국금융지주', '000660': 'SK하이닉스', '036570': '엔씨소프트',
+  '035420': 'NAVER', '055550': '신한지주', '068270': '셀트리온', '005490': 'POSCO홀딩스',
+  '012330': '현대모비스', '066570': 'LG전자', '028260': '삼성물산', '000270': '기아',
+  '096770': 'SK이노베이션', '003550': 'LG', '034730': 'SK', '032830': '삼성생명',
+  '011200': 'HMM', '018260': '삼성에스디에스', '009150': '삼성전기', '030200': 'KT',
+  '086790': '하나금융지주', '035720': '카카오', '004020': '현대제철', '003670': '포스코퓨처엠',
+  '010130': '고려아연', '011170': '롯데케미칼', '017670': 'SK텔레콤',
 };
 
 function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) {
@@ -206,11 +237,14 @@ function AnalystReportModal({ report, code, onClose }: AnalystReportModalProps) 
                 </div>
                 <div>
                   <span className="text-gray-500">애널리스트</span>
-                  <p className="font-medium">{report.analyst || '-'}</p>
+                  <p className="font-medium">{report.analyst || report.firm || '-'}</p>
+                  {!report.analyst && report.firm && (
+                    <span className="text-xs text-gray-400">증권사</span>
+                  )}
                 </div>
                 <div>
                   <span className="text-gray-500">목표가</span>
-                  <p className="font-medium">{formatTargetPrice(report.target_price, code)}</p>
+                  <p className="font-medium text-lg">{report.target_price ? formatTargetPrice(report.target_price, code) : '-'}</p>
                 </div>
                 <div>
                   <span className="text-gray-500">투자의견</span>

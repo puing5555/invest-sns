@@ -236,10 +236,28 @@ function formatDate(dateStr: string) {
   }
 }
 
+// 내용 없는 섹션 감지 패턴
+const EMPTY_SECTION_PATTERNS = [
+  /제시되지 않았습니다/,
+  /명시되지 않았습니다/,
+  /언급되지 않았습니다/,
+  /확인되지 않았습니다/,
+  /포함되어 있지 않/,
+  /구체적인.{0,20}없습니다/,
+  /직접적으로.{0,20}없습니다/,
+  /별도.{0,10}언급.{0,10}없/,
+  /본문에서.{0,20}않았습니다/,
+  /본 리포트에서.{0,20}않았습니다/,
+];
+
+function isSectionEmpty(content: string): boolean {
+  return EMPTY_SECTION_PATTERNS.some(pattern => pattern.test(content));
+}
+
 // AI Detail 렌더러 컴포넌트
 function AiDetailRenderer({ content }: { content: string }) {
   const sections = parseAiDetail(content);
-  
+
   if (sections.length === 0) {
     return (
       <div className="p-3 bg-gray-50 rounded-lg text-sm text-gray-600 whitespace-pre-line leading-relaxed">
@@ -247,10 +265,19 @@ function AiDetailRenderer({ content }: { content: string }) {
       </div>
     );
   }
-  
+
+  const validSections = sections.filter(s => !isSectionEmpty(s.content));
+  if (validSections.length === 0) {
+    return (
+      <div className="p-3 bg-gray-50 rounded-lg text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+        {content}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-3">
-      {sections.map((section, index) => (
+      {validSections.map((section, index) => (
         <div key={index} className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-200">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg">{getSectionIcon(section.title)}</span>
