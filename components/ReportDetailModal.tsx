@@ -265,9 +265,18 @@ export default function ReportDetailModal({ report, isOpen, onClose, type = 'rep
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
         <div className="p-6">
-          {/* 헤더 — 우측에 좋아요 | 신고 | X */}
+          {/* 헤더 — 좌측 배지 | 우측 좋아요·신고·X */}
           <div className="flex items-center justify-between mb-4">
-            <div /> {/* 좌측 비움 */}
+            <div className="flex items-center gap-2">
+              {type === 'signal' && report.signal && (
+                <span className={`px-2.5 py-1 rounded text-sm font-bold ${getSignalStyle(report.signal)}`}>
+                  {report.signal}
+                </span>
+              )}
+              {type === 'signal' && report.date && (
+                <span className="text-xs text-gray-400">{formatDate(report.date)}</span>
+              )}
+            </div>
             <div className="flex items-center gap-1">
               {/* 좋아요 */}
               <button
@@ -375,17 +384,6 @@ export default function ReportDetailModal({ report, isOpen, onClose, type = 'rep
               // 시그널 컨텐츠
               <>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-500">
-                      {report.date && formatDate(report.date)}
-                    </div>
-                    {report.signal && (
-                      <span className={`px-2 py-1 rounded text-sm font-medium ${getSignalStyle(report.signal)}`}>
-                        {report.signal}
-                      </span>
-                    )}
-                  </div>
-
                   <div>
                     <span className="text-gray-500 text-sm">인플루언서</span>
                     <p className="font-medium">{report.influencer}</p>
