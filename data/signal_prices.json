@@ -9510,5 +9510,181 @@
     "ticker": "ADA",
     "market": "CRYPTO",
     "currency": "KRW"
+  },
+  "011170": {
+    "price": 70800.0,
+    "market": "KR"
+  },
+  "012330": {
+    "price": 404000.0,
+    "market": "KR"
+  },
+  "028300": {
+    "price": 48300.0,
+    "market": "KR"
+  },
+  "034020": {
+    "price": 106500.0,
+    "market": "KR"
+  },
+  "042660": {
+    "price": 136900.0,
+    "market": "KR"
+  },
+  "307950": {
+    "price": 412500.0,
+    "market": "KR"
+  },
+  "ABCL": {
+    "price": 3.49,
+    "market": "US"
+  },
+  "BITF": {
+    "price": 2.24,
+    "market": "US"
+  },
+  "BMNR": {
+    "price": 20.54,
+    "market": "US"
+  },
+  "BOTZ": {
+    "price": 34.83,
+    "market": "ETF"
+  },
+  "BSX": {
+    "price": 69.13,
+    "market": "US"
+  },
+  "COST": {
+    "price": 1008.43,
+    "market": "US"
+  },
+  "CPNG": {
+    "price": 18.45,
+    "market": "US"
+  },
+  "CRM": {
+    "price": 192.83,
+    "market": "US"
+  },
+  "CRWD": {
+    "price": 441.78,
+    "market": "US"
+  },
+  "EEM": {
+    "price": 56.8,
+    "market": "ETF"
+  },
+  "EWY": {
+    "price": 124.15,
+    "market": "ETF"
+  },
+  "EWZ": {
+    "price": 35.49,
+    "market": "ETF"
+  },
+  "EXPE": {
+    "price": 228.37,
+    "market": "US"
+  },
+  "FIG": {
+    "price": 26.03,
+    "market": "US"
+  },
+  "FIGR": {
+    "price": 35.07,
+    "market": "US"
+  },
+  "FLNC": {
+    "price": 16.38,
+    "market": "US"
+  },
+  "HOOD": {
+    "price": 73.39,
+    "market": "US"
+  },
+  "ISRG": {
+    "price": 472.16,
+    "market": "US"
+  },
+  "JOBY": {
+    "price": 9.7,
+    "market": "US"
+  },
+  "LEN": {
+    "price": 94.96,
+    "market": "US"
+  },
+  "MPC": {
+    "price": 226.18,
+    "market": "US"
+  },
+  "NKE": {
+    "price": 53.98,
+    "market": "US"
+  },
+  "OPEN": {
+    "price": 4.95,
+    "market": "US"
+  },
+  "PANW": {
+    "price": 167.01,
+    "market": "US"
+  },
+  "QS": {
+    "price": 6.73,
+    "market": "US"
+  },
+  "RDDT": {
+    "price": 132.36,
+    "market": "US"
+  },
+  "RIO": {
+    "price": 87.83,
+    "market": "US"
+  },
+  "RSP": {
+    "price": 193.52,
+    "market": "ETF"
+  },
+  "SCHD": {
+    "price": 30.8,
+    "market": "ETF"
+  },
+  "SOFI": {
+    "price": 17.76,
+    "market": "US"
+  },
+  "SPOT": {
+    "price": 516.06,
+    "market": "US"
+  },
+  "TEM": {
+    "price": 49.98,
+    "market": "US"
+  },
+  "TJX": {
+    "price": 155.43,
+    "market": "US"
+  },
+  "TMDX": {
+    "price": 123.48,
+    "market": "US"
+  },
+  "UNH": {
+    "price": 282.09,
+    "market": "US"
+  },
+  "VLO": {
+    "price": 230.59,
+    "market": "US"
+  },
+  "XLF": {
+    "price": 48.89,
+    "market": "ETF"
+  },
+  "XOM": {
+    "price": 156.12,
+    "market": "US"
   }
 }
