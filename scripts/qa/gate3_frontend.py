@@ -256,24 +256,35 @@ def check_stock_pages(project_root, out_dir, slug):
 
 def check_all_profile_pages(project_root, out_dir, slug):
     """
-    DB의 모든 인플루언서 slug → out/profile/influencer/[slug]/index.html 존재 확인.
+    speaker_slugs.json의 모든 slug → out/profile/influencer/[slug]/index.html 존재 확인.
     미존재 시 ⛔ 배포 차단.
     """
-    channels = supabase_get('influencer_channels?select=slug,channel_name&limit=100', project_root)
-    if not channels:
-        # DB 없으면 최소한 현재 slug만 체크
-        channels = [{'slug': slug, 'channel_name': slug}]
-
-    missing = []
-    for ch in channels:
-        s = ch.get('slug') or ''
-        if not s:
-            continue
-        page = os.path.join(out_dir, 'profile', 'influencer', s, 'index.html')
-        if not os.path.isfile(page):
-            missing.append({'slug': s, 'name': ch.get('channel_name', '?')})
-
-    return missing
+    slugs_path = os.path.join(project_root, 'data', 'speaker_slugs.json')
+    if os.path.isfile(slugs_path):
+        import json as _json
+        with open(slugs_path, encoding='utf-8') as f:
+            slug_map = _json.load(f)
+        # speaker_slugs.json: { slug: name } 형태
+        missing = []
+        for s, name in slug_map.items():
+            page = os.path.join(out_dir, 'profile', 'influencer', s, 'index.html')
+            if not os.path.isfile(page):
+                missing.append({'slug': s, 'name': name})
+        return missing
+    else:
+        # fallback: DB channel_handle 기반
+        channels = supabase_get('influencer_channels?select=channel_handle,channel_name&limit=100', project_root)
+        if not channels:
+            channels = [{'channel_handle': slug, 'channel_name': slug}]
+        missing = []
+        for ch in channels:
+            s = ch.get('channel_handle') or ''
+            if not s:
+                continue
+            page = os.path.join(out_dir, 'profile', 'influencer', s, 'index.html')
+            if not os.path.isfile(page):
+                missing.append({'slug': s, 'name': ch.get('channel_name', '?')})
+        return missing
 
 # ────────────────────────────────────────
 # 체크 5: YouTube URL 검증 + auto-fix
