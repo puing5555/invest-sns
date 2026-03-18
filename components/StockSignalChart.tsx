@@ -200,7 +200,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
       startPrice, endPrice,
       priceDiff, pctChange,
     });
-  }, [isDragging, dragStart, chartConfig, svgXToIndex]);
+  }, [isDragging, dragStart, chartConfig, eventToIndex]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
