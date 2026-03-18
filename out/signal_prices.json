@@ -9686,5 +9686,77 @@
   "XOM": {
     "price": 156.12,
     "market": "US"
+  },
+  "STRC": {
+    "name": "STRC",
+    "ticker": "STRC",
+    "market": "US",
+    "current_price": 99.75,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "ASTS": {
+    "name": "AST Spacemobile",
+    "ticker": "ASTS",
+    "market": "US",
+    "current_price": 86.34,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "MSTY": {
+    "name": "MSTY",
+    "ticker": "MSTY",
+    "market": "ETF",
+    "current_price": 23.93,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "3350.T": {
+    "name": "메타플래닛",
+    "ticker": "3350.T",
+    "market": "OTHER",
+    "current_price": 379.0,
+    "currency": "JPY",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "STRF": {
+    "name": "STRF",
+    "ticker": "STRF",
+    "market": "US",
+    "current_price": 100.29,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "STRK": {
+    "name": "STRK",
+    "ticker": "STRK",
+    "market": "US",
+    "current_price": 78.53,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "STRD": {
+    "name": "STRD",
+    "ticker": "STRD",
+    "market": "US",
+    "current_price": 76.92,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
+  },
+  "MTPLF": {
+    "name": "메타플래닛",
+    "ticker": "MTPLF",
+    "market": "OTHER",
+    "current_price": 2.33,
+    "currency": "USD",
+    "last_updated": "2026-03-16",
+    "source": "yahoo"
   }
 }
