@@ -86,3 +86,4 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - published_at = 영상 업로드 날짜 (**크롤링 날짜 사용 금지**)
 - channel_name = 실제 채널명 (**핸들 사용 금지**)
 - **시그널 재분석은 JAY 승인 필수**
+- **배포 시 gh-pages orphan push 사용** (→ `deploy.md` 참조, repo 1GB limit 주의)
