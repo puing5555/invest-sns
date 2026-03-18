@@ -153,14 +153,15 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
     return { W, H, padL, padR, padT, padB, chartW, chartH, pathPoints, areaPath, yLabels, xLabels, signalMarkers, formatPrice, currentPrice: stockData.currentPrice, prices };
   }, [stockData, filteredSignals, periodFilter]);
 
-  // nativeEvent.offsetX → SVG viewBox 좌표 → price index 변환
+  // clientX → SVG viewBox 좌표 → price index 변환
+  // offsetX는 e.target(자식 요소) 기준이라 부정확. clientX + SVG.getBoundingClientRect()가 정확.
   const eventToIndex = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current || !chartConfig) return -1;
-    // offsetX/offsetY는 이벤트 대상 요소 기준 좌표 (패딩/마진 무관)
-    const svgEl = svgRef.current;
-    const cssWidth = svgEl.clientWidth || svgEl.getBoundingClientRect().width;
-    // CSS px → SVG viewBox 좌표 변환
-    const svgX = (e.nativeEvent.offsetX / cssWidth) * chartConfig.W;
+    const rect = svgRef.current.getBoundingClientRect();
+    // clientX - rect.left = SVG 요소 기준 CSS px 좌표 (자식 요소 무관)
+    const pxFromLeft = e.clientX - rect.left;
+    // CSS px → SVG viewBox 좌표
+    const svgX = (pxFromLeft / rect.width) * chartConfig.W;
     const relX = svgX - chartConfig.padL;
     const idx = Math.round((relX / chartConfig.chartW) * (chartConfig.prices.length - 1));
     return Math.max(0, Math.min(chartConfig.prices.length - 1, idx));
@@ -272,7 +273,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
           </defs>
 
           {chartConfig.yLabels.map((yl: any, i: number) => (
-            <g key={`y-${i}`}>
+            <g key={`y-${i}`} pointerEvents="none">
               <line x1={chartConfig.padL} y1={yl.y} x2={chartConfig.W - 20} y2={yl.y} stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
               <text x={chartConfig.padL - 5} y={yl.y + 4} textAnchor="end" fontSize="10" fill="#8b95a1">
                 {chartConfig.formatPrice(yl.price)}
@@ -281,13 +282,16 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
           ))}
 
           {chartConfig.xLabels.map((xl: any, i: number) => (
-            <text key={`x-${i}`} x={xl.x} y={chartConfig.H - 5} textAnchor="middle" fontSize="10" fill="#8b95a1">
+            <text key={`x-${i}`} x={xl.x} y={chartConfig.H - 5} textAnchor="middle" fontSize="10" fill="#8b95a1" pointerEvents="none">
               {xl.label}
             </text>
           ))}
 
-          <path d={chartConfig.areaPath} fill="url(#priceGradReal)"/>
-          <path d={chartConfig.pathPoints} fill="none" stroke="#3182f6" strokeWidth="2.5"/>
+          {/* 투명 드래그 캡처 레이어 — 모든 마우스 이벤트를 SVG 루트로 전달 */}
+          <rect x="0" y="0" width={chartConfig.W} height={chartConfig.H} fill="transparent" />
+
+          <path d={chartConfig.areaPath} fill="url(#priceGradReal)" pointerEvents="none"/>
+          <path d={chartConfig.pathPoints} fill="none" stroke="#3182f6" strokeWidth="2.5" pointerEvents="none"/>
 
           {chartConfig.signalMarkers.map((marker: any, i: number) => (
             <g key={`sig-${i}`} style={{ cursor: 'pointer', pointerEvents: isDragging ? 'none' : 'auto' }}
@@ -322,6 +326,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
                 fill={dragSelection && dragSelection.pctChange >= 0 ? '#22c55e' : '#ef4444'}
                 opacity="0.12"
                 rx="2"
+                pointerEvents="none"
               />
             );
           })()}
