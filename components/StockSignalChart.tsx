@@ -153,30 +153,33 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
     return { W, H, padL, padR, padT, padB, chartW, chartH, pathPoints, areaPath, yLabels, xLabels, signalMarkers, formatPrice, currentPrice: stockData.currentPrice, prices };
   }, [stockData, filteredSignals, periodFilter]);
 
-  // SVG 좌표 → price index 변환
-  const svgXToIndex = useCallback((clientX: number) => {
+  // nativeEvent.offsetX → SVG viewBox 좌표 → price index 변환
+  const eventToIndex = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current || !chartConfig) return -1;
-    const rect = svgRef.current.getBoundingClientRect();
-    const svgX = ((clientX - rect.left) / rect.width) * chartConfig.W;
+    // offsetX/offsetY는 이벤트 대상 요소 기준 좌표 (패딩/마진 무관)
+    const svgEl = svgRef.current;
+    const cssWidth = svgEl.clientWidth || svgEl.getBoundingClientRect().width;
+    // CSS px → SVG viewBox 좌표 변환
+    const svgX = (e.nativeEvent.offsetX / cssWidth) * chartConfig.W;
     const relX = svgX - chartConfig.padL;
     const idx = Math.round((relX / chartConfig.chartW) * (chartConfig.prices.length - 1));
     return Math.max(0, Math.min(chartConfig.prices.length - 1, idx));
   }, [chartConfig]);
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+  const handleMouseDown = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     if (!chartConfig) return;
-    const idx = svgXToIndex(e.clientX);
+    const idx = eventToIndex(e);
     if (idx < 0) return;
     setIsDragging(true);
     setDragStart(idx);
     setDragEnd(idx);
     setDragSelection(null);
     setHoveredSignal(null);
-  }, [chartConfig, svgXToIndex]);
+  }, [chartConfig, eventToIndex]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     if (!isDragging || dragStart === null || !chartConfig) return;
-    const idx = svgXToIndex(e.clientX);
+    const idx = eventToIndex(e);
     if (idx < 0) return;
     setDragEnd(idx);
 
