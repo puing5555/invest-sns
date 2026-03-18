@@ -1,6 +1,10 @@
-﻿'use client';
+'use client';
 
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
+import {
+  ComposedChart, Area, Line, XAxis, YAxis, Tooltip,
+  ResponsiveContainer, ReferenceDot, ReferenceArea,
+} from 'recharts';
 import stockPricesData from '@/data/stockPrices.json';
 import { formatStockPrice } from '@/lib/currency';
 
@@ -23,197 +27,122 @@ interface StockSignalChartProps {
 
 const ALL_SIGNAL_TYPES = ['매수', '긍정', '중립', '부정', '매도'];
 
-export default function StockSignalChart({ code, signals, periodFilter, onSignalClick, activeSignalTypes, onSignalTypeToggle }: StockSignalChartProps) {
-  const [hoveredSignal, setHoveredSignal] = useState<Signal | null>(null);
-  const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
+const SIGNAL_COLORS: Record<string, string> = {
+  '매수': '#22c55e', '긍정': '#3182f6', '중립': '#eab308',
+  '부정': '#f97316', '매도': '#ef4444',
+};
+const SIGNAL_EMOJI: Record<string, string> = {
+  '매수': '🟢', '긍정': '🔵', '중립': '🟡', '부정': '🟠', '매도': '🔴',
+};
 
-  // Drag selection state
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState<number | null>(null);
-  const [dragEnd, setDragEnd] = useState<number | null>(null);
-  const [dragSelection, setDragSelection] = useState<{
-    startIdx: number; endIdx: number;
-    startDate: string; endDate: string;
-    startPrice: number; endPrice: number;
-    priceDiff: number; pctChange: number;
-  } | null>(null);
-
-  // Internal state if not controlled externally
+export default function StockSignalChart({
+  code, signals, periodFilter, onSignalClick, activeSignalTypes, onSignalTypeToggle,
+}: StockSignalChartProps) {
   const activeTypes = activeSignalTypes || ALL_SIGNAL_TYPES;
-
   const stockData = (stockPricesData as any)[code];
 
-  // Filter signals by active types
-  const filteredSignals = useMemo(() => {
-    return signals.filter(s => activeTypes.includes(s.signal));
-  }, [signals, activeTypes]);
+  // Drag state — index into chartData array
+  const [dragStartIdx, setDragStartIdx] = useState<number | null>(null);
+  const [dragEndIdx, setDragEndIdx] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const chartConfig = useMemo(() => {
-    if (!stockData?.prices?.length) return null;
+  // Build chart data
+  const { chartData, signalMarkers } = useMemo(() => {
+    if (!stockData?.prices?.length) return { chartData: [], signalMarkers: [] };
 
     let prices = stockData.prices;
     if (periodFilter && periodFilter !== '전체') {
-      const now = new Date();
-      let cutoff = new Date();
+      const cutoff = new Date();
       switch (periodFilter) {
-        case '1개월': cutoff.setMonth(now.getMonth() - 1); break;
-        case '6개월': cutoff.setMonth(now.getMonth() - 6); break;
-        case '1년': cutoff.setFullYear(now.getFullYear() - 1); break;
-        case '3년': cutoff.setFullYear(now.getFullYear() - 3); break;
+        case '1개월': cutoff.setMonth(cutoff.getMonth() - 1); break;
+        case '6개월': cutoff.setMonth(cutoff.getMonth() - 6); break;
+        case '1년': cutoff.setFullYear(cutoff.getFullYear() - 1); break;
+        case '3년': cutoff.setFullYear(cutoff.getFullYear() - 3); break;
       }
       const filtered = prices.filter((p: any) => new Date(p.date) >= cutoff);
       if (filtered.length >= 2) prices = filtered;
     }
-    const closes = prices.map((p: any) => p.close);
-    const minPrice = Math.min(...closes);
-    const maxPrice = Math.max(...closes);
-    const priceRange = maxPrice - minPrice || 1;
 
-    const W = 460, H = 240;
-    const padL = 60, padR = 20, padT = 20, padB = 35;
-    const chartW = W - padL - padR;
-    const chartH = H - padT - padB;
+    const data = prices.map((p: any, i: number) => ({
+      idx: i,
+      date: p.date,
+      close: p.close,
+    }));
 
-    const priceToY = (price: number) => padT + chartH - ((price - minPrice) / priceRange) * chartH;
-    const dateToX = (idx: number) => padL + (idx / (prices.length - 1)) * chartW;
-
-    const pathPoints = prices.map((p: any, i: number) => {
-      const x = dateToX(i);
-      const y = priceToY(p.close);
-      return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
-    }).join(' ');
-
-    const areaPath = pathPoints + ` L ${dateToX(prices.length - 1).toFixed(1)} ${padT + chartH} L ${padL} ${padT + chartH} Z`;
-
-    const yLabels = [];
-    const step = priceRange / 4;
-    for (let i = 0; i <= 4; i++) {
-      const price = minPrice + step * i;
-      yLabels.push({ price: Math.round(price), y: priceToY(price) });
-    }
-
-    // 기간별 X축 날짜 포맷
-    const formatXLabel = (d: Date): string => {
-      const period = periodFilter || '전체';
-      switch (period) {
-        case '1개월': return `${d.getMonth() + 1}/${d.getDate()}`;
-        case '6개월': return `${d.getMonth() + 1}월`;
-        case '1년': return `${d.getMonth() + 1}월`;
-        case '3년': {
-          const q = Math.floor(d.getMonth() / 3) + 1;
-          return `${d.getFullYear()} Q${q}`;
-        }
-        default: return `${d.getFullYear()}`;
-      }
-    };
-
-    const xLabels: { label: string; x: number }[] = [];
-    const xStep = Math.max(1, Math.floor(prices.length / 5));
-    let prevLabel = '';
-    for (let i = 0; i < prices.length; i += xStep) {
-      const d = new Date(prices[i].date);
-      const label = formatXLabel(d);
-      if (label !== prevLabel) {
-        xLabels.push({ label, x: dateToX(i) });
-        prevLabel = label;
-      }
-    }
-    // 마지막 라벨 추가 (중복 아닐 때만)
-    const lastD = new Date(prices[prices.length - 1].date);
-    const lastLabel = formatXLabel(lastD);
-    if (lastLabel !== prevLabel) {
-      xLabels.push({ label: lastLabel, x: dateToX(prices.length - 1) });
-    }
-
-    const signalMarkers = filteredSignals.map(sig => {
-      const sigDate = sig.date;
-      let closestIdx = prices.length - 1;
+    // Map signals to nearest price index
+    const filteredSigs = signals.filter(s => activeTypes.includes(s.signal));
+    const markers = filteredSigs.map(sig => {
+      let closestIdx = 0;
       let closestDiff = Infinity;
       prices.forEach((p: any, i: number) => {
-        const diff = Math.abs(new Date(p.date).getTime() - new Date(sigDate).getTime());
-        if (diff < closestDiff) {
-          closestDiff = diff;
-          closestIdx = i;
-        }
+        const diff = Math.abs(new Date(p.date).getTime() - new Date(sig.date).getTime());
+        if (diff < closestDiff) { closestDiff = diff; closestIdx = i; }
       });
-      return {
-        ...sig,
-        x: dateToX(closestIdx),
-        y: priceToY(prices[closestIdx].close),
-        priceAtSignal: prices[closestIdx].close,
-      };
+      return { ...sig, dataIdx: closestIdx, priceAtSignal: prices[closestIdx].close };
     });
 
-    const formatPrice = (p: number) => {
-      if (p >= 1000000) return `${(p / 10000).toFixed(0)}만`;
-      return p.toLocaleString();
+    return { chartData: data, signalMarkers: markers };
+  }, [stockData, signals, activeTypes, periodFilter]);
+
+  // Drag selection computed values
+  const dragSelection = useMemo(() => {
+    if (dragStartIdx === null || dragEndIdx === null || dragStartIdx === dragEndIdx) return null;
+    if (!chartData.length) return null;
+    const sIdx = Math.min(dragStartIdx, dragEndIdx);
+    const eIdx = Math.max(dragStartIdx, dragEndIdx);
+    const startPrice = chartData[sIdx].close;
+    const endPrice = chartData[eIdx].close;
+    const diff = endPrice - startPrice;
+    const pct = (diff / startPrice) * 100;
+    return {
+      sIdx, eIdx,
+      startDate: chartData[sIdx].date, endDate: chartData[eIdx].date,
+      startPrice, endPrice, diff, pct,
     };
+  }, [dragStartIdx, dragEndIdx, chartData]);
 
-    return { W, H, padL, padR, padT, padB, chartW, chartH, pathPoints, areaPath, yLabels, xLabels, signalMarkers, formatPrice, currentPrice: stockData.currentPrice, prices };
-  }, [stockData, filteredSignals, periodFilter]);
-
-  // clientX → SVG viewBox 좌표 → price index 변환
-  // offsetX는 e.target(자식 요소) 기준이라 부정확. clientX + SVG.getBoundingClientRect()가 정확.
-  const eventToIndex = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
-    if (!svgRef.current || !chartConfig) return -1;
-    const rect = svgRef.current.getBoundingClientRect();
-    // clientX - rect.left = SVG 요소 기준 CSS px 좌표 (자식 요소 무관)
-    const pxFromLeft = e.clientX - rect.left;
-    // CSS px → SVG viewBox 좌표
-    const svgX = (pxFromLeft / rect.width) * chartConfig.W;
-    const relX = svgX - chartConfig.padL;
-    const idx = Math.round((relX / chartConfig.chartW) * (chartConfig.prices.length - 1));
-    return Math.max(0, Math.min(chartConfig.prices.length - 1, idx));
-  }, [chartConfig]);
-
-  const handleMouseDown = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
-    if (!chartConfig) return;
-    const idx = eventToIndex(e);
-    if (idx < 0) return;
+  // Recharts mouse handlers — e.activeTooltipIndex gives exact data index
+  const handleMouseDown = useCallback((e: any) => {
+    if (!e || e.activeTooltipIndex == null) return;
     setIsDragging(true);
-    setDragStart(idx);
-    setDragEnd(idx);
-    setDragSelection(null);
-    setHoveredSignal(null);
-  }, [chartConfig, eventToIndex]);
+    setDragStartIdx(e.activeTooltipIndex);
+    setDragEndIdx(e.activeTooltipIndex);
+  }, []);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
-    if (!isDragging || dragStart === null || !chartConfig) return;
-    const idx = eventToIndex(e);
-    if (idx < 0) return;
-    setDragEnd(idx);
-
-    const startIdx = Math.min(dragStart, idx);
-    const endIdx = Math.max(dragStart, idx);
-    if (startIdx === endIdx) return;
-
-    const p = chartConfig.prices;
-    const startPrice = p[startIdx].close;
-    const endPrice = p[endIdx].close;
-    const priceDiff = endPrice - startPrice;
-    const pctChange = (priceDiff / startPrice) * 100;
-
-    setDragSelection({
-      startIdx, endIdx,
-      startDate: p[startIdx].date,
-      endDate: p[endIdx].date,
-      startPrice, endPrice,
-      priceDiff, pctChange,
-    });
-  }, [isDragging, dragStart, chartConfig, eventToIndex]);
+  const handleMouseMove = useCallback((e: any) => {
+    if (!isDragging || !e || e.activeTooltipIndex == null) return;
+    setDragEndIdx(e.activeTooltipIndex);
+  }, [isDragging]);
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
   }, []);
 
   const clearSelection = useCallback(() => {
-    setDragSelection(null);
-    setDragStart(null);
-    setDragEnd(null);
+    setDragStartIdx(null);
+    setDragEndIdx(null);
+    setIsDragging(false);
   }, []);
 
-  if (!chartConfig) {
+  // Format helpers
+  const formatYAxis = (v: number) => {
+    if (v >= 1000000) return `${(v / 10000).toFixed(0)}만`;
+    if (v >= 1000) return v.toLocaleString();
+    return v.toString();
+  };
+
+  const formatXTick = (date: string) => {
+    const d = new Date(date);
+    const period = periodFilter || '전체';
+    switch (period) {
+      case '1개월': return `${d.getMonth() + 1}/${d.getDate()}`;
+      case '6개월': case '1년': return `${d.getFullYear().toString().slice(2)}.${d.getMonth() + 1}`;
+      case '3년': return `${d.getFullYear()} Q${Math.floor(d.getMonth() / 3) + 1}`;
+      default: return `${d.getFullYear()}`;
+    }
+  };
+
+  if (!chartData.length) {
     return (
       <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
         <h4 className="font-medium text-[#191f28] mb-4">주가 차트 & 신호</h4>
@@ -224,146 +153,132 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
     );
   }
 
-  const getSignalColor = (signal: string) => {
-    switch (signal) {
-      case '매수': return '#22c55e';
-      case '긍정': return '#3182f6';
-      case '중립': return '#eab308';
-      case '부정': return '#f97316';
-      case '매도': return '#ef4444';
-      default: return '#8b95a1';
-    }
-  };
-
-  const getSignalEmoji = (signal: string) => {
-    switch (signal) {
-      case '매수': return '🟢';
-      case '긍정': return '🔵';
-      case '중립': return '🟡';
-      case '부정': return '🟠';
-      case '매도': return '🔴';
-      default: return '⚪';
-    }
-  };
-
   return (
     <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
       <div className="flex justify-between items-center mb-4">
         <h4 className="font-medium text-[#191f28]">주가 차트 & 신호</h4>
         <div className="text-sm text-[#8b95a1]">
-          현재가 <span className="font-bold text-[#191f28]">{formatStockPrice(chartConfig.currentPrice, code)}</span>
+          현재가 <span className="font-bold text-[#191f28]">{formatStockPrice(stockData.currentPrice, code)}</span>
         </div>
       </div>
-      <div className="relative h-72 bg-[#f8f9fa] rounded-lg overflow-visible select-none">
-        <svg
-          ref={svgRef}
-          className="w-full h-full"
-          viewBox={`0 0 ${chartConfig.W} ${chartConfig.H}`}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={() => { if (isDragging) handleMouseUp(); }}
-          style={{ cursor: isDragging ? 'col-resize' : 'crosshair' }}
-        >
-          <defs>
-            <linearGradient id="priceGradReal" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#3182f6" stopOpacity="0.15"/>
-              <stop offset="100%" stopColor="#3182f6" stopOpacity="0.02"/>
-            </linearGradient>
-          </defs>
 
-          {chartConfig.yLabels.map((yl: any, i: number) => (
-            <g key={`y-${i}`} pointerEvents="none">
-              <line x1={chartConfig.padL} y1={yl.y} x2={chartConfig.W - 20} y2={yl.y} stroke="#e8e8e8" strokeWidth="0.5" strokeDasharray="3,3"/>
-              <text x={chartConfig.padL - 5} y={yl.y + 4} textAnchor="end" fontSize="10" fill="#8b95a1">
-                {chartConfig.formatPrice(yl.price)}
-              </text>
-            </g>
-          ))}
-
-          {chartConfig.xLabels.map((xl: any, i: number) => (
-            <text key={`x-${i}`} x={xl.x} y={chartConfig.H - 5} textAnchor="middle" fontSize="10" fill="#8b95a1" pointerEvents="none">
-              {xl.label}
-            </text>
-          ))}
-
-          {/* 투명 드래그 캡처 레이어 — 모든 마우스 이벤트를 SVG 루트로 전달 */}
-          <rect x="0" y="0" width={chartConfig.W} height={chartConfig.H} fill="transparent" />
-
-          <path d={chartConfig.areaPath} fill="url(#priceGradReal)" pointerEvents="none"/>
-          <path d={chartConfig.pathPoints} fill="none" stroke="#3182f6" strokeWidth="2.5" pointerEvents="none"/>
-
-          {chartConfig.signalMarkers.map((marker: any, i: number) => (
-            <g key={`sig-${i}`} style={{ cursor: 'pointer', pointerEvents: isDragging ? 'none' : 'auto' }}
-              onMouseEnter={(e) => {
-                if (isDragging) return;
-                setHoveredSignal(marker);
-                const rect = (e.target as SVGElement).closest('svg')?.getBoundingClientRect();
-                if (rect) {
-                  const svgX = marker.x / chartConfig.W * rect.width;
-                  const svgY = marker.y / chartConfig.H * rect.height;
-                  setHoverPos({ x: svgX, y: svgY });
-                }
-              }}
-              onMouseLeave={() => setHoveredSignal(null)}
-              onClick={() => onSignalClick?.(marker)}
-            >
-              <circle cx={marker.x} cy={marker.y} r="4" fill={getSignalColor(marker.signal)} stroke="white" strokeWidth="1.5" opacity="0.9"/>
-            </g>
-          ))}
-
-          {/* Drag selection highlight */}
-          {dragStart !== null && dragEnd !== null && dragStart !== dragEnd && chartConfig.prices.length > 0 && (() => {
-            const sIdx = Math.min(dragStart, dragEnd);
-            const eIdx = Math.max(dragStart, dragEnd);
-            const dateToX = (idx: number) => chartConfig.padL + (idx / (chartConfig.prices.length - 1)) * chartConfig.chartW;
-            const x1 = dateToX(sIdx);
-            const x2 = dateToX(eIdx);
-            return (
-              <rect
-                x={x1} y={chartConfig.padT}
-                width={x2 - x1} height={chartConfig.chartH}
-                fill={dragSelection && dragSelection.pctChange >= 0 ? '#22c55e' : '#ef4444'}
-                opacity="0.12"
-                rx="2"
-                pointerEvents="none"
-              />
-            );
-          })()}
-        </svg>
-
-        {hoveredSignal && !isDragging && (
-          <div
-            className="absolute z-50 bg-white border border-[#e8e8e8] rounded-lg shadow-lg p-3 pointer-events-none"
-            style={{
-              left: Math.min(hoverPos.x, 280),
-              top: Math.max(hoverPos.y - 100, 0),
-              maxWidth: '220px'
-            }}
+      <div className="relative h-72 bg-[#f8f9fa] rounded-lg select-none">
+        <ResponsiveContainer width="100%" height="100%">
+          <ComposedChart
+            data={chartData}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            style={{ cursor: isDragging ? 'col-resize' : 'crosshair' }}
           >
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-bold text-sm text-[#191f28]">{(hoveredSignal as any).influencer}</span>
-              <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${
-                hoveredSignal.signal === '매수' ? 'text-green-600 bg-green-50' :
-                hoveredSignal.signal === '긍정' ? 'text-blue-600 bg-blue-50' :
-                'text-gray-600 bg-gray-50'
-              }`}>{hoveredSignal.signal}</span>
-            </div>
-            <div className="text-xs text-[#8b95a1] mb-1">{hoveredSignal.date} • {formatStockPrice((hoveredSignal as any).priceAtSignal || 0, code)}</div>
-            <div className="text-xs text-[#191f28] line-clamp-2">&ldquo;{hoveredSignal.quote}&rdquo;</div>
-          </div>
-        )}
+            <defs>
+              <linearGradient id="priceGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#3182f6" stopOpacity={0.15} />
+                <stop offset="100%" stopColor="#3182f6" stopOpacity={0.02} />
+              </linearGradient>
+            </defs>
+
+            <XAxis
+              dataKey="date"
+              tickFormatter={formatXTick}
+              tick={{ fontSize: 10, fill: '#8b95a1' }}
+              tickLine={false}
+              axisLine={{ stroke: '#e8e8e8' }}
+              interval="preserveStartEnd"
+              minTickGap={50}
+            />
+            <YAxis
+              tickFormatter={formatYAxis}
+              tick={{ fontSize: 10, fill: '#8b95a1' }}
+              tickLine={false}
+              axisLine={false}
+              domain={['auto', 'auto']}
+              width={55}
+            />
+
+            {/* Drag highlight area */}
+            {dragSelection && (
+              <ReferenceArea
+                x1={chartData[dragSelection.sIdx].date}
+                x2={chartData[dragSelection.eIdx].date}
+                fill={dragSelection.pct >= 0 ? '#22c55e' : '#ef4444'}
+                fillOpacity={0.12}
+              />
+            )}
+
+            <Area
+              type="monotone"
+              dataKey="close"
+              stroke="none"
+              fill="url(#priceGrad)"
+              isAnimationActive={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="close"
+              stroke="#3182f6"
+              strokeWidth={2.5}
+              dot={false}
+              isAnimationActive={false}
+            />
+
+            {/* Signal markers */}
+            {signalMarkers.map((m, i) => (
+              <ReferenceDot
+                key={`sig-${i}`}
+                x={chartData[m.dataIdx]?.date}
+                y={m.priceAtSignal}
+                r={4}
+                fill={SIGNAL_COLORS[m.signal] || '#8b95a1'}
+                stroke="white"
+                strokeWidth={1.5}
+                style={{ cursor: 'pointer' }}
+                onClick={() => onSignalClick?.(m)}
+              />
+            ))}
+
+            {/* Disable default tooltip during drag */}
+            <Tooltip
+              active={!isDragging}
+              content={({ active, payload }) => {
+                if (isDragging || !active || !payload?.length) return null;
+                const d = payload[0].payload;
+                // Find signal at this date
+                const sig = signalMarkers.find(s => chartData[s.dataIdx]?.date === d.date);
+                return (
+                  <div className="bg-white border border-[#e8e8e8] rounded-lg shadow-lg p-3 text-xs">
+                    <div className="text-[#8b95a1] mb-1">
+                      {new Date(d.date).toLocaleDateString('ko-KR')}
+                    </div>
+                    <div className="font-bold text-[#191f28]">
+                      {formatStockPrice(d.close, code)}
+                    </div>
+                    {sig && (
+                      <div className="mt-1 pt-1 border-t border-[#e8e8e8]">
+                        <span className="font-medium" style={{ color: SIGNAL_COLORS[sig.signal] }}>
+                          {sig.signal}
+                        </span>
+                        <span className="text-[#8b95a1] ml-1">{sig.influencer}</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              }}
+            />
+          </ComposedChart>
+        </ResponsiveContainer>
 
         {/* Drag selection info banner */}
         {dragSelection && (
           <div
-            className="absolute top-2 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-sm border border-[#e8e8e8] rounded-lg shadow-lg px-4 py-2 pointer-events-auto cursor-pointer"
+            className="absolute top-2 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-sm border border-[#e8e8e8] rounded-lg shadow-lg px-4 py-2 cursor-pointer"
             onClick={clearSelection}
             title="클릭하여 선택 해제"
           >
             <div className="flex items-center gap-3">
-              <span className={`text-lg font-bold ${dragSelection.pctChange >= 0 ? 'text-green-600' : 'text-red-500'}`}>
-                {dragSelection.pctChange >= 0 ? '+' : ''}{formatStockPrice(dragSelection.priceDiff, code)} ({dragSelection.pctChange >= 0 ? '+' : ''}{dragSelection.pctChange.toFixed(2)}%) {dragSelection.pctChange >= 0 ? '↑' : '↓'}
+              <span className={`text-lg font-bold ${dragSelection.pct >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                {dragSelection.pct >= 0 ? '+' : ''}{formatStockPrice(dragSelection.diff, code)} ({dragSelection.pct >= 0 ? '+' : ''}{dragSelection.pct.toFixed(2)}%) {dragSelection.pct >= 0 ? '↑' : '↓'}
               </span>
             </div>
             <div className="text-xs text-[#8b95a1] mt-0.5">
@@ -377,7 +292,7 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
         )}
       </div>
 
-      {/* Clickable legend - signal type filter */}
+      {/* Signal type filter legend */}
       <div className="flex justify-center gap-3 mt-3">
         {ALL_SIGNAL_TYPES.map(type => {
           const isActive = activeTypes.includes(type);
@@ -386,16 +301,14 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
               key={type}
               onClick={() => onSignalTypeToggle?.(type)}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
-                isActive
-                  ? 'opacity-100'
-                  : 'opacity-30 line-through'
+                isActive ? 'opacity-100' : 'opacity-30 line-through'
               }`}
               style={{
-                backgroundColor: isActive ? getSignalColor(type) + '20' : '#f0f0f0',
-                color: isActive ? getSignalColor(type) : '#8b95a1',
+                backgroundColor: isActive ? (SIGNAL_COLORS[type] || '#8b95a1') + '20' : '#f0f0f0',
+                color: isActive ? SIGNAL_COLORS[type] || '#8b95a1' : '#8b95a1',
               }}
             >
-              {getSignalEmoji(type)} {type}
+              {SIGNAL_EMOJI[type] || '⚪'} {type}
             </button>
           );
         })}
