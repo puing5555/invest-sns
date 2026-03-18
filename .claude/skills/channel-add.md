@@ -87,3 +87,23 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - channel_name = 실제 채널명 (**핸들 사용 금지**)
 - **시그널 재분석은 JAY 승인 필수**
 - **배포 시 gh-pages orphan push 사용** (→ `deploy.md` 참조, repo 1GB limit 주의)
+
+## 파이프라인 기존 버그 (수정 완료)
+- extract_flat upload_date 미반환 → 보완 추출 구현
+- ticker: stock/ticker/market 분리 전달 수정
+- speakers 테이블 참조 수정 (influencer_speakers 아님)
+- speaker_name 폴백 channel_name 구현
+- Windows npm.cmd 수정
+- Gate 2 새 채널 완화 구현
+
+## 채널 추가 후 검증
+- published_at NULL 0건
+- ticker NULL 0건
+- speaker_id NULL 0건
+- return_pct 계산 완료
+- signal_prices.json 포함
+- stock_tickers.json 포함
+- stockPrices.json 차트 포함
+- speaker_slugs.js 실행
+- 프로필 페이지 빌드 포함
+- 종목 페이지 가격 정상
