@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import stockPricesData from '@/data/stockPrices.json';
 import { formatStockPrice } from '@/lib/currency';
 
@@ -26,6 +26,18 @@ const ALL_SIGNAL_TYPES = ['매수', '긍정', '중립', '부정', '매도'];
 export default function StockSignalChart({ code, signals, periodFilter, onSignalClick, activeSignalTypes, onSignalTypeToggle }: StockSignalChartProps) {
   const [hoveredSignal, setHoveredSignal] = useState<Signal | null>(null);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
+
+  // Drag selection state
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [dragEnd, setDragEnd] = useState<number | null>(null);
+  const [dragSelection, setDragSelection] = useState<{
+    startIdx: number; endIdx: number;
+    startDate: string; endDate: string;
+    startPrice: number; endPrice: number;
+    priceDiff: number; pctChange: number;
+  } | null>(null);
 
   // Internal state if not controlled externally
   const activeTypes = activeSignalTypes || ALL_SIGNAL_TYPES;
@@ -138,8 +150,64 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
       return p.toLocaleString();
     };
 
-    return { W, H, padL, padT, padB, chartH, pathPoints, areaPath, yLabels, xLabels, signalMarkers, formatPrice, currentPrice: stockData.currentPrice };
+    return { W, H, padL, padR, padT, padB, chartW, chartH, pathPoints, areaPath, yLabels, xLabels, signalMarkers, formatPrice, currentPrice: stockData.currentPrice, prices };
   }, [stockData, filteredSignals, periodFilter]);
+
+  // SVG 좌표 → price index 변환
+  const svgXToIndex = useCallback((clientX: number) => {
+    if (!svgRef.current || !chartConfig) return -1;
+    const rect = svgRef.current.getBoundingClientRect();
+    const svgX = ((clientX - rect.left) / rect.width) * chartConfig.W;
+    const relX = svgX - chartConfig.padL;
+    const idx = Math.round((relX / chartConfig.chartW) * (chartConfig.prices.length - 1));
+    return Math.max(0, Math.min(chartConfig.prices.length - 1, idx));
+  }, [chartConfig]);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!chartConfig) return;
+    const idx = svgXToIndex(e.clientX);
+    if (idx < 0) return;
+    setIsDragging(true);
+    setDragStart(idx);
+    setDragEnd(idx);
+    setDragSelection(null);
+    setHoveredSignal(null);
+  }, [chartConfig, svgXToIndex]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging || dragStart === null || !chartConfig) return;
+    const idx = svgXToIndex(e.clientX);
+    if (idx < 0) return;
+    setDragEnd(idx);
+
+    const startIdx = Math.min(dragStart, idx);
+    const endIdx = Math.max(dragStart, idx);
+    if (startIdx === endIdx) return;
+
+    const p = chartConfig.prices;
+    const startPrice = p[startIdx].close;
+    const endPrice = p[endIdx].close;
+    const priceDiff = endPrice - startPrice;
+    const pctChange = (priceDiff / startPrice) * 100;
+
+    setDragSelection({
+      startIdx, endIdx,
+      startDate: p[startIdx].date,
+      endDate: p[endIdx].date,
+      startPrice, endPrice,
+      priceDiff, pctChange,
+    });
+  }, [isDragging, dragStart, chartConfig, svgXToIndex]);
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  const clearSelection = useCallback(() => {
+    setDragSelection(null);
+    setDragStart(null);
+    setDragEnd(null);
+  }, []);
 
   if (!chartConfig) {
     return (
@@ -182,8 +250,17 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
           현재가 <span className="font-bold text-[#191f28]">{formatStockPrice(chartConfig.currentPrice, code)}</span>
         </div>
       </div>
-      <div className="relative h-72 bg-[#f8f9fa] rounded-lg overflow-visible">
-        <svg className="w-full h-full" viewBox={`0 0 ${chartConfig.W} ${chartConfig.H}`}>
+      <div className="relative h-72 bg-[#f8f9fa] rounded-lg overflow-visible select-none">
+        <svg
+          ref={svgRef}
+          className="w-full h-full"
+          viewBox={`0 0 ${chartConfig.W} ${chartConfig.H}`}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={() => { if (isDragging) handleMouseUp(); }}
+          style={{ cursor: isDragging ? 'col-resize' : 'crosshair' }}
+        >
           <defs>
             <linearGradient id="priceGradReal" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#3182f6" stopOpacity="0.15"/>
@@ -210,8 +287,9 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
           <path d={chartConfig.pathPoints} fill="none" stroke="#3182f6" strokeWidth="2.5"/>
 
           {chartConfig.signalMarkers.map((marker: any, i: number) => (
-            <g key={`sig-${i}`} style={{ cursor: 'pointer' }}
+            <g key={`sig-${i}`} style={{ cursor: 'pointer', pointerEvents: isDragging ? 'none' : 'auto' }}
               onMouseEnter={(e) => {
+                if (isDragging) return;
                 setHoveredSignal(marker);
                 const rect = (e.target as SVGElement).closest('svg')?.getBoundingClientRect();
                 if (rect) {
@@ -226,9 +304,27 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
               <circle cx={marker.x} cy={marker.y} r="4" fill={getSignalColor(marker.signal)} stroke="white" strokeWidth="1.5" opacity="0.9"/>
             </g>
           ))}
+
+          {/* Drag selection highlight */}
+          {dragStart !== null && dragEnd !== null && dragStart !== dragEnd && chartConfig.prices.length > 0 && (() => {
+            const sIdx = Math.min(dragStart, dragEnd);
+            const eIdx = Math.max(dragStart, dragEnd);
+            const dateToX = (idx: number) => chartConfig.padL + (idx / (chartConfig.prices.length - 1)) * chartConfig.chartW;
+            const x1 = dateToX(sIdx);
+            const x2 = dateToX(eIdx);
+            return (
+              <rect
+                x={x1} y={chartConfig.padT}
+                width={x2 - x1} height={chartConfig.chartH}
+                fill={dragSelection && dragSelection.pctChange >= 0 ? '#22c55e' : '#ef4444'}
+                opacity="0.12"
+                rx="2"
+              />
+            );
+          })()}
         </svg>
 
-        {hoveredSignal && (
+        {hoveredSignal && !isDragging && (
           <div
             className="absolute z-50 bg-white border border-[#e8e8e8] rounded-lg shadow-lg p-3 pointer-events-none"
             style={{
@@ -247,6 +343,28 @@ export default function StockSignalChart({ code, signals, periodFilter, onSignal
             </div>
             <div className="text-xs text-[#8b95a1] mb-1">{hoveredSignal.date} • {formatStockPrice((hoveredSignal as any).priceAtSignal || 0, code)}</div>
             <div className="text-xs text-[#191f28] line-clamp-2">&ldquo;{hoveredSignal.quote}&rdquo;</div>
+          </div>
+        )}
+
+        {/* Drag selection info banner */}
+        {dragSelection && (
+          <div
+            className="absolute top-2 left-1/2 -translate-x-1/2 z-50 bg-white/95 backdrop-blur-sm border border-[#e8e8e8] rounded-lg shadow-lg px-4 py-2 pointer-events-auto cursor-pointer"
+            onClick={clearSelection}
+            title="클릭하여 선택 해제"
+          >
+            <div className="flex items-center gap-3">
+              <span className={`text-lg font-bold ${dragSelection.pctChange >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                {dragSelection.pctChange >= 0 ? '+' : ''}{formatStockPrice(dragSelection.priceDiff, code)} ({dragSelection.pctChange >= 0 ? '+' : ''}{dragSelection.pctChange.toFixed(2)}%) {dragSelection.pctChange >= 0 ? '↑' : '↓'}
+              </span>
+            </div>
+            <div className="text-xs text-[#8b95a1] mt-0.5">
+              {new Date(dragSelection.startDate).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {' — '}
+              {new Date(dragSelection.endDate).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {' • '}
+              {formatStockPrice(dragSelection.startPrice, code)} → {formatStockPrice(dragSelection.endPrice, code)}
+            </div>
           </div>
         )}
       </div>
