@@ -137,8 +137,11 @@ export default function StockSignalChart({
     switch (period) {
       case '1개월': return `${d.getMonth() + 1}/${d.getDate()}`;
       case '6개월': case '1년': return `${d.getFullYear().toString().slice(2)}.${d.getMonth() + 1}`;
-      case '3년': return `${d.getFullYear()} Q${Math.floor(d.getMonth() / 3) + 1}`;
-      default: return `${d.getFullYear()}`;
+      default: {
+        // 3년, 전체 모두 분기별 표시
+        const q = Math.floor(d.getMonth() / 3) + 1;
+        return `${d.getFullYear()} Q${q}`;
+      }
     }
   };
 
