@@ -1,0 +1,2264 @@
+{
+  "ts": "2026-03-18T10:44:39.865516",
+  "total": 280,
+  "v14_pct": 77.1,
+  "v151_pct": 76.1,
+  "delta_pct": -1.1,
+  "new_correct": 17,
+  "regression": 20,
+  "still_wrong": 47,
+  "by_source": {
+    "anyuhwa": {
+      "n": 69,
+      "v14_pct": 75.4,
+      "v151_pct": 71.0
+    },
+    "wisdomtooth": {
+      "n": 211,
+      "v14_pct": 77.7,
+      "v151_pct": 77.7
+    }
+  },
+  "details": [
+    {
+      "stock": "푸야오글래스",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "화웨이",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "로블록스",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성SDI",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "LG화학",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "이더리움",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "HYBE",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "CATL",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "BYD",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "현대자동차",
+      "correct": "부정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "BYD",
+      "correct": "매수",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "이더리움",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "SMIC",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "메이투안",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "레노버",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "샤오미",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "알리바바",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "텐센트",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "비아디",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "타이거 차이나 전기차 솔렉티브",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "USDC",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "USDT",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "샤오미",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "타이거 차이나테크 탑 10 ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "SMIC",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "텐센트",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비야디",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "알리바바",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "중립",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "리플",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "네이버",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "두나무",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "뉴럴링크",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "타이거 차이나 증권 ETF",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "지리자동차",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "현대자동차",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "타이거차이나휴먼노이드로봇",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": false
+    },
+    {
+      "stock": "타이거차이나테크톱10",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "타이거차이나반도체팩세트",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "한화에어로스페이스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "한국금융지주",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "anyuhwa",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "크라우드스트라이크",
+      "correct": "매수",
+      "v14": "중립",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "스포티파이",
+      "correct": "매수",
+      "v14": "중립",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "한화오션",
+      "correct": "매수",
+      "v14": "중립",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "구글",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아마존",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "세일즈포스",
+      "correct": "매수",
+      "v14": "중립",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "한국ETF",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "템퍼스AI",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "코스피",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "TJX",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "템퍼스AI",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아마존",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "금융섹터ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "쿠팡",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "브라질ETF",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "구글",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "S&P500 동일가중 ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "압셀라바이오",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "브로드컴",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아마존",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "구글",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "코스피",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "템퍼스AI",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "리오틴토",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "현대오토에버",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "구글",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "현대모비스",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "현대자동차",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "오클로",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "크라우드스트라이크",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔로알토",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "나이키",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "코스피",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "셰브론",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "롯데케미칼",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "LG화학",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "마라톤페트롤리엄",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "발레로에너지",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로켓랩",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로켓랩",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "현대자동차",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "JP모건",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "뱅크오브아메리카",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "소파이",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "두산에너빌리티",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "효성중공업",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성바이오로직스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "TSMC",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "HD현대일렉트릭",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "구글",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "나스닥",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "피그어로보틱스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "소파이",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트코인",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "신흥국ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "이더리움",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "아마존",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "나스닥",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "슈왑배당ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아마존",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "익스피디아",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "넷플릭스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트디지털",
+      "correct": "매수",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "테슬라",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "로빈후드",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "템퍼스AI",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "레딧",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이온큐",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트팜스",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "코스피",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이렌",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "플루언스에너지",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "퀀텀스케이프",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "인튜이티브서지컬",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "매수",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "브로드컴",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "SK하이닉스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "AMD",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "FIG",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "오클로",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로빈후드",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "AMD",
+      "correct": "매도",
+      "v14": "매도",
+      "v151": "매도",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "조비에비에이션",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "AMD",
+      "correct": "매도",
+      "v14": "매도",
+      "v151": "매도",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "브로드컴",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "아이렌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "인텔",
+      "correct": "부정",
+      "v14": "부정",
+      "v151": "부정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "템퍼스AI",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "ORBS ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "세일즈포스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "레나",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "오픈도어",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "레딧",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "써클",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "브로드컴",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로빈후드",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "유나이티드헬스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "FIG",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "AMD",
+      "correct": "부정",
+      "v14": "매도",
+      "v151": "부정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "보스턴사이언티픽",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로켓랩",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로켓랩",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로빈후드",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "비트마이너",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "이더리움",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "노보노디스크",
+      "correct": "중립",
+      "v14": "부정",
+      "v151": "부정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "일라이릴리",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "이더리움",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "JP모건",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로빈후드",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "S&P500",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "유나이티드헬스",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "이더리움",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "중립",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "안두릴",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "FIG",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "일라이릴리",
+      "correct": "중립",
+      "v14": "부정",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "유나이티드헬스",
+      "correct": "긍정",
+      "v14": "중립",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "노보노디스크",
+      "correct": "중립",
+      "v14": "부정",
+      "v151": "부정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "피그마",
+      "correct": "중립",
+      "v14": "부정",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "메타",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "유나이티드헬스",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "메타",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "노보노디스크",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "일라이릴리",
+      "correct": "긍정",
+      "v14": "매수",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "템퍼스AI",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "코스트코",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "옥시덴탈",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "코스피",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "코스트코",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "애플",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "소파이",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "브로드컴",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "AMD",
+      "correct": "부정",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "일라이릴리",
+      "correct": "매수",
+      "v14": "매수",
+      "v151": "매수",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "테슬라",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "HLB",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "뉴스케일파워",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "셰브론",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엑슨모빌",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "넥스트에라에너지",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "트랜스메딕스",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "팔란티어",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "엔비디아",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "삼성전자",
+      "correct": "중립",
+      "v14": "중립",
+      "v151": "중립",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "마이크로소프트",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "일라이릴리",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "노보노디스크",
+      "correct": "중립",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": false
+    },
+    {
+      "stock": "테슬라",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "로보틱스ETF",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "현대자동차",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "나인테크",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    },
+    {
+      "stock": "크리스퍼",
+      "correct": "긍정",
+      "v14": "긍정",
+      "v151": "긍정",
+      "source": "wisdomtooth",
+      "v151_correct": true
+    }
+  ]
+}

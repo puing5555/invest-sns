@@ -52,7 +52,7 @@
     "key_quote": "비트코인 현물 etf 통과가 됐죠 따라서 지금 비트코인 가격이 엄청 많이 올랐습니다. 앞으로는 기관 투자가도 여기 들어올 수가 있게 됐다라는 거예요. 비트코인이 시대적 흐름이냐 이거예요. 저는 메타버스 시대라는 거는 100% 오게 돼 있어요.",
     "video_title": "비트코인 2억 갈 수 있나? 진실은 이것이다.  #비트코인 #경제",
     "v12_result": "매수",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "맥락일치"
   },
   {
@@ -116,7 +116,7 @@
     "key_quote": "비트코인이 가격이라고 표현하지 말자, 비트코인을 환율로 봐야 한다. 달러가 앞으로 계속 가치가 떨어진다면 비트코인이 가격이 더 올라갈 수밖에 없다",
     "video_title": "달러보다 더 가치 있는 가상자산 '비트코인' ㅣ 안유화의 경제투자론",
     "v12_result": "매수",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "맥락일치"
   },
   {
@@ -180,7 +180,7 @@
     "key_quote": "비트코인이 뭐 2억 간다 지금 7만 달러 넘었잖아요 거의 1억이 됩니다 제가 옛날에 10억 간다 자세히 부속해 드렸어요",
     "video_title": "트럼프가 오면 디지털 달러는 가고 비트코인이 기축통화 역할을 한다? ㅣ안유화 경제투자론",
     "v12_result": "긍정",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "뷰유지(스탠스동일)"
   },
   {
@@ -204,7 +204,7 @@
     "key_quote": "비아디는 자동차 한대당 매출 원가가 17,400원이 돼요이 차이가 보이죠 여기서 보면은 한국 자동차하부 비아디 자동차 원가 차이가 한 2,000달러 차이가나요",
     "video_title": "내년 전기차 줄파산 예고! 한국 이렇게 안하면 망합니다! ㅣ안유화 경제투자론",
     "v12_result": "긍정",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "시그널상향"
   },
   {
@@ -228,7 +228,7 @@
     "key_quote": "2025년에는 오를거다 이게 또 이분들이 두 번째 근거고요... 앞으로 긍정적으로 본다",
     "video_title": "바로 20만달러 간다! 2025년 비트코인 전망 나왔다! ㅣ안유화 경제투자론",
     "v12_result": "매수",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "뷰유지(스탠스동일)"
   },
   {
@@ -436,7 +436,7 @@
     "key_quote": "제가 비트코인은 기초 통화가 될 수밖에 없다고 제가 얘기하는 이유 중에 하나고 올해는 기관들이 지금 어 200m 속도로 달려 들어온다고 보시면 돼요.",
     "video_title": "A 50-Year Opportunity! Top 3 Megatrends for 2026 | Ahn Yu-hwa's Economic Investment Theory",
     "v12_result": "매수",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "맥락일치"
   },
   {
@@ -476,7 +476,7 @@
     "key_quote": "지리자동차가 이미 테슬라 현대 따라갈 수 없을 정도로 가장 먼저 갔다라는 걸 엄청 알게 됐죠",
     "video_title": "The next Hyundai?! If you're looking for an opportunity, look no further. Ahn Yu-hwa's Economic I...",
     "v12_result": "매수",
-    "correct": "매수",
+    "correct": "긍정",
     "reason_cat": "맥락일치"
   },
   {
@@ -484,7 +484,7 @@
     "key_quote": "현대자동차가 앞으로 잘 간다는 보장은 없어요",
     "video_title": "The next Hyundai?! If you're looking for an opportunity, look no further. Ahn Yu-hwa's Economic I...",
     "v12_result": "중립",
-    "correct": "긍정",
+    "correct": "중립",
     "reason_cat": "맥락일치"
   },
   {
