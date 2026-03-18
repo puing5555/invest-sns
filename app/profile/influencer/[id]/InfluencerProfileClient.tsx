@@ -231,7 +231,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       <td className="px-3 py-3 text-xs font-medium text-[#191f28] w-[11%]">
                         {signal.ticker ? (
                           <Link
-                            href={`/stock/${signal.ticker}`}
+                            href={`/stock/${signal.ticker}?tab=influencer`}
                             className="text-[#3182f6] hover:underline break-words"
                             title={formatStockDisplay(signal.stock, signal.ticker)}
                             onClick={(e) => e.stopPropagation()}
