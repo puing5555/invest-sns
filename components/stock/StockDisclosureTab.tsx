@@ -3,6 +3,18 @@
 import { useState, useMemo } from 'react';
 import disclosuresData from '@/data/disclosures.json';
 
+interface DisclosureDetail {
+  detail_type?: string;
+  shares?: number | null;
+  new_shares?: number | null;
+  amount?: number | null;
+  fund_total?: number | null;
+  period_start?: string | null;
+  period_end?: string | null;
+  purpose?: string;
+  method?: string;
+}
+
 interface Disclosure {
   stock_code: string;
   corp_name: string;
@@ -11,6 +23,8 @@ interface Disclosure {
   rcept_dt: string;
   pblntf_ty: string;
   rm: string;
+  detail?: DisclosureDetail;
+  detail_summary?: string | null;
 }
 
 type FilterType = '전체' | '자사주' | '실적' | '증자/CB' | '지분' | '기타';
@@ -21,7 +35,7 @@ const FILTERS: { label: FilterType; match: (d: Disclosure) => boolean }[] = [
   { label: '실적', match: (d) => /실적|매출액또는손익|감사보고서|사업보고서|분기보고서|반기보고서/.test(d.report_nm) },
   { label: '증자/CB', match: (d) => /증권신고|유상증자|전환사채|신주인수권|합병|분할|감자/.test(d.report_nm) },
   { label: '지분', match: (d) => /대량보유|최대주주|소유주식변동/.test(d.report_nm) },
-  { label: '기타', match: () => false }, // 나머지
+  { label: '기타', match: () => false },
 ];
 
 function classifyType(nm: string): { label: string; color: string } {
@@ -56,7 +70,6 @@ export default function StockDisclosureTab({ code }: { code: string }) {
   const filtered = useMemo(() => {
     if (filter === '전체') return stockDisclosures;
     if (filter === '기타') {
-      // 다른 필터에 안 걸리는 것
       const otherFilters = FILTERS.filter((f) => f.label !== '전체' && f.label !== '기타');
       return stockDisclosures.filter((d) => !otherFilters.some((f) => f.match(d)));
     }
@@ -76,7 +89,6 @@ export default function StockDisclosureTab({ code }: { code: string }) {
     );
   }
 
-  // 유형별 건수
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const f of FILTERS) {
@@ -115,6 +127,7 @@ export default function StockDisclosureTab({ code }: { code: string }) {
       <div className="space-y-2">
         {visible.map((d) => {
           const typeInfo = classifyType(d.report_nm);
+          const hasSummary = d.detail_summary && d.detail_summary.trim();
           return (
             <a
               key={d.rcept_no}
@@ -136,10 +149,15 @@ export default function StockDisclosureTab({ code }: { code: string }) {
                   <p className="text-sm font-medium text-[#191f28] leading-snug">
                     {d.report_nm}
                   </p>
+                  {hasSummary && (
+                    <p className="text-xs text-[#3182f6] mt-1.5 leading-relaxed">
+                      {d.detail_summary}
+                    </p>
+                  )}
                 </div>
                 <div className="flex-shrink-0 text-right">
                   <div className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</div>
-                  <div className="text-xs text-[#3182f6] mt-1">DART →</div>
+                  <div className="text-xs text-[#8b95a1] mt-1">DART →</div>
                 </div>
               </div>
             </a>

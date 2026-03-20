@@ -3,7 +3,9 @@
     "collected_at": "2026-03-20T14:59:28.760707",
     "period": "20250320~20260320",
     "stocks": 111,
-    "total_count": 5307
+    "total_count": 5307,
+    "detail_merged": 114,
+    "detail_collected_at": "2026-03-20T15:31:48.394687"
   },
   "disclosures": [
     {
@@ -532,7 +534,17 @@
       "rcept_dt": "20260318",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260318001203",
+        "detail_type": "treasury_dispose",
+        "shares": 2039151,
+        "amount": 395391378900,
+        "period_start": "2026.03.20",
+        "period_end": "2026.03.20",
+        "purpose": "직원 대상 자기주식 지급"
+      },
+      "detail_summary": "204만주 처분 · 3,954억원 · 직원 대상 자기주식 지급"
     },
     {
       "stock_code": "005930",
@@ -544,7 +556,18 @@
       "rcept_dt": "20260318",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260318001062",
+        "detail_type": "treasury_acquire",
+        "shares": 37000000,
+        "amount": 7174300000000,
+        "period_start": "2026.03.19",
+        "period_end": "2026.06.18",
+        "purpose": "임직원 주식보상",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "3,700만주 취득 · 7.2조원 · 2026.03.19~2026.06.18 · 임직원 보상"
     },
     {
       "stock_code": "005930",
@@ -3628,7 +3651,17 @@
       "rcept_dt": "20260310",
       "flr_nm": "원익피앤이",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260310002896",
+        "detail_type": "treasury_dispose",
+        "shares": 195000,
+        "amount": 622050000,
+        "period_start": "2026.03.26",
+        "period_end": "2026.04.30",
+        "purpose": "- 임직원 보상 목적"
+      },
+      "detail_summary": "20만주 처분 · 6억원 · - 임직원 보상 목적"
     },
     {
       "stock_code": "217820",
@@ -4048,7 +4081,18 @@
       "rcept_dt": "20260309",
       "flr_nm": "아모레퍼시픽",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260309001389",
+        "detail_type": "treasury_acquire",
+        "shares": 75988,
+        "amount": 10000020800,
+        "period_start": "2026.03.10",
+        "period_end": "2026.04.27",
+        "purpose": "임직원 상여금 지급 및 장기근속자포상",
+        "method": "유가증권시장 장내매수"
+      },
+      "detail_summary": "8만주 취득 · 100억원 · 2026.03.10~2026.04.27 · 임직원 보상"
     },
     {
       "stock_code": "090430",
@@ -4996,7 +5040,18 @@
       "rcept_dt": "20260305",
       "flr_nm": "한화오션",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260305000671",
+        "detail_type": "treasury_acquire",
+        "shares": 37721,
+        "amount": 5107423400,
+        "period_start": "2026.03.20",
+        "period_end": "2026.06.03",
+        "purpose": "임직원 주식보상",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "4만주 취득 · 51억원 · 2026.03.20~2026.06.03 · 임직원 보상"
     },
     {
       "stock_code": "042700",
@@ -6760,7 +6815,16 @@
       "rcept_dt": "20260226",
       "flr_nm": "SKC",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260226005077",
+        "detail_type": "capital_increase",
+        "new_shares": 11730000,
+        "face_value": 5000,
+        "fund_total": 1000569000000,
+        "method": "주주배정후 실권주 일반공모"
+      },
+      "detail_summary": "신주 1,173만주 · 1.0조원 · 주주배정후 실권주 일반공모"
     },
     {
       "stock_code": "011790",
@@ -7204,7 +7268,17 @@
       "rcept_dt": "20260226",
       "flr_nm": "현대오토에버",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260226006513",
+        "detail_type": "treasury_dispose",
+        "shares": 866,
+        "amount": 374545000,
+        "period_start": "2026.02.27",
+        "period_end": "2026.02.27",
+        "purpose": "- 주식매수청구권 행사로 취득한 자기주식의 기한 내 처분(자본시장법제165조의5) \n- 합병시 발생한 단주의 처분(유통주식물량 확대를 통한 거래량 활성화)"
+      },
+      "detail_summary": "866주 처분 · 4억원 · - 주식매수청구권 행사로 취득한 자기"
     },
     {
       "stock_code": "322000",
@@ -9292,7 +9366,16 @@
       "rcept_dt": "20260219",
       "flr_nm": "고려아연",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260219002746",
+        "detail_type": "capital_increase",
+        "new_shares": 2209716,
+        "face_value": 5000,
+        "fund_total": 2833562221325,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 221만주 · 2.8조원 · 제3자배정증자"
     },
     {
       "stock_code": "010130",
@@ -10420,7 +10503,17 @@
       "rcept_dt": "20260212",
       "flr_nm": "엘앤에프",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260212001688",
+        "detail_type": "treasury_dispose",
+        "shares": 500000,
+        "amount": 58350000000,
+        "period_start": "2026.02.13",
+        "period_end": "2026.02.13",
+        "purpose": "운영자금 조달"
+      },
+      "detail_summary": "50만주 처분 · 584억원 · 운영자금 조달"
     },
     {
       "stock_code": "068270",
@@ -10564,7 +10657,17 @@
       "rcept_dt": "20260212",
       "flr_nm": "하이브",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260212001587",
+        "detail_type": "treasury_dispose",
+        "shares": 9010,
+        "amount": 3450830000,
+        "period_start": "2026.03.03",
+        "period_end": "2026.03.31",
+        "purpose": "임직원 대상 \n주가 연동형 보상으로 \n자기주식 지급"
+      },
+      "detail_summary": "9,010주 처분 · 35억원 · 임직원 대상 \n주가 연동형 보상으로 "
     },
     {
       "stock_code": "352820",
@@ -10576,7 +10679,17 @@
       "rcept_dt": "20260212",
       "flr_nm": "하이브",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260212001393",
+        "detail_type": "treasury_dispose",
+        "shares": 9500,
+        "amount": 2002030000,
+        "period_start": "2026.01.23",
+        "period_end": "2026.03.09",
+        "purpose": "임직원에게 기 부여한 주식매수선택권의 최초행사에 따른 동일 이사회 부여물량 전체 공시"
+      },
+      "detail_summary": "9,500주 처분 · 20억원 · 임직원에게 기 부여한 주식매수선택권의"
     },
     {
       "stock_code": "352820",
@@ -10588,7 +10701,18 @@
       "rcept_dt": "20260212",
       "flr_nm": "하이브",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260212001232",
+        "detail_type": "treasury_acquire",
+        "shares": 546120,
+        "amount": null,
+        "period_start": "2026.03.16",
+        "period_end": "2026.04.13",
+        "purpose": "임직원 등의 성과보상 재원 목적\n취득",
+        "method": "무상수증"
+      },
+      "detail_summary": "55만주 취득 · 2026.03.16~2026.04.13 · 임직원 보상"
     },
     {
       "stock_code": "352820",
@@ -10672,7 +10796,17 @@
       "rcept_dt": "20260212",
       "flr_nm": "HPSP",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260212001448",
+        "detail_type": "treasury_dispose",
+        "shares": 4410,
+        "amount": 190512000,
+        "period_start": "2026.03.02",
+        "period_end": "2026.06.02",
+        "purpose": "임직원 대상 주식보상제도\n(RSU)에 따른\n자기주식 교부"
+      },
+      "detail_summary": "4,410주 처분 · 2억원 · 임직원 대상 주식보상제도\n(RSU)에"
     },
     {
       "stock_code": "403870",
@@ -10804,7 +10938,17 @@
       "rcept_dt": "20260211",
       "flr_nm": "카카오",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260211001133",
+        "detail_type": "treasury_dispose",
+        "shares": 13259,
+        "amount": 772999700,
+        "period_start": "2026.02.12",
+        "period_end": "2026.05.11",
+        "purpose": "2021년 부여 RSU 지급 "
+      },
+      "detail_summary": "1만주 처분 · 8억원 · 2021년 부여 RSU 지급 "
     },
     {
       "stock_code": "035720",
@@ -11212,7 +11356,17 @@
       "rcept_dt": "20260210",
       "flr_nm": "현대모비스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260210000755",
+        "detail_type": "treasury_dispose",
+        "shares": 3800,
+        "amount": 1653000000,
+        "period_start": "2026.02.12",
+        "period_end": "2026.02.12",
+        "purpose": "임원 대상 성과급 자기주식 지급"
+      },
+      "detail_summary": "3,800주 처분 · 17억원 · 임원 대상 성과급 자기주식 지급"
     },
     {
       "stock_code": "012330",
@@ -11596,7 +11750,17 @@
       "rcept_dt": "20260210",
       "flr_nm": "두산테스나",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260210000810",
+        "detail_type": "treasury_dispose",
+        "shares": 7095,
+        "amount": 456918000,
+        "period_start": "2026.02.25",
+        "period_end": "2026.02.25",
+        "purpose": "임원에 대한 장기 성과 보상(RSU 지급)"
+      },
+      "detail_summary": "7,095주 처분 · 5억원 · 임원에 대한 장기 성과 보상(RSU "
     },
     {
       "stock_code": "131970",
@@ -12364,7 +12528,17 @@
       "rcept_dt": "20260206",
       "flr_nm": "아모레퍼시픽",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260206002081",
+        "detail_type": "treasury_dispose",
+        "shares": 3636,
+        "amount": 507949200,
+        "period_start": "2026.02.09",
+        "period_end": "2026.02.09",
+        "purpose": "직원에 대한 상여금으로 자기주식을 지급 "
+      },
+      "detail_summary": "3,636주 처분 · 5억원 · 직원에 대한 상여금으로 자기주식을 지"
     },
     {
       "stock_code": "090430",
@@ -12820,7 +12994,18 @@
       "rcept_dt": "20260205",
       "flr_nm": "KB금융",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260205000367",
+        "detail_type": "treasury_acquire",
+        "shares": 4222378,
+        "amount": 600000000000,
+        "period_start": "2026.02.06",
+        "period_end": "2026.04.20",
+        "purpose": "자기주식 취득 및 소각을 통한 주주환원과 기업가치 제고",
+        "method": "장내매수"
+      },
+      "detail_summary": "422만주 취득 · 6,000억원 · 2026.02.06~2026.04.20"
     },
     {
       "stock_code": "105560",
@@ -13252,7 +13437,17 @@
       "rcept_dt": "20260204",
       "flr_nm": "SK텔레콤",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260204000368",
+        "detail_type": "treasury_dispose",
+        "shares": 195245,
+        "amount": 11101630700,
+        "period_start": "2026.02.12",
+        "period_end": "2027.03.25",
+        "purpose": "주식매수선택권의 최초행사에 따른 동일 주주총회 부여물량 전체 공시"
+      },
+      "detail_summary": "20만주 처분 · 111억원 · 주식매수선택권의 최초행사에 따른 동일"
     },
     {
       "stock_code": "034020",
@@ -14884,7 +15079,18 @@
       "rcept_dt": "20260129",
       "flr_nm": "현대자동차",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260129000336",
+        "detail_type": "treasury_acquire",
+        "shares": 744870,
+        "amount": 366848475000,
+        "period_start": "2026.01.30",
+        "period_end": "2026.04.27",
+        "purpose": "주주가치 제고",
+        "method": "장내매수"
+      },
+      "detail_summary": "74만주 취득 · 3,668억원 · 2026.01.30~2026.04.27 · 주주가치 제고"
     },
     {
       "stock_code": "005380",
@@ -15016,7 +15222,17 @@
       "rcept_dt": "20260129",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260129000004",
+        "detail_type": "treasury_dispose",
+        "shares": 6729069,
+        "amount": 1092800805600,
+        "period_start": "2026.01.30",
+        "period_end": "2026.01.30",
+        "purpose": "임직원 성과급의 자기주식 지급"
+      },
+      "detail_summary": "673만주 처분 · 1.1조원 · 임직원 성과급의 자기주식 지급"
     },
     {
       "stock_code": "005930",
@@ -15028,7 +15244,18 @@
       "rcept_dt": "20260129",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260129000003",
+        "detail_type": "treasury_acquire",
+        "shares": 22000000,
+        "amount": 3572800000000,
+        "period_start": "2026.01.30",
+        "period_end": "2026.04.29",
+        "purpose": "임직원 주식보상",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "2,200만주 취득 · 3.6조원 · 2026.01.30~2026.04.29 · 임직원 보상"
     },
     {
       "stock_code": "005930",
@@ -15532,7 +15759,17 @@
       "rcept_dt": "20260128",
       "flr_nm": "SK하이닉스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260128000366",
+        "detail_type": "treasury_dispose",
+        "shares": 451015,
+        "amount": 360812000000,
+        "period_start": "2026.01.28",
+        "period_end": "2026.02.27",
+        "purpose": "장기성과급 행사에 따른\n주식 보수 지급 및\n기업가치 연계 보상을 위한 \n임직원 대상 자기주식 상여 지급"
+      },
+      "detail_summary": "45만주 처분 · 3,608억원 · 장기성과급 행사에 따른\n주식 보수 지"
     },
     {
       "stock_code": "000660",
@@ -15832,7 +16069,17 @@
       "rcept_dt": "20260128",
       "flr_nm": "SK텔레콤",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260128000464",
+        "detail_type": "treasury_dispose",
+        "shares": 71726,
+        "amount": 3606096376,
+        "period_start": "2026.02.04",
+        "period_end": "2026.03.25",
+        "purpose": "주식매수선택권의 최초행사에 따른 동일 주주총회 부여물량 전체 공시"
+      },
+      "detail_summary": "7만주 처분 · 36억원 · 주식매수선택권의 최초행사에 따른 동일"
     },
     {
       "stock_code": "018670",
@@ -16108,7 +16355,17 @@
       "rcept_dt": "20260127",
       "flr_nm": "한화솔루션",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260127000338",
+        "detail_type": "treasury_dispose",
+        "shares": 160221,
+        "amount": 4366022250,
+        "period_start": "2026.01.22",
+        "period_end": "2026.02.04",
+        "purpose": "주식기준보상(RSU제도)에 따른 주식의 지급"
+      },
+      "detail_summary": "16만주 처분 · 44억원 · 주식기준보상(RSU제도)에 따른 주식"
     },
     {
       "stock_code": "012330",
@@ -16312,7 +16569,17 @@
       "rcept_dt": "20260126",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260126000001",
+        "detail_type": "treasury_dispose",
+        "shares": 1152022,
+        "amount": 175222546200,
+        "period_start": "2026.01.26",
+        "period_end": "2026.01.26",
+        "purpose": "임원 등 성과급의 자기주식 지급"
+      },
+      "detail_summary": "115만주 처분 · 1,752억원 · 임원 등 성과급의 자기주식 지급"
     },
     {
       "stock_code": "011070",
@@ -16684,7 +16951,17 @@
       "rcept_dt": "20260123",
       "flr_nm": "SK가스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260123000504",
+        "detail_type": "treasury_dispose",
+        "shares": 20000,
+        "amount": 1739400000,
+        "period_start": "2026.01.23",
+        "period_end": "2026.02.28",
+        "purpose": "주식매수선택권 행사에 따른 \n자기주식 교부"
+      },
+      "detail_summary": "2만주 처분 · 17억원 · 주식매수선택권 행사에 따른 \n자기주식"
     },
     {
       "stock_code": "018670",
@@ -16828,7 +17105,17 @@
       "rcept_dt": "20260123",
       "flr_nm": "나노신소재",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260123000563",
+        "detail_type": "treasury_dispose",
+        "shares": 4000,
+        "amount": 222400000,
+        "period_start": "2026.01.26",
+        "period_end": "2026.03.25",
+        "purpose": "임직원 특별상여금 지급에 따른 자기주식교부"
+      },
+      "detail_summary": "4,000주 처분 · 2억원 · 임직원 특별상여금 지급에 따른 자기주"
     },
     {
       "stock_code": "284620",
@@ -17248,7 +17535,17 @@
       "rcept_dt": "20260121",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260121000386",
+        "detail_type": "treasury_dispose",
+        "shares": 11379,
+        "amount": 1648139691,
+        "period_start": "2026.01.21",
+        "period_end": "2026.01.21",
+        "purpose": "주식매수선택권 행사에 따른 자기주식 교부"
+      },
+      "detail_summary": "1만주 처분 · 16억원 · 주식매수선택권 행사에 따른 자기주식 "
     },
     {
       "stock_code": "084370",
@@ -17260,7 +17557,17 @@
       "rcept_dt": "20260121",
       "flr_nm": "유진테크",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260121000411",
+        "detail_type": "treasury_dispose",
+        "shares": 2000,
+        "amount": 158800000,
+        "period_start": "2026.01.21",
+        "period_end": "2026.02.20",
+        "purpose": "근무조건부 상여금\n(주식으로 직접 지급함)"
+      },
+      "detail_summary": "2,000주 처분 · 2억원 · 근무조건부 상여금\n(주식으로 직접 지"
     },
     {
       "stock_code": "105560",
@@ -17860,7 +18167,17 @@
       "rcept_dt": "20260115",
       "flr_nm": "코미코",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260115000050",
+        "detail_type": "treasury_dispose",
+        "shares": 3270,
+        "amount": 309342000,
+        "period_start": "2026.01.16",
+        "period_end": "2026.01.16",
+        "purpose": "임직원 보상용 RSU(양도제한조건부주식) 부여를 위한 자기주식 교부"
+      },
+      "detail_summary": "3,270주 처분 · 3억원 · 임직원 보상용 RSU(양도제한조건부주"
     },
     {
       "stock_code": "267260",
@@ -18796,7 +19113,16 @@
       "rcept_dt": "20260108",
       "flr_nm": "캐리소프트",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260108000603",
+        "detail_type": "capital_increase",
+        "new_shares": 2266667,
+        "face_value": 500,
+        "fund_total": 8500000000,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 227만주 · 85억원 · 제3자배정증자"
     },
     {
       "stock_code": "323410",
@@ -18820,7 +19146,18 @@
       "rcept_dt": "20260107",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20260107000715",
+        "detail_type": "treasury_acquire",
+        "shares": 18000000,
+        "amount": 2500200000000,
+        "period_start": "2026.01.08",
+        "period_end": "2026.04.07",
+        "purpose": "임직원 주식보상",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "1,800만주 취득 · 2.5조원 · 2026.01.08~2026.04.07 · 임직원 보상"
     },
     {
       "stock_code": "006400",
@@ -19972,7 +20309,16 @@
       "rcept_dt": "20251230",
       "flr_nm": "캐리소프트",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251230000838",
+        "detail_type": "capital_increase",
+        "new_shares": 1680001,
+        "face_value": 500,
+        "fund_total": 6300003750,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 168만주 · 63억원 · 제3자배정증자"
     },
     {
       "stock_code": "319400",
@@ -21292,7 +21638,16 @@
       "rcept_dt": "20251222",
       "flr_nm": "캐리소프트",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251222000481",
+        "detail_type": "capital_increase",
+        "new_shares": 255427,
+        "face_value": 500,
+        "fund_total": 999996705,
+        "method": "일반공모증자"
+      },
+      "detail_summary": "신주 26만주 · 10억원 · 일반공모증자"
     },
     {
       "stock_code": "317530",
@@ -21460,7 +21815,16 @@
       "rcept_dt": "20251219",
       "flr_nm": "캐리소프트",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251219000421",
+        "detail_type": "capital_increase",
+        "new_shares": 1600000,
+        "face_value": 500,
+        "fund_total": 6000000000,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 160만주 · 60억원 · 제3자배정증자"
     },
     {
       "stock_code": "006400",
@@ -23260,7 +23624,17 @@
       "rcept_dt": "20251212",
       "flr_nm": "현대모비스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251212000393",
+        "detail_type": "treasury_dispose",
+        "shares": 46898,
+        "amount": 16906729000,
+        "period_start": "2025.12.24",
+        "period_end": "2025.12.24",
+        "purpose": "2025년 단체교섭에 따른 회사주식 지급"
+      },
+      "detail_summary": "5만주 처분 · 169억원 · 2025년 단체교섭에 따른 회사주식 "
     },
     {
       "stock_code": "028050",
@@ -23752,7 +24126,17 @@
       "rcept_dt": "20251211",
       "flr_nm": "유진테크",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251211000295",
+        "detail_type": "treasury_dispose",
+        "shares": 300000,
+        "amount": 22395000000,
+        "period_start": "2025.12.12",
+        "period_end": "2025.12.12",
+        "purpose": "연구개발 재원확보 외"
+      },
+      "detail_summary": "30만주 처분 · 224억원 · 연구개발 재원확보 외"
     },
     {
       "stock_code": "178320",
@@ -23860,7 +24244,17 @@
       "rcept_dt": "20251211",
       "flr_nm": "천보",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251211000420",
+        "detail_type": "treasury_dispose",
+        "shares": 1914,
+        "amount": 124792800,
+        "period_start": "2025.12.16",
+        "period_end": "2026.03.15",
+        "purpose": "임직원 양도제한조건부주식\n(RSU, Restricted Stock Unit) 지급"
+      },
+      "detail_summary": "1,914주 처분 · 1억원 · 임직원 양도제한조건부주식\n(RSU, "
     },
     {
       "stock_code": "322000",
@@ -24496,7 +24890,17 @@
       "rcept_dt": "20251208",
       "flr_nm": "테스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251208000071",
+        "detail_type": "treasury_dispose",
+        "shares": 192900,
+        "amount": 7494165000,
+        "period_start": "2025.12.08",
+        "period_end": "2025.12.22",
+        "purpose": "임직원 대상 자기주식 상여 지급"
+      },
+      "detail_summary": "19만주 처분 · 75억원 · 임직원 대상 자기주식 상여 지급"
     },
     {
       "stock_code": "097520",
@@ -24892,7 +25296,16 @@
       "rcept_dt": "20251204",
       "flr_nm": "캐리소프트",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251204000524",
+        "detail_type": "capital_increase",
+        "new_shares": 1653333,
+        "face_value": 500,
+        "fund_total": 6200000000,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 165만주 · 62억원 · 제3자배정증자"
     },
     {
       "stock_code": "317530",
@@ -24988,7 +25401,17 @@
       "rcept_dt": "20251203",
       "flr_nm": "대주전자재료",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251203000257",
+        "detail_type": "treasury_dispose",
+        "shares": 150000,
+        "amount": 11430000000,
+        "period_start": "2025.12.04",
+        "period_end": "2025.12.04",
+        "purpose": "투자재원 확보 및 재무건전성 증대"
+      },
+      "detail_summary": "15만주 처분 · 114억원 · 투자재원 확보 및 재무건전성 증대"
     },
     {
       "stock_code": "078600",
@@ -25192,7 +25615,17 @@
       "rcept_dt": "20251202",
       "flr_nm": "엘앤에프",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251202000401",
+        "detail_type": "treasury_dispose",
+        "shares": 1000000,
+        "amount": 128100000000,
+        "period_start": "2025.12.03",
+        "period_end": "2025.12.03",
+        "purpose": " 운영자금 및 시설자금의 조달"
+      },
+      "detail_summary": "100만주 처분 · 1,281억원 ·  운영자금 및 시설자금의 조달"
     },
     {
       "stock_code": "105560",
@@ -26536,7 +26969,17 @@
       "rcept_dt": "20251124",
       "flr_nm": "캐리소프트",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251124000041",
+        "detail_type": "treasury_dispose",
+        "shares": 641053,
+        "amount": 2631522565,
+        "period_start": "2025.11.24",
+        "period_end": "2025.11.24",
+        "purpose": "운영자금 및 투자재원 확보"
+      },
+      "detail_summary": "64만주 처분 · 26억원 · 운영자금 및 투자재원 확보"
     },
     {
       "stock_code": "317530",
@@ -27076,7 +27519,17 @@
       "rcept_dt": "20251118",
       "flr_nm": "에코프로비엠",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251118000105",
+        "detail_type": "treasury_dispose",
+        "shares": 854,
+        "amount": 131857600,
+        "period_start": "2025.11.28",
+        "period_end": "2026.02.27",
+        "purpose": "대표이사 연봉 일부 주식지급"
+      },
+      "detail_summary": "854주 처분 · 1억원 · 대표이사 연봉 일부 주식지급"
     },
     {
       "stock_code": "317530",
@@ -28840,7 +29293,17 @@
       "rcept_dt": "20251106",
       "flr_nm": "아모레퍼시픽",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251106000355",
+        "detail_type": "treasury_dispose",
+        "shares": 19283,
+        "amount": 2315888300,
+        "period_start": "2025.11.10",
+        "period_end": "2025.11.10",
+        "purpose": "직원에 대한 상여금으로 자기주식을 지급 "
+      },
+      "detail_summary": "2만주 처분 · 23억원 · 직원에 대한 상여금으로 자기주식을 지"
     },
     {
       "stock_code": "090430",
@@ -29248,7 +29711,17 @@
       "rcept_dt": "20251105",
       "flr_nm": "켐트로닉스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251105000319",
+        "detail_type": "treasury_dispose",
+        "shares": 428915,
+        "amount": 18228887500,
+        "period_start": "2025.11.06",
+        "period_end": "2025.11.06",
+        "purpose": "신규 사업 관련 투자 재원 마련 "
+      },
+      "detail_summary": "43만주 처분 · 182억원 · 신규 사업 관련 투자 재원 마련 "
     },
     {
       "stock_code": "089010",
@@ -29884,7 +30357,17 @@
       "rcept_dt": "20251031",
       "flr_nm": "기아",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251031000189",
+        "detail_type": "treasury_dispose",
+        "shares": 2163918,
+        "amount": 251447271600,
+        "period_start": "2025.11.28",
+        "period_end": "2025.11.28",
+        "purpose": "2025년 임금협상에 따른 회사주식 지급"
+      },
+      "detail_summary": "216만주 처분 · 2,514억원 · 2025년 임금협상에 따른 회사주식 "
     },
     {
       "stock_code": "000270",
@@ -30028,7 +30511,17 @@
       "rcept_dt": "20251031",
       "flr_nm": "현대모비스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251031000328",
+        "detail_type": "treasury_dispose",
+        "shares": 205989,
+        "amount": 63238623000,
+        "period_start": "2025.11.28",
+        "period_end": "2025.11.28",
+        "purpose": "2025년 단체교섭에 따른 회사주식 지급"
+      },
+      "detail_summary": "21만주 처분 · 632억원 · 2025년 단체교섭에 따른 회사주식 "
     },
     {
       "stock_code": "012330",
@@ -30328,7 +30821,17 @@
       "rcept_dt": "20251030",
       "flr_nm": "현대자동차",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251030000466",
+        "detail_type": "treasury_dispose",
+        "shares": 1102878,
+        "amount": 284542524000,
+        "period_start": "2025.11.28",
+        "period_end": "2025.11.28",
+        "purpose": "2025년 임금 및 단체협상 결과에 \n따른 주식지급"
+      },
+      "detail_summary": "110만주 처분 · 2,845억원 · 2025년 임금 및 단체협상 결과에 "
     },
     {
       "stock_code": "005380",
@@ -30388,7 +30891,17 @@
       "rcept_dt": "20251030",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251030000502",
+        "detail_type": "treasury_dispose",
+        "shares": 4790,
+        "amount": 481395000,
+        "period_start": "2025.10.31",
+        "period_end": "2025.10.31",
+        "purpose": "임직원 대상 개발 과제\n목표 달성 인센티브 지급"
+      },
+      "detail_summary": "4,790주 처분 · 5억원 · 임직원 대상 개발 과제\n목표 달성 인"
     },
     {
       "stock_code": "005930",
@@ -30892,7 +31405,17 @@
       "rcept_dt": "20251029",
       "flr_nm": "SK하이닉스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251029000378",
+        "detail_type": "treasury_dispose",
+        "shares": 31755,
+        "amount": 16544355000,
+        "period_start": "2025.10.29",
+        "period_end": "2025.11.28",
+        "purpose": "장기성과급 행사에 따른\n주식 보수 지급 및\n기업가치 연계 보상을 위한\n임직원 대상 자기주식 상여 지급"
+      },
+      "detail_summary": "3만주 처분 · 165억원 · 장기성과급 행사에 따른\n주식 보수 지"
     },
     {
       "stock_code": "000660",
@@ -31120,7 +31643,17 @@
       "rcept_dt": "20251029",
       "flr_nm": "테스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251029000087",
+        "detail_type": "treasury_dispose",
+        "shares": 300000,
+        "amount": 15666900000,
+        "period_start": "2025.10.30",
+        "period_end": "2025.10.30",
+        "purpose": "자기주식을 교환대상으로 하는 교환사채 발행"
+      },
+      "detail_summary": "30만주 처분 · 157억원 · 자기주식을 교환대상으로 하는 교환사채"
     },
     {
       "stock_code": "095610",
@@ -32140,7 +32673,17 @@
       "rcept_dt": "20251022",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251022000239",
+        "detail_type": "treasury_dispose",
+        "shares": 5094,
+        "amount": 746785494,
+        "period_start": "2025.10.22",
+        "period_end": "2025.10.22",
+        "purpose": "주식매수선택권 행사에 따른 자기주식 교부"
+      },
+      "detail_summary": "5,094주 처분 · 7억원 · 주식매수선택권 행사에 따른 자기주식 "
     },
     {
       "stock_code": "095610",
@@ -32464,7 +33007,17 @@
       "rcept_dt": "20251020",
       "flr_nm": "에코프로비엠",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251020000144",
+        "detail_type": "treasury_dispose",
+        "shares": 65168,
+        "amount": 10492048000,
+        "period_start": "2025.10.22",
+        "period_end": "2026.01.21",
+        "purpose": "종업원에 대한 상여금 지급 (RSU)"
+      },
+      "detail_summary": "7만주 처분 · 105억원 · 종업원에 대한 상여금 지급 (RSU)"
     },
     {
       "stock_code": "267260",
@@ -33640,7 +34193,17 @@
       "rcept_dt": "20251002",
       "flr_nm": "테크윙",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20251002000526",
+        "detail_type": "treasury_dispose",
+        "shares": 1313171,
+        "amount": 93313931260,
+        "period_start": "2025.10.20",
+        "period_end": "2025.10.20",
+        "purpose": "자기주식을 교환대상으로 하는 교환사채 발행"
+      },
+      "detail_summary": "131만주 처분 · 933억원 · 자기주식을 교환대상으로 하는 교환사채"
     },
     {
       "stock_code": "089030",
@@ -34780,7 +35343,17 @@
       "rcept_dt": "20250926",
       "flr_nm": "HPSP",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250926000786",
+        "detail_type": "treasury_dispose",
+        "shares": 76617,
+        "amount": 2631793950,
+        "period_start": "2025.09.29",
+        "period_end": "2025.10.30",
+        "purpose": "임직원 대상 주식보상제도\n(RSU,스톡옵션)에 따른 \n자기주식 교부"
+      },
+      "detail_summary": "8만주 처분 · 26억원 · 임직원 대상 주식보상제도\n(RSU,스"
     },
     {
       "stock_code": "403870",
@@ -34948,7 +35521,18 @@
       "rcept_dt": "20250925",
       "flr_nm": "엠씨넥스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250925000210",
+        "detail_type": "treasury_acquire",
+        "shares": 172117,
+        "amount": 4999998850,
+        "period_start": "2025.09.26",
+        "period_end": "2025.12.24",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "장내 직접취득"
+      },
+      "detail_summary": "17만주 취득 · 50억원 · 2025.09.26~2025.12.24 · 주주가치 제고"
     },
     {
       "stock_code": "000270",
@@ -35020,7 +35604,18 @@
       "rcept_dt": "20250924",
       "flr_nm": "서진시스템",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250924000148",
+        "detail_type": "treasury_acquire",
+        "shares": 449438,
+        "amount": 10000000000,
+        "period_start": "2025.09.25",
+        "period_end": "2025.12.24",
+        "purpose": "주주가치 제고를 위한\n자기주식 취득 및 소각",
+        "method": "장내매수"
+      },
+      "detail_summary": "45만주 취득 · 100억원 · 2025.09.25~2025.12.24 · 주주가치 제고"
     },
     {
       "stock_code": "178320",
@@ -35284,7 +35879,17 @@
       "rcept_dt": "20250919",
       "flr_nm": "고려아연",
       "rm": "정",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250919000329",
+        "detail_type": "treasury_dispose",
+        "shares": 5841,
+        "amount": 5665770000,
+        "period_start": "2025.09.22",
+        "period_end": "2025.09.26",
+        "purpose": "우리사주조합 무상출연"
+      },
+      "detail_summary": "5,841주 처분 · 57억원 · 우리사주조합 무상출연"
     },
     {
       "stock_code": "030520",
@@ -35668,7 +36273,18 @@
       "rcept_dt": "20250917",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250917000073",
+        "detail_type": "treasury_acquire",
+        "shares": 592769,
+        "amount": 100000130300,
+        "period_start": "2025.09.18",
+        "period_end": "2025.12.17",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "59만주 취득 · 1,000억원 · 2025.09.18~2025.12.17 · 주주가치 제고"
     },
     {
       "stock_code": "079160",
@@ -35692,7 +36308,17 @@
       "rcept_dt": "20250917",
       "flr_nm": "테스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250917000388",
+        "detail_type": "treasury_dispose",
+        "shares": 600000,
+        "amount": 28516200000,
+        "period_start": "2025.09.25",
+        "period_end": "2025.09.25",
+        "purpose": "자기주식을 교환대상으로 하는 교환사채 발행"
+      },
+      "detail_summary": "60만주 처분 · 285억원 · 자기주식을 교환대상으로 하는 교환사채"
     },
     {
       "stock_code": "095610",
@@ -38200,7 +38826,17 @@
       "rcept_dt": "20250826",
       "flr_nm": "하이브",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250826000414",
+        "detail_type": "treasury_dispose",
+        "shares": 6115,
+        "amount": 1794752500,
+        "period_start": "2025.09.01",
+        "period_end": "2025.10.02",
+        "purpose": "임직원 대상 주가 연동형 보상으로 자기주식 지급"
+      },
+      "detail_summary": "6,115주 처분 · 18억원 · 임직원 대상 주가 연동형 보상으로 자"
     },
     {
       "stock_code": "000720",
@@ -38356,7 +38992,16 @@
       "rcept_dt": "20250825",
       "flr_nm": "넥스턴앤롤코리아",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250825000263",
+        "detail_type": "capital_increase",
+        "new_shares": 480001,
+        "face_value": 2500,
+        "fund_total": 1200002500,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 48만주 · 12억원 · 제3자배정증자"
     },
     {
       "stock_code": "089140",
@@ -39484,7 +40129,17 @@
       "rcept_dt": "20250813",
       "flr_nm": "카카오",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250813001416",
+        "detail_type": "treasury_dispose",
+        "shares": 9000,
+        "amount": 573300000,
+        "period_start": "2025.08.14",
+        "period_end": "2025.11.13",
+        "purpose": "2021년 부여 RSU 지급 "
+      },
+      "detail_summary": "9,000주 처분 · 6억원 · 2021년 부여 RSU 지급 "
     },
     {
       "stock_code": "068270",
@@ -39772,7 +40427,17 @@
       "rcept_dt": "20250811",
       "flr_nm": "SKC",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250811000549",
+        "detail_type": "treasury_dispose",
+        "shares": 1089666,
+        "amount": 125000000000,
+        "period_start": "2025.08.26",
+        "period_end": "2025.08.26",
+        "purpose": "자기주식을 교환대상으로 하는 교환사채 발행"
+      },
+      "detail_summary": "109만주 처분 · 1,250억원 · 자기주식을 교환대상으로 하는 교환사채"
     },
     {
       "stock_code": "011790",
@@ -40444,7 +41109,17 @@
       "rcept_dt": "20250807",
       "flr_nm": "현대무벡스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250807000150",
+        "detail_type": "treasury_dispose",
+        "shares": 454666,
+        "amount": 2291516640,
+        "period_start": "2025.11.03",
+        "period_end": "2025.11.03",
+        "purpose": "직원 성과급 등의 자기주식 지급"
+      },
+      "detail_summary": "45만주 처분 · 23억원 · 직원 성과급 등의 자기주식 지급"
     },
     {
       "stock_code": "319400",
@@ -41368,7 +42043,18 @@
       "rcept_dt": "20250801",
       "flr_nm": "아모레퍼시픽",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250801000303",
+        "detail_type": "treasury_acquire",
+        "shares": 37120,
+        "amount": 5000064000,
+        "period_start": "2025.08.26",
+        "period_end": "2025.10.31",
+        "purpose": "임직원 상여금 지급 및 장기근속자 포상",
+        "method": "유가증권시장 장내매수"
+      },
+      "detail_summary": "4만주 취득 · 50억원 · 2025.08.26~2025.10.31 · 임직원 보상"
     },
     {
       "stock_code": "090430",
@@ -41380,7 +42066,17 @@
       "rcept_dt": "20250801",
       "flr_nm": "아모레퍼시픽",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250801000278",
+        "detail_type": "treasury_dispose",
+        "shares": 24144,
+        "amount": 3252196800,
+        "period_start": "2025.08.04",
+        "period_end": "2025.08.25",
+        "purpose": "임직원에 대한 상여금으로 자기주식을 지급 "
+      },
+      "detail_summary": "2만주 처분 · 33억원 · 임직원에 대한 상여금으로 자기주식을 "
     },
     {
       "stock_code": "090430",
@@ -41632,7 +42328,16 @@
       "rcept_dt": "20250731",
       "flr_nm": "NH투자증권",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250731000518",
+        "detail_type": "capital_increase",
+        "new_shares": 32258064,
+        "face_value": 5000,
+        "fund_total": 649999989600,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 3,226만주 · 6,500억원 · 제3자배정증자"
     },
     {
       "stock_code": "005940",
@@ -42496,7 +43201,17 @@
       "rcept_dt": "20250728",
       "flr_nm": "나노신소재",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250728000375",
+        "detail_type": "treasury_dispose",
+        "shares": 2000,
+        "amount": 107200000,
+        "period_start": "2025.07.29",
+        "period_end": "2025.09.30",
+        "purpose": "임직원 특별상여금 지급에 따른 자기주식교부"
+      },
+      "detail_summary": "2,000주 처분 · 1억원 · 임직원 특별상여금 지급에 따른 자기주"
     },
     {
       "stock_code": "214430",
@@ -42580,7 +43295,18 @@
       "rcept_dt": "20250725",
       "flr_nm": "기아",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250725000473",
+        "detail_type": "treasury_acquire",
+        "shares": 3333333,
+        "amount": 350000000000,
+        "period_start": "2025.07.28",
+        "period_end": "2025.10.22",
+        "purpose": "자기주식 취득을 통한 주주가치 제고",
+        "method": "장내매수"
+      },
+      "detail_summary": "333만주 취득 · 3,500억원 · 2025.07.28~2025.10.22 · 주주가치 제고"
     },
     {
       "stock_code": "000270",
@@ -42664,7 +43390,17 @@
       "rcept_dt": "20250725",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250725000794",
+        "detail_type": "treasury_dispose",
+        "shares": 779315,
+        "amount": 51356858500,
+        "period_start": "2025.07.28",
+        "period_end": "2025.07.28",
+        "purpose": "임원 등 성과급의 자기주식 지급"
+      },
+      "detail_summary": "78만주 처분 · 514억원 · 임원 등 성과급의 자기주식 지급"
     },
     {
       "stock_code": "010130",
@@ -42700,7 +43436,18 @@
       "rcept_dt": "20250725",
       "flr_nm": "현대모비스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250725000051",
+        "detail_type": "treasury_acquire",
+        "shares": 371621,
+        "amount": 110000000000,
+        "period_start": "2025.07.28",
+        "period_end": "2025.10.24",
+        "purpose": "주주가치 제고를 목적으로\n자기주식 취득 및 소각",
+        "method": "장내 매수"
+      },
+      "detail_summary": "37만주 취득 · 1,100억원 · 2025.07.28~2025.10.24 · 주주가치 제고"
     },
     {
       "stock_code": "012330",
@@ -43084,7 +43831,17 @@
       "rcept_dt": "20250724",
       "flr_nm": "현대자동차",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250724000437",
+        "detail_type": "treasury_dispose",
+        "shares": 3333,
+        "amount": 739926000,
+        "period_start": "2025.07.25",
+        "period_end": "2025.07.31",
+        "purpose": "임원 인센티브 지급"
+      },
+      "detail_summary": "3,333주 처분 · 7억원 · 임원 인센티브 지급"
     },
     {
       "stock_code": "005380",
@@ -43456,7 +44213,17 @@
       "rcept_dt": "20250723",
       "flr_nm": "SK하이닉스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250723000377",
+        "detail_type": "treasury_dispose",
+        "shares": 43316,
+        "amount": 11630346000,
+        "period_start": "2025.07.23",
+        "period_end": "2025.08.22",
+        "purpose": "기업가치 연계 보상을 위한\n임직원 대상 자기주식 상여 지급"
+      },
+      "detail_summary": "4만주 처분 · 116억원 · 기업가치 연계 보상을 위한\n임직원 대"
     },
     {
       "stock_code": "000660",
@@ -43636,7 +44403,17 @@
       "rcept_dt": "20250723",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250723000327",
+        "detail_type": "treasury_dispose",
+        "shares": 7043,
+        "amount": 1032510843,
+        "period_start": "2025.07.23",
+        "period_end": "2025.07.23",
+        "purpose": "주식매수선택권 행사에 따른 자기주식 교부"
+      },
+      "detail_summary": "7,043주 처분 · 10억원 · 주식매수선택권 행사에 따른 자기주식 "
     },
     {
       "stock_code": "068270",
@@ -43660,7 +44437,17 @@
       "rcept_dt": "20250723",
       "flr_nm": "유진테크",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250723000356",
+        "detail_type": "treasury_dispose",
+        "shares": 7000,
+        "amount": 308700000,
+        "period_start": "2025.07.24",
+        "period_end": "2025.08.23",
+        "purpose": "근무조건부 상여금\n(주식으로 직접 지급함)"
+      },
+      "detail_summary": "7,000주 처분 · 3억원 · 근무조건부 상여금\n(주식으로 직접 지"
     },
     {
       "stock_code": "084370",
@@ -43672,7 +44459,17 @@
       "rcept_dt": "20250723",
       "flr_nm": "유진테크",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250723000306",
+        "detail_type": "treasury_dispose",
+        "shares": 276745,
+        "amount": 9802307900,
+        "period_start": "2025.07.24",
+        "period_end": "2032.06.23",
+        "purpose": "주식매수선택권의 최초행사에 따른 동일 주주총회 부여물량 전체 공시"
+      },
+      "detail_summary": "28만주 처분 · 98억원 · 주식매수선택권의 최초행사에 따른 동일"
     },
     {
       "stock_code": "084370",
@@ -43924,7 +44721,18 @@
       "rcept_dt": "20250721",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250721000035",
+        "detail_type": "treasury_acquire",
+        "shares": 554632,
+        "amount": 100000149600,
+        "period_start": "2025.07.22",
+        "period_end": "2025.10.21",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "55만주 취득 · 1,000억원 · 2025.07.22~2025.10.21 · 주주가치 제고"
     },
     {
       "stock_code": "068270",
@@ -44824,7 +45632,16 @@
       "rcept_dt": "20250717",
       "flr_nm": "포스코퓨처엠",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250717000003",
+        "detail_type": "capital_increase",
+        "new_shares": 11483000,
+        "face_value": 500,
+        "fund_total": 1106961200000,
+        "method": "주주배정후 실권주 일반공모"
+      },
+      "detail_summary": "신주 1,148만주 · 1.1조원 · 주주배정후 실권주 일반공모"
     },
     {
       "stock_code": "003670",
@@ -45556,7 +46373,17 @@
       "rcept_dt": "20250710",
       "flr_nm": "한글과컴퓨터",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250710000459",
+        "detail_type": "treasury_dispose",
+        "shares": 5000,
+        "amount": 110945000,
+        "period_start": "2025.07.18",
+        "period_end": "2028.03.29",
+        "purpose": "주식매수선택권 행사에 따른\n\n자기주식 교부"
+      },
+      "detail_summary": "5,000주 처분 · 1억원 · 주식매수선택권 행사에 따른\n\n자기주식"
     },
     {
       "stock_code": "051910",
@@ -45748,7 +46575,17 @@
       "rcept_dt": "20250709",
       "flr_nm": "아이쓰리시스템",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250709000413",
+        "detail_type": "treasury_dispose",
+        "shares": 86078,
+        "amount": 8064217430,
+        "period_start": "2025.07.10",
+        "period_end": "2025.07.10",
+        "purpose": "시설자금 확보"
+      },
+      "detail_summary": "9만주 처분 · 81억원 · 시설자금 확보"
     },
     {
       "stock_code": "278470",
@@ -45784,7 +46621,18 @@
       "rcept_dt": "20250708",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250708000011",
+        "detail_type": "treasury_acquire",
+        "shares": 56888092,
+        "amount": 3509995276400,
+        "period_start": "2025.07.09",
+        "period_end": "2025.10.08",
+        "purpose": "주주가치 제고 및 임직원 주식 보상",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "5,689만주 취득 · 3.5조원 · 2025.07.09~2025.10.08 · 주주가치 제고"
     },
     {
       "stock_code": "005930",
@@ -47584,7 +48432,16 @@
       "rcept_dt": "20250627",
       "flr_nm": "한화에어로스페이스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250627000349",
+        "detail_type": "capital_increase",
+        "new_shares": 4267200,
+        "face_value": 5000,
+        "fund_total": 2918764800000,
+        "method": "주주배정후 실권주 일반공모"
+      },
+      "detail_summary": "신주 427만주 · 2.9조원 · 주주배정후 실권주 일반공모"
     },
     {
       "stock_code": "012450",
@@ -47860,7 +48717,17 @@
       "rcept_dt": "20250626",
       "flr_nm": "SKC",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250626000604",
+        "detail_type": "treasury_dispose",
+        "shares": 2503803,
+        "amount": 260000000000,
+        "period_start": "2025.06.30",
+        "period_end": "2025.06.30",
+        "purpose": "자기주식을 교환대상으로 하는 교환사채 발행"
+      },
+      "detail_summary": "250만주 처분 · 2,600억원 · 자기주식을 교환대상으로 하는 교환사채"
     },
     {
       "stock_code": "011790",
@@ -47920,7 +48787,17 @@
       "rcept_dt": "20250626",
       "flr_nm": "한글과컴퓨터",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250626000393",
+        "detail_type": "treasury_dispose",
+        "shares": 7000,
+        "amount": 155323000,
+        "period_start": "2025.07.04",
+        "period_end": "2028.03.29",
+        "purpose": "주식매수선택권 행사에 따른\n\n자기주식 교부"
+      },
+      "detail_summary": "7,000주 처분 · 2억원 · 주식매수선택권 행사에 따른\n\n자기주식"
     },
     {
       "stock_code": "068270",
@@ -47932,7 +48809,18 @@
       "rcept_dt": "20250626",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250626000003",
+        "detail_type": "treasury_acquire",
+        "shares": 623053,
+        "amount": 100000006500,
+        "period_start": "2025.06.27",
+        "period_end": "2025.09.26",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "62만주 취득 · 1,000억원 · 2025.06.27~2025.09.26 · 주주가치 제고"
     },
     {
       "stock_code": "068270",
@@ -48568,7 +49456,17 @@
       "rcept_dt": "20250619",
       "flr_nm": "한글과컴퓨터",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250619000174",
+        "detail_type": "treasury_dispose",
+        "shares": 29000,
+        "amount": 643481000,
+        "period_start": "2025.06.27",
+        "period_end": "2028.03.29",
+        "purpose": "주식매수선택권 행사에 따른\n\n자기주식 교부"
+      },
+      "detail_summary": "3만주 처분 · 6억원 · 주식매수선택권 행사에 따른\n\n자기주식"
     },
     {
       "stock_code": "030520",
@@ -49876,7 +50774,17 @@
       "rcept_dt": "20250605",
       "flr_nm": "보령",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250605000476",
+        "detail_type": "treasury_dispose",
+        "shares": 517572,
+        "amount": 4476997800,
+        "period_start": "2025.06.05",
+        "period_end": "2025.06.05",
+        "purpose": "임직원 2인에 대한 주식 보상으로 자기주식을 지급"
+      },
+      "detail_summary": "52만주 처분 · 45억원 · 임직원 2인에 대한 주식 보상으로 자"
     },
     {
       "stock_code": "003850",
@@ -51520,7 +52428,18 @@
       "rcept_dt": "20250528",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250528000403",
+        "detail_type": "treasury_acquire",
+        "shares": 649351,
+        "amount": 100000054000,
+        "period_start": "2025.05.21",
+        "period_end": "2025.08.20",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "65만주 취득 · 1,000억원 · 2025.05.21~2025.08.20 · 주주가치 제고"
     },
     {
       "stock_code": "089140",
@@ -51844,7 +52763,17 @@
       "rcept_dt": "20250523",
       "flr_nm": "삼성전자",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250523000601",
+        "detail_type": "treasury_dispose",
+        "shares": 5256775,
+        "amount": 287545592500,
+        "period_start": "2025.05.26",
+        "period_end": "2025.05.26",
+        "purpose": "직원 대상 자기주식 지급"
+      },
+      "detail_summary": "526만주 처분 · 2,875억원 · 직원 대상 자기주식 지급"
     },
     {
       "stock_code": "006400",
@@ -52756,7 +53685,18 @@
       "rcept_dt": "20250516",
       "flr_nm": "한솔케미칼",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250516000342",
+        "detail_type": "treasury_acquire",
+        "shares": 250000,
+        "amount": 31625000000,
+        "period_start": "2025.05.19",
+        "period_end": "2025.08.14",
+        "purpose": "주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "25만주 취득 · 316억원 · 2025.05.19~2025.08.14 · 주주가치 제고"
     },
     {
       "stock_code": "018670",
@@ -53800,7 +54740,17 @@
       "rcept_dt": "20250512",
       "flr_nm": "HPSP",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250512000746",
+        "detail_type": "treasury_dispose",
+        "shares": 36770,
+        "amount": 829163500,
+        "period_start": "2025.06.01",
+        "period_end": "2025.12.31",
+        "purpose": "임직원 대상 주식보상제도행사에 따른 자기주식 지급"
+      },
+      "detail_summary": "4만주 처분 · 8억원 · 임직원 대상 주식보상제도행사에 따른 "
     },
     {
       "stock_code": "403870",
@@ -54784,7 +55734,17 @@
       "rcept_dt": "20250502",
       "flr_nm": "SK텔레콤",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250502000110",
+        "detail_type": "treasury_dispose",
+        "shares": 370355,
+        "amount": 14240890460,
+        "period_start": "2025.05.02",
+        "period_end": "2027.03.26",
+        "purpose": "주식매수선택권의 최초행사에 따른 동일 주주총회 부여물량 전체 공시"
+      },
+      "detail_summary": "37만주 처분 · 142억원 · 주식매수선택권의 최초행사에 따른 동일"
     },
     {
       "stock_code": "017670",
@@ -55216,7 +56176,17 @@
       "rcept_dt": "20250430",
       "flr_nm": "NAVER",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250430001426",
+        "detail_type": "treasury_dispose",
+        "shares": 27240,
+        "amount": 5352660000,
+        "period_start": "2025.05.12",
+        "period_end": "2025.05.30",
+        "purpose": "보상 경쟁력 강화를 위한\n\n계열법인 임원 대상 자기주식 지급"
+      },
+      "detail_summary": "3만주 처분 · 54억원 · 보상 경쟁력 강화를 위한\n\n계열법인 "
     },
     {
       "stock_code": "036010",
@@ -55372,7 +56342,17 @@
       "rcept_dt": "20250430",
       "flr_nm": "아모레퍼시픽",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250430000006",
+        "detail_type": "treasury_dispose",
+        "shares": 6766,
+        "amount": 813273200,
+        "period_start": "2025.05.07",
+        "period_end": "2025.05.07",
+        "purpose": "직원에 대한 상여금으로 자기주식을 지급"
+      },
+      "detail_summary": "6,766주 처분 · 8억원 · 직원에 대한 상여금으로 자기주식을 지"
     },
     {
       "stock_code": "090430",
@@ -56044,7 +57024,18 @@
       "rcept_dt": "20250428",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250428000097",
+        "detail_type": "treasury_acquire",
+        "shares": 631712,
+        "amount": 100000009600,
+        "period_start": "2025.04.29",
+        "period_end": "2025.07.28",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "63만주 취득 · 1,000억원 · 2025.04.29~2025.07.28 · 주주가치 제고"
     },
     {
       "stock_code": "068270",
@@ -56404,7 +57395,17 @@
       "rcept_dt": "20250425",
       "flr_nm": "SK텔레콤",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250425000001",
+        "detail_type": "treasury_dispose",
+        "shares": 4860,
+        "amount": 279936000,
+        "period_start": "2025.04.25",
+        "period_end": "2025.05.31",
+        "purpose": "자기주식 상여지급"
+      },
+      "detail_summary": "4,860주 처분 · 3억원 · 자기주식 상여지급"
     },
     {
       "stock_code": "017670",
@@ -56572,7 +57573,18 @@
       "rcept_dt": "20250425",
       "flr_nm": "KB금융",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250425000885",
+        "detail_type": "treasury_acquire",
+        "shares": 3529411,
+        "amount": 300000000000,
+        "period_start": "2025.04.25",
+        "period_end": "2025.07.24",
+        "purpose": "주식소각",
+        "method": "장내매수"
+      },
+      "detail_summary": "353만주 취득 · 3,000억원 · 2025.04.25~2025.07.24"
     },
     {
       "stock_code": "105560",
@@ -57028,7 +58040,17 @@
       "rcept_dt": "20250423",
       "flr_nm": "SK하이닉스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250423000507",
+        "detail_type": "treasury_dispose",
+        "shares": 69406,
+        "amount": 12062762800,
+        "period_start": "2025.04.23",
+        "period_end": "2025.05.22",
+        "purpose": "사외이사 보수 지급 및\n기업가치 연계 보상을 위한\n임직원 대상 자기주식 상여 지급"
+      },
+      "detail_summary": "7만주 처분 · 121억원 · 사외이사 보수 지급 및\n기업가치 연계"
     },
     {
       "stock_code": "000660",
@@ -57172,7 +58194,17 @@
       "rcept_dt": "20250423",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250423000383",
+        "detail_type": "treasury_dispose",
+        "shares": 1575,
+        "amount": 239658300,
+        "period_start": "2025.04.23",
+        "period_end": "2025.04.23",
+        "purpose": "주식매수선택권 행사에 따른 자기주식 교부"
+      },
+      "detail_summary": "1,575주 처분 · 2억원 · 주식매수선택권 행사에 따른 자기주식 "
     },
     {
       "stock_code": "090430",
@@ -57292,7 +58324,17 @@
       "rcept_dt": "20250422",
       "flr_nm": "SKC",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250422000455",
+        "detail_type": "treasury_dispose",
+        "shares": 1327,
+        "amount": 129780600,
+        "period_start": "2025.04.23",
+        "period_end": "2025.04.23",
+        "purpose": "사외이사 대상 Stock Grant 부여"
+      },
+      "detail_summary": "1,327주 처분 · 1억원 · 사외이사 대상 Stock Grant "
     },
     {
       "stock_code": "011790",
@@ -57604,7 +58646,16 @@
       "rcept_dt": "20250418",
       "flr_nm": "한화에어로스페이스",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250418000538",
+        "detail_type": "capital_increase",
+        "new_shares": 1715040,
+        "face_value": 5000,
+        "fund_total": 1300000320000,
+        "method": "제3자배정증자"
+      },
+      "detail_summary": "신주 172만주 · 1.3조원 · 제3자배정증자"
     },
     {
       "stock_code": "015760",
@@ -57652,7 +58703,18 @@
       "rcept_dt": "20250418",
       "flr_nm": "키움증권",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250418000218",
+        "detail_type": "treasury_acquire",
+        "shares": 300000,
+        "amount": 35040000000,
+        "period_start": "2025.04.21",
+        "period_end": "2025.07.18",
+        "purpose": "주식 취득을 통한 주주가치 제고",
+        "method": "장내매수"
+      },
+      "detail_summary": "30만주 취득 · 350억원 · 2025.04.21~2025.07.18 · 주주가치 제고"
     },
     {
       "stock_code": "039490",
@@ -59536,7 +60598,18 @@
       "rcept_dt": "20250403",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250403000024",
+        "detail_type": "treasury_acquire",
+        "shares": 589276,
+        "amount": 100000137200,
+        "period_start": "2025.04.04",
+        "period_end": "2025.07.03",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "59만주 취득 · 1,000억원 · 2025.04.04~2025.07.03 · 주주가치 제고"
     },
     {
       "stock_code": "068270",
@@ -61576,7 +62649,17 @@
       "rcept_dt": "20250326",
       "flr_nm": "SK",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250326001097",
+        "detail_type": "treasury_dispose",
+        "shares": 1656,
+        "amount": 229852800,
+        "period_start": "2025.04.02",
+        "period_end": "2025.04.05",
+        "purpose": "사외이사 보수 지급용 Stock Grant 부여를 위한 자기주식 처분"
+      },
+      "detail_summary": "1,656주 처분 · 2억원 · 사외이사 보수 지급용 Stock Gr"
     },
     {
       "stock_code": "034730",
@@ -61600,7 +62683,17 @@
       "rcept_dt": "20250326",
       "flr_nm": "NAVER",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250326000754",
+        "detail_type": "treasury_dispose",
+        "shares": 224182,
+        "amount": 46517765000,
+        "period_start": "2025.03.27",
+        "period_end": "2025.04.30",
+        "purpose": "보상 경쟁력 강화를 위한 \n임직원 대상 자기주식 지급"
+      },
+      "detail_summary": "22만주 처분 · 465억원 · 보상 경쟁력 강화를 위한 \n임직원 대"
     },
     {
       "stock_code": "035420",
@@ -61888,7 +62981,17 @@
       "rcept_dt": "20250326",
       "flr_nm": "원익피앤이",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250326001244",
+        "detail_type": "treasury_dispose",
+        "shares": 205000,
+        "amount": 441775000,
+        "period_start": "2025.04.01",
+        "period_end": "2025.04.30",
+        "purpose": "우리사주조합 무상출연"
+      },
+      "detail_summary": "20만주 처분 · 4억원 · 우리사주조합 무상출연"
     },
     {
       "stock_code": "217820",
@@ -62212,7 +63315,17 @@
       "rcept_dt": "20250325",
       "flr_nm": "유진테크",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250325000950",
+        "detail_type": "treasury_dispose",
+        "shares": 8500,
+        "amount": 373150000,
+        "period_start": "2025.03.26",
+        "period_end": "2025.04.25",
+        "purpose": "근무조건부 상여금\n\n(주식으로 직접 지급함)"
+      },
+      "detail_summary": "8,500주 처분 · 4억원 · 근무조건부 상여금\n\n(주식으로 직접 "
     },
     {
       "stock_code": "089030",
@@ -62452,7 +63565,18 @@
       "rcept_dt": "20250324",
       "flr_nm": "JW중외제약",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250324000615",
+        "detail_type": "treasury_acquire",
+        "shares": 228311,
+        "amount": 5000010900,
+        "period_start": "2025.03.25",
+        "period_end": "2025.06.24",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내매수"
+      },
+      "detail_summary": "23만주 취득 · 50억원 · 2025.03.25~2025.06.24 · 주주가치 제고"
     },
     {
       "stock_code": "003670",
@@ -62464,7 +63588,17 @@
       "rcept_dt": "20250324",
       "flr_nm": "포스코퓨처엠",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250324000555",
+        "detail_type": "treasury_dispose",
+        "shares": 40502,
+        "amount": 5577125400,
+        "period_start": "2025.03.28",
+        "period_end": "2025.04.10",
+        "purpose": "'24년 임단협 합의에 따른 회사주식의 직원 지급"
+      },
+      "detail_summary": "4만주 처분 · 56억원 · '24년 임단협 합의에 따른 회사주식"
     },
     {
       "stock_code": "003670",
@@ -62476,7 +63610,18 @@
       "rcept_dt": "20250324",
       "flr_nm": "포스코퓨처엠",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250324000551",
+        "detail_type": "treasury_acquire",
+        "shares": 12526,
+        "amount": 1724830200,
+        "period_start": "2025.03.25",
+        "period_end": "2025.03.25",
+        "purpose": "'24년 임단협 합의에 따른 직원지급 위한 자기주식 취득",
+        "method": "장내매수"
+      },
+      "detail_summary": "1만주 취득 · 17억원 · 2025.03.25~2025.03.25"
     },
     {
       "stock_code": "003670",
@@ -63040,7 +64185,18 @@
       "rcept_dt": "20250321",
       "flr_nm": "셀트리온",
       "rm": "",
-      "pblntf_ty": "B"
+      "pblntf_ty": "B",
+      "detail": {
+        "rcept_no": "20250321000011",
+        "detail_type": "treasury_acquire",
+        "shares": 268385,
+        "amount": 50000125500,
+        "period_start": "2025.03.24",
+        "period_end": "2025.06.20",
+        "purpose": "주가 안정 및 주주가치 제고",
+        "method": "유가증권시장을 통한 장내 매수"
+      },
+      "detail_summary": "27만주 취득 · 500억원 · 2025.03.24~2025.06.20 · 주주가치 제고"
     },
     {
       "stock_code": "068270",
