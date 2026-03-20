@@ -5,7 +5,10 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockAnalystTab from '@/components/stock/StockAnalystTab';
-import StockDisclosureTab from '@/components/stock/StockDisclosureTab';
+import dynamic from 'next/dynamic';
+const StockDisclosureTab = dynamic(() => import('@/components/stock/StockDisclosureTab'), {
+  loading: () => <div className="text-center py-8 text-[#8b95a1]">공시 데이터 로딩중...</div>,
+});
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
