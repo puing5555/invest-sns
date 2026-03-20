@@ -351,21 +351,21 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
     [reports]
   );
 
-  // 최근 1개월 리포트
+  // 최근 3개월 리포트
   const recentReports = useMemo(() => {
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-    const filtered = reports.filter(r => new Date(r.published_at) >= oneMonthAgo);
-    return filtered.length > 0 ? filtered : reports; // 1개월 내 없으면 전체 fallback
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    const filtered = reports.filter(r => new Date(r.published_at) >= threeMonthsAgo);
+    return filtered.length > 0 ? filtered : reports; // 3개월 내 없으면 전체 fallback
   }, [reports]);
 
   const isRecentOnly = useMemo(() => {
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-    return reports.some(r => new Date(r.published_at) >= oneMonthAgo);
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    return reports.some(r => new Date(r.published_at) >= threeMonthsAgo);
   }, [reports]);
 
-  // 컨센서스 계산 (최근 1개월 기준)
+  // 컨센서스 계산 (최근 3개월 기준)
   const consensus = useMemo(() => {
     if (recentReports.length === 0) return null;
     
@@ -393,7 +393,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
     };
   }, [recentReports]);
 
-  // 평균 목표가 및 업사이드 계산 (최근 1개월 기준)
+  // 평균 목표가 및 업사이드 계산 (최근 3개월 기준)
   const targetPriceStats = useMemo(() => {
     const validReports = recentReports.filter(r => r.target_price && r.target_price > 0);
     if (validReports.length === 0 || currentPrice === 0) return null;
@@ -416,7 +416,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
     };
   }, [recentReports, currentPrice]);
 
-  // 최근 변화 (30일 내 목표가 변화)
+  // 최근 변화 (3개월 내 목표가 변화)
   const recentChanges = useMemo(() => {
     const upgrades = recentReports.filter(r => r.opinion === 'BUY').length;
     const downgrades = recentReports.filter(r => r.opinion === 'SELL').length;
@@ -458,7 +458,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
           <div>
             <h3 className="text-base font-bold text-[#191f28]">애널리스트 컨센서스</h3>
             <p className="text-xs text-[#8b95a1]">
-              {isRecentOnly ? '최근 1개월 리포트 기준' : '전체 리포트 기준 (1개월 내 없음)'}
+              {isRecentOnly ? '최근 3개월 리포트 기준' : '전체 리포트 기준 (3개월 내 없음)'}
             </p>
           </div>
           {/* 최신 리포트 인라인 */}
@@ -528,7 +528,7 @@ export default function StockAnalystTab({ code }: StockAnalystTabProps) {
 
         {/* 최근 변화 */}
         <div className="mt-2.5 flex items-center gap-3 text-xs">
-          <span className="text-[#8b95a1]">최근 30일:</span>
+          <span className="text-[#8b95a1]">최근 3개월:</span>
           {recentChanges.upgrades > 0 && (
             <span className="text-green-600 font-medium">↑ {recentChanges.upgrades}건 매수</span>
           )}
