@@ -16,9 +16,18 @@ interface Disclosure {
   sentiment?: string | null;
 }
 
-type FilterType = '전체' | '자사주' | '실적' | '증자/CB' | '지분' | '기타';
+type FilterType = '주요' | '전체' | '자사주' | '실적' | '증자/CB' | '지분' | '기타';
+
+// 노이즈 패턴 — "주요" 필터에서 제외
+const NOISE_RE = /최대주주등소유주식변동|기타경영사항\(자율공시\)|주주총회소집|정기주주총회결과|주주총회소집결의|주주총회소집공고/;
+
+function isKeyDisclosure(d: Disclosure): boolean {
+  const s = d.sentiment;
+  return (s === '호재' || s === '악재' || s === '확인필요') && !NOISE_RE.test(d.report_nm);
+}
 
 const FILTERS: { label: FilterType; match: (d: Disclosure) => boolean }[] = [
+  { label: '주요', match: isKeyDisclosure },
   { label: '전체', match: () => true },
   { label: '자사주', match: (d) => /자기주식|자사주/.test(d.report_nm) },
   { label: '실적', match: (d) => /실적|매출액또는손익|감사보고서|사업보고서|분기보고서|반기보고서/.test(d.report_nm) },
@@ -43,7 +52,14 @@ function sentimentBadge(s: string | null | undefined): { icon: string; color: st
   if (s === '호재') return { icon: '호재', color: 'bg-red-50 text-red-600' };
   if (s === '악재') return { icon: '악재', color: 'bg-blue-50 text-blue-600' };
   if (s === '확인필요') return { icon: '확인', color: 'bg-amber-50 text-amber-600' };
-  return null; // 중립은 표시 안 함
+  return null;
+}
+
+function sentimentDot(s: string | null | undefined): string {
+  if (s === '호재') return 'text-red-500';
+  if (s === '악재') return 'text-blue-500';
+  if (s === '확인필요') return 'text-amber-500';
+  return 'text-gray-400';
 }
 
 function formatDate(dt: string): string {
@@ -51,12 +67,17 @@ function formatDate(dt: string): string {
   return `${dt.slice(0, 4)}.${dt.slice(4, 6)}.${dt.slice(6)}`;
 }
 
+function shortDate(dt: string): string {
+  if (dt.length !== 8) return dt;
+  return `${parseInt(dt.slice(4, 6))}/${parseInt(dt.slice(6))}`;
+}
+
 function dartUrl(rceptNo: string): string {
   return `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${rceptNo}`;
 }
 
 export default function StockDisclosureTab({ code }: { code: string }) {
-  const [filter, setFilter] = useState<FilterType>('전체');
+  const [filter, setFilter] = useState<FilterType>('주요');
   const [showCount, setShowCount] = useState(20);
 
   const stockDisclosures = useMemo(() => {
@@ -64,11 +85,21 @@ export default function StockDisclosureTab({ code }: { code: string }) {
       .filter((d) => d.stock_code === code);
   }, [code]);
 
+  // 최근 3개월 주요 이벤트 (상단 요약)
+  const highlights = useMemo(() => {
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+    const cutoff = threeMonthsAgo.toISOString().slice(0, 10).replace(/-/g, '');
+    return stockDisclosures
+      .filter((d) => d.rcept_dt >= cutoff && isKeyDisclosure(d))
+      .slice(0, 5);
+  }, [stockDisclosures]);
+
   const filtered = useMemo(() => {
     if (filter === '전체') return stockDisclosures;
     if (filter === '기타') {
-      const otherFilters = FILTERS.filter((f) => f.label !== '전체' && f.label !== '기타');
-      return stockDisclosures.filter((d) => !otherFilters.some((f) => f.match(d)));
+      const otherFilters = FILTERS.filter((f) => f.label !== '전체' && f.label !== '기타' && f.label !== '주요');
+      return stockDisclosures.filter((d) => !otherFilters.some((f) => f.match(d)) && !isKeyDisclosure(d));
     }
     const f = FILTERS.find((f) => f.label === filter);
     return f ? stockDisclosures.filter(f.match) : stockDisclosures;
@@ -91,9 +122,11 @@ export default function StockDisclosureTab({ code }: { code: string }) {
     for (const f of FILTERS) {
       if (f.label === '전체') {
         counts['전체'] = stockDisclosures.length;
+      } else if (f.label === '주요') {
+        counts['주요'] = stockDisclosures.filter(isKeyDisclosure).length;
       } else if (f.label === '기타') {
-        const otherFilters = FILTERS.filter((ff) => ff.label !== '전체' && ff.label !== '기타');
-        counts['기타'] = stockDisclosures.filter((d) => !otherFilters.some((ff) => ff.match(d))).length;
+        const otherFilters = FILTERS.filter((ff) => ff.label !== '전체' && ff.label !== '기타' && ff.label !== '주요');
+        counts['기타'] = stockDisclosures.filter((d) => !otherFilters.some((ff) => ff.match(d)) && !isKeyDisclosure(d)).length;
       } else {
         counts[f.label] = stockDisclosures.filter(f.match).length;
       }
@@ -103,6 +136,32 @@ export default function StockDisclosureTab({ code }: { code: string }) {
 
   return (
     <div className="space-y-4">
+      {/* 상단 요약: 최근 3개월 주요 이벤트 */}
+      {highlights.length > 0 && (
+        <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
+          <h4 className="text-xs font-medium text-[#8b95a1] mb-3">최근 3개월 주요 이벤트</h4>
+          <div className="space-y-2">
+            {highlights.map((h) => {
+              const summary = h.ai_summary || h.detail_summary || h.report_nm;
+              const dotColor = sentimentDot(h.sentiment);
+              return (
+                <a
+                  key={h.rcept_no}
+                  href={dartUrl(h.rcept_no)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-2 hover:bg-gray-50 rounded px-1 py-0.5 transition-colors"
+                >
+                  <span className={`mt-1 ${dotColor}`}>●</span>
+                  <span className="text-sm text-[#191f28] flex-1 leading-snug">{summary}</span>
+                  <span className="text-xs text-[#8b95a1] flex-shrink-0">({shortDate(h.rcept_dt)})</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* 필터 */}
       <div className="flex flex-wrap gap-2">
         {FILTERS.map((f) => (
@@ -122,6 +181,11 @@ export default function StockDisclosureTab({ code }: { code: string }) {
 
       {/* 공시 목록 */}
       <div className="space-y-2">
+        {visible.length === 0 && (
+          <div className="text-center py-8">
+            <p className="text-sm text-[#8b95a1]">해당 유형의 공시가 없습니다</p>
+          </div>
+        )}
         {visible.map((d) => {
           const typeInfo = classifyType(d.report_nm);
           const badge = sentimentBadge(d.sentiment);
