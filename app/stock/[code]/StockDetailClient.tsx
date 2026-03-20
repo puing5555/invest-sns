@@ -5,10 +5,6 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockAnalystTab from '@/components/stock/StockAnalystTab';
-import dynamic from 'next/dynamic';
-const StockDisclosureTab = dynamic(() => import('@/components/stock/StockDisclosureTab'), {
-  loading: () => <div className="text-center py-8 text-[#8b95a1]">공시 데이터 로딩중...</div>,
-});
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
@@ -34,16 +30,18 @@ interface StockTimelineEvent {
 const getStockTimeline = (code: string): StockTimelineEvent[] => {
   const timelines: { [key: string]: StockTimelineEvent[] } = {
     '005930': [
-      { id: 1, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '자기주식 취득결정', time: '2일 전', tab: 'disclosure' },
+      { id: 1, type: 'disclosure', icon: '🔵', categoryName: '공시', title: 'A등급 공시 - 3분기 실적 컨센서스 상회', time: '3분 전', tab: 'disclosure' },
       { id: 2, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '슈카월드 긍정 신호', time: '1시간 전', tab: 'influencer' },
-      { id: 3, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'analyst' },
-      { id: 4, type: 'insider', icon: '👔', categoryName: '내부자', title: '임원 주식 변동', time: '3시간 전', tab: 'insider' },
-      { id: 5, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '코린이아빠 매수 신호', time: '8시간 전', tab: 'influencer' },
-      { id: 6, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '자사주 매입 결정', time: '1일 전', tab: 'disclosure' },
+      { id: 3, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'reports' },
+      { id: 4, type: 'insider', icon: '👔', categoryName: '임원매매', title: '이재용 사장 매수 5만주', time: '3시간 전', tab: 'insider' },
+      { id: 5, type: 'earnings', icon: '📈', categoryName: '실적', title: '3분기 영업이익 컨센서스 상회', time: '5시간 전', tab: 'earnings' },
+      { id: 6, type: 'influencer', icon: '🟢', categoryName: '인플루언서', title: '코린이아빠 매수 신호', time: '8시간 전', tab: 'influencer' },
+      { id: 7, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '자사주 매입 결정', time: '1일 전', tab: 'disclosure' },
     ],
     '005380': [
-      { id: 1, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'analyst' },
-      { id: 2, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '전기차 신모델 출시 공시', time: '1일 전', tab: 'disclosure' },
+      { id: 1, type: 'report', icon: '📊', categoryName: '리포트', title: '한국투자증권 목표가 상향', time: '2시간 전', tab: 'reports' },
+      { id: 2, type: 'earnings', icon: '📈', categoryName: '실적', title: '3분기 영업이익 컨센서스 상회', time: '5시간 전', tab: 'earnings' },
+      { id: 3, type: 'disclosure', icon: '🔵', categoryName: '공시', title: '전기차 신모델 출시 공시', time: '1일 전', tab: 'disclosure' },
     ],
   };
   return timelines[code] || [
@@ -51,19 +49,17 @@ const getStockTimeline = (code: string): StockTimelineEvent[] => {
   ];
 };
 
-// 탭 정의 (한국 종목만 공시/내부자 탭 표시)
-const getTabsForCode = (code: string) => {
-  const base = [
-    { id: 'feed', label: '피드', icon: '📱' },
-    { id: 'influencer', label: '인플루언서', icon: '📈' },
-    { id: 'analyst', label: '애널리스트', icon: '📊' },
-  ];
-  if (isKoreanStock(code)) {
-    base.push({ id: 'disclosure', label: '공시', icon: '📋' });
-    base.push({ id: 'insider', label: '내부자', icon: '💼' });
-  }
-  return base;
-};
+// 탭 정의
+const tabs = [
+  { id: 'feed', label: '피드', icon: '📱' },
+  { id: 'influencer', label: '인플루언서', icon: '📈' },
+  { id: 'analyst', label: '애널리스트', icon: '📊' },
+  { id: 'disclosure', label: '공시', icon: '📋' },
+  { id: 'earnings', label: '실적', icon: '📈' },
+  { id: 'insider', label: '임원매매', icon: '💼' },
+  { id: 'calendar', label: '일정', icon: '📅' },
+  { id: 'memo', label: '메모', icon: '📝' },
+];
 
 import stockPricesData from '@/data/stockPrices.json';
 import signalPricesData from '@/data/signal_prices.json';
@@ -234,14 +230,72 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return <StockAnalystTab code={code} />;
 
       case 'disclosure':
-        return <StockDisclosureTab code={code} />;
+        return (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">📋</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">공시</h3>
+            <p className="text-[#8b95a1]">DART 연동 준비중</p>
+          </div>
+        );
+
+      case 'earnings':
+        return (
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">📊</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">실적 분석</h3>
+            <p className="text-[#8b95a1]">상세 실적 분석을 준비중입니다</p>
+          </div>
+        );
 
       case 'insider':
         return (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+              <h4 className="font-bold text-[#191f28] mb-4">임원 매매 현황</h4>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                  <div>
+                    <div className="font-medium text-red-800">김○○ 전무 매도</div>
+                    <div className="text-sm text-red-600">5억원 규모 • 3일 전</div>
+                  </div>
+                  <div className="text-red-600 font-bold">-1.2%</div>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                  <div>
+                    <div className="font-medium text-blue-800">박○○ 상무 매수</div>
+                    <div className="text-sm text-blue-600">3억원 규모 • 1주 전</div>
+                  </div>
+                  <div className="text-blue-600 font-bold">+0.8%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'calendar':
+        return (
           <div className="text-center py-12">
-            <div className="text-4xl mb-4">💼</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">내부자 거래</h3>
-            <p className="text-[#8b95a1]">DART 연동 준비중</p>
+            <div className="text-4xl mb-4">📅</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">종목 일정</h3>
+            <p className="text-[#8b95a1]">실적발표, 주주총회 등 일정을 준비중입니다</p>
+          </div>
+        );
+
+      case 'memo':
+        return (
+          <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
+            <h4 className="font-bold text-[#191f28] mb-4">내 메모</h4>
+            <div className="space-y-4">
+              <textarea
+                placeholder="이 종목에 대한 메모를 작성해보세요..."
+                className="w-full h-32 p-3 border border-[#e8e8e8] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#3182f6] focus:border-transparent"
+              />
+              <div className="flex justify-end">
+                <button className="px-4 py-2 bg-[#3182f6] text-white rounded-lg hover:bg-[#2171e5] transition-colors">
+                  저장
+                </button>
+              </div>
+            </div>
           </div>
         );
 
@@ -323,7 +377,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
       <div className="bg-white border-b border-[#e8e8e8]">
         <div className="px-4">
           <div className="flex overflow-x-auto scrollbar-hide">
-            {getTabsForCode(code).map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
