@@ -182,29 +182,7 @@ function DisclosureModal({ d, onClose }: { d: Disclosure; onClose: () => void })
         )}
 
         {/* AI 해석 + 내 주식에 미치는 영향 (분리) */}
-        {d.ai_analysis && (() => {
-          const parts = d.ai_analysis!.split('내 주식에 미치는 영향:');
-          const interpretation = parts[0].trim();
-          const impact = parts.length > 1 ? parts[1].trim() : null;
-          return (
-            <>
-              {interpretation && (
-                <div className="bg-blue-50 rounded-lg p-3 mb-3">
-                  <h4 className="text-xs font-medium text-blue-600 mb-2">AI 해석</h4>
-                  <p className="text-sm text-[#191f28] leading-relaxed">{interpretation}</p>
-                </div>
-              )}
-              {impact && (
-                <div className="bg-orange-50 border border-orange-100 rounded-lg p-3 mb-3">
-                  <p className="text-sm text-[#191f28] leading-relaxed">
-                    <span className="font-medium text-orange-700">내 주식에 미치는 영향: </span>
-                    {impact}
-                  </p>
-                </div>
-              )}
-            </>
-          );
-        })()}
+        {d.ai_analysis && <AnalysisSection text={d.ai_analysis} />}
 
         {/* DART 원문 링크 */}
         <a
@@ -217,6 +195,30 @@ function DisclosureModal({ d, onClose }: { d: Disclosure; onClose: () => void })
         </a>
       </div>
     </div>
+  );
+}
+
+function AnalysisSection({ text }: { text: string }) {
+  const parts = text.split('내 주식에 미치는 영향:');
+  const interpretation = parts[0].trim();
+  const impact = parts.length > 1 ? parts[1].trim() : null;
+  return (
+    <>
+      {interpretation && (
+        <div className="bg-blue-50 rounded-lg p-3 mb-3">
+          <h4 className="text-xs font-medium text-blue-600 mb-2">AI 해석</h4>
+          <p className="text-sm text-[#191f28] leading-relaxed">{interpretation}</p>
+        </div>
+      )}
+      {impact && (
+        <div className="bg-orange-50 border border-orange-100 rounded-lg p-3 mb-3">
+          <p className="text-sm text-[#191f28] leading-relaxed">
+            <span className="font-medium text-orange-700">내 주식에 미치는 영향: </span>
+            {impact}
+          </p>
+        </div>
+      )}
+    </>
   );
 }
 
