@@ -150,7 +150,7 @@ export default function StockDisclosureTab({ code }: { code: string }) {
                     {d.report_nm}
                   </p>
                   {hasSummary && (
-                    <p className="text-xs text-[#3182f6] mt-1.5 leading-relaxed">
+                    <p className="text-xs text-[#3182f6] mt-1 leading-relaxed">
                       {d.detail_summary}
                     </p>
                   )}
