@@ -26,6 +26,7 @@ interface Disclosure {
   detail?: DisclosureDetail;
   detail_summary?: string | null;
   ai_summary?: string | null;
+  ai_analysis?: string | null;
   sentiment?: string | null;
 }
 
@@ -89,7 +90,7 @@ function dartUrl(rceptNo: string): string {
 }
 
 function hasDetailData(d: Disclosure): boolean {
-  return !!(d.detail || d.ai_summary || d.detail_summary);
+  return !!(d.detail || d.ai_analysis || d.ai_summary || d.detail_summary);
 }
 
 // ── 모달 ──
@@ -177,6 +178,14 @@ function DisclosureModal({ d, onClose }: { d: Disclosure; onClose: () => void })
         {!detail && d.detail_summary && (
           <div className="bg-gray-50 rounded-lg p-3 mb-3">
             <p className="text-sm text-[#191f28]">{d.detail_summary}</p>
+          </div>
+        )}
+
+        {/* 투자자 관점 해석 */}
+        {d.ai_analysis && (
+          <div className="bg-amber-50 border border-amber-100 rounded-lg p-3 mb-3">
+            <h4 className="text-xs font-medium text-amber-700 mb-2">투자자 관점 해석</h4>
+            <p className="text-sm text-[#191f28] leading-relaxed">{d.ai_analysis}</p>
           </div>
         )}
 
