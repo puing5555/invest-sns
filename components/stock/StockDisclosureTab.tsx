@@ -3,18 +3,6 @@
 import { useState, useMemo } from 'react';
 import disclosuresData from '@/data/disclosures.json';
 
-interface DisclosureDetail {
-  detail_type?: string;
-  shares?: number | null;
-  new_shares?: number | null;
-  amount?: number | null;
-  fund_total?: number | null;
-  period_start?: string | null;
-  period_end?: string | null;
-  purpose?: string;
-  method?: string;
-}
-
 interface Disclosure {
   stock_code: string;
   corp_name: string;
@@ -23,8 +11,9 @@ interface Disclosure {
   rcept_dt: string;
   pblntf_ty: string;
   rm: string;
-  detail?: DisclosureDetail;
   detail_summary?: string | null;
+  ai_summary?: string | null;
+  sentiment?: string | null;
 }
 
 type FilterType = '전체' | '자사주' | '실적' | '증자/CB' | '지분' | '기타';
@@ -47,6 +36,14 @@ function classifyType(nm: string): { label: string; color: string } {
   if (/기업가치제고/.test(nm)) return { label: '밸류업', color: 'bg-teal-100 text-teal-700' };
   if (/공정공시/.test(nm)) return { label: '공정공시', color: 'bg-yellow-100 text-yellow-700' };
   return { label: '기타', color: 'bg-gray-100 text-gray-600' };
+}
+
+function sentimentBadge(s: string | null | undefined): { icon: string; color: string } | null {
+  if (!s) return null;
+  if (s === '호재') return { icon: '호재', color: 'bg-red-50 text-red-600' };
+  if (s === '악재') return { icon: '악재', color: 'bg-blue-50 text-blue-600' };
+  if (s === '확인필요') return { icon: '확인', color: 'bg-amber-50 text-amber-600' };
+  return null; // 중립은 표시 안 함
 }
 
 function formatDate(dt: string): string {
@@ -127,7 +124,8 @@ export default function StockDisclosureTab({ code }: { code: string }) {
       <div className="space-y-2">
         {visible.map((d) => {
           const typeInfo = classifyType(d.report_nm);
-          const hasSummary = d.detail_summary && d.detail_summary.trim();
+          const badge = sentimentBadge(d.sentiment);
+          const summary = d.ai_summary || d.detail_summary;
           return (
             <a
               key={d.rcept_no}
@@ -138,26 +136,37 @@ export default function StockDisclosureTab({ code }: { code: string }) {
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1.5">
+                  <div className="flex items-center gap-2 mb-1">
                     <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeInfo.color}`}>
                       {typeInfo.label}
                     </span>
+                    {badge && (
+                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${badge.color}`}>
+                        {badge.icon}
+                      </span>
+                    )}
                     {d.rm && d.rm.trim() && (
                       <span className="text-xs text-[#8b95a1]">[{d.rm.trim()}]</span>
                     )}
                   </div>
-                  <p className="text-sm font-medium text-[#191f28] leading-snug">
-                    {d.report_nm}
-                  </p>
-                  {hasSummary && (
-                    <p className="text-xs text-[#3182f6] mt-1 leading-relaxed">
-                      {d.detail_summary}
+                  {summary ? (
+                    <>
+                      <p className="text-sm font-medium text-[#191f28] leading-snug">
+                        {summary}
+                      </p>
+                      <p className="text-xs text-[#8b95a1] mt-1">
+                        {d.report_nm}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-sm font-medium text-[#191f28] leading-snug">
+                      {d.report_nm}
                     </p>
                   )}
                 </div>
                 <div className="flex-shrink-0 text-right">
                   <div className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</div>
-                  <div className="text-xs text-[#8b95a1] mt-1">DART →</div>
+                  <div className="text-xs text-[#8b95a1] mt-1">DART</div>
                 </div>
               </div>
             </a>
