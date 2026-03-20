@@ -21,8 +21,8 @@ const exploreCards = [
     iconColor: 'text-green-600',
   },
   {
-    title: '공시 대시보드',
-    description: 'AI가 분석한 공시와 시그널 스코어',
+    title: '공시',
+    description: '이번 주 주요 공시 요약 + 유형별 건수',
     icon: '📋',
     href: '/explore/disclosure',
     color: 'bg-purple-50 border-purple-200 hover:bg-purple-100',
@@ -30,19 +30,11 @@ const exploreCards = [
   },
   {
     title: '실적 센터',
-    description: '기업 실적과 컨센서스 비교 분석',
+    description: '어닝 서프라이즈/쇼크 + 발표 예정',
     icon: '📊',
     href: '/explore/earnings',
     color: 'bg-orange-50 border-orange-200 hover:bg-orange-100',
     iconColor: 'text-orange-600',
-  },
-  {
-    title: '임원/대주주',
-    description: '임원 매매와 대주주 지분 변동 추적',
-    icon: '💼',
-    href: '/explore/insider',
-    color: 'bg-red-50 border-red-200 hover:bg-red-100',
-    iconColor: 'text-red-600',
   },
   {
     title: '투자 구루',
@@ -53,12 +45,12 @@ const exploreCards = [
     iconColor: 'text-teal-600',
   },
   {
-    title: '전략연구실',
-    description: '백테스트와 퀀트 전략 실험실',
-    icon: '🧪',
-    href: '/explore/lab',
-    color: 'bg-indigo-50 border-indigo-200 hover:bg-indigo-100',
-    iconColor: 'text-indigo-600',
+    title: '임원/대주주',
+    description: '최근 내부자 매수 TOP + 대주주 지분 변동',
+    icon: '💼',
+    href: '/explore/insider',
+    color: 'bg-red-50 border-red-200 hover:bg-red-100',
+    iconColor: 'text-red-600',
   },
 ];
 
