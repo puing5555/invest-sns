@@ -339,11 +339,11 @@ export default function StockDisclosureTab({ code }: { code: string }) {
           const badge = sentimentBadge(d.sentiment);
           const summary = d.ai_summary || d.detail_summary;
           const clickable = hasDetailData(d);
-          return (
+          return clickable ? (
             <div
               key={d.rcept_no}
-              onClick={() => handleClick(d)}
-              className="block bg-white rounded-lg border border-[#e8e8e8] p-4 hover:border-[#3182f6] hover:shadow-sm transition-all cursor-pointer"
+              onClick={() => setModalItem(d)}
+              className="block bg-white rounded-lg border border-[#e8e8e8] p-4 hover:bg-[#f2f4f6] hover:border-[#3182f6] transition-all cursor-pointer"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
@@ -369,12 +369,35 @@ export default function StockDisclosureTab({ code }: { code: string }) {
                     <p className="text-sm font-medium text-[#191f28] leading-snug">{d.report_nm}</p>
                   )}
                 </div>
-                <div className="flex-shrink-0 text-right">
-                  <div className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</div>
-                  <div className="text-xs text-[#8b95a1] mt-1">{clickable ? '상세' : 'DART'}</div>
+                <div className="flex-shrink-0 flex items-center gap-1 text-[#3182f6]">
+                  <span className="text-xs">{formatDate(d.rcept_dt)}</span>
+                  <span className="text-sm">›</span>
                 </div>
               </div>
             </div>
+          ) : (
+            <a
+              key={d.rcept_no}
+              href={dartUrl(d.rcept_no)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white rounded-lg border border-[#e8e8e8] p-4 hover:border-[#e8e8e8] transition-all"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeInfo.color}`}>
+                      {typeInfo.label}
+                    </span>
+                  </div>
+                  <p className="text-sm text-[#191f28] leading-snug">{d.report_nm}</p>
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  <div className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</div>
+                  <div className="text-xs text-[#8b95a1] mt-1">DART →</div>
+                </div>
+              </div>
+            </a>
           );
         })}
       </div>
