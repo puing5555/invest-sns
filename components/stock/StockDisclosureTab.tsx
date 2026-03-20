@@ -3,6 +3,18 @@
 import { useState, useMemo } from 'react';
 import disclosuresData from '@/data/disclosures.json';
 
+interface DisclosureDetail {
+  detail_type?: string;
+  shares?: number | null;
+  new_shares?: number | null;
+  amount?: number | null;
+  fund_total?: number | null;
+  period_start?: string | null;
+  period_end?: string | null;
+  purpose?: string;
+  method?: string;
+}
+
 interface Disclosure {
   stock_code: string;
   corp_name: string;
@@ -11,6 +23,7 @@ interface Disclosure {
   rcept_dt: string;
   pblntf_ty: string;
   rm: string;
+  detail?: DisclosureDetail;
   detail_summary?: string | null;
   ai_summary?: string | null;
   sentiment?: string | null;
@@ -46,44 +59,174 @@ function classifyType(nm: string): { label: string; color: string } {
   return { label: '기타', color: 'bg-gray-100 text-gray-600' };
 }
 
-function sentimentStyle(s: string | null | undefined): { badge: string; border: string; bg: string } | null {
-  if (s === '호재') return { badge: 'bg-green-600 text-white', border: 'border-green-400', bg: 'bg-green-50' };
-  if (s === '악재') return { badge: 'bg-red-600 text-white', border: 'border-red-400', bg: 'bg-red-50' };
-  if (s === '확인필요') return { badge: 'bg-amber-500 text-white', border: 'border-amber-400', bg: 'bg-amber-50' };
+function sentimentBadge(s: string | null | undefined): { icon: string; color: string } | null {
+  if (!s) return null;
+  if (s === '호재') return { icon: '호재', color: 'bg-red-50 text-red-600' };
+  if (s === '악재') return { icon: '악재', color: 'bg-blue-50 text-blue-600' };
+  if (s === '확인필요') return { icon: '확인', color: 'bg-amber-50 text-amber-600' };
   return null;
+}
+
+function sentimentDot(s: string | null | undefined): string {
+  if (s === '호재') return 'text-red-500';
+  if (s === '악재') return 'text-blue-500';
+  if (s === '확인필요') return 'text-amber-500';
+  return 'text-gray-400';
 }
 
 function formatDate(dt: string): string {
   if (dt.length !== 8) return dt;
-  return `${dt.slice(4, 6)}.${dt.slice(6)}`;
+  return `${dt.slice(0, 4)}.${dt.slice(4, 6)}.${dt.slice(6)}`;
 }
 
-function fullDate(dt: string): string {
+function shortDate(dt: string): string {
   if (dt.length !== 8) return dt;
-  return `${dt.slice(0, 4)}.${dt.slice(4, 6)}.${dt.slice(6)}`;
+  return `${parseInt(dt.slice(4, 6))}/${parseInt(dt.slice(6))}`;
 }
 
 function dartUrl(rceptNo: string): string {
   return `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${rceptNo}`;
 }
 
+function hasDetailData(d: Disclosure): boolean {
+  return !!(d.detail || d.ai_summary || d.detail_summary);
+}
+
+// ── 모달 ──
+function DisclosureModal({ d, onClose }: { d: Disclosure; onClose: () => void }) {
+  const typeInfo = classifyType(d.report_nm);
+  const badge = sentimentBadge(d.sentiment);
+  const detail = d.detail;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/40" />
+      <div
+        className="bg-white rounded-xl p-5 w-full max-w-md relative z-10 max-h-[80vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* 헤더 */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeInfo.color}`}>
+              {typeInfo.label}
+            </span>
+            {badge && (
+              <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${badge.color}`}>
+                {badge.icon}
+              </span>
+            )}
+            <span className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</span>
+          </div>
+          <button onClick={onClose} className="text-[#8b95a1] hover:text-[#191f28] text-lg">
+            ✕
+          </button>
+        </div>
+
+        {/* 제목 */}
+        <h3 className="text-base font-bold text-[#191f28] mb-3 leading-snug">
+          {d.report_nm}
+        </h3>
+
+        {/* AI 해석 */}
+        {d.ai_summary && (
+          <div className="bg-blue-50 rounded-lg p-3 mb-3">
+            <p className="text-sm text-blue-800 leading-relaxed">{d.ai_summary}</p>
+          </div>
+        )}
+
+        {/* 상세 데이터 */}
+        {detail && (
+          <div className="bg-gray-50 rounded-lg p-3 mb-3">
+            <h4 className="text-xs font-medium text-[#8b95a1] mb-2">상세 정보</h4>
+            <div className="space-y-1">
+              {detail.detail_type === 'treasury_acquire' && (
+                <>
+                  {detail.shares && <DetailRow label="취득 주식수" value={`${detail.shares.toLocaleString()}주`} />}
+                  {detail.amount && <DetailRow label="취득 금액" value={formatKrAmount(detail.amount)} />}
+                  {detail.period_start && detail.period_end && (
+                    <DetailRow label="취득 기간" value={`${detail.period_start} ~ ${detail.period_end}`} />
+                  )}
+                  {detail.purpose && <DetailRow label="목적" value={detail.purpose} />}
+                  {detail.method && <DetailRow label="방법" value={detail.method} />}
+                </>
+              )}
+              {detail.detail_type === 'treasury_dispose' && (
+                <>
+                  {detail.shares && <DetailRow label="처분 주식수" value={`${detail.shares.toLocaleString()}주`} />}
+                  {detail.amount && <DetailRow label="처분 금액" value={formatKrAmount(detail.amount)} />}
+                  {detail.period_start && detail.period_end && (
+                    <DetailRow label="처분 기간" value={`${detail.period_start} ~ ${detail.period_end}`} />
+                  )}
+                  {detail.purpose && <DetailRow label="목적" value={detail.purpose} />}
+                </>
+              )}
+              {detail.detail_type === 'capital_increase' && (
+                <>
+                  {detail.new_shares && <DetailRow label="신주 발행" value={`${detail.new_shares.toLocaleString()}주`} />}
+                  {detail.fund_total && <DetailRow label="자금 총액" value={formatKrAmount(detail.fund_total)} />}
+                  {detail.face_value && <DetailRow label="액면가" value={`${detail.face_value.toLocaleString()}원`} />}
+                  {detail.method && <DetailRow label="증자 방식" value={detail.method} />}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* detail_summary (detail 없지만 summary 있는 경우) */}
+        {!detail && d.detail_summary && (
+          <div className="bg-gray-50 rounded-lg p-3 mb-3">
+            <p className="text-sm text-[#191f28]">{d.detail_summary}</p>
+          </div>
+        )}
+
+        {/* DART 원문 링크 */}
+        <a
+          href={dartUrl(d.rcept_no)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full text-center py-2 text-sm font-medium text-[#3182f6] bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+        >
+          DART 원문 보기
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-start gap-2">
+      <span className="text-xs text-[#8b95a1] flex-shrink-0 w-20">{label}</span>
+      <span className="text-xs text-[#191f28] font-medium">{value}</span>
+    </div>
+  );
+}
+
+function formatKrAmount(n: number): string {
+  if (n >= 1_0000_0000_0000) return `${(n / 1_0000_0000_0000).toFixed(1)}조원`;
+  if (n >= 1_0000_0000) return `${Math.round(n / 1_0000_0000).toLocaleString()}억원`;
+  return `${n.toLocaleString()}원`;
+}
+
+// ── 메인 ──
 export default function StockDisclosureTab({ code }: { code: string }) {
   const [filter, setFilter] = useState<FilterType>('주요');
   const [showCount, setShowCount] = useState(20);
+  const [modalItem, setModalItem] = useState<Disclosure | null>(null);
 
   const stockDisclosures = useMemo(() => {
     return (disclosuresData as { disclosures: Disclosure[] }).disclosures
       .filter((d) => d.stock_code === code);
   }, [code]);
 
-  // 최근 3개월 하이라이트 (최대 3건)
   const highlights = useMemo(() => {
     const d = new Date();
     d.setMonth(d.getMonth() - 3);
     const cutoff = d.toISOString().slice(0, 10).replace(/-/g, '');
     return stockDisclosures
       .filter((d) => d.rcept_dt >= cutoff && isKeyDisclosure(d))
-      .slice(0, 3);
+      .slice(0, 5);
   }, [stockDisclosures]);
 
   const filtered = useMemo(() => {
@@ -100,7 +243,7 @@ export default function StockDisclosureTab({ code }: { code: string }) {
 
   if (stockDisclosures.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] p-12 text-center">
+      <div className="text-center py-12">
         <div className="text-4xl mb-4">📋</div>
         <h3 className="text-lg font-bold text-[#191f28] mb-2">공시 데이터 없음</h3>
         <p className="text-[#8b95a1]">이 종목의 최근 1년 주요 공시가 없습니다</p>
@@ -111,48 +254,50 @@ export default function StockDisclosureTab({ code }: { code: string }) {
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const f of FILTERS) {
-      if (f.label === '전체') {
-        counts['전체'] = stockDisclosures.length;
-      } else if (f.label === '주요') {
-        counts['주요'] = stockDisclosures.filter(isKeyDisclosure).length;
-      } else if (f.label === '기타') {
+      if (f.label === '전체') counts['전체'] = stockDisclosures.length;
+      else if (f.label === '주요') counts['주요'] = stockDisclosures.filter(isKeyDisclosure).length;
+      else if (f.label === '기타') {
         const others = FILTERS.filter((ff) => ff.label !== '전체' && ff.label !== '기타' && ff.label !== '주요');
         counts['기타'] = stockDisclosures.filter((d) => !others.some((ff) => ff.match(d)) && !isKeyDisclosure(d)).length;
-      } else {
-        counts[f.label] = stockDisclosures.filter(f.match).length;
-      }
+      } else counts[f.label] = stockDisclosures.filter(f.match).length;
     }
     return counts;
   }, [stockDisclosures]);
 
+  function handleClick(d: Disclosure) {
+    if (hasDetailData(d)) {
+      setModalItem(d);
+    } else {
+      window.open(dartUrl(d.rcept_no), '_blank');
+    }
+  }
+
   return (
-    <div className="space-y-3">
-      {/* 하이라이트 */}
+    <div className="space-y-4">
+      {/* 모달 */}
+      {modalItem && <DisclosureModal d={modalItem} onClose={() => setModalItem(null)} />}
+
+      {/* 상단 요약 */}
       {highlights.length > 0 && (
-        <div className="space-y-2">
-          {highlights.map((h) => {
-            const summary = h.ai_summary || h.detail_summary || h.report_nm;
-            const style = sentimentStyle(h.sentiment);
-            return (
-              <a
-                key={`hl-${h.rcept_no}`}
-                href={dartUrl(h.rcept_no)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`block rounded-xl p-3 border-l-4 ${style?.border || 'border-gray-300'} ${style?.bg || 'bg-gray-50'} hover:shadow-md transition-shadow cursor-pointer`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-bold text-[#191f28] flex-shrink-0">{formatDate(h.rcept_dt)}</span>
+        <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
+          <h4 className="text-xs font-medium text-[#8b95a1] mb-3">최근 3개월 주요 이벤트</h4>
+          <div className="space-y-2">
+            {highlights.map((h) => {
+              const summary = h.ai_summary || h.detail_summary || h.report_nm;
+              const dotColor = sentimentDot(h.sentiment);
+              return (
+                <div
+                  key={`hl-${h.rcept_no}`}
+                  className="flex items-start gap-2 hover:bg-gray-50 rounded px-1 py-0.5 transition-colors cursor-pointer"
+                  onClick={() => handleClick(h)}
+                >
+                  <span className={`mt-1 ${dotColor}`}>●</span>
                   <span className="text-sm text-[#191f28] flex-1 leading-snug">{summary}</span>
-                  {style && (
-                    <span className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${style.badge}`}>
-                      {h.sentiment}
-                    </span>
-                  )}
+                  <span className="text-xs text-[#8b95a1] flex-shrink-0">({shortDate(h.rcept_dt)})</span>
                 </div>
-              </a>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
 
@@ -162,65 +307,74 @@ export default function StockDisclosureTab({ code }: { code: string }) {
           <button
             key={f.label}
             onClick={() => { setFilter(f.label); setShowCount(20); }}
-            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
               filter === f.label
                 ? 'bg-[#3182f6] text-white'
                 : 'bg-white border border-[#e8e8e8] text-[#8b95a1] hover:border-[#3182f6] hover:text-[#3182f6]'
             }`}
           >
-            {f.label}{typeCounts[f.label] ? ` ${typeCounts[f.label]}` : ''}
+            {f.label} {typeCounts[f.label] ? `(${typeCounts[f.label]})` : ''}
           </button>
         ))}
       </div>
 
-      {/* 공시 리스트 */}
-      <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8]">
-        {visible.length === 0 ? (
+      {/* 공시 목록 */}
+      <div className="space-y-2">
+        {visible.length === 0 && (
           <div className="text-center py-8">
             <p className="text-sm text-[#8b95a1]">해당 유형의 공시가 없습니다</p>
           </div>
-        ) : (
-          <div className="divide-y divide-[#e8e8e8]">
-            {visible.map((d) => {
-              const typeInfo = classifyType(d.report_nm);
-              const style = sentimentStyle(d.sentiment);
-              const summary = d.ai_summary || d.detail_summary;
-              return (
-                <a
-                  key={d.rcept_no}
-                  href={dartUrl(d.rcept_no)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-3 hover:bg-[#f2f4f6] transition-colors cursor-pointer group"
-                  title={d.report_nm}
-                >
-                  <span className="text-xs text-[#8b95a1] flex-shrink-0 w-12">{formatDate(d.rcept_dt)}</span>
-                  <span className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${typeInfo.color}`}>
-                    {typeInfo.label}
-                  </span>
-                  {style && (
-                    <span className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${style.badge}`}>
-                      {d.sentiment === '확인필요' ? '확인' : d.sentiment}
-                    </span>
-                  )}
-                  <span className="text-sm text-[#191f28] flex-1 truncate">
-                    {summary || d.report_nm}
-                  </span>
-                  <span className="flex-shrink-0 text-[#8b95a1] opacity-0 group-hover:opacity-100 transition-opacity text-xs">
-                    🔗
-                  </span>
-                </a>
-              );
-            })}
-          </div>
         )}
+        {visible.map((d) => {
+          const typeInfo = classifyType(d.report_nm);
+          const badge = sentimentBadge(d.sentiment);
+          const summary = d.ai_summary || d.detail_summary;
+          const clickable = hasDetailData(d);
+          return (
+            <div
+              key={d.rcept_no}
+              onClick={() => handleClick(d)}
+              className="block bg-white rounded-lg border border-[#e8e8e8] p-4 hover:border-[#3182f6] hover:shadow-sm transition-all cursor-pointer"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeInfo.color}`}>
+                      {typeInfo.label}
+                    </span>
+                    {badge && (
+                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${badge.color}`}>
+                        {badge.icon}
+                      </span>
+                    )}
+                    {d.rm && d.rm.trim() && (
+                      <span className="text-xs text-[#8b95a1]">[{d.rm.trim()}]</span>
+                    )}
+                  </div>
+                  {summary ? (
+                    <>
+                      <p className="text-sm font-medium text-[#191f28] leading-snug">{summary}</p>
+                      <p className="text-xs text-[#8b95a1] mt-1">{d.report_nm}</p>
+                    </>
+                  ) : (
+                    <p className="text-sm font-medium text-[#191f28] leading-snug">{d.report_nm}</p>
+                  )}
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  <div className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</div>
+                  <div className="text-xs text-[#8b95a1] mt-1">{clickable ? '상세' : 'DART'}</div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* 더보기 */}
       {visible.length < filtered.length && (
         <button
           onClick={() => setShowCount((c) => c + 20)}
-          className="w-full py-3 text-sm font-medium text-[#3182f6] bg-white rounded-xl border border-[#e8e8e8] hover:bg-blue-50 transition-colors"
+          className="w-full py-3 text-sm font-medium text-[#3182f6] bg-white rounded-lg border border-[#e8e8e8] hover:bg-blue-50 transition-colors"
         >
           더보기 ({filtered.length - visible.length}건 남음)
         </button>
