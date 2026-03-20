@@ -96,6 +96,26 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - Windows npm.cmd 수정
 - Gate 2 새 채널 완화 구현
 
+## 크립토 종목 검증 (Gate 3 체크 10)
+채널에 크립토 시그널이 포함된 경우 자동 검증:
+
+| 체크 | 내용 | 실패 시 |
+|------|------|---------|
+| -USD 매핑 | BTC→BTC-USD, ETH→ETH-USD 등 yfinance ticker 확인 | ⚠️ 경고 |
+| 가격 누락 | stockPrices.json에 ticker 존재 여부 | ⚠️ 경고 |
+| 가격 0/$0 | currentPrice가 0 또는 None | ⚠️ 경고 |
+| 극소수 가격 | $0.01 미만 → 프론트 소수점 6~8자리 표시 확인 | 💰 안내 |
+
+**CoinGecko fallback**: yfinance에서 가격을 못 가져오는 크립토 종목은 CoinGecko API로 시도.
+```bash
+# yfinance 실패 시 CoinGecko 수집
+python scripts/fetch_crypto_prices.py --ticker SHIB --source coingecko
+```
+
+**극소수 가격 표시**: $0.01 미만 가격은 `formatStockPrice()`가 소수점 6~8자리를 반올림 없이 절삭 표시.
+- 예: $0.00001234 → `$0.00001234` (8자리)
+- 예: $0.005 → `$0.0050` (4자리, < $1 브랜치)
+
 ## 채널 추가 후 검증
 - published_at NULL 0건
 - ticker NULL 0건
@@ -107,3 +127,4 @@ python scripts/auto_pipeline.py --channel URL --dry-run
 - speaker_slugs.js 실행
 - 프로필 페이지 빌드 포함
 - 종목 페이지 가격 정상
+- **크립토: -USD 매핑 + 가격 0 + 극소수 가격 확인**

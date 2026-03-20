@@ -447,6 +447,106 @@ def check_db_null_fields(project_root, slug):
 
 
 # ────────────────────────────────────────
+# 체크 10: 크립토 종목 가격 검증
+# ────────────────────────────────────────
+
+def check_crypto_prices(project_root, slug):
+    """
+    크립토 종목 가격 이상 검증:
+    - ticker → -USD 접미사 매핑 확인 (BTC→BTC-USD)
+    - stockPrices.json에 누락된 크립토 ticker
+    - currentPrice가 0 또는 None
+    - stock_tickers.json에 누락
+    - 극소수 가격(< $0.01) 종목 경고 (프론트 소수점 표시 확인 필요)
+    - yfinance 실패 시 CoinGecko fallback 안내
+    반환: (passed: bool, issues: list[str], micro_prices: list[str])
+    """
+    load_env(project_root)
+    issues = []
+    micro_prices = []
+
+    # DB에서 크립토 시그널 ticker 조회
+    crypto_sigs = supabase_get(
+        'influencer_signals?market=eq.CRYPTO&select=ticker,stock&limit=2000',
+        project_root
+    )
+    if not crypto_sigs:
+        return True, [], []
+
+    # 고유 ticker 추출
+    crypto_tickers = {}
+    for s in crypto_sigs:
+        t = s.get('ticker', '')
+        if t:
+            crypto_tickers.setdefault(t, s.get('stock', ''))
+
+    if not crypto_tickers:
+        return True, [], []
+
+    # 로컬 데이터 로드
+    tickers_path = os.path.join(project_root, 'data', 'stock_tickers.json')
+    prices_path = os.path.join(project_root, 'data', 'stockPrices.json')
+    signal_prices_path = os.path.join(project_root, 'data', 'signal_prices.json')
+
+    tickers_list = set()
+    if os.path.exists(tickers_path):
+        with open(tickers_path, encoding='utf-8') as f:
+            tickers_list = set(json.load(f))
+
+    stock_prices = {}
+    if os.path.exists(prices_path):
+        with open(prices_path, encoding='utf-8') as f:
+            stock_prices = json.load(f)
+
+    signal_prices = {}
+    if os.path.exists(signal_prices_path):
+        with open(signal_prices_path, encoding='utf-8') as f:
+            signal_prices = json.load(f)
+
+    for ticker, stock_name in crypto_tickers.items():
+        yf_ticker = f"{ticker}-USD"
+
+        # 1. stock_tickers.json 누락
+        if ticker not in tickers_list:
+            issues.append(f"{ticker} ({stock_name}): stock_tickers.json 누락")
+
+        # 2. -USD 매핑: signal_prices에 ticker 있으면 yfinance ticker 확인
+        sp_entry = signal_prices.get(ticker)
+        if isinstance(sp_entry, dict):
+            sp_yf = sp_entry.get('yf_ticker', '')
+            if sp_yf and not sp_yf.endswith('-USD'):
+                issues.append(f"{ticker} ({stock_name}): yfinance ticker가 '{sp_yf}' — "
+                              f"'{yf_ticker}'이어야 함")
+
+        # 3. stockPrices.json 누락
+        if ticker not in stock_prices:
+            issues.append(f"{ticker} ({stock_name}): stockPrices.json 누락 "
+                          f"(yfinance {yf_ticker} 또는 CoinGecko로 수집 필요)")
+            continue
+
+        # 4. currentPrice 검증
+        sp = stock_prices[ticker]
+        if isinstance(sp, dict):
+            cur = sp.get('currentPrice')
+        elif isinstance(sp, list) and sp:
+            cur = sp[-1].get('close')
+        else:
+            cur = None
+
+        if cur is None:
+            issues.append(f"{ticker} ({stock_name}): currentPrice=None "
+                          f"(CoinGecko fallback 시도 필요)")
+        elif cur == 0:
+            issues.append(f"{ticker} ({stock_name}): currentPrice=$0 "
+                          f"(yfinance {yf_ticker} 재수집 또는 CoinGecko fallback)")
+        elif cur > 0 and cur < 0.01:
+            micro_prices.append(f"{ticker} ({stock_name}): ${cur} — "
+                                f"극소수 가격, 프론트 소수점 6~8자리 표시 확인 필요")
+
+    return len(issues) == 0, issues, micro_prices
+
+
+# ────────────────────────────────────────
 # 기존 체크 (유지)
 # ────────────────────────────────────────
 
@@ -623,7 +723,27 @@ def run_gate3(slug, project_root, check_deploy=False):
         print(f"⛔ [체크 9] DB NULL 필드 존재 → 배포 차단")
         has_fatal = True
 
-    # ── 체크 10: 배포 후 HTTP 체크 ──
+    # ── 체크 10: 크립토 종목 가격 검증 ──
+    print(f"\n[체크 10] 크립토 종목 가격 검증...")
+    crypto_ok, crypto_issues, micro_prices = check_crypto_prices(project_root, slug)
+    if crypto_ok and not micro_prices:
+        print(f"✅ [체크 10] 크립토 종목 가격 정상")
+    else:
+        for issue in crypto_issues:
+            print(f"  ⚠️  {issue}")
+        for mp in micro_prices:
+            print(f"  💰 {mp}")
+        total_issues = len(crypto_issues) + len(micro_prices)
+        if crypto_issues:
+            print(f"⚠️  [체크 10] 크립토 가격 이상 {len(crypto_issues)}건 "
+                  f"(경고, 배포 차단 아님)")
+            save_error_pattern(slug, 'gate3', 'crypto_price_issue',
+                               f"{len(crypto_issues)}건: {crypto_issues[:3]}")
+        if micro_prices:
+            print(f"  💰 극소수 가격 {len(micro_prices)}건 "
+                  f"(formatStockPrice 소수점 6~8자리 확인)")
+
+    # ── 체크 11: 배포 후 HTTP 체크 ──
     if check_deploy:
         print(f"\n[체크 10] GitHub Pages 배포 확인...")
         status, url = check_deploy_http(slug)
@@ -633,7 +753,7 @@ def run_gate3(slug, project_root, check_deploy=False):
             print(f"⚠️  [체크 10] HTTP {status}: {url}")
             save_error_pattern(slug, 'gate3', 'deploy_http', f"HTTP {status}: {url}")
     else:
-        print(f"\nℹ️  [체크 10] 배포 HTTP 체크 스킵 (--check-deploy 옵션)")
+        print(f"\nℹ️  [체크 11] 배포 HTTP 체크 스킵 (--check-deploy 옵션)")
 
     # ── 결과 ──
     print(f"\n{'='*60}")

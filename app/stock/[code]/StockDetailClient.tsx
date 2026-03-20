@@ -10,7 +10,7 @@ import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
 import cryptoNames from '@/data/cryptoNames.json';
-import { formatStockPrice, isKoreanStock } from '@/lib/currency';
+import { formatStockPrice, formatPriceChange, isKoreanStock } from '@/lib/currency';
 import ReportDetailModal from '@/components/ReportDetailModal';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
@@ -332,7 +332,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
                     <span className={`text-lg font-medium ${
                       stockData.change >= 0 ? 'text-red-500' : 'text-blue-500'
                     }`}>
-                      {isKoreanStock(code) ? `${stockData.change >= 0 ? '+' : ''}${stockData.change.toLocaleString()}원` : `${stockData.change >= 0 ? '+' : ''}$${stockData.change.toLocaleString()}`}
+                      {formatPriceChange(stockData.change, code)}
                       ({stockData.change >= 0 ? '+' : ''}{stockData.changePercent}%)
                     </span>
                   </>
