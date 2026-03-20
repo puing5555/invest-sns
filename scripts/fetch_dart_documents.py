@@ -115,14 +115,14 @@ def parse_and_analyze(d, doc_text):
 
         lines = []
         if total_qty and total_amt:
-            lines.append(f'{corp} 자사주{period_str} {total_qty:,}주 · {fmt_kr(total_amt)} 취득 완료.')
             avg_price = total_amt // total_qty if total_qty else 0
+            lines.append(f'{corp}가 자사주(회사가 자기 주식을 사는 것){period_str} {total_qty:,}주를 총 {fmt_kr(total_amt)}에 매입 완료했습니다.')
             if avg_price:
-                lines.append(f'평균 매입단가 {avg_price:,}원.')
+                lines.append(f'평균 {avg_price:,}원에 샀습니다.')
+            lines.append(f'내 주식에 미치는 영향: 회사가 약속대로 자사주를 매입해 시장의 신뢰가 유지됩니다.')
         else:
-            lines.append(f'{corp} 자사주 취득 결과 보고.')
-
-        lines.append(f'계획 대비 실제 취득 수량과 금액을 비교하여 실행력을 평가할 수 있습니다.')
+            lines.append(f'{corp}가 자사주 매입을 완료했다는 결과 보고입니다.')
+            lines.append(f'내 주식에 미치는 영향: 매입 완료 자체는 이미 반영된 호재이므로 추가 영향은 제한적입니다.')
         return ' '.join(lines)
 
     # 자사주 처분결과보고서
@@ -138,10 +138,10 @@ def parse_and_analyze(d, doc_text):
                 pass
         lines = []
         if total_qty and total_amt:
-            lines.append(f'{corp} 자사주 {total_qty:,}주 · {fmt_kr(total_amt)} 처분 완료.')
+            lines.append(f'{corp}가 보유하던 자사주 {total_qty:,}주({fmt_kr(total_amt)} 규모)를 처분(매도 또는 직원에게 지급) 완료했습니다.')
         else:
-            lines.append(f'{corp} 자사주 처분 결과 보고.')
-        lines.append(f'처분 방식과 수령자의 매도 가능성을 확인해야 합니다.')
+            lines.append(f'{corp}가 자사주 처분을 완료했다는 결과 보고입니다.')
+        lines.append(f'내 주식에 미치는 영향: 직원 보상용이면 영향 적고, 시장 매도면 단기 매물 부담이 있을 수 있습니다.')
         return ' '.join(lines)
 
     # 자사주 취득 결정
@@ -161,28 +161,25 @@ def parse_and_analyze(d, doc_text):
 
         lines = []
         parts = []
-        if shares:
-            parts.append(f'{shares:,}주')
-        if amount:
-            parts.append(fmt_kr(amount))
-        if ratio:
-            parts.append(f'발행주식의 {ratio:.1f}%')
-        lines.append(f'{corp} {" · ".join(parts)} 규모 자사주 매입 결정.')
+        if shares: parts.append(f'{shares:,}주')
+        if amount: parts.append(fmt_kr(amount))
+        if ratio: parts.append(f'전체 주식의 {ratio:.1f}%')
+        lines.append(f'{corp}가 자사주(자기 회사 주식) {" · ".join(parts)} 규모를 사기로 결정했습니다.')
 
         if '장내' in method:
             period_start = existing_detail.get('period_start', '')
             period_end = existing_detail.get('period_end', '')
             if period_start and period_end:
-                lines.append(f'{period_start}~{period_end} 장내 직접 매수로, 해당 기간 지속적 매수세 유입.')
-            else:
-                lines.append(f'장내 직접 매수로 시장에 매수세 유입.')
+                lines.append(f'{period_start}~{period_end} 동안 주식시장에서 직접 매수하므로, 이 기간 동안 주가를 받쳐주는 매수세(사는 힘)가 생깁니다.')
 
         if psu_match and '임직원' in purpose:
-            lines.append(f'목적이 성과연동 주식보상(PSU) 등 임직원 보상이므로 향후 직원 지급 시 매물 가능성 있어 단기 호재, 중기 중립.')
+            lines.append(f'내 주식에 미치는 영향: 매입 기간엔 호재지만, 나중에 직원들에게 지급되면 그 직원들이 팔 수 있어서 단기 호재·중기 중립입니다.')
         elif '주주' in purpose or '소각' in purpose:
-            lines.append(f'주주가치 제고 목적으로 소각 시 영구적 주당가치 상승. 강한 호재.')
+            lines.append(f'내 주식에 미치는 영향: 주주환원 목적이라 소각(없애기)하면 내 지분 가치가 올라갑니다. 강한 호재.')
         elif '임직원' in purpose:
-            lines.append(f'임직원 보상 목적이므로 지급 후 매도 가능성 있어 단기 호재, 중기 중립.')
+            lines.append(f'내 주식에 미치는 영향: 매입 기간엔 호재지만, 직원 보상용이라 나중에 매물이 나올 수 있어 단기 호재·중기 중립입니다.')
+        else:
+            lines.append(f'내 주식에 미치는 영향: 회사가 자기 주식을 사면 시장에 유통되는 주식이 줄어 주가에 긍정적입니다.')
 
         return ' '.join(lines)
 
@@ -196,16 +193,13 @@ def parse_and_analyze(d, doc_text):
         parts = []
         if shares: parts.append(f'{shares:,}주')
         if amount: parts.append(fmt_kr(amount))
-        lines.append(f'{corp} 자사주 {" · ".join(parts)} 처분.')
+        lines.append(f'{corp}가 보유 중인 자사주 {" · ".join(parts)}를 처분(내보내기)하기로 했습니다.')
 
         if '임직원' in purpose or '성과급' in purpose:
-            # 처분 방식 확인
-            etc_match = re.search(r'기타\s*([\d,]+)', doc_text)
-            lines.append(f'임직원 보상 목적 직접 교부로 시장 매도 아님. 주가 직접 영향 제한적.')
-            lines.append(f'수령 직원의 즉시 매도 가능성은 있으나 물량이 제한적.')
+            lines.append(f'직원 보상용으로 직접 지급하는 것이라 주식시장에서 파는 게 아닙니다.')
+            lines.append(f'내 주식에 미치는 영향: 시장 매도가 아니라 직접 영향은 적지만, 받은 직원이 바로 팔 수도 있어 소량 매물 가능성.')
         else:
-            lines.append(f'시장 또는 장외 처분으로 유통 주식 증가. 매도 압력 발생 가능.')
-            lines.append(f'처분 대금 용도를 확인하여 기업 전략 맥락에서 판단 필요.')
+            lines.append(f'내 주식에 미치는 영향: 시장에 매물(팔려는 주식)이 나와 단기적으로 주가 하락 압력이 생길 수 있습니다.')
 
         return ' '.join(lines)
 
@@ -229,12 +223,12 @@ def parse_and_analyze(d, doc_text):
 
         lines = []
         parts = []
-        if new_shares: parts.append(f'신주 {new_shares:,}주')
+        if new_shares: parts.append(f'새 주식 {new_shares:,}주')
         if fund_total: parts.append(fmt_kr(fund_total))
-        lines.append(f'{corp} {" · ".join(parts)} 규모 유상증자.')
+        lines.append(f'{corp}가 유상증자(돈을 받고 새 주식을 발행)를 결정했습니다. 규모: {" · ".join(parts)}.')
 
         if fund_uses:
-            lines.append(f'자금용도: {", ".join(fund_uses)}.')
+            lines.append(f'모은 돈의 용도: {", ".join(fund_uses)}.')
 
         ratio = None
         bfic_match = re.search(r'증자전 발행주식총수[^\d]*([\d,]+)', doc_text)
@@ -242,62 +236,62 @@ def parse_and_analyze(d, doc_text):
             bfic = int(bfic_match.group(1).replace(',', ''))
             if bfic > 0:
                 ratio = new_shares / bfic * 100
-                lines.append(f'기존 주식 대비 {ratio:.1f}% 희석. {"주주배정이므로 기존 주주 참여 가능." if "주주배정" in method else "제3자 배정으로 기존 주주 참여 불가."}')
 
-        if not ratio:
-            lines.append(f'신주 발행으로 기존 주주 지분 희석. 증자 가격 할인율 확인 필요.')
+        if ratio and '주주배정' in method:
+            lines.append(f'내 주식에 미치는 영향: 내 지분이 {ratio:.1f}% 희석(가치 하락)되지만, 기존 주주에게 우선 참여 기회가 있어 참여하면 방어 가능.')
+        elif ratio:
+            lines.append(f'내 주식에 미치는 영향: 내 지분이 {ratio:.1f}% 희석됩니다. 새 주식이 나오면 기존 주식 가치가 줄어들어 보통 악재입니다.')
+        else:
+            lines.append(f'내 주식에 미치는 영향: 새 주식이 발행되면 내 지분 비율이 줄어듭니다(희석). 보통 단기 악재.')
 
         return ' '.join(lines)
 
     # 밸류업
     if '기업가치제고' in nm:
-        lines = [f'{corp} 기업가치 제고(밸류업) 계획을 공시.']
-        # 원문에서 주요 정책 추출
+        lines = [f'{corp}가 밸류업(기업가치를 높이겠다는) 계획을 발표했습니다.']
         policies = []
-        if re.search(r'배당', doc_text): policies.append('배당 확대')
+        if re.search(r'배당', doc_text): policies.append('배당(주주에게 돈 나눠주기) 확대')
         if re.search(r'자사주|자기주식', doc_text): policies.append('자사주 매입')
-        if re.search(r'ROE|자기자본이익률', doc_text): policies.append('ROE 개선')
+        if re.search(r'ROE|자기자본이익률', doc_text): policies.append('수익성 개선')
         if re.search(r'주주환원', doc_text): policies.append('주주환원 강화')
         if policies:
-            lines.append(f'주요 내용: {", ".join(policies)}.')
-        lines.append(f'정부 밸류업 프로그램 참여로 기관투자자 관심 증가 기대.')
+            lines.append(f'구체적으로: {", ".join(policies)}을 약속했습니다.')
+        lines.append(f'내 주식에 미치는 영향: 주주에게 더 많이 돌려주겠다는 신호라 보통 호재입니다.')
         return ' '.join(lines)
 
     # 잠정실적 / 매출변동
     if '잠정실적' in nm or '매출액또는손익' in nm:
-        lines = [f'{corp} 실적 관련 공시.']
-        # 원문에서 금액 추출
+        lines = [f'{corp}가 실적(회사가 얼마나 벌었는지)을 공시했습니다.']
         revenue_m = re.search(r'매출액[^\d]{0,30}([\d,]{6,})', doc_text)
         op_m = re.search(r'영업이익[^\d]{0,30}([\d,]{6,})', doc_text)
         ni_m = re.search(r'당기순이익[^\d]{0,30}([\d,]{6,})', doc_text)
         nums = []
-        if revenue_m: nums.append(f'매출 {fmt_kr(int(revenue_m.group(1).replace(",","")))}')
-        if op_m: nums.append(f'영업이익 {fmt_kr(int(op_m.group(1).replace(",","")))}')
-        if ni_m: nums.append(f'순이익 {fmt_kr(int(ni_m.group(1).replace(",","")))}')
+        if revenue_m: nums.append(f'매출(총 판매액) {fmt_kr(int(revenue_m.group(1).replace(",","")))}')
+        if op_m: nums.append(f'영업이익(본업으로 번 돈) {fmt_kr(int(op_m.group(1).replace(",","")))}')
+        if ni_m: nums.append(f'순이익(최종 이익) {fmt_kr(int(ni_m.group(1).replace(",","")))}')
         if nums:
-            lines.append(f'주요 수치: {", ".join(nums)}.')
-        # 증감률 추출
+            lines.append(f'{", ".join(nums)}.')
         change_m = re.search(r'(증가|감소|상승|하락)[^\d]{0,10}([\d.]+)%', doc_text)
         if change_m:
-            lines.append(f'전년 대비 {change_m.group(2)}% {change_m.group(1)}.')
-        lines.append(f'컨센서스 대비 서프라이즈/쇼크 여부를 확인해야 합니다.')
+            lines.append(f'전년 대비 {change_m.group(2)}% {change_m.group(1)}했습니다.')
+        lines.append(f'내 주식에 미치는 영향: 시장 예상보다 좋으면 주가 상승, 나쁘면 하락합니다. 증권사 예상치와 비교해 보세요.')
         return ' '.join(lines)
 
     # 배당
     if '배당' in nm:
-        lines = [f'{corp} 배당 관련 공시.']
+        lines = [f'{corp}가 배당(주식 보유자에게 돈을 나눠주는 것)을 결정했습니다.']
         div_m = re.search(r'주당.*?배당금[^\d]{0,15}([\d,]+)', doc_text)
         if div_m:
-            lines.append(f'주당 배당금 {div_m.group(1)}원.')
+            lines.append(f'1주당 {div_m.group(1)}원을 받을 수 있습니다.')
         div_rate = re.search(r'배당수익률[^\d]{0,10}([\d.]+)', doc_text)
         if div_rate:
-            lines.append(f'배당수익률 {div_rate.group(1)}%.')
-        lines.append(f'배당 기준일과 전년 대비 증감을 확인하세요.')
+            lines.append(f'배당수익률(투자 대비 받는 비율) {div_rate.group(1)}%입니다.')
+        lines.append(f'내 주식에 미치는 영향: 배당 기준일에 주식을 보유하고 있어야 받을 수 있고, 배당 후 주가는 배당금만큼 떨어지는 게 일반적입니다.')
         return ' '.join(lines)
 
     # 대량보유
     if '대량보유' in nm:
-        lines = [f'{corp} 지분 5%+ 대량보유 변동 보고.']
+        lines = [f'{corp} 주식을 5% 이상 대량 보유한 사람/기관의 변동 보고입니다.']
         reporter_m = re.search(r'보고자[^\w]{0,10}(\S+)', doc_text)
         if reporter_m:
             lines.append(f'보고자: {reporter_m.group(1)}.')
@@ -308,9 +302,11 @@ def parse_and_analyze(d, doc_text):
         if purpose_m:
             p = purpose_m.group(1)
             if p == '경영참여':
-                lines.append(f'경영참여 목적으로 경영권 이슈 가능성.')
+                lines.append(f'내 주식에 미치는 영향: 경영참여 목적이라 경영권 다툼이 생길 수 있어 주가 변동성이 커질 수 있습니다.')
             else:
-                lines.append(f'{p} 목적.')
+                lines.append(f'내 주식에 미치는 영향: 단순투자 목적이라 당장 큰 영향은 없지만, 대주주가 많이 사면 주가에 긍정적 신호입니다.')
+        else:
+            lines.append(f'내 주식에 미치는 영향: 누가 왜 많이 샀는지(또는 팔았는지)에 따라 달라집니다.')
         return ' '.join(lines)
 
     # 기타 — 원문에서 핵심 숫자 추출 (10억원 이상만)
@@ -328,7 +324,7 @@ def parse_and_analyze(d, doc_text):
                 except ValueError:
                     pass
         if nums:
-            return f'{corp} 공시. 주요 수치: {", ".join(nums)}. DART 원문에서 상세 내용을 확인하세요.'
+            return f'{corp} 공시입니다. 주요 수치: {", ".join(nums)}. 자세한 내용은 DART 원문을 확인하세요.'
 
     return None
 
