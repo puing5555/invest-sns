@@ -18,7 +18,6 @@ interface Disclosure {
 
 type FilterType = '주요' | '전체' | '자사주' | '실적' | '증자/CB' | '지분' | '기타';
 
-// 노이즈 패턴 — "주요" 필터에서 제외
 const NOISE_RE = /최대주주등소유주식변동|기타경영사항\(자율공시\)|주주총회소집|정기주주총회결과|주주총회소집결의|주주총회소집공고/;
 
 function isKeyDisclosure(d: Disclosure): boolean {
@@ -47,29 +46,21 @@ function classifyType(nm: string): { label: string; color: string } {
   return { label: '기타', color: 'bg-gray-100 text-gray-600' };
 }
 
-function sentimentBadge(s: string | null | undefined): { icon: string; color: string } | null {
-  if (!s) return null;
-  if (s === '호재') return { icon: '호재', color: 'bg-red-50 text-red-600' };
-  if (s === '악재') return { icon: '악재', color: 'bg-blue-50 text-blue-600' };
-  if (s === '확인필요') return { icon: '확인', color: 'bg-amber-50 text-amber-600' };
+function sentimentStyle(s: string | null | undefined): { badge: string; border: string; bg: string } | null {
+  if (s === '호재') return { badge: 'bg-green-600 text-white', border: 'border-green-400', bg: 'bg-green-50' };
+  if (s === '악재') return { badge: 'bg-red-600 text-white', border: 'border-red-400', bg: 'bg-red-50' };
+  if (s === '확인필요') return { badge: 'bg-amber-500 text-white', border: 'border-amber-400', bg: 'bg-amber-50' };
   return null;
-}
-
-function sentimentDot(s: string | null | undefined): string {
-  if (s === '호재') return 'text-red-500';
-  if (s === '악재') return 'text-blue-500';
-  if (s === '확인필요') return 'text-amber-500';
-  return 'text-gray-400';
 }
 
 function formatDate(dt: string): string {
   if (dt.length !== 8) return dt;
-  return `${dt.slice(0, 4)}.${dt.slice(4, 6)}.${dt.slice(6)}`;
+  return `${dt.slice(4, 6)}.${dt.slice(6)}`;
 }
 
-function shortDate(dt: string): string {
+function fullDate(dt: string): string {
   if (dt.length !== 8) return dt;
-  return `${parseInt(dt.slice(4, 6))}/${parseInt(dt.slice(6))}`;
+  return `${dt.slice(0, 4)}.${dt.slice(4, 6)}.${dt.slice(6)}`;
 }
 
 function dartUrl(rceptNo: string): string {
@@ -85,21 +76,21 @@ export default function StockDisclosureTab({ code }: { code: string }) {
       .filter((d) => d.stock_code === code);
   }, [code]);
 
-  // 최근 3개월 주요 이벤트 (상단 요약)
+  // 최근 3개월 하이라이트 (최대 3건)
   const highlights = useMemo(() => {
-    const threeMonthsAgo = new Date();
-    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-    const cutoff = threeMonthsAgo.toISOString().slice(0, 10).replace(/-/g, '');
+    const d = new Date();
+    d.setMonth(d.getMonth() - 3);
+    const cutoff = d.toISOString().slice(0, 10).replace(/-/g, '');
     return stockDisclosures
       .filter((d) => d.rcept_dt >= cutoff && isKeyDisclosure(d))
-      .slice(0, 5);
+      .slice(0, 3);
   }, [stockDisclosures]);
 
   const filtered = useMemo(() => {
     if (filter === '전체') return stockDisclosures;
     if (filter === '기타') {
-      const otherFilters = FILTERS.filter((f) => f.label !== '전체' && f.label !== '기타' && f.label !== '주요');
-      return stockDisclosures.filter((d) => !otherFilters.some((f) => f.match(d)) && !isKeyDisclosure(d));
+      const others = FILTERS.filter((f) => f.label !== '전체' && f.label !== '기타' && f.label !== '주요');
+      return stockDisclosures.filter((d) => !others.some((f) => f.match(d)) && !isKeyDisclosure(d));
     }
     const f = FILTERS.find((f) => f.label === filter);
     return f ? stockDisclosures.filter(f.match) : stockDisclosures;
@@ -109,7 +100,7 @@ export default function StockDisclosureTab({ code }: { code: string }) {
 
   if (stockDisclosures.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8] p-12 text-center">
         <div className="text-4xl mb-4">📋</div>
         <h3 className="text-lg font-bold text-[#191f28] mb-2">공시 데이터 없음</h3>
         <p className="text-[#8b95a1]">이 종목의 최근 1년 주요 공시가 없습니다</p>
@@ -125,8 +116,8 @@ export default function StockDisclosureTab({ code }: { code: string }) {
       } else if (f.label === '주요') {
         counts['주요'] = stockDisclosures.filter(isKeyDisclosure).length;
       } else if (f.label === '기타') {
-        const otherFilters = FILTERS.filter((ff) => ff.label !== '전체' && ff.label !== '기타' && ff.label !== '주요');
-        counts['기타'] = stockDisclosures.filter((d) => !otherFilters.some((ff) => ff.match(d)) && !isKeyDisclosure(d)).length;
+        const others = FILTERS.filter((ff) => ff.label !== '전체' && ff.label !== '기타' && ff.label !== '주요');
+        counts['기타'] = stockDisclosures.filter((d) => !others.some((ff) => ff.match(d)) && !isKeyDisclosure(d)).length;
       } else {
         counts[f.label] = stockDisclosures.filter(f.match).length;
       }
@@ -135,30 +126,33 @@ export default function StockDisclosureTab({ code }: { code: string }) {
   }, [stockDisclosures]);
 
   return (
-    <div className="space-y-4">
-      {/* 상단 요약: 최근 3개월 주요 이벤트 */}
+    <div className="space-y-3">
+      {/* 하이라이트 */}
       {highlights.length > 0 && (
-        <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
-          <h4 className="text-xs font-medium text-[#8b95a1] mb-3">최근 3개월 주요 이벤트</h4>
-          <div className="space-y-2">
-            {highlights.map((h) => {
-              const summary = h.ai_summary || h.detail_summary || h.report_nm;
-              const dotColor = sentimentDot(h.sentiment);
-              return (
-                <a
-                  key={h.rcept_no}
-                  href={dartUrl(h.rcept_no)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-2 hover:bg-gray-50 rounded px-1 py-0.5 transition-colors"
-                >
-                  <span className={`mt-1 ${dotColor}`}>●</span>
+        <div className="space-y-2">
+          {highlights.map((h) => {
+            const summary = h.ai_summary || h.detail_summary || h.report_nm;
+            const style = sentimentStyle(h.sentiment);
+            return (
+              <a
+                key={`hl-${h.rcept_no}`}
+                href={dartUrl(h.rcept_no)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`block rounded-xl p-3 border-l-4 ${style?.border || 'border-gray-300'} ${style?.bg || 'bg-gray-50'} hover:shadow-md transition-shadow cursor-pointer`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-bold text-[#191f28] flex-shrink-0">{formatDate(h.rcept_dt)}</span>
                   <span className="text-sm text-[#191f28] flex-1 leading-snug">{summary}</span>
-                  <span className="text-xs text-[#8b95a1] flex-shrink-0">({shortDate(h.rcept_dt)})</span>
-                </a>
-              );
-            })}
-          </div>
+                  {style && (
+                    <span className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${style.badge}`}>
+                      {h.sentiment}
+                    </span>
+                  )}
+                </div>
+              </a>
+            );
+          })}
         </div>
       )}
 
@@ -168,81 +162,65 @@ export default function StockDisclosureTab({ code }: { code: string }) {
           <button
             key={f.label}
             onClick={() => { setFilter(f.label); setShowCount(20); }}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               filter === f.label
                 ? 'bg-[#3182f6] text-white'
                 : 'bg-white border border-[#e8e8e8] text-[#8b95a1] hover:border-[#3182f6] hover:text-[#3182f6]'
             }`}
           >
-            {f.label} {typeCounts[f.label] ? `(${typeCounts[f.label]})` : ''}
+            {f.label}{typeCounts[f.label] ? ` ${typeCounts[f.label]}` : ''}
           </button>
         ))}
       </div>
 
-      {/* 공시 목록 */}
-      <div className="space-y-2">
-        {visible.length === 0 && (
+      {/* 공시 리스트 */}
+      <div className="bg-white rounded-xl shadow-sm border border-[#e8e8e8]">
+        {visible.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-sm text-[#8b95a1]">해당 유형의 공시가 없습니다</p>
           </div>
-        )}
-        {visible.map((d) => {
-          const typeInfo = classifyType(d.report_nm);
-          const badge = sentimentBadge(d.sentiment);
-          const summary = d.ai_summary || d.detail_summary;
-          return (
-            <a
-              key={d.rcept_no}
-              href={dartUrl(d.rcept_no)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-white rounded-lg border border-[#e8e8e8] p-4 hover:border-[#3182f6] hover:shadow-sm transition-all"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeInfo.color}`}>
-                      {typeInfo.label}
+        ) : (
+          <div className="divide-y divide-[#e8e8e8]">
+            {visible.map((d) => {
+              const typeInfo = classifyType(d.report_nm);
+              const style = sentimentStyle(d.sentiment);
+              const summary = d.ai_summary || d.detail_summary;
+              return (
+                <a
+                  key={d.rcept_no}
+                  href={dartUrl(d.rcept_no)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-3 hover:bg-[#f2f4f6] transition-colors cursor-pointer group"
+                  title={d.report_nm}
+                >
+                  <span className="text-xs text-[#8b95a1] flex-shrink-0 w-12">{formatDate(d.rcept_dt)}</span>
+                  <span className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${typeInfo.color}`}>
+                    {typeInfo.label}
+                  </span>
+                  {style && (
+                    <span className={`flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${style.badge}`}>
+                      {d.sentiment === '확인필요' ? '확인' : d.sentiment}
                     </span>
-                    {badge && (
-                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${badge.color}`}>
-                        {badge.icon}
-                      </span>
-                    )}
-                    {d.rm && d.rm.trim() && (
-                      <span className="text-xs text-[#8b95a1]">[{d.rm.trim()}]</span>
-                    )}
-                  </div>
-                  {summary ? (
-                    <>
-                      <p className="text-sm font-medium text-[#191f28] leading-snug">
-                        {summary}
-                      </p>
-                      <p className="text-xs text-[#8b95a1] mt-1">
-                        {d.report_nm}
-                      </p>
-                    </>
-                  ) : (
-                    <p className="text-sm font-medium text-[#191f28] leading-snug">
-                      {d.report_nm}
-                    </p>
                   )}
-                </div>
-                <div className="flex-shrink-0 text-right">
-                  <div className="text-xs text-[#8b95a1]">{formatDate(d.rcept_dt)}</div>
-                  <div className="text-xs text-[#8b95a1] mt-1">DART</div>
-                </div>
-              </div>
-            </a>
-          );
-        })}
+                  <span className="text-sm text-[#191f28] flex-1 truncate">
+                    {summary || d.report_nm}
+                  </span>
+                  <span className="flex-shrink-0 text-[#8b95a1] opacity-0 group-hover:opacity-100 transition-opacity text-xs">
+                    🔗
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* 더보기 */}
       {visible.length < filtered.length && (
         <button
           onClick={() => setShowCount((c) => c + 20)}
-          className="w-full py-3 text-sm font-medium text-[#3182f6] bg-white rounded-lg border border-[#e8e8e8] hover:bg-blue-50 transition-colors"
+          className="w-full py-3 text-sm font-medium text-[#3182f6] bg-white rounded-xl border border-[#e8e8e8] hover:bg-blue-50 transition-colors"
         >
           더보기 ({filtered.length - visible.length}건 남음)
         </button>
