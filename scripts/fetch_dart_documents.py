@@ -95,8 +95,57 @@ def parse_and_analyze(d, doc_text):
     if pct1_match:
         total_shares = int(pct1_match.group(1).replace(',', '')) * 100
 
-    # 자사주 취득
-    if dt == 'treasury_acquire' or '자기주식.*취득' in nm:
+    # 자사주 취득결과보고서 (별도 포맷 — 일별 매수 내역 테이블)
+    if '취득결과보고서' in nm:
+        # 일별 내역에서 총 취득수량/금액 합산
+        rows = re.findall(r'보통주식\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)', doc_text)
+        total_qty = 0
+        total_amt = 0
+        for row in rows:
+            try:
+                total_qty += int(row[1].replace(',', ''))  # 취득수량
+                total_amt += int(row[3].replace(',', ''))  # 취득가액총액
+            except ValueError:
+                pass
+        # 취득기간
+        period_m = re.search(r'취득기간[^\d]*([\d]{4}년\s*[\d]{2}월\s*[\d]{2}일)\s*부터\s*([\d]{4}년\s*[\d]{2}월\s*[\d]{2}일)', doc_text)
+        period_str = ''
+        if period_m:
+            period_str = f' {period_m.group(1).replace(" ","")}~{period_m.group(2).replace(" ","")} 동안'
+
+        lines = []
+        if total_qty and total_amt:
+            lines.append(f'{corp} 자사주{period_str} {total_qty:,}주 · {fmt_kr(total_amt)} 취득 완료.')
+            avg_price = total_amt // total_qty if total_qty else 0
+            if avg_price:
+                lines.append(f'평균 매입단가 {avg_price:,}원.')
+        else:
+            lines.append(f'{corp} 자사주 취득 결과 보고.')
+
+        lines.append(f'계획 대비 실제 취득 수량과 금액을 비교하여 실행력을 평가할 수 있습니다.')
+        return ' '.join(lines)
+
+    # 자사주 처분결과보고서
+    if '처분결과보고서' in nm:
+        rows = re.findall(r'보통주식\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)', doc_text)
+        total_qty = 0
+        total_amt = 0
+        for row in rows:
+            try:
+                total_qty += int(row[1].replace(',', ''))
+                total_amt += int(row[3].replace(',', ''))
+            except ValueError:
+                pass
+        lines = []
+        if total_qty and total_amt:
+            lines.append(f'{corp} 자사주 {total_qty:,}주 · {fmt_kr(total_amt)} 처분 완료.')
+        else:
+            lines.append(f'{corp} 자사주 처분 결과 보고.')
+        lines.append(f'처분 방식과 수령자의 매도 가능성을 확인해야 합니다.')
+        return ' '.join(lines)
+
+    # 자사주 취득 결정
+    if dt == 'treasury_acquire' or re.search(r'자기주식.*취득', nm):
         shares = existing_detail.get('shares')
         amount = existing_detail.get('amount')
         purpose = existing_detail.get('purpose', '')
@@ -137,8 +186,8 @@ def parse_and_analyze(d, doc_text):
 
         return ' '.join(lines)
 
-    # 자사주 처분
-    if dt == 'treasury_dispose' or '자기주식.*처분' in nm:
+    # 자사주 처분 결정
+    if dt == 'treasury_dispose' or re.search(r'자기주식.*처분', nm):
         shares = existing_detail.get('shares')
         amount = existing_detail.get('amount')
         purpose = existing_detail.get('purpose', '')
@@ -264,16 +313,18 @@ def parse_and_analyze(d, doc_text):
                 lines.append(f'{p} 목적.')
         return ' '.join(lines)
 
-    # 기타 — 원문에서 핵심 숫자 추출
+    # 기타 — 원문에서 핵심 숫자 추출 (10억원 이상만)
     if doc_text and len(doc_text) > 100:
         nums = []
-        for label, pattern in [('매출', r'매출[^\d]{0,20}([\d,]{5,})'),
-                                ('영업이익', r'영업이익[^\d]{0,20}([\d,]{5,})'),
-                                ('금액', r'금액[^\d]{0,20}([\d,]{8,})')]:
+        for label, pattern in [('매출', r'매출액[^\d]{0,20}([\d,]{10,})'),
+                                ('영업이익', r'영업이익[^\d]{0,20}([\d,]{10,})'),
+                                ('총액', r'총\s*액[^\d]{0,10}([\d,]{10,})')]:
             m = re.search(pattern, doc_text)
             if m:
                 try:
-                    nums.append(f'{label} {fmt_kr(int(m.group(1).replace(",","")))}')
+                    val = int(m.group(1).replace(',', ''))
+                    if val >= 1_0000_0000:  # 1억원 이상만
+                        nums.append(f'{label} {fmt_kr(val)}')
                 except ValueError:
                     pass
         if nums:
