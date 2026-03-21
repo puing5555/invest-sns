@@ -5,6 +5,10 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { getStockSignals, getSignalColor } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockAnalystTab from '@/components/stock/StockAnalystTab';
+import dynamic from 'next/dynamic';
+const StockDisclosureTab = dynamic(() => import('@/components/stock/StockDisclosureTab'), {
+  loading: () => <div className="text-center py-8 text-[#8b95a1]">공시 로딩중...</div>,
+});
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
@@ -49,14 +53,13 @@ const getStockTimeline = (code: string): StockTimelineEvent[] => {
   ];
 };
 
-// 탭 정의
+// 탭 정의 (7개 — 모든 종목 동일)
 const tabs = [
   { id: 'feed', label: '피드', icon: '📱' },
   { id: 'influencer', label: '인플루언서', icon: '📈' },
   { id: 'analyst', label: '애널리스트', icon: '📊' },
   { id: 'disclosure', label: '공시', icon: '📋' },
-  { id: 'earnings', label: '실적', icon: '📈' },
-  { id: 'insider', label: '임원매매', icon: '💼' },
+  { id: 'insider', label: '내부자', icon: '💼' },
   { id: 'calendar', label: '일정', icon: '📅' },
   { id: 'memo', label: '메모', icon: '📝' },
 ];
@@ -230,45 +233,25 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return <StockAnalystTab code={code} />;
 
       case 'disclosure':
+        if (isKoreanStock(code)) {
+          return <StockDisclosureTab code={code} />;
+        }
         return (
           <div className="text-center py-12">
             <div className="text-4xl mb-4">📋</div>
             <h3 className="text-lg font-bold text-[#191f28] mb-2">공시</h3>
-            <p className="text-[#8b95a1]">DART 연동 준비중</p>
-          </div>
-        );
-
-      case 'earnings':
-        return (
-          <div className="text-center py-12">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">실적 분석</h3>
-            <p className="text-[#8b95a1]">상세 실적 분석을 준비중입니다</p>
+            <p className="text-[#8b95a1]">SEC Filing 연동 예정</p>
           </div>
         );
 
       case 'insider':
         return (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-[#e8e8e8] p-6">
-              <h4 className="font-bold text-[#191f28] mb-4">임원 매매 현황</h4>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
-                  <div>
-                    <div className="font-medium text-red-800">김○○ 전무 매도</div>
-                    <div className="text-sm text-red-600">5억원 규모 • 3일 전</div>
-                  </div>
-                  <div className="text-red-600 font-bold">-1.2%</div>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                  <div>
-                    <div className="font-medium text-blue-800">박○○ 상무 매수</div>
-                    <div className="text-sm text-blue-600">3억원 규모 • 1주 전</div>
-                  </div>
-                  <div className="text-blue-600 font-bold">+0.8%</div>
-                </div>
-              </div>
-            </div>
+          <div className="text-center py-12">
+            <div className="text-4xl mb-4">💼</div>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">내부자 거래</h3>
+            <p className="text-[#8b95a1]">
+              {isKoreanStock(code) ? 'DART 연동 예정' : 'Form 4 연동 예정'}
+            </p>
           </div>
         );
 
@@ -276,8 +259,8 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
         return (
           <div className="text-center py-12">
             <div className="text-4xl mb-4">📅</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">종목 일정</h3>
-            <p className="text-[#8b95a1]">실적발표, 주주총회 등 일정을 준비중입니다</p>
+            <h3 className="text-lg font-bold text-[#191f28] mb-2">일정</h3>
+            <p className="text-[#8b95a1]">실적 발표일 연동 예정</p>
           </div>
         );
 
