@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-25T11:26:51.204421",
+  "generated_at": "2026-03-25T11:34:04.113256",
   "min_hit_eligible": 10,
   "total_speakers": 60,
   "qualified_speakers": 14,
@@ -17,6 +17,7 @@
       "avg_return_1y": 32.35,
       "avg_return_current": 188.32,
       "median_return_1y": 13.78,
+      "median_return_current": 86.46,
       "best_call": {
         "stock": "한미반도체",
         "ticker": "042700",
@@ -1937,6 +1938,7 @@
       "avg_return_1y": 34.64,
       "avg_return_current": 117.69,
       "median_return_1y": 15.14,
+      "median_return_current": 43.13,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -4788,6 +4790,7 @@
       "avg_return_1y": 95.24,
       "avg_return_current": 13.05,
       "median_return_1y": 18.5,
+      "median_return_current": -1.5,
       "best_call": {
         "stock": "팔란티어",
         "ticker": "PLTR",
@@ -6409,6 +6412,7 @@
       "avg_return_1y": null,
       "avg_return_current": 6.73,
       "median_return_1y": null,
+      "median_return_current": 3.67,
       "best_call": {
         "stock": "에이피알",
         "ticker": "278470",
@@ -6562,6 +6566,7 @@
       "avg_return_1y": null,
       "avg_return_current": 5.0,
       "median_return_1y": null,
+      "median_return_current": 5.0,
       "best_call": {
         "stock": "현대건설",
         "ticker": "000720",
@@ -6642,6 +6647,7 @@
       "avg_return_1y": 103.03,
       "avg_return_current": 216.29,
       "median_return_1y": 100.72,
+      "median_return_current": 177.09,
       "best_call": {
         "stock": "엔비디아",
         "ticker": "NVDA",
@@ -6797,6 +6803,7 @@
       "avg_return_1y": null,
       "avg_return_current": 20.04,
       "median_return_1y": null,
+      "median_return_current": 11.25,
       "best_call": {
         "stock": "한미반도체",
         "ticker": "042700",
@@ -6950,6 +6957,7 @@
       "avg_return_1y": null,
       "avg_return_current": 17.02,
       "median_return_1y": null,
+      "median_return_current": 10.84,
       "best_call": {
         "stock": "팔란티어",
         "ticker": "PLTR",
@@ -7105,6 +7113,7 @@
       "avg_return_1y": null,
       "avg_return_current": -32.38,
       "median_return_1y": null,
+      "median_return_current": -35.4,
       "best_call": {
         "stock": "체인링크",
         "ticker": "LINK",
@@ -7894,6 +7903,7 @@
       "avg_return_1y": null,
       "avg_return_current": -9.33,
       "median_return_1y": null,
+      "median_return_current": -25.79,
       "best_call": {
         "stock": "비트마인",
         "ticker": "WULF",
@@ -8910,6 +8920,7 @@
       "avg_return_1y": null,
       "avg_return_current": -6.3,
       "median_return_1y": null,
+      "median_return_current": -7.47,
       "best_call": {
         "stock": "키움증권",
         "ticker": "039490",
@@ -9053,6 +9064,7 @@
       "avg_return_1y": null,
       "avg_return_current": -4.71,
       "median_return_1y": null,
+      "median_return_current": -5.17,
       "best_call": {
         "stock": "솔브레인",
         "ticker": "357780",
@@ -9216,6 +9228,7 @@
       "avg_return_1y": null,
       "avg_return_current": 0.69,
       "median_return_1y": null,
+      "median_return_current": 2.46,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -9349,6 +9362,7 @@
       "avg_return_1y": null,
       "avg_return_current": -3.7,
       "median_return_1y": null,
+      "median_return_current": -3.7,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -9441,6 +9455,7 @@
       "avg_return_1y": null,
       "avg_return_current": null,
       "median_return_1y": null,
+      "median_return_current": null,
       "best_call": null,
       "worst_call": null,
       "top3_calls": [],
@@ -9472,6 +9487,7 @@
       "avg_return_1y": null,
       "avg_return_current": 1.56,
       "median_return_1y": null,
+      "median_return_current": 3.19,
       "best_call": {
         "stock": "마이크론",
         "ticker": "MU",
@@ -9621,6 +9637,7 @@
       "avg_return_1y": null,
       "avg_return_current": 1.23,
       "median_return_1y": null,
+      "median_return_current": -4.63,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -9778,6 +9795,7 @@
       "avg_return_1y": null,
       "avg_return_current": -7.75,
       "median_return_1y": null,
+      "median_return_current": -7.75,
       "best_call": {
         "stock": "엔비디아",
         "ticker": "NVDA",
@@ -9858,6 +9876,7 @@
       "avg_return_1y": null,
       "avg_return_current": 39.71,
       "median_return_1y": null,
+      "median_return_current": 39.71,
       "best_call": {
         "stock": "셀트리온",
         "ticker": "068270",
@@ -9949,6 +9968,7 @@
       "avg_return_1y": 47.27,
       "avg_return_current": 90.98,
       "median_return_1y": 30.81,
+      "median_return_current": 80.42,
       "best_call": {
         "stock": "엔비디아",
         "ticker": "NVDA",
@@ -10152,6 +10172,7 @@
       "avg_return_1y": 201.36,
       "avg_return_current": 324.16,
       "median_return_1y": 77.21,
+      "median_return_current": 57.06,
       "best_call": {
         "stock": "블룸에너지",
         "ticker": "BE",
@@ -10304,6 +10325,7 @@
       "avg_return_1y": 25.79,
       "avg_return_current": 244.03,
       "median_return_1y": 25.79,
+      "median_return_current": 244.03,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -10395,6 +10417,7 @@
       "avg_return_1y": 14.28,
       "avg_return_current": 6.58,
       "median_return_1y": -0.11,
+      "median_return_current": 4.24,
       "best_call": {
         "stock": "엔비디아",
         "ticker": "NVDA",
@@ -10582,6 +10605,7 @@
       "avg_return_1y": 206.71,
       "avg_return_current": 0.28,
       "median_return_1y": 206.71,
+      "median_return_current": -21.41,
       "best_call": {
         "stock": "AST 스페이스모바일",
         "ticker": "ASTS",
@@ -11141,6 +11165,7 @@
       "avg_return_1y": 6.14,
       "avg_return_current": -24.84,
       "median_return_1y": 1.47,
+      "median_return_current": -25.53,
       "best_call": {
         "stock": "플라즈마",
         "ticker": "XPL",
@@ -11690,6 +11715,7 @@
       "avg_return_1y": 148.67,
       "avg_return_current": 3.85,
       "median_return_1y": 148.67,
+      "median_return_current": 3.85,
       "best_call": {
         "stock": "마이크로스트래티지",
         "ticker": "MSTR",
@@ -11770,6 +11796,7 @@
       "avg_return_1y": -33.33,
       "avg_return_current": -42.71,
       "median_return_1y": -36.31,
+      "median_return_current": -40.07,
       "best_call": {
         "stock": "비트코인",
         "ticker": "BTC",
@@ -12189,6 +12216,7 @@
       "avg_return_1y": 33.05,
       "avg_return_current": 54.67,
       "median_return_1y": 29.78,
+      "median_return_current": 52.31,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -12428,6 +12456,7 @@
       "avg_return_1y": null,
       "avg_return_current": -3.7,
       "median_return_1y": null,
+      "median_return_current": -3.7,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -12519,6 +12548,7 @@
       "avg_return_1y": null,
       "avg_return_current": -64.6,
       "median_return_1y": null,
+      "median_return_current": -64.6,
       "best_call": {
         "stock": "마이크로스트래티지",
         "ticker": "MSTR",
@@ -12599,6 +12629,7 @@
       "avg_return_1y": 70.89,
       "avg_return_current": 92.0,
       "median_return_1y": 53.52,
+      "median_return_current": 55.24,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -12869,6 +12900,7 @@
       "avg_return_1y": null,
       "avg_return_current": -5.65,
       "median_return_1y": null,
+      "median_return_current": -5.65,
       "best_call": {
         "stock": "엔비디아",
         "ticker": "NVDA",
@@ -12975,6 +13007,7 @@
       "avg_return_1y": null,
       "avg_return_current": -4.36,
       "median_return_1y": null,
+      "median_return_current": -4.36,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -13055,6 +13088,7 @@
       "avg_return_1y": null,
       "avg_return_current": 13.05,
       "median_return_1y": null,
+      "median_return_current": 13.05,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -13167,6 +13201,7 @@
       "avg_return_1y": 21.02,
       "avg_return_current": 86.84,
       "median_return_1y": 21.02,
+      "median_return_current": 86.84,
       "best_call": {
         "stock": "구글",
         "ticker": "GOOGL",
@@ -13258,6 +13293,7 @@
       "avg_return_1y": null,
       "avg_return_current": -1.25,
       "median_return_1y": null,
+      "median_return_current": -1.25,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -13365,6 +13401,7 @@
       "avg_return_1y": -2.87,
       "avg_return_current": 235.06,
       "median_return_1y": -2.68,
+      "median_return_current": 173.78,
       "best_call": {
         "stock": "엔비디아",
         "ticker": "NVDA",
@@ -13513,6 +13550,7 @@
       "avg_return_1y": null,
       "avg_return_current": 25.31,
       "median_return_1y": null,
+      "median_return_current": -11.78,
       "best_call": {
         "stock": "현대차",
         "ticker": "005380",
@@ -13730,6 +13768,7 @@
       "avg_return_1y": null,
       "avg_return_current": 1.4,
       "median_return_1y": null,
+      "median_return_current": -2.47,
       "best_call": {
         "stock": "서클",
         "ticker": "CRCL",
@@ -14189,6 +14228,7 @@
       "avg_return_1y": 88.54,
       "avg_return_current": 237.37,
       "median_return_1y": 88.54,
+      "median_return_current": 237.37,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -14311,6 +14351,7 @@
       "avg_return_1y": null,
       "avg_return_current": -34.53,
       "median_return_1y": null,
+      "median_return_current": -34.53,
       "best_call": {
         "stock": "XRP",
         "ticker": "XRP",
@@ -14391,6 +14432,7 @@
       "avg_return_1y": 44.7,
       "avg_return_current": 121.44,
       "median_return_1y": 44.7,
+      "median_return_current": 121.44,
       "best_call": {
         "stock": "한전",
         "ticker": "015760",
@@ -14499,6 +14541,7 @@
       "avg_return_1y": 15.02,
       "avg_return_current": 112.66,
       "median_return_1y": 11.86,
+      "median_return_current": 110.28,
       "best_call": {
         "stock": "테슬라",
         "ticker": "TSLA",
@@ -14657,6 +14700,7 @@
       "avg_return_1y": 1.91,
       "avg_return_current": 6.29,
       "median_return_1y": 1.91,
+      "median_return_current": 6.29,
       "best_call": {
         "stock": "삼성바이오로직스",
         "ticker": "207940",
@@ -14738,6 +14782,7 @@
       "avg_return_1y": null,
       "avg_return_current": 3.53,
       "median_return_1y": null,
+      "median_return_current": 3.53,
       "best_call": {
         "stock": "비트코인",
         "ticker": "BTC",
@@ -14818,6 +14863,7 @@
       "avg_return_1y": 11.06,
       "avg_return_current": 20.94,
       "median_return_1y": 11.06,
+      "median_return_current": 20.94,
       "best_call": {
         "stock": "애플",
         "ticker": "AAPL",
@@ -14946,6 +14992,7 @@
       "avg_return_1y": 123.16,
       "avg_return_current": 160.54,
       "median_return_1y": 45.2,
+      "median_return_current": 40.24,
       "best_call": {
         "stock": "SK하이닉스",
         "ticker": "000660",
@@ -15103,6 +15150,7 @@
       "avg_return_1y": 20.72,
       "avg_return_current": 14.2,
       "median_return_1y": 22.87,
+      "median_return_current": 2.87,
       "best_call": {
         "stock": "두나무",
         "ticker": "042700",
@@ -15838,6 +15886,7 @@
       "avg_return_1y": 150.03,
       "avg_return_current": 208.45,
       "median_return_1y": 158.89,
+      "median_return_current": 192.55,
       "best_call": {
         "stock": "현대로템",
         "ticker": "064350",
@@ -15991,6 +16040,7 @@
       "avg_return_1y": 16.07,
       "avg_return_current": -6.72,
       "median_return_1y": 16.07,
+      "median_return_current": -6.72,
       "best_call": {
         "stock": "테슬라",
         "ticker": "TSLA",
@@ -16072,6 +16122,7 @@
       "avg_return_1y": null,
       "avg_return_current": null,
       "median_return_1y": null,
+      "median_return_current": null,
       "best_call": null,
       "worst_call": null,
       "top3_calls": [],
@@ -16131,6 +16182,7 @@
       "avg_return_1y": null,
       "avg_return_current": 9.18,
       "median_return_1y": null,
+      "median_return_current": 9.18,
       "best_call": {
         "stock": "팔란티어",
         "ticker": "PLTR",
@@ -16211,6 +16263,7 @@
       "avg_return_1y": 74.44,
       "avg_return_current": 238.25,
       "median_return_1y": 74.44,
+      "median_return_current": 238.25,
       "best_call": {
         "stock": "브로드컴",
         "ticker": "AVGO",
@@ -16291,6 +16344,7 @@
       "avg_return_1y": 50.29,
       "avg_return_current": 36.92,
       "median_return_1y": 50.29,
+      "median_return_current": 36.92,
       "best_call": {
         "stock": "알테오젠",
         "ticker": "196170",
@@ -16371,6 +16425,7 @@
       "avg_return_1y": -23.91,
       "avg_return_current": 198.49,
       "median_return_1y": -23.91,
+      "median_return_current": 198.49,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -16451,6 +16506,7 @@
       "avg_return_1y": null,
       "avg_return_current": -27.16,
       "median_return_1y": null,
+      "median_return_current": -28.51,
       "best_call": {
         "stock": "바이두",
         "ticker": "BIDU",
@@ -16604,6 +16660,7 @@
       "avg_return_1y": null,
       "avg_return_current": null,
       "median_return_1y": null,
+      "median_return_current": null,
       "best_call": null,
       "worst_call": null,
       "top3_calls": [],
@@ -16646,6 +16703,7 @@
       "avg_return_1y": 0.82,
       "avg_return_current": 25.96,
       "median_return_1y": 0.82,
+      "median_return_current": 25.96,
       "best_call": {
         "stock": "네이버",
         "ticker": "035420",
@@ -16726,6 +16784,7 @@
       "avg_return_1y": 98.48,
       "avg_return_current": 87.81,
       "median_return_1y": 98.48,
+      "median_return_current": 87.81,
       "best_call": {
         "stock": "테슬라",
         "ticker": "TSLA",
@@ -16806,6 +16865,7 @@
       "avg_return_1y": null,
       "avg_return_current": -52.6,
       "median_return_1y": null,
+      "median_return_current": -52.6,
       "best_call": {
         "stock": "XRP",
         "ticker": "XRP",

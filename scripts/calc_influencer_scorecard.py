@@ -253,6 +253,7 @@ def main():
         avg_return_1y = round(sum(rets_1y) / len(rets_1y), 2) if rets_1y else None
         median_return_1y = round(median(rets_1y), 2) if rets_1y else None
         avg_return_current = round(sum(rets_cur) / len(rets_cur), 2) if rets_cur else None
+        median_return_current = round(median(rets_cur), 2) if rets_cur else None
 
         # --- Best/Worst call (1Y return 기준, 없으면 current) ---
         def sort_key(s):
@@ -357,6 +358,7 @@ def main():
             'avg_return_1y': avg_return_1y,
             'avg_return_current': avg_return_current,
             'median_return_1y': median_return_1y,
+            'median_return_current': median_return_current,
             'best_call': best_call,
             'worst_call': worst_call,
             'top3_calls': top3_calls,

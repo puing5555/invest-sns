@@ -181,41 +181,46 @@ def generate_trend_analysis(card):
 
 
 def generate_follow_simulation(card):
-    """팔로우 시뮬레이션: 매 콜 100만원 투입 (매수+긍정+매도만, 1Y return 우선)"""
+    """팔로우 시뮬레이션: 매 콜 100만원 투입 (매수+긍정+매도만, 1Y / 현재 각각)"""
     scored_list = card.get('scored_list', [])
-    # 매수+긍정+매도만 (부정/중립 제외)
     eligible = [s for s in scored_list if s.get('signal') in (BUY_SIGNALS | SELL_SIGNALS)]
     if not eligible:
-        return {'text': '시뮬레이션 데이터 부족', 'total_invested': 0, 'total_profit': 0, 'final_return': 0}
+        return {'text': '시뮬레이션 데이터 부족', 'total_invested_1y': 0, 'profit_1y': 0, 'return_1y': 0, 'total_invested_cur': 0, 'profit_cur': 0, 'return_cur': 0}
 
-    invest_per_call = 1_000_000
-    count = 0
-    cumulative_profit = 0
+    invest = 1_000_000
+    cnt_1y = cnt_cur = 0
+    profit_1y = profit_cur = 0
 
     for s in eligible:
-        ret = s.get('return_1y') if s.get('return_1y') is not None else s.get('return_current')
-        if ret is None:
-            continue
-        # 매도 시그널: 숏 포지션 (주가 하락 → 수익)
-        if s.get('signal') in SELL_SIGNALS:
-            ret = -ret
-        profit = invest_per_call * ret / 100
-        cumulative_profit += profit
-        count += 1
+        is_sell = s.get('signal') in SELL_SIGNALS
+        r1y = s.get('return_1y')
+        rcur = s.get('return_current')
+        if r1y is not None:
+            r = -r1y if is_sell else r1y
+            profit_1y += invest * r / 100
+            cnt_1y += 1
+        if rcur is not None:
+            r = -rcur if is_sell else rcur
+            profit_cur += invest * r / 100
+            cnt_cur += 1
 
-    total_invested = count * invest_per_call
-    final_return = round(cumulative_profit / total_invested * 100, 1) if total_invested > 0 else 0
+    ret_1y = round(profit_1y / (cnt_1y * invest) * 100, 1) if cnt_1y > 0 else 0
+    ret_cur = round(profit_cur / (cnt_cur * invest) * 100, 1) if cnt_cur > 0 else 0
 
     text = (
-        f"매 시그널마다 100만원씩 투입했다면 (총 {count}건, 투자금 {fmt_money(total_invested)}):\n"
-        f"누적 수익: {fmt_money(cumulative_profit)} (수익률 {fmt_pct(final_return)})"
+        f"매 시그널마다 100만원씩 투입했다면:\n"
+        f"1Y 기준: {cnt_1y}건, 누적 {fmt_money(profit_1y)} ({fmt_pct(ret_1y)})\n"
+        f"현재 기준: {cnt_cur}건, 누적 {fmt_money(profit_cur)} ({fmt_pct(ret_cur)})"
     )
 
     return {
         'text': text,
-        'total_invested': total_invested,
-        'total_profit': round(cumulative_profit),
-        'final_return': final_return
+        'total_invested_1y': cnt_1y * invest,
+        'profit_1y': round(profit_1y),
+        'return_1y': ret_1y,
+        'total_invested_cur': cnt_cur * invest,
+        'profit_cur': round(profit_cur),
+        'return_cur': ret_cur,
     }
 
 

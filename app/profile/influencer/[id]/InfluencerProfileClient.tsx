@@ -189,15 +189,19 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                   <div className="text-xs text-[#8b95a1] mt-1">승 / 패</div>
                   {card.pending > 0 && <div className="text-[10px] text-[#8b95a1]">평가 중 {card.pending}건</div>}
                 </div>
-                {/* 3열: 1Y 중앙수익률 */}
+                {/* 3열: 중앙수익률 (1Y | 현재) */}
                 <div className="text-center">
-                  <div className={`text-2xl font-bold ${medColor}`}>
-                    {card.median_return_1y != null ? `${card.median_return_1y >= 0 ? '+' : ''}${card.median_return_1y?.toFixed(1)}%` : '-'}
+                  <div className="text-sm font-bold">
+                    <span className={medColor}>
+                      {card.median_return_1y != null ? `${card.median_return_1y >= 0 ? '+' : ''}${card.median_return_1y?.toFixed(0)}%` : '-'}
+                    </span>
+                    <span className="text-[#d1d6db] mx-1">|</span>
+                    <span className={card.median_return_current != null ? (card.median_return_current >= 0 ? 'text-green-600' : 'text-red-500') : 'text-gray-400'}>
+                      {card.median_return_current != null ? `${card.median_return_current >= 0 ? '+' : ''}${card.median_return_current?.toFixed(0)}%` : '-'}
+                    </span>
                   </div>
-                  <div className="text-xs text-[#8b95a1] mt-1">1Y 중앙수익률</div>
-                  {card.avg_return_1y != null && (
-                    <div className="text-[10px] text-[#8b95a1]">평균 {card.avg_return_1y >= 0 ? '+' : ''}{card.avg_return_1y?.toFixed(1)}%</div>
-                  )}
+                  <div className="text-xs text-[#8b95a1] mt-1">중앙수익률</div>
+                  <div className="text-[10px] text-[#8b95a1]">1Y | 현재</div>
                 </div>
                 {/* 4열: 최고 콜 */}
                 {card.best_call && (
@@ -274,29 +278,28 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                 <div>
                   <p className="text-xs font-medium text-green-600 mb-1.5">TOP 3 콜</p>
                   {(card.top3_calls || []).map((c: any, i: number) => (
-                    <div key={i} className="text-xs text-[#333d4b] mb-0.5 flex justify-between">
-                      <span className="truncate mr-1">{c.stock}</span>
-                      <span className="text-green-600 font-medium whitespace-nowrap">
-                        {c.return_1y != null ? `+${c.return_1y?.toFixed(0)}%` : `+${c.return_current?.toFixed(0)}%`}
-                        <span className="text-[10px] text-[#8b95a1] ml-0.5">{c.return_1y != null ? '1Y' : '현재'}</span>
-                      </span>
+                    <div key={i} className="text-xs text-[#333d4b] mb-1">
+                      <div className="font-medium truncate">{c.stock}</div>
+                      <div className="text-[10px]">
+                        <span className="text-green-600 font-medium">{c.return_1y != null ? `1Y +${c.return_1y?.toFixed(0)}%` : '1Y 평가중'}</span>
+                        <span className="text-[#d1d6db] mx-1">|</span>
+                        <span className="text-[#8b95a1]">{c.return_current != null ? `현재 ${c.return_current >= 0 ? '+' : ''}${c.return_current?.toFixed(0)}%` : ''}</span>
+                      </div>
                     </div>
                   ))}
                 </div>
                 <div>
                   <p className="text-xs font-medium text-red-500 mb-1.5">WORST 3 콜</p>
-                  {(card.worst3_calls || []).map((c: any, i: number) => {
-                    const ret = c.return_1y ?? c.return_current;
-                    return (
-                      <div key={i} className="text-xs text-[#333d4b] mb-0.5 flex justify-between">
-                        <span className="truncate mr-1">{c.stock}</span>
-                        <span className="text-red-500 font-medium whitespace-nowrap">
-                          {ret != null ? `${ret >= 0 ? '+' : ''}${ret?.toFixed(0)}%` : '-'}
-                          <span className="text-[10px] text-[#8b95a1] ml-0.5">{c.return_1y != null ? '1Y' : '현재'}</span>
-                        </span>
+                  {(card.worst3_calls || []).map((c: any, i: number) => (
+                    <div key={i} className="text-xs text-[#333d4b] mb-1">
+                      <div className="font-medium truncate">{c.stock}</div>
+                      <div className="text-[10px]">
+                        <span className="text-red-500 font-medium">{c.return_1y != null ? `1Y ${c.return_1y >= 0 ? '+' : ''}${c.return_1y?.toFixed(0)}%` : '1Y 평가중'}</span>
+                        <span className="text-[#d1d6db] mx-1">|</span>
+                        <span className="text-[#8b95a1]">{c.return_current != null ? `현재 ${c.return_current >= 0 ? '+' : ''}${c.return_current?.toFixed(0)}%` : ''}</span>
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -319,12 +322,19 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                   </div>
                   <div className="text-[10px] text-[#8b95a1] mt-0.5">기대수익률</div>
                 </div>
-                {sim && sim.total_invested > 0 && (
+                {sim && (sim.total_invested_1y > 0 || sim.total_invested_cur > 0) && (
                   <div className="bg-[#f8f9fa] rounded-lg p-3 text-center">
-                    <div className={`text-lg font-bold ${(sim.final_return || 0) >= 0 ? 'text-green-600' : 'text-red-500'}`}>
-                      {sim.final_return >= 0 ? '+' : ''}{sim.final_return}%
+                    <div className="text-sm font-bold">
+                      <span className={`${(sim.return_1y || 0) >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                        {sim.return_1y != null ? `${sim.return_1y >= 0 ? '+' : ''}${sim.return_1y}%` : '-'}
+                      </span>
+                      <span className="text-[#d1d6db] mx-1">|</span>
+                      <span className={`${(sim.return_cur || 0) >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                        {sim.return_cur != null ? `${sim.return_cur >= 0 ? '+' : ''}${sim.return_cur}%` : '-'}
+                      </span>
                     </div>
-                    <div className="text-[10px] text-[#8b95a1] mt-0.5">100만원 팔로우 수익률</div>
+                    <div className="text-[10px] text-[#8b95a1] mt-0.5">팔로우 수익률</div>
+                    <div className="text-[10px] text-[#8b95a1]">1Y | 현재</div>
                   </div>
                 )}
               </div>
