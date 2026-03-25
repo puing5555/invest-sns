@@ -8,6 +8,8 @@ import { slugToSpeaker } from '@/lib/speakerSlugs';
 import SignalDetailModal from '@/components/SignalDetailModal';
 import { formatStockDisplay, formatStockShort } from '@/lib/stockNames';
 import { formatStockPrice } from '@/lib/currency';
+import scorecardData from '@/data/influencer_scorecard.json';
+import reportsData from '@/data/influencer_reports.json';
 
 export default function InfluencerProfileClient({ id }: { id: string }) {
   const router = useRouter();
@@ -17,6 +19,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [activeStock, setActiveStock] = useState<string>('전체');
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
+  const [reportOpen, setReportOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -90,6 +93,16 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
     : (profile?.signals || []).filter((s: any) => (formatStockShort(s.stock, s.ticker) || '기타') === activeStock)
   ).sort(sortByDate);
 
+  // scored_list에서 signal id → 1Y/현재 수익률 lookup
+  const scoredMap: Record<string, { return_1y: number | null; return_current: number | null; hit: boolean | null }> = {};
+  const sc = (scorecardData as any).speakers || {};
+  const cardData = sc[id] || null;
+  if (cardData?.scored_list) {
+    for (const s of cardData.scored_list) {
+      if (s.id) scoredMap[s.id] = { return_1y: s.return_1y, return_current: s.return_current, hit: s.hit };
+    }
+  }
+
   const handleCardClick = (signal: any) => {
     const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
     setSelectedSignal({
@@ -140,21 +153,223 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
           </div>
         </div>
 
-        {stockCounts.length > 0 && (
-          <div className="mt-4">
-            <p className="text-xs text-[#8b95a1] mb-1.5">관심 종목</p>
-            <p className="text-sm text-[#333d4b]">
-              {stockCounts.slice(0, 5).map((s, i) => (
-                <span key={s.shortName}>
-                  {i > 0 && <span className="text-[#d1d6db] mx-1">·</span>}
-                  <span className="font-medium">{s.shortName}</span>
-                  <span className="text-[#8b95a1]">({s.count})</span>
-                </span>
-              ))}
-            </p>
-          </div>
-        )}
       </div>
+
+      {/* 성과 요약 */}
+      {(() => {
+        const sc = (scorecardData as any).speakers || {};
+        const card = sc[id] || null;
+        if (!card || card.scored_signals === 0) return null;
+
+        const hitColor = card.hit_rate != null
+          ? (card.hit_rate >= 60 ? 'text-green-600' : card.hit_rate >= 50 ? 'text-yellow-600' : 'text-red-500')
+          : 'text-gray-400';
+        const medColor = card.median_return_1y != null
+          ? (card.median_return_1y >= 0 ? 'text-green-600' : 'text-red-500')
+          : 'text-gray-400';
+
+        return (
+          <div className="px-4 pt-4">
+            <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
+              <h3 className="text-xs font-medium text-[#8b95a1] mb-3">성과 요약 <span className="text-[10px] text-[#b0b8c1]">매수/긍정/매도 기준, 월별 dedup</span></h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {/* 1열: 적중률 */}
+                <div className="text-center">
+                  <div className={`text-2xl font-bold ${hitColor}`}>{card.hit_rate != null ? `${card.hit_rate}%` : '수집 중'}</div>
+                  <div className="text-xs text-[#8b95a1] mt-1">적중률</div>
+                  <div className="text-[10px] text-[#8b95a1]">{card.hit_eligible || 0}건 기준</div>
+                </div>
+                {/* 2열: 승/패 */}
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-[#191f28]">
+                    <span className="text-green-600">{card.wins}</span>
+                    <span className="text-[#8b95a1] text-lg mx-1">/</span>
+                    <span className="text-red-500">{card.losses}</span>
+                  </div>
+                  <div className="text-xs text-[#8b95a1] mt-1">승 / 패</div>
+                  {card.pending > 0 && <div className="text-[10px] text-[#8b95a1]">평가 중 {card.pending}건</div>}
+                </div>
+                {/* 3열: 1Y 중앙수익률 */}
+                <div className="text-center">
+                  <div className={`text-2xl font-bold ${medColor}`}>
+                    {card.median_return_1y != null ? `${card.median_return_1y >= 0 ? '+' : ''}${card.median_return_1y?.toFixed(1)}%` : '-'}
+                  </div>
+                  <div className="text-xs text-[#8b95a1] mt-1">1Y 중앙수익률</div>
+                  {card.avg_return_1y != null && (
+                    <div className="text-[10px] text-[#8b95a1]">평균 {card.avg_return_1y >= 0 ? '+' : ''}{card.avg_return_1y?.toFixed(1)}%</div>
+                  )}
+                </div>
+                {/* 4열: 최고 콜 */}
+                {card.best_call && (
+                  <div className="text-center">
+                    <div className="text-lg font-bold text-green-600">
+                      {card.best_call.return_1y != null ? `+${card.best_call.return_1y?.toFixed(0)}%` : `+${card.best_call.return_current?.toFixed(0)}%`}
+                    </div>
+                    <div className="text-xs text-[#191f28] font-medium truncate">{card.best_call.stock}</div>
+                    <div className="text-[10px] text-[#8b95a1]">최고 콜 {card.best_call.return_1y != null ? '(1Y)' : '(현재)'}</div>
+                  </div>
+                )}
+              </div>
+
+              {/* 승/패 바 + 시장별 */}
+              <div className="mt-3 flex items-center gap-4 flex-wrap">
+                {card.wins + card.losses > 0 && (
+                  <div className="flex items-center gap-2 flex-1 min-w-[120px]">
+                    <div className="flex h-2 rounded-full overflow-hidden bg-gray-100 flex-1">
+                      <div className="bg-green-500" style={{ width: `${(card.wins / (card.wins + card.losses)) * 100}%` }} />
+                      <div className="bg-red-400" style={{ width: `${(card.losses / (card.wins + card.losses)) * 100}%` }} />
+                    </div>
+                    <span className="text-[10px] text-[#8b95a1] whitespace-nowrap">{card.wins}W/{card.losses}L</span>
+                  </div>
+                )}
+                {card.market && Object.keys(card.market).length > 0 && (
+                  <div className="flex gap-3">
+                    {Object.entries(card.market).map(([mkt, data]: [string, any]) => (
+                      <span key={mkt} className="text-[10px] text-[#8b95a1]">
+                        <span className="font-medium text-[#333d4b]">{mkt}</span> {data.count}건
+                        {data.hit_rate != null && <span className={data.hit_rate >= 50 ? 'text-green-600' : 'text-red-500'}> {data.hit_rate}%</span>}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* AI 분석 리포트 */}
+      {(() => {
+        const sc = (scorecardData as any).speakers || {};
+        const card = sc[id] || null;
+        const report = (reportsData as any).reports?.[id];
+        if (!card || !report || card.hit_eligible < 3) return null;
+
+        const sim = report.sections?.follow_simulation;
+        const styleColors: Record<string, string> = {
+          '⭐올라운더': 'bg-blue-50 text-blue-700',
+          '🎯스나이퍼': 'bg-green-50 text-green-700',
+          '💣홈런히터': 'bg-orange-50 text-orange-700',
+          '📊시그널 수집 중': 'bg-gray-50 text-gray-500',
+          '📊일반': 'bg-gray-50 text-gray-600',
+        };
+        const styleCls = styleColors[card.style_tag] || 'bg-gray-50 text-gray-600';
+
+        return (
+          <div className="px-4 pt-4">
+            <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
+              {/* 헤더: 제목 + 스타일 태그 */}
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-xs font-medium text-[#8b95a1]">AI 분석 리포트</h3>
+                <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${styleCls}`}>
+                  {card.style_tag}
+                </span>
+              </div>
+
+              {/* 한줄 평가 */}
+              <p className="text-sm text-[#191f28] mb-4">{report.sections?.one_liner}</p>
+
+              {/* TOP3 / WORST3 */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                  <p className="text-xs font-medium text-green-600 mb-1.5">TOP 3 콜</p>
+                  {(card.top3_calls || []).map((c: any, i: number) => (
+                    <div key={i} className="text-xs text-[#333d4b] mb-0.5 flex justify-between">
+                      <span className="truncate mr-1">{c.stock}</span>
+                      <span className="text-green-600 font-medium whitespace-nowrap">
+                        {c.return_1y != null ? `+${c.return_1y?.toFixed(0)}%` : `+${c.return_current?.toFixed(0)}%`}
+                        <span className="text-[10px] text-[#8b95a1] ml-0.5">{c.return_1y != null ? '1Y' : '현재'}</span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-red-500 mb-1.5">WORST 3 콜</p>
+                  {(card.worst3_calls || []).map((c: any, i: number) => {
+                    const ret = c.return_1y ?? c.return_current;
+                    return (
+                      <div key={i} className="text-xs text-[#333d4b] mb-0.5 flex justify-between">
+                        <span className="truncate mr-1">{c.stock}</span>
+                        <span className="text-red-500 font-medium whitespace-nowrap">
+                          {ret != null ? `${ret >= 0 ? '+' : ''}${ret?.toFixed(0)}%` : '-'}
+                          <span className="text-[10px] text-[#8b95a1] ml-0.5">{c.return_1y != null ? '1Y' : '현재'}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 홈런 비율 바 */}
+              <div className="mb-4">
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-[#8b95a1]">홈런 비율 (+100% 이상)</span>
+                  <span className="font-medium text-[#191f28]">{card.homerun_rate}%</span>
+                </div>
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-[#3182f6] rounded-full transition-all" style={{ width: `${Math.min(card.homerun_rate || 0, 100)}%` }} />
+                </div>
+              </div>
+
+              {/* 기대수익률 + 팔로우 시뮬레이션 */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="bg-[#f8f9fa] rounded-lg p-3 text-center">
+                  <div className={`text-lg font-bold ${(card.expected_return || 0) >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                    {card.expected_return != null ? `${card.expected_return >= 0 ? '+' : ''}${card.expected_return?.toFixed(1)}%` : '-'}
+                  </div>
+                  <div className="text-[10px] text-[#8b95a1] mt-0.5">기대수익률</div>
+                </div>
+                {sim && sim.total_invested > 0 && (
+                  <div className="bg-[#f8f9fa] rounded-lg p-3 text-center">
+                    <div className={`text-lg font-bold ${(sim.final_return || 0) >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                      {sim.final_return >= 0 ? '+' : ''}{sim.final_return}%
+                    </div>
+                    <div className="text-[10px] text-[#8b95a1] mt-0.5">100만원 팔로우 수익률</div>
+                  </div>
+                )}
+              </div>
+
+              {/* 접이식 상세 리포트 */}
+              <button
+                onClick={() => setReportOpen(!reportOpen)}
+                className="text-xs text-[#3182f6] font-medium hover:underline"
+              >
+                {reportOpen ? '접기 ▲' : '상세 리포트 보기 ▼'}
+              </button>
+              {reportOpen && (
+                <div className="mt-3 text-xs text-[#333d4b] space-y-3 bg-[#f8f9fa] rounded-lg p-4">
+                  {[
+                    { key: 'strengths_weaknesses', title: '강점/약점' },
+                    { key: 'investment_pattern', title: '투자 패턴' },
+                    { key: 'trend_analysis', title: '트렌드 분석' },
+                    { key: 'ai_opinion', title: 'AI 종합 의견' },
+                  ].map(({ key, title }) => {
+                    const text = key === 'follow_simulation'
+                      ? report.sections?.[key]?.text
+                      : report.sections?.[key];
+                    if (!text) return null;
+                    return (
+                      <div key={key}>
+                        <p className="font-medium text-[#191f28] mb-1">{title}</p>
+                        <p className="whitespace-pre-wrap leading-relaxed">{text}</p>
+                      </div>
+                    );
+                  })}
+                  {sim?.text && (
+                    <div>
+                      <p className="font-medium text-[#191f28] mb-1">팔로우 시뮬레이션</p>
+                      <p className="whitespace-pre-wrap leading-relaxed">{sim.text}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* 분석 기준 */}
+              <p className="text-[10px] text-[#b0b8c1] mt-3">분석 기준: 2026년 3월</p>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* 종목 필터 탭 (시그널 5개 이상만) */}
       {(() => {
@@ -201,7 +416,7 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                   <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] w-[11%]">종목</th>
                   <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap min-w-[60px] w-[7%]">신호</th>
                   <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1]">핵심발언</th>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-[8%]">수익률</th>
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-[12%]">수익률</th>
                   <th className="px-3 py-3 text-left text-xs font-medium text-[#8b95a1] whitespace-nowrap w-[5%]">링크</th>
                 </tr>
               </thead>
@@ -221,10 +436,13 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                     }
                   })();
 
+                  const isRef = signal.signal === '부정' || signal.signal === '중립';
+                  const rowCls = isRef ? 'opacity-50' : '';
+
                   return (
                     <tr
                       key={signal.id || i}
-                      className="hover:bg-[#f8f9fa] cursor-pointer transition-colors"
+                      className={`hover:bg-[#f8f9fa] cursor-pointer transition-colors ${rowCls}`}
                       onClick={() => handleCardClick(signal)}
                     >
                       <td className="px-3 py-3 text-xs text-[#191f28] whitespace-nowrap">{date}</td>
@@ -251,17 +469,31 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       </td>
                       <td className="px-3 py-3 text-xs whitespace-nowrap">
                         {(() => {
-                          if (signal.signal === '중립') return <span className="text-[#8b95a1]">N/A</span>;
-                          if (signal.return_pct == null) return <span className="text-[#8b95a1]">-</span>;
-                          const ret = signal.return_pct;
-                          const isBullish = signal.signal === '매수' || signal.signal === '긍정';
-                          const isGood = isBullish ? ret >= 0 : ret <= 0;
-                          const color = isGood ? 'text-[#22c55e]' : 'text-[#ef4444]';
-                          const arrow = ret >= 0 ? '▲' : '▼';
+                          if (isRef) return <span className="text-[#8b95a1]">참고</span>;
+                          const scored = signal.id ? scoredMap[signal.id] : null;
+                          if (!scored) return <span className="text-[#8b95a1]">-</span>;
+                          const r1y = scored.return_1y;
+                          const rCur = scored.return_current;
+                          const isBuy = signal.signal === '매수' || signal.signal === '긍정';
+                          const retForColor = r1y ?? rCur;
+                          const isGood = retForColor != null ? (isBuy ? retForColor > 0 : retForColor < 0) : false;
+                          const color = retForColor != null ? (isGood ? 'text-[#22c55e]' : 'text-[#ef4444]') : 'text-[#8b95a1]';
                           return (
-                            <span className={`font-medium ${color}`} title={`시점가 ${formatStockPrice(signal.price_at_signal || 0, signal.stock)} → 현재 ${formatStockPrice(signal.price_current || 0, signal.stock)}`}>
-                              {arrow} {ret >= 0 ? '+' : ''}{ret}%
-                            </span>
+                            <div>
+                              {r1y != null ? (
+                                <div className={`font-medium ${color}`}>
+                                  {r1y >= 0 ? '▲' : '▼'} {r1y >= 0 ? '+' : ''}{r1y}%
+                                  <span className="text-[10px] text-[#8b95a1] ml-0.5">1Y</span>
+                                </div>
+                              ) : (
+                                <div className="text-[#8b95a1]">평가 중</div>
+                              )}
+                              {rCur != null && (
+                                <div className="text-[10px] text-[#8b95a1]">
+                                  현재 {rCur >= 0 ? '+' : ''}{rCur}%
+                                </div>
+                              )}
+                            </div>
                           );
                         })()}
                       </td>
