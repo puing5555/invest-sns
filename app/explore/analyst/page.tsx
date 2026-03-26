@@ -391,7 +391,7 @@ export default function AnalystPage() {
         };
       })
       .filter(g => !q || g.name.toLowerCase().includes(q) || g.firms.some(f => f.toLowerCase().includes(q)))
-      .sort((a, b) => b.recentReportCount - a.recentReportCount || b.reports.length - a.reports.length);
+      .sort((a, b) => b.reports.length - a.reports.length);
   }, [q]);
 
   // 애널리스트별 통계
@@ -519,7 +519,7 @@ export default function AnalystPage() {
                   <div>
                     <p className="font-medium text-gray-900 text-sm">{g.name}</p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      {g.reports.length}개 리포트 · {g.firms.join(', ')}
+                      {g.reports.length}건
                     </p>
                   </div>
                   <div className="flex items-center gap-2">

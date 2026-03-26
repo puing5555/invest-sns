@@ -13,7 +13,7 @@ class PipelineConfig:
     
     # Anthropic API 설정
     ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-    ANTHROPIC_MODEL = "claude-sonnet-4-6"
+    ANTHROPIC_MODEL = "claude-sonnet-4-20250514"
     
     # Webshare 프록시 설정
     WEBSHARE_PROXY_URL = os.getenv('WEBSHARE_PROXY_URL', '')
@@ -26,8 +26,8 @@ class PipelineConfig:
     RATE_LIMIT_API_REQUESTS = 5  # API 요청 간 5초
     
     # 프롬프트 설정
-    PROMPT_VERSION = "V14.0"
-    PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v14.0.md')
+    PROMPT_VERSION = "V15.2"
+    PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v15.2.md')
     
     # 시그널 타입 (한글 5단계)
     SIGNAL_TYPES = ["매수", "긍정", "중립", "경계", "매도"]
@@ -81,6 +81,31 @@ class PipelineConfig:
         "asset", "wealth", "portfolio", "diversification", "analysis", "valuation", "risk",
         "return", "yield", "dividend", "earnings", "profit", "loss", "finance", "financial"
     ]
+
+    # 채널 → 운영자 매핑 (speaker 구분용)
+    CHANNEL_OWNERS = {
+        '이효석아카데미': '이효석',
+        '안경투 (안유화의 경제투자론)': '안유화',
+        '부읽남TV': '부읽남',
+        '삼프로TV': None,  # 패널 채널, 단일 운영자 없음
+        'Godofit': '이형수 (IT의신)',
+        '코린이 아빠': '코린이 아빠',
+        '위즈덤투스': '위즈덤투스',
+        '표상록의 코인 포트폴리오': '표상록',
+        '슈카월드': '슈카',
+        '양정길': '양정길',
+        '듀딜 | Due Diligence - Videos': '듀딜',
+        '달란트투자': '달란트투자',
+        '세상학개론': '세상학개론',
+        '월가아재': '월가아재',
+        '올랜도 킴 미국주식': '올랜도 킴',
+        '대니월드(Danny World)': '대니월드',
+    }
+
+    @classmethod
+    def get_channel_owner(cls, channel_name):
+        """채널명으로 운영자 이름 반환"""
+        return cls.CHANNEL_OWNERS.get(channel_name)
 
     @classmethod
     def load_prompt(cls):

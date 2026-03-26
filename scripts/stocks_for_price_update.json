@@ -55,6 +55,11 @@
     "market": "US"
   },
   {
+    "stock": "솔라나",
+    "ticker": "SOL",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "효성중공업",
     "ticker": "298040",
     "market": "KR"
@@ -165,8 +170,8 @@
     "market": "KR"
   },
   {
-    "stock": "솔라나",
-    "ticker": "SOL",
+    "stock": "헤데라",
+    "ticker": "HBAR",
     "market": "CRYPTO"
   },
   {
@@ -306,7 +311,7 @@
   },
   {
     "stock": "메타플래닛",
-    "ticker": null,
+    "ticker": "3350",
     "market": "OTHER"
   },
   {
@@ -525,14 +530,14 @@
     "market": "US"
   },
   {
-    "stock": "Smarter Web Company",
-    "ticker": null,
-    "market": "OTHER"
-  },
-  {
     "stock": "스트래티지 STRD",
     "ticker": "STRD",
     "market": "US"
+  },
+  {
+    "stock": "XRP",
+    "ticker": "XRP",
+    "market": "CRYPTO"
   },
   {
     "stock": "ASML",
@@ -610,6 +615,11 @@
     "market": "US"
   },
   {
+    "stock": "온도 파이낸스",
+    "ticker": "ONDO",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "체인링크",
     "ticker": "LINK",
     "market": "CRYPTO"
@@ -623,11 +633,6 @@
     "stock": "에코프로비엠",
     "ticker": "247540",
     "market": "KR"
-  },
-  {
-    "stock": "스페이스엑스",
-    "ticker": null,
-    "market": "OTHER"
   },
   {
     "stock": "캔톤코인",
@@ -775,6 +780,11 @@
     "market": "US"
   },
   {
+    "stock": "알고랜드",
+    "ticker": "ALGO",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "LG에너지솔루션",
     "ticker": "373220",
     "market": "KR"
@@ -795,6 +805,16 @@
     "market": "CRYPTO"
   },
   {
+    "stock": "리커전 파마슈티컬스",
+    "ticker": "RXRX",
+    "market": "US"
+  },
+  {
+    "stock": "주미아",
+    "ticker": "JMIA",
+    "market": "US"
+  },
+  {
     "stock": "카카오뱅크",
     "ticker": "323410",
     "market": "KR"
@@ -805,14 +825,34 @@
     "market": "KR"
   },
   {
+    "stock": "아이렌",
+    "ticker": "IREN",
+    "market": "US"
+  },
+  {
     "stock": "로체시스템즈",
     "ticker": "",
     "market": "KR"
   },
   {
+    "stock": "어플라이드 디지털",
+    "ticker": "APLD",
+    "market": "US"
+  },
+  {
+    "stock": "샌디스크",
+    "ticker": "SNDK",
+    "market": "US"
+  },
+  {
     "stock": "나인테크",
     "ticker": "188490",
     "market": "KR"
+  },
+  {
+    "stock": "아발란체",
+    "ticker": "AVAX",
+    "market": "CRYPTO"
   },
   {
     "stock": "FNS테크",
@@ -845,14 +885,14 @@
     "market": "SECTOR"
   },
   {
-    "stock": "이더질라",
-    "ticker": null,
-    "market": "KR"
-  },
-  {
     "stock": "하이아트호텔",
     "ticker": "H",
     "market": "US"
+  },
+  {
+    "stock": "라이트코인",
+    "ticker": "LTC",
+    "market": "CRYPTO"
   },
   {
     "stock": "금융섹터ETF",
@@ -875,11 +915,6 @@
     "market": "US"
   },
   {
-    "stock": "아이렌",
-    "ticker": "IREN",
-    "market": "US"
-  },
-  {
     "stock": "율촌화학",
     "ticker": "008730",
     "market": "KR"
@@ -890,9 +925,9 @@
     "market": "KR"
   },
   {
-    "stock": "비트마이너",
-    "ticker": null,
-    "market": "KR"
+    "stock": "센티넬원",
+    "ticker": "S",
+    "market": "US"
   },
   {
     "stock": "펠로톤",
@@ -935,14 +970,29 @@
     "market": "KR"
   },
   {
+    "stock": "온도 ONDO",
+    "ticker": "ONDO",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "현대모비스",
     "ticker": "012330",
     "market": "KR"
   },
   {
+    "stock": "MSTR",
+    "ticker": "MSTR",
+    "market": "US"
+  },
+  {
     "stock": "셰브론",
     "ticker": "CVX",
     "market": "US"
+  },
+  {
+    "stock": "플라즈마 USUAL",
+    "ticker": "USUAL",
+    "market": "CRYPTO"
   },
   {
     "stock": "롯데케미칼",
@@ -963,6 +1013,11 @@
     "stock": "나이키",
     "ticker": "NKE",
     "market": "US"
+  },
+  {
+    "stock": "커브 CRV",
+    "ticker": "CRV",
+    "market": "CRYPTO"
   },
   {
     "stock": "TIGER 반도체 TOP10",
@@ -995,6 +1050,11 @@
     "market": "US"
   },
   {
+    "stock": "인튜이티브 머신스",
+    "ticker": "LUNR",
+    "market": "US"
+  },
+  {
     "stock": "미코",
     "ticker": "",
     "market": "KR"
@@ -1023,6 +1083,16 @@
     "stock": "HB테크놀로지",
     "ticker": "",
     "market": "KR"
+  },
+  {
+    "stock": "리커젼 파마슈티컬스",
+    "ticker": "RXRX",
+    "market": "US"
+  },
+  {
+    "stock": "마라 홀딩스",
+    "ticker": "MARA",
+    "market": "US"
   },
   {
     "stock": "야스",
@@ -1085,9 +1155,9 @@
     "market": "ETF"
   },
   {
-    "stock": "뉴럴링크",
+    "stock": "알트코인",
     "ticker": null,
-    "market": "OTHER"
+    "market": "CRYPTO"
   },
   {
     "stock": "비트팜스",
@@ -1130,6 +1200,11 @@
     "market": "US"
   },
   {
+    "stock": "템퍼스 AI",
+    "ticker": "TEM",
+    "market": "US"
+  },
+  {
     "stock": "스텔라루멘",
     "ticker": "XLM",
     "market": "CRYPTO"
@@ -1158,6 +1233,11 @@
     "stock": "TIGER 미국 필라델피아 AI 반도체 나스닥 ETF",
     "ticker": "",
     "market": "ETF"
+  },
+  {
+    "stock": "플러그 파워",
+    "ticker": "PLUG",
+    "market": "US"
   },
   {
     "stock": "엠코테크놀로지",
@@ -1210,6 +1290,11 @@
     "market": "US"
   },
   {
+    "stock": "비트마이너",
+    "ticker": "BMNR",
+    "market": "US"
+  },
+  {
     "stock": "노보노디스크",
     "ticker": "NVO",
     "market": "US"
@@ -1255,18 +1340,18 @@
     "market": "OTHER"
   },
   {
+    "stock": "커브",
+    "ticker": "CRV",
+    "market": "CRYPTO"
+  },
+  {
     "stock": "안두릴",
     "ticker": "",
     "market": "OTHER"
   },
   {
-    "stock": "화웨이",
-    "ticker": null,
-    "market": "OTHER"
-  },
-  {
     "stock": "두나무",
-    "ticker": null,
+    "ticker": "042700",
     "market": "KR"
   },
   {
@@ -1303,55 +1388,5 @@
     "stock": "타이거 차이나테크 탑 10 ETF",
     "ticker": "396520.KS",
     "market": "ETF"
-  },
-  {
-    "stock": "SMIC",
-    "ticker": "0981.HK",
-    "market": "OTHER"
-  },
-  {
-    "stock": "메이투안",
-    "ticker": "3690",
-    "market": "OTHER"
-  },
-  {
-    "stock": "레노버",
-    "ticker": "0992",
-    "market": "OTHER"
-  },
-  {
-    "stock": "USDT",
-    "ticker": "USDT",
-    "market": "CRYPTO"
-  },
-  {
-    "stock": "타이거차이나테크톱10",
-    "ticker": "396520.KS",
-    "market": "ETF"
-  },
-  {
-    "stock": "타이거차이나반도체팩세트",
-    "ticker": "438330.KS",
-    "market": "ETF"
-  },
-  {
-    "stock": "USDC",
-    "ticker": "USDC",
-    "market": "CRYPTO"
-  },
-  {
-    "stock": "코스트코",
-    "ticker": "COST",
-    "market": "US"
-  },
-  {
-    "stock": "키움증권",
-    "ticker": "039490",
-    "market": "KR"
-  },
-  {
-    "stock": "ARM홀딩스",
-    "ticker": "ARM",
-    "market": "US"
   }
 ]

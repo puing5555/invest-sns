@@ -7,6 +7,7 @@ import { speakerToSlug } from '@/lib/speakerSlugs';
 import { stockDetailUrl } from '@/lib/stockUtils';
 import SignalCard from '@/components/SignalCard';
 import SignalDetailModal from '@/components/SignalDetailModal';
+import scorecardData from '@/data/influencer_scorecard.json';
 
 // V9 기준 한글 시그널 타입 색상
 const V9_SIGNAL_COLORS: Record<string, string> = {
@@ -69,6 +70,7 @@ export default function InfluencerPage() {
   const [selectedSignal, setSelectedSignal] = useState<any>(null);
   const [categoryFilter, setCategoryFilter] = useState<Set<string>>(new Set(['kr', 'us', 'crypto']));
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
+  const [influencerSort, setInfluencerSort] = useState<'accuracy' | 'return' | 'count'>('accuracy');
 
   // DB에서 시그널 로드
   useEffect(() => {
@@ -286,7 +288,24 @@ export default function InfluencerPage() {
         )}
 
         {activeTab === 'influencers' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div>
+            {/* 정렬 컨트롤 */}
+            <div className="flex gap-2 mb-4">
+              {([['accuracy', '적중률순'], ['return', '수익률순'], ['count', '시그널수']] as const).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => setInfluencerSort(key)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                    influencerSort === key
+                      ? 'bg-gray-900 text-white border-gray-900'
+                      : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(() => {
               // 카테고리 필터 적용된 시그널로 발언자별 카운트
               const categoryFilteredSignals = allSignals.filter(s => categoryFilter.size === 0 || categoryFilter.has(classifySignal(s)));
@@ -296,7 +315,6 @@ export default function InfluencerPage() {
                 if (existing) {
                   existing.count++;
                   if (s.channelName) existing.channels.add(s.channelName);
-                  // 자기 채널 핸들 우선 (채널명에 발언자 이름 포함 시)
                   if (s.channelHandle && (!existing.channelHandle || (s.channelName && s.channelName.includes(s.speaker.charAt(0))))) existing.channelHandle = s.channelHandle;
                   if (s.stock) existing.stockCounts.set(s.stock, (existing.stockCounts.get(s.stock) || 0) + 1);
                   if (s.signal_type) existing.signalTypes.set(s.signal_type, (existing.signalTypes.get(s.signal_type) || 0) + 1);
@@ -323,16 +341,6 @@ export default function InfluencerPage() {
                 }
               });
 
-              // 추세 아이콘 결정 함수
-              const getTrendIcon = (signalTypes: Map<string, number>) => {
-                const buy = (signalTypes.get('매수') || 0) + (signalTypes.get('긍정') || 0);
-                const sell = (signalTypes.get('매도') || 0) + (signalTypes.get('부정') || 0);
-                const neutral = signalTypes.get('중립') || 0;
-                if (buy > sell && buy > neutral) return '🟢';
-                if (sell > buy && sell > neutral) return '🟠';
-                return '⚪';
-              };
-
               // 최근 활동 텍스트
               const getLastActivity = (dateStr: string) => {
                 if (!dateStr) return '';
@@ -340,6 +348,13 @@ export default function InfluencerPage() {
                 if (diff === 0) return '오늘 활동';
                 if (diff === 1) return '어제 활동';
                 return `${diff}일 전 활동`;
+              };
+
+              // scorecard lookup helper
+              const sc = (scorecardData as any).speakers || {};
+              const getScorecard = (name: string) => {
+                const slug = speakerToSlug(name);
+                return sc[slug] || null;
               };
 
               const speakers = Array.from(speakerMap.entries())
@@ -351,21 +366,48 @@ export default function InfluencerPage() {
                     .sort((a, b) => b[1] - a[1])
                     .slice(0, 3)
                     .map(([stock]) => stock),
-                  trendIcon: getTrendIcon(data.signalTypes),
                   lastActivity: getLastActivity(data.latestDate),
+                  scorecard: getScorecard(name),
                 }))
                 .filter(s => searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                .sort((a, b) => b.count - a.count);
+                .sort((a, b) => {
+                  const MIN_SCORED = 10;
+                  const aN = a.scorecard?.scored_signals || 0;
+                  const bN = b.scorecard?.scored_signals || 0;
+                  if (influencerSort === 'accuracy') {
+                    const aQ = aN >= MIN_SCORED;
+                    const bQ = bN >= MIN_SCORED;
+                    if (aQ !== bQ) return bQ ? 1 : -1;
+                    const aHit = a.scorecard?.hit_rate ?? -1;
+                    const bHit = b.scorecard?.hit_rate ?? -1;
+                    if (bHit !== aHit) return bHit - aHit;
+                    return b.count - a.count;
+                  }
+                  if (influencerSort === 'return') {
+                    const aQ = aN >= MIN_SCORED;
+                    const bQ = bN >= MIN_SCORED;
+                    if (aQ !== bQ) return bQ ? 1 : -1;
+                    const aRet = a.scorecard?.median_return ?? -9999;
+                    const bRet = b.scorecard?.median_return ?? -9999;
+                    if (bRet !== aRet) return bRet - aRet;
+                    return b.count - a.count;
+                  }
+                  return b.count - a.count;
+                });
 
               return speakers.map((speaker) => {
                 const speakerId = speakerToSlug(speaker.name);
-                // 호스트 판별: 채널명에 발언자 이름이 포함되거나, 발언자 이름에 채널명이 포함
-                const isHost = speaker.channelList.some((ch: string) => 
+                const isHost = speaker.channelList.some((ch: string) =>
                   ch.includes(speaker.name) || speaker.name.includes(ch) || ch === speaker.name
                 );
                 const thumbUrl = isHost && speaker.channelHandle
                   ? CHANNEL_THUMBNAILS[speaker.channelHandle] || null
                   : null;
+                const card = speaker.scorecard;
+                const hitRate = card?.hit_rate;
+                const medReturn = card?.median_return;
+                const scoredCount = card?.scored_signals || 0;
+
                 return (
                   <Link key={speaker.name} href={`/profile/influencer/${speakerId}`}>
                     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer">
@@ -376,7 +418,6 @@ export default function InfluencerPage() {
                             alt={speaker.name}
                             className="w-12 h-12 rounded-full object-cover border-2 border-gray-100"
                             onError={(e) => {
-                              // 이미지 로드 실패 시 이니셜로 폴백
                               const target = e.target as HTMLImageElement;
                               target.style.display = 'none';
                               target.nextElementSibling?.classList.remove('hidden');
@@ -386,18 +427,65 @@ export default function InfluencerPage() {
                         <div className={`w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg ${thumbUrl ? 'hidden' : ''}`}>
                           {speaker.name.charAt(0)}
                         </div>
-                        <div>
-                          <h3 className="font-bold text-gray-900">{speaker.name}</h3>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-bold text-gray-900 truncate">{speaker.name}</h3>
                           {speaker.lastActivity && (
                             <p className="text-xs text-gray-400 mt-0.5">{speaker.lastActivity}</p>
                           )}
                         </div>
                       </div>
-                      <div className="mb-3">
-                        <span className="text-sm text-gray-500">언급 </span>
-                        <span className="text-2xl font-bold text-[#3182f6]">{speaker.count}</span>
-                        <span className="text-sm text-gray-500">회</span>
+
+                      {/* 성과 지표: 장기→중기→스윙 fallback */}
+                      <div className="flex items-center gap-3 mb-3 text-sm">
+                        {(() => {
+                          const tiers = card?.tiers;
+                          const best = tiers?.long?.hit_rate != null ? { ...tiers.long, label: '장기' }
+                            : tiers?.mid?.hit_rate != null ? { ...tiers.mid, label: '중기' }
+                            : tiers?.swing?.hit_rate != null ? { ...tiers.swing, label: '스윙' }
+                            : null;
+                          if (!best) return <span className="text-gray-400 text-xs">데이터 수집 중</span>;
+                          const hr = best.hit_rate;
+                          const avg = best.avg_return;
+                          return (
+                            <>
+                              <span className={`font-bold ${hr >= 60 ? 'text-green-600' : hr >= 50 ? 'text-yellow-600' : 'text-red-500'}`}>
+                                적중 {hr}% <span className="text-[10px] font-normal text-gray-400">({best.label})</span>
+                              </span>
+                              {avg != null && (
+                                <>
+                                  <span className="text-gray-300">|</span>
+                                  <span className={`font-medium ${avg >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                                    평균 {avg >= 0 ? '+' : ''}{avg.toFixed(0)}%
+                                  </span>
+                                </>
+                              )}
+                            </>
+                          );
+                        })()}
+                        <span className="text-gray-300">|</span>
+                        <span className="text-gray-500">{speaker.count}건</span>
                       </div>
+
+                      {/* 승/패 바 */}
+                      {card && scoredCount >= 10 && card.wins + card.losses > 0 && (
+                        <div className="mb-3">
+                          <div className="flex h-1.5 rounded-full overflow-hidden bg-gray-100">
+                            <div
+                              className="bg-green-500 rounded-l-full"
+                              style={{ width: `${(card.wins / (card.wins + card.losses)) * 100}%` }}
+                            />
+                            <div
+                              className="bg-red-400 rounded-r-full"
+                              style={{ width: `${(card.losses / (card.wins + card.losses)) * 100}%` }}
+                            />
+                          </div>
+                          <div className="flex justify-between text-[10px] text-gray-400 mt-0.5">
+                            <span>{card.wins}W</span>
+                            <span>{card.losses}L</span>
+                          </div>
+                        </div>
+                      )}
+
                       {speaker.topStocks.length > 0 && (
                         <div className="text-xs text-gray-400 truncate">
                           {speaker.topStocks.join(' · ')}
@@ -408,6 +496,7 @@ export default function InfluencerPage() {
                 );
               });
             })()}
+            </div>
           </div>
         )}
 

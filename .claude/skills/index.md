@@ -13,6 +13,8 @@
 | 프롬프트 수정 / 시그널 분석 규칙 | `prompt.md` |
 | Eval 실행 / 정확도 비교 | `eval.md` |
 | 프롬프트 개선 (전체 흐름) | `eval.md` → `prompt.md` |
+| 배포 전 검증 | `verify.md` |
+| 데이터 품질 체크 | `qa-checker.md` |
 
 ## 각 skill 요약
 
@@ -27,6 +29,8 @@
 | `supabase.md` | DB 테이블 15개+ 스키마, RPC, Edge Function, 인덱스 |
 | `prompt.md` | 시그널 5단계, V14.0 핵심 규칙, 프롬프트 수정 절차 |
 | `eval.md` | 69건 정답지, eval 스크립트, 3그룹 분석법, 정확도 이력 |
+| `verify.md` | 배포 전 검증: 빌드 + 종목 페이지 + import + API 키 점검 |
+| `qa-checker.md` | 데이터 품질: 가격 $0, 페이지 누락, 해석 누락 공시 |
 
 ## 참조 관계
 ```

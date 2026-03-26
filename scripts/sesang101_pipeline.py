@@ -281,7 +281,7 @@ async def step4_5_analyze_and_insert():
         async with semaphore:
             vid = video['video_id']
             title = video['title']
-            subtitle = video['subtitle'][:8000]
+            subtitle = video['subtitle'][:20000]
             
             prompt = prompt_template + f"""
 

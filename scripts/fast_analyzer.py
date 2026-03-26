@@ -98,7 +98,7 @@ class FastAnalyzer:
     
     def create_prompt(self, channel_url: str, video_title: str, video_id: str, subtitle: str) -> str:
         """遺꾩꽍 ?꾨＼?꾪듃 ?앹꽦 ???좏겙 ?덉빟???꾪빐 ?먮쭑 理쒕? 8000??""
-        subtitle_trimmed = subtitle[:8000] if len(subtitle) > 8000 else subtitle
+        subtitle_trimmed = subtitle[:20000] if len(subtitle) > 20000 else subtitle
         
         prompt = self.prompt_template.replace('{CHANNEL_URL}', channel_url)
         

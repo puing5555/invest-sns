@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:finance.naver.com)",
+      "Bash(node:*)",
+      "WebSearch",
+      "WebFetch(domain:opendart.fss.or.kr)",
+      "WebFetch(domain:dart-fss.readthedocs.io)",
+      "WebFetch(domain:engopendart.fss.or.kr)",
+      "WebFetch(domain:www.dinolabs.ai)"
+    ]
+  }
+}

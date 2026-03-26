@@ -383,5 +383,215 @@
     "check_name": "too_many_signals",
     "detail": "평균 38.00/영상",
     "timestamp": "2026-03-16T10:30:12.926388"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 20개: ['뉴스케일파워', 'RF시스템즈', '유니티', '서비스나우', '샌디스크']",
+    "timestamp": "2026-03-18T16:16:42.359484"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-18T16:16:42.360960"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 30.00/영상",
+    "timestamp": "2026-03-18T16:16:42.362045"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 17개: ['오로라 이노베이션', '마라 홀딩스', '템퍼스 AI', '유니티', '코어위브']",
+    "timestamp": "2026-03-18T16:24:28.343588"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-18T16:24:28.344823"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 31.00/영상",
+    "timestamp": "2026-03-18T16:24:28.345822"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate1",
+    "check_name": "low_pass_rate",
+    "detail": "통과율 0.0% (0/120)",
+    "timestamp": "2026-03-18T16:31:35.813981"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate3",
+    "check_name": "return_pct_null",
+    "detail": "수익률 누락 30.7% (307/1000건)",
+    "timestamp": "2026-03-18T16:37:45.131802"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate3",
+    "check_name": "profile_page_missing",
+    "detail": "누락: ['yangjunggil-jb']",
+    "timestamp": "2026-03-18T16:37:45.659113"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate3",
+    "check_name": "published_at_null",
+    "detail": "11건",
+    "timestamp": "2026-03-18T16:37:46.131920"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate3",
+    "check_name": "ticker_null",
+    "detail": "17건",
+    "timestamp": "2026-03-18T16:37:46.341414"
+  },
+  {
+    "channel": "yangjunggil-jb",
+    "gate": "gate3",
+    "check_name": "profile_page_missing",
+    "detail": "누락: ['yangjunggil-jb']",
+    "timestamp": "2026-03-18T18:50:04.268311"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 12개: ['시바이누', '마이크로스트래터지', '페페코인', 'BNB', '도지코인']",
+    "timestamp": "2026-03-19T11:41:00.790867"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-19T11:41:00.792351"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 39.00/영상",
+    "timestamp": "2026-03-19T11:41:00.793701"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 16개: ['시바이누', '페페', 'XRP', '헤데라', '몰포']",
+    "timestamp": "2026-03-19T11:50:53.516558"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-19T11:50:53.518506"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 52.00/영상",
+    "timestamp": "2026-03-19T11:50:53.520147"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate3",
+    "check_name": "return_pct_null",
+    "detail": "수익률 누락 30.5% (305/1000건)",
+    "timestamp": "2026-03-19T11:56:50.536114"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate3",
+    "check_name": "ticker_null",
+    "detail": "1건",
+    "timestamp": "2026-03-19T11:56:51.367285"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate3",
+    "check_name": "build_missing",
+    "detail": "out/ 폴더 없음",
+    "timestamp": "2026-03-19T12:08:48.016425"
+  },
+  {
+    "channel": "dannyworld",
+    "gate": "gate3",
+    "check_name": "return_pct_null",
+    "detail": "수익률 누락 30.5% (305/1000건)",
+    "timestamp": "2026-03-19T12:10:48.253474"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate1",
+    "check_name": "low_pass_rate",
+    "detail": "통과율 0.0% (0/60)",
+    "timestamp": "2026-03-19T15:21:19.928158"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 5개: ['USDC', '온도 파이낸스', '인젝티브', '플라즈마', 'XRP']",
+    "timestamp": "2026-03-19T16:14:08.427311"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-19T16:14:08.429403"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 47.00/영상",
+    "timestamp": "2026-03-19T16:14:08.431206"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 8개: ['세이 SEI', '플라즈마 USUAL', '온도 ONDO', '커브 CRV', '에이다']",
+    "timestamp": "2026-03-19T16:24:40.470372"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-19T16:24:40.471829"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 58.00/영상",
+    "timestamp": "2026-03-19T16:24:40.473214"
+  },
+  {
+    "channel": "%ed%91%9c%ec%83%81%eb%a1%9d%ec%bd%94%ec%9d%b8%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4",
+    "gate": "gate3",
+    "check_name": "ticker_null",
+    "detail": "2건",
+    "timestamp": "2026-03-19T16:26:52.788155"
   }
 ]

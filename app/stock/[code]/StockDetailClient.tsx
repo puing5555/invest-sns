@@ -15,6 +15,7 @@ import { formatStockDisplay } from '@/lib/stockNames';
 import cryptoNames from '@/data/cryptoNames.json';
 import { formatStockPrice, formatPriceChange, isKoreanStock } from '@/lib/currency';
 import ReportDetailModal from '@/components/ReportDetailModal';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { influencers } from '@/data/influencerData';
 interface StockDetailClientProps {
   code: string;
@@ -234,7 +235,7 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
 
       case 'disclosure':
         if (isKoreanStock(code)) {
-          return <StockDisclosureTab code={code} />;
+          return <ErrorBoundary><StockDisclosureTab code={code} /></ErrorBoundary>;
         }
         return (
           <div className="text-center py-12">

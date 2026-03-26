@@ -8729,32 +8729,40 @@
     "price_source": "yfinance"
   },
   "e3086055-67df-46d1-a53d-c8e304e3f01a": {
-    "price_at_signal": 8.71,
-    "price_current": 8.9882,
-    "return_pct": 3.21,
+    "price_at_signal": 13039.57107,
+    "price_current": 13654.077774,
+    "return_pct": 4.71,
     "signal_date": "2026-02-27",
-    "ticker": "LINK-USD"
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "ba040831-e85c-40de-8751-a1a3983f2e61": {
-    "price_at_signal": 12.19,
-    "price_current": 8.9882,
-    "return_pct": -26.25,
+    "price_at_signal": 17860.267205,
+    "price_current": 13654.077774,
+    "return_pct": -23.55,
     "signal_date": "2025-12-31",
-    "ticker": "LINK-USD"
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "3366da31-e218-4106-ad6e-7e656efead79": {
-    "price_at_signal": 22.65,
-    "price_current": 8.9882,
-    "return_pct": -60.32,
+    "price_at_signal": 30205.919243,
+    "price_current": 13654.077774,
+    "return_pct": -54.8,
     "signal_date": "2025-08-16",
-    "ticker": "LINK-USD"
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "c1a350ad-04ba-43f2-9cfe-16def77f83e3": {
-    "price_at_signal": 25.76,
-    "price_current": 8.9882,
-    "return_pct": -65.11,
+    "price_at_signal": 35668.949131,
+    "price_current": 13654.077774,
+    "return_pct": -61.72,
     "signal_date": "2025-08-18",
-    "ticker": "LINK-USD"
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
   },
   "CNTN-USD": {
     "name": "캔톤코인",
@@ -9305,13 +9313,12 @@
     "currency": "KRW"
   },
   "UNI": {
-    "name": "유니스왑",
+    "name": "UNI",
     "ticker": "UNI",
     "market": "CRYPTO",
-    "current_price": 5722.6746,
-    "currency": "KRW",
-    "last_updated": "2026-03-12",
-    "source": "coingecko"
+    "current_price": 3.61,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
   },
   "ARB": {
     "name": "아비트럼",
@@ -9758,5 +9765,3340 @@
     "currency": "USD",
     "last_updated": "2026-03-16",
     "source": "yahoo"
+  },
+  "44d68620-bdf4-472c-9e6d-f94da31ab947": {
+    "price_at_signal": 157.1699981689453,
+    "price_current": 155.08,
+    "return_pct": -1.33,
+    "signal_date": "2025-08-25",
+    "ticker": "PLTR"
+  },
+  "6d46c302-fefd-40d0-9dd1-92f5b14b758e": {
+    "price_at_signal": 39.189998626708984,
+    "price_current": 34.4,
+    "return_pct": -12.22,
+    "signal_date": "2025-11-19",
+    "ticker": "FIGR"
+  },
+  "51c00659-3efc-41e1-b5d3-4e58edc451dd": {
+    "price_at_signal": 294.8999938964844,
+    "price_current": 286.89,
+    "return_pct": -2.72,
+    "signal_date": "2025-08-25",
+    "ticker": "JPM"
+  },
+  "d243a794-6c0e-442d-ab3a-5ee7d0b28a3d": {
+    "price_at_signal": 320.2900085449219,
+    "price_current": 150.28,
+    "return_pct": -53.08,
+    "signal_date": "2025-10-10",
+    "ticker": "MSTR"
+  },
+  "01363a9f-2d97-4663-99f2-ffb26ae0f10e": {
+    "price_at_signal": 344.75,
+    "price_current": 150.28,
+    "return_pct": -56.41,
+    "signal_date": "2025-09-20",
+    "ticker": "MSTR"
+  },
+  "c6d90a96-1f6f-49a8-b812-119d354419c3": {
+    "price_at_signal": 341.6199951171875,
+    "price_current": 150.28,
+    "return_pct": -56.01,
+    "signal_date": "2025-09-01",
+    "ticker": "MSTR"
+  },
+  "2eec4813-cd03-44b1-becc-96d5edd95337": {
+    "price_at_signal": 54.79999923706055,
+    "price_current": 6.31,
+    "return_pct": -88.49,
+    "signal_date": "2025-09-01",
+    "ticker": "MSTU"
+  },
+  "1d0409a6-8c49-4b33-8f3c-52603e9b668e": {
+    "price_at_signal": 363.6000061035156,
+    "price_current": 150.28,
+    "return_pct": -58.67,
+    "signal_date": "2025-08-18",
+    "ticker": "MSTR"
+  },
+  "908a856f-1e17-43f7-868f-18edc4aa8db9": {
+    "price_at_signal": 879.0,
+    "price_current": 355.0,
+    "return_pct": -59.61,
+    "signal_date": "2025-08-29",
+    "ticker": "3350.T"
+  },
+  "7b3f982b-bf11-48cc-ae11-c83e391c6a56": {
+    "price_at_signal": 78.5,
+    "price_current": 25.37,
+    "return_pct": -67.68,
+    "signal_date": "2025-08-29",
+    "ticker": "MSTY"
+  },
+  "9cd40bd8-c9b6-4e59-9e37-c325c4ec4daa": {
+    "price_at_signal": 366.32000732421875,
+    "price_current": 150.28,
+    "return_pct": -58.98,
+    "signal_date": "2025-08-16",
+    "ticker": "MSTR"
+  },
+  "557cf47f-a501-4067-9435-82d430c2feec": {
+    "price_at_signal": 96.5,
+    "price_current": 99.875,
+    "return_pct": 3.5,
+    "signal_date": "2025-08-06",
+    "ticker": "STRC"
+  },
+  "ce8def95-b252-4279-a55e-1a92d097471e": {
+    "price_at_signal": 25.799999237060547,
+    "price_current": 95.7,
+    "return_pct": 270.93,
+    "signal_date": "2025-03-28",
+    "ticker": "ASTS"
+  },
+  "55686e33-cf76-4b9d-bc8e-bda79bee1d81": {
+    "price_at_signal": 92.68000030517578,
+    "price_current": 95.7,
+    "return_pct": 3.26,
+    "signal_date": "2026-03-04",
+    "ticker": "ASTS"
+  },
+  "b5b79be3-d0b4-4549-bab2-e686f0f6cdf3": {
+    "price_at_signal": 28.020000457763672,
+    "price_current": 95.7,
+    "return_pct": 241.54,
+    "signal_date": "2025-03-17",
+    "ticker": "ASTS"
+  },
+  "4f390345-24d6-4439-ae05-39151600e305": {
+    "price_at_signal": 40.77000045776367,
+    "price_current": 95.7,
+    "return_pct": 134.73,
+    "signal_date": "2025-09-08",
+    "ticker": "ASTS"
+  },
+  "675d443f-ef51-4ea9-abc9-15d7b5686f24": {
+    "price_at_signal": 45.91999816894531,
+    "price_current": 95.7,
+    "return_pct": 108.41,
+    "signal_date": "2025-08-12",
+    "ticker": "ASTS"
+  },
+  "91f3f4d3-6efe-4bc5-9329-b49e49608b3c": {
+    "price_at_signal": 86.79000091552734,
+    "price_current": 95.7,
+    "return_pct": 10.27,
+    "signal_date": "2025-10-10",
+    "ticker": "ASTS"
+  },
+  "99e13ac7-0e9f-4241-b138-fc550ac20bc1": {
+    "price_at_signal": 42.40999984741211,
+    "price_current": 95.7,
+    "return_pct": 125.65,
+    "signal_date": "2025-09-06",
+    "ticker": "ASTS"
+  },
+  "fa2e6a8a-2f28-4733-b582-a77d23ebc185": {
+    "price_at_signal": 47.86000061035156,
+    "price_current": 95.7,
+    "return_pct": 99.96,
+    "signal_date": "2025-07-15",
+    "ticker": "ASTS"
+  },
+  "bb868a74-131a-4cb3-909d-0b2fd46a7b4f": {
+    "price_at_signal": 60.060001373291016,
+    "price_current": 95.7,
+    "return_pct": 59.34,
+    "signal_date": "2025-07-25",
+    "ticker": "ASTS"
+  },
+  "d8de09f1-30f1-4642-b7bb-63474b539ddc": {
+    "price_at_signal": 26.1200008392334,
+    "price_current": 95.7,
+    "return_pct": 266.39,
+    "signal_date": "2025-03-14",
+    "ticker": "ASTS"
+  },
+  "f8831224-601f-4a31-88ea-54c561513421": {
+    "price_at_signal": 133.8800048828125,
+    "price_current": 150.28,
+    "return_pct": 12.25,
+    "signal_date": "2026-02-14",
+    "ticker": "MSTR"
+  },
+  "23eb7209-8689-4f80-9796-e87107e80452": {
+    "price_at_signal": 352.3299865722656,
+    "price_current": 150.28,
+    "return_pct": -57.35,
+    "signal_date": "2025-10-03",
+    "ticker": "MSTR"
+  },
+  "3338e2f9-c6f2-4f42-94a2-36a627695bf1": {
+    "price_at_signal": 403.79998779296875,
+    "price_current": 150.28,
+    "return_pct": -62.78,
+    "signal_date": "2025-07-29",
+    "ticker": "MSTR"
+  },
+  "7a4c8edc-774b-4861-a5af-442c7bbafbb6": {
+    "price_at_signal": 83.9000015258789,
+    "price_current": 95.7,
+    "return_pct": 14.06,
+    "signal_date": "2026-02-23",
+    "ticker": "ASTS"
+  },
+  "742b8607-5587-46bd-a20e-1bed8f5ef3d3": {
+    "price_at_signal": 3.7699999809265137,
+    "price_current": 3.42,
+    "return_pct": -9.28,
+    "signal_date": "2026-02-27",
+    "ticker": "RXRX"
+  },
+  "614b94c8-fdc3-4fa3-b458-741880090608": {
+    "price_at_signal": 8.520000457763672,
+    "price_current": 10.13,
+    "return_pct": 18.9,
+    "signal_date": "2025-12-23",
+    "ticker": "RDW"
+  },
+  "4b05f2f1-7457-4675-ac33-bd240caf0a80": {
+    "price_at_signal": 5.730000019073486,
+    "price_current": 3.96,
+    "return_pct": -30.89,
+    "signal_date": "2025-12-26",
+    "ticker": "BBAI"
+  },
+  "a06c59bb-9495-4fd3-9568-44d769647a4a": {
+    "price_at_signal": 14.9399995803833,
+    "price_current": 18.9,
+    "return_pct": 26.51,
+    "signal_date": "2025-12-20",
+    "ticker": "LUNR"
+  },
+  "1936368b-b123-4f9e-9964-413583dfe8b4": {
+    "price_at_signal": 26.239999771118164,
+    "price_current": 17.37,
+    "return_pct": -33.8,
+    "signal_date": "2025-11-19",
+    "ticker": "SOFI"
+  },
+  "7ed00712-097d-42d0-8d2f-acaa6e208482": {
+    "price_at_signal": 4.199999809265137,
+    "price_current": 3.42,
+    "return_pct": -18.57,
+    "signal_date": "2025-12-14",
+    "ticker": "RXRX"
+  },
+  "3579adf1-a0d9-41c1-bbe4-ffdc3acf7b57": {
+    "price_at_signal": 11.739999771118164,
+    "price_current": 9.24,
+    "return_pct": -21.29,
+    "signal_date": "2025-12-06",
+    "ticker": "MARA"
+  },
+  "50b8f4ba-db86-4e29-b93e-d242b8262910": {
+    "price_at_signal": 26.649999618530273,
+    "price_current": 20.8,
+    "return_pct": -21.95,
+    "signal_date": "2025-12-01",
+    "ticker": "CPNG"
+  },
+  "5e79c0c8-6050-4a71-ada0-6494cb265aac": {
+    "price_at_signal": 53500.0,
+    "price_current": 81200.0,
+    "return_pct": 51.78,
+    "signal_date": "2025-12-01",
+    "ticker": "017670.KS"
+  },
+  "26d5b58a-8813-4d08-b261-9fa364b4fbde": {
+    "price_at_signal": 58.220001220703125,
+    "price_current": 42.96,
+    "return_pct": -26.21,
+    "signal_date": "2025-10-31",
+    "ticker": "IREN"
+  },
+  "dc032352-bfd4-4bb1-a61e-ec88d9b7b58c": {
+    "price_at_signal": 55.45000076293945,
+    "price_current": 33.31,
+    "return_pct": -39.93,
+    "signal_date": "2025-10-23",
+    "ticker": "IONQ"
+  },
+  "e199d65b-53b3-4c4e-a251-00092a80e7cb": {
+    "price_at_signal": 421.80999755859375,
+    "price_current": 399.27,
+    "return_pct": -5.34,
+    "signal_date": "2026-02-03",
+    "ticker": "TSLA"
+  },
+  "ea872780-5c66-4ca3-a24b-c41a3ecc3df8": {
+    "price_at_signal": 15.829999923706055,
+    "price_current": 18.15,
+    "return_pct": 14.66,
+    "signal_date": "2026-02-03",
+    "ticker": "0175.HK"
+  },
+  "fbcc34fd-bab9-4438-aa97-74edf8f8efe0": {
+    "price_at_signal": 491500.0,
+    "price_current": 545000.0,
+    "return_pct": 10.89,
+    "signal_date": "2026-02-03",
+    "ticker": "005380.KS"
+  },
+  "93d9643b-70c5-4ac3-9899-0a88c808091c": {
+    "price_at_signal": 140300.0,
+    "price_current": 208500.0,
+    "return_pct": 48.61,
+    "signal_date": "2026-01-14",
+    "ticker": "005930.KS"
+  },
+  "88df37b5-de91-48f1-9f1a-e3a349c3b136": {
+    "price_at_signal": 185.80999755859375,
+    "price_current": 181.93,
+    "return_pct": -2.09,
+    "signal_date": "2026-01-14",
+    "ticker": "NVDA"
+  },
+  "20688f53-4445-4cf4-a09c-b2abaddd4fe8": {
+    "price_at_signal": 216500.0,
+    "price_current": 545000.0,
+    "return_pct": 151.73,
+    "signal_date": "2024-12-24",
+    "ticker": "005380.KS"
+  },
+  "8f196ed8-7315-4673-a36f-a6131490d8d0": {
+    "price_at_signal": 249.85000610351562,
+    "price_current": 399.27,
+    "return_pct": 59.8,
+    "signal_date": "2024-11-01",
+    "ticker": "TSLA"
+  },
+  "b34c2649-a440-4223-bd6c-807b191ae6d3": {
+    "price_at_signal": 58300.0,
+    "price_current": 208500.0,
+    "return_pct": 257.63,
+    "signal_date": "2024-11-01",
+    "ticker": "005930.KS"
+  },
+  "9b59d630-34c9-4fba-b84f-e8db1ab10f53": {
+    "price_at_signal": 12.678333282470703,
+    "price_current": 13.25,
+    "return_pct": 4.51,
+    "signal_date": "2024-10-04",
+    "ticker": "BYDDY"
+  },
+  "fb2ff9ec-c07a-455a-b4fe-fb7b2f55ea49": {
+    "price_at_signal": 203500.0,
+    "price_current": 367500.0,
+    "return_pct": 80.59,
+    "signal_date": "2024-05-03",
+    "ticker": "352820.KS"
+  },
+  "13cba56c-9f23-48bc-a39c-2cce4883f773": {
+    "price_at_signal": 82.4229965209961,
+    "price_current": 181.93,
+    "return_pct": 120.73,
+    "signal_date": "2024-04-24",
+    "ticker": "NVDA"
+  },
+  "fc48c4f8-edf2-400e-ad0e-63b434902253": {
+    "price_at_signal": 667000.0,
+    "price_current": 405000.0,
+    "return_pct": -39.28,
+    "signal_date": "2022-12-16",
+    "ticker": "006400.KS"
+  },
+  "9f90348a-11db-4809-a2f1-847eca6497c3": {
+    "price_at_signal": 41.849998474121094,
+    "price_current": 57.79,
+    "return_pct": 38.09,
+    "signal_date": "2022-10-24",
+    "ticker": "RBLX"
+  },
+  "197e1703-b9a9-419d-a36c-71c06038ebbb": {
+    "price_at_signal": 107.94000244140625,
+    "price_current": 77.35,
+    "return_pct": -28.34,
+    "signal_date": "2025-08-25",
+    "ticker": "HOOD"
+  },
+  "e6d4f79b-c571-4910-9b3e-f9a5d1a93fb6": {
+    "price_at_signal": 30.549999237060547,
+    "price_current": 59.65,
+    "return_pct": 95.25,
+    "signal_date": "2022-03-22",
+    "ticker": "3606.HK"
+  },
+  "702bb7ca-22c4-4fbb-ab1d-0be5a809053b": {
+    "price_at_signal": 299.0,
+    "price_current": 402.02,
+    "return_pct": 34.45,
+    "signal_date": "2024-10-04",
+    "ticker": "300750.SZ"
+  },
+  "70c0af4d-f6cd-4cb0-8156-0df38af809da": {
+    "price_at_signal": 260.4800109863281,
+    "price_current": 399.27,
+    "return_pct": 53.28,
+    "signal_date": "2024-10-25",
+    "ticker": "TSLA"
+  },
+  "a3a83d60-426a-4fdb-a84c-4f7ec45bf058": {
+    "price_at_signal": 55900.0,
+    "price_current": 208500.0,
+    "return_pct": 272.99,
+    "signal_date": "2024-10-25",
+    "ticker": "005930.KS"
+  },
+  "b03c83e4-fc51-44b4-972a-e39c10d191df": {
+    "price_at_signal": 140.41000366210938,
+    "price_current": 181.93,
+    "return_pct": 29.57,
+    "signal_date": "2024-10-25",
+    "ticker": "NVDA"
+  },
+  "7b315da2-96f2-4b77-91d0-cf0e16497fe6": {
+    "price_at_signal": 430.6000061035156,
+    "price_current": 399.27,
+    "return_pct": -7.28,
+    "signal_date": "2024-12-24",
+    "ticker": "TSLA"
+  },
+  "be3a2305-8cbf-48db-87d1-3ce13d858586": {
+    "price_at_signal": 11.515000343322754,
+    "price_current": 13.25,
+    "return_pct": 15.07,
+    "signal_date": "2024-12-24",
+    "ticker": "BYDDY"
+  },
+  "2a699198-d7dd-4020-8878-fb73282a10f8": {
+    "price_at_signal": 331.32666015625,
+    "price_current": 399.27,
+    "return_pct": 20.51,
+    "signal_date": "2022-03-23",
+    "ticker": "TSLA"
+  },
+  "9cddf2df-f456-452d-ad0a-d3c6d2898485": {
+    "price_at_signal": 742000.0,
+    "price_current": 1056000.0,
+    "return_pct": 42.32,
+    "signal_date": "2026-01-14",
+    "ticker": "000660.KS"
+  },
+  "907272fc-bed8-427f-8f81-5af37921a289": {
+    "price_at_signal": 268500.0,
+    "price_current": 226500.0,
+    "return_pct": -15.64,
+    "signal_date": "2025-09-30",
+    "ticker": "035420.KS"
+  },
+  "811e6a54-ed78-4127-adb4-f051684724b1": {
+    "price_at_signal": 645000.0,
+    "price_current": 320000.0,
+    "return_pct": -50.39,
+    "signal_date": "2022-12-16",
+    "ticker": "051910.KS"
+  },
+  "1b52b7f1-48da-4080-986a-541df282e2f7": {
+    "price_at_signal": 713.5800170898438,
+    "price_current": 622.66,
+    "return_pct": -12.74,
+    "signal_date": "2025-07-24",
+    "ticker": "META"
+  },
+  "6d2717a4-90d5-45cc-86da-da346df7480f": {
+    "price_at_signal": 589.0,
+    "price_current": 322.0,
+    "return_pct": -45.33,
+    "signal_date": "2025-09-20",
+    "ticker": "3350.T"
+  },
+  "4f688c0e-15d5-4ab9-9058-5ec6455260e7": {
+    "price_at_signal": 191600.0,
+    "price_current": 201250.0,
+    "return_pct": 5.04,
+    "signal_date": "2026-03-05",
+    "ticker": "005930.KS"
+  },
+  "e79c57a8-0734-41f5-bdde-ab4c83fc0fca": {
+    "price_at_signal": 106.9800033569336,
+    "price_current": 180.4,
+    "return_pct": 68.63,
+    "signal_date": "2025-03-11",
+    "ticker": "NVDA"
+  },
+  "b8cbd29b-904c-4a34-b65e-4b0b76ae3648": {
+    "price_at_signal": 222.14999389648438,
+    "price_current": 392.78,
+    "return_pct": 76.81,
+    "signal_date": "2025-03-11",
+    "ticker": "TSLA"
+  },
+  "656dda76-3726-43a1-85a3-0e3fd39d514e": {
+    "price_at_signal": 96500.0,
+    "price_current": 306000.0,
+    "return_pct": 217.1,
+    "signal_date": "2025-09-30",
+    "ticker": "042700.KS"
+  },
+  "793a4688-d31b-4925-a5e3-050197477159": {
+    "price_at_signal": 941000.0,
+    "price_current": 1017000.0,
+    "return_pct": 8.08,
+    "signal_date": "2026-03-05",
+    "ticker": "000660.KS"
+  },
+  "b22e65ba-c247-4e58-8769-5e0c9a91e121": {
+    "price_at_signal": 1131000.0,
+    "price_current": 1370000.0,
+    "return_pct": 21.13,
+    "signal_date": "2026-02-12",
+    "ticker": "012450.KS"
+  },
+  "23040a64-ebf4-4f5c-a99a-c6d175515a8c": {
+    "price_at_signal": 38.66,
+    "price_current": 46.73,
+    "return_pct": 20.87
+  },
+  "f361f5b5-c237-4b1e-86c4-efb44797e8cc": {
+    "price_at_signal": 10.99,
+    "price_current": 15.3,
+    "return_pct": 39.22
+  },
+  "c649cc16-e666-4215-b819-36d645bdfdda": {
+    "price_at_signal": 5.01,
+    "price_current": 15.3,
+    "return_pct": 205.39
+  },
+  "654b2217-9b83-4dc4-939b-c375575a573b": {
+    "price_at_signal": 4.99,
+    "price_current": 15.3,
+    "return_pct": 206.61
+  },
+  "462d1818-4316-49aa-b9e8-53b4572d7c05": {
+    "price_at_signal": 238566.34,
+    "price_current": 241000.0,
+    "return_pct": 1.02
+  },
+  "4423db68-2695-4046-ae40-32537de2bbf7": {
+    "price_at_signal": 115150.0,
+    "price_current": 115470.0,
+    "return_pct": 0.28
+  },
+  "935e1768-d6aa-4d9e-a396-3a2155489d61": {
+    "price_at_signal": 11296.26,
+    "price_current": 11480.0,
+    "return_pct": 1.63
+  },
+  "051c0946-130d-423f-8ef7-d12fee4a1d01": {
+    "price_at_signal": 10905.0,
+    "price_current": 10810.0,
+    "return_pct": -0.87
+  },
+  "17cfedc6-d158-4f12-ab4b-85d953a01b74": {
+    "price_at_signal": 10600.0,
+    "price_current": 10600.0,
+    "return_pct": 0.0
+  },
+  "44ca6ee3-1b66-489c-ba03-7836ed1018fb": {
+    "price_at_signal": 96929.33,
+    "price_current": 71218.03,
+    "return_pct": -26.53
+  },
+  "cac68897-e0d6-4ee5-a82e-4132453cad33": {
+    "price_at_signal": 114056.09,
+    "price_current": 71218.03,
+    "return_pct": -37.56
+  },
+  "19360ef0-b715-4e7c-9df4-ba0a0a357799": {
+    "price_at_signal": 3.04,
+    "price_current": 1.46,
+    "return_pct": -51.97
+  },
+  "c79bab61-5d83-40a9-a690-4090a4805209": {
+    "price_at_signal": 103998.57,
+    "price_current": 71218.03,
+    "return_pct": -31.52
+  },
+  "31cfad4f-16ca-48c3-8851-87b89e53e538": {
+    "price_at_signal": 72.37,
+    "price_current": 81.73,
+    "return_pct": 12.93
+  },
+  "c5e2b854-aaee-4c49-ade4-e1769096807a": {
+    "price_at_signal": 65.76,
+    "price_current": 66.0,
+    "return_pct": 0.36
+  },
+  "0e6d3be6-4917-480f-83ff-57c96e71d64e": {
+    "price_at_signal": 6453.5,
+    "price_current": 10810.0,
+    "return_pct": 67.51
+  },
+  "88d454dd-6c4e-473b-9f83-a0c466e094b6": {
+    "price_at_signal": 41.85,
+    "price_current": 61.7,
+    "return_pct": 47.43
+  },
+  "6746122c-0313-41e7-88c5-9baf14239bcf": {
+    "price_at_signal": 118.72,
+    "price_current": 134.43,
+    "return_pct": 13.23
+  },
+  "3b1b6220-300a-4725-bdf5-0e4f990e17ef": {
+    "price_at_signal": 53.0,
+    "price_current": 35.14,
+    "return_pct": -33.7
+  },
+  "859028be-ac0b-400d-bd98-7b365b920898": {
+    "price_at_signal": 106791.09,
+    "price_current": 71218.03,
+    "return_pct": -33.31
+  },
+  "17bbe9cf-3137-4eae-adb7-0db8f8d529fe": {
+    "price_at_signal": 1.0,
+    "price_current": 1.0,
+    "return_pct": 0.0
+  },
+  "bf0c3112-3415-4760-8153-9f89bf589e59": {
+    "price_at_signal": 8959.97,
+    "price_current": 13250.0,
+    "return_pct": 47.88
+  },
+  "4abbeb84-7dee-414a-84fc-b7c3b8743ea9": {
+    "price_at_signal": 51.05,
+    "price_current": 35.14,
+    "return_pct": -31.17
+  },
+  "7405898c-7371-4a22-9add-ac98317074b0": {
+    "price_at_signal": 10.45,
+    "price_current": 9.61,
+    "return_pct": -8.04
+  },
+  "642b564c-3abe-4f54-a6ab-1f7c09a719c3": {
+    "price_at_signal": 160.1,
+    "price_current": 80.3,
+    "return_pct": -49.84
+  },
+  "e9243b8f-ba91-4cdc-9dcd-ae92cfd2b016": {
+    "price_at_signal": 48.0,
+    "price_current": 61.7,
+    "return_pct": 28.54
+  },
+  "1ecd4733-d9f9-4d9f-9089-016b8a26969f": {
+    "price_at_signal": 505.09,
+    "price_current": 550.5,
+    "return_pct": 8.99
+  },
+  "1740c949-d52e-4ed6-b29b-f75b6584bec2": {
+    "price_at_signal": 130.23,
+    "price_current": 134.43,
+    "return_pct": 3.23
+  },
+  "3d328477-c9e7-4dbe-8aac-420012dfbc86": {
+    "price_at_signal": 96922.7,
+    "price_current": 71218.03,
+    "return_pct": -26.52
+  },
+  "97f3a3f2-074b-4f0d-a2d8-74edf69eab4f": {
+    "price_at_signal": 3353.5,
+    "price_current": 2193.26,
+    "return_pct": -34.6
+  },
+  "b0b97bad-fcf6-4a56-9494-672c12321d1a": {
+    "price_at_signal": 94419.76,
+    "price_current": 71218.03,
+    "return_pct": -24.57
+  },
+  "dff399d9-023f-424d-83fa-4e85f0a1c8c5": {
+    "price_at_signal": 69482.47,
+    "price_current": 71218.03,
+    "return_pct": 2.5
+  },
+  "34d16d7f-658a-4a90-a611-6c23b062b14c": {
+    "price_at_signal": 66011.09,
+    "price_current": 71218.03,
+    "return_pct": 7.89
+  },
+  "dce91de5-6a2a-4228-85dc-a9ecae68b944": {
+    "price_at_signal": 66267.49,
+    "price_current": 71218.03,
+    "return_pct": 7.47
+  },
+  "b008740d-4728-4b90-b92e-8418e6fbb682": {
+    "price_at_signal": 67837.64,
+    "price_current": 71218.03,
+    "return_pct": 4.98
+  },
+  "e601ba49-4685-4832-9bd6-d22e8b9d8a75": {
+    "price_at_signal": 69892.83,
+    "price_current": 71218.03,
+    "return_pct": 1.9
+  },
+  "25ebc25b-b325-4ca1-accc-7cef1f72a62c": {
+    "price_at_signal": 3333.69,
+    "price_current": 2193.26,
+    "return_pct": -34.21
+  },
+  "1da3ecfc-6894-41f8-b8b6-35df977e30d0": {
+    "price_at_signal": 63778.76,
+    "price_current": 71218.03,
+    "return_pct": 11.66
+  },
+  "7a53d8c7-9692-42ac-a74f-d36b452e78d3": {
+    "price_at_signal": 42742.65,
+    "price_current": 71218.03,
+    "return_pct": 66.62
+  },
+  "41113325-9ca2-4059-a810-23ae65006b24": {
+    "price_at_signal": 955000.0,
+    "price_current": 1056000.0,
+    "return_pct": 10.58
+  },
+  "5acbb19b-0045-4daa-8357-30dc5dbc5731": {
+    "price_at_signal": 133600.0,
+    "price_current": 132900.0,
+    "return_pct": -0.52
+  },
+  "5da99a90-8bcb-465a-ba27-3075e794b079": {
+    "price_at_signal": 194.13,
+    "price_current": 194.34,
+    "return_pct": 0.11
+  },
+  "95c888a5-2723-4324-adbc-3e0ff2da14b1": {
+    "price_at_signal": 514.37,
+    "price_current": 516.72,
+    "return_pct": 0.46
+  },
+  "c65272cb-bc33-4f3d-aa93-a2c31b52df73": {
+    "price_at_signal": 442.03,
+    "price_current": 435.81,
+    "return_pct": -1.41
+  },
+  "c2bd7eba-8db8-42d7-b900-e195dc6f08de": {
+    "price_at_signal": 308.7,
+    "price_current": 307.69,
+    "return_pct": -0.33
+  },
+  "26cb7e2f-05da-4a2b-bb36-f8b25aa42367": {
+    "price_at_signal": 212.65,
+    "price_current": 209.87,
+    "return_pct": -1.31
+  },
+  "5aaa097b-02ce-4aa3-bb91-fdfc165911d0": {
+    "price_at_signal": 190000.0,
+    "price_current": 208500.0,
+    "return_pct": 9.74
+  },
+  "60f1528d-ae2d-4594-af46-8140d0fcca8b": {
+    "price_at_signal": 134.37,
+    "price_current": 131.88,
+    "return_pct": -1.85
+  },
+  "d8870745-3b94-497e-92aa-40cc6c4671a3": {
+    "price_at_signal": 180.25,
+    "price_current": 180.4,
+    "return_pct": 0.08
+  },
+  "67baa8d9-84ab-46e6-9e83-1b77b458829a": {
+    "price_at_signal": 70968.27,
+    "price_current": 71218.03,
+    "return_pct": 0.35
+  },
+  "41cc8f95-4607-4256-b3f5-fc69b94fc585": {
+    "price_at_signal": 195.55,
+    "price_current": 180.4,
+    "return_pct": -7.75
+  },
+  "ce857b1b-1e08-4b85-b44d-202b8aec0fe9": {
+    "price_at_signal": 203500.0,
+    "price_current": 208500.0,
+    "return_pct": 2.46
+  },
+  "fd99db78-824b-4542-b9ef-cefd36bdafd4": {
+    "price_at_signal": 1016125.0,
+    "price_current": 1056000.0,
+    "return_pct": 3.92
+  },
+  "940c3525-af5a-455f-87da-3a1cd2190065": {
+    "price_at_signal": 67960.12,
+    "price_current": 71218.03,
+    "return_pct": 4.79
+  },
+  "842ee4cf-8ea7-4f11-803a-4a8cd0262707": {
+    "price_at_signal": 155.82,
+    "price_current": 152.87,
+    "return_pct": -1.89
+  },
+  "c23e18e8-afd4-4e15-a454-6dc0e2544f75": {
+    "price_at_signal": 57.29,
+    "price_current": 48.69,
+    "return_pct": -15.01
+  },
+  "efdab10c-ccd9-4a12-b3cf-1d2cc267df43": {
+    "price_at_signal": 3.1,
+    "price_current": 3.52,
+    "return_pct": 13.55
+  },
+  "7e339f87-5d3c-4d09-a616-694529d585fe": {
+    "price_at_signal": 342.76,
+    "price_current": 315.93,
+    "return_pct": -7.83
+  },
+  "2d63b3f4-5f29-489b-bb27-117f1d4aed04": {
+    "price_at_signal": 310.74,
+    "price_current": 307.69,
+    "return_pct": -0.98
+  },
+  "a81c5a57-9c8a-402c-af98-05d00508de31": {
+    "price_at_signal": 204.08,
+    "price_current": 209.87,
+    "return_pct": 2.84
+  },
+  "44e875de-90b8-4a78-8496-5e811811009e": {
+    "price_at_signal": 167800.0,
+    "price_current": 208500.0,
+    "return_pct": 24.26
+  },
+  "ac1cc28d-7ce5-47bd-a12e-d3941cea2b63": {
+    "price_at_signal": 858416.0,
+    "price_current": 1056000.0,
+    "return_pct": 23.02
+  },
+  "c44bcd68-06c3-4d91-915c-73b00ca4b5ab": {
+    "price_at_signal": 204.86,
+    "price_current": 209.87,
+    "return_pct": 2.45
+  },
+  "dfd5ecff-6f7a-4f61-9434-c2515a5cfb1c": {
+    "price_at_signal": 302.64,
+    "price_current": 307.69,
+    "return_pct": 1.67
+  },
+  "e2959ef3-60f7-4746-a12b-a89f4e131739": {
+    "price_at_signal": 52.15,
+    "price_current": 48.97,
+    "return_pct": -6.1
+  },
+  "168f43a0-86c0-4458-a9da-737df0aa302d": {
+    "price_at_signal": 203.14,
+    "price_current": 193.47,
+    "return_pct": -4.76
+  },
+  "c24eb3c1-b3ac-45a1-9a0c-e76655233e0e": {
+    "price_at_signal": 38.61,
+    "price_current": 36.26,
+    "return_pct": -6.09
+  },
+  "250ddfc1-ceae-485f-88e4-6b143450e9a0": {
+    "price_at_signal": 18.45,
+    "price_current": 20.09,
+    "return_pct": 8.89
+  },
+  "137b6ec5-b76c-42f0-ae17-58ee43a7f356": {
+    "price_at_signal": 41.83,
+    "price_current": 42.21,
+    "return_pct": 0.91
+  },
+  "a58c5132-a047-4ddc-a3c6-e84c9969325f": {
+    "price_at_signal": 76974.45,
+    "price_current": 71218.03,
+    "return_pct": -7.48
+  },
+  "a0490cb8-3bce-4aaa-bb4c-5fc644274758": {
+    "price_at_signal": 53.74,
+    "price_current": 42.21,
+    "return_pct": -21.46
+  },
+  "48578f51-1203-4549-bced-cb86c9f49c86": {
+    "price_at_signal": 160500.0,
+    "price_current": 208500.0,
+    "return_pct": 29.91
+  },
+  "0216b2f1-ac50-4e19-b772-5a66676a6920": {
+    "price_at_signal": 907325.75,
+    "price_current": 1056000.0,
+    "return_pct": 16.39
+  },
+  "aec7933f-9f98-4621-967e-caf399528e1c": {
+    "price_at_signal": 5224.36,
+    "price_current": 5487.24,
+    "return_pct": 5.03
+  },
+  "f7b71214-c745-4545-ad9e-bd6c39ee6227": {
+    "price_at_signal": 6244.13,
+    "price_current": 5487.24,
+    "return_pct": -12.12
+  },
+  "d2c54b2e-ce66-49d9-b50d-1f7bae18150f": {
+    "price_at_signal": 216500.0,
+    "price_current": 208500.0,
+    "return_pct": -3.7
+  },
+  "e8a8c448-09bd-4a81-895c-e1dde21ea015": {
+    "price_at_signal": 1061000.0,
+    "price_current": 1056000.0,
+    "return_pct": -0.47
+  },
+  "ab279334-f63b-4be4-ad61-e69ac8a989b7": {
+    "price_at_signal": 53.25,
+    "price_current": 48.69,
+    "return_pct": -8.56
+  },
+  "5da20568-f133-4d22-8e24-e307925e1a22": {
+    "price_at_signal": 65.32,
+    "price_current": 48.69,
+    "return_pct": -25.46
+  },
+  "b19ca8e9-ddac-4e27-a61d-a41cf25c68bf": {
+    "price_at_signal": 86.42,
+    "price_current": 87.72,
+    "return_pct": 1.5
+  },
+  "f9843705-403a-4636-8134-2df89ca4d599": {
+    "price_at_signal": 365395.97,
+    "price_current": 545000.0,
+    "return_pct": 49.15
+  },
+  "57240503-37e3-4b1f-bd2f-844e2e50abc9": {
+    "price_at_signal": 331.63,
+    "price_current": 307.69,
+    "return_pct": -7.22
+  },
+  "af2e1dbc-a780-4dc0-822d-b1a71fe33fb5": {
+    "price_at_signal": 460000.0,
+    "price_current": 434000.0,
+    "return_pct": -5.65
+  },
+  "119366a8-cadc-48fe-b5bd-25ddb61ed26b": {
+    "price_at_signal": 448.96,
+    "price_current": 392.78,
+    "return_pct": -12.51
+  },
+  "206e14a1-d915-4d3c-9896-f93046ba6380": {
+    "price_at_signal": 138800.0,
+    "price_current": 208500.0,
+    "return_pct": 50.22
+  },
+  "4c1bc12e-dd41-4b6e-9675-de72147e1c45": {
+    "price_at_signal": 747620.44,
+    "price_current": 1056000.0,
+    "return_pct": 41.25
+  },
+  "91870efc-bb4e-4e29-a44e-b450a13ee45a": {
+    "price_at_signal": 389418.59,
+    "price_current": 425000.0,
+    "return_pct": 9.14
+  },
+  "1f70f3fc-5d84-4ded-858b-604efb03c3f8": {
+    "price_at_signal": 105.31,
+    "price_current": 56.7,
+    "return_pct": -46.16
+  },
+  "40db71ef-4b75-456e-837d-1842e971851b": {
+    "price_at_signal": 470.61,
+    "price_current": 435.81,
+    "return_pct": -7.39
+  },
+  "d0d2cb0f-0a28-4082-b180-4cf6762b203a": {
+    "price_at_signal": 189.02,
+    "price_current": 168.91,
+    "return_pct": -10.64
+  },
+  "d2b5e555-429f-4024-9d9e-5a356fafdd9e": {
+    "price_at_signal": 162.26,
+    "price_current": 198.61,
+    "return_pct": 22.4
+  },
+  "ff5f34b6-5ed4-40d7-a085-ad59d8c34927": {
+    "price_at_signal": 179.47,
+    "price_current": 238.46,
+    "return_pct": 32.87
+  },
+  "4c0dc736-ea40-4ec7-9199-5c15eda63e9c": {
+    "price_at_signal": 174.07,
+    "price_current": 236.24,
+    "return_pct": 35.72
+  },
+  "c84f5a00-a331-48c8-88f2-165a8ee67639": {
+    "price_at_signal": 68900.0,
+    "price_current": 82000.0,
+    "return_pct": 19.01
+  },
+  "51c16c03-52cf-4506-9ce1-b484e619d384": {
+    "price_at_signal": 330000.0,
+    "price_current": 320000.0,
+    "return_pct": -3.03
+  },
+  "cf2fa99b-1c13-4303-8834-0246eec94d1c": {
+    "price_at_signal": 93882.55,
+    "price_current": 71218.03,
+    "return_pct": -24.14
+  },
+  "73316644-c470-4a91-a951-c9952967a3e3": {
+    "price_at_signal": 451.67,
+    "price_current": 392.78,
+    "return_pct": -13.04
+  },
+  "e1af6d06-a723-43f0-9bf8-2cd8b47a99a3": {
+    "price_at_signal": 62.8,
+    "price_current": 53.47,
+    "return_pct": -14.86
+  },
+  "30117bb8-b792-46a9-8240-aac397f389e2": {
+    "price_at_signal": 141000.0,
+    "price_current": 208500.0,
+    "return_pct": 47.87
+  },
+  "984a34a1-74ae-447e-a004-46e21643301e": {
+    "price_at_signal": 740633.38,
+    "price_current": 1056000.0,
+    "return_pct": 42.58
+  },
+  "1708c865-e559-46bf-a91f-c0a096ada4ba": {
+    "price_at_signal": 4551.06,
+    "price_current": 5487.24,
+    "return_pct": 20.57
+  },
+  "7bef44ad-bf6b-4d20-987e-caf10b323b29": {
+    "price_at_signal": 70.65,
+    "price_current": 69.48,
+    "return_pct": -1.66
+  },
+  "55c5ee11-0cff-44f0-98bb-648221b34664": {
+    "price_at_signal": 116434.0,
+    "price_current": 208500.0,
+    "return_pct": 79.07
+  },
+  "d3f0d9f9-7d71-41d8-a1b6-8dccb1e3d0fa": {
+    "price_at_signal": 597896.75,
+    "price_current": 1056000.0,
+    "return_pct": 76.62
+  },
+  "de21729a-70dd-4691-a265-47ab18c110c2": {
+    "price_at_signal": 70.52,
+    "price_current": 69.48,
+    "return_pct": -1.47
+  },
+  "e480d213-d17a-466a-8d18-31db58b417ad": {
+    "price_at_signal": 481.2,
+    "price_current": 392.78,
+    "return_pct": -18.37
+  },
+  "5418675a-12ef-4ecc-a350-8d8eece57d0a": {
+    "price_at_signal": 287239.06,
+    "price_current": 545000.0,
+    "return_pct": 89.74
+  },
+  "f3da0fd5-6342-4fa8-bc84-b43d1b2a120d": {
+    "price_at_signal": 318.58,
+    "price_current": 287.74,
+    "return_pct": -9.68
+  },
+  "e0142b65-3bb7-4c01-9d78-e741f728295d": {
+    "price_at_signal": 55.02,
+    "price_current": 46.83,
+    "return_pct": -14.89
+  },
+  "1d7354eb-3230-4197-a4d8-e800010af12d": {
+    "price_at_signal": 25.82,
+    "price_current": 17.18,
+    "return_pct": -33.46
+  },
+  "2dc0578e-5cd2-488f-8689-1155322bcb5e": {
+    "price_at_signal": 319.52,
+    "price_current": 307.69,
+    "return_pct": -3.7
+  },
+  "3fe7bcb8-d56b-4566-91c4-7f87367796cc": {
+    "price_at_signal": 76800.0,
+    "price_current": 107300.0,
+    "return_pct": 39.71
+  },
+  "0a655162-f218-4c91-8eb6-b67f2ae0f362": {
+    "price_at_signal": 1978518.25,
+    "price_current": 2731000.0,
+    "return_pct": 38.03
+  },
+  "e47bf63d-fb20-4f02-bc4b-0a8b3fea9de5": {
+    "price_at_signal": 837888.81,
+    "price_current": 974000.0,
+    "return_pct": 16.24
+  },
+  "2f00df4a-336e-4c1e-a5b0-1e056014b177": {
+    "price_at_signal": 1629000.0,
+    "price_current": 1626000.0,
+    "return_pct": -0.18
+  },
+  "19bb5c73-5cd1-44ef-a2a2-0a1ba78d82d9": {
+    "price_at_signal": 181.49,
+    "price_current": 152.77,
+    "return_pct": -15.82
+  },
+  "c5b82a10-c3f3-4df9-bf6d-18cc215adba0": {
+    "price_at_signal": 185.54,
+    "price_current": 180.4,
+    "return_pct": -2.77
+  },
+  "c8000e23-5f1a-479d-95e2-c57cdaae8db5": {
+    "price_at_signal": 439.58,
+    "price_current": 392.78,
+    "return_pct": -10.65
+  },
+  "fc7b5a25-1b69-4e4f-9064-1a5f35bcf8a4": {
+    "price_at_signal": 575937.25,
+    "price_current": 1056000.0,
+    "return_pct": 83.35
+  },
+  "ad0e447a-fd5b-4997-9eb3-69cbf2c1e2c7": {
+    "price_at_signal": 108970.28,
+    "price_current": 208500.0,
+    "return_pct": 91.34
+  },
+  "2d0cf9bf-c397-4409-a2cf-6c8c00c8b6bb": {
+    "price_at_signal": 300.21,
+    "price_current": 339.57,
+    "return_pct": 13.11
+  },
+  "2075d22f-cc5f-4944-90e6-82f47ec0ad6d": {
+    "price_at_signal": 222.55,
+    "price_current": 209.87,
+    "return_pct": -5.7
+  },
+  "f98bb5d8-07b9-4b52-8afe-1d7948669e75": {
+    "price_at_signal": 91465.99,
+    "price_current": 71218.03,
+    "return_pct": -22.14
+  },
+  "960dd1c1-21c2-4115-9fa3-bf7c0c048c74": {
+    "price_at_signal": 3023.07,
+    "price_current": 2193.26,
+    "return_pct": -27.45
+  },
+  "d0744eb4-d409-4ba2-95b7-dd1742b2bef5": {
+    "price_at_signal": 53.09,
+    "price_current": 57.56,
+    "return_pct": 8.42
+  },
+  "6e92349e-8278-49f6-ac61-1a99d02557eb": {
+    "price_at_signal": 190.15,
+    "price_current": 180.4,
+    "return_pct": -5.13
+  },
+  "c1acc7a4-abcc-4fbe-bfaa-7be24e3ebe97": {
+    "price_at_signal": 234.69,
+    "price_current": 209.87,
+    "return_pct": -10.58
+  },
+  "2da03a4b-8159-4a30-9f57-fd4c94536f46": {
+    "price_at_signal": 111.22,
+    "price_current": 94.7,
+    "return_pct": -14.85
+  },
+  "14fe26cc-c3e6-4abd-b56c-e44be5ff292c": {
+    "price_at_signal": 263.65,
+    "price_current": 240.04,
+    "return_pct": -8.96
+  },
+  "42318594-52f4-4291-b9f5-102e3f0f4c5c": {
+    "price_at_signal": 26.96,
+    "price_current": 30.58,
+    "return_pct": 13.43
+  },
+  "f2fe6d7c-2ba9-4e6b-a716-383199653d19": {
+    "price_at_signal": 172.14,
+    "price_current": 152.77,
+    "return_pct": -11.25
+  },
+  "28052e75-1046-49eb-9ebe-bc9a81f1829e": {
+    "price_at_signal": 60.17,
+    "price_current": 42.21,
+    "return_pct": -29.85
+  },
+  "c2201617-a8bc-474e-86a1-6eeaa70cd2d4": {
+    "price_at_signal": 3.04,
+    "price_current": 1.62,
+    "return_pct": -46.71
+  },
+  "beb12bd8-73be-485a-9918-2483ff2aefde": {
+    "price_at_signal": 130.36,
+    "price_current": 74.9,
+    "return_pct": -42.54
+  },
+  "7ac8d540-69b2-49af-8b5a-20d6d4135e9a": {
+    "price_at_signal": 429.52,
+    "price_current": 392.78,
+    "return_pct": -8.55
+  },
+  "5ac11c61-d8a0-427e-af2a-2e21a78f69cd": {
+    "price_at_signal": 72.09,
+    "price_current": 48.69,
+    "return_pct": -32.46
+  },
+  "e559face-33ec-45fd-aec3-9521a6af9756": {
+    "price_at_signal": 204.98,
+    "price_current": 142.79,
+    "return_pct": -30.34
+  },
+  "dd2a809e-cffc-4171-8b72-944ede747fc7": {
+    "price_at_signal": 202.47,
+    "price_current": 180.4,
+    "return_pct": -10.9
+  },
+  "3761b960-c06d-4fb5-85d5-e18629ad3b7c": {
+    "price_at_signal": 18.33,
+    "price_current": 15.99,
+    "return_pct": -12.77
+  },
+  "0b5c810c-32ee-4504-b567-8009c4c1396b": {
+    "price_at_signal": 439.31,
+    "price_current": 392.78,
+    "return_pct": -10.59
+  },
+  "aa05c367-38c4-4ab9-a958-2027864cd352": {
+    "price_at_signal": 4.49,
+    "price_current": 2.32,
+    "return_pct": -48.33
+  },
+  "1545aa2c-9930-46f8-820e-c674dcac0e42": {
+    "price_at_signal": 55.19,
+    "price_current": 42.21,
+    "return_pct": -23.52
+  },
+  "bf36a6c5-ace1-4878-9573-13647c206bd7": {
+    "price_at_signal": 3823.84,
+    "price_current": 5487.24,
+    "return_pct": 43.5
+  },
+  "32726e1c-5055-4dbb-8294-cdb86e21d900": {
+    "price_at_signal": 183.14,
+    "price_current": 180.4,
+    "return_pct": -1.5
+  },
+  "15900198-f66c-4804-8104-ad552f98f5c4": {
+    "price_at_signal": 93943.33,
+    "price_current": 208500.0,
+    "return_pct": 121.94
+  },
+  "a5ff6dcf-eae7-4315-b290-7eec122b30d6": {
+    "price_at_signal": 324.01,
+    "price_current": 315.93,
+    "return_pct": -2.49
+  },
+  "1fd39b67-1502-4542-870f-e8ee4003e9a1": {
+    "price_at_signal": 426905.94,
+    "price_current": 1056000.0,
+    "return_pct": 147.36
+  },
+  "1907fe6f-83c4-4f60-813e-2204b0b1171a": {
+    "price_at_signal": 59.77,
+    "price_current": 42.21,
+    "return_pct": -29.38
+  },
+  "95520ce7-c063-493d-8459-ed36f1b4d3ac": {
+    "price_at_signal": 214.9,
+    "price_current": 199.46,
+    "return_pct": -7.18
+  },
+  "a094aa88-e89f-4ced-9c0a-536113805586": {
+    "price_at_signal": 180.01,
+    "price_current": 180.4,
+    "return_pct": 0.22
+  },
+  "20895dee-0ea3-49e6-95d6-cff4651f3fcc": {
+    "price_at_signal": 179.74,
+    "price_current": 152.77,
+    "return_pct": -15.01
+  },
+  "49a71e05-2ee1-43fd-96e3-1a510347b929": {
+    "price_at_signal": 436.39,
+    "price_current": 477.73,
+    "return_pct": 9.47
+  },
+  "93d2bf3b-1d17-4c47-937a-fb3959cbd8aa": {
+    "price_at_signal": 429.24,
+    "price_current": 392.78,
+    "return_pct": -8.49
+  },
+  "d471454a-79ae-4d3c-bab5-d9b1a83d6e2e": {
+    "price_at_signal": 16.88,
+    "price_current": 6.85,
+    "return_pct": -59.42
+  },
+  "cde354a0-3b10-4fae-9239-eefbbf957286": {
+    "price_at_signal": 190.96,
+    "price_current": 152.77,
+    "return_pct": -20.0
+  },
+  "a4d34dda-44d4-4029-b3e2-4126802d82c4": {
+    "price_at_signal": 61.68,
+    "price_current": 42.21,
+    "return_pct": -31.57
+  },
+  "9fd6b802-7ebc-40f6-b411-6d1d43ae926e": {
+    "price_at_signal": 60.84,
+    "price_current": 25.26,
+    "return_pct": -58.48
+  },
+  "8d1069bd-ec37-479f-9199-fcac035749c8": {
+    "price_at_signal": 127.36,
+    "price_current": 56.7,
+    "return_pct": -55.48
+  },
+  "ccb0b325-26b5-4c73-baf9-16829fff8788": {
+    "price_at_signal": 16.22,
+    "price_current": 9.54,
+    "return_pct": -41.18
+  },
+  "a374f59b-c8bc-41fa-9de8-4c58339099ba": {
+    "price_at_signal": 164.01,
+    "price_current": 199.46,
+    "return_pct": 21.61
+  },
+  "cdcf94e0-1f4e-4f7e-af83-6cab49304a2f": {
+    "price_at_signal": 139.14,
+    "price_current": 74.9,
+    "return_pct": -46.17
+  },
+  "870037ee-b3f3-4f0e-9b2f-9b1504ad19a3": {
+    "price_at_signal": 84.13,
+    "price_current": 48.69,
+    "return_pct": -42.13
+  },
+  "75d61f8d-3e9d-4b3e-bd2c-ea27b284b090": {
+    "price_at_signal": 41.86,
+    "price_current": 42.21,
+    "return_pct": 0.84
+  },
+  "59ae41aa-ccf1-410a-bb56-cd68338edd8d": {
+    "price_at_signal": 178.17,
+    "price_current": 180.4,
+    "return_pct": 1.25
+  },
+  "a0905b50-53b9-4c70-b3df-edf176faec4d": {
+    "price_at_signal": 333.89,
+    "price_current": 315.93,
+    "return_pct": -5.38
+  },
+  "fe198d6c-74ad-4b5f-b296-3697a9a81138": {
+    "price_at_signal": 159.46,
+    "price_current": 199.46,
+    "return_pct": 25.08
+  },
+  "b35b8d31-e2eb-40e6-a5fe-3a3980afc846": {
+    "price_at_signal": 35.5,
+    "price_current": 45.03,
+    "return_pct": 26.85
+  },
+  "d3b0a164-ee04-43c6-a683-7ce44bf57ddd": {
+    "price_at_signal": 9.94,
+    "price_current": 5.28,
+    "return_pct": -46.88
+  },
+  "ad7028a9-8311-4621-bb49-47d8288ad0b4": {
+    "price_at_signal": 131.72,
+    "price_current": 94.75,
+    "return_pct": -28.07
+  },
+  "feddf31c-e7b6-4257-807b-26a3d778b307": {
+    "price_at_signal": 263.64,
+    "price_current": 142.79,
+    "return_pct": -45.84
+  },
+  "8472bd25-e334-4e14-be8b-c575700aa26a": {
+    "price_at_signal": 42.99,
+    "price_current": 69.48,
+    "return_pct": 61.62
+  },
+  "137b60f4-b819-4b28-a684-d10c758e981c": {
+    "price_at_signal": 118.5,
+    "price_current": 74.9,
+    "return_pct": -36.79
+  },
+  "1b6108a6-495f-444d-92a4-cae005c4ace4": {
+    "price_at_signal": 335.45,
+    "price_current": 315.93,
+    "return_pct": -5.82
+  },
+  "e3c2b8d0-a82d-4d64-ae91-3158cb5fddbd": {
+    "price_at_signal": 155.82,
+    "price_current": 199.46,
+    "return_pct": 28.01
+  },
+  "67a24845-0c1f-4e6e-bb3a-4a8a11849677": {
+    "price_at_signal": 170.73,
+    "price_current": 180.4,
+    "return_pct": 5.66
+  },
+  "bfa8ce8b-eebb-4660-b2d7-c8099a250748": {
+    "price_at_signal": 53.32,
+    "price_current": 25.26,
+    "return_pct": -52.63
+  },
+  "15261e3d-9ab7-4245-9aa1-6e3318144806": {
+    "price_at_signal": 340.78,
+    "price_current": 284.33,
+    "return_pct": -16.56
+  },
+  "8d9e1ab7-52f0-4a51-a57b-745e155f6d1a": {
+    "price_at_signal": 117.99,
+    "price_current": 132.84,
+    "return_pct": 12.59
+  },
+  "3d2ecb25-4efd-4f9d-8447-56433de59ecc": {
+    "price_at_signal": 108.09,
+    "price_current": 71.28,
+    "return_pct": -34.05
+  },
+  "76e25e6c-cae7-491a-aee6-1fe2e47554b7": {
+    "price_at_signal": 49.31,
+    "price_current": 69.48,
+    "return_pct": 40.9
+  },
+  "f764b78f-6b23-4fd3-bbbe-67b69f0c4bc8": {
+    "price_at_signal": 104.03,
+    "price_current": 74.9,
+    "return_pct": -28.0
+  },
+  "23e91666-fd15-41dd-959c-c4eb56f8d37d": {
+    "price_at_signal": 4390.02,
+    "price_current": 2193.26,
+    "return_pct": -50.04
+  },
+  "8ddf7443-41f7-45e9-b9fb-12a1346aac1e": {
+    "price_at_signal": 43.61,
+    "price_current": 21.41,
+    "return_pct": -50.91
+  },
+  "217df9a8-b3a5-47de-9380-18c5c641b96d": {
+    "price_at_signal": 729.67,
+    "price_current": 918.05,
+    "return_pct": 25.82
+  },
+  "d5f2fd14-e0f2-47fd-bdc2-d3bf2f22f913": {
+    "price_at_signal": 56.11,
+    "price_current": 37.45,
+    "return_pct": -33.26
+  },
+  "3538d84f-af2b-48d6-ac37-c23b50c0855d": {
+    "price_at_signal": 301.11,
+    "price_current": 284.33,
+    "return_pct": -5.57
+  },
+  "dff14f7f-7f1a-4ddb-b893-87a3753ccdc5": {
+    "price_at_signal": 182.39,
+    "price_current": 152.77,
+    "return_pct": -16.24
+  },
+  "6f7716ad-c2b6-4ad3-9e36-241c4ce25787": {
+    "price_at_signal": 246.69,
+    "price_current": 194.34,
+    "return_pct": -21.22
+  },
+  "e4afbdd1-959f-4d70-811e-a8cd49033737": {
+    "price_at_signal": 4372.99,
+    "price_current": 2193.26,
+    "return_pct": -49.85
+  },
+  "3481c1cc-cef2-44ad-81a2-477e79980de8": {
+    "price_at_signal": 6439.32,
+    "price_current": 6716.09,
+    "return_pct": 4.3
+  },
+  "106c21eb-01cf-417e-8a8f-2a74bbc333b3": {
+    "price_at_signal": 174.95,
+    "price_current": 180.4,
+    "return_pct": 3.12
+  },
+  "0c98356d-f419-4bce-b66e-b9cda6c5e56c": {
+    "price_at_signal": 156.18,
+    "price_current": 152.77,
+    "return_pct": -2.18
+  },
+  "6ead25f7-e62c-48a9-a24e-b26578fd2004": {
+    "price_at_signal": 4223.21,
+    "price_current": 2193.26,
+    "return_pct": -48.07
+  },
+  "867568a9-827c-4deb-91f5-461523c478fc": {
+    "price_at_signal": 184.37,
+    "price_current": 152.77,
+    "return_pct": -17.14
+  },
+  "0685cb78-2589-42fd-86f6-5eb42b0b9906": {
+    "price_at_signal": 637.45,
+    "price_current": 918.05,
+    "return_pct": 44.02
+  },
+  "8cb50ee1-be78-45a6-8727-3553338bdd3e": {
+    "price_at_signal": 78.24,
+    "price_current": 25.26,
+    "return_pct": -67.71
+  },
+  "7a2a5c3c-2d6f-4e61-9048-c73a2b033b66": {
+    "price_at_signal": 239.65,
+    "price_current": 284.33,
+    "return_pct": 18.64
+  },
+  "e3e80f75-1769-4ff9-838e-e160e22ffb6f": {
+    "price_at_signal": 47.65,
+    "price_current": 37.45,
+    "return_pct": -21.41
+  },
+  "918ebb03-73c0-4ad4-8eaf-0e8e5f5f6e7e": {
+    "price_at_signal": 232.89,
+    "price_current": 284.33,
+    "return_pct": 22.09
+  },
+  "e6d63f5d-afa4-46ab-9a1d-a5e45313178f": {
+    "price_at_signal": 748.25,
+    "price_current": 615.68,
+    "return_pct": -17.72
+  },
+  "44682938-52c8-43da-96ef-12993ead64b7": {
+    "price_at_signal": 767.61,
+    "price_current": 918.05,
+    "return_pct": 19.6
+  },
+  "9fb35c53-6e15-47d8-b2e7-ef2bc5e31277": {
+    "price_at_signal": 63.59,
+    "price_current": 37.45,
+    "return_pct": -41.11
+  },
+  "8ffbd0b5-c10a-4886-a303-f4dc673316a5": {
+    "price_at_signal": 60.98,
+    "price_current": 48.69,
+    "return_pct": -20.15
+  },
+  "8075c5a1-2344-4a97-8244-6488940cb2f1": {
+    "price_at_signal": 947.0,
+    "price_current": 979.92,
+    "return_pct": 3.48
+  },
+  "cbf81ab9-95e2-45d6-bcde-762283db459b": {
+    "price_at_signal": 14.67,
+    "price_current": 17.18,
+    "return_pct": 17.11
+  },
+  "31652616-c2cb-4182-b8c6-555813ae3e18": {
+    "price_at_signal": 62.12,
+    "price_current": 152.77,
+    "return_pct": 145.93
+  },
+  "f847fa95-11b7-43c4-9638-4245a02fb43a": {
+    "price_at_signal": 65.77,
+    "price_current": 152.77,
+    "return_pct": 132.28
+  },
+  "6b573253-c98b-43d2-917f-038f3693dc04": {
+    "price_at_signal": 74.01,
+    "price_current": 152.77,
+    "return_pct": 106.42
+  },
+  "f16d2491-2e97-44ee-b764-d18e23c07089": {
+    "price_at_signal": 94.29,
+    "price_current": 180.4,
+    "return_pct": 91.32
+  },
+  "9de1d854-2cbe-42ba-8c62-a2fc029109c2": {
+    "price_at_signal": 239.43,
+    "price_current": 392.78,
+    "return_pct": 64.05
+  },
+  "68330d49-0f72-4554-8c0a-c697582ed2b3": {
+    "price_at_signal": 911.48,
+    "price_current": 979.92,
+    "return_pct": 7.51
+  },
+  "1363170a-83dd-4eac-8379-f8d8a1acfde7": {
+    "price_at_signal": 187.56,
+    "price_current": 249.94,
+    "return_pct": 33.26
+  },
+  "9736dcb8-e9c1-4561-8b2c-5970cb4f1cdf": {
+    "price_at_signal": 39.68,
+    "price_current": 58.38,
+    "return_pct": 47.13
+  },
+  "6ba275c7-d2ee-44de-9667-3b9cdfe372fe": {
+    "price_at_signal": 2465.42,
+    "price_current": 5487.24,
+    "return_pct": 122.57
+  },
+  "6fc34240-3292-411c-b0d9-8b5b177dc0ab": {
+    "price_at_signal": 151.83,
+    "price_current": 315.93,
+    "return_pct": 108.08
+  },
+  "a398e74b-d82f-4a3e-a549-5d34028f813a": {
+    "price_at_signal": 106.16,
+    "price_current": 180.4,
+    "return_pct": 69.93
+  },
+  "af184fd7-5848-4d2a-bcc9-3a905c0474d4": {
+    "price_at_signal": 140.87,
+    "price_current": 199.46,
+    "return_pct": 41.59
+  },
+  "fcdd781d-d202-44ff-9468-e6454a806dc2": {
+    "price_at_signal": 36.46,
+    "price_current": 152.77,
+    "return_pct": 319.01
+  },
+  "8f88f968-fd9e-4ed4-a00a-97ac3d125353": {
+    "price_at_signal": 903.53,
+    "price_current": 918.05,
+    "return_pct": 1.61
+  },
+  "4eda301b-0234-42c5-86c6-0d9f8b25850e": {
+    "price_at_signal": 196.37,
+    "price_current": 392.78,
+    "return_pct": 100.02
+  },
+  "502b75e3-3069-4572-b5d7-caa181db5bdb": {
+    "price_at_signal": 63400.0,
+    "price_current": 51300.0,
+    "return_pct": -19.09
+  },
+  "149c8d11-ccde-483f-bed1-01a7f78d38dc": {
+    "price_at_signal": 8.19,
+    "price_current": 12.03,
+    "return_pct": 46.89
+  },
+  "01ed3787-d968-4823-aba7-05f8ab1b942b": {
+    "price_at_signal": 69.45,
+    "price_current": 90.96,
+    "return_pct": 30.97
+  },
+  "bf8fcf8e-489a-4050-a196-533eab30fa13": {
+    "price_at_signal": 102.87,
+    "price_current": 157.59,
+    "return_pct": 53.19
+  },
+  "bea27929-1434-4eb7-86f5-9bef4d0efe74": {
+    "price_at_signal": 141.36,
+    "price_current": 198.61,
+    "return_pct": 40.5
+  },
+  "7c6e7089-3a65-4614-8393-e92a7fe8f62c": {
+    "price_at_signal": 143.4,
+    "price_current": 113.21,
+    "return_pct": -21.05
+  },
+  "333eead2-1136-4c8c-be66-df21cc5fb6b7": {
+    "price_at_signal": 23.31,
+    "price_current": 152.77,
+    "return_pct": 555.38
+  },
+  "1f08e839-b8d3-4253-82fa-0a8ef8073895": {
+    "price_at_signal": 120.82,
+    "price_current": 180.4,
+    "return_pct": 49.31
+  },
+  "7c10ff78-0d03-48d7-99d0-f8c26167b393": {
+    "price_at_signal": 74500.52,
+    "price_current": 208500.0,
+    "return_pct": 179.86
+  },
+  "8c5f2ff2-ad77-4a93-befe-2b824264d2c9": {
+    "price_at_signal": 397.95,
+    "price_current": 391.79,
+    "return_pct": -1.55
+  },
+  "fded6926-5d26-4bf9-a90e-5294e9d4dcee": {
+    "price_at_signal": 618.85,
+    "price_current": 918.05,
+    "return_pct": 48.35
+  },
+  "cc716068-864a-4008-b10c-03c3009882b1": {
+    "price_at_signal": 102.96,
+    "price_current": 37.45,
+    "return_pct": -63.63
+  },
+  "63de4c34-f583-48dd-9d98-781cd6bc0cd3": {
+    "price_at_signal": 218.89,
+    "price_current": 392.78,
+    "return_pct": 79.44
+  },
+  "fcba37cd-b585-4952-85b7-7fda33e716af": {
+    "price_at_signal": 28.56,
+    "price_current": 34.85,
+    "return_pct": 22.02
+  },
+  "5cfd3731-3e79-4a2d-9f49-23cd223a8352": {
+    "price_at_signal": 164890.52,
+    "price_current": 545000.0,
+    "return_pct": 230.52
+  },
+  "37e1da4b-2ec3-435d-89b2-0df90f0028da": {
+    "price_at_signal": 63.67,
+    "price_current": 47.69,
+    "return_pct": -25.1
+  },
+  "36ba20fe-113f-48c0-a5c9-7ad15682c10b": {
+    "price_at_signal": 64080.04,
+    "price_current": 71218.03,
+    "return_pct": 11.14
+  },
+  "2d07e2aa-8513-4660-89ce-45cbb99d3be0": {
+    "price_at_signal": 139.63,
+    "price_current": 140.56,
+    "return_pct": 0.67
+  },
+  "85b183b1-147d-45c6-a6c9-cbfb2c33ef39": {
+    "price_at_signal": 78688.77,
+    "price_current": 71218.03,
+    "return_pct": -9.49
+  },
+  "67d60ace-d9f9-4f35-95c0-42909bbaf1de": {
+    "price_at_signal": 115.77,
+    "price_current": 90.74,
+    "return_pct": -21.62
+  },
+  "7dab687e-1010-41de-af08-fbbf7495c7c0": {
+    "price_at_signal": 90386.65,
+    "price_current": 71218.03,
+    "return_pct": -21.21
+  },
+  "c2990df0-6c72-4004-b45b-208614ebea9c": {
+    "price_at_signal": 157.97,
+    "price_current": 140.56,
+    "return_pct": -11.02
+  },
+  "6494daf0-fb7b-4ddd-92ef-2aab5f7cf26b": {
+    "price_at_signal": 78.05,
+    "price_current": 90.74,
+    "return_pct": 16.26
+  },
+  "84d9cd62-9ce0-4c40-b49a-9b07db38f764": {
+    "price_at_signal": 76.7,
+    "price_current": 90.74,
+    "return_pct": 18.31
+  },
+  "a89c3f36-b513-474d-a359-257e1e219b96": {
+    "price_at_signal": 61.4,
+    "price_current": 90.74,
+    "return_pct": 47.79
+  },
+  "e879ce82-52c8-4a98-bc9c-82b11487c294": {
+    "price_at_signal": 177.18,
+    "price_current": 140.56,
+    "return_pct": -20.67
+  },
+  "5bea70d7-030c-4c0a-80a3-b73e512c8a1d": {
+    "price_at_signal": 400.0,
+    "price_current": 355.0,
+    "return_pct": -11.25
+  },
+  "959702e2-2b1a-4b2b-8c9d-1bf09f879a1b": {
+    "price_at_signal": 170.5,
+    "price_current": 140.56,
+    "return_pct": -17.56
+  },
+  "a79b6bdd-0629-4794-858b-0d09497d5fd2": {
+    "price_at_signal": 3.77,
+    "price_current": 7.0,
+    "return_pct": 85.68
+  },
+  "7e86b49f-9639-42f0-95e0-74bb73a51806": {
+    "price_at_signal": 269.51,
+    "price_current": 140.56,
+    "return_pct": -47.85
+  },
+  "fe2a865c-ce6d-49a7-905b-ae013617906d": {
+    "price_at_signal": 111033.92,
+    "price_current": 71218.03,
+    "return_pct": -35.86
+  },
+  "e9053010-0849-411b-945f-9a04dc3dfa1d": {
+    "price_at_signal": 289.08,
+    "price_current": 140.56,
+    "return_pct": -51.38
+  },
+  "eedee323-bb84-4d1e-a2ac-b3622eccafdb": {
+    "price_at_signal": 117491.35,
+    "price_current": 71218.03,
+    "return_pct": -39.38
+  },
+  "c1f1ad7b-0de0-48b1-a19a-42c40b150d78": {
+    "price_at_signal": 57.59,
+    "price_current": 24.14,
+    "return_pct": -58.08
+  },
+  "910c1cd0-e9b7-4d7a-8424-669ea07d8a88": {
+    "price_at_signal": 34.02,
+    "price_current": 3.73,
+    "return_pct": -89.04
+  },
+  "29ae1204-daa6-4188-a805-cf0752daef08": {
+    "price_at_signal": 19.98,
+    "price_current": 6.89,
+    "return_pct": -65.52
+  },
+  "d4c2ad30-864f-41ff-b07a-111981a3271e": {
+    "price_at_signal": 366.63,
+    "price_current": 140.56,
+    "return_pct": -61.66
+  },
+  "bab0651d-84d2-4d7c-910d-3e83e5e666f7": {
+    "price_at_signal": 61.41,
+    "price_current": 24.14,
+    "return_pct": -60.69
+  },
+  "eabdc496-003d-4024-8b64-198e3f3c4024": {
+    "price_at_signal": 423.22,
+    "price_current": 140.56,
+    "return_pct": -66.79
+  },
+  "6ca78c48-a08f-4be2-a602-6b87a78323d7": {
+    "price_at_signal": 1333.0,
+    "price_current": 355.0,
+    "return_pct": -73.37
+  },
+  "8ea5184b-0e97-44f6-8232-7c4720e6f162": {
+    "price_at_signal": 57.98,
+    "price_current": 90.74,
+    "return_pct": 56.5
+  },
+  "9bd440cd-fbba-4247-bf81-c626b2991e6c": {
+    "price_at_signal": 118003.23,
+    "price_current": 71218.03,
+    "return_pct": -39.65
+  },
+  "d4a1cb5b-d043-4b27-b0d6-d25d58f96585": {
+    "price_at_signal": 396.94,
+    "price_current": 140.56,
+    "return_pct": -64.59
+  },
+  "11ad5e7a-5259-4ea4-9162-e13f2b02ef9a": {
+    "price_at_signal": 1565.0,
+    "price_current": 355.0,
+    "return_pct": -77.32
+  },
+  "2b8d150e-5d57-47ff-9783-436e037cb192": {
+    "price_at_signal": 403.99,
+    "price_current": 140.56,
+    "return_pct": -65.21
+  },
+  "79f3293e-af0f-406e-9acd-409213e11d85": {
+    "price_at_signal": 114.09,
+    "price_current": 98.58,
+    "return_pct": -13.59
+  },
+  "87f97a77-40f9-49c1-ae4f-98e0d65ad4b3": {
+    "price_at_signal": 114.26,
+    "price_current": 75.63,
+    "return_pct": -33.81
+  },
+  "f01e73c6-8bb6-48c6-adab-a21c44c1ded1": {
+    "price_at_signal": 85.85,
+    "price_current": 73.87,
+    "return_pct": -13.95
+  },
+  "70bbb9a8-0a37-4d84-947b-6252d1762ad7": {
+    "price_at_signal": 44.35,
+    "price_current": 90.74,
+    "return_pct": 104.6
+  },
+  "f507a082-49f8-4487-b707-12f48984f69f": {
+    "price_at_signal": 379.76,
+    "price_current": 140.56,
+    "return_pct": -62.99
+  },
+  "3ac8b525-c541-4057-8b2e-aef7fc4ae15a": {
+    "price_at_signal": 105929.05,
+    "price_current": 71218.03,
+    "return_pct": -32.77
+  },
+  "96073a58-ad26-4124-b580-c47773762953": {
+    "price_at_signal": 387.43,
+    "price_current": 140.56,
+    "return_pct": -63.72
+  },
+  "f8274e56-b262-4a37-8dbe-f1071a916991": {
+    "price_at_signal": 24.09,
+    "price_current": 90.74,
+    "return_pct": 276.67
+  },
+  "ecf01e7f-568d-41f5-abf6-87febc99c6f9": {
+    "price_at_signal": 57.15,
+    "price_current": 24.14,
+    "return_pct": -57.76
+  },
+  "7364e478-02a4-459b-8fe7-82af286ac485": {
+    "price_at_signal": 26.66,
+    "price_current": 90.74,
+    "return_pct": 240.36
+  },
+  "41ae4ec4-4ab6-48bf-82aa-1405a0ee094e": {
+    "price_at_signal": 416.03,
+    "price_current": 140.56,
+    "return_pct": -66.21
+  },
+  "4b7d675a-f5e4-4766-82f9-4ecbd5016978": {
+    "price_at_signal": 104696.33,
+    "price_current": 71218.03,
+    "return_pct": -31.98
+  },
+  "84bd1b91-8f67-4385-8503-6a83c9ebb6d7": {
+    "price_at_signal": 94207.31,
+    "price_current": 71218.03,
+    "return_pct": -24.4
+  },
+  "cd6feae4-3dac-437a-abda-a04ba10305c6": {
+    "price_at_signal": 23.76,
+    "price_current": 90.74,
+    "return_pct": 281.9
+  },
+  "952a250e-4906-45b7-913b-d492c6aa53fc": {
+    "price_at_signal": 83684.98,
+    "price_current": 71218.03,
+    "return_pct": -14.9
+  },
+  "d886a0ae-cbe1-4ed3-97b2-669ab563b0da": {
+    "price_at_signal": 23.39,
+    "price_current": 90.74,
+    "return_pct": 287.94
+  },
+  "09e1eb31-1144-4de9-ab87-87d7a75a003a": {
+    "price_at_signal": 79235.34,
+    "price_current": 71218.03,
+    "return_pct": -10.12
+  },
+  "20b43f70-ed6d-4774-86c5-e4bdfa481426": {
+    "price_at_signal": 132.31,
+    "price_current": 132.84,
+    "return_pct": 0.4
+  },
+  "819e58d3-5fbf-4edb-95c5-7c3730c11a52": {
+    "price_at_signal": 11.67,
+    "price_current": 12.03,
+    "return_pct": 3.08
+  },
+  "60315354-8c58-4675-8e66-eddef04bda9d": {
+    "price_at_signal": 61.06,
+    "price_current": 64.23,
+    "return_pct": 5.19
+  },
+  "ac9672ed-9ade-4eb7-aa54-ef1382817c72": {
+    "price_at_signal": 63.02,
+    "price_current": 132.84,
+    "return_pct": 110.79
+  },
+  "6b94fe72-c63f-4fb1-92f0-0ad491857eee": {
+    "price_at_signal": 9.79,
+    "price_current": 6.91,
+    "return_pct": -29.42
+  },
+  "0e8d2e10-6045-4f58-834e-ec33a37c69dc": {
+    "price_at_signal": 75.97,
+    "price_current": 74.9,
+    "return_pct": -1.41
+  },
+  "4b6e6bfa-75a2-4a74-8c44-d6667fa16e66": {
+    "price_at_signal": 18.68,
+    "price_current": 19.71,
+    "return_pct": 5.51
+  },
+  "85a3e06e-d4ac-47f3-99a4-c0e381eac826": {
+    "price_at_signal": 34.95,
+    "price_current": 26.65,
+    "return_pct": -23.75
+  },
+  "b608a481-8a9c-471a-9eab-1fc9b06c7e2a": {
+    "price_at_signal": 41.83,
+    "price_current": 42.21,
+    "return_pct": 0.91
+  },
+  "fac89d45-e5f4-431a-ba13-b1a8c552d785": {
+    "price_at_signal": 576.2,
+    "price_current": 753.69,
+    "return_pct": 30.8
+  },
+  "67dbe314-7f2d-4f99-b6e0-cc6fe61a67ee": {
+    "price_at_signal": 41.83,
+    "price_current": 42.21,
+    "return_pct": 0.91
+  },
+  "fdcc63e8-8875-451e-bb91-0f6c5ae80f9d": {
+    "price_at_signal": 465.54,
+    "price_current": 700.81,
+    "return_pct": 50.54
+  },
+  "33b7e559-40d6-4a9a-9512-f32ac85e348d": {
+    "price_at_signal": 148500.0,
+    "price_current": 127500.0,
+    "return_pct": -14.14
+  },
+  "d034ca04-645e-4425-b834-97be7bc5077c": {
+    "price_at_signal": 63.86,
+    "price_current": 44.3,
+    "return_pct": -30.63
+  },
+  "0602c47e-3793-4a4a-bdf0-8688eab7a438": {
+    "price_at_signal": 31.54,
+    "price_current": 26.65,
+    "return_pct": -15.5
+  },
+  "d3b692a5-6069-405e-85cf-132eae8d6619": {
+    "price_at_signal": 14.93,
+    "price_current": 14.38,
+    "return_pct": -3.68
+  },
+  "99fa2abb-2b11-4cd0-8882-9edc04995d8f": {
+    "price_at_signal": 47950.0,
+    "price_current": 53400.0,
+    "return_pct": 11.37
+  },
+  "d26119b7-fb58-42e1-83a1-15561881b698": {
+    "price_at_signal": 22.5,
+    "price_current": 17.35,
+    "return_pct": -22.89
+  },
+  "d35acab4-bdb8-48f2-abcd-ca471bec7071": {
+    "price_at_signal": 361.33,
+    "price_current": 700.81,
+    "return_pct": 93.95
+  },
+  "38dfc0b6-2613-456d-a430-fc9fb76b00df": {
+    "price_at_signal": 177.49,
+    "price_current": 152.77,
+    "return_pct": -13.93
+  },
+  "0e9684ae-c3e3-4cca-bd14-9da99d105493": {
+    "price_at_signal": 453.12,
+    "price_current": 753.69,
+    "return_pct": 66.33
+  },
+  "9bb033f9-b4fa-41dd-a201-cbe87e0fbabc": {
+    "price_at_signal": 147.45,
+    "price_current": 113.71,
+    "return_pct": -22.88
+  },
+  "bfffc3f5-b0b9-4d67-b85d-c2f186e334ec": {
+    "price_at_signal": 36.59,
+    "price_current": 42.21,
+    "return_pct": 15.36
+  },
+  "a5763059-dfd9-4aba-b559-09ff8d1dacc1": {
+    "price_at_signal": 4.91,
+    "price_current": 3.12,
+    "return_pct": -36.46
+  },
+  "34f4e2a8-1774-4457-b1e7-097dfafc726d": {
+    "price_at_signal": 14.84,
+    "price_current": 15.3,
+    "return_pct": 3.1
+  },
+  "851bb447-666d-4f6b-a134-f6f9ae3036e6": {
+    "price_at_signal": 182.53,
+    "price_current": 180.4,
+    "return_pct": -1.17
+  },
+  "bd3c5e82-5bae-4f79-827a-b4783ac09787": {
+    "price_at_signal": 74.9,
+    "price_current": 82.82,
+    "return_pct": 10.57
+  },
+  "b9af734b-be11-444b-9a15-8700382197eb": {
+    "price_at_signal": 181.34,
+    "price_current": 180.4,
+    "return_pct": -0.52
+  },
+  "727844a5-2bde-4f8b-a115-91dfb539f9f7": {
+    "price_at_signal": 68.48,
+    "price_current": 48.69,
+    "return_pct": -28.9
+  },
+  "b959df59-b441-4310-8c8b-5d3da1d21a5f": {
+    "price_at_signal": 49.97,
+    "price_current": 69.48,
+    "return_pct": 39.04
+  },
+  "47c95c07-4f97-4582-b306-f5f14025ce77": {
+    "price_at_signal": 2.53,
+    "price_current": 2.32,
+    "return_pct": -8.3
+  },
+  "2bdfb1c2-e29e-4d84-9227-f4b3c72d0667": {
+    "price_at_signal": 40.03,
+    "price_current": 19.71,
+    "return_pct": -50.76
+  },
+  "d65d786d-9a58-4081-b1af-357ff2f5f59c": {
+    "price_at_signal": 30.34,
+    "price_current": 12.03,
+    "return_pct": -60.35
+  },
+  "ca5a4dd0-fa48-4156-b328-ae5479af7b05": {
+    "price_at_signal": 294.16,
+    "price_current": 208.46,
+    "return_pct": -29.13
+  },
+  "6c80518a-0828-4f0a-b786-8e9dfbbc9db6": {
+    "price_at_signal": 10.07,
+    "price_current": 6.91,
+    "return_pct": -31.38
+  },
+  "c7302ac3-ab17-44bd-922f-8432b825d600": {
+    "price_at_signal": 4.62,
+    "price_current": 3.32,
+    "return_pct": -28.14
+  },
+  "f8741c77-83b8-407a-8662-21a127c0ab4c": {
+    "price_at_signal": 36.63,
+    "price_current": 64.23,
+    "return_pct": 75.35
+  },
+  "0039d8ff-1450-497d-80b3-3bb2cff1b1e0": {
+    "price_at_signal": 9.86,
+    "price_current": 9.06,
+    "return_pct": -8.11
+  },
+  "6434a3fc-cc72-4ab5-b870-7893100c32e3": {
+    "price_at_signal": 13.91,
+    "price_current": 9.06,
+    "return_pct": -34.87
+  },
+  "a8cfeeda-076c-4449-a70e-a3ffe707c113": {
+    "price_at_signal": 59.37,
+    "price_current": 32.38,
+    "return_pct": -45.46
+  },
+  "62ca66d5-9794-4252-b886-40eafc4dbbad": {
+    "price_at_signal": 3.4,
+    "price_current": 2.32,
+    "return_pct": -31.76
+  },
+  "f4248a20-2ac0-4617-8b08-f88f98d5076e": {
+    "price_at_signal": 5.16,
+    "price_current": 4.06,
+    "return_pct": -21.32
+  },
+  "f7ebf863-d47c-431c-8846-ac3a819b8a1a": {
+    "price_at_signal": 17.05,
+    "price_current": 12.45,
+    "return_pct": -26.98
+  },
+  "f1d6bb28-6880-4e67-a78a-f1404e4dea36": {
+    "price_at_signal": 183.14,
+    "price_current": 180.4,
+    "return_pct": -1.5
+  },
+  "d3a46f06-ff8d-4d88-9b40-f7bd0b266b19": {
+    "price_at_signal": 185.52,
+    "price_current": 180.4,
+    "return_pct": -2.76
+  },
+  "fddc48c2-11bb-4433-9fa2-7edfc8362b3d": {
+    "price_at_signal": 33.95,
+    "price_current": 12.03,
+    "return_pct": -64.57
+  },
+  "065f3cb6-7306-408c-a4f4-9c27fbf11192": {
+    "price_at_signal": 47.02,
+    "price_current": 42.21,
+    "return_pct": -10.23
+  },
+  "cef59fda-02a3-4cc1-9fd4-a80075cb5703": {
+    "price_at_signal": 5.78,
+    "price_current": 6.91,
+    "return_pct": 19.55
+  },
+  "76b4eea6-516a-4842-9865-63b8d0b67609": {
+    "price_at_signal": 156.18,
+    "price_current": 152.77,
+    "return_pct": -2.18
+  },
+  "d7feaa2e-f811-4271-85b9-57de3f79b17c": {
+    "price_at_signal": 44.75,
+    "price_current": 69.48,
+    "return_pct": 55.26
+  },
+  "01eac5d3-0c90-49af-acfa-71602ea222f0": {
+    "price_at_signal": 232.89,
+    "price_current": 284.33,
+    "return_pct": 22.09
+  },
+  "757a86d8-85ec-4457-8b21-66ab07416f13": {
+    "price_at_signal": 2073.14,
+    "price_current": 2193.26,
+    "return_pct": 5.79
+  },
+  "dccd4385-06a7-479a-bcd1-8022b7402743": {
+    "price_at_signal": 86.87,
+    "price_current": 89.98,
+    "return_pct": 3.58
+  },
+  "88edd601-1922-4581-b4b9-07d024c9c410": {
+    "price_at_signal": 1.4,
+    "price_current": 1.46,
+    "return_pct": 4.29
+  },
+  "8e882b3c-cbe2-4b23-a307-568c7aeca3fd": {
+    "price_at_signal": 70841.12,
+    "price_current": 71218.03,
+    "return_pct": 0.53
+  },
+  "7dc80728-d06f-4ce7-9000-18188c33785d": {
+    "price_at_signal": 0.09,
+    "price_current": 0.09,
+    "return_pct": 0.0
+  },
+  "601fa634-9f59-4c1c-a84c-b323302ee29b": {
+    "price_at_signal": 65881.8,
+    "price_current": 71218.03,
+    "return_pct": 8.1
+  },
+  "8506c971-a452-47d3-8850-1ba31d4ebff8": {
+    "price_at_signal": 1930.76,
+    "price_current": 2193.26,
+    "return_pct": 13.6
+  },
+  "ff69f667-b72d-4401-97cb-e9aa7722780c": {
+    "price_at_signal": 1.36,
+    "price_current": 1.46,
+    "return_pct": 7.35
+  },
+  "d604fe3e-a6c9-411a-8045-3d5ffe6d915e": {
+    "price_at_signal": 175.85,
+    "price_current": 202.29,
+    "return_pct": 15.04
+  },
+  "fb2eb0e8-470d-4014-b63f-81e9bd7e2794": {
+    "price_at_signal": 69926.92,
+    "price_current": 71218.03,
+    "return_pct": 1.85
+  },
+  "630925c1-347e-4254-b260-e06445e89655": {
+    "price_at_signal": 2037.12,
+    "price_current": 2193.26,
+    "return_pct": 7.66
+  },
+  "32a345ed-6b93-4afd-9a19-ea1c630ac842": {
+    "price_at_signal": 1.39,
+    "price_current": 1.46,
+    "return_pct": 5.04
+  },
+  "b07ad248-a539-4c01-9cae-713ffa1c78ea": {
+    "price_at_signal": 85.84,
+    "price_current": 89.98,
+    "return_pct": 4.82
+  },
+  "0b46d926-5bab-4a12-894d-be49511fb481": {
+    "price_at_signal": 12880.027095,
+    "price_current": 13654.077774,
+    "return_pct": 6.01,
+    "signal_date": "2026-02-17",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "070309e0-36c5-4bf2-b815-5d98911edc20": {
+    "price_at_signal": 133.88,
+    "price_current": 140.56,
+    "return_pct": 4.99
+  },
+  "c6f5a90e-25b2-410f-96d3-80079e5195c9": {
+    "price_at_signal": 2048.53,
+    "price_current": 2193.26,
+    "return_pct": 7.07
+  },
+  "97c163b3-b62e-4a57-a9fe-9c2ef898daa1": {
+    "price_at_signal": 11669.295404,
+    "price_current": 13654.077774,
+    "return_pct": 17.01,
+    "signal_date": "2026-02-06",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "c4612bf7-a251-47f9-8c51-7fc5064f5b48": {
+    "price_at_signal": 2.08,
+    "price_current": 1.46,
+    "return_pct": -29.81
+  },
+  "70c52189-247a-42a0-90b0-f3d81779de66": {
+    "price_at_signal": 19128.099762,
+    "price_current": 13654.077774,
+    "return_pct": -28.62,
+    "signal_date": "2026-01-10",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "c91199bd-ba61-44da-b350-9e7de4d42fa1": {
+    "price_at_signal": 66221.84,
+    "price_current": 71218.03,
+    "return_pct": 7.54
+  },
+  "c96b013c-6aab-422a-bb1f-0f8e4c2adb0b": {
+    "price_at_signal": 123.0,
+    "price_current": 140.56,
+    "return_pct": 14.28
+  },
+  "82d7a8cb-d23d-402a-8e58-e077c2590afb": {
+    "price_at_signal": 2702.38,
+    "price_current": 2193.26,
+    "return_pct": -18.84
+  },
+  "ef7c5974-eb33-489b-aaa4-f1d851deafb9": {
+    "price_at_signal": 117.36,
+    "price_current": 89.98,
+    "return_pct": -23.33
+  },
+  "316802a7-85ae-4ef5-b464-5822ef499104": {
+    "price_at_signal": 0.13,
+    "price_current": 0.09,
+    "return_pct": -30.77
+  },
+  "5a892488-490a-4fc5-a1bc-6254190e9129": {
+    "price_at_signal": 20748.644036,
+    "price_current": 13654.077774,
+    "return_pct": -34.19,
+    "signal_date": "2025-12-11",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "39e80bce-c098-4c48-8e85-453d09249af9": {
+    "price_at_signal": 0.15,
+    "price_current": 0.09,
+    "return_pct": -40.0
+  },
+  "724b48f3-66ce-457f-a510-82ec8ed75252": {
+    "price_at_signal": 0.12,
+    "price_current": 0.09,
+    "return_pct": -25.0
+  },
+  "d55c31ed-57b5-4886-90cb-ad58edd3d558": {
+    "price_at_signal": 87341.89,
+    "price_current": 71218.03,
+    "return_pct": -18.46
+  },
+  "c1997054-0722-4336-bcd4-6f9529917729": {
+    "price_at_signal": 2957.94,
+    "price_current": 2193.26,
+    "return_pct": -25.85
+  },
+  "eea1f5ba-39bd-4c42-9229-1620d31d78ec": {
+    "price_at_signal": 2.0,
+    "price_current": 1.46,
+    "return_pct": -27.0
+  },
+  "096a2f8f-ee2f-415f-876b-6a3df2040661": {
+    "price_at_signal": 3415.28,
+    "price_current": 2193.26,
+    "return_pct": -35.78
+  },
+  "8a1c4456-db80-46a2-915c-df0435e9758b": {
+    "price_at_signal": 103891.84,
+    "price_current": 71218.03,
+    "return_pct": -31.45
+  },
+  "559fee63-3a1f-437b-bf37-107b7ede5d61": {
+    "price_at_signal": 3425.17,
+    "price_current": 2193.26,
+    "return_pct": -35.97
+  },
+  "5e9b7b02-d5c3-46cf-953d-c8cdf56a78a1": {
+    "price_at_signal": 2.6,
+    "price_current": 1.46,
+    "return_pct": -43.85
+  },
+  "a5d17fb1-3b56-4737-b54f-a71b2eb99254": {
+    "price_at_signal": 0.2,
+    "price_current": 0.09,
+    "return_pct": -55.0
+  },
+  "dd982d05-69b6-4ac6-ae96-9a92db93a8f0": {
+    "price_at_signal": 114056.09,
+    "price_current": 71218.03,
+    "return_pct": -37.56
+  },
+  "0fd5d3ee-7b28-4df7-be7a-96d66e958b74": {
+    "price_at_signal": 4145.96,
+    "price_current": 2193.26,
+    "return_pct": -47.1
+  },
+  "eb59c049-2b98-4850-b448-1eac81ed49a7": {
+    "price_at_signal": 208.74,
+    "price_current": 89.98,
+    "return_pct": -56.89
+  },
+  "1897ed5c-e75c-4350-a9bd-32cbb5f7206a": {
+    "price_at_signal": 120681.26,
+    "price_current": 71218.03,
+    "return_pct": -40.99
+  },
+  "d1ff7ef2-82f8-446c-bc78-5bd212ca9c8f": {
+    "price_at_signal": 4487.92,
+    "price_current": 2193.26,
+    "return_pct": -51.13
+  },
+  "67a627ff-26bd-4c9e-a996-1d2003fd037d": {
+    "price_at_signal": 234.86,
+    "price_current": 89.98,
+    "return_pct": -61.69
+  },
+  "41addf94-d1b0-49cd-bbd8-7da1b6bdef3e": {
+    "price_at_signal": 111530.55,
+    "price_current": 71218.03,
+    "return_pct": -36.14
+  },
+  "088b63e7-9b69-4cbe-9d36-75c8372e6ddb": {
+    "price_at_signal": 4309.04,
+    "price_current": 2193.26,
+    "return_pct": -49.1
+  },
+  "b4889945-ee30-4209-87f3-1cd3eb4a04ad": {
+    "price_at_signal": 2.95,
+    "price_current": 1.46,
+    "return_pct": -50.51
+  },
+  "540b4e91-ca5c-4ae6-85c0-a9040f09253e": {
+    "price_at_signal": 3.04,
+    "price_current": 1.46,
+    "return_pct": -51.97
+  },
+  "d5180bab-0641-48ac-9afa-df2f4709ba15": {
+    "price_at_signal": 0.27,
+    "price_current": 0.09,
+    "return_pct": -66.67
+  },
+  "aeb42524-399e-4157-b1ea-dd8e4d5a5abd": {
+    "price_at_signal": 3232.76,
+    "price_current": 2193.26,
+    "return_pct": -32.16
+  },
+  "579870a0-acac-4e3c-9772-7512ef3b1c37": {
+    "price_at_signal": 99697.49,
+    "price_current": 71218.03,
+    "return_pct": -28.57
+  },
+  "e6b703db-5a2e-4504-a772-0b1d6806792a": {
+    "price_at_signal": 3914.33,
+    "price_current": 2193.26,
+    "return_pct": -43.97
+  },
+  "e4da50d3-33e3-488c-bbd9-e831f1a4af95": {
+    "price_at_signal": 175.49,
+    "price_current": 89.98,
+    "return_pct": -48.73
+  },
+  "8a2e8207-600a-4046-89d7-b51e3ee5a7c8": {
+    "price_at_signal": 0.76,
+    "price_current": 0.76,
+    "return_pct": 0.0
+  },
+  "5baf7e11-eea3-4423-9b29-a024b0190308": {
+    "price_at_signal": 0.77,
+    "price_current": 0.27,
+    "return_pct": -64.94
+  },
+  "c58025c5-da9a-4413-bc85-5ac486e9a71a": {
+    "price_at_signal": 3.14,
+    "price_current": 1.46,
+    "return_pct": -53.5
+  },
+  "51c27372-95d2-4018-85c6-707c961aa5bd": {
+    "price_at_signal": 24973.401206,
+    "price_current": 13654.077774,
+    "return_pct": -45.33,
+    "signal_date": "2025-07-24",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "8e3ee08c-e35a-45dc-9bf1-524adab3b720": {
+    "price_at_signal": 119995.41,
+    "price_current": 71218.03,
+    "return_pct": -40.65
+  },
+  "2fa9a368-9127-46e3-95b9-8a27744556e1": {
+    "price_at_signal": 205.7,
+    "price_current": 89.98,
+    "return_pct": -56.26
+  },
+  "c35fffcf-b60c-40b6-9c48-359ad3c37ab7": {
+    "price_at_signal": 3.55,
+    "price_current": 1.46,
+    "return_pct": -58.87
+  },
+  "b68ce0f8-1c90-4326-a9c4-532eabad4c57": {
+    "price_at_signal": 27020.965932,
+    "price_current": 13654.077774,
+    "return_pct": -49.47,
+    "signal_date": "2025-07-22",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "c690cdc2-1199-48d2-bf78-b566ad6a0227": {
+    "price_at_signal": 0.27,
+    "price_current": 0.09,
+    "return_pct": -66.67
+  },
+  "e75d2240-987d-437e-945b-fa00f8b7f031": {
+    "price_at_signal": 0.9,
+    "price_current": 0.27,
+    "return_pct": -70.0
+  },
+  "c6a041fc-87c0-4de8-8145-23a57b2107cc": {
+    "price_at_signal": 3139.89,
+    "price_current": 2193.26,
+    "return_pct": -30.15
+  },
+  "15eb7c1f-dadb-45bb-a99e-753d3f42e5a5": {
+    "price_at_signal": 163.95,
+    "price_current": 89.98,
+    "return_pct": -45.12
+  },
+  "f414eaae-6a45-4d37-9d0f-e758c0b122c4": {
+    "price_at_signal": 0.17,
+    "price_current": 0.09,
+    "return_pct": -47.06
+  },
+  "30bb893e-ed45-4fef-83ff-fae86180d805": {
+    "price_at_signal": 2.26,
+    "price_current": 1.46,
+    "return_pct": -35.4
+  },
+  "2e59320b-5382-45fa-ae66-4b1374eeb572": {
+    "price_at_signal": 139.06,
+    "price_current": 89.98,
+    "return_pct": -35.29
+  },
+  "a7624aff-5184-4e2b-9702-838c9ee27c99": {
+    "price_at_signal": 2448.01,
+    "price_current": 2193.26,
+    "return_pct": -10.41
+  },
+  "SHIB": {
+    "name": "Shiba Inu USD",
+    "ticker": "SHIB",
+    "market": "CRYPTO",
+    "current_price": 5.7712e-06,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "AVAX": {
+    "name": "Avalanche USD",
+    "ticker": "AVAX",
+    "market": "CRYPTO",
+    "current_price": 9.618401,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "SUI": {
+    "name": "Sui USD",
+    "ticker": "SUI",
+    "market": "CRYPTO",
+    "current_price": 0.9623227,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "KAIA": {
+    "name": "Kaia USD",
+    "ticker": "KAIA",
+    "market": "CRYPTO",
+    "current_price": 0.05255464,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "PEPE": {
+    "name": "PEPEGOLD USD",
+    "ticker": "PEPE",
+    "market": "CRYPTO",
+    "current_price": 6.1957e-06,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "HBAR": {
+    "name": "Hedera USD",
+    "ticker": "HBAR",
+    "market": "CRYPTO",
+    "current_price": 0.09525191,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "ALGO": {
+    "name": "Algorand USD",
+    "ticker": "ALGO",
+    "market": "CRYPTO",
+    "current_price": 0.09041954,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "LTC": {
+    "name": "Litecoin USD",
+    "ticker": "LTC",
+    "market": "CRYPTO",
+    "current_price": 55.720863,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "USDT": {
+    "name": "Tether USDt USD",
+    "ticker": "USDT",
+    "market": "CRYPTO",
+    "current_price": 1.000005,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "USDC": {
+    "name": "USDC USD",
+    "ticker": "USDC",
+    "market": "CRYPTO",
+    "current_price": 0.99990463,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "BCH": {
+    "name": "Bitcoin Cash USD",
+    "ticker": "BCH",
+    "market": "CRYPTO",
+    "current_price": 457.3562,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "BABY": {
+    "name": "Babytoken USD",
+    "ticker": "BABY",
+    "market": "CRYPTO",
+    "current_price": 0.0002046624,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "BNB": {
+    "name": "BNB USD",
+    "ticker": "BNB",
+    "market": "CRYPTO",
+    "current_price": 650.1738,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "ONDO": {
+    "name": "Ondo USD",
+    "ticker": "ONDO",
+    "market": "CRYPTO",
+    "current_price": 0.2626136,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "POL": {
+    "name": "Proof Of Liquidity USD",
+    "ticker": "POL",
+    "market": "CRYPTO",
+    "current_price": 0.008241397,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "MORPHO": {
+    "name": "Morpho Network USD",
+    "ticker": "MORPHO",
+    "market": "CRYPTO",
+    "current_price": 0.00181254,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "MNT": {
+    "name": "microNFT USD",
+    "ticker": "MNT",
+    "market": "CRYPTO",
+    "current_price": 0.12233496,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "ETC": {
+    "name": "Ethereum Classic USD",
+    "ticker": "ETC",
+    "market": "CRYPTO",
+    "current_price": 8.504842,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "HYPE": {
+    "name": "HYPE",
+    "ticker": "HYPE",
+    "market": "CRYPTO",
+    "current_price": 39.55,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "TRX": {
+    "name": "TRON USD",
+    "ticker": "TRX",
+    "market": "CRYPTO",
+    "current_price": 0.30380234,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "STX": {
+    "name": "Stox USD",
+    "ticker": "STX",
+    "market": "CRYPTO",
+    "current_price": 0.0028344663,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "2ad9afc2-b6a2-4719-8b49-3a3718c6b0c6": {
+    "price_at_signal": 0.055601,
+    "price_current": 0.05297118,
+    "return_pct": -4.73
+  },
+  "4addfa85-aa2c-4198-9e0a-a700523600a8": {
+    "price_at_signal": 0.008241,
+    "price_current": 0.008241397,
+    "return_pct": 0.0
+  },
+  "LINK": {
+    "name": "체인링크",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "current_price": 13654.077774,
+    "currency": "KRW",
+    "last_updated": "2026-03-19",
+    "source": "coingecko"
+  },
+  "b5b50841-1987-44fa-b1e7-d046e515b7e6": {
+    "price_at_signal": 18486.923077,
+    "price_current": 13654.077774,
+    "return_pct": -26.14,
+    "signal_date": "2025-06-07",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "a08857f5-d478-42de-8e5e-b720be253b21": {
+    "price_at_signal": 20227.747882,
+    "price_current": 13654.077774,
+    "return_pct": -32.5,
+    "signal_date": "2026-01-17",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "5ec22222-6dae-47b9-9b5d-ebc3f71dc75a": {
+    "price_at_signal": 13678.566281,
+    "price_current": 13654.077774,
+    "return_pct": -0.18,
+    "signal_date": "2026-02-02",
+    "ticker": "LINK",
+    "market": "CRYPTO",
+    "currency": "KRW"
+  },
+  "54b10e62-d2f4-4e3c-a3a6-d21b25e11baf": {
+    "price_at_signal": 0.252256,
+    "price_current": 0.09525191,
+    "return_pct": -62.24
+  },
+  "88212ced-1c3c-410c-a5ed-f1bc61baafeb": {
+    "price_at_signal": 1.54,
+    "price_current": 1.46,
+    "return_pct": -5.19
+  },
+  "1ff9925f-f4cd-4e24-a838-3e10f1517ebf": {
+    "price_at_signal": 235.42,
+    "price_current": 89.98,
+    "return_pct": -61.78
+  },
+  "c5613b25-14fd-49f5-8577-2cfacb2ec512": {
+    "price_at_signal": 3058.95,
+    "price_current": 2193.26,
+    "return_pct": -28.3
+  },
+  "139f1801-d13b-432e-aa77-1a7021c5b387": {
+    "price_at_signal": 209.22,
+    "price_current": 89.98,
+    "return_pct": -56.99
+  },
+  "f85054db-380f-4dfb-a2bd-15177afe3187": {
+    "price_at_signal": 121451.38,
+    "price_current": 71218.03,
+    "return_pct": -41.36
+  },
+  "27b1c4ad-d565-4cf4-88e6-260c9181a428": {
+    "price_at_signal": 108808.07,
+    "price_current": 71218.03,
+    "return_pct": -34.55
+  },
+  "e71d39b0-dc98-472a-9048-96457c49366b": {
+    "price_at_signal": 119995.41,
+    "price_current": 71218.03,
+    "return_pct": -40.65
+  },
+  "78df34da-f89d-44b6-afa1-9ec34c1ecd7e": {
+    "price_at_signal": 2.16,
+    "price_current": 1.46,
+    "return_pct": -32.41
+  },
+  "823d3fac-b8ab-4652-a762-9eb1b2d5d5d8": {
+    "price_at_signal": 127.05,
+    "price_current": 89.98,
+    "return_pct": -29.18
+  },
+  "d2ca67b7-f173-4adf-825b-32c4be283b01": {
+    "price_at_signal": 143.73,
+    "price_current": 89.98,
+    "return_pct": -37.4
+  },
+  "65cb7020-8641-45c4-aef9-ddfb97942d93": {
+    "price_at_signal": 0.355443,
+    "price_current": 0.2655911,
+    "return_pct": -25.28
+  },
+  "26037fcb-7b90-4d54-bb36-8bff55b486c1": {
+    "price_at_signal": 0.291963,
+    "price_current": 0.09041954,
+    "return_pct": -69.03
+  },
+  "c1a64ccf-2d30-43ad-b3b5-d4bf15d9308d": {
+    "price_at_signal": 2948.0,
+    "price_current": 2193.26,
+    "return_pct": -25.6
+  },
+  "67b11c73-8a1a-43c1-a3a9-354f5dd2c0d2": {
+    "price_at_signal": 87802.16,
+    "price_current": 71218.03,
+    "return_pct": -18.89
+  },
+  "ff7d5c2e-36b6-42bb-aca5-f319de8af66a": {
+    "price_at_signal": 124.65,
+    "price_current": 89.98,
+    "return_pct": -27.81
+  },
+  "16924dbc-85f6-4065-9b4a-f7fbf929095b": {
+    "price_at_signal": 1.95,
+    "price_current": 1.46,
+    "return_pct": -25.13
+  },
+  "0d7bace7-29c3-4a28-ab09-d45fc2ecfe03": {
+    "price_at_signal": 2.23,
+    "price_current": 1.46,
+    "return_pct": -34.53
+  },
+  "dfa46769-63bd-4764-8789-bf2237aa5289": {
+    "price_at_signal": 21.2,
+    "price_current": 9.618401,
+    "return_pct": -54.63
+  },
+  "a423bb80-77e1-443e-a92d-dda3da998cf2": {
+    "price_at_signal": 1.95,
+    "price_current": 1.46,
+    "return_pct": -25.13
+  },
+  "f4037556-5f8e-41da-b6ed-4d22ce7cce13": {
+    "price_at_signal": 0.14,
+    "price_current": 0.09,
+    "return_pct": -35.71
+  },
+  "25029249-6db1-4de9-be9c-45334d54519d": {
+    "price_at_signal": 114.8,
+    "price_current": 55.720863,
+    "return_pct": -51.46
+  },
+  "88e96058-5ce3-43f0-9782-eedda62bc139": {
+    "price_at_signal": 0.731417,
+    "price_current": 0.2655911,
+    "return_pct": -63.69
+  },
+  "3528cfbb-3c97-48c8-a6df-47319b0e03a4": {
+    "price_at_signal": 289.87,
+    "price_current": 140.56,
+    "return_pct": -51.51
+  },
+  "ed6193da-63fa-4028-ac68-f9de732447cb": {
+    "price_at_signal": 87177.1,
+    "price_current": 71218.03,
+    "return_pct": -18.31
+  },
+  "705789d1-fcb0-46b5-89a8-7ab0c4168a79": {
+    "price_at_signal": 65969.78,
+    "price_current": 71218.03,
+    "return_pct": 7.96
+  },
+  "f65dc430-911a-4231-b56f-b844310d2534": {
+    "price_at_signal": 68788.19,
+    "price_current": 71218.03,
+    "return_pct": 3.53
+  },
+  "957ab299-42eb-416c-a1aa-136f96cc9006": {
+    "price_at_signal": 105615.62,
+    "price_current": 71218.03,
+    "return_pct": -32.57
+  },
+  "93696ccb-92c7-4a1c-9dab-e84e24d9ba1c": {
+    "price_at_signal": 3.55,
+    "price_current": 1.46,
+    "return_pct": -58.87
+  },
+  "53c57c48-2757-45b0-b90e-71a2235ec665": {
+    "price_at_signal": 3.42,
+    "price_current": 1.46,
+    "return_pct": -57.31
+  },
+  "17530213-e302-421a-b496-938b2713a7c4": {
+    "price_at_signal": 328.4,
+    "price_current": 140.56,
+    "return_pct": -57.2
+  },
+  "d7d7abf0-11b7-40c6-9115-8602de14b4ab": {
+    "price_at_signal": 2.82,
+    "price_current": 1.46,
+    "return_pct": -48.23
+  },
+  "ef50b5d8-682f-42a6-90c7-c379188c47d2": {
+    "price_at_signal": 2.97,
+    "price_current": 1.46,
+    "return_pct": -50.84
+  },
+  "b91bfa14-bac8-4360-b6db-3a56c4463aef": {
+    "price_at_signal": 111222.06,
+    "price_current": 71218.03,
+    "return_pct": -35.97
+  },
+  "9cb063b7-2f57-4d03-9b56-2f9789ac6923": {
+    "price_at_signal": 118003.23,
+    "price_current": 71218.03,
+    "return_pct": -39.65
+  },
+  "0bcb0147-c437-4e18-bb64-704dcd83bf20": {
+    "price_at_signal": 177.38,
+    "price_current": 89.98,
+    "return_pct": -49.27
+  },
+  "d1818439-052a-4e55-90b4-d15e4b7504ba": {
+    "price_at_signal": 396.73,
+    "price_current": 392.78,
+    "return_pct": -1.0
+  },
+  "fec97944-4e60-4345-bf91-b0da25bd7efc": {
+    "price_at_signal": 0.0003,
+    "price_current": 0.000300194,
+    "return_pct": 0.06
+  },
+  "0a597da1-6004-4007-8378-768690e48967": {
+    "price_at_signal": 0.0003,
+    "price_current": 0.000300194,
+    "return_pct": 0.06
+  },
+  "9fe2063b-5d29-4b8b-b765-6956ec3e9735": {
+    "price_at_signal": 2227.56,
+    "price_current": 2193.26,
+    "return_pct": -1.54
+  },
+  "87ebec8c-949f-4c55-947d-3516d9a13dbf": {
+    "price_at_signal": 150.13,
+    "price_current": 89.98,
+    "return_pct": -40.07
+  },
+  "c696f4d7-57a7-4073-8a10-e22771e1d8f4": {
+    "price_at_signal": 143.36,
+    "price_current": 89.98,
+    "return_pct": -37.23
+  },
+  "dc7a89e5-21d7-4bf9-8086-6c653ac700e5": {
+    "price_at_signal": 0.91,
+    "price_current": 0.27,
+    "return_pct": -70.33
+  },
+  "452ae3d6-10a0-4526-baf5-6697d11cbecb": {
+    "price_at_signal": 70120.78,
+    "price_current": 71218.03,
+    "return_pct": 1.56
+  },
+  "ab1ef45a-2711-4390-a8cf-3adbfc3c5351": {
+    "price_at_signal": 2103.57,
+    "price_current": 2193.26,
+    "return_pct": 4.26
+  },
+  "62118729-77c2-4ff3-942e-bf967433cc5d": {
+    "price_at_signal": 469.61,
+    "price_current": 457.3562,
+    "return_pct": -2.61
+  },
+  "c81ff696-daa1-42ff-a4c1-713eb3191c5c": {
+    "price_at_signal": 0.000205,
+    "price_current": 0.0002046624,
+    "return_pct": -0.16
+  },
+  "510a208f-1af1-47bf-8feb-8ed915fb1647": {
+    "price_at_signal": 673.7,
+    "price_current": 650.1738,
+    "return_pct": -3.49
+  },
+  "b4788953-90fa-47f9-ba7e-22d271c45181": {
+    "price_at_signal": 0.26214,
+    "price_current": 0.2655911,
+    "return_pct": 1.32
+  },
+  "0746200e-f44f-41be-891c-da5008471d24": {
+    "price_at_signal": 8e-06,
+    "price_current": 5.7932e-06,
+    "return_pct": -27.58
+  },
+  "d13153f2-0bbb-4980-a5ef-c87e2ad75e64": {
+    "price_at_signal": 6e-06,
+    "price_current": 6.1957e-06,
+    "return_pct": 3.26
+  },
+  "a76a000b-cdef-4051-8d1d-adc7295cfd6d": {
+    "price_at_signal": 8e-06,
+    "price_current": 5.7932e-06,
+    "return_pct": -27.58
+  },
+  "ff87a030-b4e9-4380-a4b8-6bba1ca11c58": {
+    "price_at_signal": 194.46,
+    "price_current": 89.98,
+    "return_pct": -53.73
+  },
+  "b36ce404-2ebe-4e9f-9c05-a7026042402d": {
+    "price_at_signal": 12.89,
+    "price_current": 9.618401,
+    "return_pct": -25.38
+  },
+  "85af177c-c370-41b3-ae13-c875f9a1d097": {
+    "price_at_signal": 8e-06,
+    "price_current": 5.7932e-06,
+    "return_pct": -27.58
+  },
+  "7fb0bcd4-b0de-4e08-be44-9d55958a57f9": {
+    "price_at_signal": 2.56,
+    "price_current": 1.46,
+    "return_pct": -42.97
+  },
+  "07e0a2dd-f785-45f6-b907-b93d91dd6aee": {
+    "price_at_signal": 0.001813,
+    "price_current": 0.00181254,
+    "return_pct": -0.03
+  },
+  "627b7127-d7e8-46da-991a-6fd0eefa275d": {
+    "price_at_signal": 1e-05,
+    "price_current": 5.7932e-06,
+    "return_pct": -42.07
+  },
+  "0c7f8088-8f14-4311-ba05-26d43113384e": {
+    "price_at_signal": 6e-06,
+    "price_current": 6.1957e-06,
+    "return_pct": 3.26
+  },
+  "d33aa45c-c9f6-4057-be4d-b33627f6bfe1": {
+    "price_at_signal": 0.122335,
+    "price_current": 0.12233496,
+    "return_pct": -0.0
+  },
+  "ef532087-106c-4dff-8c20-ecf3531806e5": {
+    "price_at_signal": 20.48,
+    "price_current": 8.504842,
+    "return_pct": -58.47
+  },
+  "fadbd6e7-505a-4255-a8df-ca2abef71bb4": {
+    "price_at_signal": 0.156303,
+    "price_current": 0.05297118,
+    "return_pct": -66.11
+  },
+  "7f6ad9e8-980b-41ee-b7ec-f677794ef6fe": {
+    "price_at_signal": 5e-06,
+    "price_current": 5.4038e-06,
+    "return_pct": 8.08
+  },
+  "f3468b88-1f38-44d6-a634-393bfef91657": {
+    "price_at_signal": 0.314221,
+    "price_current": 0.30380234,
+    "return_pct": -3.32
+  },
+  "58ac6aac-7e6a-4029-b52a-f9fec999dc45": {
+    "price_at_signal": 0.002834,
+    "price_current": 0.0028344663,
+    "return_pct": 0.02
+  },
+  "ad6f5f70-8a64-4fda-8a5f-80d20090b66d": {
+    "price_at_signal": 2.53,
+    "price_current": 1.46,
+    "return_pct": -42.29
+  },
+  "b67150f4-7604-4d25-9de8-e9f9d5f721b7": {
+    "price_at_signal": 89102.57,
+    "price_current": 71218.03,
+    "return_pct": -20.07
+  },
+  "337e9e75-0b03-49c7-91f2-82b76bc558ab": {
+    "price_at_signal": 91985.32,
+    "price_current": 71218.03,
+    "return_pct": -22.58
+  },
+  "d3767885-9fd5-43e2-bfca-9e2f66708e01": {
+    "price_at_signal": 94339.49,
+    "price_current": 71218.03,
+    "return_pct": -24.51
+  },
+  "f8c44bb2-084b-427a-953f-90123717ff6f": {
+    "price_at_signal": 87250.43,
+    "price_current": 71218.03,
+    "return_pct": -18.38
+  },
+  "f7fd8d86-b273-4a5e-a24c-ae8db8852737": {
+    "price_at_signal": 92141.62,
+    "price_current": 71218.03,
+    "return_pct": -22.71
+  },
+  "fd4e6203-618c-44a1-977d-7c60eb6dd333": {
+    "price_at_signal": 91465.99,
+    "price_current": 71218.03,
+    "return_pct": -22.14
+  },
+  "fd05f262-d8bb-461c-9834-2678313f6cb0": {
+    "price_at_signal": 85090.69,
+    "price_current": 71218.03,
+    "return_pct": -16.3
+  },
+  "2dc692b4-2299-4094-b6fb-ccd764bf26e1": {
+    "price_at_signal": 99756.91,
+    "price_current": 71218.03,
+    "return_pct": -28.61
+  },
+  "c639f604-d966-49e4-a095-0787ce695763": {
+    "price_at_signal": 3308.35,
+    "price_current": 2193.26,
+    "return_pct": -33.71
+  },
+  "c1910fd5-e57b-40c2-ae9d-f0280aa83855": {
+    "price_at_signal": 3.25,
+    "price_current": 1.46,
+    "return_pct": -55.08
+  },
+  "8a0adc1b-a899-46a1-b71e-ae5418e75de8": {
+    "price_at_signal": 211.23,
+    "price_current": 89.98,
+    "return_pct": -57.4
+  },
+  "d9788382-28d5-40de-a632-2c16a8e976ca": {
+    "price_at_signal": 0.38,
+    "price_current": 0.09,
+    "return_pct": -76.32
+  },
+  "2c9ed0bb-591d-440f-8f91-4d4fc34714c2": {
+    "price_at_signal": 96623.87,
+    "price_current": 71218.03,
+    "return_pct": -26.29
+  },
+  "0567b3f9-42c0-4e86-9bff-007165e24a93": {
+    "price_at_signal": 95549.15,
+    "price_current": 71218.03,
+    "return_pct": -25.46
+  },
+  "cf5b9b15-3b1d-4487-89ac-22a395d2df85": {
+    "price_at_signal": 76778.87,
+    "price_current": 71218.03,
+    "return_pct": -7.24
+  },
+  "8f697a79-462a-4652-895e-e0240123280a": {
+    "price_at_signal": 3022.21,
+    "price_current": 2193.26,
+    "return_pct": -27.43
+  },
+  "5d8e2817-7b9d-4f75-9ba0-0e875eeef5e1": {
+    "price_at_signal": 3072.19,
+    "price_current": 2193.26,
+    "return_pct": -28.61
+  },
+  "bf6746e9-3472-438b-a266-2dd6dd2a9977": {
+    "price_at_signal": 2971.42,
+    "price_current": 2193.26,
+    "return_pct": -26.19
+  },
+  "b971bfb4-5df2-49d3-bb1a-fc90b3de1510": {
+    "price_at_signal": 3166.63,
+    "price_current": 2193.26,
+    "return_pct": -30.74
+  },
+  "327874e8-deb6-42d6-a821-be6e984b3c3b": {
+    "price_at_signal": 3749.15,
+    "price_current": 2193.26,
+    "return_pct": -41.5
+  },
+  "852b7999-51b5-4171-866c-4eae70e786af": {
+    "price_at_signal": 2318.05,
+    "price_current": 2193.26,
+    "return_pct": -5.38
+  },
+  "d0288d30-881a-4ab6-a654-631a06b024d7": {
+    "price_at_signal": 1953.97,
+    "price_current": 2193.26,
+    "return_pct": 12.25
+  },
+  "db1378ed-6d41-447c-a936-85b2958dfd78": {
+    "price_at_signal": 2202.48,
+    "price_current": 2193.26,
+    "return_pct": -0.42
+  },
+  "bb38bf41-d137-4478-b8ce-4d3b29052369": {
+    "price_at_signal": 2445.09,
+    "price_current": 2193.26,
+    "return_pct": -10.3
+  },
+  "b597edae-5c13-4d9a-a0ae-e9b2c8a1238e": {
+    "price_at_signal": 3282.22,
+    "price_current": 2193.26,
+    "return_pct": -33.18
+  },
+  "7963d897-e6fa-4c67-bf57-9d1a5f40c713": {
+    "price_at_signal": 1.91,
+    "price_current": 1.46,
+    "return_pct": -23.56
+  },
+  "072ad0bb-d192-4b9a-b761-11e345c857d4": {
+    "price_at_signal": 2.4,
+    "price_current": 1.46,
+    "return_pct": -39.17
+  },
+  "08b3b4e6-a681-4a10-a931-90256511a0b6": {
+    "price_at_signal": 2.06,
+    "price_current": 1.46,
+    "return_pct": -29.13
+  },
+  "7053771f-d54f-4d4d-a710-e2c4be073639": {
+    "price_at_signal": 2.09,
+    "price_current": 1.46,
+    "return_pct": -30.14
+  },
+  "4c6751ad-7bbf-4bb2-a7e4-64b2da3de541": {
+    "price_at_signal": 1.88,
+    "price_current": 1.46,
+    "return_pct": -22.34
+  },
+  "b6e4da79-b7b8-4d91-882d-7b7efb7a974f": {
+    "price_at_signal": 1.87,
+    "price_current": 1.46,
+    "return_pct": -21.93
+  },
+  "2dcb1fe6-3dc3-4fba-98b7-8c415ee0b404": {
+    "price_at_signal": 2.36,
+    "price_current": 1.46,
+    "return_pct": -38.14
+  },
+  "7f382140-0022-4e8a-aa15-372214fbbf58": {
+    "price_at_signal": 2.74,
+    "price_current": 1.46,
+    "return_pct": -46.72
+  },
+  "271eefcc-bc6c-400f-8738-50858acb26fe": {
+    "price_at_signal": 3.08,
+    "price_current": 1.46,
+    "return_pct": -52.6
+  },
+  "5477d735-a177-4726-a321-89601d3a0a07": {
+    "price_at_signal": 3.04,
+    "price_current": 1.46,
+    "return_pct": -51.97
+  },
+  "063e204e-d680-4b91-85ea-08648b0900de": {
+    "price_at_signal": 2.85,
+    "price_current": 1.46,
+    "return_pct": -48.77
+  },
+  "a560d7c4-8efb-4783-8012-f89743dc94a5": {
+    "price_at_signal": 1.4,
+    "price_current": 1.46,
+    "return_pct": 4.29
+  },
+  "ccfe17d9-c176-42b8-991c-019ac4a379c5": {
+    "price_at_signal": 1.43,
+    "price_current": 1.46,
+    "return_pct": 2.1
+  },
+  "987928d5-1e22-48b9-922d-5c645f8efb1d": {
+    "price_at_signal": 2.18,
+    "price_current": 1.46,
+    "return_pct": -33.03
+  },
+  "367202f7-7f65-4e93-9384-3f59b081fc41": {
+    "price_at_signal": 2.6,
+    "price_current": 1.46,
+    "return_pct": -43.85
+  },
+  "4177109c-6745-4481-b5e8-54aed7c5863f": {
+    "price_at_signal": 1.65,
+    "price_current": 1.46,
+    "return_pct": -11.52
+  },
+  "7eb05805-42d0-44cd-8b71-bf9d753191ce": {
+    "price_at_signal": 141.1,
+    "price_current": 89.98,
+    "return_pct": -36.23
+  },
+  "90e365b8-b9fb-49b8-afe5-7d1dddfda9ae": {
+    "price_at_signal": 133.9,
+    "price_current": 89.98,
+    "return_pct": -32.8
+  },
+  "dc114688-4912-49b1-819f-27d55242ea6e": {
+    "price_at_signal": 180.18,
+    "price_current": 89.98,
+    "return_pct": -50.06
+  },
+  "6e862156-f5bf-4c69-90dd-37b9850100ec": {
+    "price_at_signal": 86.7,
+    "price_current": 89.98,
+    "return_pct": 3.78
+  },
+  "e7af062d-ba66-41e0-93b6-905e8befb6a2": {
+    "price_at_signal": 0.15,
+    "price_current": 0.09,
+    "return_pct": -40.0
+  },
+  "d6a05680-9002-4715-b41a-51896b727b19": {
+    "price_at_signal": 0.09,
+    "price_current": 0.09,
+    "return_pct": 0.0
+  },
+  "5f4480ee-4a15-4438-8e4a-b35728164485": {
+    "price_at_signal": 0.12,
+    "price_current": 0.09,
+    "return_pct": -25.0
+  },
+  "90d98728-5a7c-42eb-b29e-35b97b96b894": {
+    "price_at_signal": 0.12,
+    "price_current": 0.09,
+    "return_pct": -25.0
+  },
+  "120072e4-4991-4af4-8777-d71424876d01": {
+    "price_at_signal": 0.56,
+    "price_current": 0.81,
+    "return_pct": 44.64
+  },
+  "CRV": {
+    "name": "Curve DAO Token USD",
+    "ticker": "CRV",
+    "market": "CRYPTO",
+    "current_price": 0.23852037,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "INJ": {
+    "name": "Injective USD",
+    "ticker": "INJ",
+    "market": "CRYPTO",
+    "current_price": 3.029167,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "SEI": {
+    "name": "Sei USD",
+    "ticker": "SEI",
+    "market": "CRYPTO",
+    "current_price": 0.06425414,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
+  },
+  "USUAL": {
+    "name": "Usual USD",
+    "ticker": "USUAL",
+    "market": "CRYPTO",
+    "current_price": 0.014317615,
+    "currency": "USD",
+    "last_updated": "2026-03-19"
   }
 }

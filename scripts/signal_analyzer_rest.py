@@ -18,21 +18,33 @@ class SignalAnalyzer:
             'anthropic-version': '2023-06-01'
         }
         
-    def create_analysis_prompt(self, channel_url: str, video_data: dict, subtitle: str) -> str:
+    def create_analysis_prompt(self, channel_url: str, video_data: dict, subtitle: str,
+                               channel_info: dict = None) -> str:
         """
         분석용 프롬프트 생성
-        
+
         Args:
             channel_url: 채널 URL
             video_data: 영상 정보 (title, url, duration, upload_date 등)
             subtitle: 자막 텍스트
-        
+            channel_info: 채널 정보 (channel_name, owner_name, channel_type)
+
         Returns:
             완성된 프롬프트
         """
         # 기본 프롬프트에서 채널 URL 교체
         prompt = self.prompt_template.replace('{CHANNEL_URL}', channel_url)
-        
+
+        # 채널 운영자/유형 플레이스홀더 치환 (V15.2 규칙 6)
+        if channel_info:
+            owner = channel_info.get('owner_name') or '불명'
+            ch_type = channel_info.get('channel_type') or 'solo'
+        else:
+            owner = '불명'
+            ch_type = 'solo'
+        prompt = prompt.replace('{CHANNEL_OWNER}', owner)
+        prompt = prompt.replace('{CHANNEL_TYPE}', ch_type)
+
         # 영상 duration 경고 정보 + V11.3 플레이스홀더 치환
         duration_info = ""
         dur_secs = video_data.get('duration_seconds')
@@ -40,7 +52,6 @@ class SignalAnalyzer:
             dur_secs = int(dur_secs)
             dur_str = f"{dur_secs//60}분 {dur_secs%60:02d}초 ({dur_secs}초)"
             duration_info = f"\n⚠️ 영상 길이: {dur_str}. 타임스탬프는 반드시 이 시간 이내여야 합니다."
-            # V11.3 프롬프트 플레이스홀더 치환
             prompt = prompt.replace(
                 '{VIDEO_DURATION_INFO}',
                 f"이 영상은 {dur_str}입니다. 타임스탬프는 이 시간을 절대로 초과할 수 없습니다."
@@ -48,8 +59,18 @@ class SignalAnalyzer:
         else:
             prompt = prompt.replace('{VIDEO_DURATION_INFO}', '영상 길이 정보 없음')
 
+        # 채널 정보 블록
+        channel_block = ""
+        if channel_info:
+            channel_block = f"""=== 채널 정보 ===
+채널명: {channel_info.get('channel_name', 'N/A')}
+채널 운영자: {owner}
+채널 유형: {ch_type}
+"""
+
         # 영상 정보 추가
         video_info = f"""
+{channel_block}
 === 분석 대상 영상 ===
 제목: {video_data['title']}
 URL: {video_data['url']}
@@ -60,9 +81,9 @@ URL: {video_data['url']}
 {subtitle}{duration_info}
 
 === 분석 지시사항 ===
-위 영상의 자막을 V11.3 프롬프트 규칙에 따라 분석하고, JSON 형태로 시그널을 추출해주세요.
+위 영상의 자막을 V15.2 프롬프트 규칙에 따라 분석하고, JSON 형태로 시그널을 추출해주세요.
 """
-        
+
         return prompt + "\n\n" + video_info
     
     def parse_analysis_response(self, response_text: str) -> Dict[str, Any]:
@@ -100,25 +121,26 @@ URL: {video_data['url']}
             print(f"[ERROR] 응답 파싱 오류: {e}")
             return {"error": str(e), "raw_response": response_text}
     
-    def analyze_video_subtitle(self, channel_url: str, video_data: dict, subtitle: str, 
-                             retry_count: int = 3) -> Optional[Dict[str, Any]]:
+    def analyze_video_subtitle(self, channel_url: str, video_data: dict, subtitle: str,
+                             channel_info: dict = None, retry_count: int = 3) -> Optional[Dict[str, Any]]:
         """
         영상 자막을 분석하여 투자 시그널 추출
-        
+
         Args:
             channel_url: 채널 URL
             video_data: 영상 정보
-            subtitle: 자막 텍스트  
+            subtitle: 자막 텍스트
+            channel_info: 채널 정보 (channel_name, owner_name, channel_type)
             retry_count: 재시도 횟수
-        
+
         Returns:
             분석 결과 또는 None (실패 시)
         """
         if not subtitle or len(subtitle.strip()) < 50:
             print(f"[WARNING] 자막이 너무 짧습니다: {len(subtitle)} chars")
             return None
-        
-        prompt = self.create_analysis_prompt(channel_url, video_data, subtitle)
+
+        prompt = self.create_analysis_prompt(channel_url, video_data, subtitle, channel_info)
         
         for attempt in range(retry_count):
             try:
@@ -189,8 +211,9 @@ URL: {video_data['url']}
         print(f"[ERROR] {retry_count}번 시도 모두 실패")
         return None
     
-    def convert_to_database_format(self, analysis_result: Dict[str, Any], 
-                                 video_uuid: str, analysis_version: str = "V10.3") -> List[Dict[str, Any]]:
+    def convert_to_database_format(self, analysis_result: Dict[str, Any],
+                                 video_uuid: str, analysis_version: str = "V10.3",
+                                 channel_info: dict = None) -> List[Dict[str, Any]]:
         """분석 결과를 데이터베이스 삽입 형식으로 변환"""
         signals = []
         
@@ -248,7 +271,19 @@ URL: {video_data['url']}
                     reasoning = signal.get('reasoning', signal.get('key_quote', ''))
                     context = signal.get('context', signal.get('key_quote', ''))
                     speaker = signal.get('speaker_name', signal.get('speaker', ''))
-                    
+
+                    # unknown_guest / 게스트 감지 로깅
+                    is_interview = False
+                    if speaker == 'unknown_guest':
+                        is_interview = True
+                    elif speaker and channel_info:
+                        ch_owner = channel_info.get('owner_name', '')
+                        if ch_owner and speaker != ch_owner:
+                            is_interview = True
+
+                    if is_interview:
+                        print(f"  [INTERVIEW] speaker={speaker}, owner={channel_info.get('owner_name', '?') if channel_info else '?'}, stock={stock_name}")
+
                     # timestamp: MM:SS 형식 (Gate 2 + DB 호환)
                     ts_str = f"{ts // 60}:{ts % 60:02d}" if ts else None
 
@@ -315,20 +350,21 @@ URL: {video_data['url']}
         return result
 
     def analyze_videos_batch(self, channel_url: str, videos_with_subtitles: List[Dict[str, Any]],
-                           delay_seconds: int = 3) -> Dict[str, Any]:
+                           delay_seconds: int = 3, channel_info: dict = None) -> Dict[str, Any]:
         """auto_pipeline.py 호환 alias"""
-        return self.batch_analyze_videos(channel_url, videos_with_subtitles, delay_seconds)
+        return self.batch_analyze_videos(channel_url, videos_with_subtitles, delay_seconds, channel_info)
 
     def batch_analyze_videos(self, channel_url: str, videos_with_subtitles: List[Dict[str, Any]],
-                           delay_seconds: int = 3) -> Dict[str, Any]:
+                           delay_seconds: int = 3, channel_info: dict = None) -> Dict[str, Any]:
         """
         여러 영상 일괄 분석
-        
+
         Args:
             channel_url: 채널 URL
             videos_with_subtitles: 영상+자막 데이터 리스트
             delay_seconds: 요청 간 딜레이
-        
+            channel_info: 채널 정보 (channel_name, owner_name, channel_type)
+
         Returns:
             일괄 분석 결과 통계
         """
@@ -346,16 +382,18 @@ URL: {video_data['url']}
                 
                 # 분석 실행
                 analysis_result = self.analyze_video_subtitle(
-                    channel_url, 
-                    video_data, 
-                    video_data['subtitle']
+                    channel_url,
+                    video_data,
+                    video_data['subtitle'],
+                    channel_info=channel_info
                 )
-                
+
                 if analysis_result:
                     # 데이터베이스 형식 변환
                     signals = self.convert_to_database_format(
-                        analysis_result, 
-                        video_data['video_uuid']
+                        analysis_result,
+                        video_data['video_uuid'],
+                        channel_info=channel_info
                     )
                     
                     # 같은 영상 내 동일 종목 중복 제거 (더 강한 시그널만 남김)

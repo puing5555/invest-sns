@@ -93,15 +93,18 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
     : (profile?.signals || []).filter((s: any) => (formatStockShort(s.stock, s.ticker) || '기타') === activeStock)
   ).sort(sortByDate);
 
-  // scored_list에서 signal id → 1Y/현재 수익률 lookup
-  const scoredMap: Record<string, { return_1y: number | null; return_current: number | null; hit: boolean | null }> = {};
+  // scored_list에서 signal id → 1Y/현재 수익률 lookup (적중률 계산용)
+  const scoredMap: Record<string, { return_1y: number | null; return_current: number | null; return_basis: string; hit: boolean | null }> = {};
   const sc = (scorecardData as any).speakers || {};
   const cardData = sc[id] || null;
   if (cardData?.scored_list) {
     for (const s of cardData.scored_list) {
-      if (s.id) scoredMap[s.id] = { return_1y: s.return_1y, return_current: s.return_current, hit: s.hit };
+      if (s.id) scoredMap[s.id] = { return_1y: s.return_1y, return_current: s.return_current, return_basis: s.return_basis || 'pending', hit: s.hit };
     }
   }
+
+  // 전체 시그널 수익률 맵 (dedup 포함, 표시용)
+  const allReturnsMap: Record<string, { return_1y: number | null; return_current: number | null }> = (scorecardData as any).all_signals_returns || {};
 
   const handleCardClick = (signal: any) => {
     const channelName = signal.influencer_videos?.influencer_channels?.channel_name || '';
@@ -148,95 +151,73 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
             {speakerName.charAt(0)}
           </div>
           <div>
-            <h1 className="text-xl font-bold text-[#191f28]">{speakerName}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-bold text-[#191f28]">{speakerName}</h1>
+              {(() => {
+                const card = ((scorecardData as any).speakers || {})[id];
+                if (!card?.style_tag) return null;
+                const styleColors: Record<string, string> = {
+                  '⭐올라운더': 'bg-blue-50 text-blue-700',
+                  '🎯스나이퍼': 'bg-green-50 text-green-700',
+                  '💣홈런히터': 'bg-orange-50 text-orange-700',
+                  '📊시그널 수집 중': 'bg-gray-50 text-gray-500',
+                  '📊일반': 'bg-gray-50 text-gray-600',
+                };
+                return <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${styleColors[card.style_tag] || 'bg-gray-50 text-gray-600'}`}>{card.style_tag}</span>;
+              })()}
+            </div>
             <p className="text-sm text-[#8b95a1] mt-1">총 {profile.totalSignals}건의 시그널</p>
           </div>
         </div>
 
       </div>
 
-      {/* 성과 요약 */}
+      {/* 구간별 성과 (스윙/중기/장기) */}
       {(() => {
         const sc = (scorecardData as any).speakers || {};
         const card = sc[id] || null;
-        if (!card || card.scored_signals === 0) return null;
+        if (!card?.tiers) return null;
 
-        const hitColor = card.hit_rate != null
-          ? (card.hit_rate >= 60 ? 'text-green-600' : card.hit_rate >= 50 ? 'text-yellow-600' : 'text-red-500')
-          : 'text-gray-400';
-        const medColor = card.median_return_1y != null
-          ? (card.median_return_1y >= 0 ? 'text-green-600' : 'text-red-500')
-          : 'text-gray-400';
+        const tierDefs = [
+          { key: 'swing', label: '스윙', sub: '1Y 수익률 기준' },
+          { key: 'mid', label: '중기', sub: '1~3Y 수익률 기준' },
+          { key: 'long', label: '장기', sub: '3Y+ 현재 수익률' },
+        ];
+        const visibleTiers = tierDefs.filter(({ key }) => {
+          const t = (card.tiers as any)?.[key];
+          return t && t.count >= 5;
+        });
+        if (visibleTiers.length === 0) return null;
 
         return (
           <div className="px-4 pt-4">
-            <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
-              <h3 className="text-xs font-medium text-[#8b95a1] mb-3">성과 요약 <span className="text-[10px] text-[#b0b8c1]">매수/긍정/매도 기준, 월별 dedup</span></h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {/* 1열: 적중률 */}
-                <div className="text-center">
-                  <div className={`text-2xl font-bold ${hitColor}`}>{card.hit_rate != null ? `${card.hit_rate}%` : '수집 중'}</div>
-                  <div className="text-xs text-[#8b95a1] mt-1">적중률</div>
-                  <div className="text-[10px] text-[#8b95a1]">{card.hit_eligible || 0}건 기준</div>
-                </div>
-                {/* 2열: 승/패 */}
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[#191f28]">
-                    <span className="text-green-600">{card.wins}</span>
-                    <span className="text-[#8b95a1] text-lg mx-1">/</span>
-                    <span className="text-red-500">{card.losses}</span>
-                  </div>
-                  <div className="text-xs text-[#8b95a1] mt-1">승 / 패</div>
-                  {card.pending > 0 && <div className="text-[10px] text-[#8b95a1]">평가 중 {card.pending}건</div>}
-                </div>
-                {/* 3열: 중앙수익률 (1Y | 현재) */}
-                <div className="text-center">
-                  <div className="text-sm font-bold">
-                    <span className={medColor}>
-                      {card.median_return_1y != null ? `${card.median_return_1y >= 0 ? '+' : ''}${card.median_return_1y?.toFixed(0)}%` : '-'}
-                    </span>
-                    <span className="text-[#d1d6db] mx-1">|</span>
-                    <span className={card.median_return_current != null ? (card.median_return_current >= 0 ? 'text-green-600' : 'text-red-500') : 'text-gray-400'}>
-                      {card.median_return_current != null ? `${card.median_return_current >= 0 ? '+' : ''}${card.median_return_current?.toFixed(0)}%` : '-'}
-                    </span>
-                  </div>
-                  <div className="text-xs text-[#8b95a1] mt-1">중앙수익률</div>
-                  <div className="text-[10px] text-[#8b95a1]">1Y | 현재</div>
-                </div>
-                {/* 4열: 최고 콜 */}
-                {card.best_call && (
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-green-600">
-                      {card.best_call.return_1y != null ? `+${card.best_call.return_1y?.toFixed(0)}%` : `+${card.best_call.return_current?.toFixed(0)}%`}
+            <div className={`grid gap-3 ${visibleTiers.length === 1 ? 'grid-cols-1' : visibleTiers.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+              {visibleTiers.map(({ key, label, sub }) => {
+                const tier = (card.tiers as any)[key];
+                const hrColor = tier.hit_rate != null
+                  ? (tier.hit_rate >= 60 ? 'text-green-600' : tier.hit_rate >= 50 ? 'text-yellow-600' : 'text-red-500')
+                  : 'text-gray-400';
+                const avgColor = tier.avg_return >= 0 ? 'text-green-600' : 'text-red-500';
+                return (
+                  <div key={key} className="bg-white rounded-lg border border-[#e8e8e8] p-4 text-center">
+                    <div className="text-xs font-medium text-[#191f28] mb-1">{label}</div>
+                    <div className="text-[10px] text-[#8b95a1] mb-2">{sub}</div>
+                    <div className={`text-3xl font-bold ${hrColor}`}>
+                      {tier.hit_rate != null ? `${tier.hit_rate}%` : '-'}
                     </div>
-                    <div className="text-xs text-[#191f28] font-medium truncate">{card.best_call.stock}</div>
-                    <div className="text-[10px] text-[#8b95a1]">최고 콜 {card.best_call.return_1y != null ? '(1Y)' : '(현재)'}</div>
-                  </div>
-                )}
-              </div>
-
-              {/* 승/패 바 + 시장별 */}
-              <div className="mt-3 flex items-center gap-4 flex-wrap">
-                {card.wins + card.losses > 0 && (
-                  <div className="flex items-center gap-2 flex-1 min-w-[120px]">
-                    <div className="flex h-2 rounded-full overflow-hidden bg-gray-100 flex-1">
-                      <div className="bg-green-500" style={{ width: `${(card.wins / (card.wins + card.losses)) * 100}%` }} />
-                      <div className="bg-red-400" style={{ width: `${(card.losses / (card.wins + card.losses)) * 100}%` }} />
+                    <div className="text-xs text-[#8b95a1] mt-1">적중률</div>
+                    <div className="mt-2 flex justify-center items-center gap-1">
+                      <span className="text-xs font-medium text-green-600">{tier.wins}W</span>
+                      <span className="text-[#d1d6db]">/</span>
+                      <span className="text-xs font-medium text-red-500">{tier.losses}L</span>
                     </div>
-                    <span className="text-[10px] text-[#8b95a1] whitespace-nowrap">{card.wins}W/{card.losses}L</span>
+                    <div className={`text-sm font-bold mt-1 ${avgColor}`}>
+                      평균 수익률 {tier.avg_return >= 0 ? '+' : ''}{tier.avg_return}%
+                    </div>
+                    <div className="text-[10px] text-[#8b95a1] mt-0.5">{tier.count}건</div>
                   </div>
-                )}
-                {card.market && Object.keys(card.market).length > 0 && (
-                  <div className="flex gap-3">
-                    {Object.entries(card.market).map(([mkt, data]: [string, any]) => (
-                      <span key={mkt} className="text-[10px] text-[#8b95a1]">
-                        <span className="font-medium text-[#333d4b]">{mkt}</span> {data.count}건
-                        {data.hit_rate != null && <span className={data.hit_rate >= 50 ? 'text-green-600' : 'text-red-500'}> {data.hit_rate}%</span>}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+                );
+              })}
             </div>
           </div>
         );
@@ -273,33 +254,39 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
               {/* 한줄 평가 */}
               <p className="text-sm text-[#191f28] mb-4">{report.sections?.one_liner}</p>
 
-              {/* TOP3 / WORST3 */}
+              {/* TOP3 / WORST3 (현재 수익률 기준) */}
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <div>
                   <p className="text-xs font-medium text-green-600 mb-1.5">TOP 3 콜</p>
-                  {(card.top3_calls || []).map((c: any, i: number) => (
-                    <div key={i} className="text-xs text-[#333d4b] mb-1">
-                      <div className="font-medium truncate">{c.stock}</div>
-                      <div className="text-[10px]">
-                        <span className="text-green-600 font-medium">{c.return_1y != null ? `1Y +${c.return_1y?.toFixed(0)}%` : '1Y 평가중'}</span>
-                        <span className="text-[#d1d6db] mx-1">|</span>
-                        <span className="text-[#8b95a1]">{c.return_current != null ? `현재 ${c.return_current >= 0 ? '+' : ''}${c.return_current?.toFixed(0)}%` : ''}</span>
+                  {(card.top3_calls || []).map((c: any, i: number) => {
+                    const dt = c.date ? `${c.date.slice(0,4)}.${c.date.slice(5,7)}` : '';
+                    const cur = c.return_current;
+                    return (
+                      <div key={i} className="text-xs text-[#333d4b] mb-1">
+                        <div className="font-medium truncate">{c.stock} {dt && <span className="text-[#8b95a1] font-normal">({dt})</span>}</div>
+                        <div className="text-[10px]">
+                          {cur != null && <span className="text-green-600 font-medium">현재 +{cur?.toFixed(0)}%</span>}
+                          {c.return_1y != null && (<><span className="text-[#d1d6db] mx-1">|</span><span className="text-[#8b95a1]">1Y {c.return_1y >= 0 ? '+' : ''}{c.return_1y?.toFixed(0)}%</span></>)}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 <div>
                   <p className="text-xs font-medium text-red-500 mb-1.5">WORST 3 콜</p>
-                  {(card.worst3_calls || []).map((c: any, i: number) => (
-                    <div key={i} className="text-xs text-[#333d4b] mb-1">
-                      <div className="font-medium truncate">{c.stock}</div>
-                      <div className="text-[10px]">
-                        <span className="text-red-500 font-medium">{c.return_1y != null ? `1Y ${c.return_1y >= 0 ? '+' : ''}${c.return_1y?.toFixed(0)}%` : '1Y 평가중'}</span>
-                        <span className="text-[#d1d6db] mx-1">|</span>
-                        <span className="text-[#8b95a1]">{c.return_current != null ? `현재 ${c.return_current >= 0 ? '+' : ''}${c.return_current?.toFixed(0)}%` : ''}</span>
+                  {(card.worst3_calls || []).map((c: any, i: number) => {
+                    const dt = c.date ? `${c.date.slice(0,4)}.${c.date.slice(5,7)}` : '';
+                    const cur = c.return_current;
+                    return (
+                      <div key={i} className="text-xs text-[#333d4b] mb-1">
+                        <div className="font-medium truncate">{c.stock} {dt && <span className="text-[#8b95a1] font-normal">({dt})</span>}</div>
+                        <div className="text-[10px]">
+                          {cur != null && <span className="text-red-500 font-medium">현재 {cur >= 0 ? '+' : ''}{cur?.toFixed(0)}%</span>}
+                          {c.return_1y != null && (<><span className="text-[#d1d6db] mx-1">|</span><span className="text-[#8b95a1]">1Y {c.return_1y >= 0 ? '+' : ''}{c.return_1y?.toFixed(0)}%</span></>)}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 
@@ -480,28 +467,31 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       <td className="px-3 py-3 text-xs whitespace-nowrap">
                         {(() => {
                           if (isRef) return <span className="text-[#8b95a1]">참고</span>;
+
+                          // 수익률 소스: scoredMap → allReturnsMap → DB return_pct
                           const scored = signal.id ? scoredMap[signal.id] : null;
-                          if (!scored) return <span className="text-[#8b95a1]">-</span>;
-                          const r1y = scored.return_1y;
-                          const rCur = scored.return_current;
-                          const isBuy = signal.signal === '매수' || signal.signal === '긍정';
-                          const retForColor = r1y ?? rCur;
-                          const isGood = retForColor != null ? (isBuy ? retForColor > 0 : retForColor < 0) : false;
-                          const color = retForColor != null ? (isGood ? 'text-[#22c55e]' : 'text-[#ef4444]') : 'text-[#8b95a1]';
+                          const allRet = signal.id ? allReturnsMap[signal.id] : null;
+                          const rCur = scored?.return_current ?? allRet?.return_current ?? signal.return_pct;
+                          const r1y = scored?.return_1y ?? allRet?.return_1y;
+
+                          if (rCur == null && r1y == null) return <span className="text-[#8b95a1]">-</span>;
+
+                          // 3개월 미만 → 회색, 3개월+ → 컬러
+                          const pubDate = signal.influencer_videos?.published_at || signal.created_at || '';
+                          const daysSince = pubDate ? Math.floor((Date.now() - new Date(pubDate).getTime()) / 86400000) : 999;
+                          const isPending = daysSince < 90;
+
+                          const ret = rCur ?? r1y ?? 0;
+                          const color = isPending ? 'text-[#8b95a1]' : (ret >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]');
+                          const arrow = ret >= 0 ? '▲' : '▼';
+
                           return (
                             <div>
-                              {r1y != null ? (
-                                <div className={`font-medium ${color}`}>
-                                  {r1y >= 0 ? '▲' : '▼'} {r1y >= 0 ? '+' : ''}{r1y}%
-                                  <span className="text-[10px] text-[#8b95a1] ml-0.5">1Y</span>
-                                </div>
-                              ) : (
-                                <div className="text-[#8b95a1]">평가 중</div>
-                              )}
-                              {rCur != null && (
-                                <div className="text-[10px] text-[#8b95a1]">
-                                  현재 {rCur >= 0 ? '+' : ''}{rCur}%
-                                </div>
+                              <div className={`font-medium ${color}`}>
+                                {arrow} {ret >= 0 ? '+' : ''}{rCur ?? r1y}%
+                              </div>
+                              {r1y != null && rCur != null && (
+                                <div className="text-[10px] text-[#8b95a1]">1Y {r1y >= 0 ? '+' : ''}{r1y}%</div>
                               )}
                             </div>
                           );
