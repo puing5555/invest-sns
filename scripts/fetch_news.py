@@ -7,12 +7,17 @@ Usage:
   python scripts/fetch_news.py --all --max-pages 5           # 전체 KR 종목
 """
 import argparse
+import io
 import json
 import os
 import re
 import sys
 import time
 import random
+
+# Windows cp949 출력 깨짐 방지
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 from datetime import datetime
 
 import requests
@@ -241,7 +246,94 @@ def _parse_market_date(date_str: str) -> str | None:
     return _parse_date(date_str)
 
 
-# ── 4) Supabase UPSERT ───────────────────────────────
+# ── 4) US/CRYPTO 뉴스 (Google News RSS) ────────────────
+US_TICKERS = {
+    "NVDA": "NVIDIA", "TSLA": "Tesla", "AAPL": "Apple", "MSFT": "Microsoft",
+    "AMZN": "Amazon", "GOOGL": "Google", "META": "Meta", "AMD": "AMD",
+    "PLTR": "Palantir", "AVGO": "Broadcom", "NFLX": "Netflix", "CRM": "Salesforce",
+    "COIN": "Coinbase", "MSTR": "MicroStrategy", "TSM": "TSMC", "ASML": "ASML",
+    "ARM": "ARM Holdings", "SMCI": "Super Micro", "IONQ": "IonQ", "RKLB": "Rocket Lab",
+}
+CRYPTO_TICKERS_NEWS = {
+    "BTC": "Bitcoin", "ETH": "Ethereum", "SOL": "Solana", "XRP": "Ripple",
+    "DOGE": "Dogecoin", "ADA": "Cardano", "AVAX": "Avalanche", "LINK": "Chainlink",
+    "BNB": "BNB", "DOT": "Polkadot",
+}
+
+import xml.etree.ElementTree as ET
+
+def fetch_google_news(query: str, ticker: str, stock_name: str, market: str,
+                      max_results: int = 10) -> list[dict]:
+    """Google News RSS로 뉴스 수집"""
+    import urllib.parse
+    encoded = urllib.parse.quote(query)
+    rss_url = f"https://news.google.com/rss/search?q={encoded}&hl=en-US&gl=US&ceid=US:en"
+
+    items = []
+    try:
+        resp = requests.get(rss_url, headers={"User-Agent": HEADERS["User-Agent"]}, timeout=15)
+        resp.encoding = "utf-8"
+        root = ET.fromstring(resp.text)
+
+        for item in root.findall(".//item")[:max_results]:
+            title = item.findtext("title", "")
+            link = item.findtext("link", "")
+            pub_date = item.findtext("pubDate", "")
+            source = item.findtext("source", "")
+
+            # pubDate: 'Thu, 27 Mar 2026 01:23:00 GMT' → ISO
+            published_at = _parse_rss_date(pub_date)
+
+            items.append({
+                "ticker": ticker,
+                "stock_name": stock_name,
+                "market": market,
+                "title": title,
+                "source": source,
+                "url": link,
+                "published_at": published_at,
+            })
+    except Exception as e:
+        log(f"  ⚠️ Google News 실패 ({ticker}): {e}")
+
+    return items
+
+
+def _parse_rss_date(date_str: str) -> str | None:
+    """'Thu, 27 Mar 2026 01:23:00 GMT' → ISO 8601"""
+    from email.utils import parsedate_to_datetime
+    try:
+        dt = parsedate_to_datetime(date_str)
+        return dt.isoformat()
+    except Exception:
+        return None
+
+
+def fetch_us_news(max_results: int = 10) -> list[dict]:
+    """US 주요 종목 뉴스 수집"""
+    all_items = []
+    for ticker, name in US_TICKERS.items():
+        query = f"{name} {ticker} stock"
+        items = fetch_google_news(query, ticker, name, "US", max_results)
+        all_items.extend(items)
+        log(f"  📄 {ticker} ({name}): {len(items)}건")
+        time.sleep(random.uniform(1.0, 2.0))
+    return all_items
+
+
+def fetch_crypto_news(max_results: int = 10) -> list[dict]:
+    """CRYPTO 주요 종목 뉴스 수집"""
+    all_items = []
+    for ticker, name in CRYPTO_TICKERS_NEWS.items():
+        query = f"{name} {ticker} crypto"
+        items = fetch_google_news(query, ticker, name, "CRYPTO", max_results)
+        all_items.extend(items)
+        log(f"  📄 {ticker} ({name}): {len(items)}건")
+        time.sleep(random.uniform(1.0, 2.0))
+    return all_items
+
+
+# ── 5) Supabase UPSERT ───────────────────────────────
 def upsert_news(items: list[dict]) -> dict:
     """stock_news 테이블에 UPSERT (url 중복 무시)"""
     config = PipelineConfig()
@@ -280,9 +372,12 @@ def main():
     parser.add_argument("--max-pages", type=int, default=5, help="종목당 최대 페이지 (기본 5)")
     parser.add_argument("--debug", action="store_true", help="HTML 파싱 확인만 (DB 저장 안 함)")
     parser.add_argument("--market", action="store_true", help="시장 전체 뉴스 크롤링")
+    parser.add_argument("--us", action="store_true", help="US 주요 종목 뉴스 (Google News)")
+    parser.add_argument("--crypto", action="store_true", help="CRYPTO 주요 종목 뉴스 (Google News)")
+    parser.add_argument("--max-results", type=int, default=10, help="Google News 종목당 최대 건수 (기본 10)")
     args = parser.parse_args()
 
-    if not args.stock and not args.all and not args.market:
+    if not args.stock and not args.all and not args.market and not args.us and not args.crypto:
         parser.error("--stock, --all, --market 중 하나 필수")
 
     # 시장 뉴스 모드
@@ -300,6 +395,30 @@ def main():
                 result = upsert_news(items)
                 log(f"  ✅ DB 저장: {result['inserted']}건 (에러 {result['errors']}건)")
         log(f"📊 완료: 시장 뉴스 {len(items)}건")
+        if not args.us and not args.crypto:
+            return
+
+    # US 뉴스 모드
+    if args.us:
+        log("📰 US 종목 뉴스 크롤링 (Google News)")
+        items = fetch_us_news(args.max_results)
+        log(f"  수집: {len(items)}건")
+        if not args.debug and items:
+            result = upsert_news(items)
+            log(f"  ✅ DB 저장: {result['inserted']}건 (에러 {result['errors']}건)")
+        log(f"📊 완료: US 뉴스 {len(items)}건")
+        if not args.crypto:
+            return
+
+    # CRYPTO 뉴스 모드
+    if args.crypto:
+        log("📰 CRYPTO 종목 뉴스 크롤링 (Google News)")
+        items = fetch_crypto_news(args.max_results)
+        log(f"  수집: {len(items)}건")
+        if not args.debug and items:
+            result = upsert_news(items)
+            log(f"  ✅ DB 저장: {result['inserted']}건 (에러 {result['errors']}건)")
+        log(f"📊 완료: CRYPTO 뉴스 {len(items)}건")
         return
 
     # 종목 리스트
