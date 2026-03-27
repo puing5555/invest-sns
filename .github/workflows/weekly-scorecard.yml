@@ -1,0 +1,46 @@
+name: Weekly Scorecard Regeneration
+
+on:
+  schedule:
+    # 매주 월요일 06:00 UTC (한국 15:00)
+    - cron: '0 6 * * 1'
+  workflow_dispatch: # 수동 실행
+
+jobs:
+  regenerate-scorecard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv yfinance
+
+      - name: Create .env.local
+        run: |
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env.local
+          echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env.local
+
+      - name: Collect signal returns (yfinance)
+        run: python scripts/collect_signal_returns.py
+
+      - name: Generate scorecard
+        run: python scripts/calc_influencer_scorecard.py
+
+      - name: Generate reports
+        run: python scripts/generate_influencer_report.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/influencer_scorecard.json data/influencer_reports.json public/influencer_scorecard.json public/influencer_reports.json
+          git diff --staged --quiet || git commit -m "chore: weekly scorecard regeneration [skip ci]"
+          git push

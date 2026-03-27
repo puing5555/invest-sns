@@ -1,0 +1,41 @@
+name: News Crawl (KR + US + CRYPTO)
+
+on:
+  schedule:
+    # 매 4시간마다 (UTC 기준: 00, 04, 08, 12, 16, 20)
+    - cron: '0 */4 * * *'
+  workflow_dispatch: # 수동 실행
+
+jobs:
+  crawl-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 python-dotenv
+
+      - name: Create .env.local
+        run: |
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env.local
+          echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env.local
+
+      - name: Crawl KR market news
+        run: python scripts/fetch_news.py --market --max-pages 3
+
+      - name: Crawl KR stock news
+        run: python scripts/fetch_news.py --all --max-pages 2
+
+      - name: Crawl US stock news
+        run: python scripts/fetch_news.py --us --max-results 10
+
+      - name: Crawl CRYPTO news
+        run: python scripts/fetch_news.py --crypto --max-results 10
