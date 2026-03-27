@@ -63,6 +63,9 @@ CRYPTO_TICKERS = {
     'WLD', 'HBAR', 'TON', 'NEAR', 'FTM',
     'ALGO', 'VET', 'ICP', 'FIL', 'ATOM',
     'KLAY', 'SUI', 'APT', 'PEPE', 'SHIB',
+    'SEI', 'INJ', 'STRK', 'MNT', 'MORPHO', 'ONDO',
+    'USUAL', 'HYPE', 'KAIA', 'CRV', 'BCH', 'LTC',
+    'ETC', 'TRX', 'BNB', 'POL', 'USDT', 'USDC',
 }
 
 # 미국 주요 ticker 화이트리스트 (상위 100개 + 유명 성장주)

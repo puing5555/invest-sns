@@ -46,18 +46,13 @@ for info in signal_dates.values():
     unique_pairs.add((info['ticker'], info['date']))
 print(f"\n=== Step 2: Unique pairs: {len(unique_pairs)} ===", flush=True)
 
-# Classify tickers
-# 코인은 yfinance에서 BTC-USD 형태로 가져올 수 있음
-CRYPTO_TICKERS = {
-    'BTC': 'BTC-USD',
-    'ETH': 'ETH-USD',
-    'XRP': 'XRP-USD',
-    'SOL': 'SOL-USD',
-    'DOGE': 'DOGE-USD',
-    'KLAY': 'KLAY-USD',
-    'CC': None,   # Canton - yfinance 미지원, 스킵
-    'CNTN': None, # Canton 별칭
-}
+# Classify tickers — stock_normalizer의 CRYPTO_TICKERS를 정규 소스로 사용
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(__file__))
+from stock_normalizer import CRYPTO_TICKERS as _CRYPTO_SET
+
+# yfinance 미지원 크립토 (스킵)
+_CRYPTO_SKIP = {'CC', 'CNTN'}
 
 # SKIP_TICKERS에서 코인 제거 (KS11, SOXX, XLU, GLD 같은 지수/ETF만 스킵)
 SKIP_TICKERS = {'KS11', 'SOXX', 'XLU', 'GLD', 'KRW'}
@@ -68,9 +63,11 @@ def get_yf_ticker(ticker):
     # 지수/ETF 스킵
     if ticker in SKIP_TICKERS:
         return None
-    # 코인 매핑
-    if ticker in CRYPTO_TICKERS:
-        return CRYPTO_TICKERS[ticker]  # None이면 스킵
+    # 크립토: -USD suffix 강제 (NYSE 티커 충돌 방지)
+    if ticker in _CRYPTO_SET:
+        if ticker in _CRYPTO_SKIP:
+            return None
+        return f"{ticker}-USD"
     # 한국 6자리
     if ticker.isdigit():
         return f"{ticker}.KS"

@@ -197,7 +197,8 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                 const hrColor = tier.hit_rate != null
                   ? (tier.hit_rate >= 60 ? 'text-green-600' : tier.hit_rate >= 50 ? 'text-yellow-600' : 'text-red-500')
                   : 'text-gray-400';
-                const avgColor = tier.avg_return >= 0 ? 'text-green-600' : 'text-red-500';
+                const medReturn = tier.median_return ?? tier.avg_return;
+                const medColor = medReturn >= 0 ? 'text-green-600' : 'text-red-500';
                 return (
                   <div key={key} className="bg-white rounded-lg border border-[#e8e8e8] p-4 text-center">
                     <div className="text-xs font-medium text-[#191f28] mb-1">{label}</div>
@@ -211,8 +212,8 @@ export default function InfluencerProfileClient({ id }: { id: string }) {
                       <span className="text-[#d1d6db]">/</span>
                       <span className="text-xs font-medium text-red-500">{tier.losses}L</span>
                     </div>
-                    <div className={`text-sm font-bold mt-1 ${avgColor}`}>
-                      평균 수익률 {tier.avg_return >= 0 ? '+' : ''}{tier.avg_return}%
+                    <div className={`text-sm font-bold mt-1 ${medColor}`}>
+                      중앙 수익률 {medReturn >= 0 ? '+' : ''}{medReturn}%
                     </div>
                     <div className="text-[10px] text-[#8b95a1] mt-0.5">{tier.count}건</div>
                   </div>

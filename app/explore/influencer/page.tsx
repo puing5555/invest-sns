@@ -445,17 +445,17 @@ export default function InfluencerPage() {
                             : null;
                           if (!best) return <span className="text-gray-400 text-xs">데이터 수집 중</span>;
                           const hr = best.hit_rate;
-                          const avg = best.avg_return;
+                          const med = best.median_return ?? best.avg_return;
                           return (
                             <>
                               <span className={`font-bold ${hr >= 60 ? 'text-green-600' : hr >= 50 ? 'text-yellow-600' : 'text-red-500'}`}>
                                 적중 {hr}% <span className="text-[10px] font-normal text-gray-400">({best.label})</span>
                               </span>
-                              {avg != null && (
+                              {med != null && (
                                 <>
                                   <span className="text-gray-300">|</span>
-                                  <span className={`font-medium ${avg >= 0 ? 'text-green-600' : 'text-red-500'}`}>
-                                    평균 {avg >= 0 ? '+' : ''}{avg.toFixed(0)}%
+                                  <span className={`font-medium ${med >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                                    중앙 {med >= 0 ? '+' : ''}{med.toFixed(0)}%
                                   </span>
                                 </>
                               )}

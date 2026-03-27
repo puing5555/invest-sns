@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
+import { getMarketNews, getNewsByTickers, type StockNews } from '@/lib/supabase';
 
 // ============ TYPES ============
 interface MarketItem {
@@ -581,32 +583,109 @@ const NowTab = () => {
 };
 
 // ============ TAB: 뉴스 ============
-const NewsTab = () => (
-  <div>
-    <Card>
-      <SectionHeader title="📰 뉴스 헤드라인" />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-        {dummyNews.map((n, i) => (
-          <div key={i} style={{
-            display: 'flex', alignItems: 'center', gap: 12,
-            padding: '12px 0',
-            borderBottom: i < dummyNews.length - 1 ? `1px solid ${colors.lightGray}` : 'none',
-            cursor: 'pointer',
-          }}>
-            <span style={{
-              padding: '3px 8px', borderRadius: 4, fontSize: 11, fontWeight: 600,
-              background: '#F3F4F6', color: '#6B7280', whiteSpace: 'nowrap',
-            }}>{n.tag}</span>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 14, fontWeight: 500, color: colors.primary }}>{n.title}</div>
-              <div style={{ fontSize: 12, color: colors.gray, marginTop: 2 }}>{n.source} · {n.time}</div>
-            </div>
-          </div>
-        ))}
+const NewsItem = ({ n, showBadge, isLast }: { n: StockNews; showBadge?: boolean; isLast?: boolean }) => (
+  <a
+    href={n.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: 'flex', alignItems: 'center', gap: 12,
+      padding: '12px 0', textDecoration: 'none',
+      borderBottom: isLast ? 'none' : `1px solid ${colors.lightGray}`,
+    }}
+  >
+    {showBadge && n.stock_name && n.stock_name !== '시장뉴스' && (
+      <span style={{
+        padding: '3px 8px', borderRadius: 4, fontSize: 11, fontWeight: 600,
+        background: '#EFF6FF', color: '#3182f6', whiteSpace: 'nowrap',
+      }}>{n.stock_name}</span>
+    )}
+    <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{
+        fontSize: 14, fontWeight: 500, color: colors.primary,
+        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      }}>{n.title}</div>
+      <div style={{ fontSize: 12, color: colors.gray, marginTop: 2 }}>
+        {n.source && `${n.source} · `}{formatNewsTime(n.published_at)}
       </div>
-    </Card>
-  </div>
+    </div>
+  </a>
 );
+
+const formatNewsTime = (dateStr: string | null) => {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  const now = new Date();
+  const diffMs = now.getTime() - d.getTime();
+  const diffH = Math.floor(diffMs / (1000 * 60 * 60));
+  if (diffH < 1) return `${Math.max(1, Math.floor(diffMs / (1000 * 60)))}분 전`;
+  if (diffH < 24) return `${diffH}시간 전`;
+  const diffD = Math.floor(diffH / 24);
+  if (diffD < 7) return `${diffD}일 전`;
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+};
+
+const NewsTab = () => {
+  const [marketNews, setMarketNews] = useState<StockNews[]>([]);
+  const [myNews, setMyNews] = useState<StockNews[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const myTickers = [
+      ...dummyHoldings.map(h => h.code),
+      ...dummyWatchlist.map(w => w.code),
+    ].filter(c => c.length === 6 && /^\d+$/.test(c));
+
+    Promise.all([
+      getMarketNews(10),
+      myTickers.length > 0 ? getNewsByTickers(myTickers, 20) : Promise.resolve([]),
+    ]).then(([market, my]) => {
+      setMarketNews(market);
+      setMyNews(my);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <Card style={{ padding: '20px 24px' }}><div style={{ textAlign: 'center', padding: 24, color: colors.gray, fontSize: 14 }}>로딩중...</div></Card>;
+
+  return (
+    <div>
+      {/* 시장 주요 뉴스 */}
+      <Card style={{ padding: '20px 24px' }}>
+        <SectionHeader title="📰 시장 주요 뉴스" />
+        {marketNews.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: 16, color: colors.gray, fontSize: 14 }}>시장 뉴스가 없습니다</div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {marketNews.map((n, i) => (
+              <NewsItem key={n.id} n={n} isLast={i === marketNews.length - 1} />
+            ))}
+          </div>
+        )}
+      </Card>
+
+      {/* 내 종목 뉴스 */}
+      <Card style={{ padding: '20px 24px' }}>
+        <SectionHeader title="📋 내 종목 뉴스" />
+        {myNews.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: 16, color: colors.gray, fontSize: 14 }}>종목 뉴스가 없습니다</div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {myNews.map((n, i) => (
+              <NewsItem key={n.id} n={n} showBadge isLast={i === myNews.length - 1} />
+            ))}
+          </div>
+        )}
+        <Link href="/explore/news" style={{
+          display: 'block', textAlign: 'center', marginTop: 16,
+          fontSize: 13, fontWeight: 600, color: colors.accent, textDecoration: 'none',
+        }}>
+          더 보기 →
+        </Link>
+      </Card>
+    </div>
+  );
+};
 
 // ============ TAB: LIVE ============
 const LiveTab = () => {

@@ -74,6 +74,7 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '홍선애': 'hong-sunae',
   '홍성철': 'hong-sungchul',
   '홍진채': 'hong-jinchae',
+  '윤수목': 'yoon-sumok',
 };
 
 // data/speaker_slugs.json: { slug: name } 역매핑 (채널명 포함, 빌드 시 생성)

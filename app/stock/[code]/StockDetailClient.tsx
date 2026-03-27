@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getStockSignals, getSignalColor } from '@/lib/supabase';
+import { getStockSignals, getSignalColor, getStockNews, type StockNews } from '@/lib/supabase';
 import StockChart from '@/components/StockChart';
 import StockAnalystTab from '@/components/stock/StockAnalystTab';
 import dynamic from 'next/dynamic';
@@ -60,6 +60,7 @@ const tabs = [
   { id: 'influencer', label: '인플루언서', icon: '📈' },
   { id: 'analyst', label: '애널리스트', icon: '📊' },
   { id: 'disclosure', label: '공시', icon: '📋' },
+  { id: 'news', label: '뉴스', icon: '📰' },
   { id: 'insider', label: '내부자', icon: '💼' },
   { id: 'calendar', label: '일정', icon: '📅' },
   { id: 'memo', label: '메모', icon: '📝' },
@@ -126,6 +127,63 @@ const getStockData = (code: string, dynamicName?: string) => {
 
   return { name: stockName, price: 0, change: 0, changePercent: 0 };
 };
+
+// ── 뉴스 탭 컴포넌트 ───────────────────────────────────
+function StockNewsTab({ code }: { code: string }) {
+  const [news, setNews] = useState<StockNews[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getStockNews(code, 50).then(data => { setNews(data); setLoading(false); });
+  }, [code]);
+
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now.getTime() - d.getTime();
+    const diffH = Math.floor(diffMs / (1000 * 60 * 60));
+    if (diffH < 1) return `${Math.max(1, Math.floor(diffMs / (1000 * 60)))}분 전`;
+    if (diffH < 24) return `${diffH}시간 전`;
+    const diffD = Math.floor(diffH / 24);
+    if (diffD < 7) return `${diffD}일 전`;
+    return `${d.getMonth() + 1}/${d.getDate()}`;
+  };
+
+  if (loading) return <div className="text-center py-8 text-[#8b95a1]">뉴스 로딩중...</div>;
+  if (news.length === 0) return (
+    <div className="text-center py-12">
+      <div className="text-4xl mb-4">📰</div>
+      <h3 className="text-lg font-bold text-[#191f28] mb-2">뉴스</h3>
+      <p className="text-[#8b95a1]">수집된 뉴스가 없습니다</p>
+    </div>
+  );
+
+  return (
+    <div className="space-y-1">
+      {news.map((n) => (
+        <a
+          key={n.id}
+          href={n.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block bg-white rounded-lg px-4 py-3 hover:bg-gray-50 transition-colors"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-[#191f28] line-clamp-2">{n.title}</p>
+              <div className="flex items-center gap-2 mt-1">
+                {n.source && <span className="text-xs text-[#8b95a1]">{n.source}</span>}
+                <span className="text-xs text-[#8b95a1]">{formatDate(n.published_at)}</span>
+              </div>
+            </div>
+            <span className="text-[#8b95a1] text-xs mt-1 shrink-0">↗</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export default function StockDetailClient({ code }: StockDetailClientProps) {
   const [activeTab, setActiveTab] = useState('feed');
@@ -232,6 +290,9 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
 
       case 'analyst':
         return <StockAnalystTab code={code} />;
+
+      case 'news':
+        return <StockNewsTab code={code} />;
 
       case 'disclosure':
         if (isKoreanStock(code)) {

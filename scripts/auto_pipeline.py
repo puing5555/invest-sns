@@ -15,7 +15,7 @@
 2. 제목 필터링 (투자 관련 영상만 선별)
 3. QA Gate 1 - 메타데이터 검증
 4. Webshare 프록시로 자막 추출
-5. Anthropic Claude로 시그널 분석 (V10 프롬프트)
+5. Anthropic Claude로 시그널 분석 (V15.2 프롬프트)
 6. QA Gate 2 - 시그널 검증
 7. Supabase DB에 INSERT + QA Gate 3 (프론트엔드 검증)
 """
@@ -417,7 +417,8 @@ class AutoPipeline:
         }
     
     def _process_single_video(self, video: Dict, channel_url: str, worker_id: int = 0,
-                              channel_id: Optional[str] = None) -> Optional[Dict]:
+                              channel_id: Optional[str] = None,
+                              channel_info: Optional[Dict] = None) -> Optional[Dict]:
         """단일 영상 자막 추출 + AI 분석 (병렬 워커용)
         
         수정 (2026-03-12): channel_id 파라미터 추가.
@@ -469,9 +470,9 @@ class AutoPipeline:
                 # channel_id 없는 경우 — 임시 UUID (나중에 insert_analysis_results에서 재처리)
                 video_with_sub['video_uuid'] = video_with_sub.get('video_uuid', f'tmp-{video_id}')
 
-            # Step B: AI 분석
+            # Step B: AI 분석 (channel_info 전달 → V15.2 CHANNEL_OWNER/TYPE 주입)
             analysis_result = self.analyzer.analyze_video_subtitle(
-                channel_url, video_with_sub, subtitle
+                channel_url, video_with_sub, subtitle, channel_info=channel_info
             )
             if not analysis_result:
                 print(f"  [SKIP] 분석 실패: {title_short}")
@@ -604,6 +605,16 @@ class AutoPipeline:
             backup_filename = None
             successful_videos_total = []
 
+            # ── AI 분석용 channel_info 구성 (V15.2 CHANNEL_OWNER/TYPE) ──────
+            channel_name = channel_info.get('channel_title', channel_info.get('name', ''))
+            owner_name = PipelineConfig.get_channel_owner(channel_name)
+            analyzer_channel_info = {
+                'channel_name': channel_name,
+                'owner_name': owner_name,
+                'channel_type': 'panel' if owner_name is None else 'solo',
+            }
+            print(f"[INFO] 채널 분석 정보: owner={analyzer_channel_info['owner_name']}, type={analyzer_channel_info['channel_type']}")
+
             # ── DB 채널 UUID 사전 확보 (video_uuid 확보에 필요) ──────
             print(f"\n[채널 DB 등록] 채널 UUID 확보 중...")
             try:
@@ -645,7 +656,8 @@ class AutoPipeline:
                 with ThreadPoolExecutor(max_workers=3) as executor:
                     future_map = {
                         executor.submit(
-                            self._process_single_video, video, channel_url, idx % 3, db_channel_id
+                            self._process_single_video, video, channel_url, idx % 3, db_channel_id,
+                            channel_info=analyzer_channel_info
                         ): video
                         for idx, video in enumerate(batch_videos)
                     }
@@ -1039,8 +1051,8 @@ def main():
                        help='QA Gate 검증 건너뛰기 (긴급 시 사용, 기본값: 실행)')
     parser.add_argument('--batch-size', type=int, default=30,
                        help='배치당 처리할 영상 수 (기본값: 30)')
-    parser.add_argument('--prompt-version', default='V10',
-                       help='사용할 프롬프트 버전 (기본값: V10)')
+    parser.add_argument('--prompt-version', default='V15.2',
+                       help='사용할 프롬프트 버전 (기본값: V15.2)')
     
     args = parser.parse_args()
     

@@ -100,6 +100,7 @@ class PipelineConfig:
         '월가아재': '월가아재',
         '올랜도 킴 미국주식': '올랜도 킴',
         '대니월드(Danny World)': '대니월드',
+        '윤수목의 생존투자훈련소': '윤수목',
     }
 
     @classmethod
@@ -109,7 +110,7 @@ class PipelineConfig:
 
     @classmethod
     def load_prompt(cls):
-        """V10 프롬프트 로드"""
+        """V15.2 프롬프트 로드"""
         try:
             with open(cls.PROMPT_PATH, 'r', encoding='utf-8') as f:
                 return f.read()

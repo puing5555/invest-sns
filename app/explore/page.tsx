@@ -45,6 +45,14 @@ const exploreCards = [
     iconColor: 'text-teal-600',
   },
   {
+    title: '뉴스',
+    description: '전체 종목 최신 뉴스 피드',
+    icon: '📰',
+    href: '/explore/news',
+    color: 'bg-amber-50 border-amber-200 hover:bg-amber-100',
+    iconColor: 'text-amber-600',
+  },
+  {
     title: '임원/대주주',
     description: '최근 내부자 매수 TOP + 대주주 지분 변동',
     icon: '💼',

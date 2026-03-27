@@ -593,5 +593,103 @@
     "check_name": "ticker_null",
     "detail": "2건",
     "timestamp": "2026-03-19T16:26:52.788155"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 10개: ['스테이블코인', 'USDT', '국장', '암호화폐', 'STRC']",
+    "timestamp": "2026-03-27T04:10:51.083972"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-27T04:10:51.086218"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 38.00/영상",
+    "timestamp": "2026-03-27T04:10:51.088278"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 18개: ['QQQ', '삼양식품', '스테이터스', 'BITQ ETF', '엔터테인먼트']",
+    "timestamp": "2026-03-27T04:17:27.832512"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-27T04:17:27.833900"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 57.00/영상",
+    "timestamp": "2026-03-27T04:17:27.835018"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_new_channel",
+    "detail": "새 채널 신규 종목 13개: ['샤프링크 게이밍', '사이퍼 마이닝', '서클', '바이낸스', 'STRC']",
+    "timestamp": "2026-03-27T04:24:14.633012"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-27T04:24:14.634744"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 50.00/영상",
+    "timestamp": "2026-03-27T04:24:14.636160"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "unknown_stocks_warn",
+    "detail": "신규 종목 3개: ['STRK', '유니스왑', '마라홀딩스']",
+    "timestamp": "2026-03-27T04:31:41.333069"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "signal_bias_no_negative",
+    "detail": "부정+매도 신호 0건",
+    "timestamp": "2026-03-27T04:31:41.335378"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate2",
+    "check_name": "too_many_signals",
+    "detail": "평균 32.00/영상",
+    "timestamp": "2026-03-27T04:31:41.337372"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate3",
+    "check_name": "ticker_null",
+    "detail": "37건",
+    "timestamp": "2026-03-27T04:35:52.560759"
+  },
+  {
+    "channel": "soomoktube",
+    "gate": "gate3",
+    "check_name": "crypto_price_issue",
+    "detail": "9건: ['ARB (아비트럼): currentPrice=$0 (yfinance ARB-USD 재수집 또는 CoinGecko fallback)', 'POL (폴리곤): currentPrice=None (CoinGecko fallback 시도 필요)', 'MATIC (폴리곤): stock_tickers.json 누락']",
+    "timestamp": "2026-03-27T04:35:52.881314"
   }
 ]

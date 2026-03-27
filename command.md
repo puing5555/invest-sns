@@ -1,40 +1,67 @@
-Part 21 핸드오프 생성해줘. 파일명: invest-sns-part21-20260325.md
+핸드오프 문서 최종 업데이트 — invest-sns-part22-20260327.md 생성:
 
-Part 20 기준으로 업데이트:
+git add -A && git commit -m "Part 22: scorecard v4 + news + soomoktube + crypto fix + median"
 
-## 오늘(3/25) 완료한 것
-1. 인플루언서 스코어카드 v1→v2→v3
-   - 적중률: 매수+긍정만 (부정/중립 제외)
-   - 수익률: 1Y fixed window + Current 병기 (direction-adjusted 제거)
-   - dedup: 월 1건 (speaker+ticker+YYYY-MM)
-   - 10건 미만 "시그널 수집 중"
-   - 스타일 태그 (스나이퍼/홈런히터/올라운더)
-   - TOP3/WORST3 날짜 표시
-2. AI 분석 리포트 (32명, 룰 기반 텍스트)
-3. 프로필 페이지 개선 (관심종목 삭제, 리포트 섹션, 아코디언)
-4. DART 공시 6년치 수집 (5,307→29,372건)
-5. V15.2 프롬프트 생성 (화자 구분 강화)
-   - pipeline_config.py: CHANNEL_OWNERS 16개 채널
-   - 자막 한도 8000→20000자
-   - unknown_guest 로직
-   - 테스트 결과: 이효석 쇼미더연수르 + 안유화쇼 26화 게스트 감지 성공
+그리고 invest-sns-part22-20260327.md 생성:
 
-## 즉시 해야 할 것
-1. 대담 의심 영상 전체 재분석 (V15.2 프롬프트)
-   - 이효석: 에릭/스파클링/함께효/쇼미더연수르 ~30건
-   - 안유화쇼: 전체 23건
-   - fast_analyzer.py / sesang101_pipeline.py 인코딩 깨짐 수정 필요
-2. 스코어카드 재생성 (재분석 후 unknown_guest 제외)
-3. 탐색 페이지 소작업 (유형카드 4→7, 컨센서스 1→3개월)
+## 3/26~3/27 완료
 
-## 다음 우선순위
-4. YouTube API 연동 (구독자 수, 조회수)
-5. GitHub Actions 자동화 (매주 스코어카드, 매월 리포트, 매일 DART)
-6. 네러티브 맵 기초작업
+### 스코어카드 v4
+- 스윙/중기/장기 3구간 분리 (1Y/3Y/현재)
+- 하이브리드 fallback (1Y 없으면 3개월+ current)
+- EVAL_GRACE_DAYS 180→90
+- TOP3/WORST3 current 기준 + 종목 중복 제거
+- 통합 적중률 제거, 3구간 카드 메인
+- 탐색 카드 장기>중기>스윙 fallback + "(장기)" 표시
+- 평균수익률 → 중앙수익률(median) 변경
 
-## 보류/대기
-- 기존 시그널 1,000+개 타임스탬프 재분석
-- 탭 구조 변경
-- 인터뷰 채널 대량 크롤링 (삼프로TV 등) — V15.2 준비 완료
-- git history 정리 (465MB)
-- V15.2 프롬프트 전체 평가 (280건 정답지 기준)
+### 뉴스 기능
+- Supabase stock_news 테이블 생성
+- scripts/fetch_news.py — 네이버 증권 KR 종목 뉴스 크롤러
+- 112개 KR 종목 5,691건 수집 완료
+- 종목 상세 페이지 뉴스 탭 추가
+- 탐색 > 뉴스 페이지 신규
+- 대시보드 뉴스 섹션 추가
+
+### 수목튜브 채널 추가
+- auto_pipeline.py 버그 수정: channel_info 미전달 + published_at NULL
+- V15.2 프롬프트 + CLI 기본값 업데이트
+- 137건 시그널 정상 수집 (published_at 정상)
+
+### 크립토 가격 수정
+- SUI/SEI/STRK yfinance 티커 충돌 수정 (REIT vs 크립토)
+- -USD suffix 강제 적용 (재발 방지)
+- 크립토 가격 5종 업데이트 (XLM, WLD, POL, STX, PEPE)
+
+### 데이터 정합성
+- ticker 오매핑 수정 (두나무/이오테크닉스/바벨론/리노공업/자화전자)
+- ticker 정규화 (.HK/.T 제거, 텐센트 통일)
+- 종목명 207건 채움
+- 애널리스트 중복 495건 제거 (6,296→5,801건)
+- 코린이아빠 UUID 쿼리 버그 수정
+
+### 시스템 업데이트
+- channel-add.md: V15.2 + 스코어카드 v4 + QA Gate 3 강화
+- qa-checker.md: 19항목으로 확장
+- auto_pipeline.py: channel_info 전달 + V15.2 기본값
+- prompts/pipeline_v15.2.md: 비상장 목록, ticker 정규화, key_quote 원문, 대담 감지
+
+### --force push 배포 문제 해결
+- orphan push 히스토리 충돌 → --force push 필수
+
+## 미완료
+1. 대시보드 시장 뉴스 (네이버 메인 뉴스 크롤링)
+2. US/CRYPTO 뉴스 크롤러 (구글 뉴스)
+3. QA Gate에 published_at NULL 검증 추가
+4. 신한투자증권 이름 파싱 511건
+5. GitHub Actions 자동화 (뉴스 4시간마다, 스코어카드 매주)
+6. 탐색 소작업 (유형카드, 컨센서스)
+7. ticker NULL 37건 기존 시그널 수정
+
+## 데이터 현황
+- 시그널: 1,875건 (16개 채널)
+- 애널리스트 리포트: 5,801건
+- 종목 페이지: 390개
+- 공시: 29,372건
+- 뉴스: 5,691건 (KR)
+- 스코어카드 qualified: 13명+

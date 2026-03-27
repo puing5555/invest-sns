@@ -668,3 +668,68 @@ export async function getAdminStats() {
     };
   }
 }
+
+// ── 뉴스 ──────────────────────────────────────────────
+
+export interface StockNews {
+  id: string;
+  ticker: string;
+  stock_name: string | null;
+  market: string;
+  title: string;
+  source: string | null;
+  url: string;
+  published_at: string | null;
+  created_at: string;
+}
+
+export async function getStockNews(ticker: string, limit = 50): Promise<StockNews[]> {
+  try {
+    const { data, error } = await supabase
+      .from('stock_news')
+      .select('*')
+      .eq('ticker', ticker)
+      .order('published_at', { ascending: false })
+      .limit(limit);
+    if (error) { console.error('Error fetching stock news:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getStockNews:', error); return []; }
+}
+
+export async function getMarketNews(limit = 10): Promise<StockNews[]> {
+  try {
+    const { data, error } = await supabase
+      .from('stock_news')
+      .select('*')
+      .eq('ticker', 'MARKET')
+      .order('published_at', { ascending: false })
+      .limit(limit);
+    if (error) { console.error('Error fetching market news:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getMarketNews:', error); return []; }
+}
+
+export async function getNewsByTickers(tickers: string[], limit = 20): Promise<StockNews[]> {
+  try {
+    const { data, error } = await supabase
+      .from('stock_news')
+      .select('*')
+      .in('ticker', tickers)
+      .order('published_at', { ascending: false })
+      .limit(limit);
+    if (error) { console.error('Error fetching news by tickers:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getNewsByTickers:', error); return []; }
+}
+
+export async function getLatestNews(limit = 100): Promise<StockNews[]> {
+  try {
+    const { data, error } = await supabase
+      .from('stock_news')
+      .select('*')
+      .order('published_at', { ascending: false })
+      .limit(limit);
+    if (error) { console.error('Error fetching latest news:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getLatestNews:', error); return []; }
+}

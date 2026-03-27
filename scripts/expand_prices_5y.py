@@ -1,14 +1,15 @@
-import sys
+import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
+sys.path.insert(0, os.path.dirname(__file__))
 import json, time
 import yfinance as yf
+from stock_normalizer import CRYPTO_TICKERS
 
 sp = json.load(open('data/stockPrices.json', 'r', encoding='utf-8'))
 
 print(f"Total tickers: {len(sp)}")
 
 # Classify tickers
-coins = ['BTC', 'ETH', 'DOGE', 'SOL', 'KLAY']
 indices = ['KS11', 'SOXX']
 
 success = 0
@@ -16,8 +17,8 @@ fail = 0
 
 for ticker in sorted(sp.keys()):
     # Determine yfinance symbol
-    if ticker in coins:
-        # Coins use -USD suffix
+    if ticker in CRYPTO_TICKERS:
+        # 크립토는 -USD suffix 강제 (NYSE 티커 충돌 방지: SUI→Sun Communities, SEI→SEI Investments)
         yf_symbol = ticker + '-USD'
     elif ticker in indices:
         if ticker == 'KS11':
