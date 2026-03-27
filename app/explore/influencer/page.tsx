@@ -71,6 +71,7 @@ export default function InfluencerPage() {
   const [categoryFilter, setCategoryFilter] = useState<Set<string>>(new Set(['kr', 'us', 'crypto']));
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
   const [influencerSort, setInfluencerSort] = useState<'accuracy' | 'return' | 'count'>('accuracy');
+  const [styleFilter, setStyleFilter] = useState<string>('all');
 
   // DB에서 시그널 로드
   useEffect(() => {
@@ -211,9 +212,10 @@ export default function InfluencerPage() {
           {/* Tabs */}
           <div className="flex space-x-8 -mb-px">
             {[
-              { id: 'latest', label: '🔥 최신 시그널', count: filteredSignals.length },
-              { id: 'influencers', label: '👥 인플루언서', count: null },
-              { id: 'stocks', label: '📊 종목별', count: null }
+              { id: 'latest', label: '최신 시그널', count: filteredSignals.length },
+              { id: 'influencers', label: '인플루언서', count: null },
+              { id: 'consensus', label: '컨센서스', count: null },
+              { id: 'stocks', label: '종목별', count: null }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -305,6 +307,22 @@ export default function InfluencerPage() {
                 </button>
               ))}
             </div>
+            {/* 유형 필터 */}
+            <div className="flex gap-2 mb-4 flex-wrap">
+              {([['all', '전체'], ['올라운더', '올라운더'], ['스나이퍼', '스나이퍼'], ['홈런히터', '홈런히터']] as const).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => setStyleFilter(key)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                    styleFilter === key
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(() => {
               // 카테고리 필터 적용된 시그널로 발언자별 카운트
@@ -370,6 +388,11 @@ export default function InfluencerPage() {
                   scorecard: getScorecard(name),
                 }))
                 .filter(s => searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                .filter(s => {
+                  if (styleFilter === 'all') return true;
+                  const tag = s.scorecard?.style_tag || '';
+                  return tag.includes(styleFilter);
+                })
                 .sort((a, b) => {
                   const MIN_SCORED = 10;
                   const aN = a.scorecard?.scored_signals || 0;
@@ -496,6 +519,62 @@ export default function InfluencerPage() {
                 );
               });
             })()}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'consensus' && (
+          <div>
+            <p className="text-sm text-gray-500 mb-4">최근 30일 시그널 기준 종목별 컨센서스</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {(() => {
+                const now = new Date();
+                const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
+                const recentSignals = allSignals.filter(s => (s.video_published_at || '') >= thirtyDaysAgo);
+
+                const stockMap = new Map<string, { bullish: number; bearish: number; neutral: number; speakers: Set<string>; ticker: string | null }>();
+                recentSignals.forEach(s => {
+                  if (!s.stock) return;
+                  const existing = stockMap.get(s.stock) || { bullish: 0, bearish: 0, neutral: 0, speakers: new Set(), ticker: null };
+                  if (['매수', '긍정'].includes(s.signal_type)) existing.bullish++;
+                  else if (['매도', '부정'].includes(s.signal_type)) existing.bearish++;
+                  else existing.neutral++;
+                  existing.speakers.add(s.speaker);
+                  if (s.ticker) existing.ticker = s.ticker;
+                  stockMap.set(s.stock, existing);
+                });
+
+                return Array.from(stockMap.entries())
+                  .filter(([, d]) => d.bullish + d.bearish >= 2)
+                  .sort((a, b) => (b[1].bullish + b[1].bearish) - (a[1].bullish + a[1].bearish))
+                  .slice(0, 30)
+                  .map(([stock, data]) => {
+                    const total = data.bullish + data.bearish;
+                    const bullPct = Math.round((data.bullish / total) * 100);
+                    const sentiment = bullPct >= 70 ? 'strong-bull' : bullPct >= 55 ? 'bull' : bullPct <= 30 ? 'strong-bear' : bullPct <= 45 ? 'bear' : 'mixed';
+                    const sentimentLabel = sentiment === 'strong-bull' ? '강세' : sentiment === 'bull' ? '약강세' : sentiment === 'strong-bear' ? '약세' : sentiment === 'bear' ? '약약세' : '혼재';
+                    const sentimentColor = sentiment.includes('bull') ? 'text-green-600' : sentiment.includes('bear') ? 'text-red-500' : 'text-yellow-600';
+                    const href = data.ticker ? `/stock/${data.ticker}` : '#';
+
+                    return (
+                      <a key={stock} href={href} className="bg-white rounded-xl p-4 border border-gray-100 hover:shadow-md transition-shadow block">
+                        <div className="flex justify-between items-start mb-2">
+                          <span className="font-bold text-sm text-gray-900">{stock}</span>
+                          <span className={`text-xs font-bold ${sentimentColor}`}>{sentimentLabel}</span>
+                        </div>
+                        <div className="flex h-2 rounded-full overflow-hidden bg-gray-100 mb-2">
+                          <div className="bg-green-500" style={{ width: `${bullPct}%` }} />
+                          <div className="bg-red-400" style={{ width: `${100 - bullPct}%` }} />
+                        </div>
+                        <div className="flex justify-between text-[10px] text-gray-400">
+                          <span>강세 {data.bullish}</span>
+                          <span>약세 {data.bearish}</span>
+                        </div>
+                        <div className="text-[10px] text-gray-400 mt-1">{data.speakers.size}명 언급</div>
+                      </a>
+                    );
+                  });
+              })()}
             </div>
           </div>
         )}
