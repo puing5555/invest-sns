@@ -733,3 +733,94 @@ export async function getLatestNews(limit = 100): Promise<StockNews[]> {
     return data || [];
   } catch (error) { console.error('Error in getLatestNews:', error); return []; }
 }
+
+// ── 내부자 매매 ──────────────────────────────────────
+export interface InsiderTrade {
+  id: string;
+  ticker: string;
+  stock_name: string | null;
+  insider_name: string;
+  position: string | null;
+  trade_type: string;
+  shares: number | null;
+  price: number | null;
+  total_amount: number | null;
+  trade_date: string | null;
+  disclosure_date: string | null;
+  source_url: string | null;
+  created_at: string;
+}
+
+export async function getInsiderTrades(ticker: string, options?: { since?: string }): Promise<InsiderTrade[]> {
+  try {
+    const PAGE = 1000;
+    const all: InsiderTrade[] = [];
+    let from = 0;
+    while (true) {
+      let query = supabase
+        .from('insider_trades')
+        .select('*')
+        .eq('ticker', ticker)
+        .order('trade_date', { ascending: false })
+        .range(from, from + PAGE - 1);
+      if (options?.since) query = query.gte('trade_date', options.since);
+      const { data, error } = await query;
+      if (error) { console.error('Error fetching insider trades:', error); break; }
+      if (!data || data.length === 0) break;
+      all.push(...data);
+      if (data.length < PAGE) break;
+      from += PAGE;
+    }
+    return all;
+  } catch (error) { console.error('Error in getInsiderTrades:', error); return []; }
+}
+
+export async function getLatestInsiderTrades(limit = 100): Promise<InsiderTrade[]> {
+  try {
+    const { data, error } = await supabase
+      .from('insider_trades')
+      .select('*')
+      .order('trade_date', { ascending: false })
+      .limit(limit);
+    if (error) { console.error('Error fetching latest insider trades:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getLatestInsiderTrades:', error); return []; }
+}
+
+export async function getInsiderTradesByName(insiderName: string): Promise<InsiderTrade[]> {
+  try {
+    const { data, error } = await supabase
+      .from('insider_trades')
+      .select('*')
+      .eq('insider_name', insiderName)
+      .order('trade_date', { ascending: false })
+      .limit(500);
+    if (error) { console.error('Error fetching insider trades by name:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getInsiderTradesByName:', error); return []; }
+}
+
+// ── 수급 데이터 ──────────────────────────────────────
+export interface SupplyDemand {
+  id: string;
+  ticker: string;
+  trade_date: string;
+  institution: number;
+  foreign_investor: number;
+  individual: number;
+  created_at: string;
+}
+
+export async function getSupplyDemand(ticker: string, since?: string): Promise<SupplyDemand[]> {
+  try {
+    let query = supabase
+      .from('stock_supply_demand')
+      .select('*')
+      .eq('ticker', ticker)
+      .order('trade_date', { ascending: true });
+    if (since) query = query.gte('trade_date', since);
+    const { data, error } = await query.limit(1000);
+    if (error) { console.error('Error fetching supply demand:', error); return []; }
+    return data || [];
+  } catch (error) { console.error('Error in getSupplyDemand:', error); return []; }
+}

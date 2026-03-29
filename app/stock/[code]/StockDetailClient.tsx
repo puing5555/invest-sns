@@ -9,6 +9,12 @@ import dynamic from 'next/dynamic';
 const StockDisclosureTab = dynamic(() => import('@/components/stock/StockDisclosureTab'), {
   loading: () => <div className="text-center py-8 text-[#8b95a1]">공시 로딩중...</div>,
 });
+const StockInsiderTab = dynamic(() => import('@/components/stock/StockInsiderTab'), {
+  loading: () => <div className="text-center py-8 text-[#8b95a1]">내부자 거래 로딩중...</div>,
+});
+const StockSupplyDemandTab = dynamic(() => import('@/components/stock/StockSupplyDemandTab'), {
+  loading: () => <div className="text-center py-8 text-[#8b95a1]">수급 데이터 로딩중...</div>,
+});
 import FeedCard from '@/components/FeedCard';
 import StockSignalChart from '@/components/StockSignalChart';
 import { formatStockDisplay } from '@/lib/stockNames';
@@ -62,6 +68,7 @@ const tabs = [
   { id: 'disclosure', label: '공시', icon: '📋' },
   { id: 'news', label: '뉴스', icon: '📰' },
   { id: 'insider', label: '내부자', icon: '💼' },
+  { id: 'supply', label: '수급', icon: '🔄' },
   { id: 'calendar', label: '일정', icon: '📅' },
   { id: 'memo', label: '메모', icon: '📝' },
 ];
@@ -308,13 +315,16 @@ export default function StockDetailClient({ code }: StockDetailClientProps) {
 
       case 'insider':
         return (
-          <div className="text-center py-12">
-            <div className="text-4xl mb-4">💼</div>
-            <h3 className="text-lg font-bold text-[#191f28] mb-2">내부자 거래</h3>
-            <p className="text-[#8b95a1]">
-              {isKoreanStock(code) ? 'DART 연동 예정' : 'Form 4 연동 예정'}
-            </p>
-          </div>
+          <ErrorBoundary fallback={<div className="text-center py-8 text-[#8b95a1]">내부자 거래 로딩 실패</div>}>
+            <StockInsiderTab code={code} />
+          </ErrorBoundary>
+        );
+
+      case 'supply':
+        return (
+          <ErrorBoundary fallback={<div className="text-center py-8 text-[#8b95a1]">수급 데이터 로딩 실패</div>}>
+            <StockSupplyDemandTab code={code} />
+          </ErrorBoundary>
         );
 
       case 'calendar':
