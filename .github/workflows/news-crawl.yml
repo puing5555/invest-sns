@@ -2,12 +2,43 @@ name: News Crawl (KR + US + CRYPTO)
 
 on:
   schedule:
-    # 매 4시간마다 (UTC 기준: 00, 04, 08, 12, 16, 20)
-    - cron: '0 */4 * * *'
-  workflow_dispatch: # 수동 실행
+    - cron: '0 * * * *'       # 매 1시간 (시장뉴스)
+    - cron: '0 */4 * * *'     # 매 4시간 (종목별 + US + CRYPTO)
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'market-only / full'
+        required: false
+        default: 'full'
 
 jobs:
-  crawl-news:
+  market-news:
+    # 매 시간 실행 (모든 schedule + workflow_dispatch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 python-dotenv
+
+      - name: Create .env.local
+        run: |
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env.local
+          echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env.local
+
+      - name: Crawl KR market news
+        run: python scripts/fetch_news.py --market --max-pages 3
+
+  stock-news:
+    # 4시간마다 or 수동 full 실행 시에만
+    if: github.event.schedule == '0 */4 * * *' || github.event_name == 'workflow_dispatch' && github.event.inputs.scope != 'market-only'
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -20,16 +51,12 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: |
-          pip install requests beautifulsoup4 python-dotenv
+        run: pip install requests beautifulsoup4 python-dotenv
 
       - name: Create .env.local
         run: |
           echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > .env.local
           echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env.local
-
-      - name: Crawl KR market news
-        run: python scripts/fetch_news.py --market --max-pages 3
 
       - name: Crawl KR stock news
         run: python scripts/fetch_news.py --all --max-pages 2
