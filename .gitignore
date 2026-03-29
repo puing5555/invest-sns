@@ -45,3 +45,4 @@ __pycache__/
 
 # Subtitle working files
 *.vtt
+_next/
