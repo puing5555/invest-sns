@@ -77,9 +77,13 @@ def fetch_naver_supply(ticker, max_pages=30):
                 continue
             seen_dates.add(trade_date)
 
-            institution = parse_number(cols[5].get_text(strip=True))
-            foreign_inv = parse_number(cols[6].get_text(strip=True))
-            # 개인 = -(기관+외국인) approximately
+            close_price = parse_number(cols[1].get_text(strip=True))
+            inst_shares = parse_number(cols[5].get_text(strip=True))
+            frgn_shares = parse_number(cols[6].get_text(strip=True))
+            # 수량(주) × 종가 → 금액(원) 변환
+            institution = inst_shares * close_price
+            foreign_inv = frgn_shares * close_price
+            # 개인 = -(기관+외국인)
             individual = -(institution + foreign_inv)
 
             all_rows.append({
@@ -106,7 +110,7 @@ def upload_to_supabase(rows):
     for i in range(0, len(rows), batch_size):
         batch = rows[i:i+batch_size]
         resp = requests.post(
-            f"{BASE_URL}/stock_supply_demand",
+            f"{BASE_URL}/stock_supply_demand?on_conflict=ticker,trade_date",
             headers=HEADERS,
             json=batch
         )

@@ -132,10 +132,11 @@ export default function StockSupplyDemandTab({ code }: { code: string }) {
       {/* Main chart: price line + institution/foreign bars (grouped) */}
       <div className="bg-white rounded-lg border border-[#e8e8e8] p-4">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-xs font-medium text-[#8b95a1]">주가 + 기관/외국인 순매수</h4>
+          <h4 className="text-xs font-medium text-[#8b95a1]">주가 + 투자자별 순매수</h4>
           <div className="flex items-center gap-3 text-[10px] text-[#8b95a1]">
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#2563eb] inline-block" />기관</span>
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#dc2626] inline-block" />외국인</span>
+            <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#16a34a] inline-block" />개인</span>
             <span className="flex items-center gap-1"><span className="w-3 h-0.5 bg-[#3182f6] inline-block" />주가</span>
           </div>
         </div>
@@ -170,6 +171,7 @@ export default function StockSupplyDemandTab({ code }: { code: string }) {
               <Area yAxisId="price" type="monotone" dataKey="close" stroke="none" fill="url(#supplyPriceGrad)" isAnimationActive={false} />
               <Bar yAxisId="volume" dataKey="institution" fill="#2563eb" fillOpacity={0.75} isAnimationActive={false} />
               <Bar yAxisId="volume" dataKey="foreign_investor" fill="#dc2626" fillOpacity={0.75} isAnimationActive={false} />
+              <Bar yAxisId="volume" dataKey="individual" fill="#16a34a" fillOpacity={0.75} isAnimationActive={false} />
               <Line yAxisId="price" type="monotone" dataKey="close" stroke="#3182f6" strokeWidth={1.5} dot={false} isAnimationActive={false} />
             </ComposedChart>
           </ResponsiveContainer>

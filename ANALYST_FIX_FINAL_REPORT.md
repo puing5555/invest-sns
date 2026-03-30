@@ -2,7 +2,7 @@
 
 ## 📊 작업 개요
 - **작업 일시**: 2026-03-03 19:19 ~ 19:25 (약 6분 소요)
-- **작업 디렉토리**: C:\Users\Mario\work\invest-sns
+- **작업 디렉토리**: D:\work\invest-sns
 - **대상 파일**: data/analyst_reports.json (519건)
 
 ## 🔍 문제 분석 결과

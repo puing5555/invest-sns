@@ -1,0 +1,972 @@
+{
+  "success": 120,
+  "fail": 0,
+  "skip": 1,
+  "details": [
+    {
+      "ticker": "000270",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "000660",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "000720",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "001060",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "001460",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "003670",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "003850",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "004170",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "005290",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "005380",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "005490",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "005930",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 0,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "005940",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "006400",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "007310",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "007810",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "008730",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "009150",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "009450",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "009830",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "010130",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "011070",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "011170",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "011790",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "012330",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "012450",
+      "status": "ok",
+      "count": 460,
+      "uploaded": 100,
+      "from": "2024-05-03",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "014680",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "015760",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "016360",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "017670",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "018670",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "023810",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "025900",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "028050",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "028300",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "030520",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "031980",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "034020",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "034220",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "034730",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "035420",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "035720",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "036010",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "036570",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "036710",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "036830",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "036930",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "039030",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "039490",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "042660",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "042700",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "045970",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "051910",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "053610",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "058470",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "058610",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "064350",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "064760",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "066570",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "066970",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "067310",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "068270",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "071050",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "078600",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "079160",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "079170",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "084370",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "089010",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "089030",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "089140",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "090090",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2009-07-24",
+      "to": "2011-12-14"
+    },
+    {
+      "ticker": "090430",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "095570",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "095610",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "097520",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "105560",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-10",
+      "to": "2026-03-27"
+    },
+    {
+      "ticker": "121600",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "131970",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "145720",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "145990",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "166090",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "178320",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "183300",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "188490",
+      "status": "skip",
+      "count": 0
+    },
+    {
+      "ticker": "195870",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "196170",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "196490",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "207940",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "214430",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "214450",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "217820",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "222800",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "240810",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "243840",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "247540",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "267260",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "271940",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "278280",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "278470",
+      "status": "ok",
+      "count": 504,
+      "uploaded": 200,
+      "from": "2024-02-27",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "281740",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "284620",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "298040",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "307950",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "317530",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "319400",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "319660",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "322000",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "323410",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "326030",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "336370",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "352820",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "353200",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "357780",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "371450",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "371460",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "373220",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "396520",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "399720",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "403870",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 300,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "438330",
+      "status": "ok",
+      "count": 600,
+      "uploaded": 600,
+      "from": "2023-10-06",
+      "to": "2026-03-26"
+    },
+    {
+      "ticker": "490490",
+      "status": "ok",
+      "count": 364,
+      "uploaded": 364,
+      "from": "2024-09-24",
+      "to": "2026-03-26"
+    }
+  ]
+}
