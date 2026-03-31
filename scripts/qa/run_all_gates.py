@@ -48,6 +48,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from gate1_metadata import run_gate1
 from gate2_signals import run_gate2
 from gate3_frontend import run_gate3
+from gate4_ticker_check import run_gate4
 
 QA_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'qa')
 
@@ -81,7 +82,7 @@ def print_banner(msg):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='QA 오케스트레이터 - Gate 1~3 순서 실행')
+    parser = argparse.ArgumentParser(description='QA 오케스트레이터 - Gate 1~4 순서 실행')
     parser.add_argument('--channel', '-c', required=True, help='채널 슬러그 (예: godofit)')
     parser.add_argument('--metadata-file', '-m', required=True,
                         help='Gate 1 입력: 메타데이터 JSON 파일')
@@ -113,6 +114,7 @@ def main():
         'gate1': None,
         'gate2': None,
         'gate3': None,
+        'gate4': None,
     }
 
     # ──────────────────────────────────
@@ -171,6 +173,21 @@ def main():
             sys.exit(1)
 
         print(f"✅ Gate 3 통과 → 배포 승인")
+
+    # ──────────────────────────────────
+    # Gate 4: Ticker 유효성 검증
+    # ──────────────────────────────────
+    print_banner("Gate 4: Ticker 유효성 검증")
+    g4_code = run_gate4(fix=False)
+    results['gate4'] = 'PASS' if g4_code == 0 else 'FAIL'
+
+    if g4_code != 0:
+        print("⚠️  Gate 4 실패: 누락 ticker 존재. --fix로 자동 추가 가능:")
+        print("   python scripts/qa/gate4_ticker_check.py --fix")
+        _print_summary(results, channel)
+        sys.exit(1)
+
+    print("✅ Gate 4 통과 → 모든 ticker 검증 완료")
 
     # ──────────────────────────────────
     # 최종 요약
