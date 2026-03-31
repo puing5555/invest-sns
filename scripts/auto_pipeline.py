@@ -357,6 +357,46 @@ class YouTubeChannelCollector:
             return []
 
 
+def _load_stock_names() -> set:
+    """stockPrices.json에서 종목명 세트 로드 (--stock-filter용)"""
+    sp_path = os.path.join(PROJECT_ROOT, 'data', 'stockPrices.json')
+    names = set()
+    try:
+        prices = json.load(open(sp_path, encoding='utf-8'))
+        for ticker, info in prices.items():
+            n = info.get('name', '')
+            if n and len(n) >= 2:
+                names.add(n)
+            # 영문 ticker (3자+)도 추가
+            if re.match(r'^[A-Z]{3,5}$', ticker):
+                names.add(ticker)
+        # 추가 한글 매핑
+        extras = [
+            '테슬라','엔비디아','삼성전자','SK하이닉스','애플','아마존','구글',
+            '마이크로소프트','메타','넷플릭스','비트코인','이더리움','솔라나',
+            '리플','도지코인','카카오','네이버','현대차','기아','셀트리온',
+            '한미반도체','팔란티어','코인베이스','마이크로스트래티지',
+        ]
+        names.update(extras)
+    except Exception:
+        pass
+    return names
+
+
+def _filter_by_stock_names(videos: list, stock_names: set) -> tuple:
+    """제목에 종목명이 포함된 영상만 필터링. (passed, skipped) 반환"""
+    passed, skipped = [], []
+    for v in videos:
+        title = v.get('title', '')
+        found = [n for n in stock_names if n in title]
+        if found:
+            v['_matched_stocks'] = found
+            passed.append(v)
+        else:
+            skipped.append(v)
+    return passed, skipped
+
+
 class AutoPipeline:
     """자동화 파이프라인 메인 클래스"""
     
@@ -368,7 +408,7 @@ class AutoPipeline:
         self.analyzer = SignalAnalyzer()
         self.db_inserter = DatabaseInserter()
     
-    def run_dry_run(self, channel_url: str, limit: Optional[int] = None) -> Dict[str, Any]:
+    def run_dry_run(self, channel_url: str, limit: Optional[int] = None, stock_filter: bool = False) -> Dict[str, Any]:
         """Dry run - 영상 목록과 필터링 결과만 출력"""
         print("=== DRY RUN 모드 ===")
         print("영상 목록 수집과 필터링 결과만 출력합니다. 실제 처리는 하지 않습니다.")
@@ -392,10 +432,25 @@ class AutoPipeline:
         
         # 3. 제목 필터링
         passed_videos, skipped_videos = self.filter.filter_videos(videos)
-        
+
+        # 3.5. 종목명 필터 (--stock-filter)
+        if stock_filter:
+            stock_names = _load_stock_names()
+            before = len(passed_videos)
+            passed_videos, stock_skipped = _filter_by_stock_names(passed_videos, stock_names)
+            print(f"\n=== 종목명 필터 (--stock-filter) ===")
+            print(f"종목명 필터 전: {before}개")
+            print(f"종목명 포함 (통과): {len(passed_videos)}개")
+            print(f"종목명 없음 (제외): {len(stock_skipped)}개")
+            if passed_videos:
+                print(f"\n--- 종목명 포함 영상 샘플 ---")
+                for v in passed_videos[:10]:
+                    stocks = v.get('_matched_stocks', [])
+                    print(f"  [{', '.join(stocks[:3])}] {v['title'][:70]}")
+
         # 4. 필터링 결과 출력
         self.filter.print_filter_results(passed_videos, skipped_videos)
-        
+
         # 5. 예상 처리 시간 계산
         subtitle_time = len(passed_videos) * (self.config.RATE_LIMIT_REQUESTS + 10)  # 자막 추출
         analysis_time = len(passed_videos) * (self.config.RATE_LIMIT_API_REQUESTS + 20)  # AI 분석
@@ -521,7 +576,7 @@ class AutoPipeline:
 
     def run_execute(self, channel_url: str, limit: Optional[int] = None,
                    skip_existing: bool = False, skip_qa: bool = False,
-                   batch_size: int = 30) -> Dict[str, Any]:
+                   batch_size: int = 30, stock_filter: bool = False) -> Dict[str, Any]:
         """실제 실행 - 전체 파이프라인 수행 (배치 처리)"""
         print("=== EXECUTE 모드 ===")
         print(f"전체 파이프라인을 실행합니다. (배치 크기: {batch_size})")
@@ -561,6 +616,13 @@ class AutoPipeline:
             print(f"\n[3] 제목 필터링...")
             passed_videos, skipped_videos = self.filter.filter_videos(videos)
             self.filter.print_filter_results(passed_videos, skipped_videos)
+
+            # ── Step 3.5: 종목명 필터 (--stock-filter) ────────────────
+            if stock_filter:
+                stock_names = _load_stock_names()
+                before = len(passed_videos)
+                passed_videos, stock_skipped = _filter_by_stock_names(passed_videos, stock_names)
+                print(f"\n[종목명 필터] {before}개 → {len(passed_videos)}개 (제외: {len(stock_skipped)}개)")
 
             if not passed_videos:
                 return {'error': '투자 관련 영상이 없습니다'}
@@ -1053,6 +1115,8 @@ def main():
                        help='배치당 처리할 영상 수 (기본값: 30)')
     parser.add_argument('--prompt-version', default='V15.2',
                        help='사용할 프롬프트 버전 (기본값: V15.2)')
+    parser.add_argument('--stock-filter', action='store_true',
+                       help='제목에 종목명이 포함된 영상만 처리 (stockPrices.json 기준)')
     
     args = parser.parse_args()
     
@@ -1071,12 +1135,13 @@ def main():
     
     try:
         if args.dry_run:
-            result = pipeline.run_dry_run(args.channel, args.limit)
+            result = pipeline.run_dry_run(args.channel, args.limit, stock_filter=args.stock_filter)
         else:
             result = pipeline.run_execute(
                 args.channel, args.limit, args.skip_existing,
                 skip_qa=args.skip_qa,
-                batch_size=args.batch_size
+                batch_size=args.batch_size,
+                stock_filter=args.stock_filter
             )
         
         # 결과 확인

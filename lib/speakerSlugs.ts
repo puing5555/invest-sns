@@ -36,6 +36,7 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '김수헌': 'kim-suheon',
   '김탁': 'kim-tak',
   '김현지': 'kim-hyunji',
+  '김광석': 'kim-kwangsuk',
   '김효식': 'kim-hyosik',
   '맹성준': 'maeng-sungjun',
   '박성진': 'park-sungjin',

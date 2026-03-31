@@ -101,6 +101,7 @@ class PipelineConfig:
         '올랜도 킴 미국주식': '올랜도 킴',
         '대니월드(Danny World)': '대니월드',
         '윤수목의 생존투자훈련소': '윤수목',
+        '경제 읽어주는 남자(김광석TV)': '김광석',
     }
 
     @classmethod
