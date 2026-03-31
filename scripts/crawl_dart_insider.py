@@ -61,24 +61,29 @@ def parse_document(rcept_no, rcept_dt, stock_code, stock_name):
                 clean = re.sub(r"<[^>]+>", " ", content)
                 clean = re.sub(r"\s+", " ", clean).strip()
                 clean = unescape(clean).replace("&cr;", " ")
-                # 이름 추출: BeautifulSoup get_text(strip=True)로 전체 텍스트 합치기
+                # 이름 추출: regex 우선 (BS보다 정확)
                 name_val = ""
-                try:
-                    soup = BeautifulSoup(content, "html.parser")
-                    for cell in soup.find_all(["td", "th"]):
-                        if re.search(r"한\s*글", cell.get_text(strip=True)):
-                            next_cell = cell.find_next("td")
-                            if next_cell:
-                                candidate = next_cell.get_text(strip=True)
-                                if candidate and candidate != cell.get_text(strip=True):
-                                    name_val = candidate
-                                    break
-                except Exception:
-                    pass
-                # fallback: regex
-                if not name_val:
-                    nm = re.search(r"성명\s*\(?명칭\)?\s*한\s*글\s+([^\s]+)", clean)
-                    name_val = nm.group(1) if nm else ""
+                nm = re.search(r"성명\s*\(?명칭\)?\s*한\s*글\s+([^\s]+)", clean)
+                if nm:
+                    name_val = nm.group(1)
+                # fallback: BeautifulSoup
+                HEADER_PATTERNS = re.compile(r"한자|영문|성명|명칭|직위|관계|생년|사업자|주소")
+                if not name_val or HEADER_PATTERNS.search(name_val):
+                    try:
+                        soup = BeautifulSoup(content, "html.parser")
+                        for cell in soup.find_all(["td", "th"]):
+                            if re.search(r"한\s*글", cell.get_text(strip=True)):
+                                next_cell = cell.find_next("td")
+                                if next_cell:
+                                    candidate = next_cell.get_text(strip=True)
+                                    if candidate and candidate != cell.get_text(strip=True) and not HEADER_PATTERNS.search(candidate):
+                                        name_val = candidate
+                                        break
+                    except Exception:
+                        pass
+                # 최종 필터: 헤더 패턴이면 빈 문자열
+                if name_val and HEADER_PATTERNS.search(name_val):
+                    name_val = ""
                 # 1글자 이름 경고
                 if len(name_val) == 1:
                     print(f"  ⚠ 이름 1글자: '{name_val}' (rcpNo={rcept_no}) - 확인: https://dart.fss.or.kr/dsaf001/main.do?rcpNo={rcept_no}")
