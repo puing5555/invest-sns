@@ -6,6 +6,7 @@ export function getCurrencySymbol(ticker: string): string {
   return isKoreanStock(ticker) ? '원' : '$';
 }
 export function formatStockPrice(price: number, ticker: string): string {
+  if (price == null || isNaN(price)) return '-';
   const isKR = isKoreanStock(ticker);
   if (isKR) return `${price.toLocaleString()}원`;
 
@@ -24,6 +25,7 @@ export function formatStockPrice(price: number, ticker: string): string {
 }
 
 export function formatPriceChange(change: number, ticker: string): string {
+  if (change == null || isNaN(change)) return '-';
   const isKR = isKoreanStock(ticker);
   const sign = change >= 0 ? '+' : '';
   if (isKR) return `${sign}${change.toLocaleString()}원`;

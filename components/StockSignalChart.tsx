@@ -161,7 +161,7 @@ export default function StockSignalChart({
       <div className="flex justify-between items-center mb-4">
         <h4 className="font-medium text-[#191f28]">주가 차트 & 신호</h4>
         <div className="text-sm text-[#8b95a1]">
-          현재가 <span className="font-bold text-[#191f28]">{formatStockPrice(stockData.currentPrice, code)}</span>
+          현재가 <span className="font-bold text-[#191f28]">{formatStockPrice(stockData?.currentPrice ?? chartData[chartData.length - 1]?.close ?? 0, code)}</span>
         </div>
       </div>
 
