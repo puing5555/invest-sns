@@ -118,18 +118,31 @@ const getStockData = (code: string, dynamicName?: string) => {
 
   const realData = (stockPricesData as any)[code];
   if (realData) {
-    return {
-      name: stockName,
-      price: realData.currentPrice,
-      change: realData.change,
-      changePercent: realData.changePercent,
-    };
+    // currentPrice 필드가 있으면 바로 사용, 없으면 prices 배열 마지막에서 계산
+    let price = realData.currentPrice;
+    let change = realData.change;
+    let changePercent = realData.changePercent;
+    if ((price === undefined || price === null) && realData.prices?.length > 0) {
+      const last = realData.prices[realData.prices.length - 1];
+      price = last.close;
+      if (realData.prices.length >= 2) {
+        const prev = realData.prices[realData.prices.length - 2];
+        change = Math.round((last.close - prev.close) * 100) / 100;
+        changePercent = prev.close ? Math.round(((last.close - prev.close) / prev.close) * 10000) / 100 : 0;
+      } else {
+        change = 0;
+        changePercent = 0;
+      }
+    }
+    if (price) {
+      return { name: stockName, price, change: change ?? 0, changePercent: changePercent ?? 0 };
+    }
   }
 
   // stockPrices.json에 없으면 signal_prices.json에서 폴백
   const sigPrice = (signalPricesData as any)[code];
-  if (sigPrice?.price) {
-    return { name: stockName, price: sigPrice.price, change: 0, changePercent: 0 };
+  if (sigPrice?.current_price || sigPrice?.price) {
+    return { name: stockName, price: sigPrice.current_price || sigPrice.price, change: 0, changePercent: 0 };
   }
 
   return { name: stockName, price: 0, change: 0, changePercent: 0 };
