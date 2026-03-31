@@ -71,7 +71,7 @@ export default function InfluencerPage() {
   const [categoryFilter, setCategoryFilter] = useState<Set<string>>(new Set(['kr', 'us', 'crypto']));
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
   const [influencerSort, setInfluencerSort] = useState<'accuracy' | 'return' | 'count'>('accuracy');
-  const [styleFilter, setStyleFilter] = useState<string>('all');
+
 
   // DB에서 시그널 로드
   useEffect(() => {
@@ -307,22 +307,6 @@ export default function InfluencerPage() {
                 </button>
               ))}
             </div>
-            {/* 유형 필터 */}
-            <div className="flex gap-2 mb-4 flex-wrap">
-              {([['all', '전체'], ['올라운더', '올라운더'], ['스나이퍼', '스나이퍼'], ['홈런히터', '홈런히터']] as const).map(([key, label]) => (
-                <button
-                  key={key}
-                  onClick={() => setStyleFilter(key)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                    styleFilter === key
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-white text-gray-500 border-gray-300 hover:border-gray-400'
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(() => {
               // 카테고리 필터 적용된 시그널로 발언자별 카운트
@@ -388,11 +372,6 @@ export default function InfluencerPage() {
                   scorecard: getScorecard(name),
                 }))
                 .filter(s => searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                .filter(s => {
-                  if (styleFilter === 'all') return true;
-                  const tag = s.scorecard?.style_tag || '';
-                  return tag.includes(styleFilter);
-                })
                 .sort((a, b) => {
                   const MIN_SCORED = 10;
                   const aN = a.scorecard?.scored_signals || 0;
