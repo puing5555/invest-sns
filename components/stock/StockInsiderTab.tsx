@@ -154,8 +154,9 @@ export default function StockInsiderTab({ code }: { code: string }) {
   }, [stockData, filteredTrades, periodFilter]);
 
   const allPerf = useMemo(() => {
-    if (!stockData?.currentPrice) return [];
-    const currentPrice = stockData.currentPrice; const pp = stockData?.prices || [];
+    const pp = stockData?.prices || [];
+    const currentPrice = stockData?.currentPrice ?? (pp.length > 0 ? pp[pp.length - 1].close : null);
+    if (!currentPrice) return [];
     const map = new Map<string, { name: string; position: string; buyShares: number; sellShares: number; buyPrices: number[]; buyDates: string[] }>();
     const src = typeFilter === 'all' ? trades : trades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter));
     src.filter(t => t.trade_date).forEach(t => {
