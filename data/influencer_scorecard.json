@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-01T06:49:52.714298",
+  "generated_at": "2026-04-01T07:48:04.947824",
   "min_hit_eligible": 10,
-  "total_speakers": 93,
-  "qualified_speakers": 16,
+  "total_speakers": 97,
+  "qualified_speakers": 17,
   "speakers": {
     "speaker-v291g7": {
       "name": "이형수 (IT의신)",
@@ -10502,7 +10502,7 @@
       "losses": 34,
       "pending": 8,
       "avg_return_1y": -35.89,
-      "avg_return_current": -24.93,
+      "avg_return_current": -24.78,
       "median_return_1y": -35.89,
       "median_return_current": -35.86,
       "best_call": {
@@ -11365,7 +11365,7 @@
           "signal": "매수",
           "return_1y": null,
           "return_3y": null,
-          "return_current": 24.1,
+          "return_current": 32.13,
           "return_basis": "current",
           "hit": true
         },
@@ -11669,7 +11669,7 @@
           "wins": 15,
           "losses": 34,
           "hit_rate": 30.6,
-          "avg_return": -24.2,
+          "avg_return": -24.04,
           "median_return": -37.09
         },
         "mid": {
@@ -12651,6 +12651,1316 @@
         "delta": null
       }
     },
+    "kang-hwanguk": {
+      "name": "강환국",
+      "slug": "kang-hwanguk",
+      "total_signals": 129,
+      "scored_signals": 96,
+      "hit_eligible": 84,
+      "hit_rate": 61.2,
+      "wins": 41,
+      "losses": 26,
+      "pending": 17,
+      "avg_return_1y": 25.72,
+      "avg_return_current": 16.47,
+      "median_return_1y": 17.16,
+      "median_return_current": -3.99,
+      "best_call": {
+        "stock": "SK하이닉스",
+        "ticker": "000660",
+        "return_1y": 13.01,
+        "return_current": 392.91,
+        "signal": "긍정",
+        "date": "2024-03-04"
+      },
+      "worst_call": {
+        "stock": "아톰",
+        "ticker": "ATOM",
+        "return_1y": -44.5,
+        "return_current": -80.5,
+        "signal": "긍정",
+        "date": "2024-05-28"
+      },
+      "top3_calls": [
+        {
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "return_1y": 13.01,
+          "return_current": 392.91,
+          "signal": "긍정",
+          "date": "2024-03-04"
+        },
+        {
+          "stock": "메타",
+          "ticker": "META",
+          "return_1y": 151.51,
+          "return_current": 191.0,
+          "signal": "긍정",
+          "date": "2023-03-19"
+        },
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": 27.29,
+          "return_current": 190.57,
+          "signal": "매수",
+          "date": "2022-08-01"
+        }
+      ],
+      "worst3_calls": [
+        {
+          "stock": "아톰",
+          "ticker": "ATOM",
+          "return_1y": -44.5,
+          "return_current": -80.5,
+          "signal": "긍정",
+          "date": "2024-05-28"
+        },
+        {
+          "stock": "아발란체",
+          "ticker": "AVAX",
+          "return_1y": -23.45,
+          "return_current": -79.84,
+          "signal": "매수",
+          "date": "2023-12-20"
+        },
+        {
+          "stock": "시바 이누",
+          "ticker": "SHIB",
+          "return_1y": -48.0,
+          "return_current": -76.92,
+          "signal": "긍정",
+          "date": "2024-05-28"
+        }
+      ],
+      "homerun_rate": 12.1,
+      "expected_return": 22.2,
+      "style_tag": "🎯스나이퍼",
+      "scored_list": [
+        {
+          "id": "f978a228-7b3f-47b9-a17d-e5eaa573c06d",
+          "date": "2020-09-12",
+          "stock": "테슬라",
+          "ticker": "TSLA",
+          "signal": "부정",
+          "return_1y": 56.41,
+          "return_3y": 68.92,
+          "return_current": 135.74,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "2fd89cdf-5a23-4962-a9f4-231870148e31",
+          "date": "2021-01-04",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 58.16,
+          "return_3y": 50.4,
+          "return_current": 130.63,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "7742ab3d-b3c0-4f09-8229-eddf71b62dff",
+          "date": "2021-01-20",
+          "stock": "라이트코인",
+          "ticker": "LTC",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "9ffda526-fe83-4577-b06e-a8b94996ab06",
+          "date": "2021-01-20",
+          "stock": "리플",
+          "ticker": "XRP",
+          "signal": "부정",
+          "return_1y": 105.41,
+          "return_3y": 48.65,
+          "return_current": 262.16,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "ab361cbc-f7d8-4be1-a41b-cb6fc6b15676",
+          "date": "2021-02-07",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 30.72,
+          "return_3y": 32.15,
+          "return_current": 102.0,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "5504640b-20c1-4a22-9f80-1cbf390ab864",
+          "date": "2021-09-23",
+          "stock": "S&P 500",
+          "ticker": "SPX",
+          "signal": "부정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "04e4d5fc-561a-4eca-a6c3-41491c88da7b",
+          "date": "2021-09-23",
+          "stock": "나스닥",
+          "ticker": "IXIC",
+          "signal": "부정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "24d3d619-7c22-404f-8753-19896a7c754f",
+          "date": "2022-02-20",
+          "stock": "SPY",
+          "ticker": "SPY",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "11804210-dfe6-4462-bae7-6024a9e47360",
+          "date": "2022-02-20",
+          "stock": "TQQQ",
+          "ticker": "TQQQ",
+          "signal": "부정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "de5ed4d1-9e2a-463b-9b9b-6d5d73c4ffea",
+          "date": "2022-03-11",
+          "stock": "코스닥",
+          "ticker": "KOSDAQ",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "fb7e2b33-eb30-4446-80a9-a261cfa7bf39",
+          "date": "2022-03-11",
+          "stock": "코스피",
+          "ticker": "KOSPI",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "f503ec79-7b08-44bb-ba20-b3eec2c5935f",
+          "date": "2022-03-21",
+          "stock": "USDT",
+          "ticker": "USDT",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "34eba6c7-483c-4c3b-b54c-9aade4b3e101",
+          "date": "2022-08-01",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 27.29,
+          "return_3y": 396.51,
+          "return_current": 190.57,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "b3441887-6ee3-4fbd-a313-01b22bc65b11",
+          "date": "2022-10-17",
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal": "부정",
+          "return_1y": 25.37,
+          "return_3y": 84.17,
+          "return_current": 216.71,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "e2234403-1a3a-4ef5-b4d7-ac6f26810624",
+          "date": "2022-10-17",
+          "stock": "카카오",
+          "ticker": "035720",
+          "signal": "부정",
+          "return_1y": -11.38,
+          "return_3y": 21.65,
+          "return_current": -4.79,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "6704fe16-84ca-4595-a03d-50ef00455627",
+          "date": "2022-10-17",
+          "stock": "네이버",
+          "ticker": "035420",
+          "signal": "부정",
+          "return_1y": 13.13,
+          "return_3y": 57.68,
+          "return_current": 23.25,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "9ad64748-637f-454c-a883-c0390f247afb",
+          "date": "2022-12-11",
+          "stock": "코스피",
+          "ticker": "KOSPI",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "578c8f39-539f-4256-a674-ee7cf1448027",
+          "date": "2023-03-19",
+          "stock": "메타",
+          "ticker": "META",
+          "signal": "긍정",
+          "return_1y": 151.51,
+          "return_3y": 213.69,
+          "return_current": 191.0,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "6569eacc-b4a2-4ee4-81df-d3387e799c66",
+          "date": "2023-03-19",
+          "stock": "마이크로소프트",
+          "ticker": "MSFT",
+          "signal": "긍정",
+          "return_1y": 54.56,
+          "return_3y": 47.33,
+          "return_current": 39.24,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "5b91a3ea-4bcb-4410-a5c3-02072bad51ae",
+          "date": "2023-03-19",
+          "stock": "SPDR S&P 500 ETF Trust",
+          "ticker": "SPY",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "3d2bb089-e146-45ec-91c2-0a42665b1bf1",
+          "date": "2023-03-19",
+          "stock": "VanEck Morningstar Wide Moat ETF",
+          "ticker": "MOAT",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "a51ce3c3-026f-4413-b4af-d62bd4650e2a",
+          "date": "2023-08-07",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 92.03,
+          "return_3y": null,
+          "return_current": 132.16,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "d6f093eb-5f90-474b-aefd-016b1c69d24d",
+          "date": "2023-08-07",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": 34.58,
+          "return_3y": null,
+          "return_current": 14.95,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "779c44a1-23bf-4c6d-bec0-8be69dd7167a",
+          "date": "2023-09-11",
+          "stock": "SCHD ETF",
+          "ticker": "SCHD",
+          "signal": "부정",
+          "return_1y": 16.89,
+          "return_3y": null,
+          "return_current": 36.51,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "70606d4e-71bd-40a7-b28a-1f003ddbfa78",
+          "date": "2023-09-11",
+          "stock": "SPY ETF",
+          "ticker": "SPY",
+          "signal": "부정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "a04b4511-c12f-432c-8902-e50ec82dacd9",
+          "date": "2023-10-22",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 124.61,
+          "return_3y": null,
+          "return_current": 125.86,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "cc672a36-4928-44f7-b7e5-73a6373fea92",
+          "date": "2023-11-15",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 130.33,
+          "return_3y": null,
+          "return_current": 78.84,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "391fc02d-ec29-4e9a-8f43-c99b644ad78e",
+          "date": "2023-11-15",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "매수",
+          "return_1y": 48.46,
+          "return_3y": null,
+          "return_current": 1.93,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "a62cb395-e692-457b-84b5-839f55a1f64e",
+          "date": "2023-12-11",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 134.4,
+          "return_3y": null,
+          "return_current": 64.25,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "e234762c-905c-4760-a2d8-fc69eab01484",
+          "date": "2023-12-11",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "매수",
+          "return_1y": 63.26,
+          "return_3y": null,
+          "return_current": -5.6,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "b81b24a8-7628-4976-ab85-bc299df35c86",
+          "date": "2023-12-20",
+          "stock": "폴카닷",
+          "ticker": "DOT",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "8dfbfe9e-fe2d-44f9-9227-154e2384c462",
+          "date": "2023-12-20",
+          "stock": "아발란체",
+          "ticker": "AVAX",
+          "signal": "매수",
+          "return_1y": -23.45,
+          "return_3y": null,
+          "return_current": -79.84,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "b1fffb97-3a63-4188-bd1e-3a3422617f05",
+          "date": "2023-12-20",
+          "stock": "카르다노",
+          "ticker": "ADA",
+          "signal": "매수",
+          "return_1y": 50.85,
+          "return_3y": null,
+          "return_current": -59.32,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "e74339da-3759-4611-9357-cc61e35d8a3f",
+          "date": "2024-01-07",
+          "stock": "코스피",
+          "ticker": "KOSPI",
+          "signal": "긍정",
+          "return_1y": -3.08,
+          "return_3y": null,
+          "return_current": 113.69,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "bb26dc64-021f-4c9d-8693-e426018f4c20",
+          "date": "2024-01-07",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 132.3,
+          "return_3y": null,
+          "return_current": 54.17,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "078c1ab1-0225-4a3f-bfe6-5155bda70963",
+          "date": "2024-01-09",
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal": "긍정",
+          "return_1y": -21.64,
+          "return_3y": null,
+          "return_current": 133.6,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "ad156511-f5b1-4605-948b-8af440d106a0",
+          "date": "2024-01-11",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "매수",
+          "return_1y": 24.73,
+          "return_3y": null,
+          "return_current": -19.83,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "6b450cfc-e52c-4380-a209-4ea9ffd8e54b",
+          "date": "2024-02-19",
+          "stock": "KODEX 코스닥150선물인버스",
+          "ticker": "251340",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "4956695e-114a-4d12-b371-2a5c6c7c4676",
+          "date": "2024-02-19",
+          "stock": "KODEX 코스닥150",
+          "ticker": "229200",
+          "signal": "매도",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "1a5c0a0c-6aee-4d2e-8ba3-00d6a8913b02",
+          "date": "2024-02-19",
+          "stock": "KODEX 코스피",
+          "ticker": "069500",
+          "signal": "매도",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "0424bc40-90e5-4dcc-af36-0339509bae2d",
+          "date": "2024-02-28",
+          "stock": "코스피",
+          "ticker": "KOSPI",
+          "signal": "긍정",
+          "return_1y": -1.15,
+          "return_3y": null,
+          "return_current": 106.89,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "0c616335-5e31-462f-9296-8bfc2785a3a7",
+          "date": "2024-03-04",
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal": "긍정",
+          "return_1y": 13.01,
+          "return_3y": null,
+          "return_current": 392.91,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "1b368d9b-5844-4ff9-a4c3-b1c6fcfd0f62",
+          "date": "2024-03-04",
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal": "긍정",
+          "return_1y": -25.66,
+          "return_3y": null,
+          "return_current": 132.97,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "a01bf397-078d-4b83-b8e5-d5a06bac00e6",
+          "date": "2024-03-04",
+          "stock": "SPY",
+          "ticker": "SPY",
+          "signal": "긍정",
+          "return_1y": 11.55,
+          "return_3y": null,
+          "return_current": 27.19,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "2934774a-8c16-46ad-993a-641a514f3d27",
+          "date": "2024-03-11",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": -52.79,
+          "return_3y": null,
+          "return_current": -48.36,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "fc9f255d-59c3-42a4-9446-36d8021147b4",
+          "date": "2024-03-11",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 14.89,
+          "return_3y": null,
+          "return_current": -6.07,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "859145e0-8694-4655-af9b-4d1a53c7e3c1",
+          "date": "2024-04-09",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 19.43,
+          "return_3y": null,
+          "return_current": -2.02,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "a0054cbd-726e-4d27-a81f-d2eb6319e9b5",
+          "date": "2024-04-12",
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "signal": "긍정",
+          "return_1y": -13.92,
+          "return_3y": null,
+          "return_current": -46.2,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "c7403d0c-483e-4d01-9c73-09f120de50da",
+          "date": "2024-04-12",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": -49.32,
+          "return_3y": null,
+          "return_current": -35.24,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "dada49b2-7b50-40e9-b8c3-e38c9e3794d3",
+          "date": "2024-05-27",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": -31.58,
+          "return_3y": null,
+          "return_current": -46.04,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "9c7cf2fd-72f1-4e51-b2f6-83994ab48a57",
+          "date": "2024-05-27",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 57.07,
+          "return_3y": null,
+          "return_current": -2.38,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "cce8481e-db2c-436e-935b-0fc9267ddc0b",
+          "date": "2024-05-28",
+          "stock": "에이다",
+          "ticker": "ADA",
+          "signal": "긍정",
+          "return_1y": 63.04,
+          "return_3y": null,
+          "return_current": -47.83,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "b5a3f290-b032-4a24-90f7-0ddec2cea36e",
+          "date": "2024-05-28",
+          "stock": "트론",
+          "ticker": "TRX",
+          "signal": "부정",
+          "return_1y": 136.36,
+          "return_3y": null,
+          "return_current": 1181.36,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "c17e1575-79e7-4c9f-8f00-a11dbada7d0f",
+          "date": "2024-05-28",
+          "stock": "아톰",
+          "ticker": "ATOM",
+          "signal": "긍정",
+          "return_1y": -44.5,
+          "return_3y": null,
+          "return_current": -80.5,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "c61f16e5-4703-48da-9f26-32a3288ab190",
+          "date": "2024-05-28",
+          "stock": "유니스왑",
+          "ticker": "UNI",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "cca12291-fdd6-453e-a233-0d055e07fb41",
+          "date": "2024-05-28",
+          "stock": "바이낸스 코인",
+          "ticker": "BNB",
+          "signal": "긍정",
+          "return_1y": 9.61,
+          "return_3y": null,
+          "return_current": 7.82,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "1fb172c7-89b5-4da5-b341-a5b18003733f",
+          "date": "2024-05-28",
+          "stock": "시바 이누",
+          "ticker": "SHIB",
+          "signal": "긍정",
+          "return_1y": -48.0,
+          "return_3y": null,
+          "return_current": -76.92,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "4b02622a-d72d-4a93-87d0-64507675b348",
+          "date": "2024-05-28",
+          "stock": "체인링크",
+          "ticker": "LINK",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "37a55881-2665-46d0-b747-ad80d31ebf6e",
+          "date": "2024-05-28",
+          "stock": "폴리곤",
+          "ticker": "MATIC",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -69.86,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "0c4e9f32-bdc0-4469-b4ae-94a6437fda67",
+          "date": "2024-05-28",
+          "stock": "톤코인",
+          "ticker": "TON",
+          "signal": "긍정",
+          "return_1y": 59.81,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "a3346b76-ddb4-48ce-8e51-afbd6891b5c7",
+          "date": "2024-05-28",
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "signal": "긍정",
+          "return_1y": 2.1,
+          "return_3y": null,
+          "return_current": -50.99,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "974fa4d8-c551-4a27-9856-789b7079e6e6",
+          "date": "2024-06-07",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 52.31,
+          "return_3y": null,
+          "return_current": -2.3,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "483d8c5d-1091-4aaf-9165-194312f449bd",
+          "date": "2024-06-24",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": -26.93,
+          "return_3y": null,
+          "return_current": -37.32,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "bd5e7f34-517a-47b2-a8e8-10bb29ed80c5",
+          "date": "2024-06-24",
+          "stock": "BNB",
+          "ticker": "BNB",
+          "signal": "긍정",
+          "return_1y": 12.59,
+          "return_3y": null,
+          "return_current": 11.76,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "48faf28f-f846-4f2f-8afc-09100562127e",
+          "date": "2024-06-24",
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "signal": "긍정",
+          "return_1y": 10.37,
+          "return_3y": null,
+          "return_current": -37.49,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "32b32a49-64bc-4c38-aa01-340a2eab9078",
+          "date": "2024-07-11",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 104.93,
+          "return_3y": null,
+          "return_current": 18.14,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "31f6aac0-d748-400e-8004-239880f2895d",
+          "date": "2024-08-14",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 101.51,
+          "return_3y": null,
+          "return_current": 15.34,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "97a95d04-2131-47b9-a882-34f0721c95d3",
+          "date": "2024-09-09",
+          "stock": "TQQQ",
+          "ticker": "TQQQ",
+          "signal": "긍정",
+          "return_1y": 60.82,
+          "return_3y": null,
+          "return_current": 43.38,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "23a79185-bb1d-4246-95cd-68964cc4ca75",
+          "date": "2024-09-09",
+          "stock": "SQQQ",
+          "ticker": "SQQQ",
+          "signal": "긍정",
+          "return_1y": -60.77,
+          "return_3y": null,
+          "return_current": -61.23,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "b8284307-ea69-456d-845e-cce9668186e2",
+          "date": "2024-10-29",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 51.34,
+          "return_3y": null,
+          "return_current": -6.84,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "61bb6839-0dfe-49f9-8b07-bb86f6fc0e3e",
+          "date": "2024-10-29",
+          "stock": "마이크로스트래티지",
+          "ticker": "MSTR",
+          "signal": "매수",
+          "return_1y": 6.63,
+          "return_3y": null,
+          "return_current": -52.04,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "2ddea67a-428e-4044-8085-5e309fd1334a",
+          "date": "2024-11-06",
+          "stock": "도지코인",
+          "ticker": "DOGE",
+          "signal": "매수",
+          "return_1y": -20.0,
+          "return_3y": null,
+          "return_current": -55.0,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "5fac237d-0996-4e7a-876c-fa64f0070652",
+          "date": "2024-11-06",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 33.93,
+          "return_3y": null,
+          "return_current": -10.44,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "6cfe445b-1ab1-44b1-a22c-7ba64af631ea",
+          "date": "2024-11-21",
+          "stock": "마이크로스트래티지",
+          "ticker": "MSTR",
+          "signal": "긍정",
+          "return_1y": -57.08,
+          "return_3y": null,
+          "return_current": -68.83,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "fc847a0d-4c77-40e7-88b3-43589ca5adc1",
+          "date": "2024-11-25",
+          "stock": "알트코인",
+          "ticker": null,
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "997cc3f7-e74d-409d-8157-c2a77daa962c",
+          "date": "2024-12-16",
+          "stock": "IBM",
+          "ticker": "IBM",
+          "signal": "긍정",
+          "return_1y": 35.62,
+          "return_3y": null,
+          "return_current": 9.04,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "eb4ad5b3-a303-462d-9d80-b9e7f3903b11",
+          "date": "2024-12-16",
+          "stock": "아마존",
+          "ticker": "AMZN",
+          "signal": "긍정",
+          "return_1y": -4.45,
+          "return_3y": null,
+          "return_current": -10.37,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "175d7ca7-b853-46f6-9cd3-758676661f41",
+          "date": "2024-12-16",
+          "stock": "구글",
+          "ticker": "GOOGL",
+          "signal": "긍정",
+          "return_1y": 56.5,
+          "return_3y": null,
+          "return_current": 46.57,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "41760a9a-4965-45e6-81f5-09fd95c0926a",
+          "date": "2024-12-16",
+          "stock": "마이크로소프트",
+          "ticker": "MSFT",
+          "signal": "긍정",
+          "return_1y": 6.27,
+          "return_3y": null,
+          "return_current": -17.21,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "69b17324-41c4-4677-809b-c10718292758",
+          "date": "2024-12-16",
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal": "긍정",
+          "return_1y": 34.67,
+          "return_3y": null,
+          "return_current": 31.59,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "d439b6aa-73d0-40b7-828f-dfcfe9b18eb8",
+          "date": "2024-12-16",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": -17.15,
+          "return_3y": null,
+          "return_current": -36.11,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "ff0cf3ff-16bd-43ad-ac06-6ba01bfab6cb",
+          "date": "2025-01-15",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": -4.93,
+          "return_3y": null,
+          "return_current": -32.6,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "fc904d0b-25a2-4e62-b2df-f47d42f86aa3",
+          "date": "2025-01-15",
+          "stock": "금",
+          "ticker": "GLD",
+          "signal": "매수",
+          "return_1y": 70.09,
+          "return_3y": null,
+          "return_current": 72.3,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "a1a5f605-7bef-4d65-ba2f-c0d7295de1dc",
+          "date": "2025-02-12",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": -32.35,
+          "return_3y": null,
+          "return_current": -30.79,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "d5fd38f9-20ec-40b1-9012-20912de253e0",
+          "date": "2025-03-11",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": -15.28,
+          "return_3y": null,
+          "return_current": -18.24,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "cb1f851e-8a64-437b-975b-4f3f6968bc69",
+          "date": "2025-03-13",
+          "stock": "SCHD ETF",
+          "ticker": "SCHD",
+          "signal": "부정",
+          "return_1y": 17.29,
+          "return_3y": null,
+          "return_current": 16.34,
+          "return_basis": "1y",
+          "hit": null
+        },
+        {
+          "id": "d3248d89-edbb-40d6-8380-d6cf6ce03d3e",
+          "date": "2025-03-13",
+          "stock": "퀀터스 월배당 로테이션 전략",
+          "ticker": null,
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "81d7d917-1203-4a42-a842-f11630d07824",
+          "date": "2025-04-28",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -28.67,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "b1fe6d82-a02c-463a-b9e0-3b4fd9fcd104",
+          "date": "2025-05-12",
+          "stock": "알트코인",
+          "ticker": null,
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
+        },
+        {
+          "id": "a2d22379-e925-4dd8-ade5-57fc6d8bdae1",
+          "date": "2025-05-12",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -15.87,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "f21af3c8-1d4e-49c1-af54-68d6fc77abd9",
+          "date": "2025-05-12",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -34.11,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "847cbbdd-14f5-420f-803f-0558fbc861ac",
+          "date": "2025-05-13",
+          "stock": "금",
+          "ticker": "GOLD",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": 80.27,
+          "return_basis": "current",
+          "hit": true
+        },
+        {
+          "id": "2e935650-22a8-46a3-a7d4-47c3c49ede1e",
+          "date": "2025-06-03",
+          "stock": "엔비디아",
+          "ticker": "NVDA",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": 22.99,
+          "return_basis": "current",
+          "hit": true
+        },
+        {
+          "id": "09e5dd87-b8f9-4bfe-83f3-1f1c306cc28a",
+          "date": "2025-10-25",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -39.32,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "5e6db7d1-5c8f-4b6c-a039-d6027ed0ef88",
+          "date": "2025-10-25",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -46.88,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "489bb918-e36f-49cd-9a1a-612e0e94318c",
+          "date": "2025-10-25",
+          "stock": "금",
+          "ticker": "GLD",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": 13.59,
+          "return_basis": "current",
+          "hit": true
+        }
+      ],
+      "market": {
+        "CRYPTO": {
+          "count": 53,
+          "hit_rate": 50.9,
+          "avg_return_1y": 29.11
+        },
+        "US": {
+          "count": 16,
+          "hit_rate": 75.0,
+          "avg_return_1y": 28.15
+        },
+        "INDEX": {
+          "count": 5,
+          "hit_rate": 0.0,
+          "avg_return_1y": -2.12
+        },
+        "ETF": {
+          "count": 2,
+          "hit_rate": 0.0,
+          "avg_return_1y": null
+        },
+        "KR": {
+          "count": 6,
+          "hit_rate": 16.7,
+          "avg_return_1y": -11.43
+        },
+        "OTHER": {
+          "count": 2,
+          "hit_rate": 50.0,
+          "avg_return_1y": null
+        }
+      },
+      "tiers": {
+        "swing": {
+          "count": 67,
+          "wins": 41,
+          "losses": 26,
+          "hit_rate": 61.2,
+          "avg_return": 20.51,
+          "median_return": 13.01
+        },
+        "mid": {
+          "count": 58,
+          "wins": 27,
+          "losses": 31,
+          "hit_rate": 46.6,
+          "avg_return": 21.06,
+          "median_return": -2.34
+        },
+        "long": {
+          "count": 5,
+          "wins": 5,
+          "losses": 0,
+          "hit_rate": 100.0,
+          "avg_return": 130.69,
+          "median_return": 130.63
+        }
+      },
+      "signal_types": {
+        "매수": 44,
+        "중립": 10,
+        "매도": 2,
+        "부정": 12,
+        "긍정": 61
+      },
+      "recent_30d": {
+        "count": 0,
+        "hit_rate": null,
+        "delta": null
+      }
+    },
     "unknown_guest": {
       "name": "unknown_guest",
       "slug": "unknown_guest",
@@ -13602,17 +14912,17 @@
     "oh-taemin": {
       "name": "오태민",
       "slug": "oh-taemin",
-      "total_signals": 10,
-      "scored_signals": 6,
-      "hit_eligible": 5,
+      "total_signals": 13,
+      "scored_signals": 8,
+      "hit_eligible": 7,
       "hit_rate": null,
-      "wins": 4,
-      "losses": 1,
+      "wins": 5,
+      "losses": 2,
       "pending": 0,
-      "avg_return_1y": 97.5,
-      "avg_return_current": 91.65,
-      "median_return_1y": 118.56,
-      "median_return_current": 126.48,
+      "avg_return_1y": 77.84,
+      "avg_return_current": 65.5,
+      "median_return_1y": 99.56,
+      "median_return_current": 54.43,
       "best_call": {
         "stock": "삼성전자",
         "ticker": "005930",
@@ -13645,6 +14955,14 @@
           "return_current": 139.32,
           "signal": "긍정",
           "date": "2023-04-25"
+        },
+        {
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "return_1y": -7.74,
+          "return_current": -29.3,
+          "signal": "매수",
+          "date": "2024-02-21"
         }
       ],
       "worst3_calls": [
@@ -13657,6 +14975,14 @@
           "date": "2025-05-25"
         },
         {
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "return_1y": -7.74,
+          "return_current": -29.3,
+          "signal": "매수",
+          "date": "2024-02-21"
+        },
+        {
           "stock": "삼성전자",
           "ticker": "005930",
           "return_1y": 25.79,
@@ -13665,7 +14991,7 @@
           "date": "2023-05-11"
         }
       ],
-      "homerun_rate": 75.0,
+      "homerun_rate": 50.0,
       "expected_return": null,
       "style_tag": "📊시그널 수집 중",
       "scored_list": [
@@ -13730,6 +15056,30 @@
           "hit": true
         },
         {
+          "id": "180ef044-7d9d-433e-b732-d969c74a3cba",
+          "date": "2024-02-20",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 84.83,
+          "return_3y": null,
+          "return_current": 29.57,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "b95dbffc-321b-4d16-b9ff-9bf4355d6add",
+          "date": "2024-02-21",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "매수",
+          "return_1y": -7.74,
+          "return_3y": null,
+          "return_current": -29.3,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
           "id": "228a9f75-5423-4426-aa56-42675f32a52a",
           "date": "2025-05-25",
           "stock": "비트코인",
@@ -13744,9 +15094,9 @@
       ],
       "market": {
         "CRYPTO": {
-          "count": 4,
-          "hit_rate": 75.0,
-          "avg_return_1y": 121.4
+          "count": 6,
+          "hit_rate": 66.7,
+          "avg_return_1y": 88.26
         },
         "KR": {
           "count": 1,
@@ -13756,26 +15106,26 @@
       },
       "tiers": {
         "swing": {
-          "count": 5,
-          "wins": 4,
-          "losses": 1,
-          "hit_rate": 80.0,
-          "avg_return": 70.42,
-          "median_return": 114.28
+          "count": 7,
+          "wins": 5,
+          "losses": 2,
+          "hit_rate": 71.4,
+          "avg_return": 61.31,
+          "median_return": 84.83
         },
         "mid": {
-          "count": 4,
-          "wins": 4,
-          "losses": 0,
-          "hit_rate": null,
-          "avg_return": 124.03,
-          "median_return": 132.9
+          "count": 6,
+          "wins": 5,
+          "losses": 1,
+          "hit_rate": 83.3,
+          "avg_return": 82.73,
+          "median_return": 90.45
         },
         "long": null
       },
       "signal_types": {
         "긍정": 6,
-        "매수": 3,
+        "매수": 6,
         "부정": 1
       },
       "recent_30d": {
@@ -21333,206 +22683,6 @@
         "delta": null
       }
     },
-    "speaker-q8smi": {
-      "name": "강환국",
-      "slug": "speaker-q8smi",
-      "total_signals": 10,
-      "scored_signals": 6,
-      "hit_eligible": 6,
-      "hit_rate": null,
-      "wins": 2,
-      "losses": 4,
-      "pending": 0,
-      "avg_return_1y": -14.6,
-      "avg_return_current": -26.01,
-      "median_return_1y": -13.92,
-      "median_return_current": -37.28,
-      "best_call": {
-        "stock": "금",
-        "ticker": "GLD",
-        "return_1y": null,
-        "return_current": 13.59,
-        "signal": "긍정",
-        "date": "2025-10-25"
-      },
-      "worst_call": {
-        "stock": "이더리움",
-        "ticker": "ETH",
-        "return_1y": null,
-        "return_current": -46.88,
-        "signal": "긍정",
-        "date": "2025-10-25"
-      },
-      "top3_calls": [
-        {
-          "stock": "금",
-          "ticker": "GLD",
-          "return_1y": null,
-          "return_current": 13.59,
-          "signal": "긍정",
-          "date": "2025-10-25"
-        },
-        {
-          "stock": "비트코인",
-          "ticker": "BTC",
-          "return_1y": 19.43,
-          "return_current": -2.02,
-          "signal": "긍정",
-          "date": "2024-04-09"
-        },
-        {
-          "stock": "이더리움",
-          "ticker": "ETH",
-          "return_1y": -49.32,
-          "return_current": -35.24,
-          "signal": "긍정",
-          "date": "2024-04-12"
-        }
-      ],
-      "worst3_calls": [
-        {
-          "stock": "이더리움",
-          "ticker": "ETH",
-          "return_1y": null,
-          "return_current": -46.88,
-          "signal": "긍정",
-          "date": "2025-10-25"
-        },
-        {
-          "stock": "솔라나",
-          "ticker": "SOL",
-          "return_1y": -13.92,
-          "return_current": -46.2,
-          "signal": "긍정",
-          "date": "2024-04-12"
-        },
-        {
-          "stock": "비트코인",
-          "ticker": "BTC",
-          "return_1y": null,
-          "return_current": -39.32,
-          "signal": "긍정",
-          "date": "2025-10-25"
-        }
-      ],
-      "homerun_rate": 0.0,
-      "expected_return": null,
-      "style_tag": "📊시그널 수집 중",
-      "scored_list": [
-        {
-          "id": "859145e0-8694-4655-af9b-4d1a53c7e3c1",
-          "date": "2024-04-09",
-          "stock": "비트코인",
-          "ticker": "BTC",
-          "signal": "긍정",
-          "return_1y": 19.43,
-          "return_3y": null,
-          "return_current": -2.02,
-          "return_basis": "1y",
-          "hit": true
-        },
-        {
-          "id": "a0054cbd-726e-4d27-a81f-d2eb6319e9b5",
-          "date": "2024-04-12",
-          "stock": "솔라나",
-          "ticker": "SOL",
-          "signal": "긍정",
-          "return_1y": -13.92,
-          "return_3y": null,
-          "return_current": -46.2,
-          "return_basis": "1y",
-          "hit": false
-        },
-        {
-          "id": "c7403d0c-483e-4d01-9c73-09f120de50da",
-          "date": "2024-04-12",
-          "stock": "이더리움",
-          "ticker": "ETH",
-          "signal": "긍정",
-          "return_1y": -49.32,
-          "return_3y": null,
-          "return_current": -35.24,
-          "return_basis": "1y",
-          "hit": false
-        },
-        {
-          "id": "09e5dd87-b8f9-4bfe-83f3-1f1c306cc28a",
-          "date": "2025-10-25",
-          "stock": "비트코인",
-          "ticker": "BTC",
-          "signal": "긍정",
-          "return_1y": null,
-          "return_3y": null,
-          "return_current": -39.32,
-          "return_basis": "current",
-          "hit": false
-        },
-        {
-          "id": "5e6db7d1-5c8f-4b6c-a039-d6027ed0ef88",
-          "date": "2025-10-25",
-          "stock": "이더리움",
-          "ticker": "ETH",
-          "signal": "긍정",
-          "return_1y": null,
-          "return_3y": null,
-          "return_current": -46.88,
-          "return_basis": "current",
-          "hit": false
-        },
-        {
-          "id": "489bb918-e36f-49cd-9a1a-612e0e94318c",
-          "date": "2025-10-25",
-          "stock": "금",
-          "ticker": "GLD",
-          "signal": "긍정",
-          "return_1y": null,
-          "return_3y": null,
-          "return_current": 13.59,
-          "return_basis": "current",
-          "hit": true
-        }
-      ],
-      "market": {
-        "CRYPTO": {
-          "count": 5,
-          "hit_rate": 20.0,
-          "avg_return_1y": -14.6
-        },
-        "US": {
-          "count": 1,
-          "hit_rate": null,
-          "avg_return_1y": null
-        }
-      },
-      "tiers": {
-        "swing": {
-          "count": 6,
-          "wins": 2,
-          "losses": 4,
-          "hit_rate": 33.3,
-          "avg_return": -19.4,
-          "median_return": -26.62
-        },
-        "mid": {
-          "count": 3,
-          "wins": 0,
-          "losses": 3,
-          "hit_rate": null,
-          "avg_return": -27.82,
-          "median_return": -35.24
-        },
-        "long": null
-      },
-      "signal_types": {
-        "긍정": 8,
-        "매수": 2
-      },
-      "recent_30d": {
-        "count": 0,
-        "hit_rate": null,
-        "delta": null
-      }
-    },
     "jang-minhwan": {
       "name": "장민환",
       "slug": "jang-minhwan",
@@ -25829,6 +26979,305 @@
         "delta": null
       }
     },
+    "speaker-wd410": {
+      "name": "홍익희",
+      "slug": "speaker-wd410",
+      "total_signals": 5,
+      "scored_signals": 4,
+      "hit_eligible": 4,
+      "hit_rate": null,
+      "wins": 1,
+      "losses": 3,
+      "pending": 0,
+      "avg_return_1y": -24.86,
+      "avg_return_current": -50.36,
+      "median_return_1y": -18.35,
+      "median_return_current": -47.65,
+      "best_call": {
+        "stock": "비트코인",
+        "ticker": "BTC",
+        "return_1y": 0.41,
+        "return_current": -29.82,
+        "signal": "매수",
+        "date": "2025-01-14"
+      },
+      "worst_call": {
+        "stock": "도지코인",
+        "ticker": "DOGE",
+        "return_1y": -63.16,
+        "return_current": -76.32,
+        "signal": "긍정",
+        "date": "2025-01-16"
+      },
+      "top3_calls": [
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": 0.41,
+          "return_current": -29.82,
+          "signal": "매수",
+          "date": "2025-01-14"
+        },
+        {
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "return_1y": -0.39,
+          "return_current": -36.52,
+          "signal": "매수",
+          "date": "2025-01-16"
+        },
+        {
+          "stock": "리플",
+          "ticker": "XRP",
+          "return_1y": -36.31,
+          "return_current": -58.77,
+          "signal": "긍정",
+          "date": "2025-01-16"
+        }
+      ],
+      "worst3_calls": [
+        {
+          "stock": "도지코인",
+          "ticker": "DOGE",
+          "return_1y": -63.16,
+          "return_current": -76.32,
+          "signal": "긍정",
+          "date": "2025-01-16"
+        },
+        {
+          "stock": "리플",
+          "ticker": "XRP",
+          "return_1y": -36.31,
+          "return_current": -58.77,
+          "signal": "긍정",
+          "date": "2025-01-16"
+        },
+        {
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "return_1y": -0.39,
+          "return_current": -36.52,
+          "signal": "매수",
+          "date": "2025-01-16"
+        }
+      ],
+      "homerun_rate": 0.0,
+      "expected_return": null,
+      "style_tag": "📊시그널 수집 중",
+      "scored_list": [
+        {
+          "id": "a40d931e-f8c3-40e0-97d6-425a458db432",
+          "date": "2025-01-14",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 0.41,
+          "return_3y": null,
+          "return_current": -29.82,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "dc4fcc95-b8bc-47d1-b244-73f9e427b7a4",
+          "date": "2025-01-16",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "매수",
+          "return_1y": -0.39,
+          "return_3y": null,
+          "return_current": -36.52,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "3d44cac7-d070-43d9-96a1-5335ce7369f1",
+          "date": "2025-01-16",
+          "stock": "도지코인",
+          "ticker": "DOGE",
+          "signal": "긍정",
+          "return_1y": -63.16,
+          "return_3y": null,
+          "return_current": -76.32,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "a4f74ecb-9efd-4360-9aea-9fe19f58374d",
+          "date": "2025-01-16",
+          "stock": "리플",
+          "ticker": "XRP",
+          "signal": "긍정",
+          "return_1y": -36.31,
+          "return_3y": null,
+          "return_current": -58.77,
+          "return_basis": "1y",
+          "hit": false
+        }
+      ],
+      "market": {
+        "CRYPTO": {
+          "count": 4,
+          "hit_rate": 25.0,
+          "avg_return_1y": -24.86
+        }
+      },
+      "tiers": {
+        "swing": {
+          "count": 4,
+          "wins": 1,
+          "losses": 3,
+          "hit_rate": null,
+          "avg_return": -24.86,
+          "median_return": -18.35
+        },
+        "mid": {
+          "count": 4,
+          "wins": 0,
+          "losses": 4,
+          "hit_rate": null,
+          "avg_return": -50.36,
+          "median_return": -47.65
+        },
+        "long": null
+      },
+      "signal_types": {
+        "매수": 3,
+        "긍정": 2
+      },
+      "recent_30d": {
+        "count": 0,
+        "hit_rate": null,
+        "delta": null
+      }
+    },
+    "speaker-u7kdg": {
+      "name": "조규원",
+      "slug": "speaker-u7kdg",
+      "total_signals": 2,
+      "scored_signals": 2,
+      "hit_eligible": 2,
+      "hit_rate": null,
+      "wins": 1,
+      "losses": 1,
+      "pending": 0,
+      "avg_return_1y": null,
+      "avg_return_current": 1.56,
+      "median_return_1y": null,
+      "median_return_current": 1.56,
+      "best_call": {
+        "stock": "금",
+        "ticker": "GLD",
+        "return_1y": null,
+        "return_current": 39.78,
+        "signal": "긍정",
+        "date": "2025-06-26"
+      },
+      "worst_call": {
+        "stock": "비트코인",
+        "ticker": "BTC",
+        "return_1y": null,
+        "return_current": -36.66,
+        "signal": "긍정",
+        "date": "2025-06-26"
+      },
+      "top3_calls": [
+        {
+          "stock": "금",
+          "ticker": "GLD",
+          "return_1y": null,
+          "return_current": 39.78,
+          "signal": "긍정",
+          "date": "2025-06-26"
+        },
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": null,
+          "return_current": -36.66,
+          "signal": "긍정",
+          "date": "2025-06-26"
+        }
+      ],
+      "worst3_calls": [
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": null,
+          "return_current": -36.66,
+          "signal": "긍정",
+          "date": "2025-06-26"
+        },
+        {
+          "stock": "금",
+          "ticker": "GLD",
+          "return_1y": null,
+          "return_current": 39.78,
+          "signal": "긍정",
+          "date": "2025-06-26"
+        }
+      ],
+      "homerun_rate": 0,
+      "expected_return": null,
+      "style_tag": "📊시그널 수집 중",
+      "scored_list": [
+        {
+          "id": "a596195d-a969-4e12-854e-8abe2f551d68",
+          "date": "2025-06-26",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -36.66,
+          "return_basis": "current",
+          "hit": false
+        },
+        {
+          "id": "64e9976b-43bf-44b1-aa90-f8bdce7ea4a5",
+          "date": "2025-06-26",
+          "stock": "금",
+          "ticker": "GLD",
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": 39.78,
+          "return_basis": "current",
+          "hit": true
+        }
+      ],
+      "market": {
+        "CRYPTO": {
+          "count": 1,
+          "hit_rate": null,
+          "avg_return_1y": null
+        },
+        "US": {
+          "count": 1,
+          "hit_rate": null,
+          "avg_return_1y": null
+        }
+      },
+      "tiers": {
+        "swing": {
+          "count": 2,
+          "wins": 1,
+          "losses": 1,
+          "hit_rate": null,
+          "avg_return": 1.56,
+          "median_return": 1.56
+        },
+        "mid": null,
+        "long": null
+      },
+      "signal_types": {
+        "긍정": 2
+      },
+      "recent_30d": {
+        "count": 0,
+        "hit_rate": null,
+        "delta": null
+      }
+    },
     "speaker-u97ix": {
       "name": "이호석",
       "slug": "speaker-u97ix",
@@ -25979,6 +27428,307 @@
       "signal_types": {
         "긍정": 2,
         "매수": 1
+      },
+      "recent_30d": {
+        "count": 0,
+        "hit_rate": null,
+        "delta": null
+      }
+    },
+    "speaker-v2rkr": {
+      "name": "최창한",
+      "slug": "speaker-v2rkr",
+      "total_signals": 4,
+      "scored_signals": 4,
+      "hit_eligible": 4,
+      "hit_rate": null,
+      "wins": 3,
+      "losses": 1,
+      "pending": 0,
+      "avg_return_1y": 125.96,
+      "avg_return_current": 41.02,
+      "median_return_1y": 52.73,
+      "median_return_current": -6.18,
+      "best_call": {
+        "stock": "리플",
+        "ticker": "XRP",
+        "return_1y": 416.28,
+        "return_current": 211.63,
+        "signal": "긍정",
+        "date": "2024-07-04"
+      },
+      "worst_call": {
+        "stock": "솔라나",
+        "ticker": "SOL",
+        "return_1y": 15.84,
+        "return_current": -35.19,
+        "signal": "긍정",
+        "date": "2024-07-04"
+      },
+      "top3_calls": [
+        {
+          "stock": "리플",
+          "ticker": "XRP",
+          "return_1y": 416.28,
+          "return_current": 211.63,
+          "signal": "긍정",
+          "date": "2024-07-04"
+        },
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": 89.61,
+          "return_current": 18.9,
+          "signal": "매수",
+          "date": "2024-07-04"
+        },
+        {
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "return_1y": -17.88,
+          "return_current": -31.25,
+          "signal": "긍정",
+          "date": "2024-07-04"
+        }
+      ],
+      "worst3_calls": [
+        {
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "return_1y": 15.84,
+          "return_current": -35.19,
+          "signal": "긍정",
+          "date": "2024-07-04"
+        },
+        {
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "return_1y": -17.88,
+          "return_current": -31.25,
+          "signal": "긍정",
+          "date": "2024-07-04"
+        },
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": 89.61,
+          "return_current": 18.9,
+          "signal": "매수",
+          "date": "2024-07-04"
+        }
+      ],
+      "homerun_rate": 25.0,
+      "expected_return": null,
+      "style_tag": "📊시그널 수집 중",
+      "scored_list": [
+        {
+          "id": "ea1f1e3f-33f7-46ab-82d2-caa94d1ccc9b",
+          "date": "2024-07-04",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "매수",
+          "return_1y": 89.61,
+          "return_3y": null,
+          "return_current": 18.9,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "c415f8d4-9c43-4565-a15d-3f47f809822a",
+          "date": "2024-07-04",
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "signal": "긍정",
+          "return_1y": 15.84,
+          "return_3y": null,
+          "return_current": -35.19,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "9fe26c27-01f5-4c7c-8fe2-b20ad6749497",
+          "date": "2024-07-04",
+          "stock": "이더리움",
+          "ticker": "ETH",
+          "signal": "긍정",
+          "return_1y": -17.88,
+          "return_3y": null,
+          "return_current": -31.25,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "7703e9cd-a6fc-403a-995f-a17983d67061",
+          "date": "2024-07-04",
+          "stock": "리플",
+          "ticker": "XRP",
+          "signal": "긍정",
+          "return_1y": 416.28,
+          "return_3y": null,
+          "return_current": 211.63,
+          "return_basis": "1y",
+          "hit": true
+        }
+      ],
+      "market": {
+        "CRYPTO": {
+          "count": 4,
+          "hit_rate": 75.0,
+          "avg_return_1y": 125.96
+        }
+      },
+      "tiers": {
+        "swing": {
+          "count": 4,
+          "wins": 3,
+          "losses": 1,
+          "hit_rate": null,
+          "avg_return": 125.96,
+          "median_return": 52.73
+        },
+        "mid": {
+          "count": 4,
+          "wins": 2,
+          "losses": 2,
+          "hit_rate": null,
+          "avg_return": 41.02,
+          "median_return": -6.18
+        },
+        "long": null
+      },
+      "signal_types": {
+        "매수": 1,
+        "긍정": 3
+      },
+      "recent_30d": {
+        "count": 0,
+        "hit_rate": null,
+        "delta": null
+      }
+    },
+    "speaker-sj1ag": {
+      "name": "박종환",
+      "slug": "speaker-sj1ag",
+      "total_signals": 2,
+      "scored_signals": 2,
+      "hit_eligible": 2,
+      "hit_rate": null,
+      "wins": 2,
+      "losses": 0,
+      "pending": 0,
+      "avg_return_1y": 61.0,
+      "avg_return_current": -10.87,
+      "median_return_1y": 61.0,
+      "median_return_current": -10.87,
+      "best_call": {
+        "stock": "비트코인",
+        "ticker": "BTC",
+        "return_1y": 105.28,
+        "return_current": 20.9,
+        "signal": "긍정",
+        "date": "2024-08-06"
+      },
+      "worst_call": {
+        "stock": "솔라나",
+        "ticker": "SOL",
+        "return_1y": 16.72,
+        "return_current": -42.63,
+        "signal": "긍정",
+        "date": "2024-08-06"
+      },
+      "top3_calls": [
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": 105.28,
+          "return_current": 20.9,
+          "signal": "긍정",
+          "date": "2024-08-06"
+        },
+        {
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "return_1y": 16.72,
+          "return_current": -42.63,
+          "signal": "긍정",
+          "date": "2024-08-06"
+        }
+      ],
+      "worst3_calls": [
+        {
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "return_1y": 16.72,
+          "return_current": -42.63,
+          "signal": "긍정",
+          "date": "2024-08-06"
+        },
+        {
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "return_1y": 105.28,
+          "return_current": 20.9,
+          "signal": "긍정",
+          "date": "2024-08-06"
+        }
+      ],
+      "homerun_rate": 50.0,
+      "expected_return": null,
+      "style_tag": "📊시그널 수집 중",
+      "scored_list": [
+        {
+          "id": "208b303b-7fa4-4045-a5ea-101225a0f9fd",
+          "date": "2024-08-06",
+          "stock": "솔라나",
+          "ticker": "SOL",
+          "signal": "긍정",
+          "return_1y": 16.72,
+          "return_3y": null,
+          "return_current": -42.63,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "f4c62f6e-ad84-4072-965f-4e2c7821c678",
+          "date": "2024-08-06",
+          "stock": "비트코인",
+          "ticker": "BTC",
+          "signal": "긍정",
+          "return_1y": 105.28,
+          "return_3y": null,
+          "return_current": 20.9,
+          "return_basis": "1y",
+          "hit": true
+        }
+      ],
+      "market": {
+        "CRYPTO": {
+          "count": 2,
+          "hit_rate": 100.0,
+          "avg_return_1y": 61.0
+        }
+      },
+      "tiers": {
+        "swing": {
+          "count": 2,
+          "wins": 2,
+          "losses": 0,
+          "hit_rate": null,
+          "avg_return": 61.0,
+          "median_return": 61.0
+        },
+        "mid": {
+          "count": 2,
+          "wins": 1,
+          "losses": 1,
+          "hit_rate": null,
+          "avg_return": -10.87,
+          "median_return": -10.87
+        },
+        "long": null
+      },
+      "signal_types": {
+        "긍정": 2
       },
       "recent_30d": {
         "count": 0,
@@ -30754,7 +32504,7 @@
     },
     "aa231f4e-c6d7-4d12-9544-943dee63d580": {
       "return_1y": null,
-      "return_current": 24.1
+      "return_current": 32.13
     },
     "8ebe1b35-b811-4ad4-972a-740bbaf77509": {
       "return_1y": null,
@@ -31218,7 +32968,7 @@
     },
     "029b3107-caf0-4f12-93cd-b874610f019d": {
       "return_1y": null,
-      "return_current": 33.19
+      "return_current": 41.81
     },
     "468d981e-50e0-4afe-9809-04778cc14eaa": {
       "return_1y": null,
@@ -31355,6 +33105,522 @@
     "ff0d3e8d-9eaf-4d8a-8bde-0b64224c9a86": {
       "return_1y": null,
       "return_current": -8.85
+    },
+    "6b450cfc-e52c-4380-a209-4ea9ffd8e54b": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "bdb97eb0-113e-42de-8b96-9dfb173a8125": {
+      "return_1y": 142.86,
+      "return_current": 61.16
+    },
+    "4956695e-114a-4d12-b371-2a5c6c7c4676": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "b81b24a8-7628-4976-ab85-bc299df35c86": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "8dfbfe9e-fe2d-44f9-9227-154e2384c462": {
+      "return_1y": -23.45,
+      "return_current": -79.84
+    },
+    "a04b4511-c12f-432c-8902-e50ec82dacd9": {
+      "return_1y": 124.61,
+      "return_current": 125.86
+    },
+    "779c44a1-23bf-4c6d-bec0-8be69dd7167a": {
+      "return_1y": 16.89,
+      "return_current": 36.51
+    },
+    "894c2022-0ea9-4699-b5b3-38db04b0c1d8": {
+      "return_1y": -46.86,
+      "return_current": -30.11
+    },
+    "233a8a84-21f1-47f4-817d-e1bc4e30e372": {
+      "return_1y": 26.92,
+      "return_current": 0.82
+    },
+    "859145e0-8694-4655-af9b-4d1a53c7e3c1": {
+      "return_1y": 19.43,
+      "return_current": -2.02
+    },
+    "8fc82af8-dd95-4a6e-8f20-c985d0b6bd45": {
+      "return_1y": -7.72,
+      "return_current": -40.68
+    },
+    "a0054cbd-726e-4d27-a81f-d2eb6319e9b5": {
+      "return_1y": -13.92,
+      "return_current": -46.2
+    },
+    "578c8f39-539f-4256-a674-ee7cf1448027": {
+      "return_1y": 151.51,
+      "return_current": 191.0
+    },
+    "34eba6c7-483c-4c3b-b54c-9aade4b3e101": {
+      "return_1y": 27.29,
+      "return_current": 190.57
+    },
+    "09e5dd87-b8f9-4bfe-83f3-1f1c306cc28a": {
+      "return_1y": null,
+      "return_current": -39.32
+    },
+    "57ef79c9-3445-4ab0-b59e-de7390c8248b": {
+      "return_1y": 31.12,
+      "return_current": 6.15
+    },
+    "5e6db7d1-5c8f-4b6c-a039-d6027ed0ef88": {
+      "return_1y": null,
+      "return_current": -46.88
+    },
+    "c7403d0c-483e-4d01-9c73-09f120de50da": {
+      "return_1y": -49.32,
+      "return_current": -35.24
+    },
+    "de5ed4d1-9e2a-463b-9b9b-6d5d73c4ffea": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "7742ab3d-b3c0-4f09-8229-eddf71b62dff": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "0c616335-5e31-462f-9296-8bfc2785a3a7": {
+      "return_1y": 13.01,
+      "return_current": 392.91
+    },
+    "489bb918-e36f-49cd-9a1a-612e0e94318c": {
+      "return_1y": null,
+      "return_current": 13.59
+    },
+    "cce8481e-db2c-436e-935b-0fc9267ddc0b": {
+      "return_1y": 63.04,
+      "return_current": -47.83
+    },
+    "ff0cf3ff-16bd-43ad-ac06-6ba01bfab6cb": {
+      "return_1y": -4.93,
+      "return_current": -32.6
+    },
+    "2e935650-22a8-46a3-a7d4-47c3c49ede1e": {
+      "return_1y": null,
+      "return_current": 22.99
+    },
+    "b1fe6d82-a02c-463a-b9e0-3b4fd9fcd104": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "c560dc29-acc1-4144-8f27-260fd08e495d": {
+      "return_1y": -30.71,
+      "return_current": -29.9
+    },
+    "997cc3f7-e74d-409d-8157-c2a77daa962c": {
+      "return_1y": 35.62,
+      "return_current": 9.04
+    },
+    "eb4ad5b3-a303-462d-9d80-b9e7f3903b11": {
+      "return_1y": -4.45,
+      "return_current": -10.37
+    },
+    "175d7ca7-b853-46f6-9cd3-758676661f41": {
+      "return_1y": 56.5,
+      "return_current": 46.57
+    },
+    "b1fffb97-3a63-4188-bd1e-3a3422617f05": {
+      "return_1y": 50.85,
+      "return_current": -59.32
+    },
+    "41760a9a-4965-45e6-81f5-09fd95c0926a": {
+      "return_1y": 6.27,
+      "return_current": -17.21
+    },
+    "82566f67-7381-4a3e-a631-2fb69f592b3e": {
+      "return_1y": 80.13,
+      "return_current": 2.76
+    },
+    "32b32a49-64bc-4c38-aa01-340a2eab9078": {
+      "return_1y": 104.93,
+      "return_current": 18.14
+    },
+    "592f11b0-a945-4b75-a68a-1aef4f694b2a": {
+      "return_1y": 32.97,
+      "return_current": 6.66
+    },
+    "b5a3f290-b032-4a24-90f7-0ddec2cea36e": {
+      "return_1y": 136.36,
+      "return_current": 1181.36
+    },
+    "0424bc40-90e5-4dcc-af36-0339509bae2d": {
+      "return_1y": -1.15,
+      "return_current": 106.89
+    },
+    "cc672a36-4928-44f7-b7e5-73a6373fea92": {
+      "return_1y": 130.33,
+      "return_current": 78.84
+    },
+    "a51ce3c3-026f-4413-b4af-d62bd4650e2a": {
+      "return_1y": 92.03,
+      "return_current": 132.16
+    },
+    "2fd89cdf-5a23-4962-a9f4-231870148e31": {
+      "return_1y": 58.16,
+      "return_current": 130.63
+    },
+    "078c1ab1-0225-4a3f-bfe6-5155bda70963": {
+      "return_1y": -21.64,
+      "return_current": 133.6
+    },
+    "e74339da-3759-4611-9357-cc61e35d8a3f": {
+      "return_1y": -3.08,
+      "return_current": 113.69
+    },
+    "391fc02d-ec29-4e9a-8f43-c99b644ad78e": {
+      "return_1y": 48.46,
+      "return_current": 1.93
+    },
+    "6e59df37-79c8-413a-bfef-828c893393fd": {
+      "return_1y": 149.02,
+      "return_current": 58.94
+    },
+    "a62cb395-e692-457b-84b5-839f55a1f64e": {
+      "return_1y": 134.4,
+      "return_current": 64.25
+    },
+    "f7018305-ad09-4084-a305-214a23fbba3c": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "a2d22379-e925-4dd8-ade5-57fc6d8bdae1": {
+      "return_1y": null,
+      "return_current": -15.87
+    },
+    "6569eacc-b4a2-4ee4-81df-d3387e799c66": {
+      "return_1y": 54.56,
+      "return_current": 39.24
+    },
+    "9ad64748-637f-454c-a883-c0390f247afb": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "fb7e2b33-eb30-4446-80a9-a261cfa7bf39": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "b7756291-939b-45ea-8b19-d3ef445093e9": {
+      "return_1y": -31.41,
+      "return_current": 64.92
+    },
+    "d5ab8cad-63ad-4139-827e-2c3e389b7669": {
+      "return_1y": -37.65,
+      "return_current": -27.53
+    },
+    "5504640b-20c1-4a22-9f80-1cbf390ab864": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "483d8c5d-1091-4aaf-9165-194312f449bd": {
+      "return_1y": -26.93,
+      "return_current": -37.32
+    },
+    "dada49b2-7b50-40e9-b8c3-e38c9e3794d3": {
+      "return_1y": -31.58,
+      "return_current": -46.04
+    },
+    "b3441887-6ee3-4fbd-a313-01b22bc65b11": {
+      "return_1y": 25.37,
+      "return_current": 216.71
+    },
+    "1b368d9b-5844-4ff9-a4c3-b1c6fcfd0f62": {
+      "return_1y": -25.66,
+      "return_current": 132.97
+    },
+    "ad156511-f5b1-4605-948b-8af440d106a0": {
+      "return_1y": 24.73,
+      "return_current": -19.83
+    },
+    "e234762c-905c-4760-a2d8-fc69eab01484": {
+      "return_1y": 63.26,
+      "return_current": -5.6
+    },
+    "d6f093eb-5f90-474b-aefd-016b1c69d24d": {
+      "return_1y": 34.58,
+      "return_current": 14.95
+    },
+    "2934774a-8c16-46ad-993a-641a514f3d27": {
+      "return_1y": -52.79,
+      "return_current": -48.36
+    },
+    "8cd0aeaf-120f-44b9-8706-abd1b594761a": {
+      "return_1y": null,
+      "return_current": -37.85
+    },
+    "f21af3c8-1d4e-49c1-af54-68d6fc77abd9": {
+      "return_1y": null,
+      "return_current": -34.11
+    },
+    "4fc05959-3815-49bf-a721-edf4e531ca69": {
+      "return_1y": null,
+      "return_current": -34.97
+    },
+    "d5fd38f9-20ec-40b1-9012-20912de253e0": {
+      "return_1y": -15.28,
+      "return_current": -18.24
+    },
+    "cb1f851e-8a64-437b-975b-4f3f6968bc69": {
+      "return_1y": 17.29,
+      "return_current": 16.34
+    },
+    "a1a5f605-7bef-4d65-ba2f-c0d7295de1dc": {
+      "return_1y": -32.35,
+      "return_current": -30.79
+    },
+    "fc48fdeb-8441-4459-b78f-451addd974a7": {
+      "return_1y": -13.69,
+      "return_current": -34.64
+    },
+    "847cbbdd-14f5-420f-803f-0558fbc861ac": {
+      "return_1y": null,
+      "return_current": 80.27
+    },
+    "d3248d89-edbb-40d6-8380-d6cf6ce03d3e": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "45a96957-f78a-47b0-b482-675a53bad283": {
+      "return_1y": -10.96,
+      "return_current": -13.74
+    },
+    "d93c2662-853a-4c0a-8cb4-eb3767caf24b": {
+      "return_1y": 75.3,
+      "return_current": -5.28
+    },
+    "fc904d0b-25a2-4e62-b2df-f47d42f86aa3": {
+      "return_1y": 70.09,
+      "return_current": 72.3
+    },
+    "fc847a0d-4c77-40e7-88b3-43589ca5adc1": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "d89ee0f3-954c-432c-a45a-ae31343c069f": {
+      "return_1y": -13.62,
+      "return_current": -31.23
+    },
+    "73400ea5-4244-478c-b70f-1d48d578276b": {
+      "return_1y": 15.15,
+      "return_current": 9.91
+    },
+    "b8284307-ea69-456d-845e-cce9668186e2": {
+      "return_1y": 51.34,
+      "return_current": -6.84
+    },
+    "97a95d04-2131-47b9-a882-34f0721c95d3": {
+      "return_1y": 60.82,
+      "return_current": 43.38
+    },
+    "31f6aac0-d748-400e-8004-239880f2895d": {
+      "return_1y": 101.51,
+      "return_current": 15.34
+    },
+    "2d541166-2451-41ce-8f96-bf8b4c7e1c19": {
+      "return_1y": 89.65,
+      "return_current": 13.87
+    },
+    "d75af16a-bad9-48da-a07c-bc78fd1643e2": {
+      "return_1y": -11.21,
+      "return_current": -31.35
+    },
+    "69b17324-41c4-4677-809b-c10718292758": {
+      "return_1y": 34.67,
+      "return_current": 31.59
+    },
+    "f4d9133e-204c-499a-b4d9-5179b7e13a4a": {
+      "return_1y": -6.19,
+      "return_current": -27.24
+    },
+    "6cfe445b-1ab1-44b1-a22c-7ba64af631ea": {
+      "return_1y": -57.08,
+      "return_current": -68.83
+    },
+    "2ddea67a-428e-4044-8085-5e309fd1334a": {
+      "return_1y": -20.0,
+      "return_current": -55.0
+    },
+    "6aa58224-8d9e-47ca-91ec-df313bd9f7ff": {
+      "return_1y": 58.7,
+      "return_current": -20.28
+    },
+    "23a79185-bb1d-4246-95cd-68964cc4ca75": {
+      "return_1y": -60.77,
+      "return_current": -61.23
+    },
+    "c17e1575-79e7-4c9f-8f00-a11dbada7d0f": {
+      "return_1y": -44.5,
+      "return_current": -80.5
+    },
+    "1ec032a5-5f63-415d-9031-05113dfde71b": {
+      "return_1y": 82.4,
+      "return_current": 4.07
+    },
+    "bd5e7f34-517a-47b2-a8e8-10bb29ed80c5": {
+      "return_1y": 12.59,
+      "return_current": 11.76
+    },
+    "9c7cf2fd-72f1-4e51-b2f6-83994ab48a57": {
+      "return_1y": 57.07,
+      "return_current": -2.38
+    },
+    "26735130-64db-4f13-b1c3-a87b7335dab5": {
+      "return_1y": 75.89,
+      "return_current": 11.4
+    },
+    "974fa4d8-c551-4a27-9856-789b7079e6e6": {
+      "return_1y": 52.31,
+      "return_current": -2.3
+    },
+    "8ba4f821-306a-4540-b097-572634cc2de9": {
+      "return_1y": 75.93,
+      "return_current": 12.39
+    },
+    "48faf28f-f846-4f2f-8afc-09100562127e": {
+      "return_1y": 10.37,
+      "return_current": -37.49
+    },
+    "c9943683-b7aa-482e-9305-ac0c8c239f87": {
+      "return_1y": 328.3,
+      "return_current": 152.83
+    },
+    "c61f16e5-4703-48da-9f26-32a3288ab190": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "cca12291-fdd6-453e-a233-0d055e07fb41": {
+      "return_1y": 9.61,
+      "return_current": 7.82
+    },
+    "1fb172c7-89b5-4da5-b341-a5b18003733f": {
+      "return_1y": -48.0,
+      "return_current": -76.92
+    },
+    "a01bf397-078d-4b83-b8e5-d5a06bac00e6": {
+      "return_1y": 11.55,
+      "return_current": 27.19
+    },
+    "4b02622a-d72d-4a93-87d0-64507675b348": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "37a55881-2665-46d0-b747-ad80d31ebf6e": {
+      "return_1y": null,
+      "return_current": -69.86
+    },
+    "0c4e9f32-bdc0-4469-b4ae-94a6437fda67": {
+      "return_1y": 59.81,
+      "return_current": null
+    },
+    "a3346b76-ddb4-48ce-8e51-afbd6891b5c7": {
+      "return_1y": 2.1,
+      "return_current": -50.99
+    },
+    "72ac674e-757e-4eb2-bee6-27cc47eef5b8": {
+      "return_1y": 18.18,
+      "return_current": -3.07
+    },
+    "a7562c31-c88c-430f-b1ba-5fc90ce5fe76": {
+      "return_1y": 104.24,
+      "return_current": 46.1
+    },
+    "ca254d09-c759-4015-b3fc-3ee96a635f34": {
+      "return_1y": 42.35,
+      "return_current": 497.31
+    },
+    "bb26dc64-021f-4c9d-8693-e426018f4c20": {
+      "return_1y": 132.3,
+      "return_current": 54.17
+    },
+    "1a5c0a0c-6aee-4d2e-8ba3-00d6a8913b02": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "445eaee2-109c-40bf-8491-6503e6883da6": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "902d23e8-487c-4df8-892c-e069f4f38c34": {
+      "return_1y": 25.98,
+      "return_current": 102.0
+    },
+    "fc9f255d-59c3-42a4-9446-36d8021147b4": {
+      "return_1y": 14.89,
+      "return_current": -6.07
+    },
+    "5b91a3ea-4bcb-4410-a5c3-02072bad51ae": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "e2234403-1a3a-4ef5-b4d7-ac6f26810624": {
+      "return_1y": -11.38,
+      "return_current": -4.79
+    },
+    "f503ec79-7b08-44bb-ba20-b3eec2c5935f": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "04e4d5fc-561a-4eca-a6c3-41491c88da7b": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "9ffda526-fe83-4577-b06e-a8b94996ab06": {
+      "return_1y": 105.41,
+      "return_current": 262.16
+    },
+    "ab361cbc-f7d8-4be1-a41b-cb6fc6b15676": {
+      "return_1y": 30.72,
+      "return_current": 102.0
+    },
+    "f5c4c124-d6ad-4c8b-be2b-832df24c07d0": {
+      "return_1y": null,
+      "return_current": -39.34
+    },
+    "81d7d917-1203-4a42-a842-f11630d07824": {
+      "return_1y": null,
+      "return_current": -28.67
+    },
+    "d439b6aa-73d0-40b7-828f-dfcfe9b18eb8": {
+      "return_1y": -17.15,
+      "return_current": -36.11
+    },
+    "5fac237d-0996-4e7a-876c-fa64f0070652": {
+      "return_1y": 33.93,
+      "return_current": -10.44
+    },
+    "70606d4e-71bd-40a7-b28a-1f003ddbfa78": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "24d3d619-7c22-404f-8753-19896a7c754f": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "3d2bb089-e146-45ec-91c2-0a42665b1bf1": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "6704fe16-84ca-4595-a03d-50ef00455627": {
+      "return_1y": 13.13,
+      "return_current": 23.25
+    },
+    "11804210-dfe6-4462-bae7-6024a9e47360": {
+      "return_1y": null,
+      "return_current": null
+    },
+    "f978a228-7b3f-47b9-a17d-e5eaa573c06d": {
+      "return_1y": 56.41,
+      "return_current": 135.74
+    },
+    "61bb6839-0dfe-49f9-8b07-bb86f6fc0e3e": {
+      "return_1y": 6.63,
+      "return_current": -52.04
     },
     "be882954-c7a5-442e-a70d-2f4de1651b0f": {
       "return_1y": null,
@@ -31567,6 +33833,18 @@
     "27b1e7f3-b89d-49c2-9e25-b8c5e5e554ec": {
       "return_1y": 74.03,
       "return_current": 308.42
+    },
+    "180ef044-7d9d-433e-b732-d969c74a3cba": {
+      "return_1y": 84.83,
+      "return_current": 29.57
+    },
+    "7c60e18c-b190-42b0-ad93-7ad6d5658ce0": {
+      "return_1y": 89.69,
+      "return_current": 30.68
+    },
+    "b95dbffc-321b-4d16-b9ff-9bf4355d6add": {
+      "return_1y": -7.74,
+      "return_current": -29.3
     },
     "37a9ac45-1d32-4458-a263-6a760e0871b7": {
       "return_1y": -15.49,
@@ -32396,10 +34674,6 @@
       "return_1y": -51.14,
       "return_current": 12.21
     },
-    "11e4d161-dd4e-414d-8b89-c2ea4cb3696b": {
-      "return_1y": 182.63,
-      "return_current": 1391.05
-    },
     "0f617063-c64a-4017-bc11-fc67a6d77d95": {
       "return_1y": null,
       "return_current": -16.4
@@ -32483,6 +34757,10 @@
     "6c2c59ef-5689-4014-b8f1-71498da31155": {
       "return_1y": 20.9,
       "return_current": 81.3
+    },
+    "11e4d161-dd4e-414d-8b89-c2ea4cb3696b": {
+      "return_1y": 182.63,
+      "return_current": 1391.05
     },
     "328419c4-cec6-423d-97d7-7f858a6f8d0e": {
       "return_1y": -7.21,
@@ -33588,46 +35866,6 @@
       "return_1y": 51.3,
       "return_current": 98.41
     },
-    "894c2022-0ea9-4699-b5b3-38db04b0c1d8": {
-      "return_1y": -46.86,
-      "return_current": -30.11
-    },
-    "233a8a84-21f1-47f4-817d-e1bc4e30e372": {
-      "return_1y": 26.92,
-      "return_current": 0.82
-    },
-    "859145e0-8694-4655-af9b-4d1a53c7e3c1": {
-      "return_1y": 19.43,
-      "return_current": -2.02
-    },
-    "8fc82af8-dd95-4a6e-8f20-c985d0b6bd45": {
-      "return_1y": -7.72,
-      "return_current": -40.68
-    },
-    "a0054cbd-726e-4d27-a81f-d2eb6319e9b5": {
-      "return_1y": -13.92,
-      "return_current": -46.2
-    },
-    "09e5dd87-b8f9-4bfe-83f3-1f1c306cc28a": {
-      "return_1y": null,
-      "return_current": -39.32
-    },
-    "57ef79c9-3445-4ab0-b59e-de7390c8248b": {
-      "return_1y": 31.12,
-      "return_current": 6.15
-    },
-    "5e6db7d1-5c8f-4b6c-a039-d6027ed0ef88": {
-      "return_1y": null,
-      "return_current": -46.88
-    },
-    "c7403d0c-483e-4d01-9c73-09f120de50da": {
-      "return_1y": -49.32,
-      "return_current": -35.24
-    },
-    "489bb918-e36f-49cd-9a1a-612e0e94318c": {
-      "return_1y": null,
-      "return_current": 13.59
-    },
     "f7d94844-34fd-4ce2-81e5-0c230d3f4534": {
       "return_1y": 7.08,
       "return_current": -7.72
@@ -34028,6 +36266,34 @@
       "return_1y": null,
       "return_current": 55.29
     },
+    "dc4fcc95-b8bc-47d1-b244-73f9e427b7a4": {
+      "return_1y": -0.39,
+      "return_current": -36.52
+    },
+    "70d9535b-5c9d-4ef9-a667-74e0beda2f22": {
+      "return_1y": -4.24,
+      "return_current": -32.09
+    },
+    "3d44cac7-d070-43d9-96a1-5335ce7369f1": {
+      "return_1y": -63.16,
+      "return_current": -76.32
+    },
+    "a4f74ecb-9efd-4360-9aea-9fe19f58374d": {
+      "return_1y": -36.31,
+      "return_current": -58.77
+    },
+    "a40d931e-f8c3-40e0-97d6-425a458db432": {
+      "return_1y": 0.41,
+      "return_current": -29.82
+    },
+    "a596195d-a969-4e12-854e-8abe2f551d68": {
+      "return_1y": null,
+      "return_current": -36.66
+    },
+    "64e9976b-43bf-44b1-aa90-f8bdce7ea4a5": {
+      "return_1y": null,
+      "return_current": 39.78
+    },
     "be913373-9e47-4342-9d9f-b73399a48667": {
       "return_1y": null,
       "return_current": -13.81
@@ -34039,6 +36305,30 @@
     "5413a376-be3a-415e-a68a-7fda8e14d37f": {
       "return_1y": null,
       "return_current": -44.22
+    },
+    "ea1f1e3f-33f7-46ab-82d2-caa94d1ccc9b": {
+      "return_1y": 89.61,
+      "return_current": 18.9
+    },
+    "c415f8d4-9c43-4565-a15d-3f47f809822a": {
+      "return_1y": 15.84,
+      "return_current": -35.19
+    },
+    "9fe26c27-01f5-4c7c-8fe2-b20ad6749497": {
+      "return_1y": -17.88,
+      "return_current": -31.25
+    },
+    "7703e9cd-a6fc-403a-995f-a17983d67061": {
+      "return_1y": 416.28,
+      "return_current": 211.63
+    },
+    "208b303b-7fa4-4045-a5ea-101225a0f9fd": {
+      "return_1y": 16.72,
+      "return_current": -42.63
+    },
+    "f4c62f6e-ad84-4072-965f-4e2c7821c678": {
+      "return_1y": 105.28,
+      "return_current": 20.9
     }
   },
   "rankings": {
@@ -34049,6 +36339,7 @@
       "kang-jungsu",
       "kim-kwangsuk",
       "lee-hyoseok",
+      "kang-hwanguk",
       "speaker-v291g7",
       "ahn-yuhwa",
       "speaker-mzeuvs",
@@ -34070,6 +36361,7 @@
       "speaker-v291g7",
       "kang-jungsu",
       "ahn-yuhwa",
+      "kang-hwanguk",
       "yoon-sumok",
       "speaker-lwt2lv",
       "speaker-uvakj",
@@ -34084,6 +36376,7 @@
       "speaker-v291g7",
       "korini-appa",
       "yoon-sumok",
+      "kang-hwanguk",
       "speaker-yqacn0",
       "speaker-lwt2lv",
       "ahn-yuhwa",
@@ -34094,11 +36387,10 @@
       "kang-jungsu",
       "jung-jihoon",
       "kang-hana",
+      "oh-taemin",
       "speaker-uvakj",
       "maeng-sungjun",
       "yang-heechang",
-      "oh-taemin",
-      "speaker-q8smi",
       "hong-jinchae",
       "speaker-v0qcs",
       "kim-tak",
@@ -34116,6 +36408,7 @@
       "choi-doyeon",
       "shin-hyunggwan",
       "speaker-t8nkk",
+      "speaker-wd410",
       "ko-yeonsu",
       "hong-sunae",
       "bae-jaegyu",
@@ -34125,6 +36418,7 @@
       "speaker-efsljj",
       "lee-hyungsu",
       "baek-sujeon",
+      "speaker-v2rkr",
       "park-byungchang",
       "speaker-qinfc",
       "speaker-qh1gj",
@@ -34152,6 +36446,8 @@
       "speaker-u6zi4",
       "speaker-u5xl7",
       "speaker-qee5w",
+      "speaker-u7kdg",
+      "speaker-sj1ag",
       "dalant-invest",
       "jang-woojin",
       "speaker-u5o79",
