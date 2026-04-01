@@ -77,7 +77,6 @@ const SPEAKER_SLUGS: Record<string, string> = {
   '홍성철': 'hong-sungchul',
   '홍진채': 'hong-jinchae',
   '윤수목': 'yoon-sumok',
-  '선대인': 'sun-daein',
   '선대인TV': 'sun-daein',
 };
 
