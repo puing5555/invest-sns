@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function LoginPage() {
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signIn, signInWithGoogle, signInWithKakao } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +28,11 @@ export default function LoginPage() {
 
   const handleGoogle = async () => {
     const { error } = await signInWithGoogle();
+    if (error) setError(error.message);
+  };
+
+  const handleKakao = async () => {
+    const { error } = await signInWithKakao();
     if (error) setError(error.message);
   };
 
@@ -91,6 +96,16 @@ export default function LoginPage() {
               <span className="px-3 bg-white text-[#8b95a1]">또는</span>
             </div>
           </div>
+
+          <button
+            onClick={handleKakao}
+            className="w-full py-3 bg-[#FEE500] rounded-xl font-medium text-[#191919] hover:bg-[#F5DC00] transition flex items-center justify-center gap-2"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24">
+              <path fill="#191919" d="M12 3C6.48 3 2 6.36 2 10.44c0 2.6 1.72 4.88 4.32 6.2-.14.52-.9 3.36-.93 3.56 0 0-.02.16.08.22.1.06.22.02.22.02.3-.04 3.44-2.26 3.98-2.64.76.1 1.54.16 2.33.16 5.52 0 10-3.36 10-7.52S17.52 3 12 3z"/>
+            </svg>
+            카카오로 계속하기
+          </button>
 
           <button
             onClick={handleGoogle}
