@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-04-01T14:19:15.185827",
+  "generated_at": "2026-04-01T16:25:26.611394",
   "min_hit_eligible": 10,
-  "total_speakers": 109,
+  "total_speakers": 108,
   "qualified_speakers": 21,
   "speakers": {
     "speaker-v291g7": {
@@ -12654,17 +12654,17 @@
     "speaker-2u4s86": {
       "name": "선대인TV",
       "slug": "speaker-2u4s86",
-      "total_signals": 211,
-      "scored_signals": 166,
-      "hit_eligible": 157,
-      "hit_rate": 35.3,
-      "wins": 53,
-      "losses": 97,
-      "pending": 7,
-      "avg_return_1y": 8.04,
-      "avg_return_current": 34.85,
-      "median_return_1y": -18.5,
-      "median_return_current": -4.77,
+      "total_signals": 215,
+      "scored_signals": 169,
+      "hit_eligible": 160,
+      "hit_rate": 37.5,
+      "wins": 57,
+      "losses": 95,
+      "pending": 8,
+      "avg_return_1y": 13.27,
+      "avg_return_current": 36.03,
+      "median_return_1y": -17.88,
+      "median_return_current": -5.33,
       "best_call": {
         "stock": "에코프로비엠",
         "ticker": "247540",
@@ -12733,8 +12733,8 @@
           "date": "2024-02-01"
         }
       ],
-      "homerun_rate": 6.7,
-      "expected_return": 10.18,
+      "homerun_rate": 8.1,
+      "expected_return": 15.18,
       "style_tag": "📊일반",
       "scored_list": [
         {
@@ -13041,13 +13041,13 @@
           "id": "e6f8abc7-abcb-4556-a211-5a79d87c8a2e",
           "date": "2022-06-01",
           "stock": "제우스",
-          "ticker": "033920",
+          "ticker": "079370",
           "signal": "긍정",
-          "return_1y": -28.65,
-          "return_3y": 13.46,
-          "return_current": 31.83,
+          "return_1y": 23.19,
+          "return_3y": 50.4,
+          "return_current": 68.94,
           "return_basis": "1y",
-          "hit": false
+          "hit": true
         },
         {
           "id": "24bc3802-52d3-49ec-9bd2-af3661862e33",
@@ -13120,6 +13120,30 @@
           "return_current": -4.79,
           "return_basis": "1y",
           "hit": null
+        },
+        {
+          "id": "24034ef4-ffe9-4053-98cf-2335635f0f56",
+          "date": "2022-12-07",
+          "stock": "SK아이이테크놀로지",
+          "ticker": "361610",
+          "signal": "긍정",
+          "return_1y": 34.38,
+          "return_3y": -54.45,
+          "return_current": -65.16,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "6e0493fd-a1e6-4440-99a9-29fe5c41ee01",
+          "date": "2022-12-07",
+          "stock": "삼성SDI",
+          "ticker": "006400",
+          "signal": "긍정",
+          "return_1y": -36.27,
+          "return_3y": -55.54,
+          "return_current": -41.01,
+          "return_basis": "1y",
+          "hit": false
         },
         {
           "id": "6994b19a-c4d2-404a-b51d-37d7dc2cb272",
@@ -13686,18 +13710,6 @@
           "hit": false
         },
         {
-          "id": "7084537f-ce55-49ab-aa24-4a2d67c9f0ce",
-          "date": "2024-02-01",
-          "stock": "솔브레인홀딩스",
-          "ticker": "357780",
-          "signal": "긍정",
-          "return_1y": -37.48,
-          "return_3y": null,
-          "return_current": 36.39,
-          "return_basis": "1y",
-          "hit": false
-        },
-        {
           "id": "8c7a00c6-ff67-45f3-a339-84b8881999b9",
           "date": "2024-02-01",
           "stock": "엔씨켐",
@@ -13706,6 +13718,18 @@
           "return_1y": -11.82,
           "return_3y": null,
           "return_current": -20.84,
+          "return_basis": "1y",
+          "hit": false
+        },
+        {
+          "id": "7084537f-ce55-49ab-aa24-4a2d67c9f0ce",
+          "date": "2024-02-01",
+          "stock": "솔브레인홀딩스",
+          "ticker": "036830",
+          "signal": "긍정",
+          "return_1y": -19.0,
+          "return_3y": null,
+          "return_current": 7.69,
           "return_basis": "1y",
           "hit": false
         },
@@ -13830,18 +13854,6 @@
           "hit": false
         },
         {
-          "id": "65f4f729-e50d-4546-a849-92feb60666c1",
-          "date": "2024-02-24",
-          "stock": "디엔티",
-          "ticker": "389030",
-          "signal": "긍정",
-          "return_1y": -39.14,
-          "return_3y": null,
-          "return_current": 148.64,
-          "return_basis": "1y",
-          "hit": false
-        },
-        {
           "id": "9055f3ee-b964-4e6d-9e67-9ae0bb43d5e1",
           "date": "2024-02-24",
           "stock": "SK넥실리스",
@@ -13852,6 +13864,18 @@
           "return_current": 11.25,
           "return_basis": "1y",
           "hit": false
+        },
+        {
+          "id": "65f4f729-e50d-4546-a849-92feb60666c1",
+          "date": "2024-02-24",
+          "stock": "디엔티",
+          "ticker": null,
+          "signal": "긍정",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": null,
+          "return_basis": "pending",
+          "hit": null
         },
         {
           "id": "ef742058-aa19-4bfd-8198-af95e900cc96",
@@ -14150,18 +14174,6 @@
           "return_1y": -29.91,
           "return_3y": null,
           "return_current": 24.06,
-          "return_basis": "1y",
-          "hit": false
-        },
-        {
-          "id": "63667b62-6111-4265-b94d-5ffd193e748f",
-          "date": "2024-06-02",
-          "stock": "앱솔릭스",
-          "ticker": "238090",
-          "signal": "긍정",
-          "return_1y": -46.18,
-          "return_3y": null,
-          "return_current": -22.77,
           "return_basis": "1y",
           "hit": false
         },
@@ -14478,6 +14490,30 @@
           "hit": true
         },
         {
+          "id": "d0f95989-1f6f-4c61-a9b2-aa843e1b263d",
+          "date": "2025-01-31",
+          "stock": "삼성전자",
+          "ticker": "005930",
+          "signal": "긍정",
+          "return_1y": 212.9,
+          "return_3y": null,
+          "return_current": 225.97,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
+          "id": "1c1e6109-e0c6-4601-a0d4-fa12b33fb026",
+          "date": "2025-01-31",
+          "stock": "SK하이닉스",
+          "ticker": "000660",
+          "signal": "긍정",
+          "return_1y": 361.1,
+          "return_3y": null,
+          "return_current": 310.11,
+          "return_basis": "1y",
+          "hit": true
+        },
+        {
           "id": "a4e32fc5-5367-4bd7-834c-1b8b701e8f95",
           "date": "2025-03-24",
           "stock": "에코프로비엠",
@@ -14562,18 +14598,6 @@
           "hit": false
         },
         {
-          "id": "878ff5ff-e198-452e-92fe-6dc91a92e82a",
-          "date": "2025-04-04",
-          "stock": "중앙첨단소재",
-          "ticker": "005030",
-          "signal": "매수",
-          "return_1y": null,
-          "return_3y": null,
-          "return_current": 0.0,
-          "return_basis": "current",
-          "hit": false
-        },
-        {
           "id": "7ff2226f-5958-4f67-8335-91f917523673",
           "date": "2025-04-04",
           "stock": "젠백스",
@@ -14584,6 +14608,18 @@
           "return_current": 3.35,
           "return_basis": "current",
           "hit": true
+        },
+        {
+          "id": "878ff5ff-e198-452e-92fe-6dc91a92e82a",
+          "date": "2025-04-04",
+          "stock": "중앙첨단소재",
+          "ticker": "051980",
+          "signal": "매수",
+          "return_1y": null,
+          "return_3y": null,
+          "return_current": -63.75,
+          "return_basis": "current",
+          "hit": false
         },
         {
           "id": "3000eeac-4225-4f88-9bac-0e01ecca4699",
@@ -14732,50 +14768,55 @@
       ],
       "market": {
         "KR": {
-          "count": 149,
-          "hit_rate": 32.2,
-          "avg_return_1y": 7.67
+          "count": 152,
+          "hit_rate": 34.2,
+          "avg_return_1y": 12.66
         },
         "INDEX": {
           "count": 3,
           "hit_rate": 66.7,
           "avg_return_1y": null
         },
+        "OTHER": {
+          "count": 1,
+          "hit_rate": null,
+          "avg_return_1y": null
+        },
         "US": {
-          "count": 5,
-          "hit_rate": 60.0,
-          "avg_return_1y": 17.49
+          "count": 4,
+          "hit_rate": 75.0,
+          "avg_return_1y": 33.41
         }
       },
       "tiers": {
         "swing": {
-          "count": 150,
-          "wins": 53,
-          "losses": 97,
-          "hit_rate": 35.3,
-          "avg_return": 8.16,
-          "median_return": -15.67
+          "count": 152,
+          "wins": 57,
+          "losses": 95,
+          "hit_rate": 37.5,
+          "avg_return": 12.42,
+          "median_return": -14.54
         },
         "mid": {
-          "count": 134,
-          "wins": 58,
-          "losses": 76,
-          "hit_rate": 43.3,
-          "avg_return": 16.64,
+          "count": 136,
+          "wins": 59,
+          "losses": 77,
+          "hit_rate": 43.4,
+          "avg_return": 18.66,
           "median_return": -4.48
         },
         "long": {
-          "count": 44,
+          "count": 46,
           "wins": 21,
-          "losses": 23,
-          "hit_rate": 47.7,
-          "avg_return": 119.66,
-          "median_return": -2.59
+          "losses": 25,
+          "hit_rate": 45.7,
+          "avg_return": 112.96,
+          "median_return": -6.97
         }
       },
       "signal_types": {
         "매수": 41,
-        "긍정": 147,
+        "긍정": 151,
         "중립": 13,
         "부정": 10
       },
@@ -14791,13 +14832,13 @@
       "total_signals": 62,
       "scored_signals": 46,
       "hit_eligible": 45,
-      "hit_rate": 45.2,
-      "wins": 14,
-      "losses": 17,
+      "hit_rate": 41.9,
+      "wins": 13,
+      "losses": 18,
       "pending": 14,
-      "avg_return_1y": -14.6,
-      "avg_return_current": 37.89,
-      "median_return_1y": -19.63,
+      "avg_return_1y": -13.28,
+      "avg_return_current": 40.13,
+      "median_return_1y": -13.88,
       "median_return_current": -2.84,
       "best_call": {
         "stock": "두산에너빌리티",
@@ -14808,10 +14849,10 @@
         "date": "2020-09-14"
       },
       "worst_call": {
-        "stock": "주승엔지니어링",
-        "ticker": "083660",
-        "return_1y": -36.5,
-        "return_current": -78.43,
+        "stock": "코스모신소재",
+        "ticker": "005070",
+        "return_1y": -79.97,
+        "return_current": -65.18,
         "signal": "긍정",
         "date": "2024-05-26"
       },
@@ -14843,14 +14884,6 @@
       ],
       "worst3_calls": [
         {
-          "stock": "주승엔지니어링",
-          "ticker": "083660",
-          "return_1y": -36.5,
-          "return_current": -78.43,
-          "signal": "긍정",
-          "date": "2024-05-26"
-        },
-        {
           "stock": "코스모신소재",
           "ticker": "005070",
           "return_1y": -79.97,
@@ -14865,10 +14898,18 @@
           "return_current": -37.5,
           "signal": "긍정",
           "date": "2023-09-03"
+        },
+        {
+          "stock": "SKC",
+          "ticker": "011790",
+          "return_1y": -31.49,
+          "return_current": -32.67,
+          "signal": "매수",
+          "date": "2024-05-26"
         }
       ],
       "homerun_rate": 0.0,
-      "expected_return": -7.44,
+      "expected_return": -8.28,
       "style_tag": "📊일반",
       "scored_list": [
         {
@@ -15114,12 +15155,12 @@
         {
           "id": "cf94bfda-dece-4b0f-a85d-f42efd66421a",
           "date": "2024-05-26",
-          "stock": "주승엔지니어링",
-          "ticker": "083660",
+          "stock": "주성엔지니어링",
+          "ticker": "036930",
           "signal": "긍정",
-          "return_1y": -36.5,
+          "return_1y": -4.61,
           "return_3y": null,
-          "return_current": -78.43,
+          "return_current": 83.58,
           "return_basis": "1y",
           "hit": false
         },
@@ -15306,14 +15347,14 @@
         {
           "id": "044555d0-38d7-4300-8934-fed3b685f0bc",
           "date": "2025-07-13",
-          "stock": "엔캠",
-          "ticker": "085660",
+          "stock": "엔켐",
+          "ticker": "348370",
           "signal": "긍정",
           "return_1y": null,
           "return_3y": null,
-          "return_current": 43.74,
+          "return_current": -28.78,
           "return_basis": "current",
-          "hit": true
+          "hit": false
         },
         {
           "id": "d8ae27e7-5962-470a-ac6f-14800ef6027b",
@@ -15432,8 +15473,8 @@
         },
         "KR": {
           "count": 31,
-          "hit_rate": 38.7,
-          "avg_return_1y": -22.16
+          "hit_rate": 35.5,
+          "avg_return_1y": -20.38
         },
         "US": {
           "count": 5,
@@ -15454,19 +15495,19 @@
       "tiers": {
         "swing": {
           "count": 31,
-          "wins": 14,
-          "losses": 17,
-          "hit_rate": 45.2,
-          "avg_return": 5.73,
-          "median_return": -1.14
+          "wins": 13,
+          "losses": 18,
+          "hit_rate": 41.9,
+          "avg_return": 4.42,
+          "median_return": -4.61
         },
         "mid": {
           "count": 24,
-          "wins": 11,
-          "losses": 13,
-          "hit_rate": 45.8,
-          "avg_return": 11.18,
-          "median_return": -2.84
+          "wins": 12,
+          "losses": 12,
+          "hit_rate": 50.0,
+          "avg_return": 17.93,
+          "median_return": 1.82
         },
         "long": {
           "count": 4,
@@ -15486,7 +15527,7 @@
       "recent_30d": {
         "count": 6,
         "hit_rate": 0.0,
-        "delta": -45.2
+        "delta": -41.9
       }
     },
     "jang-woojin": {
@@ -30915,183 +30956,6 @@
         "delta": null
       }
     },
-    "speaker-t5vvc": {
-      "name": "선대인",
-      "slug": "speaker-t5vvc",
-      "total_signals": 4,
-      "scored_signals": 4,
-      "hit_eligible": 4,
-      "hit_rate": null,
-      "wins": 3,
-      "losses": 1,
-      "pending": 0,
-      "avg_return_1y": 143.03,
-      "avg_return_current": 107.48,
-      "median_return_1y": 123.64,
-      "median_return_current": 92.48,
-      "best_call": {
-        "stock": "SK하이닉스",
-        "ticker": "000660",
-        "return_1y": 361.1,
-        "return_current": 310.11,
-        "signal": "긍정",
-        "date": "2025-01-31"
-      },
-      "worst_call": {
-        "stock": "SK아이이테크놀로지",
-        "ticker": "361610",
-        "return_1y": 34.38,
-        "return_current": -65.16,
-        "signal": "긍정",
-        "date": "2022-12-07"
-      },
-      "top3_calls": [
-        {
-          "stock": "SK하이닉스",
-          "ticker": "000660",
-          "return_1y": 361.1,
-          "return_current": 310.11,
-          "signal": "긍정",
-          "date": "2025-01-31"
-        },
-        {
-          "stock": "삼성전자",
-          "ticker": "005930",
-          "return_1y": 212.9,
-          "return_current": 225.97,
-          "signal": "긍정",
-          "date": "2025-01-31"
-        },
-        {
-          "stock": "삼성SDI",
-          "ticker": "006400",
-          "return_1y": -36.27,
-          "return_current": -41.01,
-          "signal": "긍정",
-          "date": "2022-12-07"
-        }
-      ],
-      "worst3_calls": [
-        {
-          "stock": "SK아이이테크놀로지",
-          "ticker": "361610",
-          "return_1y": 34.38,
-          "return_current": -65.16,
-          "signal": "긍정",
-          "date": "2022-12-07"
-        },
-        {
-          "stock": "삼성SDI",
-          "ticker": "006400",
-          "return_1y": -36.27,
-          "return_current": -41.01,
-          "signal": "긍정",
-          "date": "2022-12-07"
-        },
-        {
-          "stock": "삼성전자",
-          "ticker": "005930",
-          "return_1y": 212.9,
-          "return_current": 225.97,
-          "signal": "긍정",
-          "date": "2025-01-31"
-        }
-      ],
-      "homerun_rate": 50.0,
-      "expected_return": null,
-      "style_tag": "📊시그널 수집 중",
-      "scored_list": [
-        {
-          "id": "24034ef4-ffe9-4053-98cf-2335635f0f56",
-          "date": "2022-12-07",
-          "stock": "SK아이이테크놀로지",
-          "ticker": "361610",
-          "signal": "긍정",
-          "return_1y": 34.38,
-          "return_3y": -54.45,
-          "return_current": -65.16,
-          "return_basis": "1y",
-          "hit": true
-        },
-        {
-          "id": "6e0493fd-a1e6-4440-99a9-29fe5c41ee01",
-          "date": "2022-12-07",
-          "stock": "삼성SDI",
-          "ticker": "006400",
-          "signal": "긍정",
-          "return_1y": -36.27,
-          "return_3y": -55.54,
-          "return_current": -41.01,
-          "return_basis": "1y",
-          "hit": false
-        },
-        {
-          "id": "d0f95989-1f6f-4c61-a9b2-aa843e1b263d",
-          "date": "2025-01-31",
-          "stock": "삼성전자",
-          "ticker": "005930",
-          "signal": "긍정",
-          "return_1y": 212.9,
-          "return_3y": null,
-          "return_current": 225.97,
-          "return_basis": "1y",
-          "hit": true
-        },
-        {
-          "id": "1c1e6109-e0c6-4601-a0d4-fa12b33fb026",
-          "date": "2025-01-31",
-          "stock": "SK하이닉스",
-          "ticker": "000660",
-          "signal": "긍정",
-          "return_1y": 361.1,
-          "return_3y": null,
-          "return_current": 310.11,
-          "return_basis": "1y",
-          "hit": true
-        }
-      ],
-      "market": {
-        "KR": {
-          "count": 4,
-          "hit_rate": 75.0,
-          "avg_return_1y": 143.03
-        }
-      },
-      "tiers": {
-        "swing": {
-          "count": 4,
-          "wins": 3,
-          "losses": 1,
-          "hit_rate": null,
-          "avg_return": 143.03,
-          "median_return": 123.64
-        },
-        "mid": {
-          "count": 4,
-          "wins": 2,
-          "losses": 2,
-          "hit_rate": null,
-          "avg_return": 106.52,
-          "median_return": 85.76
-        },
-        "long": {
-          "count": 2,
-          "wins": 0,
-          "losses": 2,
-          "hit_rate": null,
-          "avg_return": -53.08,
-          "median_return": -53.08
-        }
-      },
-      "signal_types": {
-        "긍정": 4
-      },
-      "recent_30d": {
-        "count": 0,
-        "hit_rate": null,
-        "delta": null
-      }
-    },
     "speaker-w6by7": {
       "name": "한병화",
       "slug": "speaker-w6by7",
@@ -37462,17 +37326,21 @@
       "return_1y": 148.75,
       "return_current": 132.89
     },
-    "878ff5ff-e198-452e-92fe-6dc91a92e82a": {
-      "return_1y": null,
-      "return_current": 0.0
-    },
     "7ff2226f-5958-4f67-8335-91f917523673": {
       "return_1y": null,
       "return_current": 3.35
     },
+    "878ff5ff-e198-452e-92fe-6dc91a92e82a": {
+      "return_1y": null,
+      "return_current": -63.75
+    },
     "06b7edb8-d73e-44b3-b379-048d2c438226": {
       "return_1y": 92.87,
       "return_current": 53.72
+    },
+    "d0f95989-1f6f-4c61-a9b2-aa843e1b263d": {
+      "return_1y": 212.9,
+      "return_current": 225.97
     },
     "0dc69034-c7c9-4de7-9cce-bf7e287630aa": {
       "return_1y": 11.62,
@@ -37505,6 +37373,10 @@
     "f1e2b924-e2fb-4e90-ba60-35852ab2ef91": {
       "return_1y": -42.44,
       "return_current": 8.72
+    },
+    "1c1e6109-e0c6-4601-a0d4-fa12b33fb026": {
+      "return_1y": 361.1,
+      "return_current": 310.11
     },
     "6737fac4-9502-4848-b3ba-dc3811e5aa0a": {
       "return_1y": -13.14,
@@ -37603,8 +37475,8 @@
       "return_current": 24.06
     },
     "63667b62-6111-4265-b94d-5ffd193e748f": {
-      "return_1y": -46.18,
-      "return_current": -22.77
+      "return_1y": -39.33,
+      "return_current": -37.34
     },
     "207fb421-6069-413d-bc41-3475d5a08abd": {
       "return_1y": -22.97,
@@ -37738,10 +37610,6 @@
       "return_1y": -45.87,
       "return_current": -36.42
     },
-    "7084537f-ce55-49ab-aa24-4a2d67c9f0ce": {
-      "return_1y": -37.48,
-      "return_current": 36.39
-    },
     "abe8a066-7471-4ed8-be28-973fc929b30f": {
       "return_1y": -17.62,
       "return_current": -29.81
@@ -37754,9 +37622,9 @@
       "return_1y": -11.82,
       "return_current": -20.84
     },
-    "a3b0977f-dd82-4301-8abb-a12136ed73d6": {
-      "return_1y": -46.47,
-      "return_current": -37.61
+    "7084537f-ce55-49ab-aa24-4a2d67c9f0ce": {
+      "return_1y": -19.0,
+      "return_current": 7.69
     },
     "e3567429-4124-4411-bcd7-94097508c8ee": {
       "return_1y": -85.66,
@@ -37786,10 +37654,6 @@
       "return_1y": -86.25,
       "return_current": -83.35
     },
-    "65f4f729-e50d-4546-a849-92feb60666c1": {
-      "return_1y": -39.14,
-      "return_current": 148.64
-    },
     "9055f3ee-b964-4e6d-9e67-9ae0bb43d5e1": {
       "return_1y": -19.89,
       "return_current": 11.25
@@ -37797,6 +37661,14 @@
     "432acfb3-167b-4680-95d9-c841b63f61ae": {
       "return_1y": -18.16,
       "return_current": -47.56
+    },
+    "a3b0977f-dd82-4301-8abb-a12136ed73d6": {
+      "return_1y": -76.48,
+      "return_current": -66.15
+    },
+    "65f4f729-e50d-4546-a849-92feb60666c1": {
+      "return_1y": null,
+      "return_current": null
     },
     "ff09ad5a-bd50-4860-abcd-77f27f9cd0ca": {
       "return_1y": -47.69,
@@ -37986,6 +37858,10 @@
       "return_1y": 18.64,
       "return_current": 18.41
     },
+    "24034ef4-ffe9-4053-98cf-2335635f0f56": {
+      "return_1y": 34.38,
+      "return_current": -65.16
+    },
     "c7ddb018-a60e-44cf-8462-ad9b0f5c0f04": {
       "return_1y": -1.91,
       "return_current": -49.15
@@ -38010,9 +37886,13 @@
       "return_1y": 99.81,
       "return_current": 71.82
     },
+    "6e0493fd-a1e6-4440-99a9-29fe5c41ee01": {
+      "return_1y": -36.27,
+      "return_current": -41.01
+    },
     "e6f8abc7-abcb-4556-a211-5a79d87c8a2e": {
-      "return_1y": -28.65,
-      "return_current": 31.83
+      "return_1y": 23.19,
+      "return_current": 68.94
     },
     "dfef8707-341f-4b98-b6f2-f1805b9b8257": {
       "return_1y": 1.79,
@@ -38379,8 +38259,8 @@
       "return_current": -32.67
     },
     "cf94bfda-dece-4b0f-a85d-f42efd66421a": {
-      "return_1y": -36.5,
-      "return_current": -78.43
+      "return_1y": -4.61,
+      "return_current": 83.58
     },
     "53730309-5dad-4af5-af4b-fb6804c61270": {
       "return_1y": -58.65,
@@ -38450,13 +38330,13 @@
       "return_1y": -63.94,
       "return_current": -2.84
     },
-    "044555d0-38d7-4300-8934-fed3b685f0bc": {
-      "return_1y": null,
-      "return_current": 43.74
-    },
     "396bc620-b373-4565-9cf1-7741f6491e60": {
       "return_1y": 35.8,
       "return_current": 539.88
+    },
+    "044555d0-38d7-4300-8934-fed3b685f0bc": {
+      "return_1y": null,
+      "return_current": -28.78
     },
     "9a0f20c2-af24-4c50-b195-5c89d92a6cf9": {
       "return_1y": null,
@@ -41646,22 +41526,6 @@
       "return_1y": -57.97,
       "return_current": 4.28
     },
-    "d0f95989-1f6f-4c61-a9b2-aa843e1b263d": {
-      "return_1y": 212.9,
-      "return_current": 225.97
-    },
-    "1c1e6109-e0c6-4601-a0d4-fa12b33fb026": {
-      "return_1y": 361.1,
-      "return_current": 310.11
-    },
-    "24034ef4-ffe9-4053-98cf-2335635f0f56": {
-      "return_1y": 34.38,
-      "return_current": -65.16
-    },
-    "6e0493fd-a1e6-4440-99a9-29fe5c41ee01": {
-      "return_1y": -36.27,
-      "return_current": -41.01
-    },
     "bcc58d00-bfcc-4e4c-83e8-4777009c4578": {
       "return_1y": 11.76,
       "return_current": 17.41
@@ -41786,8 +41650,8 @@
       "unknown_guest",
       "speaker-w6by7",
       "speaker-mzeuvs",
-      "maeng-sungjun",
       "speaker-2u4s86",
+      "maeng-sungjun",
       "korini-appa",
       "speaker-ak2j8x",
       "yoon-sumok",
@@ -41820,8 +41684,8 @@
     ],
     "by_count": [
       "lee-hyoseok",
-      "speaker-mzeuvs",
       "speaker-2u4s86",
+      "speaker-mzeuvs",
       "speaker-v291g7",
       "korini-appa",
       "yoon-sumok",
@@ -41872,7 +41736,6 @@
       "baek-sujeon",
       "speaker-v2rkr",
       "speaker-v1r4n",
-      "speaker-t5vvc",
       "park-byungchang",
       "speaker-qinfc",
       "speaker-qh1gj",
