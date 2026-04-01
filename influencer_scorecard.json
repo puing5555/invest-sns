@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-01T16:25:26.611394",
+  "generated_at": "2026-04-01T17:05:22.326310",
   "min_hit_eligible": 10,
   "total_speakers": 108,
   "qualified_speakers": 21,
@@ -12651,9 +12651,9 @@
         "delta": null
       }
     },
-    "speaker-2u4s86": {
+    "sun-daein": {
       "name": "선대인TV",
-      "slug": "speaker-2u4s86",
+      "slug": "sun-daein",
       "total_signals": 215,
       "scored_signals": 169,
       "hit_eligible": 160,
@@ -41650,7 +41650,7 @@
       "unknown_guest",
       "speaker-w6by7",
       "speaker-mzeuvs",
-      "speaker-2u4s86",
+      "sun-daein",
       "maeng-sungjun",
       "korini-appa",
       "speaker-ak2j8x",
@@ -41671,7 +41671,7 @@
       "speaker-v291g7",
       "ahn-yuhwa",
       "kang-hwanguk",
-      "speaker-2u4s86",
+      "sun-daein",
       "speaker-w6by7",
       "yoon-sumok",
       "speaker-lwt2lv",
@@ -41684,7 +41684,7 @@
     ],
     "by_count": [
       "lee-hyoseok",
-      "speaker-2u4s86",
+      "sun-daein",
       "speaker-mzeuvs",
       "speaker-v291g7",
       "korini-appa",
