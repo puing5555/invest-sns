@@ -194,6 +194,7 @@ URL: {video_data['url']}
             response = self.client.messages.create(
                 model=self.config.ANTHROPIC_MODEL,
                 max_tokens=4000,
+                temperature=0,
                 messages=[
                     {"role": "user", "content": prompt}
                 ]

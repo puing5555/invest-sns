@@ -141,6 +141,7 @@ def call_claude(client: anthropic.Anthropic, report: dict, body_text: str) -> di
             response = client.messages.create(
                 model=MODEL,
                 max_tokens=1024,
+                temperature=0,
                 messages=[{"role": "user", "content": prompt}],
             )
             text = response.content[0].text.strip()

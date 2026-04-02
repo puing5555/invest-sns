@@ -92,7 +92,7 @@ def call_claude(prompt: str, label: str = '') -> list:
     for attempt in range(1, 4):
         try:
             msg = client.messages.create(
-                model=MODEL, max_tokens=4096,
+                model=MODEL, max_tokens=4096, temperature=0,
                 messages=[{'role': 'user', 'content': prompt + '\n\nJSON만 출력: {"signals":[...]}'}])
             raw = msg.content[0].text.strip()
             for pat in [r'```json\s*(.*?)\s*```', r'(\{.*\})', None]:

@@ -160,6 +160,7 @@ def main():
             resp = client.messages.create(
                 model=MODEL,
                 max_tokens=50,
+                temperature=0,
                 messages=[
                     {
                         "role": "user",

@@ -32,6 +32,7 @@ for i, s in enumerate(long):
         msg = client.messages.create(
             model="claude-sonnet-4-6",
             max_tokens=200,
+            temperature=0,
             messages=[{
                 "role": "user",
                 "content": f"?ㅼ쓬 ?ъ옄 ?쒓렇?먯쓽 key_quote瑜??듭떖留?1~2臾몄옣(理쒕? 200???쇰줈 ?붿빟?댁쨾. ?먮Ц???ъ옄 ?먮떒怨?洹쇨굅瑜?諛섎뱶???ы븿?? 留덊겕?ㅼ슫 蹂쇰뱶泥??곗? 留? ?쒖닔 ?띿뒪?몃쭔.\n\n醫낅ぉ: {stock}\n?먮Ц: {kq}"

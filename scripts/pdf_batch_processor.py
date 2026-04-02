@@ -145,6 +145,7 @@ def generate_summary(client, text: str, firm: str, ticker: str, delay_state: dic
             resp = client.messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=1200,
+                temperature=0,
                 timeout=60,
                 messages=[{"role": "user", "content": f"""?ㅼ쓬 ?좊꼸由ъ뒪??由ы룷?몃? 遺꾩꽍?댁＜?몄슂.
 

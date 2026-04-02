@@ -84,6 +84,7 @@ def ask_ai(firm, title, page_first, page_last):
         resp = client.messages.create(
             model=MODEL,
             max_tokens=100,
+            temperature=0,
             messages=[{"role": "user", "content": prompt_text}],
         )
         answer = resp.content[0].text.strip()

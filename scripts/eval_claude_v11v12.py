@@ -123,6 +123,7 @@ def call_claude(prompt_text: str, video_id: str, retry=3) -> list:
             message = client.messages.create(
                 model=CLAUDE_MODEL,
                 max_tokens=8192,
+                temperature=0,
                 messages=[{
                     "role": "user",
                     "content": prompt_text + '\n\n반드시 JSON 형식으로만 출력하세요: {"signals": [...]}'

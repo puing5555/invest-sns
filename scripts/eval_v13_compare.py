@@ -97,6 +97,7 @@ def classify(system_prompt, stock, key_quote, video_title, retries=2):
             r = client.messages.create(
                 model="claude-sonnet-4-20250514",
                 max_tokens=100,
+                temperature=0,
                 system=system_prompt,
                 messages=[{"role": "user", "content": user_msg}]
             )

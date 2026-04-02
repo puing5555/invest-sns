@@ -232,6 +232,7 @@ def step3_extract_signals(subtitles, videos_dict):
             response = client.messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=4096,
+                temperature=0,
                 system=PROMPT,
                 messages=[{"role": "user", "content": user_msg}]
             )

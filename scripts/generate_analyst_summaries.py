@@ -104,6 +104,7 @@ def call_api(client: anthropic.Anthropic, report: dict) -> dict | None:
             response = client.messages.create(
                 model=MODEL,
                 max_tokens=1024,
+                temperature=0,
                 messages=[{"role": "user", "content": prompt}],
             )
             text = response.content[0].text.strip()
