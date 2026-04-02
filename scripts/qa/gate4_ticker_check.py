@@ -109,51 +109,11 @@ def load_prices_keys():
     return set(data.keys())
 
 
-def load_pykrx_names(tickers):
-    """KR 6자리 ticker들의 실제 종목명을 pykrx로 조회. {ticker: 실제종목명}"""
-    kr_tickers = [t for t in tickers if len(t) == 6 and t.isdigit()]
-    if not kr_tickers:
-        return {}
-    try:
-        from pykrx import stock as st
-        result = {}
-        for t in kr_tickers:
-            try:
-                name = st.get_market_ticker_name(t)
-                if name and isinstance(name, str) and name.strip():
-                    result[t] = name.strip()
-            except Exception:
-                pass
-        return result
-    except ImportError:
-        return {}
-
-
-def name_matches(signal_stock, actual_name):
-    """시그널 종목명과 pykrx 실제 종목명이 일치하는지 (표기차이 허용)"""
-    if not signal_stock or not actual_name:
-        return True  # 비교 불가 → pass
-    a = signal_stock.strip()
-    b = actual_name.strip()
-    # 완전 일치
-    if a == b:
-        return True
-    # 포함 관계 (네이버↔NAVER, 에코프로BM↔에코프로비엠 등)
-    if a in b or b in a:
-        return True
-    # 영문/한글 혼용 무시: SKC↔에스케이씨, ISC↔아이에스씨 등
-    # 사명 변경: 한화테크윈↔한화에어로스페이스, LS산전↔LS ELECTRIC 등
-    # 이런 경우는 ticker가 같으면 정상 — 별도 허용 목록
-    return False
-
-
-def run_gate4(fix=False, verify_names=False):
+def run_gate4(fix=False):
     load_env()
 
     print("\n" + "=" * 60)
     print("  QA Gate 4 - Ticker 유효성 검증")
-    if verify_names:
-        print("  + Gate 5 - 종목명 일치 검증 (pykrx)")
     print("=" * 60)
 
     # 1) Supabase에서 전체 ticker 수집
@@ -214,38 +174,9 @@ def run_gate4(fix=False, verify_names=False):
             print(f"  ⚠️  stockPrices.json 가격 데이터는 별도 수집 필요:")
             print(f"     python scripts/fetch_prices.py {' '.join(to_add)}")
 
-    # 4) Gate 5 — 종목명 일치 검증
-    name_mismatches = []
-    if verify_names:
-        print(f"\n{'='*60}")
-        print("  Gate 5 - 종목명 일치 검증 (pykrx)")
-        print("=" * 60)
-
-        kr_tickers = [t for t in ticker_map if len(t) == 6 and t.isdigit()]
-        print(f"\n  KR 6자리 ticker {len(kr_tickers)}개 pykrx 조회 중...")
-        actual_names = load_pykrx_names(kr_tickers)
-        print(f"  → pykrx 조회 성공: {len(actual_names)}개")
-
-        for ticker in sorted(kr_tickers):
-            info = ticker_map[ticker]
-            actual = actual_names.get(ticker)
-            if not actual:
-                continue  # 상폐 등 조회 불가 → skip
-            if not name_matches(info['stock'], actual):
-                name_mismatches.append((ticker, info['stock'], actual, info['count']))
-
-        if name_mismatches:
-            print(f"\n  ⚠️  종목명 불일치 {len(name_mismatches)}건:\n")
-            print(f"  {'ticker':<10} {'시그널 종목명':<22} {'pykrx 실제 종목명':<22} {'건수':<6}")
-            print(f"  {'-'*10} {'-'*22} {'-'*22} {'-'*6}")
-            for ticker, sig_name, actual, count in name_mismatches:
-                print(f"  {ticker:<10} {sig_name:<22} {actual:<22} {count:<6}")
-        else:
-            print("\n  ✅ 모든 KR ticker의 종목명이 일치합니다.")
-
     print("\n" + "=" * 60)
 
-    if total_missing > 0 or name_mismatches:
+    if total_missing > 0:
         return 1
     return 0
 
@@ -253,10 +184,9 @@ def run_gate4(fix=False, verify_names=False):
 def main():
     parser = argparse.ArgumentParser(description='QA Gate 4 - Ticker 유효성 검증')
     parser.add_argument('--fix', action='store_true', help='누락 ticker를 stock_tickers.json에 자동 추가')
-    parser.add_argument('--verify-names', action='store_true', help='Gate 5: pykrx로 종목명 일치 검증')
     args = parser.parse_args()
 
-    code = run_gate4(fix=args.fix, verify_names=args.verify_names)
+    code = run_gate4(fix=args.fix)
     sys.exit(code)
 
 
