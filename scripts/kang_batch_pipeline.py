@@ -171,6 +171,19 @@ def insert_video(video_id, title, published_at, duration):
         return None
 
 
+def map_confidence(val):
+    """정수 confidence → DB enum 변환"""
+    if isinstance(val, str):
+        return val
+    if val is None:
+        return 'medium'
+    v = int(val)
+    if v >= 9: return 'very_high'
+    if v >= 7: return 'high'
+    if v >= 5: return 'medium'
+    return 'low'
+
+
 def insert_signals(db_video_id, signals):
     """influencer_signals 테이블에 INSERT"""
     count = 0
@@ -183,7 +196,7 @@ def insert_signals(db_video_id, signals):
             'market': sig.get('market', ''),
             'signal': sig.get('signal_type', '중립'),
             'mention_type': '결론',
-            'confidence': sig.get('confidence', 5),
+            'confidence': map_confidence(sig.get('confidence', 5)),
             'timestamp': sig.get('timestamp'),
             'key_quote': sig.get('key_quote', ''),
             'reasoning': sig.get('reasoning', ''),
@@ -196,6 +209,8 @@ def insert_signals(db_video_id, signals):
         )
         if r.status_code in (200, 201):
             count += 1
+        else:
+            print(f'    insert_signal FAIL: {r.status_code} {r.text[:150]}', flush=True)
     return count
 
 
