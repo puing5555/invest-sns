@@ -170,6 +170,8 @@ export default function StockInsiderTab({ code }: { code: string }) {
       const avgBuyPrice = i.buyPrices.reduce((a, b) => a + b, 0) / i.buyPrices.length;
       const lastDate = i.buyDates.sort().reverse()[0];
       const totalBuyAmount = i.buyShares * avgBuyPrice;
+      const hasPreExisting = i.sellShares > i.buyShares;
+      const preExistingSellShares = hasPreExisting ? i.sellShares - i.buyShares : 0;
       const estHoldings = Math.max(i.buyShares - i.sellShares, 0);
       // Compute sell avg price from stockPrices for sell trades
       const sellTrades = (typeFilter === 'all' ? trades : trades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter)))
@@ -179,13 +181,15 @@ export default function StockInsiderTab({ code }: { code: string }) {
         const sp = sellTrades.map(t => pp[findPriceIdx(pp, t.trade_date!)].close as number).filter(Boolean);
         if (sp.length) avgSellPrice = sp.reduce((a: number, b: number) => a + b, 0) / sp.length;
       }
-      const realizedProfit = i.sellShares > 0 ? (avgSellPrice - avgBuyPrice) * Math.min(i.sellShares, i.buyShares) : 0;
+      // 기존 보유분 매도 시: 크롤링 기간 내 매수분에 대해서만 수익률 계산
+      const matchedSellShares = Math.min(i.sellShares, i.buyShares);
+      const realizedProfit = matchedSellShares > 0 ? (avgSellPrice - avgBuyPrice) * matchedSellShares : 0;
       const unrealizedProfit = estHoldings > 0 ? (currentPrice - avgBuyPrice) * estHoldings : 0;
-      const totalProfit = realizedProfit + unrealizedProfit;
-      const returnPct = totalBuyAmount > 0 ? (totalProfit / totalBuyAmount) * 100 : 0;
-      // Case: 'sold_all' | 'holding' | 'partial'
-      const profitCase = estHoldings === 0 ? 'sold_all' as const : i.sellShares === 0 ? 'holding' as const : 'partial' as const;
-      return { ...i, avgPrice: avgBuyPrice, avgSellPrice, returnPct, lastDate, tradeCount: i.buyPrices.length, totalAmount: totalBuyAmount, estHoldings, realizedProfit, unrealizedProfit, totalProfit, profitCase };
+      const totalProfit = hasPreExisting ? realizedProfit : realizedProfit + unrealizedProfit;
+      const returnPct = hasPreExisting ? (totalBuyAmount > 0 ? (realizedProfit / totalBuyAmount) * 100 : 0) : (totalBuyAmount > 0 ? (totalProfit / totalBuyAmount) * 100 : 0);
+      // Case: 'sold_all' | 'holding' | 'partial' | 'pre_existing'
+      const profitCase = hasPreExisting ? 'pre_existing' as const : estHoldings === 0 ? 'sold_all' as const : i.sellShares === 0 ? 'holding' as const : 'partial' as const;
+      return { ...i, avgPrice: avgBuyPrice, avgSellPrice, returnPct, lastDate, tradeCount: i.buyPrices.length, totalAmount: totalBuyAmount, estHoldings, realizedProfit, unrealizedProfit, totalProfit, profitCase, hasPreExisting, preExistingSellShares };
     });
   }, [trades, stockData, typeFilter, gradeMap]);
 
@@ -221,15 +225,17 @@ export default function StockInsiderTab({ code }: { code: string }) {
             {p.position && <span className="text-[10px] text-[#8b95a1] whitespace-nowrap flex-shrink-0">{p.position}</span>}
             {p.profitCase === 'sold_all' && <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-500 whitespace-nowrap flex-shrink-0">매도 완료</span>}
           </div>
-          <span className={`text-lg font-bold flex-shrink-0 ml-2 ${p.returnPct >= 0 ? 'text-green-600' : 'text-red-500'}`}>{p.returnPct >= 0 ? '+' : ''}{p.returnPct.toFixed(1)}%</span>
+          {p.profitCase === 'pre_existing'
+            ? <span className="text-xs text-[#8b95a1] flex-shrink-0 ml-2">기존 보유분 매도</span>
+            : <span className={`text-lg font-bold flex-shrink-0 ml-2 ${p.returnPct >= 0 ? 'text-green-600' : 'text-red-500'}`}>{p.returnPct >= 0 ? '+' : ''}{p.returnPct.toFixed(1)}%</span>}
         </div>
         <div className="grid grid-cols-4 gap-2 text-xs">
           <div><div className="text-[#8b95a1]">평균 매수가</div><div className="font-medium text-[#191f28]">{formatStockPrice(Math.round(p.avgPrice), code)}</div></div>
-          <div><div className="text-[#8b95a1]">{p.profitCase === 'sold_all' ? '매도수량' : '추정 보유'}</div><div className="font-medium text-[#191f28]">{p.profitCase === 'sold_all' ? p.sellShares.toLocaleString() : p.estHoldings.toLocaleString()}주</div></div>
+          <div><div className="text-[#8b95a1]">{p.profitCase === 'pre_existing' ? '보유 상태' : p.profitCase === 'sold_all' ? '매도수량' : '추정 보유'}</div><div className="font-medium text-[#191f28]">{p.profitCase === 'pre_existing' ? <span className="text-[10px] text-[#8b95a1] leading-tight">공시 기간 외 보유분</span> : p.profitCase === 'sold_all' ? `${p.sellShares.toLocaleString()}주` : `${p.estHoldings.toLocaleString()}주`}</div></div>
           <div><div className="text-[#8b95a1]">매수 총액</div><div className="font-medium text-[#191f28]">{formatAmount(p.totalAmount)}원</div></div>
-          <div><div className="text-[#8b95a1]">{p.profitCase === 'sold_all' ? '실현 수익' : p.profitCase === 'holding' ? '미실현 수익' : '총 수익'}</div><div className={`font-medium ${pc}`}>{p.totalProfit >= 0 ? '+' : ''}{formatAmount(p.totalProfit)}원</div></div>
+          <div><div className="text-[#8b95a1]">{p.profitCase === 'pre_existing' ? '매수분 수익' : p.profitCase === 'sold_all' ? '실현 수익' : p.profitCase === 'holding' ? '미실현 수익' : '총 수익'}</div><div className={`font-medium ${pc}`}>{p.totalProfit >= 0 ? '+' : ''}{formatAmount(p.totalProfit)}원</div></div>
         </div>
-        <div className="text-xs text-[#8b95a1] mt-2">매수 {p.tradeCount}회 · 최근 {formatDate(p.lastDate)}</div>
+        <div className="text-xs text-[#8b95a1] mt-2">매수 {p.tradeCount}회 · 최근 {formatDate(p.lastDate)}{p.hasPreExisting ? ` · 기존 보유분 매도 ${p.preExistingSellShares.toLocaleString()}주 (수익률 산정 불가)` : ''}</div>
       </div>
     );
   };
@@ -344,6 +350,8 @@ export default function StockInsiderTab({ code }: { code: string }) {
         const it = trades.filter(t => t.insider_name === modalInsider);
         const buys = it.filter(t => t.trade_type === '매수'); const sells = it.filter(t => t.trade_type === '매도');
         const totalBuyShares = buys.reduce((s, t) => s + (t.shares || 0), 0); const totalSellShares = sells.reduce((s, t) => s + (t.shares || 0), 0);
+        const mHasPreExisting = totalSellShares > totalBuyShares;
+        const mPreExistingSellShares = mHasPreExisting ? totalSellShares - totalBuyShares : 0;
         const estHoldings = Math.max(totalBuyShares - totalSellShares, 0); const cp = stockData?.currentPrice || 0;
         let avgBP = 0; let avgSP = 0;
         if (stockData?.prices?.length) {
@@ -351,9 +359,10 @@ export default function StockInsiderTab({ code }: { code: string }) {
           if (buys.length > 0) { const bp = buys.filter(t => t.trade_date).map(t => sp[findPriceIdx(sp, t.trade_date!)].close as number).filter(Boolean); if (bp.length) avgBP = bp.reduce((a: number, b: number) => a + b, 0) / bp.length; }
           if (sells.length > 0) { const slp = sells.filter(t => t.trade_date).map(t => sp[findPriceIdx(sp, t.trade_date!)].close as number).filter(Boolean); if (slp.length) avgSP = slp.reduce((a: number, b: number) => a + b, 0) / slp.length; }
         }
-        const realized = totalSellShares > 0 ? (avgSP - avgBP) * Math.min(totalSellShares, totalBuyShares) : 0;
+        const matchedSells = Math.min(totalSellShares, totalBuyShares);
+        const realized = matchedSells > 0 ? (avgSP - avgBP) * matchedSells : 0;
         const unrealized = estHoldings > 0 ? (cp - avgBP) * estHoldings : 0;
-        const mCase = estHoldings === 0 ? 'sold_all' : totalSellShares === 0 ? 'holding' : 'partial';
+        const mCase = mHasPreExisting ? 'pre_existing' : estHoldings === 0 ? 'sold_all' : totalSellShares === 0 ? 'holding' : 'partial';
         const pos = it[0]?.position || ''; const g = gradeMap.get(modalInsider) || 'C'; const gm = GRADE_META[g];
         const otherStocks = otherTrades.filter(t => t.ticker !== code).reduce((acc, t) => { if (!acc.has(t.ticker)) acc.set(t.ticker, { ticker: t.ticker, stockName: t.stock_name || t.ticker, count: 0 }); acc.get(t.ticker)!.count++; return acc; }, new Map<string, { ticker: string; stockName: string; count: number }>());
         return (
@@ -403,13 +412,24 @@ export default function StockInsiderTab({ code }: { code: string }) {
                 <div className="bg-[#f8f9fa] rounded-lg p-3 mb-2">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-xs text-[#8b95a1]">추정 보유량</div>
-                    <div className="text-sm font-bold text-[#191f28]">{estHoldings.toLocaleString()}주 <span className="font-normal text-[#8b95a1]">(매수 {totalBuyShares.toLocaleString()} - 매도 {totalSellShares.toLocaleString()})</span></div>
+                    {mHasPreExisting
+                      ? <div className="text-sm text-[#191f28]"><span className="font-normal text-[#8b95a1]">(매수 {totalBuyShares.toLocaleString()} &lt; 매도 {totalSellShares.toLocaleString()})</span></div>
+                      : <div className="text-sm font-bold text-[#191f28]">{estHoldings.toLocaleString()}주 <span className="font-normal text-[#8b95a1]">(매수 {totalBuyShares.toLocaleString()} - 매도 {totalSellShares.toLocaleString()})</span></div>}
                   </div>
+                  {mHasPreExisting && <div className="text-xs text-amber-600 bg-amber-50 rounded px-2 py-1.5 mb-2">데이터 범위 이전 보유분 있음 (DART 공시 기간 외) · 기존 보유분 매도 {mPreExistingSellShares.toLocaleString()}주</div>}
                   {avgBP > 0 && <div className="text-xs text-[#8b95a1] mb-2">평균 매수가 {formatStockPrice(Math.round(avgBP), code)}{avgSP > 0 ? ` · 평균 매도가 ${formatStockPrice(Math.round(avgSP), code)}` : ''} · 현재가 {formatStockPrice(cp, code)}</div>}
                 </div>
                 <div className={`grid ${mCase === 'partial' ? 'grid-cols-2' : 'grid-cols-1'} gap-3`}>
+                  {mCase === 'pre_existing' && (
+                    <div className="bg-[#f8f9fa] rounded-lg p-3">
+                      <div className="text-xs text-[#8b95a1] mb-1">크롤링 기간 내 매수분 수익</div>
+                      <div className={`text-lg font-bold ${realized >= 0 ? 'text-green-600' : 'text-red-500'}`}>{realized >= 0 ? '+' : ''}{formatAmount(realized)}원</div>
+                      <div className="text-xs text-[#8b95a1]">매수분 매도 {matchedSells.toLocaleString()}주</div>
+                      <div className="text-xs text-amber-600 mt-1.5">기존 보유분 매도 {mPreExistingSellShares.toLocaleString()}주 — 수익률 산정 불가</div>
+                    </div>
+                  )}
                   {(mCase === 'sold_all' || mCase === 'partial') && (
-                    <div className="bg-[#f8f9fa] rounded-lg p-3"><div className="text-xs text-[#8b95a1] mb-1">실현 수익</div><div className={`text-lg font-bold ${realized >= 0 ? 'text-green-600' : 'text-red-500'}`}>{realized >= 0 ? '+' : ''}{formatAmount(realized)}원</div><div className="text-xs text-[#8b95a1]">매도 {Math.min(totalSellShares, totalBuyShares).toLocaleString()}주</div></div>
+                    <div className="bg-[#f8f9fa] rounded-lg p-3"><div className="text-xs text-[#8b95a1] mb-1">실현 수익</div><div className={`text-lg font-bold ${realized >= 0 ? 'text-green-600' : 'text-red-500'}`}>{realized >= 0 ? '+' : ''}{formatAmount(realized)}원</div><div className="text-xs text-[#8b95a1]">매도 {matchedSells.toLocaleString()}주</div></div>
                   )}
                   {(mCase === 'holding' || mCase === 'partial') && (
                     <div className="bg-[#f8f9fa] rounded-lg p-3"><div className="text-xs text-[#8b95a1] mb-1">미실현 수익</div><div className={`text-lg font-bold ${unrealized >= 0 ? 'text-green-600' : 'text-red-500'}`}>{unrealized >= 0 ? '+' : ''}{formatAmount(unrealized)}원</div><div className="text-xs text-[#8b95a1]">보유 {estHoldings.toLocaleString()}주</div></div>
