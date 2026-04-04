@@ -80,6 +80,7 @@ function getPositionBadge(position: string): { color: string; bg: string } | nul
 
 export default function StockInsiderTab({ code }: { code: string }) {
   const [trades, setTrades] = useState<InsiderTrade[]>([]);
+  const [allTrades, setAllTrades] = useState<InsiderTrade[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | '매수' | '매도'>('all');
   const [selectedInsider, setSelectedInsider] = useState<string | null>(null);
@@ -96,25 +97,31 @@ export default function StockInsiderTab({ code }: { code: string }) {
   useEffect(() => {
     setLoading(true);
     (async () => {
-      let since: string | undefined;
-      if (periodFilter !== '전체') {
-        const cutoff = new Date();
-        switch (periodFilter) {
-          case '1개월': cutoff.setMonth(cutoff.getMonth() - 1); break;
-          case '6개월': cutoff.setMonth(cutoff.getMonth() - 6); break;
-          case '1년': cutoff.setFullYear(cutoff.getFullYear() - 1); break;
-          case '3년': cutoff.setFullYear(cutoff.getFullYear() - 3); break;
-        }
-        since = cutoff.toISOString().slice(0, 10);
-      }
-      const data = await getInsiderTrades(code, { since });
-      setTrades(data.map(t => ({ ...t, insider_name: normalizeInsiderName(t.insider_name) })));
+      const data = await getInsiderTrades(code);
+      const normalized = data.map(t => ({ ...t, insider_name: normalizeInsiderName(t.insider_name) }));
+      setAllTrades(normalized);
+      setTrades(normalized);
       setLoading(false);
     })();
-  }, [code, periodFilter]);
+  }, [code]);
+
+  // 기간 필터는 차트/거래 리스트용 trades만 필터링 (수익률 카드는 allTrades 사용)
+  useEffect(() => {
+    if (allTrades.length === 0) return;
+    if (periodFilter === '전체') { setTrades(allTrades); return; }
+    const cutoff = new Date();
+    switch (periodFilter) {
+      case '1개월': cutoff.setMonth(cutoff.getMonth() - 1); break;
+      case '6개월': cutoff.setMonth(cutoff.getMonth() - 6); break;
+      case '1년': cutoff.setFullYear(cutoff.getFullYear() - 1); break;
+      case '3년': cutoff.setFullYear(cutoff.getFullYear() - 3); break;
+    }
+    const since = cutoff.toISOString().slice(0, 10);
+    setTrades(allTrades.filter(t => !t.trade_date || t.trade_date >= since));
+  }, [allTrades, periodFilter]);
 
   const stockData = (stockPricesData as any)[code];
-  const gradeMap = useMemo(() => { const gm = new Map<string, InsiderGrade>(); trades.forEach(t => { if (!gm.has(t.insider_name)) gm.set(t.insider_name, gradeInsider(t.insider_name, t.position)); }); return gm; }, [trades]);
+  const gradeMap = useMemo(() => { const gm = new Map<string, InsiderGrade>(); allTrades.forEach(t => { if (!gm.has(t.insider_name)) gm.set(t.insider_name, gradeInsider(t.insider_name, t.position)); }); return gm; }, [allTrades]);
 
   const { topChips, restChips } = useMemo(() => {
     const filtered = typeFilter === 'all' ? trades : trades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter));
@@ -158,7 +165,7 @@ export default function StockInsiderTab({ code }: { code: string }) {
     const currentPrice = stockData?.currentPrice ?? (pp.length > 0 ? pp[pp.length - 1].close : null);
     if (!currentPrice) return [];
     const map = new Map<string, { name: string; position: string; buyShares: number; sellShares: number; buyPrices: number[]; buyDates: string[] }>();
-    const src = typeFilter === 'all' ? trades : trades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter));
+    const src = typeFilter === 'all' ? allTrades : allTrades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter));
     src.filter(t => t.trade_date).forEach(t => {
       let price: number | null = null;
       if (pp.length) { const ci = findPriceIdx(pp, t.trade_date!); price = pp[ci].close; }
@@ -174,7 +181,7 @@ export default function StockInsiderTab({ code }: { code: string }) {
       const preExistingSellShares = hasPreExisting ? i.sellShares - i.buyShares : 0;
       const estHoldings = Math.max(i.buyShares - i.sellShares, 0);
       // Compute sell avg price from stockPrices for sell trades
-      const sellTrades = (typeFilter === 'all' ? trades : trades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter)))
+      const sellTrades = (typeFilter === 'all' ? allTrades : allTrades.filter(t => matchesFilter(gradeMap.get(t.insider_name) || 'C', typeFilter)))
         .filter(t => t.insider_name === i.name && t.trade_type === '매도' && t.trade_date);
       let avgSellPrice = 0;
       if (sellTrades.length > 0 && pp.length) {
@@ -191,7 +198,7 @@ export default function StockInsiderTab({ code }: { code: string }) {
       const profitCase = hasPreExisting ? 'pre_existing' as const : estHoldings === 0 ? 'sold_all' as const : i.sellShares === 0 ? 'holding' as const : 'partial' as const;
       return { ...i, avgPrice: avgBuyPrice, avgSellPrice, returnPct, lastDate, tradeCount: i.buyPrices.length, totalAmount: totalBuyAmount, estHoldings, realizedProfit, unrealizedProfit, totalProfit, profitCase, hasPreExisting, preExistingSellShares };
     });
-  }, [trades, stockData, typeFilter, gradeMap]);
+  }, [allTrades, stockData, typeFilter, gradeMap]);
 
   const { topPerf, restPerf } = useMemo(() => {
     const sorted = [...allPerf].sort((a, b) => { switch (perfSort) { case 'profit': return b.totalProfit - a.totalProfit; case 'return': return b.returnPct - a.returnPct; default: return b.totalAmount - a.totalAmount; } });
@@ -206,7 +213,7 @@ export default function StockInsiderTab({ code }: { code: string }) {
 
   if (!isKoreanStock(code)) return <div className="text-center py-12"><div className="text-4xl mb-4">💼</div><h3 className="text-lg font-bold text-[#191f28] mb-2">내부자 거래</h3><p className="text-[#8b95a1]">Form 4 연동 예정</p></div>;
   if (loading) return <div className="text-center py-12 text-[#8b95a1]">로딩중...</div>;
-  if (trades.length === 0) return <div className="text-center py-12"><div className="text-4xl mb-4">💼</div><h3 className="text-lg font-bold text-[#191f28] mb-2">내부자 거래</h3><p className="text-[#8b95a1]">수집된 내부자 거래가 없습니다</p></div>;
+  if (allTrades.length === 0) return <div className="text-center py-12"><div className="text-4xl mb-4">💼</div><h3 className="text-lg font-bold text-[#191f28] mb-2">내부자 거래</h3><p className="text-[#8b95a1]">수집된 내부자 거래가 없습니다</p></div>;
 
   const buyCount = trades.filter(t => t.trade_type === '매수').length;
   const sellCount = trades.filter(t => t.trade_type === '매도').length;
