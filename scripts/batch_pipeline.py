@@ -200,6 +200,20 @@ def analyze_signals(ai_client, model_name, subtitle, title, channel_owner, durat
                 return {"signals": []}
 
 
+# ── confidence 변환 ──
+def map_confidence(val):
+    """정수 confidence → DB enum 변환"""
+    if isinstance(val, str):
+        return val
+    if val is None:
+        return 'medium'
+    v = int(val)
+    if v >= 9: return 'very_high'
+    if v >= 7: return 'high'
+    if v >= 5: return 'medium'
+    return 'low'
+
+
 # ── DB 저장 ──
 def insert_video(video_id, channel_id, title, published_at, duration):
     row = {
@@ -236,7 +250,7 @@ def insert_signals(db_video_id, speaker_id, signals, model_name):
             'market': sig.get('market', ''),
             'signal': sig.get('signal_type', '중립'),
             'mention_type': '결론',
-            'confidence': sig.get('confidence', 5),
+            'confidence': map_confidence(sig.get('confidence', 5)),
             'timestamp': sig.get('timestamp'),
             'key_quote': sig.get('key_quote', ''),
             'reasoning': sig.get('reasoning', ''),

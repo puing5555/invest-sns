@@ -67,6 +67,7 @@
 17. 새 채널/시그널 추가 후 반드시 `python scripts/qa/gate4_ticker_check.py` 실행하여 ticker 누락 검증
 18. 새 채널 dry-run 시 반드시 3가지 수치 보고: (1) 투자 키워드 필터 통과 건수 (2) --stock-filter 통과 건수 (종목명 포함) (3) 비율 (stock/키워드). 비율 20% 이하 → --stock-filter 권장, 50% 이상 → --execute 권장, 20~50% → JAY 판단
 19. 새 채널 파이프라인 완료 후 `python scripts/qa/gate5_name_check.py --channel 채널명` 필수 실행하여 ticker↔종목명 일치 검증
+20. 버그 수정 시 반드시 해당 파일만이 아닌 프로젝트 전체에서 동일 패턴이 있는지 grep으로 확인하고 일괄 수정할 것. 현상만 보고 수정하면 다른 곳에서 같은 버그가 반복됨. "반드시 현상이 아닌 전체 구조를 보고 판단해."
 
 ## .claude/ 자동화 시스템
 
