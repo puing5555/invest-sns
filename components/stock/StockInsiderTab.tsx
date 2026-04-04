@@ -79,7 +79,6 @@ function getPositionBadge(position: string): { color: string; bg: string } | nul
 }
 
 export default function StockInsiderTab({ code }: { code: string }) {
-  const [trades, setTrades] = useState<InsiderTrade[]>([]);
   const [allTrades, setAllTrades] = useState<InsiderTrade[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | '매수' | '매도'>('all');
@@ -98,17 +97,15 @@ export default function StockInsiderTab({ code }: { code: string }) {
     setLoading(true);
     (async () => {
       const data = await getInsiderTrades(code);
-      const normalized = data.map(t => ({ ...t, insider_name: normalizeInsiderName(t.insider_name) }));
-      setAllTrades(normalized);
-      setTrades(normalized);
+      setAllTrades(data.map(t => ({ ...t, insider_name: normalizeInsiderName(t.insider_name) })));
       setLoading(false);
     })();
   }, [code]);
 
-  // 기간 필터는 차트/거래 리스트용 trades만 필터링 (수익률 카드는 allTrades 사용)
-  useEffect(() => {
-    if (allTrades.length === 0) return;
-    if (periodFilter === '전체') { setTrades(allTrades); return; }
+  // 기간 필터는 차트/거래 리스트용 trades만 파생 (수익률 카드는 allTrades 사용)
+  const trades = useMemo(() => {
+    if (allTrades.length === 0) return [];
+    if (periodFilter === '전체') return allTrades;
     const cutoff = new Date();
     switch (periodFilter) {
       case '1개월': cutoff.setMonth(cutoff.getMonth() - 1); break;
@@ -117,7 +114,7 @@ export default function StockInsiderTab({ code }: { code: string }) {
       case '3년': cutoff.setFullYear(cutoff.getFullYear() - 3); break;
     }
     const since = cutoff.toISOString().slice(0, 10);
-    setTrades(allTrades.filter(t => !t.trade_date || t.trade_date >= since));
+    return allTrades.filter(t => !t.trade_date || t.trade_date >= since);
   }, [allTrades, periodFilter]);
 
   const stockData = (stockPricesData as any)[code];
