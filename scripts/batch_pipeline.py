@@ -16,6 +16,10 @@ import glob
 
 config = PipelineConfig()
 
+# ── 비종목 블랙리스트 ──
+_bl_path = os.path.join(os.path.dirname(__file__), 'qa', 'stock_blacklist.json')
+STOCK_BLACKLIST = set(json.load(open(_bl_path, encoding='utf-8'))) if os.path.exists(_bl_path) else set()
+
 # ── 환경변수 ──
 env_path = os.path.join(os.path.dirname(__file__), '..', '.env.local')
 ENV = {}
@@ -35,8 +39,8 @@ SB_HEADERS = {
 }
 SB_READ = {'apikey': SB_KEY, 'Authorization': f'Bearer {SB_KEY}'}
 
-# ── 프롬프트 (V14.0 운영) ──
-PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v14.0.md')
+# ── 프롬프트 (V15.0 운영) ──
+PROMPT_PATH = os.path.join(os.path.dirname(__file__), '..', 'prompts', 'pipeline_v15.0.md')
 with open(PROMPT_PATH, encoding='utf-8') as f:
     SYSTEM_PROMPT = f.read()
 
@@ -240,8 +244,14 @@ def insert_video(video_id, channel_id, title, published_at, duration):
 
 def insert_signals(db_video_id, speaker_id, signals, model_name):
     count = 0
-    pv = f'V14.0-GPT4o' if model_name == 'gpt4o' else 'V14.0'
+    skipped_bl = 0
+    pv = 'V15.0-GPT4o' if model_name == 'gpt4o' else 'V15.0'
     for sig in signals:
+        stock_name = sig.get('stock', '').strip()
+        if stock_name in STOCK_BLACKLIST:
+            skipped_bl += 1
+            print(f'    [SKIP] 비종목 블랙리스트: "{stock_name}"', flush=True)
+            continue
         row = {
             'video_id': db_video_id,
             'speaker_id': speaker_id,
